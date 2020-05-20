@@ -1,0 +1,60 @@
+﻿<Window x:Class="upravnikKT2.ShiftWindow"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:upravnikKT2"
+        mc:Ignorable="d"
+        FontSize="18"
+        Title="Dodavanje smene" Height="400" Width="630.5">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" MinHeight="26" />
+            <RowDefinition Height="Auto" MinHeight="26" />
+            <RowDefinition Height="Auto" MinHeight="26" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" MinWidth="301" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Column="0" Grid.Row="0" Margin="0,12,0,8">Izaberite lekara</Label>
+        <Label Grid.Column="0" Grid.Row="2" Margin="0,10">Izaberite datum pocetka radnog vremena</Label>
+        <Label Grid.Column="0" Grid.Row="3" Margin="0,10" RenderTransformOrigin="0.488,1.273" >Izaberite datum kraja radnog vremena</Label>
+        <Label Grid.Column="0" Grid.Row="4" Margin="0,0,0,10" VerticalAlignment="Bottom">vreme pocetka</Label>
+        <Label Grid.Column="0" Grid.Row="5" Margin="0,0,0,10" VerticalAlignment="Bottom">vreme kraja</Label>
+
+
+        <ComboBox Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right" Margin="0,10,10,10" Width="139" materialDesign:HintAssist.Hint="Pretrazi" IsEditable="True" >
+            <ComboBoxItem>
+                Apple
+            </ComboBoxItem>
+            <ComboBoxItem>
+                Banana
+            </ComboBoxItem>
+        </ComboBox>
+        
+
+        <DatePicker Grid.Column="1" Grid.Row="2" HorizontalAlignment="Right" Margin="0,10,10,10" Width="139"></DatePicker>
+        <DatePicker Grid.Column="1" Grid.Row="3" HorizontalAlignment="Right" Margin="0,10,10,10" Width="139"></DatePicker>
+        <materialDesign:TimePicker Grid.Column="1" Grid.Row="4" HorizontalAlignment="Right" Margin="0,0,10,10" Width="139" Style="{StaticResource MaterialDesignFloatingHintTimePicker}"
+                                   materialDesign:HintAssist.Hint=""></materialDesign:TimePicker>
+        <materialDesign:TimePicker Grid.Column="1" Grid.Row="5" HorizontalAlignment="Right" Margin="0,0,10,10" Width="139" Style="{StaticResource MaterialDesignFloatingHintTimePicker}"
+                                   materialDesign:HintAssist.Hint=""></materialDesign:TimePicker>
+
+        
+        <WrapPanel  Grid.Column="1" Grid.Row="8" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <Button Height="28" Width="100" Click="Button_Click_Ok">Potvrdi</Button>
+            <Button Height="28" Width="100" Click="Button_Click_Cancel" Margin="10,0,0,0">Odustani</Button>
+        </WrapPanel>
+
+
+    </Grid>
+</Window>
