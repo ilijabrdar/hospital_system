@@ -1,0 +1,12 @@
+C:\Users\david\Desktop\code2\obj\Debug\bolnica.csprojAssemblyReference.cache
+C:\Users\david\Desktop\code2\obj\Debug\bolnica.csproj.CoreCompileInputs.cache
+C:\Users\david\Desktop\code2\bin\Debug\bolnica.dll
+C:\Users\david\Desktop\code2\bin\Debug\bolnica.pdb
+C:\Users\david\Desktop\code2\obj\Debug\bolnica.dll
+C:\Users\david\Desktop\code2\obj\Debug\bolnica.pdb
+C:\Users\david\Desktop\code2\bolnica\bin\Debug\bolnica.dll
+C:\Users\david\Desktop\code2\bolnica\bin\Debug\bolnica.pdb
+C:\Users\david\Desktop\code2\bolnica\obj\Debug\bolnica.csprojAssemblyReference.cache
+C:\Users\david\Desktop\code2\bolnica\obj\Debug\bolnica.csproj.CoreCompileInputs.cache
+C:\Users\david\Desktop\code2\bolnica\obj\Debug\bolnica.dll
+C:\Users\david\Desktop\code2\bolnica\obj\Debug\bolnica.pdb
