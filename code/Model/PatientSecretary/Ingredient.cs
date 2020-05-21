@@ -4,14 +4,33 @@
  * Purpose: Definition of the Class PatientSecretary.Ingredient
  ***********************************************************************/
 
+using Repository;
 using System;
 
 namespace Model.PatientSecretary
 {
-   public class Ingredient
+   public class Ingredient : IIdentifiable<long>
    {
-      private String Name;
-      private int Quantity;
-   
-   }
+      public string Name { get; set; }
+      public int Quantity { get; set; }
+
+        public Ingredient(long id, string name, int quantity)
+        {
+            Quantity = quantity;
+            Name = name;
+            Id = id;
+        }
+
+        public Ingredient(string name, int quantity)
+        {
+            Quantity = quantity;
+            Name = name;
+        }
+
+        public long Id { get; set; }
+
+        public long GetId() => Id;
+
+        public void SetId(long id) => Id = id;
+    }
 }

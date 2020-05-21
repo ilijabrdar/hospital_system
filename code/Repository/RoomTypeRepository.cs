@@ -19,24 +19,5 @@ namespace Repository
 
         }
 
-        public object Delete()
-        {
-            throw new NotImplementedException();
-        }
-
-        public object Edit()
-        {
-            throw new NotImplementedException();
-        }
-
-        public object GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public new RoomType Save(RoomType roomType)
-        {
-            return base.Save(roomType);
-        }
     }
 }
