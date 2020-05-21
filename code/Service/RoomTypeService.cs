@@ -4,13 +4,25 @@
  * Purpose: Definition of the Class Service.RoomTypeService
  ***********************************************************************/
 
+using Model.Director;
+using Repository;
 using System;
+using System.Web.Management;
 
 namespace Service
 {
-   public class RoomTypeService : IService
+   public class RoomTypeService : IService<RoomType, long>
    {
-      private Repository.IRoomTypeRepository _roomTypeRepository;
+        private readonly IRoomTypeRepository _repository;
+
+      //private Repository.IRoomTypeRepository _roomTypeRepository;
+        
+        public RoomTypeService(IRoomTypeRepository repository)
+        {
+            _repository = repository;
+        }
+
+        
 
         public object Delete()
         {
@@ -27,9 +39,11 @@ namespace Service
             throw new NotImplementedException();
         }
 
-        public object Save()
+        
+
+        public RoomType Save(RoomType entity)
         {
-            throw new NotImplementedException();
+            return _repository.Save(entity);
         }
     }
 }

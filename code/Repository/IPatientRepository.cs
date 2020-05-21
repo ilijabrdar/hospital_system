@@ -9,7 +9,7 @@ using System;
 
 namespace Repository
 {
-   public interface IPatientRepository : IRepository
+   public interface IPatientRepository //: IRepository
    {
       Patient GetPatientByJMBG(String jmbg);
       Patient GetPatientByUsername(String username);

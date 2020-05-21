@@ -8,7 +8,7 @@ using System;
 
 namespace Repository
 {
-   public interface IPatientFileRepository : IRepository
+   public interface IPatientFileRepository// : IRepository
    {
    }
 }

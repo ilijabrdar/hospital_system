@@ -9,7 +9,7 @@ using System;
 
 namespace Repository
 {
-   public interface ISecretaryRepository : IRepository
+   public interface ISecretaryRepository
    {
       Secretary GetSecretaryByUsername(String username);
    }

@@ -23,7 +23,7 @@ namespace Controller
          return false;
       }
    
-      private Service.IService _service;
+      //private Service.IService _service;
    
    }
 }

@@ -9,7 +9,7 @@ using System;
 
 namespace Repository
 {
-   public interface IDoctorRepository : IRepository
+   public interface IDoctorRepository// : IRepository
    {
       Model.Users.Doctor[] GetDoctorsBySpeciality(Specialty specialty);
       Model.Users.Doctor GetDoctorByUsername(String username);

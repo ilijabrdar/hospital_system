@@ -9,7 +9,7 @@ using System;
 
 namespace Service
 {
-   public class UserService : IService
+   public class UserService// : IService
    {
       public User Login(String username, String password)
       {
@@ -67,10 +67,10 @@ namespace Service
             throw new NotImplementedException();
         }
 
-        private IService _doctorService;
-      private IService _patientService;
-      private IService _secretaryService;
-      private IService _directorService;
+        //private IService _doctorService;
+      //private IService _patientService;
+      //private IService _secretaryService;
+      //private IService _directorService;
    
    }
 }

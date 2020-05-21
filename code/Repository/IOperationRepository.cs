@@ -8,7 +8,7 @@ using System;
 
 namespace Repository
 {
-   public interface IOperationRepository : IRepository
+   public interface IOperationRepository //: IRepository
    {
    }
 }

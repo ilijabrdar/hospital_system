@@ -11,7 +11,7 @@ using System;
 
 namespace Service
 {
-   public class PatientFileService : IService
+   public class PatientFileService// : IService
    {
       public PatientFile GetPatientFile(Patient patient)
       {
@@ -75,8 +75,8 @@ namespace Service
             throw new NotImplementedException();
         }
 
-        private IService Hospitalisation;
-      private IService Operation;
+       // private IService Hospitalisation;
+      //private IService Operation;
       private Repository.IPatientFileRepository _patientFileRepository;
    
    }

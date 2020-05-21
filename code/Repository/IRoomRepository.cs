@@ -8,7 +8,7 @@ using System;
 
 namespace Repository
 {
-   public interface IRoomRepository : IRepository
+   public interface IRoomRepository// : IRepository
    {
       int GetVacantRooms();
       int GetRoomByID();

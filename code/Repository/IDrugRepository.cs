@@ -9,7 +9,7 @@ using System;
 
 namespace Repository
 {
-   public interface IDrugRepository : IRepository
+   public interface IDrugRepository// : IRepository
    {
       Drug[] GetAlternative(Drug drug);
       Drug[] GetNotApproved();

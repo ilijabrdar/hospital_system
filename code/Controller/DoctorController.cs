@@ -9,7 +9,7 @@ using System;
 
 namespace Controller
 {
-   public class DoctorController : IController
+   public class DoctorController// : IController
    {
       public Model.Users.Doctor[] GetDoctorsBySpeciality(Specialty specialty)
       {
@@ -49,7 +49,7 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        private Service.IService iService;
+        //private Service.IService iService;
    
    }
 }

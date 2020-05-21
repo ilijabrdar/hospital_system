@@ -11,7 +11,7 @@ using System;
 
 namespace Service
 {
-   public class BusinessDayService : IService
+   public class BusinessDayService// : IService
    {
       public Boolean DeletePreviousBusinessDay()
       {
