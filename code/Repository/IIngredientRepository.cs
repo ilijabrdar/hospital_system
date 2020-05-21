@@ -4,11 +4,12 @@
  * Purpose: Definition of the Interface Repository.IIngredientRepository
  ***********************************************************************/
 
+using Model.PatientSecretary;
 using System;
 
 namespace Repository
 {
-   public interface IIngredientRepository// : IRepository
+   public interface IIngredientRepository : IRepository<Ingredient,long>
    {
    }
 }

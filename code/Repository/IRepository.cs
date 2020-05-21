@@ -15,7 +15,9 @@ namespace Repository
    {    //TODO: the rest of the methods?
       IEnumerable<E> GetAll();
       E Save(E entity);  //Danijelov create
-      Object Edit();
-      Object Delete();
+      void Edit(E entity);
+      void Delete(E entity);
+        E get(ID id);
+        
    }
 }

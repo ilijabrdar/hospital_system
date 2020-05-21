@@ -4,13 +4,21 @@
  * Purpose: Definition of the Class Service.IngredientService
  ***********************************************************************/
 
+using Model.Director;
+using Model.PatientSecretary;
+using Service;
 using System;
 
 namespace Controller
 {
-   public class IngredientController// : IController
+   public class IngredientController : IController<Ingredient, long>
    {
-      //private Service.IService _service;
+        private readonly IService<Ingredient, long> _service;
+
+        public IngredientController(IService<Ingredient, long> service)
+        {
+            _service = service;
+        }
 
         public object Delete()
         {
@@ -27,9 +35,11 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        public object Save()
+
+
+        public Ingredient Save(Ingredient entity)
         {
-            throw new NotImplementedException();
+            return _service.Save(entity);
         }
     }
 }
