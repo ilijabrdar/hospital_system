@@ -221,6 +221,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Resources\Data\ingredients.csv" />
     <None Include="Resources\Data\roomtypes.csv" />
   </ItemGroup>
   <ItemGroup>

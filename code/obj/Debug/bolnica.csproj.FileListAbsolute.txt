@@ -15,3 +15,9 @@ C:\Users\david\Desktop\Fax\treca godina\hospital_system\code\bin\Debug\bolnica.p
 C:\Users\david\Desktop\Fax\treca godina\hospital_system\code\obj\Debug\bolnica.csproj.CoreCompileInputs.cache
 C:\Users\david\Desktop\Fax\treca godina\hospital_system\code\obj\Debug\bolnica.dll
 C:\Users\david\Desktop\Fax\treca godina\hospital_system\code\obj\Debug\bolnica.pdb
+C:\Users\david\Desktop\ugn\hospital_system\code\obj\Debug\bolnica.csproj.CoreCompileInputs.cache
+C:\Users\david\Desktop\ugn\hospital_system\code\obj\Debug\bolnica.dll
+C:\Users\david\Desktop\ugn\hospital_system\code\obj\Debug\bolnica.pdb
+C:\Users\david\Desktop\ugn\hospital_system\code\bin\Debug\bolnica.dll
+C:\Users\david\Desktop\ugn\hospital_system\code\bin\Debug\bolnica.pdb
+C:\Users\david\Desktop\ugn\hospital_system\code\obj\Debug\bolnica.csprojAssemblyReference.cache

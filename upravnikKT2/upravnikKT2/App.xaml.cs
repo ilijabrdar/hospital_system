@@ -1,6 +1,7 @@
 ﻿using bolnica.Repository;
 using Controller;
 using Model.Director;
+using Model.PatientSecretary;
 using Repository;
 using Service;
 using System;
@@ -19,9 +20,11 @@ namespace upravnikKT2
     public partial class App : Application
     {
         private const string ROOMTYPE_FILE = "../../Resources/Data/roomtypes.csv";
+        private const string INGREDIENTS_FILE = "../../Resources/Data/ingredients.csv";
         private const string CSV_DELIMITER = ",";
 
         public IController<RoomType,long> RoomTypeController { get; private set; }
+        public IController<Ingredient, long> IngredientController { get; private set; }
 
         public App()
         {
@@ -32,6 +35,15 @@ namespace upravnikKT2
             var roomTypeService = new RoomTypeService(roomTypeRepository);
 
             RoomTypeController = new RoomTypeController(roomTypeService);
+
+            var ingredientRepository = new IngredientRepository(
+                new CSVStream<Ingredient>(INGREDIENTS_FILE, new IngredientsCSVConverter(CSV_DELIMITER)),
+                new LongSequencer());
+
+            var ingredientService = new IngredientService(ingredientRepository);
+
+            IngredientController = new IngredientController(ingredientService);
+
         }
     }
 }

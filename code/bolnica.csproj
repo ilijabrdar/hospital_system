@@ -178,9 +178,6 @@
     <Compile Include="Model\Director\Equipment.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Director\EquipmentType.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Model\Director\Renovation.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -357,6 +354,7 @@
     <Compile Include="Repository\IngredientRepository.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Repository\IngredientsCSVConverter.cs" />
     <Compile Include="Repository\IOperationRepository.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -398,6 +396,7 @@
     <Compile Include="Repository\RenovationRepository.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Repository\RoomCSVConverter.cs" />
     <Compile Include="Repository\RoomRepository.cs">
       <SubType>Code</SubType>
     </Compile>
