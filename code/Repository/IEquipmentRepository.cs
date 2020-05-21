@@ -4,11 +4,12 @@
  * Purpose: Definition of the Interface Repository.IEquipmentRepository
  ***********************************************************************/
 
+using Model.Director;
 using System;
 
 namespace Repository
 {
-   public interface IEquipmentRepository //: IRepository
+   public interface IEquipmentRepository : IRepository<Equipment,long>
    {
    }
 }
