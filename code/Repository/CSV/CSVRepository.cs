@@ -12,13 +12,11 @@ namespace bolnica.Repository
         where E : IIdentifiable<ID>
         where ID : IComparable
     {
-        protected string _entityName;
         protected ICSVStream<E> _stream;
         protected ISequencer<ID> _sequencer;
 
-        public CSVRepository(string entityName, ICSVStream<E> stream, ISequencer<ID> sequencer)
+        public CSVRepository(ICSVStream<E> stream, ISequencer<ID> sequencer)
         {
-            _entityName = entityName;
             _stream = stream;
             _sequencer = sequencer;
             InitializeId();

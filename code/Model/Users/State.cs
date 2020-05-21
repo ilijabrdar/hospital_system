@@ -8,14 +8,22 @@ using System;
 
 namespace Model.Users
 {
-   public class State
+   public class State : Repository.IIdentifiable<long>
    {
 
-   
-      private String Name;
-      private String Code;
-      
+      private long _id;
+      public String Name { get; set; }
+      public String Code { get; set; }
+
       private System.Collections.ArrayList town;
+
+        public State(long id, String name, String code)
+        {
+            _id = id;
+            Name = name;
+            Code = code;
+            town = new System.Collections.ArrayList();
+        }
       
       /// <pdGenerated>default getter</pdGenerated>
       public System.Collections.ArrayList GetTown()
@@ -74,6 +82,15 @@ namespace Model.Users
             tmpTown.Clear();
          }
       }
-   
-   }
+
+        public long GetId()
+        {
+            return _id;
+        }
+
+        public void SetId(long id)
+        {
+            _id = id;
+        }
+    }
 }
