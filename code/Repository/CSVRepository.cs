@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web.Caching;
+using System.Xml;
 
 namespace bolnica.Repository
 {
@@ -22,19 +24,53 @@ namespace bolnica.Repository
             InitializeId();
         }
 
-        public object Delete()
+        public void Delete(E entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var entities = _stream.ReadAll().ToList();
+                var entityToRemove = entities.SingleOrDefault(ent => ent.GetId().CompareTo(entity.GetId()) == 0);
+                entities.Remove(entityToRemove);
+                _stream.SaveAll(entities);
+               
+            } catch
+            {
+                Console.WriteLine("Nije pronasao trazeni entitet sa id:" + entity.GetId());
+            }
         }
 
-        public object Edit()
+        public void Edit(E entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var entities = _stream.ReadAll().ToList();
+                entities[entities.FindIndex(ent => ent.GetId().CompareTo(entity.GetId()) == 0)] = entity;
+                _stream.SaveAll(entities);
+            }
+            catch (ArgumentException)
+            {
+                Console.WriteLine("Nije pronasao entitet sa id=" + entity.GetId());
+            }
+        }
+
+        public E get(ID id)
+        {
+            try
+            {
+                return _stream
+                   .ReadAll()
+                   .SingleOrDefault(entity => entity.GetId().CompareTo(id) == 0);
+            }
+            catch
+            {
+                Console.WriteLine("Nije pronasao ni jedan entitet sa zadatim id");
+                return default(E);
+            }
         }
 
         public IEnumerable<E> GetAll()
         {
-            throw new NotImplementedException();
+            return _stream.ReadAll();
         }
 
         public E Save(E entity)
@@ -48,5 +84,6 @@ namespace bolnica.Repository
 
         private ID GetMaxId(IEnumerable<E> entities)
            => entities.Count() == 0 ? default : entities.Max(entity => entity.GetId());
+       
     }
 }
