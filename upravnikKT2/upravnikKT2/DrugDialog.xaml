@@ -73,7 +73,7 @@
         <Label Grid.Row="2" Grid.Column="0" Width="91" HorizontalAlignment="Left" Margin="10,10,0,0" Content="Kolicina"/>
         <TextBox x:Name="txtAmount" Grid.Row="2" Grid.Column="1" Width="159"  Margin="0,10,10,0" HorizontalAlignment="Right">
             <TextBox.Text>
-                <Binding Path="Test3" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                <Binding Path="Test3" StringFormat="{}{0:#.##}" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
                         <val:OnlyNumbersValidationRule  ValidationStep="RawProposedValue" ValidatesOnTargetUpdated="True"/>
                     </Binding.ValidationRules>

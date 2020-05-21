@@ -1,0 +1,57 @@
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\bin\Debug\upravnikKT2.exe.config
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\bin\Debug\upravnikKT2.exe
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\bin\Debug\upravnikKT2.pdb
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\bin\Debug\MaterialDesignColors.dll
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\bin\Debug\MaterialDesignThemes.Wpf.dll
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\bin\Debug\MaterialDesignColors.pdb
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\bin\Debug\MaterialDesignThemes.Wpf.pdb
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\bin\Debug\MaterialDesignThemes.Wpf.xml
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\AlternativeDrugDialog.g.cs
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\DashboardWindow.g.cs
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\DialogRasporedNepotrosne.g.cs
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\DoctorAddWindow.g.cs
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\DodavanjeInventaraProstorijaDialog.g.cs
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\DrugDialog.g.cs
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\EquipmentDialog.g.cs
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\GenerateReportDialog.g.cs
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\IngredientsDialog.g.cs
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\MainWindow.g.cs
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\ReadArticleWindow.g.cs
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\RenovationDialog.g.cs
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\RoomDialog.g.cs
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\RoomEquipmentDialog.g.cs
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\RoomTypeWindow.g.cs
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\ShiftWindow.g.cs
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\App.g.cs
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\upravnikKT2_MarkupCompile.cache
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\upravnikKT2_MarkupCompile.lref
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\App.baml
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\AlternativeDrugDialog.baml
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\DashboardWindow.baml
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\DialogRasporedNepotrosne.baml
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\DoctorAddWindow.baml
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\DodavanjeInventaraProstorijaDialog.baml
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\DrugDialog.baml
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\EquipmentDialog.baml
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\GenerateReportDialog.baml
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\IngredientsDialog.baml
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\MainWindow.baml
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\ReadArticleWindow.baml
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\RenovationDialog.baml
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\RoomDialog.baml
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\RoomEquipmentDialog.baml
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\RoomTypeWindow.baml
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\ShiftWindow.baml
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\upravnikKT2.g.resources
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\upravnikKT2.Properties.Resources.resources
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\hospital director front.csproj.GenerateResource.cache
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\hospital director front.csproj.CoreCompileInputs.cache
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\hospital director front.csproj.CopyComplete
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\upravnikKT2.exe
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\upravnikKT2.pdb
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\AddRoomTypeWindow.g.cs
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\AddRoomTypeWindow.baml
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\obj\Debug\hospital director front.csprojAssemblyReference.cache
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\bin\Debug\bolnica.dll
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\upravnikKT2\upravnikKT2\bin\Debug\bolnica.pdb

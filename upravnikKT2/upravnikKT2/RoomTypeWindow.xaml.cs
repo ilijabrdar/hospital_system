@@ -36,7 +36,9 @@ namespace upravnikKT2
 
         private void Button_Click_Add(object sender, RoutedEventArgs e)
         {
-
+            AddRoomType dialog = new AddRoomType();
+            dialog.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            dialog.ShowDialog();
         }
 
         private void Button_Click_Edit(object sender, RoutedEventArgs e)

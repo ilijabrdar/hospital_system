@@ -37,7 +37,7 @@ namespace upravnikKT2.Validation
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
             return string.IsNullOrWhiteSpace((value ?? "").ToString())
-                ? new ValidationResult(false, "Polje za unos mora biti popunjeno.")
+                ? new ValidationResult(false, "Polje mora biti popunjeno.")
                 : ValidationResult.ValidResult;
 
         }
@@ -49,8 +49,9 @@ namespace upravnikKT2.Validation
 
             try
             {
-                var s = value as string;
-                if (s.Length == 13)  //TODO: NE RADI ZA 13 SLOVA
+                bool isJMBG = Regex.IsMatch(value as string, "[0-9]{13,13}", RegexOptions.IgnoreCase);
+
+                if (isJMBG)  
                 {
                     return new ValidationResult(true, null);
                 }
@@ -58,7 +59,7 @@ namespace upravnikKT2.Validation
             }
             catch
             {
-                return new ValidationResult(false, "Unknown error occured.");
+                return new ValidationResult(false, "Morate uneti 13 brojeva za JMBG.");
             }
         }
     }
@@ -80,7 +81,7 @@ namespace upravnikKT2.Validation
             }
             catch
             {
-                return new ValidationResult(false, "Niste dobro uneli email.");
+                return new ValidationResult(false, "Format email-a xxxx@xx.x");
             }
         }
     }
@@ -97,12 +98,12 @@ namespace upravnikKT2.Validation
                 if (isPhone)
                     return new ValidationResult(true, null);
 
-                return new ValidationResult(false, "Niste dobro uneli telefon.");
+                return new ValidationResult(false, "Format telefona xxx");
 
             }
             catch
             {
-                return new ValidationResult(false, "Niste dobro uneli telefon.");
+                return new ValidationResult(false, "Format telefona xxx");
             }
         }
     }
@@ -115,11 +116,11 @@ namespace upravnikKT2.Validation
             {
                 var s = value as string;
                 int r;
-                if (int.TryParse(s, out r))
+                if (int.TryParse(s, out r) && r>0)
                 {
                     return new ValidationResult(true, null);
                 }
-                return new ValidationResult(false, "Unesite broj");
+                return new ValidationResult(false, "Unesite pozitivan broj");
             }
             catch
             {
@@ -129,33 +130,5 @@ namespace upravnikKT2.Validation
     }
     
 
-    public class MinMaxValidationRule : ValidationRule
-    {
-        public double Min
-        {
-            get;
-            set;
-        }
-
-        public double Max
-        {
-            get;
-            set;
-        }
-
-        public override ValidationResult Validate(object value, System.Globalization.CultureInfo cultureInfo)
-        {
-            if (value is double)
-            {
-                double d = (double)value;
-                if (d < Min) return new ValidationResult(false, "Value too small.");
-                if (d > Max) return new ValidationResult(false, "Value too large.");
-                return new ValidationResult(true, null);
-            }
-            else
-            {
-                return new ValidationResult(false, "Unknown error occured.");
-            }
-        }
     }
-}
+

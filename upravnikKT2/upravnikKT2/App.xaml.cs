@@ -1,4 +1,9 @@
-﻿using System;
+﻿using bolnica.Repository;
+using Controller;
+using Model.Director;
+using Repository;
+using Service;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +18,20 @@ namespace upravnikKT2
     /// </summary>
     public partial class App : Application
     {
+        private const string ROOMTYPE_FILE = "../../Resources/Data/roomtypes.csv";
+        private const string CSV_DELIMITER = ",";
+
+        public IController<RoomType,long> RoomTypeController { get; private set; }
+
+        public App()
+        {
+            var roomTypeRepository = new RoomTypeRepository(
+                new CSVStream<RoomType>(ROOMTYPE_FILE, new RoomTypeCSVConverter(CSV_DELIMITER)),
+                new LongSequencer());
+
+            var roomTypeService = new RoomTypeService(roomTypeRepository);
+
+            RoomTypeController = new RoomTypeController(roomTypeService);
+        }
     }
 }

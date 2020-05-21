@@ -55,7 +55,7 @@
             <TextBox.Text>
                 <Binding Path="JMBG" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged" >
                     <Binding.ValidationRules>
-                        <val:JMBGValidationRule />
+                        <val:JMBGValidationRule  ValidatesOnTargetUpdated="True"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>

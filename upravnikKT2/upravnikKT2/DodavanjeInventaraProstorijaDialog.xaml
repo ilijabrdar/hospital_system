@@ -27,9 +27,9 @@
         <Label Grid.Row="1" Grid.Column="0" Width="102" HorizontalAlignment="Left" Margin="10,10,0,0">Kolicina</Label>
         <TextBox x:Name="txtAmount" Grid.Row="1" Grid.Column="1" Width="92"  Margin="0,10,10,0" HorizontalAlignment="Right">
             <TextBox.Text>
-                <Binding Path="Test3" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                <Binding Path="Test3" StringFormat="{}{0:#.##}" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
-                        <val:OnlyNumbersValidationRule  ValidationStep="RawProposedValue"/>
+                        <val:OnlyNumbersValidationRule ValidatesOnTargetUpdated="True"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>

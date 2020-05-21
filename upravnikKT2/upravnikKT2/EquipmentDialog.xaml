@@ -10,7 +10,7 @@
     <Grid Margin="21,21,21,3">
         <Grid.RowDefinitions>
             <RowDefinition Height="55" />
-            <RowDefinition Height="55" />
+            <RowDefinition Height="80" />
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -19,23 +19,23 @@
         </Grid.ColumnDefinitions>
 
 
-        <Label Grid.Row="0" Grid.Column="0" Width="91" HorizontalAlignment="Left" Margin="10,10,0,0">Naziv</Label>
+        <Label Grid.Row="0" Grid.Column="0" Width="91" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,0" Height="32">Naziv</Label>
         <TextBox x:Name="txtName" Grid.Row="0" Grid.Column="1" Width="92" Margin="0,10,10,0" HorizontalAlignment="Right">
             <TextBox.Text>
                 <Binding Path="Test2" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
-                        <val:NotEmptyValidationRule ValidatesOnTargetUpdated="True"/>
+                        <val:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
         </TextBox>
 
-        <Label Grid.Row="1" Grid.Column="0" Width="81" HorizontalAlignment="Left" Margin="10,10,0,0">Kolicina</Label>
-        <TextBox x:Name="txtAmount" Grid.Row="1" Grid.Column="1" Width="92"  Margin="0,10,10,0" HorizontalAlignment="Right">
+        <Label Grid.Row="1" Grid.Column="0" Width="81" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,0" Height="32">Kolicina</Label>
+        <TextBox x:Name="txtAmount" Grid.Row="1" Grid.Column="1" Width="92"  Margin="0,48,10,0" Height="32" HorizontalAlignment="Right">
             <TextBox.Text>
-                <Binding Path="Test3" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                <Binding Path="Test3" StringFormat="{}{0:#.##}" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
-                        <val:OnlyNumbersValidationRule  ValidationStep="RawProposedValue"/>
+                        <val:OnlyNumbersValidationRule ValidatesOnTargetUpdated="True"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>

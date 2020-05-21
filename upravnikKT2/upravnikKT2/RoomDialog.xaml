@@ -20,21 +20,32 @@
 
 
         <Label Grid.Row="0" Grid.Column="0" Width="152" HorizontalAlignment="Left" Margin="10,10,0,120" Content="Sifra prostorije" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
-        <TextBox Grid.Row="0" Grid.Column="1" Width="92" Margin="0,10,10,0" HorizontalAlignment="Right">
+        <TextBox x:Name="txtID" Grid.Row="0" Grid.Column="1" Width="92" Margin="0,10,10,0" HorizontalAlignment="Right">
             <TextBox.Text>
                 <Binding Path="Test3" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
-                        <val:NotEmptyValidationRule/>
+                        <val:NotEmptyValidationRule ValidatesOnTargetUpdated="True"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
         </TextBox>
 
-        <Label Grid.Row="1" Grid.Column="0" Width="81" HorizontalAlignment="Left" Margin="10,10,0,79" Content="Tip"/>
-        <ComboBox Grid.Row="1" Grid.Column="1" Width="92"  Margin="0,10,10,90" HorizontalAlignment="Right"></ComboBox>
+        <Label Grid.Row="1" Grid.Column="0" Width="81" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,30,0,59" Content="Tip"/>
+        <ComboBox Grid.Row="1" Grid.Column="1" Width="92"  Margin="0,41,10,59" HorizontalAlignment="Right"></ComboBox>
 
         <WrapPanel  Grid.Column="1" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10">
-            <Button Height="28" Width="100" Click="Button_Click_OK_Room">Potvrdi</Button>
+            <Button Height="28" Width="100" Click="Button_Click_OK_Room">Potvrdi
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=(Validation.HasError), ElementName=txtID}" Value="True">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                            
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
             <Button Height="28" Width="100" Click="Button_Click_Cancel_Room" Margin="10,0,0,0">Odustani</Button>
         </WrapPanel>
 
