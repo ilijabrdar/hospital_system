@@ -10,14 +10,13 @@ namespace Model.Users
 {
    public abstract class Person
    {
-      private String FirstName;
-      private String LastName;
-      private String Jmbg;
-      private String Email;
-      private String Phone;
-      private DateTime DateOfBirth;
-      
-      private Address address;
-   
-   }
+        public String FirstName { get; set; }
+        public String LastName { get; set; }
+        public String Jmbg { get; set; }
+        public String Email { get; set; }
+        public String Phone { get; set; }
+        public DateTime DateOfBirth { get; set; }
+
+        public Address address { get; set; }
+    }
 }
