@@ -16,7 +16,7 @@ namespace Model.Users
             String username, String password, Object image, 
             String firstName, String lastName, String jmbg, String email, String phone, DateTime dateOfBirth)
         {
-            Id = id;
+            _id = id;
             Username = username;
             Password = password;
             Image = image;

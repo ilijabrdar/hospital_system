@@ -178,9 +178,6 @@
     <Compile Include="Model\Director\Equipment.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Director\EquipmentType.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Model\Director\Renovation.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -292,8 +289,8 @@
     <Compile Include="Repository\BusinessDayRepository.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Repository\CSVRepository.cs" />
-    <Compile Include="Repository\CSVStream.cs" />
+    <Compile Include="Repository\CSV\CSVRepository.cs" />
+    <Compile Include="Repository\CSV\Stream\CSVStream.cs" />
     <Compile Include="Repository\DirectorRepository.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -318,74 +315,74 @@
     <Compile Include="Repository\HospitalizationRepository.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Repository\IArticleRepository.cs">
+    <Compile Include="Repository\abstract\IArticleRepository.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Repository\IBusinessDayRepository.cs">
+    <Compile Include="Repository\abstract\IBusinessDayRepository.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Repository\ICSVConverter.cs" />
-    <Compile Include="Repository\ICSVStream.cs" />
-    <Compile Include="Repository\IDirectorRepository.cs">
+    <Compile Include="Repository\CSV\Converter\ICSVConverter.cs" />
+    <Compile Include="Repository\CSV\Stream\ICSVStream.cs" />
+    <Compile Include="Repository\abstract\IDirectorRepository.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Repository\IDoctorGradeRepository.cs">
+    <Compile Include="Repository\abstract\IDoctorGradeRepository.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Repository\IDoctorRepository.cs">
+    <Compile Include="Repository\abstract\IDoctorRepository.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Repository\IDrugRepository.cs">
+    <Compile Include="Repository\abstract\IDrugRepository.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Repository\IEquipmentRepository.cs">
+    <Compile Include="Repository\abstract\IEquipmentRepository.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Repository\IExaminationPreviousRepository.cs">
+    <Compile Include="Repository\abstract\IExaminationPreviousRepository.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Repository\IExaminationUpcomingRepository.cs">
+    <Compile Include="Repository\abstract\IExaminationUpcomingRepository.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Repository\IHospitalizationRepository.cs">
+    <Compile Include="Repository\abstract\IHospitalizationRepository.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Repository\IIdentifiable.cs" />
-    <Compile Include="Repository\IIngredientRepository.cs">
+    <Compile Include="Repository\abstract\IIdentifiable.cs" />
+    <Compile Include="Repository\abstract\IIngredientRepository.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Repository\IngredientRepository.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Repository\IOperationRepository.cs">
+    <Compile Include="Repository\abstract\IOperationRepository.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Repository\IPatientFileRepository.cs">
+    <Compile Include="Repository\abstract\IPatientFileRepository.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Repository\IPatientRepository.cs">
+    <Compile Include="Repository\abstract\IPatientRepository.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Repository\IRenovationRepository.cs">
+    <Compile Include="Repository\abstract\IRenovationRepository.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Repository\IRepository.cs">
+    <Compile Include="Repository\abstract\IRepository.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Repository\IRoomRepository.cs">
+    <Compile Include="Repository\abstract\IRoomRepository.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Repository\IRoomTypeRepository.cs">
+    <Compile Include="Repository\abstract\IRoomTypeRepository.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Repository\ISecretaryRepository.cs">
+    <Compile Include="Repository\abstract\ISecretaryRepository.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Repository\ISequencer.cs" />
-    <Compile Include="Repository\ISpecialityRepository.cs">
+    <Compile Include="Repository\Sequencer\ISequencer.cs" />
+    <Compile Include="Repository\abstract\ISpecialityRepository.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Repository\LongSequencer.cs" />
+    <Compile Include="Repository\Sequencer\LongSequencer.cs" />
     <Compile Include="Repository\OperationRepository.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -401,10 +398,11 @@
     <Compile Include="Repository\RoomRepository.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Repository\RoomTypeCSVConverter.cs" />
+    <Compile Include="Repository\CSV\Converter\RoomTypeCSVConverter.cs" />
     <Compile Include="Repository\RoomTypeRepository.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Repository\CSV\Converter\SecretaryCSVConverter.cs" />
     <Compile Include="Repository\SecretaryRepository.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -412,6 +410,10 @@
     <Compile Include="Repository\SpecialityRepository.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Repository\CSV\Converter\StateCSVConverter.cs" />
+    <Compile Include="Repository\StateRepository.cs" />
+    <Compile Include="Repository\CSV\Converter\TownCSVConverter.cs" />
+    <Compile Include="Repository\TownRepository.cs" />
     <Compile Include="Service\AnamnesisService.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -494,6 +496,7 @@
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent />
