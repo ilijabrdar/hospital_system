@@ -1,0 +1,10 @@
+C:\Users\jovan\Desktop\PacijentBolnicaZdravo\obj\x86\Debug\MainWindow.g.cs
+C:\Users\jovan\Desktop\PacijentBolnicaZdravo\obj\x86\Debug\Registration.g.cs
+C:\Users\jovan\Desktop\PacijentBolnicaZdravo\obj\x86\Debug\WindowLogIn.g.cs
+C:\Users\jovan\Desktop\PacijentBolnicaZdravo\obj\x86\Debug\App.g.cs
+C:\Users\jovan\Desktop\PacijentBolnicaZdravo\obj\x86\Debug\PacijentBolnicaZdravo_MarkupCompile.cache
+C:\Users\jovan\Desktop\PacijentBolnicaZdravo\obj\x86\Debug\PacijentBolnicaZdravo_MarkupCompile.lref
+C:\Users\jovan\Desktop\PacijentBolnicaZdravo\obj\x86\Debug\Registration.baml
+C:\Users\jovan\Desktop\PacijentBolnicaZdravo\obj\x86\Debug\WindowLogIn.baml
+C:\Users\jovan\Desktop\PacijentBolnicaZdravo\obj\x86\Debug\PacijentBolnicaZdravo.exe
+C:\Users\jovan\Desktop\PacijentBolnicaZdravo\obj\x86\Debug\PacijentBolnicaZdravo.pdb

@@ -1,0 +1,192 @@
+﻿<mah:MetroWindow Name="PatientWindow" x:Class="PacijentBolnicaZdravo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PacijentBolnicaZdravo"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+         xmlns:resource="clr-namespace:PacijentBolnicaZdravo.Properties" xmlns:p="clr-namespace:MyProject.Language"
+        mc:Ignorable="d"
+        Title="{x:Static p:Resources.Title}" Height="504" Width="827">
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Top" Height="35">
+            <Button Name="LogOutButton" Content="{x:Static p:Resources.LogOut}"  DockPanel.Dock="Left" VerticalContentAlignment="Center" Margin="5" Click="LogOut"/>
+
+            <Slider Name="DarkMode"  Width="35" Height="16"  ValueChanged="Slider_ValueChanged" IsSnapToTickEnabled="True"
+            Value="0"
+            Minimum="0"
+            Maximum="1" 
+            TickFrequency="7"
+            IsMoveToPointEnabled="True"
+            LargeChange="1"  DockPanel.Dock="Right" Margin="5"/>
+            <TextBlock Text="{x:Static p:Resources.DarkMode}"  Name="DarkModeLabel" FontSize="13" Margin="8" DockPanel.Dock="Right" />
+            <ComboBox Name="Language"  Margin="4" Width="120" SelectionChanged="Language_SelectionChanged" FontSize="13">
+                <ComboBoxItem >
+                    <StackPanel Orientation="Horizontal">
+                        <Image Height="17" Margin="2" Source="/PacijentBolnicaZdravo;component/Images/srb.png"></Image>
+                        <Label Margin="-5" >Srpski</Label>
+                    </StackPanel>
+                </ComboBoxItem>
+                <ComboBoxItem >
+                    <StackPanel  Orientation="Horizontal">
+                        <Image Height="13" Margin="2" Source="/PacijentBolnicaZdravo;component/Images/eng.png"></Image>
+                        <Label Margin="-5" >English</Label>
+                    </StackPanel>
+                </ComboBoxItem>
+            </ComboBox>
+
+        </DockPanel>
+        <TabControl x:Name="TabControl" TabStripPlacement="Left" Margin="0.3" SelectionChanged="TabControl_SelectionChanged">
+            <TabControl.Resources>
+                <Style TargetType="{x:Type TabItem}" BasedOn="{StaticResource {x:Type TabItem}}">
+                    <Setter Property="mah:ControlsHelper.HeaderFontSize" Value="15" />
+                </Style>
+            </TabControl.Resources>
+            <TabItem Header="{x:Static p:Resources.TabArticles}" Name="Articles"  >
+                <DockPanel>
+                    
+                        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right">
+                        <TextBox BorderThickness="3" BorderBrush="LightBlue" Height="30" VerticalContentAlignment="Center" Margin="0,5,0,5" Width="200" HorizontalAlignment="left" Name="SearchBox" ></TextBox>
+                        <Button x:Name="SearchButton" Width="49" Margin="0,5,5,5" Height="30" Background="#FFF2EDED" Click="Search" >
+                                <Image Margin="2" Source="/PacijentBolnicaZdravo;component/Images/search.png"></Image>
+                            </Button>
+                        </StackPanel>
+
+                    <ScrollViewer VerticalScrollBarVisibility="auto">
+                        <StackPanel x:Name="ArticlesPanel" Orientation="Vertical">
+                            <Border BorderThickness="1" BorderBrush="Black" Height="200" CornerRadius="3">
+                                <TextBox TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="auto"  FontSize="14" TextAlignment="Left" >Šta je piramida ishrane?
+Piramida ishrane je vizuelni prikaz namirnica koje treba da budu zastupljenje u svakodnevnoj ishrani. Količine namirnica koje uzimate su individualne i zavise od Vašeg organizma- da li ste zdravi, u fazi rasta i razvijanja, da li imate dijabetes, da li imate svakodnevne fizičke i mentalne napore, neku hroničnu bolest koja zahteva specijalan režim ishrane, ili jednostavno želite da se zdravo hranite.</TextBox>
+                            </Border>
+                        </StackPanel>
+                    </ScrollViewer>
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="{x:Static p:Resources.TabExemination}" Name="TabExamination">
+                <StackPanel  Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Name="ChooseDoctor" Text="{x:Static p:Resources.ChooseDoctor}" FontSize="19"  Margin="20" Width="150"/>
+                        <ComboBox HorizontalAlignment="Left" Margin="20"  Width="250">
+                            <ComboBoxItem Content="dr Jovan Jovanović"></ComboBoxItem>
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel x:Name="DatePicker" Orientation="Horizontal">
+                        <TextBlock Name="ChooseDate" Text="{x:Static p:Resources.ChooseDate}" FontSize="19" Margin="20" Width="150"/>
+                        <DatePicker  CalendarClosed="CalendarClosedDate" Name="Picker" Margin="20" Width="200"/>
+                    </StackPanel>
+                    <Border x:Name="Termins" BorderBrush="Black" CornerRadius="8,8,3,3" BorderThickness="1" Height="163" Margin="0.1">
+                        <GroupBox x:Name="RadioButtons"></GroupBox>
+                    </Border>
+                    <Button Name="Schedule" Content="{x:Static p:Resources.Schedule}" HorizontalAlignment="Right" Margin="15"  Width="76" Click="Zakazi" />
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="{x:Static p:Resources.TabCancel}" Name="TabCancel">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Name="CancelCondition" Margin="20" Text="{x:Static p:Resources.CancelCondition}" FontSize="14" ></TextBlock>
+                    <Border BorderBrush="Black"  CornerRadius="8,8,3,3" BorderThickness="1" Height="236" Margin="0.1">
+                        <StackPanel x:Name="TERMIN" Orientation="Horizontal">
+                            <StackPanel  Orientation="Vertical">
+                                <TextBlock  FontSize="14" Name="Doctor" Margin="10,15,10,15" Text="{x:Static p:Resources.Doctor}"/>
+                                <TextBlock  FontSize="14" Name="Date" Margin="10,5,10,15" Text="{x:Static p:Resources.Date}"/>
+                                <TextBlock  FontSize="14" Name="Time" Margin="10,5,10,15" Text="{x:Static p:Resources.Time}"/>
+                                <TextBlock  FontSize="14" Name="Ordination" Margin="10,5,10,15" Text="{x:Static p:Resources.Ordination}"/>
+                            </StackPanel>
+                            <Border  BorderBrush="Black" BorderThickness="1" Margin="5" Width="165">
+                                <StackPanel x:Name="FirstExam" Orientation="Vertical">
+                                    
+                                </StackPanel>
+                            </Border>
+                            <Border  BorderBrush="Black" BorderThickness="1" Margin="5" Width="165"></Border>
+                            <Border  BorderBrush="Black" BorderThickness="1" Margin="5" Width="165"></Border>
+                        </StackPanel>
+                    </Border>
+                    <Button Name="Cancel" Content="{x:Static p:Resources.Cancel}" HorizontalAlignment="Right" Margin="15" Width="74" Click="Otkazi"/>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="{x:Static p:Resources.TabFile}" Name="TabFile">
+                <DockPanel>
+                    <Button DockPanel.Dock="Top" HorizontalAlignment="Left" x:Name="GetTherapy"  Width="150" Height="27" Margin="30,15,10,10" Background="#FFF2EDED" Click="CurrentTherapy" >
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Name="CurrentTherapyLabel" Text="{x:Static p:Resources.CurrentTherapy}" Margin="-1" FontSize="12" Foreground="Black"></TextBlock>
+                            <Image Margin="3,-5,0,0"  Height="23" Width="20" Source="/PacijentBolnicaZdravo;component/Images/PDF1.png"></Image>
+                        </StackPanel>
+                    </Button>
+                    <ScrollViewer VerticalScrollBarVisibility="auto">
+                        <StackPanel x:Name="Exeminations" Orientation="Vertical">
+
+                        </StackPanel>
+                    </ScrollViewer>
+                </DockPanel>
+  
+            </TabItem>
+            <TabItem Header="{x:Static p:Resources.Tabaccount}" Name="TabAccount">
+                <ScrollViewer>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Name="BasicInf"  Text="{x:Static p:Resources.BasicInf}" Margin="10" FontSize="18"/>
+                        <StackPanel Orientation="Horizontal">
+                            
+                            <StackPanel Orientation="Vertical">
+                               
+                                <TextBlock Name="NameLabel" Text="{x:Static p:Resources.Name}" Margin="15" FontSize="15"/>
+                                <TextBlock Margin="15" FontSize="15" Name="SurnameLabel"  Text="{x:Static p:Resources.Surname}"/>
+                                <TextBlock Name="IDLabel" Margin="15" FontSize="15"  Text="{x:Static p:Resources.ID}" />
+                                <TextBlock Name="DateBirthLabel" FontSize="15" Margin="15" Text="{x:Static p:Resources.DateBirth}" ></TextBlock>
+                                <TextBlock Margin="15" FontSize="15" >E-mail:</TextBlock>
+                                <TextBlock Name="AdressLabel"  Text="{x:Static p:Resources.Adress}" Margin="15" FontSize="15"/>
+                                <TextBlock Name="PhoneLabel" Margin="15" FontSize="15"  Text="{x:Static p:Resources.NumberPhone}" />
+                               
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical">
+                                <TextBox TextAlignment="Left" BorderThickness="3" BorderBrush="LightBlue" Name="Name" Margin="10" FontSize="15" Width="220">Jovan</TextBox>
+                                <TextBox TextAlignment="Left" BorderThickness="3" BorderBrush="LightBlue" FontSize="15" Name="Surname" Margin="10,12,10,10" Width="220">Jelicki</TextBox>
+                                <TextBox TextAlignment="Left" BorderThickness="3" BorderBrush="LightBlue" FontSize="15" Name="ID" Margin="10,12,10,10"  Width="220">2001998800114</TextBox>
+                                <DatePicker SelectedDate="01/20/1998"  Margin="10,12,10,10" Width="220" Height="30"/>
+                                <TextBox TextAlignment="Left" BorderThickness="3" BorderBrush="LightBlue" FontSize="15" Name="Email" Margin="10"  Width="220">jovanzte@gmail.com</TextBox>
+                                <TextBox TextAlignment="Left" BorderThickness="3" BorderBrush="LightBlue" FontSize="15" Name="Adress" Margin="10,12,10,10" Width="220">Mišarska 40</TextBox>
+                                <TextBox TextAlignment="Left" BorderThickness="3" BorderBrush="LightBlue" FontSize="15" Name="PhoneNumber" Margin="10,12,10,10" Width="220"></TextBox>
+                                <Button  Content="{x:Static p:Resources.UpdateData}" Name="UpdateData" Width="120" HorizontalAlignment="Right" Margin="10" Click="UpdateInfo"></Button>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel Orientation="Vertical">
+                                    <Image x:Name="ProfileImage" Height="100" Width="90" Margin="10" Source="/PacijentBolnicaZdravo;component/Images/User.png"></Image>
+                                    <Button Margin="20" Name="ChoosePhotoButton"  Content="{x:Static p:Resources.Photo}" HorizontalAlignment="Right" VerticalAlignment="Center" Click="ChoosePhoto"></Button>
+                                </StackPanel>
+                            </StackPanel>
+                          
+                           
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Name="PwLabel"  Margin="10,10,0,0" FontSize="18" Text="{x:Static p:Resources.ChangePw}" />
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock  Name="CurrentPw" Margin="10,10,43,10" FontSize="15" Text="{x:Static p:Resources.CurrentPw}"/>
+                                <PasswordBox BorderThickness="3" BorderBrush="LightBlue"  FontSize="15" Name="CurrentPassword"  Margin="10" Width="220"></PasswordBox>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Name="NewPw" Margin="10,10,66,10" FontSize="15" Text="{x:Static p:Resources.NewPw}"/>
+                                <PasswordBox BorderThickness="3" BorderBrush="LightBlue"  FontSize="15" Name="NewPassword" Margin="10"  Width="220"></PasswordBox>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Name="ConfirmPw" Margin="10,10,50,10" FontSize="15"  Text="{x:Static p:Resources.ConfirmPw}"/>
+                                <PasswordBox BorderThickness="3" BorderBrush="LightBlue"  FontSize="15" Name="CheckPassword" Margin="10" Width="220"></PasswordBox>
+                            </StackPanel>
+                            <Button Content="{x:Static p:Resources.UpdatePw}" Name="UpdatePwButton" Margin="10"  Height="25" Width="110" Click="UpdatePw"></Button>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Name="FeedbackHeader" Header="{x:Static p:Resources.FeedBack}">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Name="Opinion"  Text="{x:Static p:Resources.Opinion}"  HorizontalAlignment="Center" FontSize="20" FontWeight="Bold"/>
+                    <TextBlock Name="OpinionName" FontSize="14" HorizontalAlignment="Center" Margin="5" Text="{x:Static p:Resources.OpinionDesc}" />
+
+                    <TextBox BorderThickness="2" Name="FeedBack" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="auto" Height="200" TextAlignment="Left" FontSize="14"></TextBox>
+                   
+                    <Button Name="FeedBackButton" Content="{x:Static p:Resources.Send}"  Width="60" Margin="10,10,20,10" HorizontalAlignment="Right" Click="Feedback"></Button>
+                    
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+
+
+    </DockPanel>
+</mah:MetroWindow>
