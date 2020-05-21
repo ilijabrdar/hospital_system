@@ -11,7 +11,7 @@ using System;
 
 namespace Controller
 {
-   public class PatientFileController : IController
+   public class PatientFileController// : IController
    {
       public PatientFile GetPatientFile(Patient patient)
       {
@@ -75,7 +75,7 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        private Service.IService _service;
+        //private Service.IService _service;
    
    }
 }

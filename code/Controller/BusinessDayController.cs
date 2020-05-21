@@ -11,7 +11,7 @@ using System;
 
 namespace Controller
 {
-   public class BusinessDayController : IController
+   public class BusinessDayController
    {
       public Boolean DeletePreviousBusinessDay()
       {
@@ -69,7 +69,7 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        private Service.IService _service;
+        //private Service.IService _service;
    
    }
 }

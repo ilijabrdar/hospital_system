@@ -10,3 +10,8 @@ C:\Users\david\Desktop\code2\bolnica\obj\Debug\bolnica.csprojAssemblyReference.c
 C:\Users\david\Desktop\code2\bolnica\obj\Debug\bolnica.csproj.CoreCompileInputs.cache
 C:\Users\david\Desktop\code2\bolnica\obj\Debug\bolnica.dll
 C:\Users\david\Desktop\code2\bolnica\obj\Debug\bolnica.pdb
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\code\bin\Debug\bolnica.dll
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\code\bin\Debug\bolnica.pdb
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\code\obj\Debug\bolnica.csproj.CoreCompileInputs.cache
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\code\obj\Debug\bolnica.dll
+C:\Users\david\Desktop\Fax\treca godina\hospital_system\code\obj\Debug\bolnica.pdb

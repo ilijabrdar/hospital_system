@@ -4,13 +4,20 @@
  * Purpose: Definition of the Class Service.RoomTypeService
  ***********************************************************************/
 
+using bolnica.Repository;
+using Model.Director;
 using System;
 
 namespace Repository
 {
-   public class RoomTypeRepository : IRoomTypeRepository
+   public class RoomTypeRepository : CSVRepository<RoomType, long>, IRoomTypeRepository
    {
-      private String FilePath;
+        private const string ENTITY_NAME = "RoomType";
+        public RoomTypeRepository(ICSVStream<RoomType> stream, ISequencer<long> sequencer)
+            : base(ENTITY_NAME, stream, sequencer)
+        {
+
+        }
 
         public object Delete()
         {
@@ -27,9 +34,9 @@ namespace Repository
             throw new NotImplementedException();
         }
 
-        public object Save()
+        public new RoomType Save(RoomType roomType)
         {
-            throw new NotImplementedException();
+            return base.Save(roomType);
         }
     }
 }

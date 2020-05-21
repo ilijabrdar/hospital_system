@@ -8,7 +8,7 @@ using System;
 
 namespace Service
 {
-   public class EquipmentService : IService
+   public class EquipmentService// : IService
    {
       public Model.Director.Room[] GetRoomsContainingEquipment(String name)
       {

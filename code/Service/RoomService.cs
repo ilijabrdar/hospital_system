@@ -9,7 +9,7 @@ using System;
 
 namespace Service
 {
-   public class RoomService : IService
+   public class RoomService// : IService
    {
       public Boolean ChangeRoomType(Room room, RoomType roomType)
       {

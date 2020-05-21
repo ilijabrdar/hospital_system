@@ -5,13 +5,16 @@
  ***********************************************************************/
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Repository
 {
-   public interface IRepository
-   {
-      Object GetAll();
-      Object Save();
+   public interface IRepository<E, ID> where E : IIdentifiable<ID>
+       where ID : IComparable
+   {    //TODO: the rest of the methods?
+      IEnumerable<E> GetAll();
+      E Save(E entity);  //Danijelov create
       Object Edit();
       Object Delete();
    }

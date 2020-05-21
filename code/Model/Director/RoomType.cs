@@ -4,13 +4,34 @@
  * Purpose: Definition of the Class Director.RoomType
  ***********************************************************************/
 
+using Repository;
 using System;
 
 namespace Model.Director
 {
-   public class RoomType
+   public class RoomType : IIdentifiable<long>
    {
-      private String Name;
+        public string Name { get; set; }
+
+        public RoomType(string name)
+        {
+            
+            Name = name;
+        }
+
+        public RoomType(long id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
+
+
+        public long Id { get; set; }
+
+        public long GetId() => Id;
+
+        public void SetId(long id) => Id = id;
+      
    
    }
 }

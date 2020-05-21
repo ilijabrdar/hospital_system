@@ -9,7 +9,7 @@ using System;
 
 namespace Repository
 {
-   public interface IDirectorRepository : IRepository
+   public interface IDirectorRepository// : IRepository
    {
       Director GetDirectorByUsername(String username);
    }

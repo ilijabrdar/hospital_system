@@ -8,9 +8,9 @@ using System;
 
 namespace Service
 {
-   public interface IService
-   {
-      Object Save();
+   public interface IService<E, ID> where E : class
+    {
+      E Save(E entity);  //Danijelov create
       Object Delete();
       Object Edit();
       Object GetAll();

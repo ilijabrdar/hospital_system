@@ -292,6 +292,8 @@
     <Compile Include="Repository\BusinessDayRepository.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Repository\CSVRepository.cs" />
+    <Compile Include="Repository\CSVStream.cs" />
     <Compile Include="Repository\DirectorRepository.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -322,6 +324,8 @@
     <Compile Include="Repository\IBusinessDayRepository.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Repository\ICSVConverter.cs" />
+    <Compile Include="Repository\ICSVStream.cs" />
     <Compile Include="Repository\IDirectorRepository.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -346,6 +350,7 @@
     <Compile Include="Repository\IHospitalizationRepository.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Repository\IIdentifiable.cs" />
     <Compile Include="Repository\IIngredientRepository.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -376,9 +381,11 @@
     <Compile Include="Repository\ISecretaryRepository.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Repository\ISequencer.cs" />
     <Compile Include="Repository\ISpecialityRepository.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Repository\LongSequencer.cs" />
     <Compile Include="Repository\OperationRepository.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -394,6 +401,7 @@
     <Compile Include="Repository\RoomRepository.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Repository\RoomTypeCSVConverter.cs" />
     <Compile Include="Repository\RoomTypeRepository.cs">
       <SubType>Code</SubType>
     </Compile>

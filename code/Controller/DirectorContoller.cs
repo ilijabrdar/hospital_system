@@ -9,7 +9,7 @@ using System;
 
 namespace Controller
 {
-   public class DirectorContoller : IController
+   public class DirectorContoller// : IController
    {
       public Doctor RegisterDoctor(Doctor doctor)
       {
@@ -37,7 +37,7 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        private Service.IService _service;
+        //private Service.IService _service;
    
    }
 }

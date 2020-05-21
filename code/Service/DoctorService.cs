@@ -9,7 +9,7 @@ using System;
 
 namespace Service
 {
-   public class DoctorService : IService
+   public class DoctorService// : IService
    {
       public Model.Users.Doctor[] GetDoctorsBySpeciality(Specialty specialty)
       {
@@ -49,7 +49,7 @@ namespace Service
             throw new NotImplementedException();
         }
 
-        private IService DoctorGrade;
+        //private IService DoctorGrade;
       private Repository.IDoctorRepository _doctorRepository;
    
    }

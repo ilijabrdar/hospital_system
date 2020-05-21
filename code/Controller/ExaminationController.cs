@@ -10,7 +10,7 @@ using System;
 
 namespace Controller
 {
-   public class ExaminationController : IController
+   public class ExaminationController// : IController
    {
       public Examination StartScheduledExamination(Examination examination)
       {
@@ -56,7 +56,7 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        private Service.IService _service;
+//        private Service.IService _service;
    
    }
 }

@@ -9,7 +9,7 @@ using System;
 
 namespace Controller
 {
-   public class RoomController : IController
+   public class RoomController// : IController
    {
       public Boolean ChangeRoomType(Room room, RoomType roomType)
       {
@@ -49,7 +49,7 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        private Service.IService _service;
+        //private Service.IService _service;
    
    }
 }

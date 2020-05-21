@@ -4,13 +4,20 @@
  * Purpose: Definition of the Class Service.RoomTypeService
  ***********************************************************************/
 
+using Model.Director;
+using Service;
 using System;
 
 namespace Controller
 {
-   public class RoomTypeController : IController
+   public class RoomTypeController : IController<RoomType, long>
    {
-      private Service.IService _service;
+      private readonly Service.IService<RoomType,long> _service;
+
+        public RoomTypeController(IService<RoomType,long> service)
+        {
+            _service = service;
+        }
 
         public object Delete()
         {
@@ -30,6 +37,11 @@ namespace Controller
         public object Save()
         {
             throw new NotImplementedException();
+        }
+
+        public RoomType Save(RoomType entity)
+        {
+            return _service.Save(entity);
         }
     }
 }

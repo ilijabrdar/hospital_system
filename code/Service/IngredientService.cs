@@ -8,7 +8,7 @@ using System;
 
 namespace Service
 {
-    public class IngredientService : IService
+    public class IngredientService// : IService
     {
         public object Delete()
         {

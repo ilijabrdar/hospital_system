@@ -9,7 +9,7 @@ using System;
 
 namespace Service
 {
-   public class DirectorService : IService
+   public class DirectorService// : IService
    {
       public Doctor RegisterDoctor(Doctor doctor)
       {

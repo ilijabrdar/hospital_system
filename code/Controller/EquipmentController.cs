@@ -8,7 +8,7 @@ using System;
 
 namespace Controller
 {
-   public class EquipmentController : IController
+   public class EquipmentController// : IController
    {
       public Model.Director.Room[] GetRoomsContainingEquipment(String name)
       {
@@ -36,7 +36,7 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        private Service.IService _service;
+        //private Service.IService _service;
    
    }
 }

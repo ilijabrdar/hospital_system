@@ -25,7 +25,7 @@ namespace Controller
          return 0.0;
       }
    
-      private Service.IService _service;
+      //private Service.IService _service;
    
    }
 }
