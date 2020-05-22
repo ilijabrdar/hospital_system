@@ -10,9 +10,8 @@ namespace Model.Users
 {
    public abstract class User : Person
    {
-      private String Username;
-      private String Password;
-      private Object Image;
-   
-   }
+        public String Username { get; set; }
+        public String Password { get; set; }
+        public Object Image { get; set; }
+    }
 }

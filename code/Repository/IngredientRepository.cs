@@ -14,10 +14,8 @@ namespace Repository
    {
       private String FilePath;
 
-        private const string ENTITY_NAME = "Ingredient";
-
         public IngredientRepository(ICSVStream<Ingredient> stream, ISequencer<long> sequencer)
-            : base(ENTITY_NAME, stream, sequencer)
+            : base(stream, sequencer)
         {
 
         }

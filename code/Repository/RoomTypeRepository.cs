@@ -12,9 +12,9 @@ namespace Repository
 {
    public class RoomTypeRepository : CSVRepository<RoomType, long>, IRoomTypeRepository
    {
-        private const string ENTITY_NAME = "RoomType";
+
         public RoomTypeRepository(ICSVStream<RoomType> stream, ISequencer<long> sequencer)
-            : base(ENTITY_NAME, stream, sequencer)
+            : base(stream, sequencer)
         {
 
         }

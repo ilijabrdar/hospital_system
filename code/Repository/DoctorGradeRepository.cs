@@ -6,16 +6,22 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace Repository
 {
    public class DoctorGradeRepository : IDoctorGradeRepository
    {
-      private String FilePath;
+      private readonly String FilePath; 
+      
 
         public List<string> GetQuestions()
         {
-            throw new NotImplementedException();
+            string[] questions = File.ReadAllLines(FilePath);
+            List<String> retVal = questions.ToList();
+            return retVal;
         }
+        
     }
 }
