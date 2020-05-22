@@ -20,3 +20,8 @@ C:\Users\Asus\Desktop\SIMS\hospital_system\code\obj\Debug\bolnica.dll
 C:\Users\Asus\Desktop\SIMS\hospital_system\code\obj\Debug\bolnica.pdb
 C:\Users\Asus\Desktop\SIMS\hospital_system\code\bin\Debug\bolnica.dll
 C:\Users\Asus\Desktop\SIMS\hospital_system\code\bin\Debug\bolnica.pdb
+C:\Users\jovan\Desktop\hospital_system\code\bin\Debug\bolnica.dll
+C:\Users\jovan\Desktop\hospital_system\code\bin\Debug\bolnica.pdb
+C:\Users\jovan\Desktop\hospital_system\code\obj\Debug\bolnica.csproj.CoreCompileInputs.cache
+C:\Users\jovan\Desktop\hospital_system\code\obj\Debug\bolnica.dll
+C:\Users\jovan\Desktop\hospital_system\code\obj\Debug\bolnica.pdb

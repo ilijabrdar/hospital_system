@@ -289,6 +289,8 @@
     <Compile Include="Repository\BusinessDayRepository.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Repository\CSV\Converter\ArticleCSVConverter.cs" />
+    <Compile Include="Repository\CSV\Converter\DrugCSVConverter.cs" />
     <Compile Include="Repository\CSV\CSVRepository.cs" />
     <Compile Include="Repository\CSV\Stream\CSVStream.cs" />
     <Compile Include="Repository\DirectorRepository.cs">
@@ -303,6 +305,7 @@
     <Compile Include="Repository\DrugRepository.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Repository\CSV\Converter\EquipmentCSVConverter.cs" />
     <Compile Include="Repository\EquipmentRepository.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -378,6 +381,8 @@
     <Compile Include="Repository\abstract\ISecretaryRepository.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Repository\CSV\Converter\IngredientsCSVConverter.cs" />
+    <Compile Include="Repository\CSV\Converter\RoomCSVConverter.cs" />
     <Compile Include="Repository\Sequencer\ISequencer.cs" />
     <Compile Include="Repository\abstract\ISpecialityRepository.cs">
       <SubType>Code</SubType>
@@ -407,6 +412,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Repository\Speciality.cs" />
+    <Compile Include="Repository\CSV\Converter\SpecialityCSVConverter.cs" />
     <Compile Include="Repository\SpecialityRepository.cs">
       <SubType>Code</SubType>
     </Compile>

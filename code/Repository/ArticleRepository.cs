@@ -4,32 +4,21 @@
  * Purpose: Definition of the Class Service.ArticleService
  ***********************************************************************/
 
+using bolnica.Repository;
+using Model.Doctor;
 using System;
 
 namespace Repository
 {
-   public class ArticleRepository : IArticleRepository
+   public class ArticleRepository : CSVRepository<Article,long>, IArticleRepository
    {
       private String FilePath;
-
-        public object Delete()
+        public ArticleRepository(ICSVStream<Article> stream, ISequencer<long> sequencer)
+             : base(stream, sequencer)
         {
-            throw new NotImplementedException();
+
         }
 
-        public object Edit()
-        {
-            throw new NotImplementedException();
-        }
-
-        public object GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public object Save()
-        {
-            throw new NotImplementedException();
-        }
+     
     }
 }

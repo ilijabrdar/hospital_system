@@ -1,22 +1,37 @@
-/***********************************************************************
- * Module:  Lek.cs
- * Author:  Tamara Kovacevic
- * Purpose: Definition of the Class Pacijent.Lek
- ***********************************************************************/
 
+using Repository;
 using System;
 
 namespace Model.PatientSecretary
 {
-   public class Drug
-   {
-      private String Name;
-      private String Id;
-      private int Amount;
-      private Boolean Approved = false;
+   public class Drug : IIdentifiable<long>
+    {
+      public String Name { get; set; }
+      public long Id { get; set; }
+      public int Amount { get; set; }
+      public Boolean Approved = false;
       
-      private Ingredient[] ingredient;
-      private Drug[] Alternative;
-   
-   }
+      public Ingredient[] ingredient { get; set; }
+      public Drug[] Alternative { get; set; }
+
+      public Drug (long id, String name, int ammount, Boolean approved, Ingredient[] ing, Drug[] alter)
+        {
+            this.Id = id;
+            this.Name = name;
+            this.Amount = ammount;
+            this.Approved = approved;
+            this.ingredient = ing;
+            this.Alternative = alter;
+        }
+
+        public long GetId()
+        {
+            return this.Id;
+        }
+
+        public void SetId(long id)
+        {
+            this.Id = id;
+        }
+    }
 }
