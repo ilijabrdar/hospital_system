@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web.UI;
 
 namespace bolnica.Repository
 {
@@ -17,16 +18,54 @@ namespace bolnica.Repository
         public Room ConvertCSVFormatToEntity(string roomCSV)
         {
             string[] tokens = roomCSV.Split(_delimiter.ToCharArray());
-            //return new Room(
-            //    long.Parse(tokens[0]),
-            //    tokens[1]);
 
-            return null;
+            string dictionary = tokens[3];
+            Dictionary<Equipment, int> helping = new Dictionary<Equipment, int>();
+
+            dictionary.Replace("{", "");
+            dictionary.Replace("}", "");
+
+            string[] pairs = dictionary.Split(_delimiter.ToCharArray());
+            foreach (string pair in pairs)
+            {
+                string[] nums = pair.Split(":".ToCharArray());
+                helping[new Equipment(long.Parse(nums[0]))] = int.Parse(nums[1]);
+            }
+
+            return new Room(
+                long.Parse(tokens[0]),
+                tokens[1],
+                new RoomType(long.Parse(tokens[2])),
+                helping,
+                null);
+
         }
 
         public string ConvertEntityToCSVFormat(Room entity)
         {
-            throw new NotImplementedException();
+            StringBuilder sb = new StringBuilder();
+            String formatted = String.Join(_delimiter, entity.GetId(), entity.RoomCode, entity.RoomType);
+            sb.Append(formatted);
+            sb.Append(_delimiter);
+
+            if (entity.Equipment_inventory.Count != 0)
+            {
+                sb.Append("{");  //dictionary delimiter
+
+                foreach (KeyValuePair<Equipment, int> item in entity.Equipment_inventory)
+                {
+                    sb.Append(item.Key.GetId());
+                    sb.Append(":");
+                    sb.Append(item.Value);
+                    sb.Append(_delimiter);
+                }
+                sb.Remove(sb.Length, 1);
+                sb.Append("}");
+            }
+
+            //TODO: add list of renovations
+
+            return sb.ToString();
         }
     }
 }

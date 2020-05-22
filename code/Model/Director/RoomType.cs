@@ -25,6 +25,10 @@ namespace Model.Director
             Name = name;
         }
 
+        public RoomType(long id)
+        {
+            Id = id;
+        }
 
         public long Id { get; set; }
 

@@ -5,12 +5,19 @@
  ***********************************************************************/
 
 using Model.Director;
+using Repository;
 using System;
 
 namespace Service
 {
-   public class RoomService// : IService
+   public class RoomService : IService<Room,long>
    {
+        private readonly IRoomRepository _repository;
+
+        public RoomService(IRoomRepository repository)
+        {
+            _repository = repository;
+        }
       public Boolean ChangeRoomType(Room room, RoomType roomType)
       {
          // TODO: implement
@@ -29,10 +36,7 @@ namespace Service
          return null;
       }
 
-        public object Save()
-        {
-            throw new NotImplementedException();
-        }
+
 
         public object Delete()
         {
@@ -49,7 +53,12 @@ namespace Service
             throw new NotImplementedException();
         }
 
-        private Repository.IRoomRepository _roomRepository;
+        public Room Save(Room entity)
+        {
+            return _repository.Save(entity);
+        }
+
+  
    
    }
 }
