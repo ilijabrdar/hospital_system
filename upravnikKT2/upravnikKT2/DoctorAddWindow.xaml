@@ -1,0 +1,126 @@
+﻿<Window x:Class="upravnikKT2.DoctorAddWindow"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="clr-namespace:upravnikKT2.Validation" xmlns:val="clr-namespace:upravnikKT2.Validation"
+        mc:Ignorable="d"
+        FontSize="18"
+        Title="Dodavanje lekara" Height="588" Width="630.5">
+    <Grid Margin="30">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" MinHeight="26" />
+            <RowDefinition Height="Auto" MinHeight="26" />
+            <RowDefinition Height="Auto" MinHeight="26" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" MinWidth="301" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Column="0" Grid.Row="0" Margin="10,10,10,10">Ime</Label>
+        <Label Grid.Column="0" Grid.Row="1" Margin="10,10,10,10">Prezime</Label>
+        <Label Grid.Column="0" Grid.Row="2" Margin="10,10,10,10">JMBG</Label>
+        <Label Grid.Column="0" Grid.Row="3" Margin="10,10,10,10">e-mail</Label>
+        <Label Grid.Column="0" Grid.Row="4" Margin="10,10,10,10">telefon</Label>
+        <Label Grid.Column="0" Grid.Row="5" Margin="10,10,10,10">datum rodjenja</Label>
+        <Label Grid.Column="0" Grid.Row="6" Margin="10,10,10,10">odeljenje</Label>
+        <Label Grid.Column="0" Grid.Row="7" Margin="10,10,10,10" Content="ID"/>
+
+        <TextBox x:Name="txtFirstName" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right" Margin="0,10,10,10" Width="139" >
+            <TextBox.Text>
+                <Binding Path="Ime" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:NotEmptyValidationRule  ValidatesOnTargetUpdated="True"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox x:Name="txtLastName" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" Margin="0,10,10,10" Width="139">
+            <TextBox.Text>
+                <Binding Path="Prezime" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:NotEmptyValidationRule  ValidatesOnTargetUpdated="True"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox x:Name="txtJMBG" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Right" Margin="0,10,10,10" Width="139">
+            <TextBox.Text>
+                <Binding Path="JMBG" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged" >
+                    <Binding.ValidationRules>
+                        <val:JMBGValidationRule  ValidatesOnTargetUpdated="True"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox x:Name="txtEmail" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Right" Margin="0,10,10,10" Width="139">
+            <TextBox.Text>
+                <Binding Path="EMAIL" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:EmailValidationRule  ValidatesOnTargetUpdated="True"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox x:Name="txtPhone" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Right" Margin="0,10,10,10" Width="139">
+            <TextBox.Text>
+                <Binding Path="Phone" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:PhoneValidationRule  ValidatesOnTargetUpdated="True"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <DatePicker Grid.Column="1" Grid.Row="5" HorizontalAlignment="Right" Margin="0,10,10,10" Width="139"></DatePicker>
+        <ComboBox Grid.Column="1" Grid.Row="6" HorizontalAlignment="Right" Margin="0,10,10,10" Width="139" materialDesign:HintAssist.Hint="Pretrazi" IsEditable="True"></ComboBox>
+        <TextBox x:Name="txtID" Grid.Column="1" Grid.Row="7" HorizontalAlignment="Right" Margin="0,10,10,10" Width="139">
+            <TextBox.Text>
+                <Binding Path="ID" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:NotEmptyValidationRule  ValidatesOnTargetUpdated="True"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <WrapPanel  Grid.Column="1" Grid.Row="8" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <Button Height="28" Width="100" Click="Button_Click_OK" Content="Potvrdi">
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=(Validation.HasError), ElementName=txtFirstName}" Value="True">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=(Validation.HasError), ElementName=txtLastName}" Value="True">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=(Validation.HasError), ElementName=txtJMBG}" Value="True">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=(Validation.HasError), ElementName=txtEmail}" Value="True">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=(Validation.HasError), ElementName=txtPhone}" Value="True">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=(Validation.HasError), ElementName=txtID}" Value="True">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                            
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button Height="28" Width="100" Click="Button_Click__Cancel" Margin="10,0,0,0">Odustani</Button>
+        </WrapPanel>
+
+
+    </Grid>
+</Window>

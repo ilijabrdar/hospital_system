@@ -1,0 +1,26 @@
+﻿<Window x:Class="upravnikKT2.ReadArticleWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:upravnikKT2"
+        mc:Ignorable="d"
+        FontSize="18"
+        Title="Pregled clanka" Height="588" Width="630.5">
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Top" Margin="10">
+            <Label HorizontalAlignment="Center" FontSize="30">
+                <Bold>Naziv</Bold>
+            </Label>
+        </DockPanel>
+        <ScrollViewer>
+            <DockPanel DockPanel.Dock="Bottom">
+                <TextBlock Margin="10">
+                ALKSJLAFJ ALKSJLAFJALKSJLAFJ ALKSJLAFJ
+
+                </TextBlock>
+            </DockPanel>
+        </ScrollViewer>
+
+    </DockPanel>
+</Window>
