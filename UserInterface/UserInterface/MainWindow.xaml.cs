@@ -18,10 +18,15 @@ namespace UserInterface
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// 
     public partial class MainWindow : Window
     {
         public List<Examination> examinations { get; set; }
         public List<Examination> freeSlots { get; set; }
+
+        private ToolTip _toolTip = new ToolTip();
+        private Boolean _isToolTipAvailable = true;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -102,6 +107,8 @@ namespace UserInterface
             profilePanel.Visibility = Visibility.Collapsed;
         }
 
+       
+
         private void CancelProfileChangeDialog(object sender, RoutedEventArgs e)
         {
             var changeProfilePanel = this.FindName("changeProfile") as Grid;
@@ -119,6 +126,25 @@ namespace UserInterface
         private void FreeSelectedAppointment(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void DisplayToolTip(object sender, RoutedEventArgs e)
+        {
+            if (_isToolTipAvailable)
+            {
+                Button button = sender as Button;
+                String toolTipText = (String)button.ToolTip;
+                _toolTip.Content = toolTipText;
+                _toolTip.PlacementTarget = button;
+                _toolTip.Placement = System.Windows.Controls.Primitives.PlacementMode.Top;
+                _toolTip.IsOpen = true;
+            }
+        }
+
+        private void RemoveToolTip(object sender, RoutedEventArgs e)
+        {
+            if(_isToolTipAvailable)
+            _toolTip.IsOpen = false;
         }
     }
 }

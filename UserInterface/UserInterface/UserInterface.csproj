@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -61,6 +62,7 @@
     <Compile Include="AppointmentSearch.xaml.cs">
       <DependentUpon>AppointmentSearch.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Commands\RoutedCommands.cs" />
     <Compile Include="EditAppointment.xaml.cs">
       <DependentUpon>EditAppointment.xaml</DependentUpon>
     </Compile>
