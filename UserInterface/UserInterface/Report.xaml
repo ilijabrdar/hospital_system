@@ -1,0 +1,37 @@
+﻿<Window x:Class="UserInterface.Report"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UserInterface"
+        mc:Ignorable="d"
+        Title="Generisanje izveštaja" Height="200" Width="610"
+        ResizeMode="NoResize">
+    <Grid>
+        <Label Content="Lekar" HorizontalAlignment="Left" Margin="40,10,0,0" VerticalAlignment="Top"/>
+        <Label Content="Datum" HorizontalAlignment="Left" Margin="40,40,0,0" VerticalAlignment="Top"/>
+        <Label Content="Termin" HorizontalAlignment="Left" Margin="40,70,0,0" VerticalAlignment="Top"/>
+        <ComboBox HorizontalAlignment="Left" Margin="130,10,0,0" VerticalAlignment="Top" Width="425"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="130,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="205,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="280,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="355,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="430,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="505,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="130,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="205,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="355,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="430,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50"/>
+        <Button Content="Generiši" HorizontalAlignment="Left" Margin="389,126,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Odustani" HorizontalAlignment="Left" Margin="480,126,0,0" VerticalAlignment="Top" Width="75" Click="CloseWindow"/>
+        <Label Content="/" HorizontalAlignment="Left" Margin="185,40,0,0" VerticalAlignment="Top"/>
+        <Label Content="/" HorizontalAlignment="Left" Margin="260,37,0,0" VerticalAlignment="Top"/>
+        <Label Content="/" HorizontalAlignment="Left" Margin="410,40,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.9,0.596"/>
+        <Label Content="/" HorizontalAlignment="Left" Margin="485,40,0,0" VerticalAlignment="Top"/>
+        <Label Content=":" HorizontalAlignment="Left" Margin="185,70,0,0" VerticalAlignment="Top"/>
+        <Label Content=":" HorizontalAlignment="Left" Margin="410,70,0,0" VerticalAlignment="Top"/>
+        <Label Content="-" HorizontalAlignment="Left" Margin="335,40,0,0" VerticalAlignment="Top"/>
+        <Label Content="-" HorizontalAlignment="Left" Margin="335,70,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>
