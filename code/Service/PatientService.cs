@@ -9,7 +9,7 @@ using System;
 
 namespace Service
 {
-   public class PatientService : IService
+   public class PatientService// : IService
    {
       public Patient ClaimAccount(String jmbg)
       {

@@ -1,17 +1,14 @@
 /***********************************************************************
- * Module:  EquipmentType.cs
+ * Module:  IRenovationRepository.cs
  * Author:  david
- * Purpose: Definition of the Class Director.EquipmentType
+ * Purpose: Definition of the Interface Repository.IRenovationRepository
  ***********************************************************************/
 
 using System;
 
-namespace Model.Director
+namespace Repository
 {
-   public enum EquipmentType
+   public interface IRenovationRepository// : IRepository
    {
-      Consumable,
-      Inconsumable,
-   
    }
 }

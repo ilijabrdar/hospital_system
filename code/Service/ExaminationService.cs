@@ -10,7 +10,7 @@ using System;
 
 namespace Service
 {
-   public class ExaminationService : IService
+   public class ExaminationService// : IService
    {
       public Examination StartScheduledExamination(Examination examination)
       {

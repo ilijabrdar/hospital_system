@@ -8,7 +8,7 @@ using System;
 
 namespace Controller
 {
-   public class ArticleController : IController
+   public class ArticleController
    {
       public Model.Doctor.Article[] SearchArticle(String criteria)
       {
@@ -36,7 +36,7 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        private Service.IService _service;
+        //private Service.IService _service;
    
    }
 }

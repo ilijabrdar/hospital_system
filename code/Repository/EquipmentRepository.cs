@@ -4,32 +4,22 @@
  * Purpose: Definition of the Class Service.EquipmentService
  ***********************************************************************/
 
+using bolnica.Repository;
+using Model.Director;
 using System;
 
 namespace Repository
 {
-   public class EquipmentRepository : IEquipmentRepository
+   public class EquipmentRepository : CSVRepository<Equipment,long>, IEquipmentRepository
    {
       private String FilePath;
-
-        public object Delete()
+      public EquipmentRepository(ICSVStream<Equipment> stream, ISequencer<long> sequencer)
+           : base(stream, sequencer)
         {
-            throw new NotImplementedException();
-        }
 
-        public object Edit()
-        {
-            throw new NotImplementedException();
         }
+      
 
-        public object GetAll()
-        {
-            throw new NotImplementedException();
-        }
 
-        public object Save()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -8,9 +8,9 @@ using System;
 
 namespace Controller
 {
-   public class RenovationController : IController
+   public class RenovationController// : IController
    {
-      private Service.IService _service;
+      //private Service.IService _service;
 
         public object Delete()
         {

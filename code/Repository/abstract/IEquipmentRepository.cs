@@ -1,14 +1,15 @@
 /***********************************************************************
- * Module:  IPatientFileRepository.cs
+ * Module:  IEquipmentRepository.cs
  * Author:  david
- * Purpose: Definition of the Interface Repository.IPatientFileRepository
+ * Purpose: Definition of the Interface Repository.IEquipmentRepository
  ***********************************************************************/
 
+using Model.Director;
 using System;
 
 namespace Repository
 {
-   public interface IPatientFileRepository : IRepository
+   public interface IEquipmentRepository : IRepository<Equipment,long>
    {
    }
 }

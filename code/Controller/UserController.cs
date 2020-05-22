@@ -9,7 +9,7 @@ using System;
 
 namespace Controller
 {
-   public class UserController : IController
+   public class UserController// : IController
    {
       public User Login(String username, String password)
       {
@@ -67,7 +67,7 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        private Service.IService _service;
+        //private Service.IService _service;
    
    }
 }

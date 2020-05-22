@@ -9,7 +9,7 @@ using System;
 
 namespace Service
 {
-   public class DrugService : IService
+   public class DrugService //: IService
    {
       public Drug CreateDrugBasedOnDiagnosis(Diagnosis diagnosis, Examination examination)
       {

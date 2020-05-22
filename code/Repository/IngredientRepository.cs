@@ -4,32 +4,21 @@
  * Purpose: Definition of the Class Repository.IngredientRepository
  ***********************************************************************/
 
+using bolnica.Repository;
+using Model.PatientSecretary;
 using System;
 
 namespace Repository
 {
-   public class IngredientRepository : IIngredientRepository
+   public class IngredientRepository : CSVRepository<Ingredient,long>, IIngredientRepository
    {
       private String FilePath;
 
-        public object Delete()
+        public IngredientRepository(ICSVStream<Ingredient> stream, ISequencer<long> sequencer)
+            : base(stream, sequencer)
         {
-            throw new NotImplementedException();
+
         }
 
-        public object Edit()
-        {
-            throw new NotImplementedException();
-        }
-
-        public object GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public object Save()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

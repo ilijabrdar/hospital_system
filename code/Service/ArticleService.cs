@@ -8,7 +8,7 @@ using System;
 
 namespace Service
 {
-   public class ArticleService : IService
+   public class ArticleService// : IService
    {
       public Model.Doctor.Article[] SearchArticle(String criteria)
       {

@@ -8,7 +8,7 @@ using System;
 
 namespace Service
 {
-   public class SpecialityService : IService
+   public class SpecialityService// : IService
    {
       private Repository.ISpecialityRepository _specialityRepository;
 

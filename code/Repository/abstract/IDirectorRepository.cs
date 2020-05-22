@@ -1,7 +1,7 @@
 /***********************************************************************
- * Module:  ISecretaryRepository.cs
+ * Module:  IDirectorRepository.cs
  * Author:  david
- * Purpose: Definition of the Interface Repository.ISecretaryRepository
+ * Purpose: Definition of the Interface Repository.IDirectorRepository
  ***********************************************************************/
 
 using Model.Users;
@@ -9,8 +9,8 @@ using System;
 
 namespace Repository
 {
-   public interface ISecretaryRepository : IRepository
+   public interface IDirectorRepository// : IRepository
    {
-      Secretary GetSecretaryByUsername(String username);
+      Director GetDirectorByUsername(String username);
    }
 }

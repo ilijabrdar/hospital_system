@@ -4,15 +4,22 @@
  * Purpose: Definition of the Class Director.Room
  ***********************************************************************/
 
+using Repository;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Model.Director
 {
-   public class Room
+   public class Room : IIdentifiable<long>
    {
-      private String Id;
+        Dictionary<Equipment, int> equipment_inventar;
+
+      //private String Id;
       private int EquipmentCounter;
       private String Name;
+
+        
       
       private System.Collections.ArrayList equipment;
       
@@ -105,6 +112,10 @@ namespace Model.Director
          if (renovation != null)
             renovation.Clear();
       }
-   
-   }
+        public long Id { get; set; }
+
+        public long GetId() => Id;
+
+        public void SetId(long id) => Id = id;
+    }
 }
