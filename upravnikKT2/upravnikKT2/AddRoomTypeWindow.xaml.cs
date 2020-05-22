@@ -55,13 +55,19 @@ namespace upravnikKT2
 
         private void Button_Click_OK(object sender, RoutedEventArgs e)
         {
-            var type = new RoomType(Ime);
-            _roomTypeController.Save(type);
+            //var type = new RoomType(Ime);
+            //_roomTypeController.Save(type);
 
-            //TODO: delete this test
-            var ingredients = new Ingredient("sastav", 323);
-            _ingredientController.Save(ingredients);
+            ////TODO: delete this test
+            //var ingredients = new Ingredient("sastav", 323);
+            //_ingredientController.Save(ingredients);
 
+            //2,test3
+            //var edit = new RoomType(2,"test3 u yas");  //TODO: delete this test
+            //_roomTypeController.Edit(edit);
+
+            var delete = new RoomType(3);  //TODO: delete this test
+            _roomTypeController.Delete(delete);
 
             this.Close();
         }

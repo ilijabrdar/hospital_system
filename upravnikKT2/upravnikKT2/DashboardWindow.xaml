@@ -578,8 +578,8 @@
                         <DockPanel DockPanel.Dock="Bottom">
                             <DataGrid Margin="10" x:Name="DataGridRooms" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Sifra" Binding="{Binding Sifra}" Width="*"/>
-                                    <DataGridTextColumn Header="Tip" Binding="{Binding Tip}"  Width="*"/>
+                                    <DataGridTextColumn Header="Sifra" Binding="{Binding RoomCode}" Width="*"/>
+                                    <DataGridTextColumn Header="Tip" Binding="{Binding RoomType}"  Width="*"/>
                                     <DataGridTemplateColumn Header="Spisak opreme" Width="*">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>

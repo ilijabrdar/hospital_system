@@ -55,9 +55,11 @@ namespace upravnikKT2
             dict[e1] = 3;
             dict[e2] = 56;
 
-            var RoomCode = new Room(Test3, new RoomType("212"), dict, null);
-            _roomController.Save(RoomCode);
+            var RoomCode = new Room(Test3, new RoomType("21223"), dict, null);
+            _roomController.Save(new Room(Test3, new RoomType("t1"), null, null));
 
+            //_roomController.Delete(new Room(2));
+            //_roomController.Edit(new Room(0,"roomCode",new RoomType("jasaa"),dict,null));
 
             this.Close();
         }

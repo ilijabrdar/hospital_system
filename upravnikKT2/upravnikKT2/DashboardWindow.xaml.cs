@@ -1,7 +1,13 @@
-﻿using System.Collections.ObjectModel;
+﻿using Controller;
+using Model.Director;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Documents;
 using System.Windows.Input;
 
 namespace upravnikKT2
@@ -11,11 +17,13 @@ namespace upravnikKT2
     /// </summary>
     public partial class DashboardWindow : Window
     {
+        private readonly IController<Room, long> _roomController;
         public DashboardWindow()
         {
             InitializeComponent();
-            
 
+            var app = Application.Current as App;
+            _roomController = app.RoomController;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -192,14 +200,14 @@ namespace upravnikKT2
             DataGridDrugs.Add(new DrugMockup { Naziv = "Paracetamol", Kolicina = "10", Sifra = "6435754", Status = "neodobren", Sastojci = "asdasd asdasd, fdsfds,a sfadsf, asadf", Alternativa = "asdas asd, asd fdsf2q3e 123" });
             this.DataGridLekovi.ItemsSource = DataGridDrugs;
 
-            ObservableCollection<RoomMockup> DataGridRooms = new ObservableCollection<RoomMockup>();
-            DataGridRooms.Add(new RoomMockup { Sifra = "1243", Tip = "operaciona" });
-            DataGridRooms.Add(new RoomMockup { Sifra = "6475", Tip = "kontrolna" });
-            DataGridRooms.Add(new RoomMockup { Sifra = "9876", Tip = "rehabilitaciona" });
-            DataGridRooms.Add(new RoomMockup { Sifra = "8674", Tip = "rehabilitaciona" });
-            DataGridRooms.Add(new RoomMockup { Sifra = "5532", Tip = "operaciona" });
-            DataGridRooms.Add(new RoomMockup { Sifra = "7684", Tip = "operaciona" });
-            this.DataGridRooms.ItemsSource = DataGridRooms;
+            //ObservableCollection<RoomMockup> DataGridRooms = new ObservableCollection<RoomMockup>();
+            //DataGridRooms.Add(new RoomMockup { Sifra = "1243", Tip = "operaciona" });
+            //DataGridRooms.Add(new RoomMockup { Sifra = "6475", Tip = "kontrolna" });
+            //DataGridRooms.Add(new RoomMockup { Sifra = "9876", Tip = "rehabilitaciona" });
+            //DataGridRooms.Add(new RoomMockup { Sifra = "8674", Tip = "rehabilitaciona" });
+            //DataGridRooms.Add(new RoomMockup { Sifra = "5532", Tip = "operaciona" });
+            //DataGridRooms.Add(new RoomMockup { Sifra = "7684", Tip = "operaciona" });
+            //this.DataGridRooms.ItemsSource = DataGridRooms;
 
             ObservableCollection<RenovationMockup> renovations = new ObservableCollection<RenovationMockup>();
             renovations.Add(new RenovationMockup { Sifra = "5432", Datum = "16.03.2012 - 14.06.2013.", Opis = "zamena instalacija", Status = "zavrseno", Tip="operaciona"});
@@ -209,7 +217,15 @@ namespace upravnikKT2
             renovations.Add(new RenovationMockup { Sifra = "0875", Datum = "16.03.2013 - 14.06.2014.", Opis = "zamena sijalica", Status = "otkazano", Tip = "rehabilitaciona" });
             this.DataGridRenovation.ItemsSource = renovations;
 
-            
+
+            ObservableCollection<Room> DataRooms = new ObservableCollection<Room>();
+            List<Room> rooms = (List<Room>)_roomController.GetAll();
+            foreach (Room room in rooms)
+            {
+                DataRooms.Add(room);
+            }
+            this.DataGridRooms.ItemsSource = DataRooms;
+
         }
 
         private void PrikaziRasporedNepotrosne(object sender, RoutedEventArgs e)
