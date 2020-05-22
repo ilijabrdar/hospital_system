@@ -15,10 +15,13 @@ namespace upravnikKT2
     {
         private const string ROOMTYPE_FILE = "../../Resources/Data/roomtypes.csv";
         private const string INGREDIENTS_FILE = "../../Resources/Data/ingredients.csv";
+        private const string ROOMS_FILE = "../../Resources/Data/rooms.csv";
         private const string CSV_DELIMITER = ",";
 
         public IController<RoomType, long> RoomTypeController { get; private set; }
         public IController<Ingredient, long> IngredientController { get; private set; }
+
+        public IController<Room, long> RoomController { get; private set; }
 
         public App()
         {
@@ -30,6 +33,7 @@ namespace upravnikKT2
 
             RoomTypeController = new RoomTypeController(roomTypeService);
 
+
             var ingredientRepository = new IngredientRepository(
                 new CSVStream<Ingredient>(INGREDIENTS_FILE, new IngredientsCSVConverter(CSV_DELIMITER)),
                 new LongSequencer());
@@ -37,6 +41,15 @@ namespace upravnikKT2
             var ingredientService = new IngredientService(ingredientRepository);
 
             IngredientController = new IngredientController(ingredientService);
+
+
+            var roomRepository = new RoomRepository(
+               new CSVStream<Room>(ROOMS_FILE, new RoomCSVConverter(CSV_DELIMITER)),
+               new LongSequencer());
+
+            var roomService = new RoomService(roomRepository);
+
+            RoomController = new RoomController(roomService);
 
         }
     }

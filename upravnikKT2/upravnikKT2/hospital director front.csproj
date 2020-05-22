@@ -78,7 +78,7 @@
     <Compile Include="DodavanjeInventaraProstorijaDialog.xaml.cs">
       <DependentUpon>DodavanjeInventaraProstorijaDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ModelMock\Drug.cs" />
+    <Compile Include="ModelMock\DrugMockup.cs" />
     <Compile Include="DrugDialog.xaml.cs">
       <DependentUpon>DrugDialog.xaml</DependentUpon>
     </Compile>
@@ -100,7 +100,7 @@
     <Compile Include="RenovationDialog.xaml.cs">
       <DependentUpon>RenovationDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ModelMock\Room.cs" />
+    <Compile Include="ModelMock\RoomMockup.cs" />
     <Compile Include="RoomDialog.xaml.cs">
       <DependentUpon>RoomDialog.xaml</DependentUpon>
     </Compile>
@@ -221,6 +221,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Resources\Data\rooms.csv" />
     <None Include="Resources\Data\ingredients.csv" />
     <None Include="Resources\Data\roomtypes.csv" />
   </ItemGroup>

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace upravnikKT2
 {
-    class Room : INotifyPropertyChanged
+    class RoomMockup : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string name)

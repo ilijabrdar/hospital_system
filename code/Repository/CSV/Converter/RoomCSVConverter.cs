@@ -22,8 +22,7 @@ namespace bolnica.Repository
             string dictionary = tokens[3];
             Dictionary<Equipment, int> helping = new Dictionary<Equipment, int>();
 
-            dictionary.Replace("{", "");
-            dictionary.Replace("}", "");
+            dictionary = dictionary.Substring(1, dictionary.Length - 1);
 
             string[] pairs = dictionary.Split(_delimiter.ToCharArray());
             foreach (string pair in pairs)
@@ -39,12 +38,13 @@ namespace bolnica.Repository
                 helping,
                 null);
 
+
         }
 
         public string ConvertEntityToCSVFormat(Room entity)
         {
             StringBuilder sb = new StringBuilder();
-            String formatted = String.Join(_delimiter, entity.GetId(), entity.RoomCode, entity.RoomType);
+            String formatted = String.Join(_delimiter, entity.GetId(), entity.RoomCode, entity.RoomType.GetId());
             sb.Append(formatted);
             sb.Append(_delimiter);
 
@@ -59,13 +59,15 @@ namespace bolnica.Repository
                     sb.Append(item.Value);
                     sb.Append(_delimiter);
                 }
-                sb.Remove(sb.Length, 1);
+                sb.Remove(sb.Length, 0);
                 sb.Append("}");
             }
 
-            //TODO: add list of renovations
+        //TODO: add list of renovations
 
             return sb.ToString();
+
+            //return string.Join(_delimiter, entity.Id, entity.RoomCode);
         }
     }
 }

@@ -185,28 +185,28 @@ namespace upravnikKT2
             DataGridOpremaNepotrosna.Add(new Oprema { Naziv = "Ogledalo", Kolicina = "122" });
             this.DataGridOpremaNepotrosna.ItemsSource = DataGridOpremaNepotrosna;
 
-            ObservableCollection<Drug> DataGridDrugs = new ObservableCollection<Drug>();
-            DataGridDrugs.Add(new Drug { Naziv = "Bromazepan", Kolicina = "20", Sifra = "131233", Status = "odobren", Sastojci = "asdasd asdasd, fdsfds,a sfadsf, asadf", Alternativa = "asdas asd, asd fdsf2q3e 123" });
-            DataGridDrugs.Add(new Drug { Naziv = "Brufen", Kolicina = "212", Sifra = "32424", Status = "neodobren", Sastojci = "asdasd asdasd, fdsfds,a sfadsf, asadf", Alternativa = "asdas asd, asd fdsf2q3e 123" });
-            DataGridDrugs.Add(new Drug { Naziv = "Xanax", Kolicina = "34", Sifra = "54352", Status = "odobren", Sastojci = "asdasd asdasd, fdsfds,a sfadsf, asadf", Alternativa = "asdas asd, asd fdsf2q3e 123" });
-            DataGridDrugs.Add(new Drug { Naziv = "Paracetamol", Kolicina = "10", Sifra = "6435754", Status = "neodobren", Sastojci = "asdasd asdasd, fdsfds,a sfadsf, asadf", Alternativa = "asdas asd, asd fdsf2q3e 123" });
+            ObservableCollection<DrugMockup> DataGridDrugs = new ObservableCollection<DrugMockup>();
+            DataGridDrugs.Add(new DrugMockup { Naziv = "Bromazepan", Kolicina = "20", Sifra = "131233", Status = "odobren", Sastojci = "asdasd asdasd, fdsfds,a sfadsf, asadf", Alternativa = "asdas asd, asd fdsf2q3e 123" });
+            DataGridDrugs.Add(new DrugMockup { Naziv = "Brufen", Kolicina = "212", Sifra = "32424", Status = "neodobren", Sastojci = "asdasd asdasd, fdsfds,a sfadsf, asadf", Alternativa = "asdas asd, asd fdsf2q3e 123" });
+            DataGridDrugs.Add(new DrugMockup { Naziv = "Xanax", Kolicina = "34", Sifra = "54352", Status = "odobren", Sastojci = "asdasd asdasd, fdsfds,a sfadsf, asadf", Alternativa = "asdas asd, asd fdsf2q3e 123" });
+            DataGridDrugs.Add(new DrugMockup { Naziv = "Paracetamol", Kolicina = "10", Sifra = "6435754", Status = "neodobren", Sastojci = "asdasd asdasd, fdsfds,a sfadsf, asadf", Alternativa = "asdas asd, asd fdsf2q3e 123" });
             this.DataGridLekovi.ItemsSource = DataGridDrugs;
 
-            ObservableCollection<Room> DataGridRooms = new ObservableCollection<Room>();
-            DataGridRooms.Add(new Room { Sifra = "1243", Tip = "operaciona" });
-            DataGridRooms.Add(new Room { Sifra = "6475", Tip = "kontrolna" });
-            DataGridRooms.Add(new Room { Sifra = "9876", Tip = "rehabilitaciona" });
-            DataGridRooms.Add(new Room { Sifra = "8674", Tip = "rehabilitaciona" });
-            DataGridRooms.Add(new Room { Sifra = "5532", Tip = "operaciona" });
-            DataGridRooms.Add(new Room { Sifra = "7684", Tip = "operaciona" });
+            ObservableCollection<RoomMockup> DataGridRooms = new ObservableCollection<RoomMockup>();
+            DataGridRooms.Add(new RoomMockup { Sifra = "1243", Tip = "operaciona" });
+            DataGridRooms.Add(new RoomMockup { Sifra = "6475", Tip = "kontrolna" });
+            DataGridRooms.Add(new RoomMockup { Sifra = "9876", Tip = "rehabilitaciona" });
+            DataGridRooms.Add(new RoomMockup { Sifra = "8674", Tip = "rehabilitaciona" });
+            DataGridRooms.Add(new RoomMockup { Sifra = "5532", Tip = "operaciona" });
+            DataGridRooms.Add(new RoomMockup { Sifra = "7684", Tip = "operaciona" });
             this.DataGridRooms.ItemsSource = DataGridRooms;
 
-            ObservableCollection<Renovation> renovations = new ObservableCollection<Renovation>();
-            renovations.Add(new Renovation { Sifra = "5432", Datum = "16.03.2012 - 14.06.2013.", Opis = "zamena instalacija", Status = "zavrseno", Tip="operaciona"});
-            renovations.Add(new Renovation { Sifra = "6547", Datum = "03.05.2020 - 14.06.2020.", Opis = "zamena sijalica", Status = "u toku", Tip = "kontrolna" });
-            renovations.Add(new Renovation { Sifra = "8764", Datum = "16.03.2020 - 14.06.2020.", Opis = "zamena kreveta", Status = "u toku", Tip = "operaciona" });
-            renovations.Add(new Renovation { Sifra = "9678", Datum = "16.03.2021 - 14.06.2021.", Opis = "zamena vrata", Status = "zakazano", Tip = "kontrolna" });
-            renovations.Add(new Renovation { Sifra = "0875", Datum = "16.03.2013 - 14.06.2014.", Opis = "zamena sijalica", Status = "otkazano", Tip = "rehabilitaciona" });
+            ObservableCollection<RenovationMockup> renovations = new ObservableCollection<RenovationMockup>();
+            renovations.Add(new RenovationMockup { Sifra = "5432", Datum = "16.03.2012 - 14.06.2013.", Opis = "zamena instalacija", Status = "zavrseno", Tip="operaciona"});
+            renovations.Add(new RenovationMockup { Sifra = "6547", Datum = "03.05.2020 - 14.06.2020.", Opis = "zamena sijalica", Status = "u toku", Tip = "kontrolna" });
+            renovations.Add(new RenovationMockup { Sifra = "8764", Datum = "16.03.2020 - 14.06.2020.", Opis = "zamena kreveta", Status = "u toku", Tip = "operaciona" });
+            renovations.Add(new RenovationMockup { Sifra = "9678", Datum = "16.03.2021 - 14.06.2021.", Opis = "zamena vrata", Status = "zakazano", Tip = "kontrolna" });
+            renovations.Add(new RenovationMockup { Sifra = "0875", Datum = "16.03.2013 - 14.06.2014.", Opis = "zamena sijalica", Status = "otkazano", Tip = "rehabilitaciona" });
             this.DataGridRenovation.ItemsSource = renovations;
 
             

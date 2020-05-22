@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace upravnikKT2
 {
-    public class Drug : INotifyPropertyChanged
+    public class DrugMockup : INotifyPropertyChanged
     {
         protected virtual void OnPropertyChanged(string name)
         {

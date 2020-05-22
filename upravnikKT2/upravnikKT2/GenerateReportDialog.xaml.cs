@@ -49,13 +49,13 @@ namespace upravnikKT2
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            ObservableCollection<Room> DataGridRooms = new ObservableCollection<Room>();
-            DataGridRooms.Add(new Room { Sifra = "1243"});
-            DataGridRooms.Add(new Room { Sifra = "6475"});
-            DataGridRooms.Add(new Room { Sifra = "9876"});
-            DataGridRooms.Add(new Room { Sifra = "8674"});
-            DataGridRooms.Add(new Room { Sifra = "5532"});
-            DataGridRooms.Add(new Room { Sifra = "7684" });
+            ObservableCollection<RoomMockup> DataGridRooms = new ObservableCollection<RoomMockup>();
+            DataGridRooms.Add(new RoomMockup { Sifra = "1243"});
+            DataGridRooms.Add(new RoomMockup { Sifra = "6475"});
+            DataGridRooms.Add(new RoomMockup { Sifra = "9876"});
+            DataGridRooms.Add(new RoomMockup { Sifra = "8674"});
+            DataGridRooms.Add(new RoomMockup { Sifra = "5532"});
+            DataGridRooms.Add(new RoomMockup { Sifra = "7684" });
             this.DataGridProstorije.ItemsSource = DataGridRooms;
         }
     }
