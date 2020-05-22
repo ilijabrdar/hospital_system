@@ -1,20 +1,5 @@
-﻿using Controller;
-using Model.Director;
-using Model.PatientSecretary;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace upravnikKT2
 {
@@ -23,8 +8,8 @@ namespace upravnikKT2
     /// </summary>
     public partial class AddRoomType : Window, INotifyPropertyChanged
     {
-        private readonly IController<RoomType, long> _roomTypeController;
-        private readonly IController<Ingredient, long> _ingredientController; //TODO: delete this test
+        //private readonly IController<RoomType, long> _roomTypeController;
+        //private readonly IController<Ingredient, long> _ingredientController; //TODO: delete this test
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -41,8 +26,8 @@ namespace upravnikKT2
             this.DataContext = this;
 
             var app = Application.Current as App;
-            _roomTypeController = app.RoomTypeController;
-            _ingredientController = app.IngredientController; //TODO: delete this test
+            //_roomTypeController = app.RoomTypeController;
+            //_ingredientController = app.IngredientController; //TODO: delete this test
         }
 
         private string _ime;
@@ -64,12 +49,12 @@ namespace upravnikKT2
 
         private void Button_Click_OK(object sender, RoutedEventArgs e)
         {
-            var type = new RoomType(Ime);
-            _roomTypeController.Save(type);
+            //var type = new RoomType(Ime);
+            //_roomTypeController.Save(type);
 
-            //TODO: delete this test
-            var ingredients = new Ingredient("sastav", 323);
-            _ingredientController.Save(ingredients);
+            ////TODO: delete this test
+            //var ingredients = new Ingredient("sastav", 323);
+            //_ingredientController.Save(ingredients);
 
             this.Close();
         }
