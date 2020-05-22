@@ -50,6 +50,11 @@ namespace Model.Director
             this.renovation = renovation;
         }
 
+        public Room(long id)
+        {
+            Id = id;
+        }
+
 
 
 

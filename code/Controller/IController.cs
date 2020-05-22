@@ -5,14 +5,16 @@
  ***********************************************************************/
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Controller
 {
    public interface IController<E, ID> where E : class
     {
       E Save(E entity);
-      Object Delete();
-      Object Edit();
-      Object GetAll();
+      void Delete(E entity);
+      void Edit(E entity);
+      IEnumerable<E> GetAll();
    }
 }

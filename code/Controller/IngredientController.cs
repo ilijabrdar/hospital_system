@@ -8,6 +8,7 @@ using Model.Director;
 using Model.PatientSecretary;
 using Service;
 using System;
+using System.Collections.Generic;
 
 namespace Controller
 {
@@ -25,7 +26,17 @@ namespace Controller
             throw new NotImplementedException();
         }
 
+        public void Delete(Ingredient entity)
+        {
+            throw new NotImplementedException();
+        }
+
         public object Edit()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Edit(Ingredient entity)
         {
             throw new NotImplementedException();
         }
@@ -40,6 +51,11 @@ namespace Controller
         public Ingredient Save(Ingredient entity)
         {
             return _service.Save(entity);
+        }
+
+        IEnumerable<Ingredient> IController<Ingredient, long>.GetAll()
+        {
+            throw new NotImplementedException();
         }
     }
 }

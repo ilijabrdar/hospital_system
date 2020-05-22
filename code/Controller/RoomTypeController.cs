@@ -7,6 +7,7 @@
 using Model.Director;
 using Service;
 using System;
+using System.Collections.Generic;
 
 namespace Controller
 {
@@ -19,14 +20,15 @@ namespace Controller
             _service = service;
         }
 
-        public object Delete()
+
+        public void Delete(RoomType entity)
         {
-            throw new NotImplementedException();
+            _service.Delete(entity);
         }
 
-        public object Edit()
+        public void Edit(RoomType entity)
         {
-            throw new NotImplementedException();
+            _service.Edit(entity);
         }
 
         public object GetAll()
@@ -42,6 +44,11 @@ namespace Controller
         public RoomType Save(RoomType entity)
         {
             return _service.Save(entity);
+        }
+
+        IEnumerable<RoomType> IController<RoomType, long>.GetAll()
+        {
+            throw new NotImplementedException();
         }
     }
 }
