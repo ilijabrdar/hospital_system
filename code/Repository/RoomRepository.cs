@@ -4,27 +4,20 @@
  * Purpose: Definition of the Class Service.RoomService
  ***********************************************************************/
 
+using bolnica.Repository;
+using Model.Director;
 using System;
+using System.Diagnostics.Eventing.Reader;
 
 namespace Repository
 {
-   public class RoomRepository : IRoomRepository
+   public class RoomRepository : CSVRepository<Room,long>, IRoomRepository
    {
       private String FilePath;
-
-        public object Delete()
+        public RoomRepository(ICSVStream<Room> stream, ISequencer<long> sequencer)
+             : base(stream, sequencer)
         {
-            throw new NotImplementedException();
-        }
 
-        public object Edit()
-        {
-            throw new NotImplementedException();
-        }
-
-        public object GetAll()
-        {
-            throw new NotImplementedException();
         }
 
         public int GetRoomByID()
@@ -37,9 +30,5 @@ namespace Repository
             throw new NotImplementedException();
         }
 
-        public object Save()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

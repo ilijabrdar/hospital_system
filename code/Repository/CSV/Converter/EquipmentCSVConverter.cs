@@ -6,11 +6,11 @@ using System.Text;
 
 namespace bolnica.Repository
 {
-    class EquipmentCSSConverter : ICSVConverter<Equipment>
+    class EquipmentCSVConverter : ICSVConverter<Equipment>
     {
         private readonly string _delimiter;
 
-        public EquipmentCSSConverter(string delimiter)
+        public EquipmentCSVConverter(string delimiter)
         {
             _delimiter = delimiter;
         }
