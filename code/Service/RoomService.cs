@@ -7,6 +7,8 @@
 using Model.Director;
 using Repository;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Service
 {
@@ -38,19 +40,9 @@ namespace Service
 
 
 
-        public object Delete()
+        public IEnumerable<Room> GetAll()
         {
-            throw new NotImplementedException();
-        }
-
-        public object Edit()
-        {
-            throw new NotImplementedException();
-        }
-
-        public object GetAll()
-        {
-            throw new NotImplementedException();
+            return _repository.GetAll();
         }
 
         public Room Save(Room entity)
@@ -58,7 +50,14 @@ namespace Service
             return _repository.Save(entity);
         }
 
-  
-   
-   }
+        public void Edit(Room entity)
+        {
+            _repository.Edit(entity);
+        }
+
+        public void Delete(Room entity)
+        {
+            _repository.Delete(entity);
+        }
+    }
 }

@@ -7,7 +7,7 @@ using System.Web.UI;
 
 namespace bolnica.Repository
 {
-    public class RoomCSVConverter : ICSVConverter<Room>
+    public class RoomCSVConverter : ICSVConverter<Room>  //TODO: fix for cases where there is not dictionary
     {
         private readonly string _delimiter;
 
@@ -22,13 +22,16 @@ namespace bolnica.Repository
             string dictionary = tokens[3];
             Dictionary<Equipment, int> helping = new Dictionary<Equipment, int>();
 
-            dictionary = dictionary.Substring(1, dictionary.Length - 1);
-
-            string[] pairs = dictionary.Split(_delimiter.ToCharArray());
-            foreach (string pair in pairs)
+            if (dictionary.Contains("{"))  // if there's no dictionary it crashes
             {
-                string[] nums = pair.Split(":".ToCharArray());
-                helping[new Equipment(long.Parse(nums[0]))] = int.Parse(nums[1]);
+                dictionary = dictionary.Substring(1, dictionary.Length - 1);
+
+                string[] pairs = dictionary.Split(_delimiter.ToCharArray());
+                foreach (string pair in pairs)
+                {
+                    string[] nums = pair.Split(":".ToCharArray());
+                    helping[new Equipment(long.Parse(nums[0]))] = int.Parse(nums[1]);
+                }
             }
 
             return new Room(
@@ -48,7 +51,7 @@ namespace bolnica.Repository
             sb.Append(formatted);
             sb.Append(_delimiter);
 
-            if (entity.Equipment_inventory.Count != 0)
+            if (entity.Equipment_inventory != null)
             {
                 sb.Append("{");  //dictionary delimiter
 
