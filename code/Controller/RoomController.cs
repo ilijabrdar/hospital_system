@@ -5,12 +5,19 @@
  ***********************************************************************/
 
 using Model.Director;
+using Service;
 using System;
 
 namespace Controller
 {
-   public class RoomController// : IController
+   public class RoomController : IController<Room,long>
    {
+        private readonly IService<Room, long> _service;
+
+        public RoomController(IService<Room,long> service)
+        {
+            _service = service;
+        }
       public Boolean ChangeRoomType(Room room, RoomType roomType)
       {
          // TODO: implement
@@ -29,9 +36,9 @@ namespace Controller
          return null;
       }
 
-        public object Save()
+        public Room Save(Room entity)
         {
-            throw new NotImplementedException();
+            return _service.Save(entity);
         }
 
         public object Delete()
@@ -49,7 +56,8 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        //private Service.IService _service;
-   
-   }
+
+
+
+    }
 }
