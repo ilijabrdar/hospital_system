@@ -10,7 +10,6 @@ namespace Model.Users
 {
    public class Director : User
    {
-      private String Id;
 
         public override long GetId()
         {

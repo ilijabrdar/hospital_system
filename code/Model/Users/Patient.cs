@@ -16,7 +16,7 @@ namespace Model.Users
     {
       public PatientFile patientFile;
       public Boolean Guest = false;
-        public long Id;
+       
 
         public Patient(long id,String name, String surname, String jmbg, String email, String phone, DateTime birth, String adress, String username, String password, Image img, PatientFile patFile)
         {
