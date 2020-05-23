@@ -95,6 +95,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controller\abstract\IEquipmentController.cs" />
+    <Compile Include="Controller\abstract\IRenovationController.cs" />
     <Compile Include="Controller\AnamnesisController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -298,6 +299,7 @@
     <Compile Include="Repository\CSV\Converter\DrugCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\PatientCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\PatientFileCSVConverter.cs" />
+    <Compile Include="Repository\CSV\Converter\RenovationCSVConverter.cs" />
     <Compile Include="Repository\CSV\CSVRepository.cs" />
     <Compile Include="Repository\CSV\Stream\CSVStream.cs" />
     <Compile Include="Repository\DirectorRepository.cs">
@@ -429,6 +431,7 @@
     <Compile Include="Repository\TownRepository.cs" />
     <Compile Include="Service\abstract\IEquipmentService.cs" />
     <Compile Include="Service\abstract\IIngredientService.cs" />
+    <Compile Include="Service\abstract\IRenovationService.cs" />
     <Compile Include="Service\abstract\IRoomTypeService.cs" />
     <Compile Include="Service\AnamnesisService.cs">
       <SubType>Code</SubType>
