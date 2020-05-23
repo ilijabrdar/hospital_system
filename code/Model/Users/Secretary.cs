@@ -5,6 +5,7 @@
  ***********************************************************************/
 
 using System;
+using System.Drawing;
 
 namespace Model.Users
 {
@@ -13,7 +14,7 @@ namespace Model.Users
         private long _id;
 
         public Secretary(long id, 
-            String username, String password, Object image, 
+            String username, String password, Image image, 
             String firstName, String lastName, String jmbg, String email, String phone, DateTime dateOfBirth)
         {
             _id = id;
@@ -28,11 +29,13 @@ namespace Model.Users
             DateOfBirth = dateOfBirth;
         }
 
+        override
         public long GetId()
         {
             return _id;
         }
 
+        override
         public void SetId(long id)
         {
             _id = id;

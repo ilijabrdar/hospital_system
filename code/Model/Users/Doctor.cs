@@ -118,7 +118,18 @@ namespace Model.Users
             tmpBusinessDay.Clear();
          }
       }
-      private Specialty specialty;
+
+        public override long GetId()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void SetId(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        private Specialty specialty;
       private DoctorGrade doctorGrade;
    
    }
