@@ -1,56 +1,63 @@
-/***********************************************************************
- * Module:  DoctorService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.DoctorService
- ***********************************************************************/
 
+
+using bolnica.Service;
 using Model.Doctor;
+using Model.Users;
+using Repository;
 using System;
+using System.Collections.Generic;
 
 namespace Service
 {
-   public class DoctorService// : IService
+   public class DoctorService : IDoctorService
    {
-      public Model.Users.Doctor[] GetDoctorsBySpeciality(Specialty specialty)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Boolean ChangeSpeciality(Specialty specialty, Model.Users.Doctor doctor)
-      {
-         // TODO: implement
-         return false;
-      }
-      
-      public DoctorGrade GiveGrade(DoctorGrade doctorGrade)
-      {
-         // TODO: implement
-         return null;
-      }
-
-        public object Save()
-        {
-            throw new NotImplementedException();
-        }
-
-        public object Delete()
-        {
-            throw new NotImplementedException();
-        }
-
-        public object Edit()
-        {
-            throw new NotImplementedException();
-        }
-
-        public object GetAll()
-        {
-            throw new NotImplementedException();
-        }
 
         //private IService DoctorGrade;
-      private Repository.IDoctorRepository _doctorRepository;
-   
-   }
+      private readonly IDoctorRepository _doctorRepository;
+
+        public DoctorService(IDoctorRepository repo)
+        {
+            _doctorRepository = repo;
+        }
+
+        public bool ChangeSpeciality(Specialty specialty, Doctor doctor)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(Doctor entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Edit(Doctor entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Doctor Get(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Doctor> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Doctor> GetDoctorsBySpeciality(Specialty specialty)
+        {
+            return _doctorRepository.GetDoctorsBySpeciality(specialty);
+        }
+
+        public DoctorGrade GiveGrade(DoctorGrade doctorGrade)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Doctor Save(Doctor entity)
+        {
+            return _doctorRepository.Save(entity);
+        }
+    }
 }

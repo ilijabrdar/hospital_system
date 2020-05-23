@@ -5,13 +5,15 @@
  ***********************************************************************/
 
 using Model.Doctor;
+using Model.Users;
 using System;
+using System.Collections.Generic;
 
 namespace Repository
 {
-   public interface IDoctorRepository// : IRepository
+   public interface IDoctorRepository : IRepository<Doctor,long>
    {
-      Model.Users.Doctor[] GetDoctorsBySpeciality(Specialty specialty);
-      Model.Users.Doctor GetDoctorByUsername(String username);
+      List<Doctor> GetDoctorsBySpeciality(Specialty specialty);
+      Doctor GetDoctorByUsername(String username);
    }
 }
