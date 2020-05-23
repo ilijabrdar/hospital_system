@@ -4,13 +4,15 @@
  * Purpose: Definition of the Class Service.IngredientService
  ***********************************************************************/
 
+using bolnica.Service;
 using Model.PatientSecretary;
 using Repository;
 using System;
+using System.Collections.Generic;
 
 namespace Service
 {
-    public class IngredientService : IService<Ingredient, long>
+    public class IngredientService : IIngredientService
     {
         private readonly IIngredientRepository _repository;
 
@@ -18,25 +20,37 @@ namespace Service
         {
             _repository = repository;
         }
-        public object Delete()
+
+        public void Delete(Ingredient entity)
         {
-            throw new NotImplementedException();
+            _repository.Delete(entity);
         }
 
-        public object Edit()
+
+        public void Edit(Ingredient entity)
         {
-            throw new NotImplementedException();
+            _repository.Edit(entity);
+        }
+
+        public Ingredient Get(long id)
+        {
+            return _repository.Get(id);
         }
 
         public object GetAll()
         {
-            throw new NotImplementedException();
+            return _repository.GetAll();
         }
 
 
         public Ingredient Save(Ingredient entity)
         {
             return _repository.Save(entity);
+        }
+
+        IEnumerable<Ingredient> IService<Ingredient, long>.GetAll()
+        {
+            return _repository.GetAll();
         }
     }
 }

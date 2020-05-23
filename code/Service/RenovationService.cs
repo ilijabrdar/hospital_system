@@ -4,32 +4,46 @@
  * Purpose: Definition of the Class Service.RenovationService
  ***********************************************************************/
 
+using bolnica.Service;
+using Model.Director;
+using Repository;
 using System;
+using System.Collections.Generic;
 
 namespace Service
 {
-   public class RenovationService// : IService
+   public class RenovationService : IRenovationService
    {
-      private Repository.IRenovationRepository _renovationRepository;
+        private readonly IRenovationRepository _repository;
 
-        public object Delete()
+        public RenovationService(IRenovationRepository repository)
         {
-            throw new NotImplementedException();
+            _repository = repository;
         }
 
-        public object Edit()
+        public void Delete(Renovation entity)
         {
-            throw new NotImplementedException();
+            _repository.Delete(entity);
         }
 
-        public object GetAll()
+        public void Edit(Renovation entity)
         {
-            throw new NotImplementedException();
+            _repository.Edit(entity);
         }
 
-        public object Save()
+        public Renovation Get(long id)
         {
-            throw new NotImplementedException();
+            return _repository.Get(id);
+        }
+
+        public IEnumerable<Renovation> GetAll()
+        {
+            return _repository.GetAll();
+        }
+
+        public Renovation Save(Renovation entity)
+        {
+            return _repository.Save(entity);
         }
     }
 }

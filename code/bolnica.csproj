@@ -94,6 +94,8 @@
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controller\abstract\IEquipmentController.cs" />
+    <Compile Include="Controller\abstract\IRenovationController.cs" />
     <Compile Include="Controller\AnamnesisController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -127,13 +129,20 @@
     <Compile Include="Controller\HospitalizationController.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controller\IController.cs">
+    <Compile Include="Controller\abstract\IController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controller\abstract\IIngredientController.cs" />
     <Compile Include="Controller\IngredientController.cs">
       <SubType>Code</SubType>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="Controller\IUserController.cs" />
+=======
+    <Compile Include="Controller\abstract\IRoomController.cs" />
+    <Compile Include="Controller\abstract\IRoomTypeController.cs" />
+    <Compile Include="Controller\abstract\IUserController.cs" />
+>>>>>>> master
     <Compile Include="Controller\NotificationController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -294,6 +303,10 @@
     <Compile Include="Repository\CSV\Converter\DrugCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\PatientCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\PatientFileCSVConverter.cs" />
+<<<<<<< HEAD
+=======
+    <Compile Include="Repository\CSV\Converter\RenovationCSVConverter.cs" />
+>>>>>>> master
     <Compile Include="Repository\CSV\CSVRepository.cs" />
     <Compile Include="Repository\CSV\Stream\CSVStream.cs" />
     <Compile Include="Repository\DirectorRepository.cs">
@@ -423,6 +436,10 @@
     <Compile Include="Repository\StateRepository.cs" />
     <Compile Include="Repository\CSV\Converter\TownCSVConverter.cs" />
     <Compile Include="Repository\TownRepository.cs" />
+    <Compile Include="Service\abstract\IEquipmentService.cs" />
+    <Compile Include="Service\abstract\IIngredientService.cs" />
+    <Compile Include="Service\abstract\IRenovationService.cs" />
+    <Compile Include="Service\abstract\IRoomTypeService.cs" />
     <Compile Include="Service\AnamnesisService.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -459,10 +476,15 @@
     <Compile Include="Service\IngredientService.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Service\IService.cs">
+    <Compile Include="Service\abstract\IRoomService.cs" />
+    <Compile Include="Service\abstract\IService.cs">
       <SubType>Code</SubType>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="Service\IUserService.cs" />
+=======
+    <Compile Include="Service\abstract\IUserService.cs" />
+>>>>>>> master
     <Compile Include="Service\NotificationService.cs">
       <SubType>Code</SubType>
     </Compile>

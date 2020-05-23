@@ -30,6 +30,11 @@ namespace Model.Director
                 this.Amount = amount;
           }
 
+        public Equipment(long id)
+        {
+            this.id = id;
+        }
+
         public long GetId()
         {
             return id;

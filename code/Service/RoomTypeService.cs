@@ -4,14 +4,16 @@
  * Purpose: Definition of the Class Service.RoomTypeService
  ***********************************************************************/
 
+using bolnica.Service;
 using Model.Director;
 using Repository;
 using System;
+using System.Collections.Generic;
 using System.Web.Management;
 
 namespace Service
 {
-   public class RoomTypeService : IService<RoomType, long>
+   public class RoomTypeService : IRoomTypeService
    {
         private readonly IRoomTypeRepository _repository;
 
@@ -24,26 +26,31 @@ namespace Service
 
         
 
-        public object Delete()
+        public void Delete(RoomType entity)
         {
-            throw new NotImplementedException();
+            _repository.Delete(entity);
         }
 
-        public object Edit()
+
+        public void Edit(RoomType entity)
         {
-            throw new NotImplementedException();
+            _repository.Edit(entity);
         }
 
-        public object GetAll()
+        public RoomType Get(long id)
         {
-            throw new NotImplementedException();
+            return _repository.Get(id);
         }
 
-        
+        public IEnumerable<RoomType> GetAll()
+        {
+            return _repository.GetAll();
+        }
 
         public RoomType Save(RoomType entity)
         {
             return _repository.Save(entity);
         }
+
     }
 }

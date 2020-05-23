@@ -13,64 +13,53 @@ namespace Model.Director
 {
    public class Room : IIdentifiable<long>
    {
-        Dictionary<Equipment, int> equipment_inventar;
+        public Dictionary<Equipment, int> Equipment_inventory { get; set; }
 
-      //private String Id;
-      private int EquipmentCounter;
-      private String Name;
-
+        public string RoomCode { get; set; }
         
-      
-      private System.Collections.ArrayList equipment;
-      
-      /// <pdGenerated>default getter</pdGenerated>
-      public System.Collections.ArrayList GetEquipment()
-      {
-         if (equipment == null)
-            equipment = new System.Collections.ArrayList();
-         return equipment;
-      }
-      
-      /// <pdGenerated>default setter</pdGenerated>
-      public void SetEquipment(System.Collections.ArrayList newEquipment)
-      {
-         RemoveAllEquipment();
-         foreach (Equipment oEquipment in newEquipment)
-            AddEquipment(oEquipment);
-      }
-      
-      /// <pdGenerated>default Add</pdGenerated>
-      public void AddEquipment(Equipment newEquipment)
-      {
-         if (newEquipment == null)
-            return;
-         if (this.equipment == null)
-            this.equipment = new System.Collections.ArrayList();
-         if (!this.equipment.Contains(newEquipment))
-            this.equipment.Add(newEquipment);
-      }
-      
-      /// <pdGenerated>default Remove</pdGenerated>
-      public void RemoveEquipment(Equipment oldEquipment)
-      {
-         if (oldEquipment == null)
-            return;
-         if (this.equipment != null)
-            if (this.equipment.Contains(oldEquipment))
-               this.equipment.Remove(oldEquipment);
-      }
-      
-      /// <pdGenerated>default removeAll</pdGenerated>
-      public void RemoveAllEquipment()
-      {
-         if (equipment != null)
-            equipment.Clear();
-      }
-      private RoomType roomType;
-      private System.Collections.ArrayList renovation;
-      
-      /// <pdGenerated>default getter</pdGenerated>
-      public System.Collections.ArrayList GetRenovation()
+
+        public long Id { get; set; }
+
+        public long GetId() => Id;
+
+        public void SetId(long id) => Id = id;
+
+        public RoomType RoomType { get; set; }
+
+        private System.Collections.ArrayList renovation;
+
+        public Room(string roomCode, RoomType roomType, Dictionary<Equipment, int> equipment_inventory, ArrayList renovation)
+        {
+            Equipment_inventory = equipment_inventory;
+            RoomCode = roomCode;
+
+            this.RoomType = roomType;
+            this.renovation = renovation;
+        }
+
+
+
+
+        public Room(long id, string roomCode, RoomType roomType, Dictionary<Equipment, int> equipment_inventory,   ArrayList renovation)
+        {
+            Equipment_inventory = equipment_inventory;
+            RoomCode = roomCode;
+
+            Id = id;
+            this.RoomType = roomType;
+            this.renovation = renovation;
+        }
+
+        public Room(long id)
+        {
+            Id = id;
+        }
+
+
+
+
+        /// <pdGenerated>default getter</pdGenerated>
+        public System.Collections.ArrayList GetRenovation()
       {
          if (renovation == null)
             renovation = new System.Collections.ArrayList();
@@ -112,10 +101,6 @@ namespace Model.Director
          if (renovation != null)
             renovation.Clear();
       }
-        public long Id { get; set; }
 
-        public long GetId() => Id;
-
-        public void SetId(long id) => Id = id;
     }
 }

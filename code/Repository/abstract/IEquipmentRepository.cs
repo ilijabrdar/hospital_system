@@ -11,5 +11,6 @@ namespace Repository
 {
    public interface IEquipmentRepository : IRepository<Equipment,long>
    {
-   }
+        Room[] GetRoomsContainingEquipment(String name);
+    }
 }

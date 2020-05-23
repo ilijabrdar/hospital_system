@@ -18,31 +18,9 @@ namespace Model.Doctor
       private Model.Director.Room room;
       private Model.PatientSecretary.PatientFile patientFile;
       
-      /// <pdGenerated>default parent getter</pdGenerated>
-      public Model.PatientSecretary.PatientFile GetPatientFile()
-      {
-         return patientFile;
-      }
       
-      /// <pdGenerated>default parent setter</pdGenerated>
-      /// <param>newPatientFile</param>
-      public void SetPatientFile(Model.PatientSecretary.PatientFile newPatientFile)
-      {
-         if (this.patientFile != newPatientFile)
-         {
-            if (this.patientFile != null)
-            {
-               Model.PatientSecretary.PatientFile oldPatientFile = this.patientFile;
-               this.patientFile = null;
-               oldPatientFile.RemoveOperation(this);
-            }
-            if (newPatientFile != null)
-            {
-               this.patientFile = newPatientFile;
-               this.patientFile.AddOperation(this);
-            }
-         }
-      }
+      
+      
    
    }
 }

@@ -17,7 +17,7 @@ namespace Repository
       E Save(E entity);  //Danijelov create
       void Edit(E entity);
       void Delete(E entity);
-        E get(ID id);
+      E Get(ID id);
         
    }
 }

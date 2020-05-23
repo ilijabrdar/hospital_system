@@ -51,7 +51,7 @@ namespace bolnica.Repository
             }
         }
 
-        public E get(ID id)
+        public E Get(ID id)
         {
             try
             {
@@ -82,6 +82,9 @@ namespace bolnica.Repository
 
         private ID GetMaxId(IEnumerable<E> entities)
            => entities.Count() == 0 ? default : entities.Max(entity => entity.GetId());
-       
+
     }
+
+
+    
 }
