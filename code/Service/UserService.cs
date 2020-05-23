@@ -9,6 +9,7 @@ using Model.PatientSecretary;
 using Model.Users;
 using Repository;
 using System;
+using System.Collections.Generic;
 
 namespace Service
 {
@@ -90,6 +91,21 @@ namespace Service
 
 
         public Feedback SendFeedback(string feedback)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(User entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Edit(User entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerable<User> IService<User, long>.GetAll()
         {
             throw new NotImplementedException();
         }

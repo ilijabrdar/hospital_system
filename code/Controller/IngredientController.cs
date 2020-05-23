@@ -4,6 +4,7 @@
  * Purpose: Definition of the Class Service.IngredientService
  ***********************************************************************/
 
+using bolnica.Controller;
 using Model.Director;
 using Model.PatientSecretary;
 using Service;
@@ -12,7 +13,7 @@ using System.Collections.Generic;
 
 namespace Controller
 {
-   public class IngredientController : IController<Ingredient, long>
+   public class IngredientController : IIngredientController
    {
         private readonly IService<Ingredient, long> _service;
 

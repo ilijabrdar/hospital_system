@@ -12,7 +12,7 @@ namespace Service
 {
    public interface IService<E, ID> where E : class
     {
-      E Save(E entity);  //Danijelov create
+      E Save(E entity); 
       void Delete(E entity);
       void Edit(E entity);
       IEnumerable<E> GetAll();

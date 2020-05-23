@@ -4,6 +4,7 @@
  * Purpose: Definition of the Class Service.RoomTypeService
  ***********************************************************************/
 
+using bolnica.Controller;
 using Model.Director;
 using Service;
 using System;
@@ -11,7 +12,7 @@ using System.Collections.Generic;
 
 namespace Controller
 {
-   public class RoomTypeController : IController<RoomType, long>
+   public class RoomTypeController : IRoomTypeController
    {
       private readonly Service.IService<RoomType,long> _service;
 

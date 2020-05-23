@@ -8,6 +8,7 @@ using bolnica.Controller;
 using bolnica.Service;
 using Model.Users;
 using System;
+using System.Collections.Generic;
 
 namespace Controller
 {
@@ -70,6 +71,21 @@ namespace Controller
  
 
         public Feedback SendFeedback(string feedback)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(User entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Edit(User entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerable<User> IController<User, long>.GetAll()
         {
             throw new NotImplementedException();
         }

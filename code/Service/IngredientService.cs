@@ -4,6 +4,7 @@
  * Purpose: Definition of the Class Service.IngredientService
  ***********************************************************************/
 
+using bolnica.Service;
 using Model.PatientSecretary;
 using Repository;
 using System;
@@ -11,7 +12,7 @@ using System.Collections.Generic;
 
 namespace Service
 {
-    public class IngredientService : IService<Ingredient, long>
+    public class IngredientService : IIngredientService
     {
         private readonly IIngredientRepository _repository;
 
