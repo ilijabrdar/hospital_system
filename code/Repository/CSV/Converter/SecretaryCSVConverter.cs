@@ -7,7 +7,7 @@ using Model.Users;
 
 namespace bolnica.Repository
 {
-    class SecretaryCSVConverter : ICSVConverter<Secretary>
+    public class SecretaryCSVConverter : ICSVConverter<Secretary>
     {
         private readonly string _delimiter;
         

@@ -29,9 +29,12 @@ namespace Service
         private readonly IPatientFileRepository _patientFileRepo;
 
 
-        public UserService(IPatientRepository patientRepo, IPatientFileRepository fileRepo)
+        public UserService(IPatientRepository patientRepo, IDoctorRepository doctorRepository, ISecretaryRepository secretaryRepository, IDirectorRepository directorRepository ,IPatientFileRepository fileRepo)
         {
             this._patientRepo = patientRepo;
+            _doctorRepo = doctorRepository;
+            _secretaryRepo = secretaryRepository;
+            _directorRepo = directorRepository;
             this._patientFileRepo = fileRepo;
         }
 
@@ -88,7 +91,7 @@ namespace Service
             User user = null;
             if ((user = _patientRepo.GetPatientByUsername(username)) != null)
                 return user;
-            else if ((user = _secretaryRepo.GetSecretaryByUsername(username)) != null)
+            if ((user = _secretaryRepo.GetSecretaryByUsername(username)) != null)
                 return user;
             else if ((user = _directorRepo.GetDirectorByUsername(username)) != null)
                 return user;

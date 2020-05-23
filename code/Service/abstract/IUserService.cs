@@ -13,11 +13,11 @@ namespace bolnica.Service
         Boolean IsPasswordValid(String password);
 
 
-        Boolean IsUsernameValid(String username);
+        User IsUsernameValid(String username);
         Feedback SendFeedback(String feedback);
 
         Boolean BlockUser(String username);
-        User Login(String username, String password);
+        Boolean Login(String username, String password);
         Boolean Logout(User user);
     }
 }

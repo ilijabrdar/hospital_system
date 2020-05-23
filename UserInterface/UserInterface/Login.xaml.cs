@@ -19,15 +19,23 @@ namespace UserInterface
     /// </summary>
     public partial class Login : Window
     {
+        public String Username { get; set; }
+        public String Password { get; set; }
+
         public Login()
         {
+            this.DataContext = this;
             InitializeComponent();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            var app = Application.Current as App;
 
+            var userController = app.UserController;
 
+            //if(userController.Login())
+            MessageBox.Show(Username);
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
             this.Close();

@@ -8,6 +8,9 @@ using System.Windows;
 using Repository;
 using bolnica.Repository;
 using Model.Users;
+using Service;
+using Controller;
+using bolnica.Controller;
 
 namespace UserInterface
 {
@@ -18,9 +21,17 @@ namespace UserInterface
     {
         private const String CSV_DELIMITER = ",";
         private const String SECRETARY_FILE = "";
+
+        public IUserController UserController { get; private set; }
         public App()
         {
-            //SecretaryRepository secretaryRepository = new SecretaryRepository(SECRETARY_FILE, new CSVStream<Secretary>, new );
+            // SecretaryRepository secretaryRepository = new SecretaryRepository(new CSVStream<Secretary>(SECRETARY_FILE, new SecretaryCSVConverter(CSV_DELIMITER)), new LongSequencer());
+            // DirectorRepository directorRepository = new DirectorRepository(new CSVStream<Director>(SECRETARY_FILE, null, new LongSequencer());
+            // DoctorRepository doctorRepository = new SecretaryRepository(new CSVStream<Secretary>(SECRETARY_FILE, new SecretaryCSVConverter(CSV_DELIMITER)), new LongSequencer());
+            // PatientRepository patientRepository = new SecretaryRepository(new CSVStream<Secretary>(SECRETARY_FILE, new SecretaryCSVConverter(CSV_DELIMITER)), new LongSequencer());
+
+            //UserService userService = new UserService(null, null, secretaryRepository, null, null);
+            //UserController = new UserController(userService);
         }
     }
 }

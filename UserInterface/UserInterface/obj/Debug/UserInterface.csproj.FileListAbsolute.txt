@@ -51,3 +51,6 @@ C:\Users\Asus\Desktop\SIMS\hospital_system\UserInterface\UserInterface\obj\Debug
 C:\Users\Asus\Desktop\SIMS\hospital_system\UserInterface\UserInterface\obj\Debug\UserInterface.exe
 C:\Users\Asus\Desktop\SIMS\hospital_system\UserInterface\UserInterface\obj\Debug\UserInterface.pdb
 C:\Users\Asus\Desktop\SIMS\hospital_system\UserInterface\UserInterface\obj\Debug\App.baml
+C:\Users\Asus\Desktop\SIMS\hospital_system\UserInterface\UserInterface\bin\Debug\bolnica.dll
+C:\Users\Asus\Desktop\SIMS\hospital_system\UserInterface\UserInterface\bin\Debug\bolnica.pdb
+C:\Users\Asus\Desktop\SIMS\hospital_system\UserInterface\UserInterface\obj\Debug\UserInterface.csproj.CopyComplete
