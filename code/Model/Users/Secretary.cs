@@ -5,18 +5,18 @@
  ***********************************************************************/
 
 using System;
+using System.Drawing;
 
 namespace Model.Users
 {
     public class Secretary : User, Repository.IIdentifiable<long>
     {
-        private long _id;
 
         public Secretary(long id, 
-            String username, String password, Object image, 
+            String username, String password, Image image, 
             String firstName, String lastName, String jmbg, String email, String phone, DateTime dateOfBirth)
         {
-            _id = id;
+            this.Id = id;
             Username = username;
             Password = password;
             Image = image;
@@ -28,14 +28,16 @@ namespace Model.Users
             DateOfBirth = dateOfBirth;
         }
 
+        override
         public long GetId()
         {
-            return _id;
+            return this.Id;
         }
 
+        override
         public void SetId(long id)
         {
-            _id = id;
+            this.Id = id;
         }
     }
 }

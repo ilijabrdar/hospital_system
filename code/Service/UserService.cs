@@ -4,50 +4,51 @@
  * Purpose: Definition of the Class Service.UserService
  ***********************************************************************/
 
+using bolnica.Service;
+using Model.PatientSecretary;
 using Model.Users;
+using Repository;
 using System;
 
 namespace Service
 {
-   public class UserService// : IService
-   {
-      public User Login(String username, String password)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Boolean Logout(User user)
-      {
-         // TODO: implement
-         return false;
-      }
-      
-      public Boolean IsPasswordValid(String password)
-      {
-         // TODO: implement
-         return false;
-      }
-      
-      public Boolean IsUsernameValid(String username)
-      {
-         // TODO: implement
-         return false;
-      }
-      
-      public Feedback SendFeedback(String feedback)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Boolean BlockUser(String username)
-      {
-         // TODO: implement
-         return false;
-      }
+    public class UserService : IUserService
+    {
+        //private IService _doctorService;
+        //private IService _patientService;
+        //private IService _secretaryService;
+        //private IService _directorService;
+        
+        //TODO : u klas dijagram dodati ove veze ako vam se ovo svidja
+        private readonly IPatientRepository _patientRepo;
+        private readonly IPatientFileRepository _patientFileRepo;
 
-        public object Save()
+        public UserService(IPatientRepository patientRepo, IPatientFileRepository fileRepo)
+        {
+            this._patientRepo = patientRepo;
+            this._patientFileRepo = fileRepo;
+        }
+
+        public User Save(User entity)
+        {
+            try
+            {
+                Patient patient = (Patient)entity;
+                if (_patientRepo.GetPatientByUsername(patient.Username).Equals(null)){
+                    return null;
+                }
+                patient.patientFile = _patientFileRepo.Save(new PatientFile(-1));
+                return _patientRepo.Save(patient);
+
+            }
+            catch
+            {
+                Doctor docktor = (Doctor)entity;
+                // TODO : imam jos nekih pitanja oko doktora 
+                return null;
+            }
+        }
+        public bool BlockUser(string username)
         {
             throw new NotImplementedException();
         }
@@ -67,10 +68,30 @@ namespace Service
             throw new NotImplementedException();
         }
 
-        //private IService _doctorService;
-      //private IService _patientService;
-      //private IService _secretaryService;
-      //private IService _directorService;
-   
-   }
+        public bool IsPasswordValid(string password)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsUsernameValid(string username)
+        {
+            throw new NotImplementedException();
+        }
+
+        public User Login(string username, string password)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Logout(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public Feedback SendFeedback(string feedback)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

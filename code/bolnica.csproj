@@ -133,6 +133,7 @@
     <Compile Include="Controller\IngredientController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controller\IUserController.cs" />
     <Compile Include="Controller\NotificationController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -291,6 +292,8 @@
     </Compile>
     <Compile Include="Repository\CSV\Converter\ArticleCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\DrugCSVConverter.cs" />
+    <Compile Include="Repository\CSV\Converter\PatientCSVConverter.cs" />
+    <Compile Include="Repository\CSV\Converter\PatientFileCSVConverter.cs" />
     <Compile Include="Repository\CSV\CSVRepository.cs" />
     <Compile Include="Repository\CSV\Stream\CSVStream.cs" />
     <Compile Include="Repository\DirectorRepository.cs">
@@ -459,6 +462,7 @@
     <Compile Include="Service\IService.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Service\IUserService.cs" />
     <Compile Include="Service\NotificationService.cs">
       <SubType>Code</SubType>
     </Compile>
