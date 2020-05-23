@@ -18,7 +18,7 @@ namespace Model.Users
       public Boolean Guest = false;
        
 
-        public Patient(long id,String name, String surname, String jmbg, String email, String phone, DateTime birth, String adress, String username, String password, Image img, PatientFile patFile)
+        public Patient(long id,String name, String surname, String jmbg, String email, String phone, DateTime birth, String adress, String username, String password, Image img)
         {
             this.Id = id;
             this.FirstName = name;
@@ -30,7 +30,6 @@ namespace Model.Users
             this.address = adress;
             this.Username = username;
             this.Password = password;
-            this.patientFile = patFile;
             this.Image = img;
         }
 

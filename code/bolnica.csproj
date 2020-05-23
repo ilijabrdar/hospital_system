@@ -133,6 +133,7 @@
     <Compile Include="Controller\IngredientController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controller\IUserController.cs" />
     <Compile Include="Controller\NotificationController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -461,6 +462,7 @@
     <Compile Include="Service\IService.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Service\IUserService.cs" />
     <Compile Include="Service\NotificationService.cs">
       <SubType>Code</SubType>
     </Compile>

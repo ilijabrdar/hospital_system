@@ -1,14 +1,13 @@
-﻿using Model.Users;
-using Service;
+﻿using Controller;
+using Model.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Web.Configuration;
 
-namespace bolnica.Service
+namespace bolnica.Controller
 {
-     public interface IUserInterface : IService<User, long>
+    public interface IUserController : IController<User, long>
     {
         Boolean IsPasswordValid(String password);
 
