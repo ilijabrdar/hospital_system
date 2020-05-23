@@ -59,7 +59,7 @@ namespace Controller
 
         public User Login(string username, string password)
         {
-            throw new NotImplementedException();
+            return _userService.Login(username, password);
         }
 
         public bool Logout(User user)
