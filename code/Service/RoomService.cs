@@ -60,5 +60,10 @@ namespace Service
         {
             _repository.Delete(entity);
         }
+
+        public Room Get(long id)
+        {
+            return _repository.Get(id);
+        }
     }
 }

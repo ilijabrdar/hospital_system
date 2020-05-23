@@ -16,5 +16,6 @@ namespace Service
       void Delete(E entity);
       void Edit(E entity);
       IEnumerable<E> GetAll();
-   }
+      E Get(ID id);
+    }
 }

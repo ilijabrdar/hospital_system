@@ -7,7 +7,7 @@ using System.Text;
 
 namespace bolnica.Service
 {
-    interface IRoomService : IService<Room, long>
+    public interface IRoomService : IService<Room, long>
     {
         Boolean ChangeRoomType(Room room, RoomType roomType);
 

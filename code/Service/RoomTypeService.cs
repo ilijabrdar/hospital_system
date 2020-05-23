@@ -26,41 +26,31 @@ namespace Service
 
         
 
-        public object Delete()
-        {
-            throw new NotImplementedException();
-        }
-
         public void Delete(RoomType entity)
         {
             _repository.Delete(entity);
         }
 
-        public object Edit()
-        {
-            throw new NotImplementedException();
-        }
 
         public void Edit(RoomType entity)
         {
             _repository.Edit(entity);
         }
 
-        public object GetAll()
+        public RoomType Get(long id)
         {
-            throw new NotImplementedException();
+            return _repository.Get(id);
         }
 
-        
+        public IEnumerable<RoomType> GetAll()
+        {
+            return _repository.GetAll();
+        }
 
         public RoomType Save(RoomType entity)
         {
             return _repository.Save(entity);
         }
 
-        IEnumerable<RoomType> IService<RoomType, long>.GetAll()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

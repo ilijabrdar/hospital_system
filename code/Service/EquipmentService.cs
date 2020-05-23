@@ -4,39 +4,52 @@
  * Purpose: Definition of the Class Service.EquipmentService
  ***********************************************************************/
 
+using bolnica.Service;
+using Model.Director;
+using Repository;
 using System;
+using System.Collections.Generic;
 
 namespace Service
 {
-   public class EquipmentService// : IService
+   public class EquipmentService : IEquipmentService
    {
-      public Model.Director.Room[] GetRoomsContainingEquipment(String name)
-      {
-         // TODO: implement
-         return null;
-      }
 
-        public object Save()
+        private IEquipmentRepository _repository;
+
+        public EquipmentService(IEquipmentRepository repository)
+        {
+            _repository = repository;
+        }
+
+        public Room[] GetRoomsContainingEquipment(string name) //TODO: GetRoomsContainingEquipment
         {
             throw new NotImplementedException();
         }
 
-        public object Delete()
+        public Equipment Save(Equipment entity)
         {
-            throw new NotImplementedException();
+            return _repository.Save(entity);
         }
 
-        public object Edit()
+        public void Delete(Equipment entity)
         {
-            throw new NotImplementedException();
+            _repository.Delete(entity);
         }
 
-        public object GetAll()
+        public void Edit(Equipment entity)
         {
-            throw new NotImplementedException();
+            _repository.Edit(entity);
         }
 
-        private Repository.IEquipmentRepository _equipmentRepository;
-   
-   }
+        IEnumerable<Equipment> IService<Equipment, long>.GetAll()
+        {
+            return _repository.GetAll();
+        }
+
+        public Equipment Get(long id)
+        {
+            return _repository.Get(id);
+        }
+    }
 }

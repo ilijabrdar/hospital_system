@@ -20,29 +20,26 @@ namespace Service
         {
             _repository = repository;
         }
-        public object Delete()
-        {
-            throw new NotImplementedException();
-        }
 
         public void Delete(Ingredient entity)
         {
-            throw new NotImplementedException();
+            _repository.Delete(entity);
         }
 
-        public object Edit()
-        {
-            throw new NotImplementedException();
-        }
 
         public void Edit(Ingredient entity)
         {
-            throw new NotImplementedException();
+            _repository.Edit(entity);
+        }
+
+        public Ingredient Get(long id)
+        {
+            return _repository.Get(id);
         }
 
         public object GetAll()
         {
-            throw new NotImplementedException();
+            return _repository.GetAll();
         }
 
 
@@ -53,7 +50,7 @@ namespace Service
 
         IEnumerable<Ingredient> IService<Ingredient, long>.GetAll()
         {
-            throw new NotImplementedException();
+            return _repository.GetAll();
         }
     }
 }

@@ -18,8 +18,10 @@ namespace Repository
         {
 
         }
-      
 
-
+        public Room[] GetRoomsContainingEquipment(string name)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

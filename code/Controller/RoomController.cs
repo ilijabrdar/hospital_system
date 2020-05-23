@@ -5,6 +5,7 @@
  ***********************************************************************/
 
 using bolnica.Controller;
+using bolnica.Service;
 using Model.Director;
 using Service;
 using System;
@@ -14,9 +15,9 @@ namespace Controller
 {
    public class RoomController : IRoomController
    {
-        private readonly IService<Room, long> _service;
+        private readonly IRoomService _service;
 
-        public RoomController(IService<Room,long> service)
+        public RoomController(IRoomService service)
         {
             _service = service;
         }
@@ -55,6 +56,11 @@ namespace Controller
         public bool ChangeRoomType(Room room, RoomType roomType)
         {
             throw new NotImplementedException();
+        }
+
+        public Room Get(long id)
+        {
+            return _service.Get(id);
         }
     }
 }

@@ -94,6 +94,7 @@
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controller\abstract\IEquipmentController.cs" />
     <Compile Include="Controller\AnamnesisController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -426,6 +427,7 @@
     <Compile Include="Repository\StateRepository.cs" />
     <Compile Include="Repository\CSV\Converter\TownCSVConverter.cs" />
     <Compile Include="Repository\TownRepository.cs" />
+    <Compile Include="Service\abstract\IEquipmentService.cs" />
     <Compile Include="Service\abstract\IIngredientService.cs" />
     <Compile Include="Service\abstract\IRoomTypeService.cs" />
     <Compile Include="Service\AnamnesisService.cs">

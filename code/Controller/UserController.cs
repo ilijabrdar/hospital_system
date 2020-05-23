@@ -89,5 +89,10 @@ namespace Controller
         {
             throw new NotImplementedException();
         }
+
+        public User Get(long id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
