@@ -25,6 +25,11 @@ namespace Model.Users
             ApartmentNumber = apartmentNumber;
         } 
 
+        public Address(long id)
+        {
+            _id = id; 
+        }
+
         /// <pdGenerated>default parent getter</pdGenerated>
         public Town GetTown()
         {

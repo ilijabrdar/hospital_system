@@ -20,7 +20,14 @@ namespace bolnica.Repository
         {
             string[] tokens = entityCSVFormat.Split(_delimiter.ToCharArray());
             Town town = new Town(long.Parse(tokens[0]), tokens[1], tokens[2]);
-            // TODO Dodati ulice u listu 
+            List<Address> adr = new List<Address>(); 
+            if (tokens.Length > 3)
+            {
+                string[] ids = tokens[3].Split(_arrayDelimiter.ToCharArray());
+                foreach (String id in ids)
+                    adr.Add(new Address(long.Parse(id)));
+            }
+            town.SetAddress(adr);
             return town;
         }
 
