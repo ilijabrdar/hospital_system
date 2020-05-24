@@ -4,52 +4,61 @@
  * Purpose: Definition of the Class Service.DoctorService
  ***********************************************************************/
 
+using bolnica.Controller;
+using bolnica.Service;
 using Model.Doctor;
+using Model.Users;
 using System;
+using System.Collections.Generic;
 
 namespace Controller
 {
-   public class DoctorController// : IController
-   {
-      public Model.Users.Doctor[] GetDoctorsBySpeciality(Specialty specialty)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Boolean ChangeSpeciality(Specialty speciality, Model.Users.Doctor doctor)
-      {
-         // TODO: implement
-         return false;
-      }
-      
-      public DoctorGrade GiveGrade(DoctorGrade doctorGrade)
-      {
-         // TODO: implement
-         return null;
-      }
+    public class DoctorController : IDoctorController
+    {
 
-        public object Save()
+        private readonly IDoctorService _doctorservice;
+        public DoctorController(IDoctorService service)
+        {
+            _doctorservice = service;
+        }
+        public bool ChangeSpeciality(Specialty speciality, Doctor doctor)
         {
             throw new NotImplementedException();
         }
 
-        public object Delete()
+        public void Delete(Doctor entity)
         {
             throw new NotImplementedException();
         }
 
-        public object Edit()
+        public void Edit(Doctor entity)
         {
             throw new NotImplementedException();
         }
 
-        public object GetAll()
+        public Doctor Get(long id)
         {
             throw new NotImplementedException();
         }
 
-        //private Service.IService iService;
-   
-   }
+        public IEnumerable<Doctor> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Doctor> GetDoctorsBySpeciality(Specialty specialty)
+        {
+            return _doctorservice.GetDoctorsBySpeciality(specialty);
+        }
+
+        public DoctorGrade GiveGrade(DoctorGrade doctorGrade)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Doctor Save(Doctor entity)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

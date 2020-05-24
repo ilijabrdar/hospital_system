@@ -9,6 +9,7 @@ using Model.Users;
 using System;
 using System.Collections.Generic;
 using bolnica.Repository;
+using System.Linq;
 
 namespace Repository
 {
@@ -21,15 +22,22 @@ namespace Repository
             IEnumerable<Doctor> entities = this.GetAll();
             foreach (Doctor entity in entities)
             {
-                if (entity.Username == username)
+                if (entity.Username.Equals(username))
                     return entity;
             }
             return null;
         }
 
-        public Doctor[] GetDoctorsBySpeciality(Specialty specialty)
+        public List<Doctor> GetDoctorsBySpeciality(Specialty specialty)
         {
-            throw new NotImplementedException();
+            List<Doctor> doctors = this.GetAll().ToList();
+            List<Doctor> retVal = new List<Doctor>();
+            foreach(Doctor doct in doctors)
+            {
+                if (doct.specialty.Equals(specialty))
+                    retVal.Add(doct);
+            }
+            return retVal;
         }
     }
 }
