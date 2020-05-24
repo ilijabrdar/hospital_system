@@ -6,7 +6,7 @@ using System.Text;
 
 namespace bolnica.Repository
 {
-    class EquipmentCSVConverter : ICSVConverter<Equipment>
+    public class EquipmentCSVConverter : ICSVConverter<Equipment>
     {
         private readonly string _delimiter;
 
@@ -19,7 +19,8 @@ namespace bolnica.Repository
             string[] tokens = entityCSVFormat.Split(_delimiter.ToCharArray());
             return new Equipment(
                 long.Parse(tokens[0]),
-                (EquipmentType)Enum.Parse(typeof(EquipmentType), tokens[1]), tokens[2], int.Parse(tokens[4]));
+                (EquipmentType)Enum.Parse(typeof(EquipmentType), tokens[1]), tokens[2], int.Parse(tokens[3])
+                );
         }
 
         public string ConvertEntityToCSVFormat(Equipment entity)
