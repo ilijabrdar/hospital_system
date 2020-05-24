@@ -57,6 +57,10 @@ namespace Service
 
         public Doctor Save(Doctor entity)
         {
+            if (_doctorRepository.GetDoctorByUsername(entity.Username).Equals(null))
+                {
+                    return null;
+                }
             return _doctorRepository.Save(entity);
         }
     }
