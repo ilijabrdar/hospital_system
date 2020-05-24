@@ -4,20 +4,37 @@
  * Purpose: Definition of the Class Pacijent.Recept
  ***********************************************************************/
 
+using Repository;
 using System;
 
 namespace Model.PatientSecretary
 {
-   public class Prescription
+   public class Prescription: IIdentifiable<long>
    {
       private DateTime DateOfIssue;
       private DateTime ExpirationDate;
       private String Note;
-      
+      public long Id;
       private System.Collections.ArrayList drug;
-      
-      /// <pdGenerated>default getter</pdGenerated>
-      public System.Collections.ArrayList GetDrug()
+
+        public Prescription(DateTime dateOfIssue, DateTime expirationDate, string note, long id, System.Collections.ArrayList alternative)
+        {
+            DateOfIssue = dateOfIssue;
+            ExpirationDate = expirationDate;
+            Note = note;
+            Id = id;
+            this.drug = alternative;
+        }
+
+        public Prescription(long id)
+        {
+            Id = id;
+        }
+
+
+
+        /// <pdGenerated>default getter</pdGenerated>
+        public System.Collections.ArrayList GetDrug()
       {
          if (drug == null)
             drug = new System.Collections.ArrayList();
@@ -59,6 +76,15 @@ namespace Model.PatientSecretary
          if (drug != null)
             drug.Clear();
       }
-   
-   }
+
+        public long GetId()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetId(long id)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

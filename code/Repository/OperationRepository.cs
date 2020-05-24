@@ -4,32 +4,21 @@
  * Purpose: Definition of the Class Service.OperationService
  ***********************************************************************/
 
+using bolnica.Repository;
+using Model.Doctor;
 using System;
+using System.Collections.Generic;
 
 namespace Repository
 {
-   public class OperationRepository : IOperationRepository
+   public class OperationRepository : CSVRepository<Operation,long>, IOperationRepository
    {
       private String FilePath;
-
-        public object Delete()
+        public OperationRepository(ICSVStream<Operation> stream, ISequencer<long> sequencer)
+          : base(stream, sequencer)
         {
-            throw new NotImplementedException();
+  
         }
 
-        public object Edit()
-        {
-            throw new NotImplementedException();
-        }
-
-        public object GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public object Save()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

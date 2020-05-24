@@ -4,65 +4,62 @@
  * Purpose: Definition of the Class Service.ExaminationService
  ***********************************************************************/
 
+using bolnica.Service;
 using Model.PatientSecretary;
 using Model.Users;
+using Repository;
 using System;
+using System.Collections.Generic;
 
 namespace Service
 {
-   public class ExaminationService// : IService
-   {
-      public Examination StartScheduledExamination(Examination examination)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Examination FinishExamination(Examination examination)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Examination[] GetScheduledUserExaminations(User user)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Examination[] GetExaminationsByUser(User user)
-      {
-         // TODO: implement
-         return null;
-      }
-
-        public object Save()
+    public class ExaminationService : IExaminationService
+    { // TODO srediti oko repozitorijuma 
+        private IExaminationUpcomingRepository _upcomingRepository;
+        private IExaminationPreviousRepository previousRepository;
+        public void Delete(Examination entity)
         {
             throw new NotImplementedException();
         }
 
-        public object Delete()
+        public void Edit(Examination entity)
         {
             throw new NotImplementedException();
         }
 
-        public object Edit()
+        public Examination FinishExamination(Examination examination)
         {
             throw new NotImplementedException();
         }
 
-        public object GetAll()
+        public Examination Get(long id)
         {
             throw new NotImplementedException();
         }
 
-        private PrescriptionService prescriptionService;
-      private TherapyService therapyService;
-      private AnamnesisService anamnesisService;
-      private ReferralService referralService;
-      private DiagnosisService diagnosisService;
-      private Repository.IExaminationUpcomingRepository _upcomingRepository;
-      private Repository.IExaminationPreviousRepository _previousRepository;
-   
-   }
+        public IEnumerable<Examination> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Examination[] GetExaminationsByUser(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Examination[] GetSheduledUserExaminations(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Examination Save(Examination entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Examination StartScheduledExamination(Examination examination)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

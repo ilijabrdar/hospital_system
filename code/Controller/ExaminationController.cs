@@ -4,59 +4,66 @@
  * Purpose: Definition of the Class Service.ExaminationService
  ***********************************************************************/
 
+using bolnica.Controller;
+using bolnica.Service;
 using Model.PatientSecretary;
 using Model.Users;
 using System;
+using System.Collections.Generic;
 
 namespace Controller
 {
-   public class ExaminationController// : IController
-   {
-      public Examination StartScheduledExamination(Examination examination)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Examination FinishExamination(Examination examination)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Examination[] GetScheduledUserExaminations(User user)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Examination[] GetExaminationsByUser(User user)
-      {
-         // TODO: implement
-         return null;
-      }
+    public class ExaminationController : IExaminationController
+    {
+        private IExaminationService _service;
 
-        public object Save()
+        public ExaminationController(IExaminationService service)
+        {
+            _service = service;
+        }
+        public void Delete(Examination entity)
+        {
+            _service.Delete(entity); 
+        }
+
+        public void Edit(Examination entity)
+        {
+            _service.Edit(entity);
+        }
+
+        public Examination FinishExamination(Examination examination)
         {
             throw new NotImplementedException();
         }
 
-        public object Delete()
+        public Examination Get(long id)
+        {
+            return _service.Get(id);
+        }
+
+        public IEnumerable<Examination> GetAll()
+        {
+            return _service.GetAll();
+        }
+
+        public Examination[] GetExaminationsByUser(User user)
         {
             throw new NotImplementedException();
         }
 
-        public object Edit()
+        public Examination[] GetSheduledUserExaminations(User user)
         {
             throw new NotImplementedException();
         }
 
-        public object GetAll()
+        public Examination Save(Examination entity)
+        {
+            return _service.Save(entity);
+        }
+
+        public Examination StartScheduledExamination(Examination examination)
         {
             throw new NotImplementedException();
         }
-
-//        private Service.IService _service;
-   
-   }
+    }
 }

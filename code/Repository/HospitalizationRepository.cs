@@ -4,32 +4,19 @@
  * Purpose: Definition of the Class Service.HospitalizationService
  ***********************************************************************/
 
+using bolnica.Repository;
+using Model.Doctor;
 using System;
 
 namespace Repository
 {
-   public class HospitalizationRepository : IHospitalizationRepository
-   {
+   public class HospitalizationRepository : CSVRepository<Hospitalization, long>, IHospitalizationRepository
+    {
       private String FilePath;
-
-        public object Delete()
+        public HospitalizationRepository(ICSVStream<Hospitalization> stream, ISequencer<long> sequencer)
+  : base(stream, sequencer)
         {
-            throw new NotImplementedException();
-        }
 
-        public object Edit()
-        {
-            throw new NotImplementedException();
-        }
-
-        public object GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public object Save()
-        {
-            throw new NotImplementedException();
         }
     }
 }

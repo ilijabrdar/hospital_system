@@ -4,24 +4,22 @@
  * Purpose: Definition of the Class Service.DiagnosisService
  ***********************************************************************/
 
+using bolnica.Service;
 using Model.PatientSecretary;
 using System;
 
 namespace Service
 {
-   public class DiagnosisService
-   {
-      public Diagnosis CreateDiagnosis(Examination examination, Diagnosis diagnosis)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Diagnosis CreateDiagnosisBasedOnSymptoms(Symptom symptom, Examination examination)
-      {
-         // TODO: implement
-         return null;
-      }
-   
-   }
+    public class DiagnosisService  : IDiagnosisService
+    {
+        public Diagnosis CreateDiagnosis(Examination examination, Diagnosis diagnosis)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Diagnosis CreateDiagnosisBasedOnSymptoms(Examination examinatio, Symptom symptom)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

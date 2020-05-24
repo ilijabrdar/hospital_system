@@ -4,19 +4,18 @@
  * Purpose: Definition of the Class Service.ReferralService
  ***********************************************************************/
 
+using bolnica.Service;
 using Model.Doctor;
 using Model.PatientSecretary;
 using System;
 
 namespace Service
 {
-   public class ReferralService
-   {
-      public Referral CreateReferral(Referral referral, Examination examination)
-      {
-         // TODO: implement
-         return null;
-      }
-   
-   }
+    public class ReferralService : IReferalService
+    {
+        public Refferal CreateRefferal(Refferal refferal, Examination examination)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

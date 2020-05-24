@@ -6,7 +6,9 @@
 
 using bolnica.Service;
 using Model.PatientSecretary;
+using Model.Users;
 using System;
+using System.Collections.Generic;
 
 namespace Service
 {

@@ -4,24 +4,22 @@
  * Purpose: Definition of the Class Service.TherapyService
  ***********************************************************************/
 
+using bolnica.Service;
 using Model.PatientSecretary;
 using System;
 
 namespace Service
 {
-   public class TherapyService
-   {
-      public Therapy CreateTherapy(Therapy therapy, Examination examination)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Therapy CreateCurrentTherapy(PatientFile patientFile)
-      {
-         // TODO: implement
-         return null;
-      }
-   
-   }
+    public class TherapyService : ITherapyService
+    {
+        public Therapy CreateCurrentTherapy(PatientFile patientFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Therapy CreateTherapy(Therapy therapy, Examination examination)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

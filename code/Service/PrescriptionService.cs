@@ -4,18 +4,17 @@
  * Purpose: Definition of the Class Service.PrescriptionService
  ***********************************************************************/
 
+using bolnica.Service;
 using Model.PatientSecretary;
 using System;
 
 namespace Service
 {
-   public class PrescriptionService
-   {
-      public Prescription CreatePrescription(Prescription prescription, Examination examination)
-      {
-         // TODO: implement
-         return null;
-      }
-   
-   }
+    public class PrescriptionService : IPrescriptionService
+    {
+        public Prescription CreatePrescription(Prescription prescription, Examination examination)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
