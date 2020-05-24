@@ -310,6 +310,7 @@
     <Compile Include="Repository\CSV\Converter\DrugCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\PatientCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\PatientFileCSVConverter.cs" />
+    <Compile Include="Repository\CSV\Converter\RenovationCSVConverter.cs" />
     <Compile Include="Repository\CSV\CSVGetterRepository.cs" />
     <Compile Include="Repository\CSV\CSVRepository.cs" />
     <Compile Include="Repository\CSV\Stream\CSVStream.cs" />
