@@ -21,7 +21,14 @@ namespace bolnica.Repository
         {
             string[] tokens = entityCSVFormat.Split(_delimiter.ToCharArray());
             State state = new State(long.Parse(tokens[0]), tokens[1], tokens[2]);
-            // TODO Dodati gradove u listu
+            List<Town> towns = new List<Town>();
+            if (tokens.Length > 3)
+            {
+                string[] ids = tokens[3].Split(_arrayDelimiter.ToCharArray());
+                foreach (String id in ids)
+                    towns.Add(new Town(long.Parse(id)));
+            }
+            state.SetTown(towns);
             return state;
         }
 

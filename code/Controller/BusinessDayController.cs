@@ -4,72 +4,79 @@
  * Purpose: Definition of the Class Service.BusinessDayService
  ***********************************************************************/
 
+using bolnica.Controller;
+using bolnica.Service;
 using Model.Director;
 using Model.PatientSecretary;
 using Model.Users;
 using System;
+using System.Collections.Generic;
 
 namespace Controller
 {
-   public class BusinessDayController
-   {
-      public Boolean DeletePreviousBusinessDay()
-      {
-         // TODO: implement
-         return false;
-      }
-      
-      public Boolean SetRoomForBusinessDay(BusinessDay businessDay, Room room)
-      {
-         // TODO: implement
-         return false;
-      }
-      
-      public Model.PatientSecretary.Period[] GenerateAvailablePeriods(Model.Users.BusinessDay bussinesDay)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Boolean MarkAsOccupied(Period period, Model.Users.BusinessDay businessDay)
-      {
-         // TODO: implement
-         return false;
-      }
-      
-      public Model.Users.BusinessDay[] PeriodRecommendationByDate(Model.PatientSecretary.Period period)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Model.Users.BusinessDay[] GetBusinessDaysByDoctor(Model.Users.Doctor doctor)
-      {
-         // TODO: implement
-         return null;
-      }
+    public class BusinessDayController : IBusinessDayController
+    {
 
-        public object Save()
+        private readonly IBusinessDayService _businessDayService;
+
+        public BusinessDayController(IBusinessDayService _service)
+        {
+            _businessDayService = _service;
+        }
+        
+        public void Delete(BusinessDay entity)
         {
             throw new NotImplementedException();
         }
 
-        public object Delete()
+        public bool DeletePreviousBusinessDay()
         {
             throw new NotImplementedException();
         }
 
-        public object Edit()
+        public void Edit(BusinessDay entity)
         {
             throw new NotImplementedException();
         }
 
-        public object GetAll()
+        public List<Period> GenerateAvailablePeriods(BusinessDay bussinesDay)
+        {
+            return _businessDayService.GenerateAvailablePeriods(bussinesDay);
+        }
+
+        public BusinessDay Get(long id)
         {
             throw new NotImplementedException();
         }
 
-        //private Service.IService _service;
-   
-   }
+        public IEnumerable<BusinessDay> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<BusinessDay> GetBusinessDaysByDoctor(Doctor doctor)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool MarkAsOccupied(Period period, BusinessDay businessDay)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<BusinessDay> PeriodRecommendationByDate(Period period)
+        {
+            throw new NotImplementedException();
+        }
+
+        public BusinessDay Save(BusinessDay entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool SetRoomForBusinessDay(BusinessDay businessDay, Room room)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

@@ -7,6 +7,7 @@
 using Model.Director;
 using Model.Users;
 using System;
+using System.Collections.Generic;
 
 namespace Repository
 {
@@ -14,27 +15,32 @@ namespace Repository
    {
       private String FilePath;
 
-        public object Delete()
+        public void Delete(BusinessDay entity)
         {
             throw new NotImplementedException();
         }
 
-        public object Edit()
+        public void Edit(BusinessDay entity)
         {
             throw new NotImplementedException();
         }
 
-        public object GetAll()
+        public BusinessDay Get(long id)
         {
             throw new NotImplementedException();
         }
 
-        public BusinessDay[] GetBusinessDaysByDate(DateTime date)
+        public IEnumerable<BusinessDay> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public object Save()
+        public List<BusinessDay> GetBusinessDaysByDate(DateTime date)
+        {
+            throw new NotImplementedException();
+        }
+
+        public BusinessDay Save(BusinessDay entity)
         {
             throw new NotImplementedException();
         }
