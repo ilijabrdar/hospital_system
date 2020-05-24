@@ -4,20 +4,22 @@
  * Purpose: Definition of the Class Service.AnamnesisService
  ***********************************************************************/
 
+using bolnica.Controller;
+using bolnica.Service;
 using Model.PatientSecretary;
 using System;
 
 namespace Controller
 {
-   public class AnamnesisController
+   public class AnamnesisController : IAnamnesisController
    {
-      public Model.PatientSecretary.Anemnesis CreateAnamnesis(Model.PatientSecretary.Anemnesis anamnesis, Examination examination)
-      {
-         // TODO: implement
-         return null;
-      }
-   
-      //private Service.IService _service;
-   
-   }
+        private readonly IAnemnesisService _service;
+        public Anemnesis createAnemnesis(Anemnesis anamnesis, Examination examination)
+        {
+            throw new NotImplementedException();
+        }
+
+     
+
+    }
 }
