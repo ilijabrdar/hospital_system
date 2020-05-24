@@ -291,6 +291,10 @@
     <Compile Include="Model\Users\User.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Repository\abstract\IEagerRepository.cs" />
+    <Compile Include="Repository\abstract\IGetterRepository.cs" />
+    <Compile Include="Repository\abstract\IStateRepository.cs" />
+    <Compile Include="Repository\abstract\ITownRepository.cs" />
     <Compile Include="Repository\ArticleRepository.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -303,7 +307,7 @@
     <Compile Include="Repository\CSV\Converter\DrugCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\PatientCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\PatientFileCSVConverter.cs" />
-    <Compile Include="Repository\CSV\Converter\RenovationCSVConverter.cs" />
+    <Compile Include="Repository\CSV\CSVGetterRepository.cs" />
     <Compile Include="Repository\CSV\CSVRepository.cs" />
     <Compile Include="Repository\CSV\Stream\CSVStream.cs" />
     <Compile Include="Repository\DirectorRepository.cs">

@@ -5,6 +5,7 @@
  ***********************************************************************/
 
 using System;
+using System.Collections.Generic;
 
 namespace Model.Users
 {
@@ -15,26 +16,26 @@ namespace Model.Users
         public String PostalNumber { get; set; }
         public State state { get; set; }
 
-        private System.Collections.ArrayList address;
+        private List<Address> address;
       
         public Town(long id, string name, string postalNumber)
         {
             _id = id;
             Name = name;
             PostalNumber = postalNumber;
-            address = new System.Collections.ArrayList();
+            address = new List<Address>();
         }
 
         /// <pdGenerated>default getter</pdGenerated>
-        public System.Collections.ArrayList GetAddress()
+        public List<Address> GetAddress()
         {
             if (address == null)
-            address = new System.Collections.ArrayList();
+            address = new List<Address>();
             return address;
         }
       
         /// <pdGenerated>default setter</pdGenerated>
-        public void SetAddress(System.Collections.ArrayList newAddress)
+        public void SetAddress(List<Address> newAddress)
         {
             RemoveAllAddress();
             foreach (Address oAddress in newAddress)
@@ -47,7 +48,7 @@ namespace Model.Users
             if (newAddress == null)
             return;
             if (this.address == null)
-            this.address = new System.Collections.ArrayList();
+            this.address = new List<Address>();
             if (!this.address.Contains(newAddress))
             {
             this.address.Add(newAddress);
@@ -73,7 +74,7 @@ namespace Model.Users
         {
             if (address != null)
             {
-            System.Collections.ArrayList tmpAddress = new System.Collections.ArrayList();
+                List<Address> tmpAddress = new List<Address>();
             foreach (Address oldAddress in address)
                 tmpAddress.Add(oldAddress);
             address.Clear();
