@@ -1,8 +1,10 @@
-﻿using Controller;
+﻿using bolnica.Controller;
+using Controller;
 using Model.Director;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Net;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,7 +19,7 @@ namespace upravnikKT2
     /// </summary>
     public partial class DashboardWindow : Window
     {
-        private readonly IController<Room, long> _roomController;
+        private readonly IRoomController _roomController;
         public DashboardWindow()
         {
             InitializeComponent();
@@ -110,12 +112,41 @@ namespace upravnikKT2
             RoomDialog window = new RoomDialog();
             window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             window.ShowDialog();
+
+            DataGridRooms.ItemsSource = null;
+
+            List<Room> rooms = _roomController.GetAll().ToList();
+            ObservableCollection<Room> DataRooms = new ObservableCollection<Room>(rooms);
+
+            this.DataGridRooms.ItemsSource = DataRooms;
+            txtsearchRooms.Clear();
         }
         private void Button_Click_Edit_Room(object sender, RoutedEventArgs e)
         {
-            RoomDialog window = new RoomDialog();
-            window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            window.ShowDialog();
+            if (DataGridRooms.SelectedItem != null)
+            {
+                Room selected = (Room)DataGridRooms.SelectedItem;
+                RoomDialog window = new RoomDialog(selected);
+                window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                window.ShowDialog();
+
+                DataGridRooms.ItemsSource = null;
+
+                List<Room> rooms = _roomController.GetAll().ToList();
+                ObservableCollection<Room> DataRooms = new ObservableCollection<Room>(rooms);
+
+                this.DataGridRooms.ItemsSource = DataRooms;
+                txtsearchRooms.Clear();
+            }
+            else
+            {
+                string messageBoxText = "Morate selektovati prostoriju da biste izvrsili izmenu!";
+                string caption = "Greska";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Error;
+
+                MessageBox.Show(messageBoxText, caption, button, icon);
+            }
         }
 
        
@@ -200,14 +231,6 @@ namespace upravnikKT2
             DataGridDrugs.Add(new DrugMockup { Naziv = "Paracetamol", Kolicina = "10", Sifra = "6435754", Status = "neodobren", Sastojci = "asdasd asdasd, fdsfds,a sfadsf, asadf", Alternativa = "asdas asd, asd fdsf2q3e 123" });
             this.DataGridLekovi.ItemsSource = DataGridDrugs;
 
-            //ObservableCollection<RoomMockup> DataGridRooms = new ObservableCollection<RoomMockup>();
-            //DataGridRooms.Add(new RoomMockup { Sifra = "1243", Tip = "operaciona" });
-            //DataGridRooms.Add(new RoomMockup { Sifra = "6475", Tip = "kontrolna" });
-            //DataGridRooms.Add(new RoomMockup { Sifra = "9876", Tip = "rehabilitaciona" });
-            //DataGridRooms.Add(new RoomMockup { Sifra = "8674", Tip = "rehabilitaciona" });
-            //DataGridRooms.Add(new RoomMockup { Sifra = "5532", Tip = "operaciona" });
-            //DataGridRooms.Add(new RoomMockup { Sifra = "7684", Tip = "operaciona" });
-            //this.DataGridRooms.ItemsSource = DataGridRooms;
 
             ObservableCollection<RenovationMockup> renovations = new ObservableCollection<RenovationMockup>();
             renovations.Add(new RenovationMockup { Sifra = "5432", Datum = "16.03.2012 - 14.06.2013.", Opis = "zamena instalacija", Status = "zavrseno", Tip="operaciona"});
@@ -218,13 +241,12 @@ namespace upravnikKT2
             this.DataGridRenovation.ItemsSource = renovations;
 
 
-            ObservableCollection<Room> DataRooms = new ObservableCollection<Room>();
-            List<Room> rooms = (List<Room>)_roomController.GetAll();
-            foreach (Room room in rooms)
-            {
-                DataRooms.Add(room);
-            }
+            
+            List<Room> rooms = _roomController.GetAll().ToList();
+            ObservableCollection<Room> DataRooms = new ObservableCollection<Room>(rooms);
+
             this.DataGridRooms.ItemsSource = DataRooms;
+            
 
         }
 
@@ -403,6 +425,37 @@ namespace upravnikKT2
             RoomTypeWindow window = new RoomTypeWindow();
             window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             window.ShowDialog();
+        }
+
+        private void deleteRoomBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataGridRooms.SelectedItem != null)
+            {
+                _roomController.Delete((Room)DataGridRooms.SelectedItem);
+
+                this.DataGridRooms.ItemsSource = null;
+                List<Room> rooms = _roomController.GetAll().ToList();
+                ObservableCollection<Room> DataRooms = new ObservableCollection<Room>(rooms);
+                this.DataGridRooms.ItemsSource = DataRooms;
+                txtsearchRooms.Clear();
+            }
+            else
+            {
+                string messageBoxText = "Morate selektovati prostoriju da biste je izbrisali!";
+                string caption = "Greska";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Error;
+
+                MessageBox.Show(messageBoxText, caption, button, icon);
+            }
+        }
+
+        private void searchRooms_KeyUp(object sender, KeyEventArgs e)
+        {
+            List<Room> rooms = _roomController.GetAll().ToList();
+            ObservableCollection<Room> DataRooms = new ObservableCollection<Room>(rooms);
+
+            this.DataGridRooms.ItemsSource = DataRooms.Where(input => input.RoomCode.Contains(txtsearchRooms.Text));
         }
     }
 }

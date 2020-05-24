@@ -539,7 +539,7 @@
                             <Button Margin="10,10,30,10"  x:Name="deleteRoomBtn"
                                   Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
                                   HorizontalAlignment="Left"
-                                  ToolTip="Izbriši prostoriju">
+                                  ToolTip="Izbriši prostoriju" Click="deleteRoomBtn_Click">
                                 <materialDesign:PackIcon
                                     Kind="DeleteForever"
                                     Height="24"
@@ -572,7 +572,7 @@
                                     Height="24"
                                     Width="24" />
                             </Button>
-                            <TextBox DockPanel.Dock="Right" Margin="10" TextChanged="TextBox_TextChanged" MinWidth="100"/>
+                            <TextBox x:Name="txtsearchRooms" DockPanel.Dock="Right" Margin="10" TextChanged="TextBox_TextChanged" MinWidth="100" materialDesign:HintAssist.Hint="Pretrazi" KeyUp="searchRooms_KeyUp"/>
                             <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Bottom">

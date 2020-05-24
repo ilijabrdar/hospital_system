@@ -25,7 +25,7 @@ namespace upravnikKT2
     {
         private readonly IRoomController _roomController;
         private readonly IRoomTypeController _roomTypeController;
-
+        private Room _selectedRoom;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -47,23 +47,51 @@ namespace upravnikKT2
             _roomTypeController = app.RoomTypeController;
         }
 
+        public RoomDialog(Room selectedRoom)
+        {
+            InitializeComponent();
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            this.DataContext = this;
+
+            var app = Application.Current as App;
+            _roomController = app.RoomController;
+            _roomTypeController = app.RoomTypeController;
+
+            _selectedRoom = selectedRoom;
+            RoomCode = _selectedRoom.RoomCode;
+            
+        }
+
+
+
         private void Button_Click_OK_Room(object sender, RoutedEventArgs e)
         {
             //var RoomCode = new Room("test1", new RoomType("212"), null, null);
             //_roomController.Save(RoomCode);
 
-            Equipment e1 = new Equipment(3);
-            Equipment e2 = new Equipment(234);
-            Dictionary<Equipment, int> dict = new Dictionary<Equipment, int>();
-            dict[e1] = 3;
-            dict[e2] = 56;
+            //Equipment e1 = new Equipment(3);
+            //Equipment e2 = new Equipment(234);
+            //Dictionary<Equipment, int> dict = new Dictionary<Equipment, int>();
+            //dict[e1] = 3;
+            //dict[e2] = 56;
 
-            var RoomCode = new Room(Test3, new RoomType("21223"), dict, null);
-            _roomController.Save(new Room(Test3, new RoomType("t1"), dict, null));
+            //var RoomCode = new Room(Test3, new RoomType("21223"), dict, null);
+            //_roomController.Save(new Room(Test3, new RoomType("t1"), dict, null));
 
 
             //_roomController.Delete(new Room(2));
             //_roomController.Edit(new Room(0,"roomCode",new RoomType("jasaa"),dict,null));
+
+            if (_selectedRoom == null)
+            {
+                _roomController.Save(new Room(RoomCode, (RoomType)comboRoomTypes.SelectedItem, null, null));
+            }
+            else
+            {
+                _selectedRoom.RoomCode = RoomCode;
+                _selectedRoom.RoomType = (RoomType) comboRoomTypes.SelectedItem;
+                _roomController.Edit(_selectedRoom);
+            }
 
             this.Close();
         }
@@ -73,19 +101,21 @@ namespace upravnikKT2
             this.Close();
         }
 
-        private string _test3;
-        public string Test3
+        private string _roomCode;
+        private Room selectedRoom;
+
+        public string RoomCode
         {
             get
             {
-                return _test3;
+                return _roomCode;
             }
             set
             {
-                if (value != _test3)
+                if (value != _roomCode)
                 {
-                    _test3 = value;
-                    OnPropertyChanged("Test3");
+                    _roomCode = value;
+                    OnPropertyChanged("RoomCode");
                 }
             }
         }
@@ -99,9 +129,11 @@ namespace upravnikKT2
             comboRoomTypes.DisplayMemberPath = "Name";
             comboRoomTypes.SelectedValuePath = "Id";
             comboRoomTypes.SelectedValue = "2";
-            
 
-            
+            if (selectedRoom != null)
+            {
+                comboRoomTypes.SelectedItem = selectedRoom.RoomType;
+            }
         }
     }
 }
