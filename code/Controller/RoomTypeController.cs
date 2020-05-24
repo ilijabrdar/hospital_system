@@ -4,6 +4,8 @@
  * Purpose: Definition of the Class Service.RoomTypeService
  ***********************************************************************/
 
+using bolnica.Controller;
+using bolnica.Service;
 using Model.Director;
 using Service;
 using System;
@@ -11,11 +13,11 @@ using System.Collections.Generic;
 
 namespace Controller
 {
-   public class RoomTypeController : IController<RoomType, long>
+   public class RoomTypeController : IRoomTypeController
    {
-      private readonly Service.IService<RoomType,long> _service;
+      private readonly IRoomTypeService _service;
 
-        public RoomTypeController(IService<RoomType,long> service)
+        public RoomTypeController(IRoomTypeService service)
         {
             _service = service;
         }
@@ -31,14 +33,14 @@ namespace Controller
             _service.Edit(entity);
         }
 
-        public object GetAll()
+        public RoomType Get(long id)
         {
-            throw new NotImplementedException();
+            return _service.Get(id);
         }
 
-        public object Save()
+        public IEnumerable<RoomType> GetAll()
         {
-            throw new NotImplementedException();
+            return _service.GetAll();
         }
 
         public RoomType Save(RoomType entity)
@@ -46,9 +48,6 @@ namespace Controller
             return _service.Save(entity);
         }
 
-        IEnumerable<RoomType> IController<RoomType, long>.GetAll()
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }

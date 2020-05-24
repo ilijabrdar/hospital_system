@@ -4,11 +4,12 @@
  * Purpose: Definition of the Interface Repository.IRenovationRepository
  ***********************************************************************/
 
+using Model.Director;
 using System;
 
 namespace Repository
 {
-   public interface IRenovationRepository// : IRepository
+   public interface IRenovationRepository : IRepository<Renovation,long>
    {
    }
 }

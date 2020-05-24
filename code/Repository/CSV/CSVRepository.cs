@@ -51,7 +51,7 @@ namespace bolnica.Repository
             }
         }
 
-        public E get(ID id)
+        public E Get(ID id)
         {
             try
             {

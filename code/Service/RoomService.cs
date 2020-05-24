@@ -4,6 +4,7 @@
  * Purpose: Definition of the Class Service.RoomService
  ***********************************************************************/
 
+using bolnica.Service;
 using Model.Director;
 using Repository;
 using System;
@@ -12,7 +13,7 @@ using System.Collections.Generic;
 
 namespace Service
 {
-   public class RoomService : IService<Room,long>
+   public class RoomService : IRoomService
    {
         private readonly IRoomRepository _repository;
 
@@ -58,6 +59,11 @@ namespace Service
         public void Delete(Room entity)
         {
             _repository.Delete(entity);
+        }
+
+        public Room Get(long id)
+        {
+            return _repository.Get(id);
         }
     }
 }

@@ -4,6 +4,8 @@
  * Purpose: Definition of the Class Service.IngredientService
  ***********************************************************************/
 
+using bolnica.Controller;
+using bolnica.Service;
 using Model.Director;
 using Model.PatientSecretary;
 using Service;
@@ -12,50 +14,44 @@ using System.Collections.Generic;
 
 namespace Controller
 {
-   public class IngredientController : IController<Ingredient, long>
+   public class IngredientController : IIngredientController
    {
-        private readonly IService<Ingredient, long> _service;
+        private readonly IIngredientService _service;
 
-        public IngredientController(IService<Ingredient, long> service)
+        public IngredientController(IIngredientService service)
         {
             _service = service;
         }
 
-        public object Delete()
-        {
-            throw new NotImplementedException();
-        }
+
 
         public void Delete(Ingredient entity)
         {
-            throw new NotImplementedException();
+            _service.Delete(entity);
         }
 
-        public object Edit()
-        {
-            throw new NotImplementedException();
-        }
+
 
         public void Edit(Ingredient entity)
         {
-            throw new NotImplementedException();
+            _service.Edit(entity);
         }
 
-        public object GetAll()
+        public Ingredient Get(long id)
         {
-            throw new NotImplementedException();
+            return _service.Get(id);
         }
 
-
+        public IEnumerable<Ingredient> GetAll()
+        {
+            return _service.GetAll();
+        }
 
         public Ingredient Save(Ingredient entity)
         {
             return _service.Save(entity);
         }
 
-        IEnumerable<Ingredient> IController<Ingredient, long>.GetAll()
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }
