@@ -7,41 +7,37 @@
 using Model.Doctor;
 using Model.Users;
 using System;
+using System.Collections.Generic;
+using bolnica.Repository;
+using System.Linq;
 
 namespace Repository
 {
-   public class DoctorRepository : IDoctorRepository
+   public class DoctorRepository : CSVRepository<Doctor, long>, IDoctorRepository
    {
-      private String FilePath;
-
-        public object Delete()
-        {
-            throw new NotImplementedException();
-        }
-
-        public object Edit()
-        {
-            throw new NotImplementedException();
-        }
-
-        public object GetAll()
-        {
-            throw new NotImplementedException();
-        }
+        public DoctorRepository(ICSVStream<Doctor> stream, ISequencer<long> sequencer) : base(stream, sequencer) { }
 
         public Doctor GetDoctorByUsername(string username)
         {
-            throw new NotImplementedException();
+            IEnumerable<Doctor> entities = this.GetAll();
+            foreach (Doctor entity in entities)
+            {
+                if (entity.Username.Equals(username))
+                    return entity;
+            }
+            return null;
         }
 
-        public Doctor[] GetDoctorsBySpeciality(Specialty specialty)
+        public List<Doctor> GetDoctorsBySpeciality(Specialty specialty)
         {
-            throw new NotImplementedException();
-        }
-
-        public object Save()
-        {
-            throw new NotImplementedException();
+            List<Doctor> doctors = this.GetAll().ToList();
+            List<Doctor> retVal = new List<Doctor>();
+            foreach(Doctor doct in doctors)
+            {
+                if (doct.specialty.Equals(specialty))
+                    retVal.Add(doct);
+            }
+            return retVal;
         }
     }
 }
