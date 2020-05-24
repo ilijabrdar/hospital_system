@@ -1,4 +1,5 @@
-﻿using System;
+﻿using bolnica.Controller;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -20,6 +21,9 @@ namespace upravnikKT2
     /// </summary>
     public partial class EquipmentDialog : Window, INotifyPropertyChanged
     {
+        private readonly IEquipmentController _equipmentController;
+        private readonly bool isConsumable;
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string name)
@@ -29,15 +33,25 @@ namespace upravnikKT2
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
         }
-        public EquipmentDialog()
+        public EquipmentDialog(bool isConsumable)
         {
             InitializeComponent();
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             this.DataContext = this;
+
+            var app = Application.Current as App;
+            _equipmentController = app.EquipmentController;
+
+            this.isConsumable = isConsumable;
         }
 
         private void Button_Click_OK_Equipment(object sender, RoutedEventArgs e)
         {
+            _equipmentController.Save(new Model.Director.Equipment(
+                isConsumable ? Model.Director.EquipmentType.Consumable : Model.Director.EquipmentType.Inconsumable,
+                txtName.Text,
+                (int)Test3));
+
             this.Close();
         }
 

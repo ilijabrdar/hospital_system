@@ -1,4 +1,5 @@
-﻿using Controller;
+﻿using bolnica.Controller;
+using Controller;
 using Model.Director;
 using Model.PatientSecretary;
 using System.Collections.Generic;
@@ -12,8 +13,8 @@ namespace upravnikKT2
     /// </summary>
     public partial class AddRoomType : Window, INotifyPropertyChanged
     {
-        private readonly IController<RoomType, long> _roomTypeController;
-        private readonly IController<Ingredient, long> _ingredientController; //TODO: delete this test
+        private readonly IRoomTypeController _roomTypeController;
+        private readonly IIngredientController _ingredientController; //TODO: delete this test
 
 
         public event PropertyChangedEventHandler PropertyChanged;

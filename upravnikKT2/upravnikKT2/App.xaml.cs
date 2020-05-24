@@ -1,4 +1,6 @@
-﻿using bolnica.Repository;
+﻿using bolnica.Controller;
+using bolnica.Repository;
+using bolnica.Repository.CSV.Converter;
 using Controller;
 using Model.Director;
 using Model.PatientSecretary;
@@ -16,12 +18,17 @@ namespace upravnikKT2
         private const string ROOMTYPE_FILE = "../../Resources/Data/roomtypes.csv";
         private const string INGREDIENTS_FILE = "../../Resources/Data/ingredients.csv";
         private const string ROOMS_FILE = "../../Resources/Data/rooms.csv";
+        private const string EQUIPMENT_FILE = "../../Resources/Data/equipment.csv";
+        private const string RENOVATIONS_FILE = "../../Resources/Data/renovations.csv";
         private const string CSV_DELIMITER = ",";
 
-        public IController<RoomType, long> RoomTypeController { get; private set; }
-        public IController<Ingredient, long> IngredientController { get; private set; }
+        public IRoomTypeController RoomTypeController { get; private set; }
+        public IIngredientController IngredientController { get; private set; }
+        public IRoomController RoomController { get; private set; }
 
-        public IController<Room, long> RoomController { get; private set; }
+        public IEquipmentController EquipmentController { get; private set; }
+
+        public IRenovationController RenovationController { get; private set; }
 
         public App()
         {
@@ -50,6 +57,20 @@ namespace upravnikKT2
             var roomService = new RoomService(roomRepository);
 
             RoomController = new RoomController(roomService);
+
+
+            var equipmentRepository = new EquipmentRepository(
+               new CSVStream<Equipment>(EQUIPMENT_FILE, new EquipmentCSVConverter(CSV_DELIMITER)),
+               new LongSequencer());
+
+            var equipmentService = new EquipmentService(equipmentRepository);
+
+            EquipmentController = new EquipmentController(equipmentService);
+
+
+            var renovationRepository = new RenovationRepository(new CSVStream<Renovation>(RENOVATIONS_FILE, new RenovationCSVConverter(CSV_DELIMITER)), new LongSequencer());
+            var renovationService = new RenovationService(renovationRepository);
+            RenovationController = new RenovationController(renovationService);
 
         }
     }

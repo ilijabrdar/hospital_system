@@ -1,4 +1,5 @@
-﻿using Controller;
+﻿using bolnica.Controller;
+using Controller;
 using Model.Director;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace upravnikKT2
     /// </summary>
     public partial class RoomDialog : Window, INotifyPropertyChanged
     {
-        private readonly IController<Room, long> _roomController;
+        private readonly IRoomController _roomController;
 
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -56,7 +57,7 @@ namespace upravnikKT2
             dict[e2] = 56;
 
             var RoomCode = new Room(Test3, new RoomType("21223"), dict, null);
-            _roomController.Save(new Room(Test3, new RoomType("t1"), null, null));
+            _roomController.Save(new Room(Test3, new RoomType("t1"), dict, null));
 
             //_roomController.Delete(new Room(2));
             //_roomController.Edit(new Room(0,"roomCode",new RoomType("jasaa"),dict,null));

@@ -68,14 +68,14 @@ namespace upravnikKT2
 
         private void Button_Click_Add_Equipment(object sender, RoutedEventArgs e)
         {
-            EquipmentDialog window = new EquipmentDialog();
+            EquipmentDialog window = new EquipmentDialog(tabControlOprema.SelectedIndex==0 ? true : false);
             window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             window.ShowDialog();
         }
 
         private void Button_Click_Edit_Equipment(object sender, RoutedEventArgs e)
         {
-            EquipmentDialog window = new EquipmentDialog();
+            EquipmentDialog window = new EquipmentDialog(true);
             window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             window.ShowDialog();
         }
