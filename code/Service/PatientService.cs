@@ -32,6 +32,7 @@ namespace Service
             {
                 return null;
             }
+            //TODO: skloniti -1 iz patFile
             entity.patientFile = _patientFileService.Save(new PatientFile(-1));
             return _patientRepository.Save(entity);
 

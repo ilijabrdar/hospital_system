@@ -18,24 +18,24 @@ namespace Model.Users
 
         public long Id;
       
-      public List<Period> period { get; set; }
+      public List<Period> ScheduledPeriods { get; set; }
 
       public Doctor doctor { get; set; }
 
       public Room room { get; set; }
 
-        public BusinessDay(Period shift, List<Period> periods, Doctor doctor, Room room)
+        public BusinessDay(Period shift, Doctor doctor, Room room, List<Period> periods)
         {
             this.Shift = shift;
-            this.period = periods;
+            this.ScheduledPeriods = periods;
             this.doctor = doctor;
             this.room = room;
         }
-        public BusinessDay(long id,Period shift, List<Period> periods, Doctor doctor, Room room)
+        public BusinessDay(long id,Period shift,  Doctor doctor, Room room, List<Period> periods)
         {
             this.Id = id;
             this.Shift = shift;
-            this.period = periods;
+            this.ScheduledPeriods = periods;
             this.doctor = doctor;
             this.room = room;
         }
