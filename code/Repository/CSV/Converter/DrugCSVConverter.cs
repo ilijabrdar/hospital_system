@@ -6,7 +6,7 @@ using System.Text;
 
 namespace bolnica.Repository.CSV.Converter
 {
-    class DrugCSVConverter : ICSVConverter<Drug>
+   public class DrugCSVConverter : ICSVConverter<Drug>
     {
         private readonly string _delimiter;
         private readonly string _arraydelimiter;
