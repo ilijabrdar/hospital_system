@@ -51,5 +51,9 @@ namespace Controller
         {
             return _service.GetAll();
         }
+
+        public IEnumerable<Equipment> getConsumableEquipment() => _service.getConsumableEquipment();
+
+        public IEnumerable<Equipment> getInconsumableEquipment() => _service.getInconsumableEquipment();
     }
 }
