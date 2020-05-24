@@ -10,8 +10,6 @@ namespace bolnica.Controller
     public interface IUserController : IController<User, long>
     {
         Boolean IsPasswordValid(String password);
-
-
         Boolean IsUsernameValid(String username);
         Feedback SendFeedback(String feedback);
 

@@ -94,6 +94,8 @@
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controller\abstract\IBusinessDayController.cs" />
+    <Compile Include="Controller\abstract\IDoctorController.cs" />
     <Compile Include="Controller\abstract\IEquipmentController.cs" />
     <Compile Include="Controller\abstract\IRenovationController.cs" />
     <Compile Include="Controller\AnamnesisController.cs">
@@ -296,6 +298,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Repository\CSV\Converter\ArticleCSVConverter.cs" />
+    <Compile Include="Repository\CSV\Converter\BusinessDayCSVConverter.cs" />
+    <Compile Include="Repository\CSV\Converter\DoctorCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\DrugCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\PatientCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\PatientFileCSVConverter.cs" />
@@ -429,8 +433,12 @@
     <Compile Include="Repository\StateRepository.cs" />
     <Compile Include="Repository\CSV\Converter\TownCSVConverter.cs" />
     <Compile Include="Repository\TownRepository.cs" />
+    <Compile Include="Service\abstract\IBusinessDayService.cs" />
+    <Compile Include="Service\abstract\IDoctorService.cs" />
     <Compile Include="Service\abstract\IEquipmentService.cs" />
     <Compile Include="Service\abstract\IIngredientService.cs" />
+    <Compile Include="Service\abstract\IPatientFileService.cs" />
+    <Compile Include="Service\abstract\IPatientService.cs" />
     <Compile Include="Service\abstract\IRenovationService.cs" />
     <Compile Include="Service\abstract\IRoomTypeService.cs" />
     <Compile Include="Service\AnamnesisService.cs">

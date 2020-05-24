@@ -1,8 +1,3 @@
-/***********************************************************************
- * Module:  Period.cs
- * Author:  david
- * Purpose: Definition of the Class PatientSecretary.Period
- ***********************************************************************/
 
 using System;
 
@@ -12,6 +7,14 @@ namespace Model.PatientSecretary
    {
       public DateTime StartDate { get; set; }
       public DateTime EndDate { get; set; }
+
+      public Period(DateTime start, DateTime end)
+      {
+          this.StartDate = start;
+          this.EndDate = end;
+      }
+
+      public Period() { }
    
    }
 }
