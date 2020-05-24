@@ -24,9 +24,9 @@ namespace bolnica.Repository
 
             if (dictionary.Contains("{"))  // if there's no dictionary it crashes
             {
-                dictionary = dictionary.Substring(1, dictionary.Length - 1);
+                dictionary = dictionary.Substring(1, dictionary.Length - 2);
 
-                string[] pairs = dictionary.Split(_delimiter.ToCharArray());
+                string[] pairs = dictionary.Split("!".ToCharArray());
                 foreach (string pair in pairs)
                 {
                     string[] nums = pair.Split(":".ToCharArray());
@@ -60,10 +60,14 @@ namespace bolnica.Repository
                     sb.Append(item.Key.GetId());
                     sb.Append(":");
                     sb.Append(item.Value);
-                    sb.Append(_delimiter);
+                    sb.Append("!");
                 }
-                sb.Remove(sb.Length, 0);
+                sb.Remove(sb.Length-1, 1);
                 sb.Append("}");
+            }
+            else
+            {
+                sb.Append("empty");
             }
 
         //TODO: add list of renovations
