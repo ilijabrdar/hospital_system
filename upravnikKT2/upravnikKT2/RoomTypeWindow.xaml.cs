@@ -2,6 +2,7 @@
 using Model.Director;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,7 +44,9 @@ namespace upravnikKT2
             List<RoomType> roomTypes = new List<RoomType>();
             roomTypes = _roomTypeController.GetAll().ToList();
 
-            listViewRoomTypes.ItemsSource = roomTypes;
+            ObservableCollection<RoomType> temp = new ObservableCollection<RoomType>(roomTypes);
+
+            listViewRoomTypes.ItemsSource = temp;
             listViewRoomTypes.DisplayMemberPath = "Name";
             listViewRoomTypes.SelectedValuePath = "Id";
             listViewRoomTypes.SelectedValue = "2";
@@ -53,19 +56,36 @@ namespace upravnikKT2
 
         private void Button_Click_Add(object sender, RoutedEventArgs e)
         {
-            AddRoomType dialog = new AddRoomType();
+            AddRoomType dialog = new AddRoomType(listViewRoomTypes);
             dialog.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             dialog.ShowDialog();
         }
 
         private void Button_Click_Edit(object sender, RoutedEventArgs e)
         {
-
+            AddRoomType dialog = new AddRoomType(listViewRoomTypes, (RoomType) listViewRoomTypes.SelectedItem);
+            dialog.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            dialog.ShowDialog();
         }
 
         private void Button_Click_Delete(object sender, RoutedEventArgs e)
         {
+            _roomTypeController.Delete((RoomType) listViewRoomTypes.SelectedItem);
 
+
+            listViewRoomTypes.ItemsSource = null;
+
+            List<RoomType> roomTypes = new List<RoomType>();
+            roomTypes = _roomTypeController.GetAll().ToList();
+
+            ObservableCollection<RoomType> temp = new ObservableCollection<RoomType>(roomTypes);
+
+            listViewRoomTypes.ItemsSource = temp;
+            listViewRoomTypes.DisplayMemberPath = "Name";
+            listViewRoomTypes.SelectedValuePath = "Id";
+            listViewRoomTypes.SelectedValue = "2";
         }
+
+
     }
 }

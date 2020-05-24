@@ -3,9 +3,12 @@ using Controller;
 using Model.Director;
 using Model.PatientSecretary;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace upravnikKT2
 {
@@ -15,8 +18,8 @@ namespace upravnikKT2
     public partial class AddRoomType : Window, INotifyPropertyChanged
     {
         private readonly IRoomTypeController _roomTypeController;
-        private readonly IIngredientController _ingredientController; //TODO: delete this test
         private ListView list;
+        private RoomType roomTypeForEdit;
 
         public event PropertyChangedEventHandler PropertyChanged;
         
@@ -35,11 +38,26 @@ namespace upravnikKT2
 
             var app = Application.Current as App;
             _roomTypeController = app.RoomTypeController;
-            _ingredientController = app.IngredientController; //TODO: delete this test
 
             list = listView;
-
         }
+
+        public AddRoomType(ListView listView, RoomType roomTypeForEdit)
+        {
+            InitializeComponent();
+            this.DataContext = this;
+
+            var app = Application.Current as App;
+            _roomTypeController = app.RoomTypeController;
+
+            list = listView;
+            this.roomTypeForEdit = roomTypeForEdit;
+
+            Ime = roomTypeForEdit.Name;
+            txtName.Text = roomTypeForEdit.Name;
+            
+        }
+
 
         private string _ime;
         public string Ime
@@ -60,19 +78,40 @@ namespace upravnikKT2
 
         private void Button_Click_OK(object sender, RoutedEventArgs e)
         {
-            //var type = new RoomType(Ime);
-            //_roomTypeController.Save(type);
+            if (roomTypeForEdit == null)
+            {
+                _roomTypeController.Save(new RoomType(Ime));
 
-            ////TODO: delete this test
-            //var ingredients = new Ingredient("sastav", 323);
-            //_ingredientController.Save(ingredients);
+                list.ItemsSource = null;
 
-            //2,test3
-            //var edit = new RoomType(2,"test3 u yas");  //TODO: delete this test
-            //_roomTypeController.Edit(edit);
+                List<RoomType> roomTypes = new List<RoomType>();
+                roomTypes = _roomTypeController.GetAll().ToList();
 
-            _roomTypeController.Save(new RoomType(Ime));
-            
+                ObservableCollection<RoomType> temp = new ObservableCollection<RoomType>(roomTypes);
+
+                list.ItemsSource = temp;
+                list.DisplayMemberPath = "Name";
+                list.SelectedValuePath = "Id";
+                list.SelectedValue = "2";
+            }
+            else
+            {
+                roomTypeForEdit.Name = Ime;
+                _roomTypeController.Edit(roomTypeForEdit);
+
+
+                list.ItemsSource = null;
+
+                List<RoomType> roomTypes = new List<RoomType>();
+                roomTypes = _roomTypeController.GetAll().ToList();
+
+                ObservableCollection<RoomType> temp = new ObservableCollection<RoomType>(roomTypes);
+
+                list.ItemsSource = temp;
+                list.DisplayMemberPath = "Name";
+                list.SelectedValuePath = "Id";
+                list.SelectedValue = "2";
+            }
 
             this.Close();
         }
