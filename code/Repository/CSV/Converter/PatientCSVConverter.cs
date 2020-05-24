@@ -8,14 +8,11 @@ using System.Text;
 
 namespace bolnica.Repository.CSV.Converter
 {
-    class PatientCSVConverter : ICSVConverter<Patient>
+   public class PatientCSVConverter : ICSVConverter<Patient>
     {
-        private readonly string _delimiter;
+        private readonly string _delimiter = ",";
 
-        public PatientCSVConverter(string delimiter, string arrayDelimiter)
-        {
-            _delimiter = delimiter;
-        }
+
         public Patient ConvertCSVFormatToEntity(string entityCSVFormat)
         {
             string[] tokens = entityCSVFormat.Split(_delimiter.ToCharArray());
