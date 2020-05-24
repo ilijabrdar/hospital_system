@@ -1,4 +1,5 @@
 ﻿using bolnica.Controller;
+using Model.Director;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,6 +24,7 @@ namespace upravnikKT2
     {
         private readonly IEquipmentController _equipmentController;
         private readonly bool isConsumable;
+        private Equipment _selectedEquipment;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -45,12 +47,38 @@ namespace upravnikKT2
             this.isConsumable = isConsumable;
         }
 
+        public EquipmentDialog(bool isConsumable, Equipment selectedEquipment)
+        {
+            InitializeComponent();
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            this.DataContext = this;
+
+            var app = Application.Current as App;
+            _equipmentController = app.EquipmentController;
+
+            this._selectedEquipment = selectedEquipment;
+            Amount = selectedEquipment.Amount;
+            Eq_Name = selectedEquipment.Name;
+            txtName.Text = Eq_Name;
+
+            this.isConsumable = isConsumable;
+        }
+
         private void Button_Click_OK_Equipment(object sender, RoutedEventArgs e)
         {
-            _equipmentController.Save(new Model.Director.Equipment(
-                isConsumable ? Model.Director.EquipmentType.Consumable : Model.Director.EquipmentType.Inconsumable,
-                txtName.Text,
-                (int)Test3));
+            if (_selectedEquipment == null)
+            {
+                _equipmentController.Save(new Model.Director.Equipment(
+                    isConsumable ? Model.Director.EquipmentType.Consumable : Model.Director.EquipmentType.Inconsumable,
+                    txtName.Text,
+                    Amount));
+            }
+            else
+            {
+                _selectedEquipment.Amount = Amount;
+                _selectedEquipment.Name = Eq_Name;
+                _equipmentController.Edit(_selectedEquipment);
+            }
 
             this.Close();
         }
@@ -60,36 +88,36 @@ namespace upravnikKT2
             this.Close();
         }
 
-        private double _test3;
-        public double Test3
+        private int _amount;
+        public int Amount
         {
             get
             {
-                return _test3;
+                return _amount;
             }
             set
             {
-                if (value != _test3)
+                if (value != _amount)
                 {
-                    _test3 = value;
-                    OnPropertyChanged("Test3");
+                    _amount = value;
+                    OnPropertyChanged("Amount");
                 }
             }
         }
 
-        private string _test2;
-        public string Test2
+        private string _name;
+        public string Eq_Name
         {
             get
             {
-                return _test2;
+                return _name;
             }
             set
             {
-                if (value != _test2)
+                if (value != _name)
                 {
-                    _test2 = value;
-                    OnPropertyChanged("Test2");
+                    _name = value;
+                    OnPropertyChanged("Name1");
                 }
             }
         }

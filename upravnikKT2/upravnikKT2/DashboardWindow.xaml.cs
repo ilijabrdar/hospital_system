@@ -20,12 +20,14 @@ namespace upravnikKT2
     public partial class DashboardWindow : Window
     {
         private readonly IRoomController _roomController;
+        private readonly IEquipmentController _equipmentController;
         public DashboardWindow()
         {
             InitializeComponent();
 
             var app = Application.Current as App;
             _roomController = app.RoomController;
+            _equipmentController = app.EquipmentController;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -70,16 +72,92 @@ namespace upravnikKT2
 
         private void Button_Click_Add_Equipment(object sender, RoutedEventArgs e)
         {
-            EquipmentDialog window = new EquipmentDialog(tabControlOprema.SelectedIndex==0 ? true : false);
-            window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            window.ShowDialog();
+            if (tabControlOprema.SelectedIndex == 0)
+            {
+                EquipmentDialog window = new EquipmentDialog(true);
+                window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                window.ShowDialog();
+
+                DataGridOpremaPotrosna.ItemsSource = null;
+
+                List<Equipment> consumable_equipment = _equipmentController.getConsumableEquipment().ToList();
+                ObservableCollection<Equipment> data_consumable = new ObservableCollection<Equipment>(consumable_equipment);
+                this.DataGridOpremaPotrosna.ItemsSource = data_consumable;
+                txtsearcConsumable.Clear();
+                
+            }
+            else
+            {
+                EquipmentDialog window = new EquipmentDialog(false);
+                window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                window.ShowDialog();
+
+                DataGridOpremaNepotrosna.ItemsSource = null;
+
+                List<Equipment> inconsumable_equipment = _equipmentController.getInconsumableEquipment().ToList();
+                ObservableCollection<Equipment> data_inconsumable = new ObservableCollection<Equipment>(inconsumable_equipment);
+                this.DataGridOpremaNepotrosna.ItemsSource = data_inconsumable;
+                txtsearchInconsumable.Clear();
+            }
         }
 
         private void Button_Click_Edit_Equipment(object sender, RoutedEventArgs e)
         {
-            EquipmentDialog window = new EquipmentDialog(true);
-            window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            window.ShowDialog();
+            if (tabControlOprema.SelectedIndex == 0)
+            {
+                if (DataGridOpremaPotrosna.SelectedItem != null)
+                {
+                    EquipmentDialog window = new EquipmentDialog(true,(Equipment) DataGridOpremaPotrosna.SelectedItem);
+                    window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                    window.ShowDialog();
+
+                    DataGridOpremaPotrosna.ItemsSource = null;
+
+                    List<Equipment> consumable_equipment = _equipmentController.getConsumableEquipment().ToList();
+                    ObservableCollection<Equipment> data_consumable = new ObservableCollection<Equipment>(consumable_equipment);
+                    this.DataGridOpremaPotrosna.ItemsSource = data_consumable;
+                    txtsearcConsumable.Clear();
+                }
+                else
+                {
+                    string messageBoxText = "Morate selektovati opremu da biste izvrsili izmenu!";
+                    string caption = "Greska";
+                    MessageBoxButton button = MessageBoxButton.OK;
+                    MessageBoxImage icon = MessageBoxImage.Error;
+
+                    MessageBox.Show(messageBoxText, caption, button, icon);
+                }
+
+
+            }
+            else
+            {
+                if (DataGridOpremaNepotrosna != null)
+                {
+                    EquipmentDialog window = new EquipmentDialog(false, (Equipment) DataGridOpremaNepotrosna.SelectedItem);
+                    window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                    window.ShowDialog();
+
+                    DataGridOpremaNepotrosna.ItemsSource = null;
+
+                    List<Equipment> inconsumable_equipment = _equipmentController.getInconsumableEquipment().ToList();
+                    ObservableCollection<Equipment> data_inconsumable = new ObservableCollection<Equipment>(inconsumable_equipment);
+                    this.DataGridOpremaNepotrosna.ItemsSource = data_inconsumable;
+
+                    txtsearchInconsumable.Clear();
+                }
+                else
+                {
+                    string messageBoxText = "Morate selektovati opremu da biste izvrsili izmenu!";
+                    string caption = "Greska";
+                    MessageBoxButton button = MessageBoxButton.OK;
+                    MessageBoxImage icon = MessageBoxImage.Error;
+
+                    MessageBox.Show(messageBoxText, caption, button, icon);
+                }
+            }
+
+
         }
 
         private void Button_Click_Logout(object sender, RoutedEventArgs e)
@@ -209,20 +287,13 @@ namespace upravnikKT2
 
             dataGridLekari.ItemsSource = Lekari;
 
-            ObservableCollection<Oprema> DataGridOpremaPotrosna = new ObservableCollection<Oprema>();
-            DataGridOpremaPotrosna.Add(new Oprema { Naziv = "Makaze", Kolicina = "30" });
-            DataGridOpremaPotrosna.Add(new Oprema { Naziv = "Flasteri", Kolicina = "10" });
-            DataGridOpremaPotrosna.Add(new Oprema { Naziv = "Gaza 5m", Kolicina = "21" });
-            DataGridOpremaPotrosna.Add(new Oprema { Naziv = "Gaza 10m", Kolicina = "123" });
-            DataGridOpremaPotrosna.Add(new Oprema { Naziv = "Hanzaplast", Kolicina = "203" });
-            this.DataGridOpremaPotrosna.ItemsSource = DataGridOpremaPotrosna;
+            List<Equipment> consumable_equipment = _equipmentController.getConsumableEquipment().ToList();
+            ObservableCollection<Equipment> data_consumable = new ObservableCollection<Equipment>(consumable_equipment);
+            this.DataGridOpremaPotrosna.ItemsSource = data_consumable;
 
-            ObservableCollection<Oprema> DataGridOpremaNepotrosna = new ObservableCollection<Oprema>();
-            DataGridOpremaNepotrosna.Add(new Oprema { Naziv = "Sto", Kolicina = "40" });
-            DataGridOpremaNepotrosna.Add(new Oprema { Naziv = "Stolica", Kolicina = "10" });
-            DataGridOpremaNepotrosna.Add(new Oprema { Naziv = "Ormar", Kolicina = "45" });
-            DataGridOpremaNepotrosna.Add(new Oprema { Naziv = "Ogledalo", Kolicina = "122" });
-            this.DataGridOpremaNepotrosna.ItemsSource = DataGridOpremaNepotrosna;
+            List<Equipment> inconsumable_equipment = _equipmentController.getInconsumableEquipment().ToList();
+            ObservableCollection<Equipment> data_inconsumable = new ObservableCollection<Equipment>(inconsumable_equipment);
+            this.DataGridOpremaNepotrosna.ItemsSource = data_inconsumable;
 
             ObservableCollection<DrugMockup> DataGridDrugs = new ObservableCollection<DrugMockup>();
             DataGridDrugs.Add(new DrugMockup { Naziv = "Bromazepan", Kolicina = "20", Sifra = "131233", Status = "odobren", Sastojci = "asdasd asdasd, fdsfds,a sfadsf, asadf", Alternativa = "asdas asd, asd fdsf2q3e 123" });
@@ -244,7 +315,6 @@ namespace upravnikKT2
             
             List<Room> rooms = _roomController.GetAll().ToList();
             ObservableCollection<Room> DataRooms = new ObservableCollection<Room>(rooms);
-
             this.DataGridRooms.ItemsSource = DataRooms;
             
 
@@ -456,6 +526,74 @@ namespace upravnikKT2
             ObservableCollection<Room> DataRooms = new ObservableCollection<Room>(rooms);
 
             this.DataGridRooms.ItemsSource = DataRooms.Where(input => input.RoomCode.Contains(txtsearchRooms.Text));
+        }
+
+        private void deleteEquipment_Btn_Click(object sender, RoutedEventArgs e)
+        {
+            if (tabControlOprema.SelectedIndex == 0)
+            {
+                if (DataGridOpremaPotrosna.SelectedItem != null)
+                {
+                    _equipmentController.Delete((Equipment)DataGridOpremaPotrosna.SelectedItem);
+
+                    DataGridOpremaPotrosna.ItemsSource = null;
+
+                    List<Equipment> consumable_equipment = _equipmentController.getConsumableEquipment().ToList();
+                    ObservableCollection<Equipment> data_consumable = new ObservableCollection<Equipment>(consumable_equipment);
+                    this.DataGridOpremaPotrosna.ItemsSource = data_consumable;
+                }
+                else
+                {
+                    string messageBoxText = "Morate selektovati opremu da biste je obrisali!";
+                    string caption = "Greska";
+                    MessageBoxButton button = MessageBoxButton.OK;
+                    MessageBoxImage icon = MessageBoxImage.Error;
+
+                    MessageBox.Show(messageBoxText, caption, button, icon);
+                }
+
+
+            }
+            else
+            {
+                if (DataGridOpremaNepotrosna != null)
+                {
+                    _equipmentController.Delete((Equipment)DataGridOpremaNepotrosna.SelectedItem);
+
+                    DataGridOpremaNepotrosna.ItemsSource = null;
+
+                    List<Equipment> inconsumable_equipment = _equipmentController.getInconsumableEquipment().ToList();
+                    ObservableCollection<Equipment> data_inconsumable = new ObservableCollection<Equipment>(inconsumable_equipment);
+                    this.DataGridOpremaNepotrosna.ItemsSource = data_inconsumable;
+                }
+                else
+                {
+                    string messageBoxText = "Morate selektovati opremu da biste je obrisali!";
+                    string caption = "Greska";
+                    MessageBoxButton button = MessageBoxButton.OK;
+                    MessageBoxImage icon = MessageBoxImage.Error;
+
+                    MessageBox.Show(messageBoxText, caption, button, icon);
+                }
+            }
+        }
+
+        private void TextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (tabControlOprema.SelectedIndex == 0)
+            {
+                List<Equipment> equipment = _equipmentController.getConsumableEquipment().ToList();
+                ObservableCollection<Equipment> data = new ObservableCollection<Equipment>(equipment);
+
+                this.DataGridOpremaPotrosna.ItemsSource = data.Where(input => input.Name.Contains(txtsearcConsumable.Text));
+            }
+            else
+            {
+                List<Equipment> equipment = _equipmentController.getInconsumableEquipment().ToList();
+                ObservableCollection<Equipment> data = new ObservableCollection<Equipment>(equipment);
+
+                this.DataGridOpremaNepotrosna.ItemsSource = data.Where(input => input.Name.Contains(txtsearchInconsumable.Text));
+            }
         }
     }
 }

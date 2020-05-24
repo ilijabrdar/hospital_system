@@ -334,10 +334,10 @@
                                     Height="24"
                                     Width="24" />
                                         </Button>
-                                        <Button Margin="10,10,30,10" x:Name="deleteEquipmentConsumableBtn"
+                                        <Button Margin="10,10,30,10" x:Name="deleteEquipmentConsumableBtn" 
                                   Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
                                   HorizontalAlignment="Left"
-                                  ToolTip="Izbriši opremu">
+                                  ToolTip="Izbriši opremu" Click="deleteEquipment_Btn_Click">
                                             <materialDesign:PackIcon
                                     Kind="DeleteForever"
                                     Height="24"
@@ -353,14 +353,14 @@
                                     Height="24"
                                     Width="24" />
                                         </Button>
-                                        <TextBox DockPanel.Dock="Right" Margin="10" TextChanged="TextBox_TextChanged" MinWidth="100"/>
+                                        <TextBox x:Name="txtsearcConsumable" DockPanel.Dock="Right" Margin="10" TextChanged="TextBox_TextChanged" MinWidth="100" materialDesign:HintAssist.Hint="Pretrazi" KeyUp="TextBox_KeyUp"/>
                                         <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                                     </DockPanel>
                                     <DockPanel DockPanel.Dock="Bottom">
                                         <DataGrid Margin="10" x:Name="DataGridOpremaPotrosna" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
                                             <DataGrid.Columns>
-                                                <DataGridTextColumn Header="Naziv" Binding="{Binding Naziv}" Width="*"/>
-                                                <DataGridTextColumn Header="Kolicina" Binding="{Binding Kolicina}" Width="*"/>
+                                                <DataGridTextColumn Header="Naziv" Binding="{Binding Name}" Width="*"/>
+                                                <DataGridTextColumn Header="Kolicina" Binding="{Binding Amount}" Width="*"/>
                                             </DataGrid.Columns>
                                         </DataGrid>
                                     </DockPanel>
@@ -388,7 +388,7 @@
                                     Height="24"
                                     Width="24" />
                                         </Button>
-                                        <Button Margin="10,10,30,10" x:Name="deleteEquipmentInconsumableBtn"
+                                        <Button Margin="10,10,30,10" x:Name="deleteEquipmentInconsumableBtn" Click="deleteEquipment_Btn_Click"
                                   Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
                                   HorizontalAlignment="Left"
                                   ToolTip="Izbriši opremu">
@@ -407,14 +407,14 @@
                                     Height="24"
                                     Width="24" />
                                         </Button>
-                                        <TextBox DockPanel.Dock="Right" Margin="10" TextChanged="TextBox_TextChanged" MinWidth="100"/>
+                                        <TextBox x:Name="txtsearchInconsumable" DockPanel.Dock="Right" Margin="10" TextChanged="TextBox_TextChanged" MinWidth="100" materialDesign:HintAssist.Hint="Pretrazi" KeyUp="TextBox_KeyUp"/>
                                         <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                                     </DockPanel>
                                     <DockPanel DockPanel.Dock="Bottom">
                                         <DataGrid Margin="10" x:Name="DataGridOpremaNepotrosna" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
                                             <DataGrid.Columns>
-                                                <DataGridTextColumn Header="Naziv" Binding="{Binding Naziv}" Width="*"/>
-                                                <DataGridTextColumn Header="Kolicina" Binding="{Binding Kolicina}" Width="*"/>
+                                                <DataGridTextColumn Header="Naziv" Binding="{Binding Name}" Width="*"/>
+                                                <DataGridTextColumn Header="Kolicina" Binding="{Binding Amount}" Width="*"/>
                                                 <DataGridTemplateColumn Header="Raspored po prostorijama" Width="*">
                                                     <DataGridTemplateColumn.CellTemplate>
                                                         <DataTemplate>
