@@ -20,7 +20,7 @@ namespace bolnica.Repository.CSV
             InitializeId();
         }
 
-        public E get(ID id)
+        public E Get(ID id)
         {
             try
             {

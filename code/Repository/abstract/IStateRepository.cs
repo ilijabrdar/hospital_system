@@ -6,9 +6,8 @@ using Model.Users;
 
 namespace bolnica.Repository
 {
-    public interface IStateRepository : IEagerRepository<State, long>
+    public interface IStateRepository : IGetterRepository<State, long>
     {
-        IEnumerable<State> GetAll();
-        State get(long id);
+
     }
 }

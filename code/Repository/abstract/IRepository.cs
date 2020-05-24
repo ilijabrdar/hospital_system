@@ -7,10 +7,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using bolnica.Repository;
 
 namespace Repository
 {
-   public interface IRepository<E, ID> 
+   public interface IRepository<E, ID>
        where E : IIdentifiable<ID>
        where ID : IComparable
    {    //TODO: the rest of the methods?

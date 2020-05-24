@@ -10,7 +10,7 @@ namespace bolnica.Repository
         where E : IIdentifiable<ID>
         where ID : IComparable
     {
-        E getEager(ID id);
-        IEnumerable<E> getAllEager();
+        E GetEager(ID id);
+        IEnumerable<E> GetAllEager();
     }
 }

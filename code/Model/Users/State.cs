@@ -5,6 +5,7 @@
  ***********************************************************************/
 
 using System;
+using System.Collections.Generic;
 
 namespace Model.Users
 {
@@ -15,26 +16,26 @@ namespace Model.Users
       public String Name { get; set; }
       public String Code { get; set; }
 
-      private System.Collections.ArrayList town;
+      private List<Town> town;
 
         public State(long id, String name, String code)
         {
             _id = id;
             Name = name;
             Code = code;
-            town = new System.Collections.ArrayList();
+            town = new List<Town>();
         }
       
       /// <pdGenerated>default getter</pdGenerated>
-      public System.Collections.ArrayList GetTown()
+      public List<Town> GetTown()
       {
          if (town == null)
-            town = new System.Collections.ArrayList();
+            town = new List<Town>();
          return town;
       }
       
       /// <pdGenerated>default setter</pdGenerated>
-      public void SetTown(System.Collections.ArrayList newTown)
+      public void SetTown(List<Town> newTown)
       {
          RemoveAllTown();
          foreach (Town oTown in newTown)
@@ -47,7 +48,7 @@ namespace Model.Users
          if (newTown == null)
             return;
          if (this.town == null)
-            this.town = new System.Collections.ArrayList();
+            this.town = new List<Town>();
          if (!this.town.Contains(newTown))
          {
             this.town.Add(newTown);
@@ -73,7 +74,7 @@ namespace Model.Users
       {
          if (town != null)
          {
-            System.Collections.ArrayList tmpTown = new System.Collections.ArrayList();
+            List<Town> tmpTown = new List<Town>();
             foreach (Town oldTown in town)
                tmpTown.Add(oldTown);
             town.Clear();

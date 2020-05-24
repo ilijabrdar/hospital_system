@@ -11,6 +11,6 @@ namespace bolnica.Repository
         where ID : IComparable
     {
         IEnumerable<E> GetAll();
-        E get(ID id);
+        E Get(ID id);
     }
 }
