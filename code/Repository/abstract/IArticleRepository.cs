@@ -4,11 +4,12 @@
  * Purpose: Definition of the Interface Repository.IArticleRepository
  ***********************************************************************/
 
+using Model.Doctor;
 using System;
 
 namespace Repository
 {
-   public interface IArticleRepository
+   public interface IArticleRepository : IRepository<Article, long>
    {
    }
 }

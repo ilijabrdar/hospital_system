@@ -4,39 +4,53 @@
  * Purpose: Definition of the Class Service.ArticleService
  ***********************************************************************/
 
+using bolnica.Controller;
+using bolnica.Service;
+using Model.Doctor;
 using System;
+using System.Collections.Generic;
 
 namespace Controller
 {
-   public class ArticleController
+   public class ArticleController : IArticleController
    {
-      public Model.Doctor.Article[] SearchArticle(String criteria)
-      {
-         // TODO: implement
-         return null;
-      }
+        private readonly IArticleService _service;
 
-        public object Save()
+        public ArticleController(IArticleService service)
+        {
+            _service = service;
+        }
+
+        public Article Save(Article entity)
+        {
+            return _service.Save(entity);
+        }
+
+        public void Delete(Article entity)
+        {
+            _service.Delete(entity);
+        }
+
+        public void Edit(Article entity)
+        {
+            _service.Edit(entity);
+        }
+
+        public Article Get(long id)
+        {
+            return _service.Get(id);
+        }
+
+        public IEnumerable<Article> GetAll()
+        {
+            return _service.GetAll();
+        }
+
+
+        public Article[] searchArticle(string criteria)
         {
             throw new NotImplementedException();
         }
 
-        public object Delete()
-        {
-            throw new NotImplementedException();
-        }
-
-        public object Edit()
-        {
-            throw new NotImplementedException();
-        }
-
-        public object GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        //private Service.IService _service;
-   
-   }
+    }
 }
