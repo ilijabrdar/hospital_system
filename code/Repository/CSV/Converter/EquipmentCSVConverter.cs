@@ -17,10 +17,11 @@ namespace bolnica.Repository
         public Equipment ConvertCSVFormatToEntity(string entityCSVFormat)
         {
             string[] tokens = entityCSVFormat.Split(_delimiter.ToCharArray());
-            return new Equipment(
+            var temp = new Equipment(
                 long.Parse(tokens[0]),
                 (EquipmentType)Enum.Parse(typeof(EquipmentType), tokens[1]), tokens[2], int.Parse(tokens[3])
                 );
+            return temp;
         }
 
         public string ConvertEntityToCSVFormat(Equipment entity)

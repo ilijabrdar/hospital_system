@@ -51,5 +51,9 @@ namespace Service
         {
             return _repository.Get(id);
         }
+
+        public IEnumerable<Equipment> getConsumableEquipment() => _repository.getConsumableEquipment();
+
+        public IEnumerable<Equipment> getInconsumableEquipment() => _repository.getInconsumableEquipment();
     }
 }
