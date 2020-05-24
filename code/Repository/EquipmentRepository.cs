@@ -7,6 +7,8 @@
 using bolnica.Repository;
 using Model.Director;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Repository
 {
@@ -19,9 +21,20 @@ namespace Repository
 
         }
 
+        public IEnumerable<Equipment> getConsumableEquipment()
+        {
+            return (IEnumerable<Equipment>) base.GetAll().Where(equipment => equipment.Type == EquipmentType.Consumable);
+        }
+
+        public IEnumerable<Equipment> getInconsumableEquipment()
+        {
+            return (IEnumerable<Equipment>) base.GetAll().Where(equipment => equipment.Type == EquipmentType.Inconsumable);
+        }
+
         public Room[] GetRoomsContainingEquipment(string name)
         {
             throw new NotImplementedException();
         }
+
     }
 }

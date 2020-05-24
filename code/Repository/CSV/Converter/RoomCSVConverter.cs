@@ -22,7 +22,7 @@ namespace bolnica.Repository
             string dictionary = tokens[3];
             Dictionary<Equipment, int> helping = new Dictionary<Equipment, int>();
 
-            if (dictionary.Contains("{"))  // if there's no dictionary it crashes
+            if (!dictionary.Contains("empty"))  // if there's no dictionary it crashes
             {
                 dictionary = dictionary.Substring(1, dictionary.Length - 2);
 
@@ -51,7 +51,9 @@ namespace bolnica.Repository
             sb.Append(formatted);
             sb.Append(_delimiter);
 
-            if (entity.Equipment_inventory != null)
+            var count = entity.Equipment_inventory == null ? 0 : entity.Equipment_inventory.Count();
+
+            if (count!=0)
             {
                 sb.Append("{");  //dictionary delimiter
 
