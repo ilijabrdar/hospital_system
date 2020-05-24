@@ -14,7 +14,7 @@ namespace Model.Users
 
         public Secretary(long id, 
             String username, String password, Image image, 
-            String firstName, String lastName, String jmbg, String email, String phone, DateTime dateOfBirth)
+            String firstName, String lastName, String jmbg, String email, String phone, DateTime dateOfBirth, String address) //FIXME Prvo provera sa stringom
         {
             this.Id = id;
             Username = username;
@@ -26,6 +26,7 @@ namespace Model.Users
             Email = email;
             Phone = phone;
             DateOfBirth = dateOfBirth;
+            this.address = address;
         }
 
         override

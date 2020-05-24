@@ -18,12 +18,18 @@ namespace Model.Users
 
         private List<Address> address;
       
-        public Town(long id, string name, string postalNumber)
+        public Town(long id, string name, string postalNumber, State state)
         {
             _id = id;
             Name = name;
             PostalNumber = postalNumber;
+            this.state = state;
             address = new List<Address>();
+        }
+
+        public Town(long id)
+        {
+            _id = id;
         }
 
         /// <pdGenerated>default getter</pdGenerated>

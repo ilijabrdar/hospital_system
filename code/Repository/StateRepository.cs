@@ -47,7 +47,7 @@ namespace bolnica.Repository
         {
             State state = this.Get(id);
             List<Town> towns = state.GetTown();
-            for(int i = 0; i < state.GetTown().Count; i++)
+            for(int i = 0; i < towns.Count; i++)
             {
                 towns[i] = _townRepository.GetEager(towns[i].GetId());
             }
