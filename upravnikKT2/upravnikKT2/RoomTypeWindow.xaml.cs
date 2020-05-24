@@ -1,4 +1,6 @@
-﻿using System;
+﻿using bolnica.Controller;
+using Model.Director;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,19 +21,34 @@ namespace upravnikKT2
     /// </summary>
     public partial class RoomTypeWindow : Window
     {
+        private readonly IRoomTypeController _roomTypeController;
+
         public RoomTypeWindow()
         {
             InitializeComponent();
+
+            var app = Application.Current as App;
+            _roomTypeController = app.RoomTypeController;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            List<String> tipovi = new List<String>();
-            tipovi.Add("magazin");
-            tipovi.Add("operaciona");
-            tipovi.Add("rehabilitaciona");
+            //List<String> tipovi = new List<String>();
+            //tipovi.Add("magazin");
+            //tipovi.Add("operaciona");
+            //tipovi.Add("rehabilitaciona");
 
-            this.lista.ItemsSource = tipovi;
+            //this.lista.ItemsSource = tipovi;
+
+            List<RoomType> roomTypes = new List<RoomType>();
+            roomTypes = _roomTypeController.GetAll().ToList();
+
+            listViewRoomTypes.ItemsSource = roomTypes;
+            listViewRoomTypes.DisplayMemberPath = "Name";
+            listViewRoomTypes.SelectedValuePath = "Id";
+            listViewRoomTypes.SelectedValue = "2";
+
+
         }
 
         private void Button_Click_Add(object sender, RoutedEventArgs e)

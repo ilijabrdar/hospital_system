@@ -24,6 +24,7 @@ namespace upravnikKT2
     public partial class RoomDialog : Window, INotifyPropertyChanged
     {
         private readonly IRoomController _roomController;
+        private readonly IRoomTypeController _roomTypeController;
 
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -43,6 +44,7 @@ namespace upravnikKT2
 
             var app = Application.Current as App;
             _roomController = app.RoomController;
+            _roomTypeController = app.RoomTypeController;
         }
 
         private void Button_Click_OK_Room(object sender, RoutedEventArgs e)
@@ -58,6 +60,7 @@ namespace upravnikKT2
 
             var RoomCode = new Room(Test3, new RoomType("21223"), dict, null);
             _roomController.Save(new Room(Test3, new RoomType("t1"), dict, null));
+
 
             //_roomController.Delete(new Room(2));
             //_roomController.Edit(new Room(0,"roomCode",new RoomType("jasaa"),dict,null));
@@ -85,6 +88,20 @@ namespace upravnikKT2
                     OnPropertyChanged("Test3");
                 }
             }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<RoomType> list_room_types = new List<RoomType>();
+            list_room_types = _roomTypeController.GetAll().ToList();
+
+            comboRoomTypes.ItemsSource = list_room_types;
+            comboRoomTypes.DisplayMemberPath = "Name";
+            comboRoomTypes.SelectedValuePath = "Id";
+            comboRoomTypes.SelectedValue = "2";
+            
+
+            
         }
     }
 }

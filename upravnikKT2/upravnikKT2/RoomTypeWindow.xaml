@@ -43,7 +43,7 @@
                                     Width="24" />
         </Button>
 
-        <ListView Grid.Row="1" x:Name="lista">
+        <ListView x:Name="listViewRoomTypes" Grid.Row="1">
         </ListView>
 
     </Grid>

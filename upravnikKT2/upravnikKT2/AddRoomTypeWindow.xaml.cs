@@ -5,6 +5,7 @@ using Model.PatientSecretary;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace upravnikKT2
 {
@@ -15,9 +16,10 @@ namespace upravnikKT2
     {
         private readonly IRoomTypeController _roomTypeController;
         private readonly IIngredientController _ingredientController; //TODO: delete this test
-
+        private ListView list;
 
         public event PropertyChangedEventHandler PropertyChanged;
+        
 
         protected virtual void OnPropertyChanged(string name)
         {
@@ -26,7 +28,7 @@ namespace upravnikKT2
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
         }
-        public AddRoomType()
+        public AddRoomType(ListView listView)
         {
             InitializeComponent();
             this.DataContext = this;
@@ -34,6 +36,8 @@ namespace upravnikKT2
             var app = Application.Current as App;
             _roomTypeController = app.RoomTypeController;
             _ingredientController = app.IngredientController; //TODO: delete this test
+
+            list = listView;
 
         }
 
@@ -67,8 +71,8 @@ namespace upravnikKT2
             //var edit = new RoomType(2,"test3 u yas");  //TODO: delete this test
             //_roomTypeController.Edit(edit);
 
-            var delete = new RoomType(3);  //TODO: delete this test
-            _roomTypeController.Delete(delete);
+            _roomTypeController.Save(new RoomType(Ime));
+            
 
             this.Close();
         }
