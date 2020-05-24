@@ -136,5 +136,15 @@ namespace Service
         {
             throw new NotImplementedException();
         }
+
+        public bool IsPasswordValid(string password)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool IUserService.IsUsernameValid(string username)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
