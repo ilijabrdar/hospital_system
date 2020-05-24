@@ -4,52 +4,63 @@
  * Purpose: Definition of the Class Service.RoomService
  ***********************************************************************/
 
+using bolnica.Controller;
+using bolnica.Service;
 using Model.Director;
+using Service;
 using System;
+using System.Collections.Generic;
 
 namespace Controller
 {
-   public class RoomController// : IController
+   public class RoomController : IRoomController
    {
-      public Boolean ChangeRoomType(Room room, RoomType roomType)
-      {
-         // TODO: implement
-         return false;
-      }
-      
-      public Boolean AddEquipment(Equipment equipment, Model.Director.Room room)
-      {
-         // TODO: implement
-         return false;
-      }
-      
-      public Model.Director.Room[] GetVacantRooms()
-      {
-         // TODO: implement
-         return null;
-      }
+        private readonly IRoomService _service;
 
-        public object Save()
+        public RoomController(IRoomService service)
+        {
+            _service = service;
+        }
+
+        public Room Save(Room entity)
+        {
+            return _service.Save(entity);
+        }
+
+
+        public IEnumerable<Room> GetAll()
+        {
+            return _service.GetAll();
+        }
+
+        public void Edit(Room entity)
+        {
+            _service.Edit(entity);
+        }
+
+        public void Delete(Room entity)
+        {
+            _service.Delete(entity);
+        }
+
+        public IEnumerable<Room> GetVacantRooms()
         {
             throw new NotImplementedException();
         }
 
-        public object Delete()
+        public bool AddEquipment(Equipment equipment, Room room)
         {
             throw new NotImplementedException();
         }
 
-        public object Edit()
+        public bool ChangeRoomType(Room room, RoomType roomType)
         {
             throw new NotImplementedException();
         }
 
-        public object GetAll()
+        public Room Get(long id)
         {
-            throw new NotImplementedException();
+            return _service.Get(id);
         }
-
-        //private Service.IService _service;
-   
-   }
+    }
 }

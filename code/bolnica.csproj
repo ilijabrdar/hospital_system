@@ -94,6 +94,8 @@
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controller\abstract\IEquipmentController.cs" />
+    <Compile Include="Controller\abstract\IRenovationController.cs" />
     <Compile Include="Controller\AnamnesisController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -127,12 +129,16 @@
     <Compile Include="Controller\HospitalizationController.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controller\IController.cs">
+    <Compile Include="Controller\abstract\IController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controller\abstract\IIngredientController.cs" />
     <Compile Include="Controller\IngredientController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controller\abstract\IRoomController.cs" />
+    <Compile Include="Controller\abstract\IRoomTypeController.cs" />
+    <Compile Include="Controller\abstract\IUserController.cs" />
     <Compile Include="Controller\NotificationController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -289,6 +295,11 @@
     <Compile Include="Repository\BusinessDayRepository.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Repository\CSV\Converter\ArticleCSVConverter.cs" />
+    <Compile Include="Repository\CSV\Converter\DrugCSVConverter.cs" />
+    <Compile Include="Repository\CSV\Converter\PatientCSVConverter.cs" />
+    <Compile Include="Repository\CSV\Converter\PatientFileCSVConverter.cs" />
+    <Compile Include="Repository\CSV\Converter\RenovationCSVConverter.cs" />
     <Compile Include="Repository\CSV\CSVRepository.cs" />
     <Compile Include="Repository\CSV\Stream\CSVStream.cs" />
     <Compile Include="Repository\DirectorRepository.cs">
@@ -303,6 +314,7 @@
     <Compile Include="Repository\DrugRepository.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Repository\CSV\Converter\EquipmentCSVConverter.cs" />
     <Compile Include="Repository\EquipmentRepository.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -378,6 +390,8 @@
     <Compile Include="Repository\abstract\ISecretaryRepository.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Repository\CSV\Converter\IngredientsCSVConverter.cs" />
+    <Compile Include="Repository\CSV\Converter\RoomCSVConverter.cs" />
     <Compile Include="Repository\Sequencer\ISequencer.cs" />
     <Compile Include="Repository\abstract\ISpecialityRepository.cs">
       <SubType>Code</SubType>
@@ -407,6 +421,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Repository\Speciality.cs" />
+    <Compile Include="Repository\CSV\Converter\SpecialityCSVConverter.cs" />
     <Compile Include="Repository\SpecialityRepository.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -414,6 +429,10 @@
     <Compile Include="Repository\StateRepository.cs" />
     <Compile Include="Repository\CSV\Converter\TownCSVConverter.cs" />
     <Compile Include="Repository\TownRepository.cs" />
+    <Compile Include="Service\abstract\IEquipmentService.cs" />
+    <Compile Include="Service\abstract\IIngredientService.cs" />
+    <Compile Include="Service\abstract\IRenovationService.cs" />
+    <Compile Include="Service\abstract\IRoomTypeService.cs" />
     <Compile Include="Service\AnamnesisService.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -450,9 +469,11 @@
     <Compile Include="Service\IngredientService.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Service\IService.cs">
+    <Compile Include="Service\abstract\IRoomService.cs" />
+    <Compile Include="Service\abstract\IService.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Service\abstract\IUserService.cs" />
     <Compile Include="Service\NotificationService.cs">
       <SubType>Code</SubType>
     </Compile>

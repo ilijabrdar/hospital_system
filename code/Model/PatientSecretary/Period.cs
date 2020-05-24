@@ -10,8 +10,8 @@ namespace Model.PatientSecretary
 {
    public class Period
    {
-      private DateTime StartDate;
-      private DateTime EndDate;
+      public DateTime StartDate { get; set; }
+      public DateTime EndDate { get; set; }
    
    }
 }

@@ -4,32 +4,21 @@
  * Purpose: Definition of the Class Service.PatientFileService
  ***********************************************************************/
 
+using bolnica.Repository;
+using Model.PatientSecretary;
 using System;
 
 namespace Repository
 {
-   public class PatientFileRepository : IPatientFileRepository
-   {
-      private String FilePath;
+    public class PatientFileRepository : CSVRepository<PatientFile, long>, IPatientFileRepository
+    {
+        private String FilePath;
 
-        public object Delete()
-        {
-            throw new NotImplementedException();
-        }
 
-        public object Edit()
+        public PatientFileRepository(ICSVStream<PatientFile> stream, ISequencer<long> sequencer)
+               : base(stream, sequencer)
         {
-            throw new NotImplementedException();
-        }
 
-        public object GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public object Save()
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -10,7 +10,15 @@ namespace Model.Users
 {
    public class Director : User
    {
-      private String Id;
-   
-   }
+
+        public override long GetId()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void SetId(long id)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

@@ -4,43 +4,48 @@
  * Purpose: Definition of the Class Service.PatientService
  ***********************************************************************/
 
+using bolnica.Repository;
 using Model.Users;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Repository
 {
-   public class PatientRepository : IPatientRepository
+   public class PatientRepository : CSVRepository<Patient,long> ,IPatientRepository
    {
       private String FilePath;
-
-        public object Delete()
+        public PatientRepository(ICSVStream<Patient> stream, ISequencer<long> sequencer)
+            : base(stream, sequencer)
         {
-            throw new NotImplementedException();
+
         }
 
-        public object Edit()
-        {
-            throw new NotImplementedException();
-        }
-
-        public object GetAll()
-        {
-            throw new NotImplementedException();
-        }
 
         public Patient GetPatientByJMBG(string jmbg)
         {
-            throw new NotImplementedException();
+            List<Patient> patients = GetAll().ToList();
+            foreach(Patient patient in patients){
+                if (patient.Jmbg.Equals(jmbg))
+                {
+                    return patient;
+                }
+            }
+            return null;
         }
 
         public Patient GetPatientByUsername(string username)
         {
-            throw new NotImplementedException();
+            List<Patient> patients = GetAll().ToList();
+            foreach (Patient patient in patients)
+            {
+                if (patient.Username.Equals(username))
+                {
+                    return patient;
+                }
+            }
+            return null;
         }
 
-        public object Save()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

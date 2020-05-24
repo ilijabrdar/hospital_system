@@ -4,32 +4,45 @@
  * Purpose: Definition of the Class Service.RenovationService
  ***********************************************************************/
 
+using bolnica.Controller;
+using bolnica.Service;
+using Model.Director;
 using System;
+using System.Collections.Generic;
 
 namespace Controller
 {
-   public class RenovationController// : IController
+   public class RenovationController : IRenovationController
    {
-      //private Service.IService _service;
+        private readonly IRenovationService _service;
 
-        public object Delete()
+        public RenovationController(IRenovationService service)
         {
-            throw new NotImplementedException();
+            _service = service;
+        }
+        public void Delete(Renovation entity)
+        {
+            _service.Delete(entity);
         }
 
-        public object Edit()
+        public void Edit(Renovation entity)
         {
-            throw new NotImplementedException();
+            _service.Edit(entity);
         }
 
-        public object GetAll()
+        public Renovation Get(long id)
         {
-            throw new NotImplementedException();
+            return _service.Get(id);
         }
 
-        public object Save()
+        public IEnumerable<Renovation> GetAll()
         {
-            throw new NotImplementedException();
+            return _service.GetAll();
+        }
+
+        public Renovation Save(Renovation entity)
+        {
+            return _service.Save(entity);
         }
     }
 }

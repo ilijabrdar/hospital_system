@@ -1,32 +1,20 @@
-/***********************************************************************
- * Module:  DrugService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.DrugService
- ***********************************************************************/
 
+
+using bolnica.Repository;
 using Model.PatientSecretary;
 using System;
 
 namespace Repository
 {
-   public class DrugRepository : IDrugRepository
+   public class DrugRepository : CSVRepository<Drug,long>, IDrugRepository
    {
       private String FilePath;
-
-        public object Delete()
+        public DrugRepository(ICSVStream<Drug> stream, ISequencer<long> sequencer)
+            : base(stream, sequencer)
         {
-            throw new NotImplementedException();
-        }
 
-        public object Edit()
-        {
-            throw new NotImplementedException();
         }
-
-        public object GetAll()
-        {
-            throw new NotImplementedException();
-        }
+      
 
         public Drug[] GetAlternative(Drug drug)
         {
@@ -38,9 +26,5 @@ namespace Repository
             throw new NotImplementedException();
         }
 
-        public object Save()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
