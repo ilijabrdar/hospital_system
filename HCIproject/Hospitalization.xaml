@@ -1,0 +1,55 @@
+﻿<Window x:Class="HCIproject.Hospitalization"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HCIproject"
+        mc:Ignorable="d"
+        Title="Hospitalization" Height="450" Width="800">
+    <StackPanel x:Name="ResizePanel" Background="#D0ECE7" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+        <StackPanel x:Name="PatientInfo" Background="#D5F5E3">
+            <Label Content="OPSTE INFO O PACIJENTU"/>
+        </StackPanel>
+        <Grid  VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Content="Dijagnoza" Grid.Row="0" Grid.Column="0" FontSize="18" Margin="10"/>
+            <TextBlock Text="OVDE CE SE PRENETI UNETA DIJAGNOZA" Grid.Row="0" Grid.Column="1" Margin="10"/>
+
+            <Label Content="Terapija" Grid.Row="1" Grid.Column="0" FontSize="18" Margin="10"/>
+            <TextBlock Text="OVDE CE SE PRENETI UNETA TERAPIJA" Grid.Row="1" Grid.Column="1" Margin="10"/>
+
+            <Label Content="Odeljenje" Grid.Row="2" Grid.Column="0" FontSize="18" Margin="10"/>
+            <ComboBox Grid.Row="2" Grid.Column="1" Margin="10"/>
+
+            <Label Content="Soba" Grid.Row="3" Grid.Column="0" FontSize="18" Margin="10"/>
+            <TextBlock Text="OVDE CE SE PRENETI Generisana soba" Grid.Row="3" Grid.Column="1" Margin="10"/>
+            <WrapPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
+                <Label Content="Vremenski period" FontSize="18" Margin="10" />
+                <Label Content="od" FontSize="18" Margin="10"/>
+                <DatePicker x:Name="StartDate" Margin="10" />
+                <Label Content="do" FontSize="18" Margin="10"/>
+                <DatePicker x:Name="EndDate" Margin="10" />
+            </WrapPanel>
+
+            <Label Content="Napomena" Grid.Row="5" Grid.Column="0" FontSize="18" Margin="10"/>
+            <TextBox Grid.Row="5" Grid.Column="1" Margin="10" AcceptsReturn="True"/>
+        </Grid>
+        <WrapPanel FlowDirection="RightToLeft" Background="#D5F5E3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Button Content="Otkaži" FontSize="18" Height="30" Width="100"  Margin="10,0,10,50" Background="#A2D9CE" Click="Button_Click" ></Button>
+            <Button Content="Potvrdi" FontSize="18" Height="30" Width="100"  Margin="10,0,10,50" Background="#A2D9CE" Click="Button_Click_1" ></Button>
+        </WrapPanel>
+    </StackPanel>
+</Window>

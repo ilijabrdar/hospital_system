@@ -1,0 +1,34 @@
+﻿<Window x:Class="HCIproject.Log"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HCIproject"
+        mc:Ignorable="d"
+        Title="Log" Height="450" Width="800">
+    <StackPanel  Background="#D0ECE7">
+        <Button Content="Povratak" Background="#A2D9CE" Foreground="#2C3E50" FontSize="17" HorizontalAlignment="Left"  Margin="10,10,0,0" VerticalAlignment="Top" Width="159" Click="Button_Click"/>
+        <Label Content="LOG IN" Margin="40" FontSize="40" Foreground="#2C3E50" HorizontalAlignment="Center" Height="73"  VerticalAlignment="Center" Width="174"/>
+        <Grid  HorizontalAlignment="Center"  >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Image Height="44" Width="56" Grid.Row="0" Grid.Column="0" Source="user.png"/>
+            <Label Content="korisničko ime" FontSize="18" Grid.Row="0" Grid.Column="1"/>
+            <TextBox x:Name="username_text" Text="unesite vaše korisničko ime" Grid.Row="0" Grid.Column="2" Height="33" FontSize="16" TextWrapping="Wrap" Width="245" Foreground="#515A5A" Focusable="True" IsKeyboardFocusedChanged="TextBox_IsKeyboardFocusedChanged" KeyDown="username_text_KeyDown" />
+
+            <Image Height="44" Width="56" Grid.Row="1" Grid.Column="0" Source="password.png"/>
+            <Label Content="lozinka" Grid.Row="1" Grid.Column="1" FontSize="18"/>
+            <PasswordBox  x:Name="password_text"  Grid.Row="1" Grid.Column="2" Height="33" FontSize="16"  Width="245" Foreground="#515A5A" Focusable="True" IsKeyboardFocusedChanged="TextBox_IsKeyboardFocusedChanged" KeyDown="password_text_KeyDown"/>
+        </Grid>
+        <Button x:Name="prijavaBtn" Content="Prijava"  HorizontalAlignment="Center"  Background="#A2D9CE" Foreground="#2C3E50" FontSize="17" Margin="30" VerticalAlignment="Top" Width="159" Click="Button_Click_1"/>
+
+    </StackPanel>
+</Window>

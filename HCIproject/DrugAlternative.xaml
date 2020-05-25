@@ -1,0 +1,53 @@
+﻿<Window x:Class="HCIproject.DrugAlternative"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HCIproject"
+        mc:Ignorable="d"
+        Title="DrugAlternative" Height="450" Width="800">
+    <StackPanel Background="#D0ECE7" Orientation="Vertical">
+        <Label Content="Izaberite lek kom želite da dodate alternativni" FontSize="16" Margin="10,10,0,0" FontWeight="DemiBold"></Label>
+            <Border  BorderBrush="#A2D9CE" BorderThickness="8" CornerRadius="8,8,8,8"  Margin="5">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Izberite lek" FontSize="16"   Margin="10"></Label>
+                        <ComboBox  Width="200" Margin="10" FontWeight="Bold" FontSize="18">
+                            <ComboBoxItem Content="Bromazepam"/>
+                            <ComboBoxItem Content="Nimulid" IsSelected="True"/>
+                            <ComboBoxItem Content="Diklofen"/>
+                        </ComboBox>
+
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Sifra leka: "  FontSize="16" Margin="10"></Label>
+                        <Label Content="B23E " Margin="10"  FontSize="18" FontWeight="Bold"></Label>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+            <Label Content="Za izabrani lek izaberite alternativni" FontSize="16" Margin="10,20,10,0" FontWeight="DemiBold"></Label>
+            <Border  BorderBrush="#A2D9CE" BorderThickness="8" CornerRadius="8,8,8,8"  Margin="5">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Izberite alternativni lek" FontSize="16"   Margin="10"></Label>
+                        <ComboBox  Width="200" Margin="10" FontWeight="Bold" FontSize="18">
+                            <ComboBoxItem Content="Bromazepam"/>
+                            <ComboBoxItem Content="Nimulid"/>
+                            <ComboBoxItem Content="Diklofen"  IsSelected="True"/>
+                        </ComboBox>
+
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Sifra leka: "  FontSize="16" Margin="10"></Label>
+                        <Label Content="B23E " Margin="10"  FontSize="18" FontWeight="Bold"></Label>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        <WrapPanel FlowDirection="RightToLeft">
+            <Button Content="Otkaži" FontSize="18" Height="30" Width="100"  Margin="10,0,10,50" Background="#A2D9CE"   Click="Button_Click_1"></Button>
+            <Button Content="Potvrdi" FontSize="18" Height="30" Width="100"  Margin="10,0,10,50" Background="#A2D9CE" Click="Button_Click" ></Button>
+
+        </WrapPanel>
+
+    </StackPanel>
+</Window>

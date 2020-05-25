@@ -1,0 +1,26 @@
+﻿<Window x:Class="HCIproject.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HCIproject"
+        mc:Ignorable="d"
+        Title="Bolnica zdravo" Height="450" Width="800">
+    <StackPanel x:Name="Resize" Orientation="Vertical" Background="#D0ECE7" >
+        <Border  BorderBrush="#A2D9CE" BorderThickness="8" CornerRadius="8,8,8,8"  Margin="5">
+            <WrapPanel Height="70">
+                <Label Content="Prijavljivanje" Foreground="#2C3E50" FontSize="17" Margin="20" Height="53" HorizontalAlignment="Left"/>
+                <Button x:Name="logBtn" Content="Log in" Foreground="#2C3E50" FontSize="17" Width="89" Margin="0,20,0,20.2" HorizontalAlignment="Right" Click="open_LogIn" Height="26"/>
+            </WrapPanel>
+        </Border>
+        <Border  BorderBrush="#A2D9CE" BorderThickness="8" CornerRadius="8,8,8,8" Margin="5">
+            <WrapPanel Height="70">
+                <Label Content="Pretraga clanaka" Margin="20" VerticalAlignment="Center" Foreground="#2C3E50" FontSize="17" Height="30"/>
+                <TextBox x:Name="searchTxt" Text="Unesite parametar pretrage" Height="30" Width="203" Background="#EBF5FB" FontSize="16" Foreground="#AAB7B8" Focusable="True" Margin="20" IsKeyboardFocusedChanged="search_text_IsKeyboardFocusedChanged" KeyDown="search_text_KeyDown"/>
+            </WrapPanel>
+        </Border>
+        <Border  BorderBrush="#A2D9CE" BorderThickness="8" CornerRadius="8,8,8,8" Margin="5">
+            <StackPanel Orientation="Vertical" Background="#D0ECE7" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="310"/>
+        </Border>
+    </StackPanel>
+</Window>

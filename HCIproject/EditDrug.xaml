@@ -1,0 +1,54 @@
+﻿<Window x:Class="HCIproject.EditDrug"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HCIproject"
+        mc:Ignorable="d"
+        Title="EditDrug" Height="450" Width="800">
+    <StackPanel Background="#D0ECE7">
+        <Border  BorderBrush="#A2D9CE" BorderThickness="8" CornerRadius="8,8,8,8"  Margin="5">
+            <StackPanel x:Name="Info" Background="#D5F5E3" Orientation="Vertical"  VerticalAlignment="Top">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Naziv leka:" FontSize="16" Margin="20,0,0,0" VerticalAlignment="Center" Width="Auto" />
+                    <Label Content="Diklofen" FontSize="18" Margin="20,0,20,0" VerticalAlignment="Center" Width="Auto" FontWeight="Bold"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Sifra leka:" FontSize="16" Margin="20,0,20,0" VerticalAlignment="Center"  />
+                    <Label Content="B23E" FontSize="18" Margin="20,0,20,0" VerticalAlignment="Center" FontWeight="Bold"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+        <Border  BorderBrush="#A2D9CE" BorderThickness="8" CornerRadius="8,8,8,8"  Margin="5">
+            <StackPanel x:Name="Structure" Orientation="Vertical">
+                <StackPanel Orientation="Horizontal" Background="#D5F5E3">
+                    <Image Grid.Column="0"  Source="graph.png" ></Image>
+                    <Grid Margin="40" HorizontalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Sastojak" Grid.Row="0" Grid.Column="0" FontSize="16" FontWeight="UltraLight"/>
+                        <Label Content="Količina [mg]" Grid.Row="0" Grid.Column="1" FontSize="16" FontWeight="UltraLight" />
+
+                        <Label Content="diklofenak-natrijum" Grid.Row="1" Grid.Column="0" FontSize="18" FontWeight="Bold"/>
+                        <Label Content="100" Grid.Row="1" Grid.Column="1" FontSize="16" FontWeight="Bold"/>
+                    </Grid>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+        <WrapPanel FlowDirection="RightToLeft">
+            <Button Content="Otkaži" FontSize="18" Height="30" Width="100"  Margin="10,0,10,50" Background="#A2D9CE" Click="Button_Click" ></Button>
+            <Button Content="Potvrdi" FontSize="18" Height="30" Width="100"  Margin="10,0,10,50" Background="#A2D9CE" Click="Button_Click_1" ></Button>
+        </WrapPanel>
+
+    </StackPanel>
+</Window>
