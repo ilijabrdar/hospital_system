@@ -5,29 +5,37 @@
  ***********************************************************************/
 
 using System;
+using System.Collections.Generic;
+using bolnica.Service;
+using Model.Users;
 
 namespace Service
 {
-   public class SecretaryService// : IService
+   public class SecretaryService : ISecretaryService
    {
       private Repository.ISecretaryRepository _secretaryRepository;
 
-        public object Delete()
+        public void Delete(Secretary entity)
         {
             throw new NotImplementedException();
         }
 
-        public object Edit()
+        public void Edit(Secretary entity)
         {
             throw new NotImplementedException();
         }
 
-        public object GetAll()
+        public Secretary Get(long id)
         {
             throw new NotImplementedException();
         }
 
-        public object Save()
+        public IEnumerable<Secretary> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Secretary Save(Secretary entity)
         {
             throw new NotImplementedException();
         }

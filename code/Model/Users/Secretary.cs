@@ -14,7 +14,7 @@ namespace Model.Users
 
         public Secretary(long id, 
             String username, String password, Image image, 
-            String firstName, String lastName, String jmbg, String email, String phone, DateTime dateOfBirth, String address) //FIXME Prvo provera sa stringom
+            String firstName, String lastName, String jmbg, String email, String phone, DateTime dateOfBirth, Address address) //FIXME Prvo provera sa stringom
         {
             this.Id = id;
             Username = username;

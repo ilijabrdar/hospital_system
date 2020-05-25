@@ -448,6 +448,7 @@
     <Compile Include="Service\abstract\IPatientService.cs" />
     <Compile Include="Service\abstract\IRenovationService.cs" />
     <Compile Include="Service\abstract\IRoomTypeService.cs" />
+    <Compile Include="Service\abstract\ISecretaryService.cs" />
     <Compile Include="Service\AnamnesisService.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -531,6 +532,7 @@
     <Compile Include="Service\UserService.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Test.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
