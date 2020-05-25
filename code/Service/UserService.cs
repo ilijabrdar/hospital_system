@@ -18,22 +18,18 @@ namespace Service
     {
         private IDoctorService _doctorService;
         private IPatientService _patientService;
-        //private IService _secretaryService;
-        //private IService _directorService;
-
-        //TODO : u klas dijagram dodati ove veze ako vam se ovo svidja
-        private readonly IPatientRepository _patientRepo;
-        private readonly IDoctorRepository _doctorRepo;
-        private readonly ISecretaryRepository _secretaryRepo;
-        private readonly IDirectorRepository _directorRepo;
+        private ISecretaryService _secretaryService;
+        private IDirectorService _directorService;
 
         private readonly IPatientFileRepository _patientFileRepo;
 
 
-        public UserService(IPatientService patientServ, IDoctorService _doctor)
+        public UserService(IPatientService patientServ, IDoctorService _doctor, ISecretaryService secretaryService, IDirectorService directorService)
         {
             this._patientService = patientServ;
             this._doctorService = _doctor;
+            _secretaryService = secretaryService;
+            _directorService = directorService;
         }
 
         public User Save(User entity)
@@ -82,13 +78,13 @@ namespace Service
         public User IsUsernameValid(string username)
         {
             User user = null;
-            if ((user = _patientRepo.GetPatientByUsername(username)) != null)
+            if ((user = _patientService.GetPatientByUsername(username)) != null)
                 return user;
-            else if ((user = _secretaryRepo.GetSecretaryByUsername(username)) != null)
+            else if ((user = _secretaryService.GetSecretaryByUsername(username)) != null)
                 return user;
-            else if ((user = _directorRepo.GetDirectorByUsername(username)) != null)
+            else if ((user = _directorService.GetDirectorByUsername(username)) != null)
                 return user;
-            else if ((user = _doctorRepo.GetDoctorByUsername(username)) != null)
+            else if ((user = _doctorService.GetDoctorByUsername(username)) != null)
                 return user;
             return user;
         }

@@ -35,6 +35,11 @@ namespace Service
             throw new NotImplementedException();
         }
 
+        public Secretary GetSecretaryByUsername(string username)
+        {
+            return _secretaryRepository.GetSecretaryByUsername(username);
+        }
+
         public Secretary Save(Secretary entity)
         {
             throw new NotImplementedException();

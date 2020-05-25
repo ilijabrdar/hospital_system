@@ -18,17 +18,24 @@ namespace Model.Users
 
         private Town town;
       
-        public Address(string street, int number, int apartmentNumber, Town town)
+        public Address(long id, string street, int number, int apartmentNumber, Town town)
         {
             Street = street;
             Number = number;
             ApartmentNumber = apartmentNumber;
             this.town = town;
+            _id = id;
         } 
 
         public Address(long id)
         {
             _id = id; 
+        }
+
+        public Address(long id, long townID, long stateID)
+        {
+            _id = id;
+            town = new Town(townID, stateID);
         }
 
         /// <pdGenerated>default parent getter</pdGenerated>

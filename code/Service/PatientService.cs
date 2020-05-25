@@ -62,5 +62,10 @@ namespace Service
         {
             throw new NotImplementedException();
         }
+
+        public Patient GetPatientByUsername(string username)
+        {
+            return _patientRepository.GetPatientByUsername(username);
+        }
     }
 }
