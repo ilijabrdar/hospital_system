@@ -9,5 +9,6 @@ namespace bolnica.Service
 {
     public interface ISecretaryService : IService<Secretary, long>
     {
+        Secretary GetSecretaryByUsername(String username);
     }
 }

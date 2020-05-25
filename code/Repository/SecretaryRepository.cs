@@ -15,10 +15,16 @@ namespace Repository
    public class SecretaryRepository : CSVRepository<Secretary, long>, ISecretaryRepository, IEagerRepository<Secretary, long>
    {
         private readonly IEagerRepository<Address, long> _addressRepository;
+        private readonly IEagerRepository<Town, long> _townRepository;
+        private readonly IEagerRepository<State, long> _stateRepository;
 
-        public SecretaryRepository(ICSVStream<Secretary> stream, ISequencer<long> sequencer, IEagerRepository<Address, long> addressRepository) : base(stream, sequencer)
+        public SecretaryRepository(ICSVStream<Secretary> stream, ISequencer<long> sequencer, IEagerRepository<Address, long> addressRepository,
+            IEagerRepository<Town, long> townRepository, IEagerRepository<State, long> stateRepository) : base(stream, sequencer)
         {
             _addressRepository = addressRepository;
+            _townRepository = townRepository;
+            _stateRepository = stateRepository;
+
         }
 
         public SecretaryRepository(CSVStream<Secretary> cSVStream, LongSequencer longSequencer) : base(cSVStream, longSequencer)
@@ -28,32 +34,19 @@ namespace Repository
         public IEnumerable<Secretary> GetAllEager()
         {
             List<Secretary> secretaries = GetAll().ToList();
-            List<Address> addresses = _addressRepository.GetAllEager().ToList();
-            Join(secretaries, addresses);
-            return secretaries;
-        }
-
-        private void Join(List<Secretary> secretaries, List<Address> addresses)
-        {
             for(int i = 0; i < secretaries.Count; i++)
             {
-                secretaries[i].address = GetAddressByID(addresses, secretaries[i].GetId());
+                secretaries[i] = GetEager(secretaries[i].GetId());
             }
-        }
-
-        private Address GetAddressByID(List<Address> addresses, long id)
-        {
-            foreach (Address address in addresses)
-                if (address.GetId() == id)
-                    return address;
-            return null; 
+            return secretaries;
         }
 
         public Secretary GetEager(long id)
         {
             Secretary secretary = Get(id);
-            Address address = secretary.address;
-            address = _addressRepository.GetEager(address.GetId());
+            secretary.address = _addressRepository.GetEager(secretary.address.GetId());
+            secretary.address.SetTown(_townRepository.GetEager(secretary.address.GetTown().GetId()));
+            secretary.address.GetTown().SetState(_stateRepository.GetEager(secretary.address.GetTown().GetState().GetId()));
             return secretary;
         }
 

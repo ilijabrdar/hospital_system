@@ -25,11 +25,18 @@ namespace Model.Users
             Number = number;
             ApartmentNumber = apartmentNumber;
             this.town = town;
+            _id = id;
         } 
 
         public Address(long id)
         {
             _id = id; 
+        }
+
+        public Address(long id, long townID, long stateID)
+        {
+            _id = id;
+            town = new Town(townID, stateID);
         }
 
         /// <pdGenerated>default parent getter</pdGenerated>

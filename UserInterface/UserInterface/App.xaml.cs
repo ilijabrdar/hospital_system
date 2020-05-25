@@ -34,12 +34,14 @@ namespace UserInterface
             TownRepository townRepository = new TownRepository(new CSVStream<Town>(TOWN_FILE, new TownCSVConverter(CSV_DELIMITER, CSV_ARRAY_DELIMITER)), new LongSequencer(), addressRepository);
             StateRepository stateRepository = new StateRepository(new CSVStream<State>(STATE_FILE, new StateCSVConverter(CSV_DELIMITER, CSV_ARRAY_DELIMITER)), new LongSequencer(), townRepository);
             
-            SecretaryRepository secretaryRepository = new SecretaryRepository(new CSVStream<Secretary>(SECRETARY_FILE, new SecretaryCSVConverter(CSV_DELIMITER)), new LongSequencer(), addressRepository);
+            SecretaryRepository secretaryRepository = new SecretaryRepository(new CSVStream<Secretary>(SECRETARY_FILE, new SecretaryCSVConverter(CSV_DELIMITER)), new LongSequencer(), addressRepository, townRepository, stateRepository);
             // DirectorRepository directorRepository = new DirectorRepository(new CSVStream<Director>(SECRETARY_FILE, null, new LongSequencer());
             // DoctorRepository doctorRepository = new SecretaryRepository(new CSVStream<Secretary>(SECRETARY_FILE, new SecretaryCSVConverter(CSV_DELIMITER)), new LongSequencer());
             // PatientRepository patientRepository = new SecretaryRepository(new CSVStream<Secretary>(SECRETARY_FILE, new SecretaryCSVConverter(CSV_DELIMITER)), new LongSequencer());
 
-            UserService userService = new UserService(null, null, secretaryRepository, null, null);
+            SecretaryService secretaryService = new SecretaryService(secretaryRepository);
+
+            UserService userService = new UserService(null, null, secretaryService, null);
             UserController userController = new UserController(userService);
 
             User user = userController.Login("pera", "pera");
@@ -51,7 +53,8 @@ namespace UserInterface
             Console.WriteLine(secretary.Password);
             Console.WriteLine(secretary.Email);
             Console.WriteLine(secretary.address.Street);
-            //Console.WriteLine(secretary.address.GetTown().Name);
+            Console.WriteLine(secretary.address.GetTown().Name);
+            Console.WriteLine(secretary.address.GetTown().GetState().Name);
         }
     }
 }

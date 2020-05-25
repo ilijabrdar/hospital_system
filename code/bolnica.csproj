@@ -441,6 +441,7 @@
     <Compile Include="Repository\CSV\Converter\TownCSVConverter.cs" />
     <Compile Include="Repository\TownRepository.cs" />
     <Compile Include="Service\abstract\IBusinessDayService.cs" />
+    <Compile Include="Service\abstract\IDirectorService.cs" />
     <Compile Include="Service\abstract\IDoctorService.cs" />
     <Compile Include="Service\abstract\IEquipmentService.cs" />
     <Compile Include="Service\abstract\IIngredientService.cs" />

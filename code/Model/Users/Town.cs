@@ -32,6 +32,12 @@ namespace Model.Users
             _id = id;
         }
 
+        public Town(long id, long stateID)
+        {
+            _id = id;
+            state = new State(stateID);
+        }
+
         /// <pdGenerated>default getter</pdGenerated>
         public List<Address> GetAddress()
         {
