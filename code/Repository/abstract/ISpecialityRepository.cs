@@ -4,13 +4,15 @@
  * Purpose: Definition of the Interface Repository.ISpecialityRepository
  ***********************************************************************/
 
+using bolnica.Repository;
+using Model.Doctor;
 using System;
 
 namespace Repository
 {
-   public interface ISpecialityRepository
+   public interface ISpecialityRepository : IRepository<Specialty,long>, IGetterRepository<Specialty,long>
    {
-      Speciality CreateSpeciality(Speciality speciality);
-      Boolean DeleteSpeciality(Speciality speciality);
+      Specialty CreateSpeciality(Specialty speciality);
+      Boolean DeleteSpeciality(Specialty speciality);
    }
 }

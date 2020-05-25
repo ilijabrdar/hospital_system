@@ -431,7 +431,6 @@
     <Compile Include="Repository\SecretaryRepository.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Repository\Speciality.cs" />
     <Compile Include="Repository\CSV\Converter\SpecialityCSVConverter.cs" />
     <Compile Include="Repository\SpecialityRepository.cs">
       <SubType>Code</SubType>

@@ -16,12 +16,9 @@ namespace Model.Users
     {
       public Period Shift { get; set; }
 
-        public long Id;
-      
+      public long Id;
       public List<Period> ScheduledPeriods { get; set; }
-
       public Doctor doctor { get; set; }
-
       public Room room { get; set; }
 
         public BusinessDay(Period shift, Doctor doctor, Room room, List<Period> periods)
