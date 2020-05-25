@@ -50,6 +50,11 @@ namespace Service
             return _doctorRepository.GetDoctorsBySpeciality(specialty);
         }
 
+        public Doctor GetDoctorByUsername(string username)
+        {
+            return _doctorRepository.GetDoctorByUsername(username);
+        }
+
         public DoctorGrade GiveGrade(DoctorGrade doctorGrade)
         {
             throw new NotImplementedException();
@@ -57,7 +62,7 @@ namespace Service
 
         public Doctor Save(Doctor entity)
         {
-            if (_doctorRepository.GetDoctorByUsername(entity.Username).Equals(null))
+            if (_doctorRepository.GetDoctorByUsername(entity.Username) != null)
                 {
                     return null;
                 }

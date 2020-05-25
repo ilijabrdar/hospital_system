@@ -10,12 +10,54 @@ using System;
 using System.Collections.Generic;
 using bolnica.Repository;
 using System.Linq;
+using Service;
 
 namespace Repository
 {
-   public class DoctorRepository : CSVRepository<Doctor, long>, IDoctorRepository
+   public class DoctorRepository : CSVRepository<Doctor, long>, IDoctorRepository, IEagerRepository<Doctor,long>
    {
-        public DoctorRepository(ICSVStream<Doctor> stream, ISequencer<long> sequencer) : base(stream, sequencer) { }
+        private readonly IArticleRepository articleRepo;
+        private readonly IEagerRepository<BusinessDay,long> businessDayRepo;
+        private readonly ISpecialityRepository specialityRepo;
+        public DoctorRepository(ICSVStream<Doctor> stream, ISequencer<long> sequencer,
+            IArticleRepository article, IEagerRepository<BusinessDay,long> businessDay, ISpecialityRepository speciality) 
+            : base(stream, sequencer)
+        {
+            articleRepo = article;
+            specialityRepo = speciality;
+            businessDayRepo = businessDay;
+        }
+
+        public IEnumerable<Doctor> GetAllEager()
+        {
+            List<Doctor> doctors = new List<Doctor>();
+            foreach(Doctor doctor in GetAll().ToList())
+            {
+                doctors.Add(GetEager(doctor.GetId()));
+            }
+
+            return doctors;
+            
+        }
+        public Doctor GetEager(long id)
+        {
+            Doctor doctor = Get(id);
+            List<Article> articles = new List<Article>();
+            foreach(Article art in doctor.articles)
+            {
+                articles.Add(articleRepo.Get(art.GetId()));
+            }
+            doctor.articles = articles;
+            List<BusinessDay> businessDays = new List<BusinessDay>();
+            foreach(BusinessDay day in doctor.businessDay)
+            {
+                businessDays.Add(businessDayRepo.GetEager(day.GetId()));
+            }
+            doctor.businessDay = businessDays;
+            doctor.specialty = specialityRepo.Get(doctor.specialty.GetId());
+            // TODO : uraditi za GradeDoctor i repo i interfejs i cuvanje Converter i ovde ga onda staviti!
+            throw new NotImplementedException();
+        }
 
         public Doctor GetDoctorByUsername(string username)
         {
@@ -39,5 +81,7 @@ namespace Repository
             }
             return retVal;
         }
+
+
     }
 }

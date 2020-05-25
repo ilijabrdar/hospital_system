@@ -17,12 +17,12 @@ namespace bolnica.Repository.CSV.Converter
         public Address ConvertCSVFormatToEntity(string entityCSVFormat)
         {
             string[] tokens = entityCSVFormat.Split(_delimiter.ToCharArray());
-            return new Address(tokens[0], int.Parse(tokens[1]), int.Parse(tokens[2]), new Town(long.Parse(tokens[3])));
+            return new Address(long.Parse(tokens[0]), tokens[1], int.Parse(tokens[2]), int.Parse(tokens[3]), new Town(long.Parse(tokens[4])));
         }
 
         public string ConvertEntityToCSVFormat(Address entity)
         {
-            return string.Join(_delimiter, entity.Street, entity.Number, entity.ApartmentNumber, entity.GetTown().GetId());
+            return string.Join(_delimiter, entity.GetId(), entity.Street, entity.Number, entity.ApartmentNumber, entity.GetTown().GetId());
         }
     }
 }
