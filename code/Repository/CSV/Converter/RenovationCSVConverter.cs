@@ -16,7 +16,7 @@ namespace bolnica.Repository.CSV.Converter
             _delimiter = delimiter;
         }
 
-        //id, status, (beginDate, endDate), description, 45
+        //id, status, (beginDate, endDate), description, roomID
         public Renovation ConvertCSVFormatToEntity(string entityCSVFormat)
         {
             string[] tokens = entityCSVFormat.Split(_delimiter.ToCharArray());
