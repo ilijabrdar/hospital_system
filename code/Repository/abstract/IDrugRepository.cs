@@ -4,12 +4,13 @@
  * Purpose: Definition of the Interface Repository.IDrugRepository
  ***********************************************************************/
 
+using bolnica.Repository;
 using Model.PatientSecretary;
 using System;
 
 namespace Repository
 {
-   public interface IDrugRepository : IRepository<Drug,long>
+   public interface IDrugRepository : IRepository<Drug,long>, IGetterRepository<Drug, long>
    {
       Drug[] GetAlternative(Drug drug);
       Drug[] GetNotApproved();

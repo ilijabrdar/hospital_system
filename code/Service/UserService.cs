@@ -5,7 +5,6 @@
  ***********************************************************************/
 
 using bolnica.Service;
-using bolnica.Services;
 using Model.PatientSecretary;
 using Model.Users;
 using Repository;
@@ -28,6 +27,10 @@ namespace Service
             this._doctorService = _doctor;
             _secretaryService = secretaryService;
             _directorService = directorService;
+        }
+        public UserService(IPatientService patientService)
+        {
+            this._patientService = patientService;
         }
 
         public User Save(User entity)

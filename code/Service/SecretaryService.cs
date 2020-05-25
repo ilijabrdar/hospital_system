@@ -20,7 +20,7 @@ namespace Service
         {
             _secretaryRepository = secretaryRepository;
         }
-
+        
         public void Delete(Secretary entity)
         {
             throw new NotImplementedException();

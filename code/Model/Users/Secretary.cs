@@ -13,8 +13,8 @@ namespace Model.Users
     {
 
         public Secretary(long id, 
-            String username, String password, Image image, 
-            String firstName, String lastName, String jmbg, String email, String phone, DateTime dateOfBirth, Address address) 
+            String username, String password, Bitmap image, 
+            String firstName, String lastName, String jmbg, String email, String phone, DateTime dateOfBirth, Address address)
         {
             this.Id = id;
             Username = username;

@@ -8,14 +8,25 @@ using Model.Users;
 using System;
 using bolnica.Repository;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Repository
 {
-   public class DirectorRepository : CSVRepository<Director, long> ,IDirectorRepository
+   public class DirectorRepository : CSVRepository<Director, long> ,IDirectorRepository, IEagerRepository<Director, long>
    {
-        public DirectorRepository(ICSVStream<Director> stream, ISequencer<long> sequencer) : base(stream, sequencer) { }
+        private readonly IEagerRepository<Address, long> _addressRepository;
+        private readonly IEagerRepository<Town, long> _townRepository;
+        private readonly IEagerRepository<State, long> _stateRepository;
 
-        public Director GetDirectorByUsername(string username) // TODOL Ubaciti ovo u poseban podsloj interfejsa
+        public DirectorRepository(ICSVStream<Director> stream, ISequencer<long> sequencer, IEagerRepository<Address, long> addressRepository,
+            IEagerRepository<Town, long> townRepository, IEagerRepository<State, long> stateRepository) : base(stream, sequencer)
+        {
+            _addressRepository = addressRepository;
+            _townRepository = townRepository;
+            _stateRepository = stateRepository;
+
+        }
+        public Director GetDirectorByUsername(string username) 
         {
             IEnumerable<Director> entities = this.GetAll();
             foreach (Director entity in entities)
@@ -24,6 +35,25 @@ namespace Repository
                     return entity;
             }
             return null;
+        }
+
+        public IEnumerable<Director> GetAllEager()
+        {
+            List<Director> directors = GetAll().ToList();
+            for (int i = 0; i < directors.Count; i++)
+            {
+                directors[i] = GetEager(directors[i].GetId());
+            }
+            return directors;
+        }
+
+        public Director GetEager(long id)
+        {
+            Director director = Get(id);
+            director.address = _addressRepository.GetEager(director.address.GetId());
+            director.address.SetTown(_townRepository.GetEager(director.address.GetTown().GetId()));
+            director.address.GetTown().SetState(_stateRepository.GetEager(director.address.GetTown().GetState().GetId()));
+            return director;
         }
     }
 }

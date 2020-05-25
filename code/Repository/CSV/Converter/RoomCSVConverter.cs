@@ -22,11 +22,11 @@ namespace bolnica.Repository
             string dictionary = tokens[3];
             Dictionary<Equipment, int> helping = new Dictionary<Equipment, int>();
 
-            if (dictionary.Contains("{"))  // if there's no dictionary it crashes
+            if (!dictionary.Contains("empty"))  // if there's no dictionary it crashes
             {
-                dictionary = dictionary.Substring(1, dictionary.Length - 1);
+                dictionary = dictionary.Substring(1, dictionary.Length - 2);
 
-                string[] pairs = dictionary.Split(_delimiter.ToCharArray());
+                string[] pairs = dictionary.Split("!".ToCharArray());
                 foreach (string pair in pairs)
                 {
                     string[] nums = pair.Split(":".ToCharArray());
@@ -51,7 +51,9 @@ namespace bolnica.Repository
             sb.Append(formatted);
             sb.Append(_delimiter);
 
-            if (entity.Equipment_inventory != null)
+            var count = entity.Equipment_inventory == null ? 0 : entity.Equipment_inventory.Count();
+
+            if (count!=0)
             {
                 sb.Append("{");  //dictionary delimiter
 
@@ -60,10 +62,14 @@ namespace bolnica.Repository
                     sb.Append(item.Key.GetId());
                     sb.Append(":");
                     sb.Append(item.Value);
-                    sb.Append(_delimiter);
+                    sb.Append("!");
                 }
-                sb.Remove(sb.Length, 0);
+                sb.Remove(sb.Length-1, 1);
                 sb.Append("}");
+            }
+            else
+            {
+                sb.Append("empty");
             }
 
         //TODO: add list of renovations

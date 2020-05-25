@@ -25,16 +25,16 @@ namespace bolnica.Repository.CSV.Converter
                 (RenovationStatus) Enum.Parse(typeof(RenovationStatus),tokens[1]),
                 StringToPeriod(tokens[2]),
                 tokens[3],
-                StringToList(tokens[4]
-                ));
+                null
+                );
         }
 
         private Period StringToPeriod(string period)
         {
-            period = period.Substring(1, period.Length-1);
+            period = period.Substring(1, period.Length-2);
             Period temp = new Period();
 
-            string[] splits = period.Split(_delimiter.ToCharArray());
+            string[] splits = period.Split("!".ToCharArray());
 
             temp.StartDate = DateTime.Parse(splits[0]);
             temp.EndDate = DateTime.Parse(splits[1]);
@@ -67,24 +67,24 @@ namespace bolnica.Repository.CSV.Converter
 
             sb.Append("(");
             sb.Append(entity.Period.StartDate);
-            sb.Append(_delimiter);
+            sb.Append("!");
             sb.Append(entity.Period.EndDate);
             sb.Append(")");
             sb.Append(_delimiter);
 
             sb.Append(entity.Description);
-            sb.Append(_delimiter);
+            //sb.Append(_delimiter);
 
-            sb.Append("[");
+            //sb.Append("[");
 
-            foreach (Room room in entity.Rooms)
-            {
-                sb.Append(room.GetId());
-                sb.Append(_delimiter);
-            }
+            //foreach (Room room in entity.Rooms)
+            //{
+            //    sb.Append(room.GetId());
+            //    sb.Append(_delimiter);
+            //}
 
-            sb.Remove(sb.Length, 0);
-            sb.Append("]");
+            //sb.Remove(sb.Length, 0);
+            //sb.Append("]");
 
             return sb.ToString();
         }
