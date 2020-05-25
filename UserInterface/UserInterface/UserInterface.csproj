@@ -145,5 +145,17 @@
       <Name>bolnica</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\StateFile.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\TownFile.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\AddressFile.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\SecretaryFile.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

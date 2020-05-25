@@ -93,14 +93,14 @@ namespace Service
         public User IsUsernameValid(string username)
         {
             User user = null;
-            if ((user = _patientRepo.GetPatientByUsername(username)) != null)
-                return user;
+            //if ((user = _patientRepo.GetPatientByUsername(username)) != null)
+            //    return user;
             if ((user = _secretaryRepo.GetSecretaryByUsername(username)) != null)
                 return user;
-            else if ((user = _directorRepo.GetDirectorByUsername(username)) != null)
-                return user;
-            else if ((user = _doctorRepo.GetDoctorByUsername(username)) != null)
-                return user;
+            //else if ((user = _directorRepo.GetDirectorByUsername(username)) != null)
+            //    return user;
+            //else if ((user = _doctorRepo.GetDoctorByUsername(username)) != null)
+            //    return user;
             return user;
         }
 
@@ -148,7 +148,5 @@ namespace Service
         {
             throw new NotImplementedException();
         }
-
-
     }
 }

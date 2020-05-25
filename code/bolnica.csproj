@@ -532,7 +532,6 @@
     <Compile Include="Service\UserService.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Test.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

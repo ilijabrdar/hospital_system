@@ -18,8 +18,9 @@ namespace Model.Users
 
         private Town town;
       
-        public Address(string street, int number, int apartmentNumber, Town town)
+        public Address(long id, string street, int number, int apartmentNumber, Town town)
         {
+            _id = id;
             Street = street;
             Number = number;
             ApartmentNumber = apartmentNumber;

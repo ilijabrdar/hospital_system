@@ -15,7 +15,7 @@ namespace bolnica.Service
         Feedback SendFeedback(String feedback);
 
         Boolean BlockUser(String username);
-        Boolean Login(String username, String password);
+        User Login(String username, String password);
         Boolean Logout(User user);
     }
 }

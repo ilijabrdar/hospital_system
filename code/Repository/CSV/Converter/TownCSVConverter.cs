@@ -6,7 +6,7 @@ using Model.Users;
 
 namespace bolnica.Repository
 {
-    class TownCSVConverter : ICSVConverter<Town>
+    public class TownCSVConverter : ICSVConverter<Town>
     {
         private readonly string _delimiter;
         private readonly string _arrayDelimiter;

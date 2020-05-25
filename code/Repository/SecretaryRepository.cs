@@ -21,6 +21,10 @@ namespace Repository
             _addressRepository = addressRepository;
         }
 
+        public SecretaryRepository(CSVStream<Secretary> cSVStream, LongSequencer longSequencer) : base(cSVStream, longSequencer)
+        {
+        }
+
         public IEnumerable<Secretary> GetAllEager()
         {
             List<Secretary> secretaries = GetAll().ToList();
