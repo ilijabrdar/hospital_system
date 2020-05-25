@@ -42,12 +42,12 @@ namespace upravnikKT2
             InitializeComponent();
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
-            //this.selectedItem = selectedItem;
-            //startDatePicker.SelectedDate = selectedItem.Period.StartDate;
-            //endDatePicker.SelectedDate = selectedItem.Period.EndDate;
-            //comboRenovationStatus.SelectedItem = selectedItem.Status;
-            //comboRoomCode.SelectedItem = selectedItem.Room;
-            //txtDescription.Text = selectedItem.Description;
+            this.selectedItem = selectedItem;
+            startDatePicker.SelectedDate = selectedItem.Period.StartDate;
+            endDatePicker.SelectedDate = selectedItem.Period.EndDate;
+            comboRenovationStatus.SelectedItem = selectedItem.Status;
+            comboRoomCode.SelectedItem = selectedItem.Room.GetId();  
+            txtDescription.Text = selectedItem.Description;
 
             var app = Application.Current as App;
             _renovationController = app.RenovationController;
@@ -68,12 +68,12 @@ namespace upravnikKT2
             }
             else
             {
-                //selectedItem.Room =(Room) comboRoomCode.SelectedItem;
-                //selectedItem.Description = txtDescription.Text;
-                //selectedItem.Status = (RenovationStatus) comboRenovationStatus.SelectedItem;
-                ////selectedItem.Period.StartDate = startDatePicker.SelectedDate;
-                ////selectedItem.Period.EndDate = endDatePicker.SelectedDate;
-                //_renovationController.Edit(selectedItem);
+                selectedItem.Room = (Room)comboRoomCode.SelectedItem;
+                selectedItem.Description = txtDescription.Text;
+                selectedItem.Status = (RenovationStatus)comboRenovationStatus.SelectedItem;
+                selectedItem.Period.StartDate = (DateTime) startDatePicker.SelectedDate;
+                selectedItem.Period.EndDate = (DateTime)endDatePicker.SelectedDate;
+                _renovationController.Edit(selectedItem);
             }
 
             this.Close();
@@ -96,6 +96,9 @@ namespace upravnikKT2
             comboRoomCode.DisplayMemberPath = "RoomCode";
             comboRoomCode.SelectedValuePath = "Id";
             comboRoomCode.SelectedValue = "2";
+
+            if(selectedItem != null) //this is for edit
+                comboRoomCode.SelectedValue = selectedItem.Room.GetId();
         }
     }
 }

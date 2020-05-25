@@ -50,13 +50,7 @@ namespace upravnikKT2
             IngredientController = new IngredientController(ingredientService);
 
 
-            var roomRepository = new RoomRepository(
-               new CSVStream<Room>(ROOMS_FILE, new RoomCSVConverter(CSV_DELIMITER)),
-               new LongSequencer());
 
-            var roomService = new RoomService(roomRepository);
-
-            RoomController = new RoomController(roomService);
 
 
             var equipmentRepository = new EquipmentRepository(
@@ -67,8 +61,16 @@ namespace upravnikKT2
 
             EquipmentController = new EquipmentController(equipmentService);
 
+            var roomRepository = new RoomRepository(
+               new CSVStream<Room>(ROOMS_FILE, new RoomCSVConverter(CSV_DELIMITER)),
+               new LongSequencer(), roomTypeRepository,equipmentRepository);
 
-            var renovationRepository = new RenovationRepository(new CSVStream<Renovation>(RENOVATIONS_FILE, new RenovationCSVConverter(CSV_DELIMITER)), new LongSequencer());
+            var roomService = new RoomService(roomRepository);
+
+            RoomController = new RoomController(roomService);
+
+
+            var renovationRepository = new RenovationRepository(new CSVStream<Renovation>(RENOVATIONS_FILE, new RenovationCSVConverter(CSV_DELIMITER)), new LongSequencer(),roomRepository);
             var renovationService = new RenovationService(renovationRepository);
             RenovationController = new RenovationController(renovationService);
 

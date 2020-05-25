@@ -246,20 +246,19 @@ namespace upravnikKT2
 
         private void Button_Click_Edit_Renovation(object sender, RoutedEventArgs e)
         {
-            //TODO Room Eager first
             if (DataGridRenovation.SelectedItem != null)
             {
                 var reno = (Renovation)DataGridRenovation.SelectedItem;
-                //RenovationDialog window = new RenovationDialog((Renovation)DataGridRenovation.SelectedItem);
-                //window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-                //window.ShowDialog();
+                RenovationDialog window = new RenovationDialog((Renovation)DataGridRenovation.SelectedItem);
+                window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                window.ShowDialog();
 
-                //DataGridRenovation.ItemsSource = null;
+                DataGridRenovation.ItemsSource = null;
 
-                //List<Renovation> renovations = _renovationController.GetAll().ToList();
-                //ObservableCollection<Renovation> data_renovations = new ObservableCollection<Renovation>(renovations);
-                //this.DataGridRenovation.ItemsSource = data_renovations;
-                //txtSearchRenovations.Clear();
+                List<Renovation> renovations = _renovationController.GetAll().ToList();
+                ObservableCollection<Renovation> data_renovations = new ObservableCollection<Renovation>(renovations);
+                this.DataGridRenovation.ItemsSource = data_renovations;
+                txtSearchRenovations.Clear();
 
             }
             else
