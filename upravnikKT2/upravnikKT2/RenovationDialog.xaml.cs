@@ -24,6 +24,8 @@ namespace upravnikKT2
     public partial class RenovationDialog : Window
     {
         private readonly IRenovationController _renovationController;
+        private readonly IRoomController _roomController;
+        private Renovation selectedItem;
 
         public RenovationDialog()
         {
@@ -32,18 +34,47 @@ namespace upravnikKT2
 
             var app = Application.Current as App;
             _renovationController = app.RenovationController;
+            _roomController = app.RoomController;
+        }
+
+        public RenovationDialog(Renovation selectedItem)
+        {
+            InitializeComponent();
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
+            //this.selectedItem = selectedItem;
+            //startDatePicker.SelectedDate = selectedItem.Period.StartDate;
+            //endDatePicker.SelectedDate = selectedItem.Period.EndDate;
+            //comboRenovationStatus.SelectedItem = selectedItem.Status;
+            //comboRoomCode.SelectedItem = selectedItem.Room;
+            //txtDescription.Text = selectedItem.Description;
+
+            var app = Application.Current as App;
+            _renovationController = app.RenovationController;
+            _roomController = app.RoomController;
         }
 
         private void Button_Click_OK_Renovation(object sender, RoutedEventArgs e)
         {
-            List<Room> temp = new List<Room>();
-            temp.Add(new Room("3", new RoomType("jas"), null, null));
-            var reno = new Renovation(Model.Director.RenovationStatus.Cancelled,
-                new Period(startDatePicker.SelectedDate, endDatePicker.SelectedDate),
-                txtDescription.Text,
-                temp
-                );
-            _renovationController.Save(reno);
+
+            if (selectedItem == null)
+            {
+                var reno = new Renovation((RenovationStatus)comboRenovationStatus.SelectedItem,
+                    new Period(startDatePicker.SelectedDate, endDatePicker.SelectedDate),
+                    txtDescription.Text,
+                    (Room)comboRoomCode.SelectedItem
+                    );
+                _renovationController.Save(reno);
+            }
+            else
+            {
+                //selectedItem.Room =(Room) comboRoomCode.SelectedItem;
+                //selectedItem.Description = txtDescription.Text;
+                //selectedItem.Status = (RenovationStatus) comboRenovationStatus.SelectedItem;
+                ////selectedItem.Period.StartDate = startDatePicker.SelectedDate;
+                ////selectedItem.Period.EndDate = endDatePicker.SelectedDate;
+                //_renovationController.Edit(selectedItem);
+            }
 
             this.Close();
 
@@ -53,6 +84,18 @@ namespace upravnikKT2
         private void Button_Click_Cancel_Renovation(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            comboRenovationStatus.ItemsSource = Enum.GetValues(typeof(RenovationStatus));
+            //TODO: display custom enum names
+
+            List<Room> rooms = _roomController.GetAll().ToList();
+            comboRoomCode.ItemsSource = rooms;
+            comboRoomCode.DisplayMemberPath = "RoomCode";
+            comboRoomCode.SelectedValuePath = "Id";
+            comboRoomCode.SelectedValue = "2";
         }
     }
 }

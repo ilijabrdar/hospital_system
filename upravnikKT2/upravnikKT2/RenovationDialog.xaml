@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:upravnikKT2"
         mc:Ignorable="d"
         FontSize="18"
-        Title="RenovationDialog" Height="450" Width="800">
+        Title="RenovationDialog" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid Margin="21,21,21,3">
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
@@ -23,10 +23,12 @@
 
 
         <Label Grid.Row="0" Grid.Column="0" Width="230" HorizontalAlignment="Left" Margin="10,10,0,30" Content="Sifra prostorije" Grid.RowSpan="2"/>
-        <ComboBox Grid.Row="0" Grid.Column="1" Width="159" Margin="0,10,10,0" HorizontalAlignment="Right"></ComboBox>
+        <ComboBox Grid.Row="0" x:Name="comboRoomCode" Grid.Column="1" Width="159" Margin="0,0,10,0" HorizontalAlignment="Right" Height="40"></ComboBox>
 
         <Label Grid.Row="1" Grid.Column="0" Width="230" HorizontalAlignment="Left" Margin="10,10,0,30" Content="Status renoviranja" Grid.RowSpan="2"/>
-        <ComboBox Grid.Row="1" Grid.Column="1" Width="159"  Margin="0,10,10,0" HorizontalAlignment="Right"></ComboBox>
+        <ComboBox x:Name="comboRenovationStatus" Grid.Row="1" Grid.Column="1" Width="159"  Margin="0,0,10,0" HorizontalAlignment="Right" Height="40"
+                  
+                  ></ComboBox>
 
         <Label Grid.Row="2" Grid.Column="0" Width="230" HorizontalAlignment="Left" Margin="10,10,0,30" Content="Izaberite datum pocetka" Grid.RowSpan="2"/>
         <DatePicker x:Name="startDatePicker" Grid.Row="2" Grid.Column="1" Width="159"  Margin="0,10,10,0" HorizontalAlignment="Right"></DatePicker>

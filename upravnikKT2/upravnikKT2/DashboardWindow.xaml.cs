@@ -21,6 +21,7 @@ namespace upravnikKT2
     {
         private readonly IRoomController _roomController;
         private readonly IEquipmentController _equipmentController;
+        private readonly IRenovationController _renovationController;
         public DashboardWindow()
         {
             InitializeComponent();
@@ -28,6 +29,7 @@ namespace upravnikKT2
             var app = Application.Current as App;
             _roomController = app.RoomController;
             _equipmentController = app.EquipmentController;
+            _renovationController = app.RenovationController;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -234,12 +236,41 @@ namespace upravnikKT2
             RenovationDialog window = new RenovationDialog();
             window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             window.ShowDialog();
+
+            DataGridRenovation.ItemsSource = null;
+            List<Renovation> renovations = _renovationController.GetAll().ToList();
+            ObservableCollection<Renovation> data_renovations = new ObservableCollection<Renovation>(renovations);
+            this.DataGridRenovation.ItemsSource = data_renovations;
+            txtSearchRenovations.Clear();
         }
 
         private void Button_Click_Edit_Renovation(object sender, RoutedEventArgs e)
         {
-            RenovationDialog window = new RenovationDialog();
-            window.ShowDialog();
+            //TODO Room Eager first
+            if (DataGridRenovation.SelectedItem != null)
+            {
+                var reno = (Renovation)DataGridRenovation.SelectedItem;
+                //RenovationDialog window = new RenovationDialog((Renovation)DataGridRenovation.SelectedItem);
+                //window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                //window.ShowDialog();
+
+                //DataGridRenovation.ItemsSource = null;
+
+                //List<Renovation> renovations = _renovationController.GetAll().ToList();
+                //ObservableCollection<Renovation> data_renovations = new ObservableCollection<Renovation>(renovations);
+                //this.DataGridRenovation.ItemsSource = data_renovations;
+                //txtSearchRenovations.Clear();
+
+            }
+            else
+            {
+                string messageBoxText = "Morate selektovati renoviranje da biste izvrsili izmenu!";
+                string caption = "Greska";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Error;
+
+                MessageBox.Show(messageBoxText, caption, button, icon);
+            }
         }
 
         private void send_feedback(object sender, RoutedEventArgs e)
@@ -303,16 +334,11 @@ namespace upravnikKT2
             this.DataGridLekovi.ItemsSource = DataGridDrugs;
 
 
-            ObservableCollection<RenovationMockup> renovations = new ObservableCollection<RenovationMockup>();
-            renovations.Add(new RenovationMockup { Sifra = "5432", Datum = "16.03.2012 - 14.06.2013.", Opis = "zamena instalacija", Status = "zavrseno", Tip="operaciona"});
-            renovations.Add(new RenovationMockup { Sifra = "6547", Datum = "03.05.2020 - 14.06.2020.", Opis = "zamena sijalica", Status = "u toku", Tip = "kontrolna" });
-            renovations.Add(new RenovationMockup { Sifra = "8764", Datum = "16.03.2020 - 14.06.2020.", Opis = "zamena kreveta", Status = "u toku", Tip = "operaciona" });
-            renovations.Add(new RenovationMockup { Sifra = "9678", Datum = "16.03.2021 - 14.06.2021.", Opis = "zamena vrata", Status = "zakazano", Tip = "kontrolna" });
-            renovations.Add(new RenovationMockup { Sifra = "0875", Datum = "16.03.2013 - 14.06.2014.", Opis = "zamena sijalica", Status = "otkazano", Tip = "rehabilitaciona" });
-            this.DataGridRenovation.ItemsSource = renovations;
+            List<Renovation> renovations = _renovationController.GetAll().ToList();
+            ObservableCollection<Renovation> data_renovations = new ObservableCollection<Renovation>(renovations);
+            this.DataGridRenovation.ItemsSource = data_renovations;
 
 
-            
             List<Room> rooms = _roomController.GetAll().ToList();
             ObservableCollection<Room> DataRooms = new ObservableCollection<Room>(rooms);
             this.DataGridRooms.ItemsSource = DataRooms;
@@ -593,6 +619,29 @@ namespace upravnikKT2
                 ObservableCollection<Equipment> data = new ObservableCollection<Equipment>(equipment);
 
                 this.DataGridOpremaNepotrosna.ItemsSource = data.Where(input => input.Name.Contains(txtsearchInconsumable.Text));
+            }
+        }
+
+        private void deleteRenovationBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataGridRenovation.SelectedItem != null)
+            {
+                _renovationController.Delete((Renovation) DataGridRenovation.SelectedItem);
+
+                DataGridRenovation.ItemsSource = null;
+                List<Renovation> renovations = _renovationController.GetAll().ToList();
+                ObservableCollection<Renovation> data_renovations = new ObservableCollection<Renovation>(renovations);
+                this.DataGridRenovation.ItemsSource = data_renovations;
+                txtSearchRenovations.Clear();
+            }
+            else
+            {
+                string messageBoxText = "Morate selektovati renoviranje da biste ga obrisali!";
+                string caption = "Greska";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Error;
+
+                MessageBox.Show(messageBoxText, caption, button, icon);
             }
         }
     }
