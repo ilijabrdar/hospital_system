@@ -22,6 +22,7 @@ namespace bolnica.Repository.CSV.Converter
            string[] tokens = entityCSVFormat.Split(_delimiter.ToCharArray());
             Doctor doct = new Doctor(long.Parse(tokens[0]), tokens[1], tokens[2], tokens[3], tokens[4], tokens[5], DateTime.Parse(tokens[6]), tokens[7], tokens[8], tokens[9],(Bitmap)Bitmap.FromFile("../../Images/"+tokens[8]+".Jpeg"), new Specialty(long.Parse(tokens[10])));
             if (!tokens[11].Equals("empty"))
+
             {
                 string[] articlesIds = tokens[12].Split("|".ToCharArray());
                 for (int i = 0; i < articlesIds.Length; i++)

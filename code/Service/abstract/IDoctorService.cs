@@ -10,10 +10,11 @@ namespace bolnica.Service
 {
    public interface IDoctorService : IService<Doctor, long>
 {
-    List<Doctor> GetDoctorsBySpeciality(Specialty specialty);
+        List<Doctor> GetDoctorsBySpeciality(Specialty specialty);
 
-   Boolean ChangeSpeciality(Specialty specialty, Model.Users.Doctor doctor);
+       Boolean ChangeSpeciality(Specialty specialty, Model.Users.Doctor doctor);
 
-   DoctorGrade GiveGrade(DoctorGrade doctorGrade);
-}
+       DoctorGrade GiveGrade(DoctorGrade doctorGrade);
+       Doctor GetDoctorByUsername(String username);
+    }
 }

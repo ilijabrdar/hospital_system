@@ -27,7 +27,7 @@ namespace Model.Users
             this.Email = email;
             this.Phone = phone;
             this.DateOfBirth = birth;
-            this.address = adress;
+            this.address = address;
             this.Username = username;
             this.Password = password;
             this.Image = img;

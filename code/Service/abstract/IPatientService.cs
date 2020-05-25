@@ -10,6 +10,7 @@ namespace bolnica.Service
     public interface IPatientService : IService<Patient, long>
 {
         Patient ClaimAccount(long id);
+        Patient GetPatientByUsername(String username);
 
     }
 }

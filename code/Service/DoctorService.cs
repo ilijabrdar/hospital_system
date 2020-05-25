@@ -50,6 +50,11 @@ namespace Service
             return _doctorRepository.GetDoctorsBySpeciality(specialty);
         }
 
+        public Doctor GetDoctorByUsername(string username)
+        {
+            return _doctorRepository.GetDoctorByUsername(username);
+        }
+
         public DoctorGrade GiveGrade(DoctorGrade doctorGrade)
         {
             throw new NotImplementedException();

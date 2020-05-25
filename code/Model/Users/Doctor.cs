@@ -21,13 +21,17 @@ namespace Model.Users
             this.Email = email;
             this.Phone = phone;
             this.DateOfBirth = birth;
-            this.address = adress;
+            this.address = address;
             this.Username = username;
             this.Password = password;
             this.Image = img;
             this.specialty = spec;
         }
+<<<<<<< HEAD
         public Doctor(long id, String name, String surname, String jmbg, String email, String phone, DateTime birth, String adress, String username, String password, Bitmap img, Specialty speciality, List<Article> articles, List<BusinessDay> businessDay ,DoctorGrade doctGrade)
+=======
+        public Doctor(long id, String name, String surname, String jmbg, String email, String phone, DateTime birth, Address address, String username, String password, Image img, Specialty speciality, List<Article> articles, List<BusinessDay> businessDay ,DoctorGrade doctGrade)
+>>>>>>> login
         {
             this.Id = id;
             this.FirstName = name;
@@ -36,7 +40,7 @@ namespace Model.Users
             this.Email = email;
             this.Phone = phone;
             this.DateOfBirth = birth;
-            this.address = adress;
+            this.address = address;
             this.Username = username;
             this.Password = password;
             this.Image = img;
