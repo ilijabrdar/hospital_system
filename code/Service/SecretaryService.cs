@@ -8,13 +8,17 @@ using System;
 using System.Collections.Generic;
 using bolnica.Service;
 using Model.Users;
+using Repository;
 
 namespace Service
 {
    public class SecretaryService : ISecretaryService
    {
-      private Repository.ISecretaryRepository _secretaryRepository;
-
+      private ISecretaryRepository _secretaryRepository;
+        public SecretaryService(ISecretaryRepository secretaryRepository)
+        {
+            _secretaryRepository = secretaryRepository;
+        }
         public void Delete(Secretary entity)
         {
             throw new NotImplementedException();
