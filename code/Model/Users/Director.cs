@@ -5,20 +5,37 @@
  ***********************************************************************/
 
 using System;
+using System.Drawing;
 
 namespace Model.Users
 {
-   public class Director : User
-   {
+    public class Director : User
+    {
+        public Director(long id,
+            String username, String password, Bitmap image,
+            String firstName, String lastName, String jmbg, String email, String phone, DateTime dateOfBirth, Address address)
+        {
+            this.Id = id;
+            Username = username;
+            Password = password;
+            Image = image;
+            FirstName = firstName;
+            LastName = lastName;
+            Jmbg = jmbg;
+            Email = email;
+            Phone = phone;
+            DateOfBirth = dateOfBirth;
+            this.address = address;
+        }
 
         public override long GetId()
         {
-            throw new NotImplementedException();
+            return Id;
         }
 
         public override void SetId(long id)
         {
-            throw new NotImplementedException();
+            Id = id;
         }
     }
 }

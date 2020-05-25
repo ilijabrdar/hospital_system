@@ -8,12 +8,19 @@ using Model.Users;
 using System;
 using bolnica.Service;
 using System.Collections.Generic;
+using bolnica.Repository;
+using Repository;
 
 namespace Service
 {
-    public class DirectorService : IDirectorService
+    public class DirectorService : IDirectorService 
     { 
-      private Repository.IDirectorRepository _directorRepository;
+        private IDirectorRepository _directorRepository;
+
+        public DirectorService(IDirectorRepository directorRepository)
+        {
+            _directorRepository = directorRepository;
+        }
 
         public void Delete(Director entity)
         {
