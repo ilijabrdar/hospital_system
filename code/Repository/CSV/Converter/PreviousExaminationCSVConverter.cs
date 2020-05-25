@@ -5,16 +5,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Documents;
 
 namespace bolnica.Repository.CSV.Converter
 {
     class PreviousExaminationCSVConverter : ICSVConverter<Examination>
     {
         private readonly string _delimiter;
+        private readonly string _prescriptonDelimiter;
 
-        public PreviousExaminationCSVConverter(string delimiter)
+        public PreviousExaminationCSVConverter(string delimiter, string prescriptonDelimiter)
         {
             _delimiter = delimiter;
+            _prescriptonDelimiter = prescriptonDelimiter;
         }
 
         public Examination ConvertCSVFormatToEntity(string entityCSVFormat)
@@ -22,17 +25,38 @@ namespace bolnica.Repository.CSV.Converter
             string[] tokens = entityCSVFormat.Split(_delimiter.ToCharArray());
             Examination examination = new Examination(long.Parse(tokens[0]),
                                                         new Doctor(long.Parse(tokens[2])), new Period(DateTime.Parse(tokens[3])),
-                                                        new Diagnosis(long.Parse(tokens[4])), new Prescription(long.Parse(tokens[5])),
-                                                        new Anemnesis(tokens[6]), new Therapy(long.Parse(tokens[7])), new Refferal(long.Parse(tokens[8])));
+                                                        new Diagnosis(long.Parse(tokens[4])),
+                                                        new Anemnesis(tokens[5]), new Therapy(long.Parse(tokens[6])), new Refferal(long.Parse(tokens[7])));
 
             examination.User = new Patient(long.Parse(tokens[1]));
-            return examination;
+
+            string[] Ids = (tokens[8]).Split(_prescriptonDelimiter.ToCharArray());
+            List < Prescription > prescriptions= new List<Prescription>();
+            foreach(string id in Ids)
+            {
+                prescriptions.Add(new Prescription(long.Parse(id)));
+            }
+            examination.Prescription=prescriptions;
+                
+                return examination;
         }
 
         public string ConvertEntityToCSVFormat(Examination entity)
         {
-            return string.Join(_delimiter, entity.Id, entity.User.GetId(), entity.Doctor.GetId(), entity.Period.StartDate,
-                                entity.Diagnosis.GetId(), entity.Prescription.GetId(),entity.Anemnesis,entity.Therapy.GetId(), entity.Refferal.GetId());
+            StringBuilder stringBuilder = new StringBuilder();
+            String format = String.Join(_delimiter, entity.Id, entity.User.GetId(), entity.Doctor.GetId(), entity.Period.StartDate,
+                                entity.Diagnosis.GetId(), entity.Anemnesis, entity.Therapy.GetId(), entity.Refferal.GetId());
+
+            stringBuilder.Append(format);
+            stringBuilder.Append(_delimiter);
+            foreach(Prescription prs in entity.Prescription)
+            {
+                stringBuilder.Append(prs.GetId());
+                stringBuilder.Append(_prescriptonDelimiter);
+            }
+            return stringBuilder.ToString();
+                
+           
         }
     }
 }

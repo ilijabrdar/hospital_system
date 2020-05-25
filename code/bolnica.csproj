@@ -61,6 +61,7 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationFramework" />
     <Reference Include="System">
       <Name>System</Name>
       <HintPath>%25windowsDirectory%25\\Microsoft.NET\\Framework\\v1.0.3705\\System.dll</HintPath>
