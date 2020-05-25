@@ -5,6 +5,7 @@
  ***********************************************************************/
 
 using bolnica.Service;
+using bolnica.Services;
 using Model.PatientSecretary;
 using Model.Users;
 using Repository;
@@ -15,11 +16,11 @@ namespace Service
 {
     public class UserService : IUserService
     {
-        //private IService _doctorService;
-        //private IService _patientService;
+        private IDoctorService _doctorService;
+        private IPatientService _patientService;
         //private IService _secretaryService;
         //private IService _directorService;
-        
+
         //TODO : u klas dijagram dodati ove veze ako vam se ovo svidja
         private readonly IPatientRepository _patientRepo;
         private readonly IDoctorRepository _doctorRepo;
@@ -29,7 +30,8 @@ namespace Service
         private readonly IPatientFileRepository _patientFileRepo;
 
 
-        public UserService(IPatientRepository patientRepo, IDoctorRepository doctorRepository, ISecretaryRepository secretaryRepository, IDirectorRepository directorRepository ,IPatientFileRepository fileRepo)
+
+        public UserService(IPatientRepository patientRepo, IDoctorRepository doctorRepository, ISecretaryRepository secretaryRepository, IDirectorRepository directorRepository, IPatientFileRepository fileRepo)
         {
             this._patientRepo = patientRepo;
             _doctorRepo = doctorRepository;
@@ -38,23 +40,25 @@ namespace Service
             this._patientFileRepo = fileRepo;
         }
 
+        public UserService(IPatientService patientServ, IDoctorService _doctor)
+        {
+            this._patientService = patientServ;
+            this._doctorService = _doctor;
+
+        }
+
         public User Save(User entity)
         {
             try
             {
-                Patient patient = (Patient)entity;
-                if (_patientRepo.GetPatientByUsername(patient.Username).Equals(null)){
-                    return null;
-                }
-                patient.patientFile = _patientFileRepo.Save(new PatientFile(-1));
-                return _patientRepo.Save(patient);
+                Patient patient = (Patient)entity; 
+                return _patientService.Save(patient);
 
             }
             catch
             {
                 Doctor docktor = (Doctor)entity;
-                // TODO : imam jos nekih pitanja oko doktora 
-                return null;
+                return _doctorService.Save(docktor);
             }
         }
         public bool BlockUser(string username)
@@ -139,5 +143,12 @@ namespace Service
         {
             throw new NotImplementedException();
         }
+
+        public bool IsPasswordValid(string password)
+        {
+            throw new NotImplementedException();
+        }
+
+
     }
 }

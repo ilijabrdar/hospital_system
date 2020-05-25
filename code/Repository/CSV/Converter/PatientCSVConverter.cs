@@ -19,7 +19,7 @@ namespace bolnica.Repository.CSV.Converter
         public Patient ConvertCSVFormatToEntity(string entityCSVFormat)
         {
             string[] tokens = entityCSVFormat.Split(_delimiter.ToCharArray());
-            Patient patient = new Patient(long.Parse(tokens[0]), tokens[1], tokens[2], tokens[3], tokens[4], tokens[5], DateTime.Parse(tokens[6]), tokens[7], tokens[8], tokens[9], Image.FromFile(tokens[10]));
+            Patient patient = new Patient(long.Parse(tokens[0]), tokens[1], tokens[2], tokens[3], tokens[4], tokens[5], DateTime.Parse(tokens[6]), new Address(long.Parse(tokens[7])), tokens[8], tokens[9], Image.FromFile(tokens[10]));
             patient.patientFile = new PatientFile(long.Parse(tokens[11]));
             return patient;
         }

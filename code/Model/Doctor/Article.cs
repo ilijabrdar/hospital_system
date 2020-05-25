@@ -20,6 +20,10 @@ namespace Model.Doctor
             this.DatePublished = date;
             this.Topic = tp;
         }
+        public Article (long id)
+        {
+            this.Id = id;
+        }
 
         public long GetId()
         {
