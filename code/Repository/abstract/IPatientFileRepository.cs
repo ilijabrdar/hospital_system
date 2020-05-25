@@ -4,12 +4,13 @@
  * Purpose: Definition of the Interface Repository.IPatientFileRepository
  ***********************************************************************/
 
+using bolnica.Repository;
 using Model.PatientSecretary;
 using System;
 
 namespace Repository
 {
-   public interface IPatientFileRepository : IRepository<PatientFile, long>
+   public interface IPatientFileRepository : IRepository<PatientFile, long>, IGetterRepository<PatientFile,long>
    {
    }
 }
