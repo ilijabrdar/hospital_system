@@ -18,16 +18,17 @@ namespace bolnica.Repository.CSV.Converter
 
         public Examination ConvertCSVFormatToEntity(string entityCSVFormat)
         {
-            //long id, Patient patient, Users.Doctor doctor, Period period
             string[] tokens = entityCSVFormat.Split(_delimiter.ToCharArray());
-            Examination examination = new Examination(long.Parse(tokens[0]), new Patient(long.Parse(tokens[1])),
+            Examination examination = new Examination(long.Parse(tokens[0]),
                                                         new Doctor(long.Parse(tokens[2])), new Period(DateTime.Parse(tokens[3])));
+            examination.User = new Patient(long.Parse(tokens[1]));
             return examination;
         }
 
         public string ConvertEntityToCSVFormat(Examination entity)
         {
-            return string.Join(_delimiter, entity.Id, entity.Patient.GetId(), entity.Doctor.GetId(), entity.Period.StartDate);
+            
+            return string.Join(_delimiter, entity.Id, entity.User.GetId(), entity.Doctor.GetId(), entity.Period.StartDate);
         }
     }
 }

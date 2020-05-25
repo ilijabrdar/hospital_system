@@ -14,7 +14,7 @@ namespace Model.PatientSecretary
    public class Examination : IIdentifiable<long>
    {
         public long Id;
-        public Patient Patient;
+        public User User;
         public Model.Users.Doctor Doctor;
         public Period Period;
         public Diagnosis Diagnosis;
@@ -23,18 +23,16 @@ namespace Model.PatientSecretary
         public Therapy Therapy;
         public Refferal Refferal;
 
-        public Examination(long id, Patient patient, Users.Doctor doctor, Period period)
+        public Examination(long id,  Users.Doctor doctor, Period period)
         {
             Id = id;
             Doctor = doctor;
-            Patient = patient;
             Period = period;
         }
-        public Examination(long id, Patient patient, Users.Doctor doctor, Period period, Diagnosis diagnosis, Prescription prescription, Anemnesis anemnesis, Therapy therapy, Refferal refferal)
+        public Examination(long id, Users.Doctor doctor, Period period, Diagnosis diagnosis, Prescription prescription, Anemnesis anemnesis, Therapy therapy, Refferal refferal)
         {
             Id = id;
             Doctor = doctor;
-            Patient = patient;
             Period = period;
             Diagnosis = diagnosis;
             Prescription = prescription;
