@@ -21,7 +21,7 @@ namespace bolnica.Repository
             string[] tokens = entityCSVFormat.Split(_delimiter.ToCharArray());
             return new Secretary(long.Parse(tokens[0]), 
                 tokens[1], tokens[2],  Image.FromFile(tokens[3]),
-                tokens[4], tokens[5], tokens[6], tokens[7], tokens[8], DateTime.Parse(tokens[9]));
+                tokens[4], tokens[5], tokens[6], tokens[7], tokens[8], DateTime.Parse(tokens[9]), tokens[8]);
         }
 
         public string ConvertEntityToCSVFormat(Secretary entity)

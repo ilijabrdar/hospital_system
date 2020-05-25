@@ -30,6 +30,13 @@ namespace Model.Director
                 this.Amount = amount;
           }
 
+        public Equipment(EquipmentType type, string name, int amount)
+        {
+            Type = type;
+            Name = name;
+            Amount = amount;
+        }
+
         public Equipment(long id)
         {
             this.id = id;
