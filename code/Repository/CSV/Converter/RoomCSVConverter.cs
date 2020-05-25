@@ -38,8 +38,8 @@ namespace bolnica.Repository
                 long.Parse(tokens[0]),
                 tokens[1],
                 new RoomType(long.Parse(tokens[2])),
-                helping,
-                null);
+                helping
+                ); 
 
 
         }
@@ -72,11 +72,10 @@ namespace bolnica.Repository
                 sb.Append("empty");
             }
 
-        //TODO: add list of renovations
+        
 
             return sb.ToString();
 
-            //return string.Join(_delimiter, entity.Id, entity.RoomCode);
         }
     }
 }
