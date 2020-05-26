@@ -64,7 +64,7 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        public List<BusinessDay> PeriodRecommendationByDate(Period period)
+        public List<Examination> PeriodRecommendationByDate(DateTime date)
         {
             throw new NotImplementedException();
         }

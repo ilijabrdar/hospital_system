@@ -20,7 +20,7 @@ namespace bolnica.Controller
 
         Boolean MarkAsOccupied(Period period, BusinessDay businessDay);
 
-        List<BusinessDay> PeriodRecommendationByDate(Period period);
+        List<Examination> PeriodRecommendationByDate(DateTime date);
 
          List<BusinessDay> GetBusinessDaysByDoctor(Doctor doctor);
     }

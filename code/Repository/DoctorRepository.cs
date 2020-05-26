@@ -14,7 +14,7 @@ using Service;
 
 namespace Repository
 {
-   public class DoctorRepository : CSVRepository<Doctor, long>, IDoctorRepository, IEagerRepository<Doctor,long>
+   public class DoctorRepository : CSVRepository<Doctor, long>, IDoctorRepository
    {
         private readonly IArticleRepository articleRepo;
         private readonly IEagerRepository<BusinessDay,long> businessDayRepo;

@@ -14,7 +14,7 @@ using System.Linq;
 
 namespace Repository
 {
-   public class BusinessDayRepository : CSVRepository<BusinessDay,long>, IBusinessDayRepository, IEagerRepository<BusinessDay,long>
+   public class BusinessDayRepository : CSVRepository<BusinessDay,long>, IBusinessDayRepository
    {
       private String FilePath;
         private readonly IDoctorRepository doctorRepo;
@@ -38,14 +38,23 @@ namespace Repository
 
         public List<BusinessDay> GetBusinessDaysByDate(DateTime date)
         {
-            throw new NotImplementedException();
+           
+            List<BusinessDay> businessDays = GetAllEager().ToList();
+            List<BusinessDay> retVal = new List<BusinessDay>();
+                foreach (BusinessDay day in businessDays)
+                {
+                    if (day.Shift.StartDate.Date == date.Date)
+                        retVal.Add(day);
+                }
+
+            return retVal;
         }
 
         public BusinessDay GetEager(long id)
         {
             BusinessDay businessDay = Get(id);
             businessDay.doctor = doctorRepo.Get(businessDay.doctor.GetId());
-            businessDay.room = roomRepo.Get(businessDay.room.GetId());
+            businessDay.room = roomRepo.GetEager(businessDay.room.GetId());
             return businessDay;
         }
 
