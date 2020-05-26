@@ -12,9 +12,9 @@ using System.Collections.Generic;
 
 namespace Repository
 {
-   public interface IDoctorRepository : IRepository<Doctor,long>, IGetterRepository<Doctor, long>
+   public interface IDoctorRepository : IRepository<Doctor,long>
    {
-      List<Doctor> GetDoctorsBySpeciality(Specialty specialty);
+      List<Doctor> GetDoctorsBySpeciality(Speciality specialty);
       Doctor GetDoctorByUsername(String username);
    }
 }

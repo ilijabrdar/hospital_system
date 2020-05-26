@@ -10,7 +10,7 @@ using System;
 
 namespace Repository
 {
-   public interface IRoomRepository : IRepository<Room, long>, IGetterRepository<Room, long>, IEagerRepository<Room, long>
+   public interface IRoomRepository : IRepository<Room, long>, IEagerRepository<Room, long>
     {
       int GetVacantRooms();
       int GetRoomByID();
