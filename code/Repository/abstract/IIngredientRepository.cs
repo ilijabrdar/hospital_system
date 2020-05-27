@@ -10,7 +10,7 @@ using System;
 
 namespace Repository
 {
-   public interface IIngredientRepository : IRepository<Ingredient,long>, IGetterRepository<Ingredient, long>
+   public interface IIngredientRepository : IRepository<Ingredient,long>
    {
    }
 }

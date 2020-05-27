@@ -10,7 +10,7 @@ using System;
 
 namespace Repository
 {
-   public interface IArticleRepository : IRepository<Article, long>, IGetterRepository<Article,long>
+   public interface IArticleRepository : IRepository<Article, long>
    {
 
    }

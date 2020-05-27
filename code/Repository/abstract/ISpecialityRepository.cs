@@ -10,9 +10,9 @@ using System;
 
 namespace Repository
 {
-   public interface ISpecialityRepository : IRepository<Specialty,long>, IGetterRepository<Specialty,long>
+   public interface ISpecialityRepository : IRepository<Speciality,long>
    {
-      Specialty CreateSpeciality(Specialty speciality);
-      Boolean DeleteSpeciality(Specialty speciality);
+      Speciality CreateSpeciality(Speciality speciality);
+      Boolean DeleteSpeciality(Speciality speciality);
    }
 }

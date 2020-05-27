@@ -10,7 +10,7 @@ using System;
 
 namespace Repository
 {
-   public interface IPatientRepository : IRepository<Patient, long>, IGetterRepository<Patient,long>
+   public interface IPatientRepository : IRepository<Patient, long>
    {
       Patient GetPatientByJMBG(String jmbg);
       Patient GetPatientByUsername(String username);

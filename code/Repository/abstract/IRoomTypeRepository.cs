@@ -10,7 +10,7 @@ using System;
 
 namespace Repository
 {
-   public interface IRoomTypeRepository : IRepository<RoomType, long>, IGetterRepository<RoomType, long>
+   public interface IRoomTypeRepository : IRepository<RoomType, long>
    {
    }
 }

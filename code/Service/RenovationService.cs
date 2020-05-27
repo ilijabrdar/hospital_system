@@ -33,12 +33,12 @@ namespace Service
 
         public Renovation Get(long id)
         {
-            return _repository.Get(id);
+            return _repository.GetEager(id);
         }
 
         public IEnumerable<Renovation> GetAll()
         {
-            return _repository.GetAll();
+            return _repository.GetAllEager();
         }
 
         public Renovation Save(Renovation entity)

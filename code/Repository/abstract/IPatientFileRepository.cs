@@ -10,7 +10,7 @@ using System;
 
 namespace Repository
 {
-   public interface IPatientFileRepository : IRepository<PatientFile, long>, IGetterRepository<PatientFile,long>
+   public interface IPatientFileRepository : IRepository<PatientFile, long>
    {
    }
 }

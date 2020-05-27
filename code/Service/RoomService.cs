@@ -43,7 +43,7 @@ namespace Service
 
         public IEnumerable<Room> GetAll()
         {
-            return _repository.GetAll();
+            return _repository.GetAllEager();
         }
 
         public Room Save(Room entity)
@@ -63,7 +63,7 @@ namespace Service
 
         public Room Get(long id)
         {
-            return _repository.Get(id);
+            return _repository.GetEager(id);
         }
     }
 }
