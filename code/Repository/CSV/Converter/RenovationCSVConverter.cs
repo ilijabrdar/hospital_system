@@ -8,7 +8,7 @@ using System.Text;
 namespace bolnica.Repository.CSV.Converter
 {
     public class RenovationCSVConverter : ICSVConverter<Renovation>
-    {
+    { //TODO: what if description contains CSV delimiter
         private readonly string _delimiter;
 
         public RenovationCSVConverter(string delimiter)
@@ -16,7 +16,7 @@ namespace bolnica.Repository.CSV.Converter
             _delimiter = delimiter;
         }
 
-        //id, status, (beginDate, endDate), description, [3, 56, 54]
+        //id, status, (beginDate, endDate), description, roomID
         public Renovation ConvertCSVFormatToEntity(string entityCSVFormat)
         {
             string[] tokens = entityCSVFormat.Split(_delimiter.ToCharArray());
@@ -25,7 +25,7 @@ namespace bolnica.Repository.CSV.Converter
                 (RenovationStatus) Enum.Parse(typeof(RenovationStatus),tokens[1]),
                 StringToPeriod(tokens[2]),
                 tokens[3],
-                null
+                new Room(long.Parse(tokens[4]))
                 );
         }
 
@@ -73,18 +73,8 @@ namespace bolnica.Repository.CSV.Converter
             sb.Append(_delimiter);
 
             sb.Append(entity.Description);
-            //sb.Append(_delimiter);
-
-            //sb.Append("[");
-
-            //foreach (Room room in entity.Rooms)
-            //{
-            //    sb.Append(room.GetId());
-            //    sb.Append(_delimiter);
-            //}
-
-            //sb.Remove(sb.Length, 0);
-            //sb.Append("]");
+            sb.Append(_delimiter);
+            sb.Append(entity.Room.GetId().ToString());
 
             return sb.ToString();
         }

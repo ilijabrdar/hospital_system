@@ -11,7 +11,7 @@ using System.Collections.Generic;
 
 namespace Repository
 {
-   public interface IEquipmentRepository : IRepository<Equipment,long>, IGetterRepository<Equipment, long>
+   public interface IEquipmentRepository : IRepository<Equipment,long>
    {
         Room[] GetRoomsContainingEquipment(String name);
 

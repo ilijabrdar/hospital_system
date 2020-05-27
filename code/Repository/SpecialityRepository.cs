@@ -10,20 +10,20 @@ using System;
 
 namespace Repository
 {
-   public class SpecialityRepository : CSVRepository<Specialty,long>, ISpecialityRepository , IGetterRepository<Specialty,long>
+   public class SpecialityRepository : CSVRepository<Speciality,long>, ISpecialityRepository , IGetterRepository<Speciality,long>
    {
       private String FilePath;
-        public SpecialityRepository(ICSVStream<Specialty> stream, ISequencer<long> sequencer) : base(stream, sequencer)
+        public SpecialityRepository(ICSVStream<Speciality> stream, ISequencer<long> sequencer) : base(stream, sequencer)
         {
 
         }
 
-        public Specialty CreateSpeciality(Specialty speciality)
+        public Speciality CreateSpeciality(Speciality speciality)
         {
             throw new NotImplementedException();
         }
 
-        public bool DeleteSpeciality(Specialty speciality)
+        public bool DeleteSpeciality(Speciality speciality)
         {
             throw new NotImplementedException();
         }

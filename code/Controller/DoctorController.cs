@@ -21,7 +21,7 @@ namespace Controller
         {
             _doctorservice = service;
         }
-        public bool ChangeSpeciality(Specialty speciality, Doctor doctor)
+        public bool ChangeSpeciality(Speciality speciality, Doctor doctor)
         {
             throw new NotImplementedException();
         }
@@ -46,7 +46,7 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        public List<Doctor> GetDoctorsBySpeciality(Specialty specialty)
+        public List<Doctor> GetDoctorsBySpeciality(Speciality specialty)
         {
             return _doctorservice.GetDoctorsBySpeciality(specialty);
         }

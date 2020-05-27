@@ -10,9 +10,9 @@ namespace Model.Users
    {
         public List<Article> articles { get; set; } 
         public List<BusinessDay> businessDay { get; set; }
-        public Specialty specialty { get; set; }
+        public Speciality specialty { get; set; }
         public DoctorGrade doctorGrade { get; set; }
-        public Doctor(long id, String name, String surname, String jmbg, String email, String phone, DateTime birth, String adress, String username, String password, Bitmap img,Specialty spec )
+        public Doctor(long id, String name, String surname, String jmbg, String email, String phone, DateTime birth, String adress, String username, String password, Bitmap img,Speciality spec )
         {
             this.Id = id;
             this.FirstName = name;
@@ -27,7 +27,7 @@ namespace Model.Users
             this.Image = img;
             this.specialty = spec;
         }
-        public Doctor(long id, String name, String surname, String jmbg, String email, String phone, DateTime birth, String address, String username, String password, Bitmap img, Specialty speciality, List<Article> articles, List<BusinessDay> businessDay ,DoctorGrade doctGrade)
+        public Doctor(long id, String name, String surname, String jmbg, String email, String phone, DateTime birth, String address, String username, String password, Bitmap img, Speciality speciality, List<Article> articles, List<BusinessDay> businessDay ,DoctorGrade doctGrade)
         {
             this.Id = id;
             this.FirstName = name;

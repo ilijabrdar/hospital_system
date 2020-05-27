@@ -10,7 +10,7 @@ using System;
 
 namespace Repository
 {
-   public interface IRenovationRepository : IRepository<Renovation,long>, IGetterRepository<Renovation, long>
+   public interface IRenovationRepository : IRepository<Renovation,long>, IEagerRepository<Renovation,long>
    {
    }
 }
