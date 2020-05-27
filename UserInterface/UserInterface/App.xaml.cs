@@ -42,19 +42,19 @@ namespace UserInterface
             SecretaryService secretaryService = new SecretaryService(secretaryRepository);
 
             UserService userService = new UserService(null, null, secretaryService, null);
-            UserController userController = new UserController(userService);
+            UserController = new UserController(userService);
 
-            User user = userController.Login("pera", "pera");
-            Secretary secretary = (Secretary)user;
-            Console.WriteLine(secretary.FirstName);
-            Console.WriteLine(secretary.LastName);
-            Console.WriteLine(secretary.Jmbg);
-            Console.WriteLine(secretary.Username);
-            Console.WriteLine(secretary.Password);
-            Console.WriteLine(secretary.Email);
-            Console.WriteLine(secretary.address.Street);
-            Console.WriteLine(secretary.address.GetTown().Name);
-            Console.WriteLine(secretary.address.GetTown().GetState().Name);
+            //User user = userController.Login("pera", "pera");
+            //Secretary secretary = (Secretary)user;
+            //Console.WriteLine(secretary.FirstName);
+            //Console.WriteLine(secretary.LastName);
+            //Console.WriteLine(secretary.Jmbg);
+            //Console.WriteLine(secretary.Username);
+            //Console.WriteLine(secretary.Password);
+            //Console.WriteLine(secretary.Email);
+            //Console.WriteLine(secretary.address.Street);
+            //Console.WriteLine(secretary.address.GetTown().Name);
+            //Console.WriteLine(secretary.address.GetTown().GetState().Name);
         }
     }
 }

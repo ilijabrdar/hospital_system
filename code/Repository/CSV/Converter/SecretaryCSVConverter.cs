@@ -20,8 +20,8 @@ namespace bolnica.Repository
         {
             string[] tokens = entityCSVFormat.Split(_delimiter.ToCharArray());
             return new Secretary(long.Parse(tokens[0]), 
-                tokens[1], tokens[2], (Bitmap) Bitmap.FromFile("../../Images/" + tokens[1] + ".Jpeg"),
-                tokens[4], tokens[5], tokens[6], tokens[7], tokens[8], DateTime.Parse(tokens[9]), new Address(long.Parse(tokens[8]), long.Parse(tokens[9]), long.Parse(tokens[10])));
+                tokens[1], tokens[2], (Bitmap) Bitmap.FromFile("../../../../UserInterface/UserInterface/Resources/Images/" + tokens[1] + ".Jpeg"),
+                tokens[4], tokens[5], tokens[6], tokens[7], tokens[8], new DateTime()/*DateTime.Parse(tokens[9])*/, new Address(long.Parse(tokens[10]), long.Parse(tokens[11]), long.Parse(tokens[12])));
         }
 
         public string ConvertEntityToCSVFormat(Secretary entity)

@@ -24,9 +24,9 @@ C:\Users\Asus\Desktop\HCI\UserInterface\UserInterface\obj\Debug\AppointmentSearc
 C:\Users\Asus\Desktop\HCI\UserInterface\UserInterface\obj\Debug\EditAppointment.baml
 C:\Users\Asus\Desktop\HCI\UserInterface\UserInterface\obj\Debug\Index.g.cs
 C:\Users\Asus\Desktop\HCI\UserInterface\UserInterface\obj\Debug\Index.baml
-C:\Users\Asus\Desktop\SIMS\hospital_system\UserInterface\UserInterface\bin\Debug\UserInterface.exe.config
 C:\Users\Asus\Desktop\SIMS\hospital_system\UserInterface\UserInterface\bin\Debug\UserInterface.exe
-C:\Users\Asus\Desktop\SIMS\hospital_system\UserInterface\UserInterface\bin\Debug\UserInterface.pdb
+C:\Users\Asus\Desktop\SIMS\hospital_system\UserInterface\UserInterface\bin\Debug\bolnica.dll
+C:\Users\Asus\Desktop\SIMS\hospital_system\UserInterface\UserInterface\bin\Debug\bolnica.pdb
 C:\Users\Asus\Desktop\SIMS\hospital_system\UserInterface\UserInterface\obj\Debug\UserInterface.csprojAssemblyReference.cache
 C:\Users\Asus\Desktop\SIMS\hospital_system\UserInterface\UserInterface\obj\Debug\AppointmentFilter.g.cs
 C:\Users\Asus\Desktop\SIMS\hospital_system\UserInterface\UserInterface\obj\Debug\AppointmentSearch.g.cs
@@ -38,6 +38,7 @@ C:\Users\Asus\Desktop\SIMS\hospital_system\UserInterface\UserInterface\obj\Debug
 C:\Users\Asus\Desktop\SIMS\hospital_system\UserInterface\UserInterface\obj\Debug\App.g.cs
 C:\Users\Asus\Desktop\SIMS\hospital_system\UserInterface\UserInterface\obj\Debug\UserInterface_MarkupCompile.cache
 C:\Users\Asus\Desktop\SIMS\hospital_system\UserInterface\UserInterface\obj\Debug\UserInterface_MarkupCompile.lref
+C:\Users\Asus\Desktop\SIMS\hospital_system\UserInterface\UserInterface\obj\Debug\App.baml
 C:\Users\Asus\Desktop\SIMS\hospital_system\UserInterface\UserInterface\obj\Debug\AppointmentFilter.baml
 C:\Users\Asus\Desktop\SIMS\hospital_system\UserInterface\UserInterface\obj\Debug\AppointmentSearch.baml
 C:\Users\Asus\Desktop\SIMS\hospital_system\UserInterface\UserInterface\obj\Debug\EditAppointment.baml
@@ -50,7 +51,3 @@ C:\Users\Asus\Desktop\SIMS\hospital_system\UserInterface\UserInterface\obj\Debug
 C:\Users\Asus\Desktop\SIMS\hospital_system\UserInterface\UserInterface\obj\Debug\UserInterface.csproj.GenerateResource.cache
 C:\Users\Asus\Desktop\SIMS\hospital_system\UserInterface\UserInterface\obj\Debug\UserInterface.exe
 C:\Users\Asus\Desktop\SIMS\hospital_system\UserInterface\UserInterface\obj\Debug\UserInterface.pdb
-C:\Users\Asus\Desktop\SIMS\hospital_system\UserInterface\UserInterface\obj\Debug\App.baml
-C:\Users\Asus\Desktop\SIMS\hospital_system\UserInterface\UserInterface\bin\Debug\bolnica.dll
-C:\Users\Asus\Desktop\SIMS\hospital_system\UserInterface\UserInterface\bin\Debug\bolnica.pdb
-C:\Users\Asus\Desktop\SIMS\hospital_system\UserInterface\UserInterface\obj\Debug\UserInterface.csproj.CopyComplete

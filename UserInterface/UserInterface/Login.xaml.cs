@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Model.Users;
 
 namespace UserInterface
 {
@@ -33,11 +34,9 @@ namespace UserInterface
             var app = Application.Current as App;
 
             var userController = app.UserController;
-
+            Secretary user = (Secretary) userController.Login("pera", "pera");
             //if(userController.Login())
-            MessageBox.Show(Username);
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
+            MainWindow mainWindow = new MainWindow(user);
             this.Close();
         }
     }

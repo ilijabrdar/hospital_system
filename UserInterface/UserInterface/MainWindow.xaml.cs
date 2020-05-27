@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Model.Users;
 
 namespace UserInterface
 {
@@ -21,16 +22,19 @@ namespace UserInterface
     /// 
     public partial class MainWindow : Window
     {
+        public Secretary Secretary { get; set; }
         public List<Examination> examinations { get; set; }
         public List<Examination> freeSlots { get; set; }
 
         private ToolTip _toolTip = new ToolTip();
         private Boolean _isToolTipAvailable = true;
 
-        public MainWindow()
+        public MainWindow(Secretary secretary)
         {
             InitializeComponent();
             this.DataContext = this;
+            App app = Application.Current as App;
+            Secretary = secretary;
             this.examinations = new List<Examination>();
             this.examinations.Add(new Examination(new DateTime(2020, 1, 2, 12, 00, 00), "Pera Peric", "Petar Petrovic", "S12"));
             this.examinations.Add(new Examination(new DateTime(2020, 1, 2, 15, 00, 00), "Pera Peric", "Milan Milanovic", "S12"));

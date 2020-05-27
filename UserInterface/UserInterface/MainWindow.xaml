@@ -34,7 +34,7 @@
                             <Label Content="Adresa" Margin="10 10 10 0" FontWeight="Bold" FontSize="14"/>
                         </StackPanel>
                         <StackPanel Grid.Column="1">
-                            <TextBlock Margin="10 13 10 0" Height="29" Text="Pera" FontSize="14"/>
+                            <TextBlock Margin="10 13 10 0" Height="29" Text="{Binding Secretary.FirstName}" FontSize="14"/>
                             <TextBlock Margin="10 10 10 0" Height="29" Text="Peric" FontSize="14"/>
                             <TextBlock Margin="10 10 10 0" Height="29" Text="1212989745931" FontSize="14"/>
                             <TextBlock Margin="10 10 10 0" Height="29" Text="pera.peric@gmail.com" FontSize="14"/>
