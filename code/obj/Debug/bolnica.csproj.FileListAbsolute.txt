@@ -1,0 +1,5 @@
+C:\Users\Asus\Desktop\SIMS\hospital_system\code\bin\Debug\bolnica.dll
+C:\Users\Asus\Desktop\SIMS\hospital_system\code\bin\Debug\bolnica.pdb
+C:\Users\Asus\Desktop\SIMS\hospital_system\code\obj\Debug\bolnica.csprojAssemblyReference.cache
+C:\Users\Asus\Desktop\SIMS\hospital_system\code\obj\Debug\bolnica.dll
+C:\Users\Asus\Desktop\SIMS\hospital_system\code\obj\Debug\bolnica.pdb
