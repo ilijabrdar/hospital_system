@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:upravnikKT2"
         mc:Ignorable="d"
         FontSize="18"
-        Title="Dodavanje smene" Height="400" Width="630.5">
+        Title="Dodavanje smene" Height="456.917" Width="688.998">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" MinHeight="26" />
@@ -21,18 +21,27 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" MinWidth="301" />
+            <ColumnDefinition Width="Auto" MinWidth="339" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
         <Label Grid.Column="0" Grid.Row="0" Margin="0,12,0,8">Izaberite lekara</Label>
+        <Label Grid.Column="0" Grid.Row="1" Margin="0,12,0,8">Izaberite prostoriju</Label>
         <Label Grid.Column="0" Grid.Row="2" Margin="0,10">Izaberite datum pocetka radnog vremena</Label>
         <Label Grid.Column="0" Grid.Row="3" Margin="0,10" RenderTransformOrigin="0.488,1.273" >Izaberite datum kraja radnog vremena</Label>
-        <Label Grid.Column="0" Grid.Row="4" Margin="0,0,0,10" VerticalAlignment="Bottom">vreme pocetka</Label>
-        <Label Grid.Column="0" Grid.Row="5" Margin="0,0,0,10" VerticalAlignment="Bottom">vreme kraja</Label>
+        <Label Grid.Column="0" Grid.Row="4" Margin="0,0,0,10" VerticalAlignment="Bottom" Height="32">vreme pocetka</Label>
+        <Label Grid.Column="0" Grid.Row="5" Margin="0,0,0,10" VerticalAlignment="Bottom" Height="32">vreme kraja</Label>
 
 
-        <ComboBox Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right" Margin="0,10,10,10" Width="139" materialDesign:HintAssist.Hint="Pretrazi" IsEditable="True" >
+        <ComboBox x:Name="comboDoctor" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right" Margin="0,10,10,10" Width="139" materialDesign:HintAssist.Hint="Pretrazi" IsEditable="True" Height="36" >
+            <ComboBoxItem>
+                Apple
+            </ComboBoxItem>
+            <ComboBoxItem>
+                Banana
+            </ComboBoxItem>
+        </ComboBox>
+        <ComboBox x:Name="comboRoom" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" Margin="0,10,10,10" Width="139" materialDesign:HintAssist.Hint="Pretrazi" IsEditable="True" Height="36" >
             <ComboBoxItem>
                 Apple
             </ComboBoxItem>
@@ -41,17 +50,42 @@
             </ComboBoxItem>
         </ComboBox>
 
+        <DatePicker x:Name="startDatePicker" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Right" Margin="0,10,10,10" Width="139" Height="33"></DatePicker>
+        <DatePicker x:Name="endDatePicker" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Right" Margin="0,10,10,10" Width="139" Height="33"></DatePicker>
+        <materialDesign:TimePicker x:Name="startTimePicker" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Right" Margin="0,0,10,10" Width="139" Style="{StaticResource MaterialDesignFloatingHintTimePicker}"
+                                   materialDesign:HintAssist.Hint="" Height="45"></materialDesign:TimePicker>
+        <materialDesign:TimePicker x:Name="endTimePicker" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Right" Margin="0,0,10,10" Width="139" Style="{StaticResource MaterialDesignFloatingHintTimePicker}"
+                                   materialDesign:HintAssist.Hint="" Height="45"></materialDesign:TimePicker>
 
-        <DatePicker Grid.Column="1" Grid.Row="2" HorizontalAlignment="Right" Margin="0,10,10,10" Width="139"></DatePicker>
-        <DatePicker Grid.Column="1" Grid.Row="3" HorizontalAlignment="Right" Margin="0,10,10,10" Width="139"></DatePicker>
-        <materialDesign:TimePicker Grid.Column="1" Grid.Row="4" HorizontalAlignment="Right" Margin="0,0,10,10" Width="139" Style="{StaticResource MaterialDesignFloatingHintTimePicker}"
-                                   materialDesign:HintAssist.Hint=""></materialDesign:TimePicker>
-        <materialDesign:TimePicker Grid.Column="1" Grid.Row="5" HorizontalAlignment="Right" Margin="0,0,10,10" Width="139" Style="{StaticResource MaterialDesignFloatingHintTimePicker}"
-                                   materialDesign:HintAssist.Hint=""></materialDesign:TimePicker>
 
-        
-        <WrapPanel  Grid.Column="1" Grid.Row="8" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-            <Button Height="28" Width="100" Click="Button_Click_Ok">Potvrdi</Button>
+        <WrapPanel  Grid.Column="1" Grid.Row="8" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="40" Width="210">
+            <Button Height="28" Width="100" Click="Button_Click_Ok">Potvrdi
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=SelectedItem, ElementName=comboDoctor}" Value="True">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=SelectedItem, ElementName=comboRoom}" Value="{x:Null}">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=SelectedDate, ElementName=startDatePicker}" Value="{x:Null}">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=SelectedDate, ElementName=endDatePicker}" Value="{x:Null}">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=SelectedTime, ElementName=endTimePicker}" Value="{x:Null}">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=SelectedTime, ElementName=endTimePicker}" Value="{x:Null}">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
             <Button Height="28" Width="100" Click="Button_Click_Cancel" Margin="10,0,0,0">Odustani</Button>
         </WrapPanel>
 

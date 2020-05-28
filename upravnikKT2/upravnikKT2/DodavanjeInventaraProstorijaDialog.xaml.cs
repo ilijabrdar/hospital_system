@@ -1,4 +1,6 @@
-﻿using System;
+﻿using bolnica.Controller;
+using Model.Director;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -20,7 +22,11 @@ namespace upravnikKT2
     /// </summary>
     public partial class DodavanjeInventaraProstorijaDialog : Window, INotifyPropertyChanged
     {
+        private readonly IRoomController _roomController;
+
+
         public event PropertyChangedEventHandler PropertyChanged;
+
 
         protected virtual void OnPropertyChanged(string name)
         {
@@ -35,6 +41,9 @@ namespace upravnikKT2
             InitializeComponent();
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             this.DataContext = this;
+
+            var app = Application.Current as App;
+            _roomController = app.RoomController;
         }
 
         private void Button_Click_OK(object sender, RoutedEventArgs e)
@@ -46,21 +55,30 @@ namespace upravnikKT2
             this.Close();
         }
 
-        private double _test3;
-        public double Test3
+        private double _amount;
+        public double Amount
         {
             get
             {
-                return _test3;
+                return _amount;
             }
             set
             {
-                if (value != _test3)
+                if (value != _amount)
                 {
-                    _test3 = value;
-                    OnPropertyChanged("Test3");
+                    _amount = value;
+                    OnPropertyChanged("Amount");
                 }
             }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<Room> rooms = _roomController.GetAll().ToList();
+            comboRoomCode.ItemsSource = rooms;
+            comboRoomCode.DisplayMemberPath = "RoomCode";
+            comboRoomCode.SelectedValuePath = "Id";
+            comboRoomCode.SelectedValue = "2";
         }
     }
 }

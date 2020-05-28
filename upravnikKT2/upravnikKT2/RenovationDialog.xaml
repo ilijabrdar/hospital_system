@@ -40,7 +40,27 @@
         <TextBox x:Name="txtDescription" Grid.Row="4" Grid.Column="1" Width="159"  Margin="0,10,10,7" HorizontalAlignment="Right" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" TextWrapping="Wrap"/>
 
         <WrapPanel  Grid.Column="1" Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10">
-            <Button Height="28" Width="100" Click="Button_Click_OK_Renovation">Potvrdi</Button>
+            <Button Height="28" Width="100" Click="Button_Click_OK_Renovation">Potvrdi
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=SelectedItem, ElementName=comboRoomCode}" Value="True">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=SelectedItem, ElementName=comboRenovationStatus}" Value="{x:Null}">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=SelectedDate, ElementName=startDatePicker}" Value="{x:Null}">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=SelectedDate, ElementName=endDatePicker}" Value="{x:Null}">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
             <Button Height="28" Width="100" Click="Button_Click_Cancel_Renovation" Margin="10,0,0,0">Odustani</Button>
         </WrapPanel>
 

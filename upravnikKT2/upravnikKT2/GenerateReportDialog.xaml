@@ -35,13 +35,27 @@
         </DataGrid>
 
         <Label Grid.Row="2" Grid.Column="0" FontSize="20" VerticalAlignment="Center"  Height="36" Margin="20,12,0,12">Izaberite pocetni datum</Label>
-        <DatePicker Grid.Row="2" Grid.Column="1" FontSize="20" Margin="193,10,20,10"></DatePicker>
+        <DatePicker x:Name="startDatePicker" Grid.Row="2" Grid.Column="1" FontSize="20" Margin="193,10,20,10"></DatePicker>
 
         <Label Grid.Row="3" Grid.Column="0" FontSize="20" VerticalAlignment="Center"  Height="38" Margin="20,11,0,10">Izaberite krajnji datum</Label>
-        <DatePicker Grid.Row="3" Grid.Column="1" FontSize="20" Margin="193,10,20,10"></DatePicker>
+        <DatePicker x:Name="endDatePicker" Grid.Row="3" Grid.Column="1" FontSize="20" Margin="193,10,20,10"></DatePicker>
 
         <WrapPanel  Grid.Column="1" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,20,0">
-            <Button Height="34" Width="146" Click="Button_Click_SacuvajPDF" Margin="0,0,0,20" Content="Sacuvaj kao PDF"/>
+            <Button Height="34" Width="146" Click="Button_Click_SacuvajPDF" Margin="0,0,0,20" Content="Sacuvaj kao PDF">
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=SelectedDate, ElementName=startDatePicker}" Value="{x:Null}">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=SelectedDate, ElementName=endDatePicker}" Value="{x:Null}">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
             <Button Height="34" Width="146" Click="Button_Click_Cancel" Margin="10,0,0,20" Content="Odustani"/>
         </WrapPanel>
     </Grid>

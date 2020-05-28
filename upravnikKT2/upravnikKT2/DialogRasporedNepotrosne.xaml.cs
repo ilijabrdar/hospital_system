@@ -1,4 +1,6 @@
-﻿using System;
+﻿using bolnica.Controller;
+using Model.Director;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -20,10 +22,16 @@ namespace upravnikKT2
     /// </summary>
     public partial class DialogRasporedNepotrosne : Window
     {
+        private readonly IRoomController _roomController;
+
         public DialogRasporedNepotrosne()
         {
             InitializeComponent();
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
+
+            var app = Application.Current as App;
+            _roomController = app.RoomController;
         }
 
         private void Button_Click_Add(object sender, RoutedEventArgs e)
@@ -42,11 +50,10 @@ namespace upravnikKT2
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            ObservableCollection<Oprema> DataGridOpremaNepotrosna = new ObservableCollection<Oprema>();
-            DataGridOpremaNepotrosna.Add(new Oprema { Naziv = "4323", Kolicina = "10" });
-            DataGridOpremaNepotrosna.Add(new Oprema { Naziv = "2142", Kolicina = "12" });
-            DataGridOpremaNepotrosna.Add(new Oprema { Naziv = "4657", Kolicina = "5" });
-            this.DataGridRasporedOpremePoProstorijama.ItemsSource = DataGridOpremaNepotrosna;
+            List<Room> rooms = _roomController.GetAll().ToList();
+            ObservableCollection<Room> data_rooms = new ObservableCollection<Room>(rooms);
+            
+            this.DataGridRasporedOpremePoProstorijama.ItemsSource = data_rooms;
         }
     }
 }

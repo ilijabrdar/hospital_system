@@ -8,7 +8,7 @@
         xmlns:local="clr-namespace:upravnikKT2" xmlns:val="clr-namespace:upravnikKT2.Validation"
         mc:Ignorable="d"
         FontSize="18"
-        Title="DodavanjeInventaraProstorijaDialog" Height="350" Width="350">
+        Title="DodavanjeInventaraProstorijaDialog" Height="350" Width="350" Loaded="Window_Loaded">
     <Grid Margin="21,21,21,3">
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
@@ -22,12 +22,12 @@
 
 
         <Label Grid.Row="0" Grid.Column="0" Width="133" HorizontalAlignment="Left" Margin="10,10,0,30" Grid.ColumnSpan="2" Grid.RowSpan="2">Sifra prostorije</Label>
-        <ComboBox Grid.Row="0" Grid.Column="1" Width="92" Margin="0,10,10,0" HorizontalAlignment="Right" materialDesign:HintAssist.Hint="Pretrazi" IsEditable="True" FontSize="14"></ComboBox>
+        <ComboBox x:Name="comboRoomCode" Grid.Row="0" Grid.Column="1" Width="92" Margin="0,10,10,0" HorizontalAlignment="Right" materialDesign:HintAssist.Hint="Pretrazi" IsEditable="True" FontSize="14"></ComboBox>
 
         <Label Grid.Row="1" Grid.Column="0" Width="102" HorizontalAlignment="Left" Margin="10,10,0,0">Kolicina</Label>
         <TextBox x:Name="txtAmount" Grid.Row="1" Grid.Column="1" Width="92"  Margin="0,10,10,0" HorizontalAlignment="Right">
             <TextBox.Text>
-                <Binding Path="Test3" StringFormat="{}{0:#.##}" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                <Binding Path="Amount" StringFormat="{}{0:#.##}" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
                         <val:OnlyNumbersValidationRule ValidatesOnTargetUpdated="True"/>
                     </Binding.ValidationRules>
@@ -41,6 +41,9 @@
                     <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding Path=(Validation.HasError), ElementName=txtAmount}" Value="True">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=SelectedItem, ElementName=comboRoomCode}" Value="{x:Null}">
                                 <Setter Property="IsEnabled" Value="False" />
                             </DataTrigger>
                             

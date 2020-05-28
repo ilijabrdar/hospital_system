@@ -36,11 +36,14 @@
         <ComboBox x:Name="comboRoomTypes" Grid.Row="1" Grid.Column="1" Width="141"  Margin="0,41,10,44" HorizontalAlignment="Right" VerticalContentAlignment="Top" Height="45" materialDesign:HintAssist.Hint="Pretrazi" IsTextSearchEnabled="True"></ComboBox>
 
         <WrapPanel  Grid.Column="1" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10">
-            <Button Height="28" Width="100" Click="Button_Click_OK_Room">Potvrdi
+            <Button x:Name="ButtonOK" Height="28" Width="100" Click="Button_Click_OK_Room">Potvrdi
                 <Button.Style>
                     <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding Path=(Validation.HasError), ElementName=txtID}" Value="True">
+                            <DataTrigger Binding="{Binding Path=(Validation.HasError), ElementName=txtRoomCode}" Value="True">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=SelectedItem, ElementName=comboRoomTypes}" Value="{x:Null}">
                                 <Setter Property="IsEnabled" Value="False" />
                             </DataTrigger>
 

@@ -119,5 +119,6 @@ namespace upravnikKT2
                 comboRoomTypes.SelectedItem = selectedRoom.RoomType;
             }
         }
+
     }
 }

@@ -46,10 +46,10 @@
                                     Width="24" />
         </Button>
 
-        <DataGrid x:Name="DataGridRasporedOpremePoProstorijama" Grid.Row="1" Margin="10" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
+        <DataGrid x:Name="DataGridRasporedOpremePoProstorijama" Grid.Row="1" Margin="10,0,10,20" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Sifra prostorije" Binding="{Binding Naziv}" Width="*"/>
-                <DataGridTextColumn Header="Kolicina" Binding="{Binding Kolicina}" Width="*"/>
+                <DataGridTextColumn Header="Sifra prostorije" Binding="{Binding RoomCode}" Width="*"/>
+                <DataGridTextColumn Header="Kolicina" Binding="{Binding Amount}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
 
