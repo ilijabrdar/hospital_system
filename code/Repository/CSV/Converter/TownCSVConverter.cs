@@ -34,7 +34,7 @@ namespace bolnica.Repository
         public string ConvertEntityToCSVFormat(Town entity)
         {
             StringBuilder sb = new StringBuilder();
-            String formated = String.Join(_delimiter, entity.GetId(), entity.Name, entity.PostalNumber, entity.state.GetId());
+            String formated = String.Join(_delimiter, entity.GetId(), entity.Name, entity.PostalNumber, entity.State.GetId());
             sb.Append(formated);
             sb.Append(_delimiter);
             foreach(Address address in entity.GetAddress())

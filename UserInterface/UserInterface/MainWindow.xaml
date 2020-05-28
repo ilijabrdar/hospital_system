@@ -35,17 +35,19 @@
                         </StackPanel>
                         <StackPanel Grid.Column="1">
                             <TextBlock Margin="10 13 10 0" Height="29" Text="{Binding Secretary.FirstName}" FontSize="14"/>
-                            <TextBlock Margin="10 10 10 0" Height="29" Text="Peric" FontSize="14"/>
-                            <TextBlock Margin="10 10 10 0" Height="29" Text="1212989745931" FontSize="14"/>
-                            <TextBlock Margin="10 10 10 0" Height="29" Text="pera.peric@gmail.com" FontSize="14"/>
-                            <TextBlock Margin="10 10 10 0" Height="29" Text="+381604596337" FontSize="14"/>
-                            <TextBlock Margin="10 10 10 0" Height="29" Text="12.12.1998." FontSize="14"/>
-                            <TextBlock Margin="10 10 10 0" Height="29" Text="Republika Srbija" FontSize="14"/>
-                            <TextBlock Margin="10 10 10 0" Height="29" Text="Novi Sad" FontSize="14"/>
-                            <TextBlock Margin="10 10 10 0" Height="29" Text="Narodnog fronta 5a" FontSize="14"/>
+                            <TextBlock Margin="10 10 10 0" Height="29" Text="{Binding Secretary.LastName}" FontSize="14"/>
+                            <TextBlock Margin="10 10 10 0" Height="29" Text="{Binding Secretary.Jmbg}" FontSize="14"/>
+                            <TextBlock Margin="10 10 10 0" Height="29" Text="{Binding Secretary.Email}" FontSize="14"/>
+                            <TextBlock Margin="10 10 10 0" Height="29" Text="{Binding Secretary.Phone}" FontSize="14"/>
+                            <TextBlock Margin="10 10 10 0" Height="29" Text="{Binding Secretary.DateOfBirth.Date}" FontSize="14"/>
+                            <TextBlock Margin="10 10 10 0" Height="29" Text="{Binding Secretary.Address.Town.State.Name}" FontSize="14"/>
+                            <TextBlock Margin="10 10 10 0" Height="29" Text="{Binding Secretary.Address.Town.Name}" FontSize="14"/>
+                            <TextBlock Margin="10 10 10 0" Height="29" Text="{Binding Secretary.Address.FullAddress}" FontSize="14"/>
                         </StackPanel>
                         <StackPanel Grid.Column="2">
                             <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Stretch" Height="350" Margin="10 10 10 10">
+                                <Image Source="{Binding Secretary.Image}">
+                                </Image>
                             </Border>
                             <Button Content="_Izmeni profil" Margin="10,30,10,10" Click="OpenEditPanel" ToolTip="ctrl + N" GotFocus="DisplayToolTip" LostFocus="RemoveToolTip"/>
                         </StackPanel>
@@ -72,15 +74,15 @@
                                     <Label Content="Država" HorizontalAlignment="Left" Margin="10,190,0,0" VerticalAlignment="Top"/>
                                     <Label Content="Grad" HorizontalAlignment="Left" Margin="10,220,0,0" VerticalAlignment="Top"/>
                                     <Label Content="Ulica" HorizontalAlignment="Left" Margin="10,250,0,0" VerticalAlignment="Top"/>
-                                    <TextBox HorizontalAlignment="Left" Height="23" Margin="150,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="263"/>
-                                    <TextBox HorizontalAlignment="Left" Height="23" Margin="150,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="263"/>
-                                    <TextBox HorizontalAlignment="Left" Height="23" Margin="150,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="263"/>
-                                    <TextBox HorizontalAlignment="Left" Height="23" Margin="150,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="263"/>
-                                    <TextBox HorizontalAlignment="Left" Height="23" Margin="150,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="263"/>
-                                    <TextBox HorizontalAlignment="Left" Height="23" Margin="150,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70"/>
-                                    <TextBox HorizontalAlignment="Left" Height="23" Margin="248,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70"/>
-                                    <TextBox HorizontalAlignment="Left" Height="23" Margin="343,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70"/>
-                                    <ComboBox HorizontalAlignment="Left" Margin="150,190,0,0" VerticalAlignment="Top" Width="263"/>
+                                    <TextBox HorizontalAlignment="Left" Height="23" Margin="150,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="263" Text="{Binding Secretary.FirstName}"/>
+                                    <TextBox HorizontalAlignment="Left" Height="23" Margin="150,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="263" Text="{Binding Secretary.LastName}"/>
+                                    <TextBox HorizontalAlignment="Left" Height="23" Margin="150,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="263" Text="{Binding Secretary.Jmbg}"/>
+                                    <TextBox HorizontalAlignment="Left" Height="23" Margin="150,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="263" Text="{Binding Secretary.Email}"/>
+                                    <TextBox HorizontalAlignment="Left" Height="23" Margin="150,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="263" Text="{Binding Secretary.Phone}"/>
+                                    <TextBox HorizontalAlignment="Left" Height="23" Margin="150,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" Text="{Binding Day}"/>
+                                    <TextBox HorizontalAlignment="Left" Height="23" Margin="248,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" Text="{Binding Month}"/>
+                                    <TextBox HorizontalAlignment="Left" Height="23" Margin="343,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" Text="{Binding Year}"/>
+                                    <ComboBox HorizontalAlignment="Left" Margin="150,190,0,0" VerticalAlignment="Top" Width="263" />
                                     <ComboBox HorizontalAlignment="Left" Margin="150,220,0,0" VerticalAlignment="Top" Width="263"/>
                                     <ComboBox HorizontalAlignment="Left" Margin="150,250,0,0" VerticalAlignment="Top" Width="152"/>
                                     <Label Content="/" HorizontalAlignment="Left" Margin="228,160,0,0" VerticalAlignment="Top"/>

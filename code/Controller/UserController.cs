@@ -50,7 +50,9 @@ namespace Controller
 
         public User Login(string username, string password)
         {
-            return _userService.Login(username, password);
+            User user = _userService.Login(username, password);
+            if (user == null) throw new NullReferenceException("User not found");
+            else return user;
         }
 
         public bool Logout(User user)

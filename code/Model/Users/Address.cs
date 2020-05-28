@@ -15,8 +15,9 @@ namespace Model.Users
         public String Street { get; set; }
         public int Number { get; set; }
         public int ApartmentNumber { get; set; }
+        public String FullAddress { get; set; }
 
-        private Town town;
+        public Town Town { get; set; }
       
         public Address(long id, string street, int number, int apartmentNumber, Town town)
         {
@@ -24,8 +25,8 @@ namespace Model.Users
             Street = street;
             Number = number;
             ApartmentNumber = apartmentNumber;
-            this.town = town;
-            _id = id;
+            Town = town;
+            FullAddress = GetFullAddress();
         } 
 
         public Address(long id)
@@ -36,31 +37,36 @@ namespace Model.Users
         public Address(long id, long townID, long stateID)
         {
             _id = id;
-            town = new Town(townID, stateID);
+            Town = new Town(townID, stateID);
+        }
+
+        public String GetFullAddress()
+        {
+            return String.Join(", ", Street, Number, ApartmentNumber);
         }
 
         /// <pdGenerated>default parent getter</pdGenerated>
         public Town GetTown()
         {
-            return town;
+            return Town;
         }
       
         /// <pdGenerated>default parent setter</pdGenerated>
         /// <param>newTown</param>
         public void SetTown(Town newTown)
         {
-            if (this.town != newTown)
+            if (Town != newTown)
             {
-            if (this.town != null)
+            if (Town != null)
             {
-                Town oldTown = this.town;
-                this.town = null;
+                Town oldTown = Town;
+                Town = null;
                 oldTown.RemoveAddress(this);
             }
             if (newTown != null)
             {
-                this.town = newTown;
-                this.town.AddAddress(this);
+                Town = newTown;
+                Town.AddAddress(this);
             }
             }
         }

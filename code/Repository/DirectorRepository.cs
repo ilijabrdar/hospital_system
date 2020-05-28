@@ -50,9 +50,9 @@ namespace Repository
         public Director GetEager(long id)
         {
             Director director = Get(id);
-            director.address = _addressRepository.GetEager(director.address.GetId());
-            director.address.SetTown(_townRepository.GetEager(director.address.GetTown().GetId()));
-            director.address.GetTown().SetState(_stateRepository.GetEager(director.address.GetTown().GetState().GetId()));
+            director.Address = _addressRepository.GetEager(director.Address.GetId());
+            director.Address.Town = _townRepository.GetEager(director.Address.Town.GetId());
+            director.Address.Town.State = _stateRepository.GetEager(director.Address.Town.State.GetId());
             return director;
         }
     }

@@ -23,6 +23,10 @@ namespace UserInterface
     public partial class MainWindow : Window
     {
         public Secretary Secretary { get; set; }
+        public int Day { get; set; }
+        public int Month { get; set; }
+        public int Year { get; set; }
+        public BitmapSource Image { get; set; }
         public List<Examination> examinations { get; set; }
         public List<Examination> freeSlots { get; set; }
 
@@ -35,6 +39,10 @@ namespace UserInterface
             this.DataContext = this;
             App app = Application.Current as App;
             Secretary = secretary;
+            Day = secretary.DateOfBirth.Day;
+            Month = secretary.DateOfBirth.Month;
+            Year = secretary.DateOfBirth.Year;
+            //Image = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(Secretary.Image, Int)
             this.examinations = new List<Examination>();
             this.examinations.Add(new Examination(new DateTime(2020, 1, 2, 12, 00, 00), "Pera Peric", "Petar Petrovic", "S12"));
             this.examinations.Add(new Examination(new DateTime(2020, 1, 2, 15, 00, 00), "Pera Peric", "Milan Milanovic", "S12"));

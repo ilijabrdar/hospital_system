@@ -21,7 +21,6 @@ namespace UserInterface
     public partial class Login : Window
     {
         public String Username { get; set; }
-        public String Password { get; set; }
 
         public Login()
         {
@@ -34,10 +33,18 @@ namespace UserInterface
             var app = Application.Current as App;
 
             var userController = app.UserController;
-            Secretary user = (Secretary) userController.Login("pera", "pera");
-            //if(userController.Login())
-            MainWindow mainWindow = new MainWindow(user);
-            this.Close();
+            PasswordBox passwordBox = FindName("password") as PasswordBox;
+            try
+            {
+                Secretary user = (Secretary)userController.Login(Username, passwordBox.Password);
+                MainWindow mainWindow = new MainWindow(user);
+                mainWindow.Show();
+                this.Close();
+            }
+            catch(Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }     
         }
     }
 }

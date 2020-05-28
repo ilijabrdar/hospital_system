@@ -44,9 +44,9 @@ namespace Repository
         public Secretary GetEager(long id)
         {
             Secretary secretary = Get(id);
-            secretary.address = _addressRepository.GetEager(secretary.address.GetId());
-            secretary.address.SetTown(_townRepository.GetEager(secretary.address.GetTown().GetId()));
-            secretary.address.GetTown().SetState(_stateRepository.GetEager(secretary.address.GetTown().GetState().GetId()));
+            secretary.Address = _addressRepository.GetEager(secretary.Address.GetId());
+            secretary.Address.Town = _townRepository.GetEager(secretary.Address.Town.GetId());
+            secretary.Address.Town.State = _stateRepository.GetEager(secretary.Address.Town.State.GetId());
             return secretary;
         }
 
