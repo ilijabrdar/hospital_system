@@ -12,7 +12,7 @@ namespace Model.Users
         public List<BusinessDay> businessDay { get; set; }
         public Speciality specialty { get; set; }
         public DoctorGrade doctorGrade { get; set; }
-        public Doctor(long id, String name, String surname, String jmbg, String email, String phone, DateTime birth, String adress, String username, String password, Bitmap img,Speciality spec )
+        public Doctor(long id, String name, String surname, String jmbg, String email, String phone, DateTime birth, Address address, String username, String password, Bitmap img,Speciality spec )
         {
             this.Id = id;
             this.FirstName = name;
@@ -21,7 +21,7 @@ namespace Model.Users
             this.Email = email;
             this.Phone = phone;
             this.DateOfBirth = birth;
-            this.address = address;
+            this.Address = address;
             this.Username = username;
             this.Password = password;
             this.Image = img;

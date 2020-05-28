@@ -25,7 +25,7 @@ namespace Model.Users
             Email = email;
             Phone = phone;
             DateOfBirth = dateOfBirth;
-            this.address = address;
+            Address = address;
         }
 
         public override long GetId()
