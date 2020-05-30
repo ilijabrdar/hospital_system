@@ -4,9 +4,11 @@
  * Purpose: Definition of the Class Service.BusinessDayService
  ***********************************************************************/
 
+using bolnica.Model.Dto;
 using bolnica.Repository;
 using bolnica.Service;
 using Model.Director;
+using Model.Dto;
 using Model.PatientSecretary;
 using Model.Users;
 using Repository;
@@ -20,7 +22,8 @@ namespace Service
    public class BusinessDayService : IBusinessDayService
    {
     
-        private IBusinessDayRepository _businessDayRepository;
+        private readonly IBusinessDayRepository _businessDayRepository;
+        public ISearchPeriods _searchPeriods { get; set; }
         public static double durationOfExamination = 20;
 
         public void Delete(BusinessDay entity)
@@ -38,7 +41,7 @@ namespace Service
             throw new NotImplementedException();
         }
 
-        public List<Period> GenerateAvailablePeriods(BusinessDay businessDay)
+  /*      public List<Period> GenerateAvailablePeriods(BusinessDay businessDay)
         {
             BusinessDay thatDay = getExactDay(businessDay);
             if (thatDay.Equals(null))
@@ -59,24 +62,31 @@ namespace Service
                 retVal.Remove(i);
             return retVal;
         }
-
-        private BusinessDay getExactDay(BusinessDay businessDay)
+*/
+        private BusinessDay getExactDay(Doctor doctor, DateTime date)
         {
             foreach (BusinessDay day in _businessDayRepository.GetAllEager())
             {
-                if (day.doctor.Equals(businessDay.doctor) && day.Shift.EndDate.Date.Equals(businessDay.Shift.EndDate.Date))
+                if (day.doctor.Id == doctor.Id && day.Shift.EndDate.Date.Equals(date.Date))
                    return day;
             }
             return null;
         }
 
 
-        public List<Examination> PeriodRecommendationByDate(DateTime date)
+        public List<ExaminationDTO> Search(BusinessDayDTO businessDayDTO)
         {
-            List<BusinessDay> businessDays = _businessDayRepository.GetBusinessDaysByDate(date);
+            List<BusinessDay> businessDayCollection = _businessDayRepository.GetAllEager().ToList();
+            return _searchPeriods.Search(businessDayDTO, businessDayCollection);
 
-            throw new NotImplementedException();
         }
+
+        /*       public List<Examination> PeriodRecommendationByDate(DateTime date)
+               {
+                   List<BusinessDay> businessDays = _businessDayRepository.GetBusinessDaysByDate(date);
+
+                   throw new NotImplementedException();
+               }*/
 
         public BusinessDay Get(long id)
         {
@@ -112,5 +122,6 @@ namespace Service
         {
             throw new NotImplementedException();
         }
+
     }
 }
