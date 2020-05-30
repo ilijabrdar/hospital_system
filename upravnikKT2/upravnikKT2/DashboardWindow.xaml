@@ -601,10 +601,10 @@
                             <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Bottom">
-                            <DataGrid Margin="10" x:Name="DataGridRooms" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
+                            <DataGrid Margin="10" x:Name="DataGridRooms" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" >
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Sifra" Binding="{Binding RoomCode}" Width="*"/>
-                                    <DataGridTextColumn Header="Tip" Binding="{Binding RoomType}"  Width="*"/>
+                                    <DataGridTextColumn Header="Tip" Binding="{Binding RoomType.Name}"  Width="*"/>
                                     <DataGridTemplateColumn Header="Spisak opreme" Width="*">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
@@ -668,10 +668,11 @@
                         <DockPanel DockPanel.Dock="Bottom">
                             <DataGrid Margin="10" x:Name="DataGridRenovation" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Sifra prostorije" Binding="{Binding RoomCode}" Width="*"/>
-                                    <DataGridTextColumn Header="Tip prostorije" Binding="{Binding RoomType}" Width="*"/>
+                                    <DataGridTextColumn Header="Sifra prostorije" Binding="{Binding Room.RoomCode}" Width="*"/>
+                                    <DataGridTextColumn Header="Tip prostorije" Binding="{Binding Room.RoomType.Name}" Width="*"/>
                                     <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="*"/>
-                                    <DataGridTextColumn Header="Datum renoviranja" Binding="{Binding Period}" Width="*"/>
+                                    <DataGridTextColumn Header="Datum pocetka" Binding="{Binding Period.StartDate.Date, StringFormat=\{0:dd.MM.yy\}}" Width="*"/>
+                                    <DataGridTextColumn Header="Datum kraja" Binding="{Binding Period.EndDate, StringFormat=\{0:dd.MM.yy\}}" Width="*"/>
                                     <DataGridTextColumn Header="Opis" Binding="{Binding Description}" Width="*"/>
                                 </DataGrid.Columns>
                             </DataGrid>
