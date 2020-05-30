@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:upravnikKT2"
         mc:Ignorable="d"
         FontSize="18"
-        Title="Pregled clanka" Height="588" Width="630.5">
+        Title="Pregled clanka" Height="588" Width="630.5" PreviewKeyDown="Window_PreviewKeyDown">
     <DockPanel>
         <DockPanel DockPanel.Dock="Top" Margin="10">
             <Label HorizontalAlignment="Center" FontSize="30">

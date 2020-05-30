@@ -58,5 +58,13 @@ namespace upravnikKT2
             DataGridRooms.Add(new RoomMockup { Sifra = "7684" });
             this.DataGridProstorije.ItemsSource = DataGridRooms;
         }
+
+        private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Escape)
+            {
+                this.Close();
+            }
+        }
     }
 }

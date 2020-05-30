@@ -80,5 +80,13 @@ namespace upravnikKT2
             comboRoomCode.SelectedValuePath = "Id";
             comboRoomCode.SelectedValue = "2";
         }
+
+        private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Escape)
+            {
+                this.Close();
+            }
+        }
     }
 }

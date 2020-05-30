@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:upravnikKT2"
         mc:Ignorable="d"
         FontSize="18"
-        Title="RenovationDialog" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="RenovationDialog" Height="450" Width="800" Loaded="Window_Loaded" PreviewKeyDown="Window_PreviewKeyDown">
     <Grid Margin="21,21,21,3">
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />

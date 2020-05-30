@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="clr-namespace:upravnikKT2.Validation" xmlns:val="clr-namespace:upravnikKT2.Validation"
         mc:Ignorable="d"
         FontSize="18"
-        Title="Dodavanje lekara" Height="588" Width="630.5">
+        Title="Dodavanje lekara" Height="588" Width="630.5" PreviewKeyDown="Window_PreviewKeyDown">
     <Grid Margin="30">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" MinHeight="26" />
@@ -86,7 +86,7 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <DatePicker Grid.Column="1" Grid.Row="6" HorizontalAlignment="Right" Margin="0,10,10,10" Width="139" Height="33"></DatePicker>
+        <DatePicker x:Name="birthDatePicker" Grid.Column="1" Grid.Row="6" HorizontalAlignment="Right" Margin="0,10,10,10" Width="139" Height="33"></DatePicker>
         <ComboBox Grid.Column="1" Grid.Row="7" HorizontalAlignment="Right" Margin="0,10,10,10" Width="139" materialDesign:HintAssist.Hint="Pretrazi" IsEditable="True" Height="36"></ComboBox>
 
 
@@ -113,7 +113,9 @@
                             <DataTrigger Binding="{Binding Path=(Validation.HasError), ElementName=txtID}" Value="True">
                                 <Setter Property="IsEnabled" Value="False" />
                             </DataTrigger>
-
+                            <DataTrigger Binding="{Binding Path=SelectedDate, ElementName=birthDatePicker}" Value="{x:Null}">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
                         </Style.Triggers>
                     </Style>
                 </Button.Style>

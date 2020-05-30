@@ -100,5 +100,13 @@ namespace upravnikKT2
             if(selectedItem != null) //this is for edit
                 comboRoomCode.SelectedValue = selectedItem.Room.GetId();
         }
+
+        private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Escape)
+            {
+                this.Close();
+            }
+        }
     }
 }

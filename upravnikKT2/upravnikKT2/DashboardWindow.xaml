@@ -5,14 +5,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:upravnikKT2"
+        xmlns:local="clr-namespace:upravnikKT2" xmlns:val="clr-namespace:upravnikKT2.Validation"
         mc:Ignorable="d"
         Title="Bolnica" WindowState="Maximized" Loaded="Window_Loaded"
         Icon="AppIcon.ico">
     <DockPanel>
         <DockPanel DockPanel.Dock="Left">
             <TabControl x:Name="tabControlMain" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TabStripPlacement="Left" FontSize="18">
-                <TabItem Header="Početak" PreviewKeyDown="TabItem_PreviewKeyDown_Home">
+                <TabItem Header="Početak">
                     <DockPanel>
                         <DockPanel DockPanel.Dock="Top">
                             <StackPanel Orientation="Vertical">
@@ -94,7 +94,7 @@
                 </TabItem>
                 <TabItem Header="Lekari">
                     <Grid Background="White">
-                        <TabControl x:Name="tabControlLekari" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <TabControl x:Name="tabControlLekari" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
                             <TabItem Header="Pregled lekara" PreviewKeyDown="TabItem_PreviewKeyDown_Doctors">
                                 <DockPanel>
                                     
@@ -680,43 +680,52 @@
                 </TabItem>
 
                 <TabItem Header="Vaš nalog">
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                     <DockPanel>
                         <GroupBox DockPanel.Dock="Top" x:Name="groupBoxNalog" Header="Vaši podaci" Margin="10,10,10,0" materialDesign:ShadowAssist.ShadowDepth="Depth1" materialDesign:ColorZoneAssist.Mode="Light">
                             <StackPanel Orientation="Vertical">
                                 <DockPanel Margin="3">
                                     <Label DockPanel.Dock="Left">ime</Label>
-                                    <TextBox DockPanel.Dock="Right" Width="170" IsReadOnly="True">Marko</TextBox>
+                                    <Label DockPanel.Dock="Right" Width="300" FontWeight="Bold">Marko</Label>
                                     <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                                 </DockPanel>
 
                                 <DockPanel Margin="3">
                                     <Label DockPanel.Dock="Left">prezime</Label>
-                                    <TextBox DockPanel.Dock="Right" Width="170" IsReadOnly="True">Markovic</TextBox>
+                                    <Label DockPanel.Dock="Right" Width="300"  FontWeight="Bold" >Markovic</Label>
+                                    <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
+                                </DockPanel>
+                                
+                                <DockPanel Margin="3">
+                                    <Label DockPanel.Dock="Left">JMBG</Label>
+                                    <Label DockPanel.Dock="Right" Width="300"  FontWeight="Bold">324295934234</Label>
+                                    <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
+                                </DockPanel>
+                                
+                                <DockPanel Margin="3">
+                                        <Label DockPanel.Dock="Left">Adresa</Label>
+                                        <Label DockPanel.Dock="Right" Width="300"  FontWeight="Bold" >Cirpanova 1, Novi Sad, Srbija</Label>
                                     <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                                 </DockPanel>
 
                                 <DockPanel Margin="3">
                                     <Label DockPanel.Dock="Left">e-mail</Label>
-                                    <TextBox DockPanel.Dock="Right" Width="170" IsReadOnly="True">marko@bolnica.com</TextBox>
+                                    <Label DockPanel.Dock="Right" Width="300"  FontWeight="Bold" >marko@bolnica.com</Label>
                                     <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                                 </DockPanel>
 
                                 <DockPanel Margin="3">
                                     <Label DockPanel.Dock="Left">telefon</Label>
-                                    <TextBox DockPanel.Dock="Right" Width="170" IsReadOnly="True">02135422</TextBox>
+                                    <Label DockPanel.Dock="Right" Width="300"  FontWeight="Bold" >02135422</Label>
                                     <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                                 </DockPanel>
 
-                                <DockPanel Margin="3">
-                                    <Label DockPanel.Dock="Left">JMBG</Label>
-                                    <TextBox DockPanel.Dock="Right" Width="170" IsReadOnly="True">324295934234</TextBox>
-                                    <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
-                                </DockPanel>
+                                
 
 
                                 <DockPanel Margin="3">
                                     <Label DockPanel.Dock="Left">datum rodjenja</Label>
-                                    <DatePicker DockPanel.Dock="Right" Width="170" IsManipulationEnabled="False" AllowDrop="False" DisplayDate="2020-05-11" Text="14/05/1967"></DatePicker>
+                                    <Label DockPanel.Dock="Right" Width="300" IsManipulationEnabled="False" AllowDrop="False" Content="14/05/1967"  FontWeight="Bold"></Label>
                                     <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                                 </DockPanel>
 
@@ -728,42 +737,115 @@
                             <StackPanel Orientation="Vertical">
                                 <DockPanel Margin="3">
                                     <Label DockPanel.Dock="Left">ime</Label>
-                                    <TextBox DockPanel.Dock="Right" Width="170"></TextBox>
+                                    <TextBox x:Name="txtFirstNameEdit" DockPanel.Dock="Right" Width="170">
+                                        <TextBox.Text>
+                                            <Binding Path="FirstName" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                                <Binding.ValidationRules>
+                                                    <val:NotEmptyValidationRule ValidatesOnTargetUpdated="True"/>
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </TextBox.Text>
+                                    </TextBox>
                                     <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                                 </DockPanel>
 
                                 <DockPanel Margin="3">
                                     <Label DockPanel.Dock="Left">prezime</Label>
-                                    <TextBox DockPanel.Dock="Right" Width="170"></TextBox>
+                                    <TextBox  x:Name="txtLastNameEdit" DockPanel.Dock="Right" Width="170">
+                                        <TextBox.Text>
+                                            <Binding Path="LastName" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                                <Binding.ValidationRules>
+                                                    <val:NotEmptyValidationRule ValidatesOnTargetUpdated="True"/>
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </TextBox.Text>
+                                    </TextBox>
+                                    <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
+                                </DockPanel>
+                                
+                                <DockPanel Margin="3">
+                                    <Label DockPanel.Dock="Left">JMBG</Label>
+                                    <TextBox x:Name="txtJMBGEdit" DockPanel.Dock="Right" Width="170">
+                                        <TextBox.Text>
+                                            <Binding Path="JMBG" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                                <Binding.ValidationRules>
+                                                    <val:JMBGValidationRule ValidatesOnTargetUpdated="True"/>
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </TextBox.Text>
+                                    </TextBox>
                                     <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                                 </DockPanel>
 
                                 <DockPanel Margin="3">
+                                    <Label DockPanel.Dock="Left">Adresa</Label>
+                                    <WrapPanel DockPanel.Dock="Right"  Grid.Column="1" Grid.Row="3" HorizontalAlignment="Right" Height="40" VerticalAlignment="Bottom">
+                                        <ComboBox Width="80" Margin="0,0,30,0" materialDesign:HintAssist.Hint="Drzava"/>
+                                        <ComboBox Width="80" Margin="0,0,30,0" materialDesign:HintAssist.Hint="Grad"/>
+                                        <ComboBox Width="80" materialDesign:HintAssist.Hint="Ulica"/>
+                                    </WrapPanel>
+                                </DockPanel>
+
+                                <DockPanel Margin="3">
                                     <Label DockPanel.Dock="Left">e-mail</Label>
-                                    <TextBox DockPanel.Dock="Right" Width="170"></TextBox>
+                                    <TextBox x:Name="txtEmailEdit" DockPanel.Dock="Right" Width="170">
+                                        <TextBox.Text>
+                                            <Binding Path="EMAIL" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                                <Binding.ValidationRules>
+                                                    <val:EmailValidationRule ValidatesOnTargetUpdated="True"/>
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </TextBox.Text>
+                                    </TextBox>
                                     <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                                 </DockPanel>
 
                                 <DockPanel Margin="3">
                                     <Label DockPanel.Dock="Left">telefon</Label>
-                                    <TextBox DockPanel.Dock="Right" Width="170"></TextBox>
+                                    <TextBox x:Name="txtPhoneEdit" DockPanel.Dock="Right" Width="170">
+                                        <TextBox.Text>
+                                            <Binding Path="Phone" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                                <Binding.ValidationRules>
+                                                    <val:PhoneValidationRule ValidatesOnTargetUpdated="True"/>
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </TextBox.Text>
+                                    </TextBox>
                                     <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                                 </DockPanel>
-
-                                <DockPanel Margin="3">
-                                    <Label DockPanel.Dock="Left">JMBG</Label>
-                                    <TextBox DockPanel.Dock="Right" Width="170"></TextBox>
-                                    <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
-                                </DockPanel>
-
 
                                 <DockPanel Margin="3">
                                     <Label DockPanel.Dock="Left">datum rodjenja</Label>
-                                    <DatePicker DockPanel.Dock="Right" Width="170"></DatePicker>
+                                    <DatePicker x:Name="birthDatePickerEdit" DockPanel.Dock="Right" Width="170" DisplayDate="1967-05-14" Text="14/05/1967"></DatePicker>
                                     <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                                 </DockPanel>
 
-                                <Button HorizontalAlignment="Center"  Padding="5" Width="160">Azuriraj podatke</Button>
+                                <Button HorizontalAlignment="Center"  Padding="5" Width="160" Click="Button_Click_1">Azuriraj podatke
+                                    <Button.Style>
+                                        <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Path=(Validation.HasError), ElementName=txtFirstNameEdit}" Value="True">
+                                                    <Setter Property="IsEnabled" Value="False" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Path=(Validation.HasError), ElementName=txtLastNameEdit}" Value="True">
+                                                    <Setter Property="IsEnabled" Value="False" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Path=(Validation.HasError), ElementName=txtEmailEdit}" Value="True">
+                                                    <Setter Property="IsEnabled" Value="False" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Path=(Validation.HasError), ElementName=txtPhoneEdit}" Value="True">
+                                                    <Setter Property="IsEnabled" Value="False" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Path=(Validation.HasError), ElementName=txtJMBGEdit}" Value="True">
+                                                    <Setter Property="IsEnabled" Value="False" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Path=SelectedDate, ElementName=birthDatePickerEdit}" Value="{x:Null}">
+                                                    <Setter Property="IsEnabled" Value="False" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
                             </StackPanel>
 
                         </GroupBox>
@@ -793,6 +875,7 @@
                         </GroupBox>
 
                     </DockPanel>
+                    </ScrollViewer>
                 </TabItem>
 
                 <TabItem Header="Vaš utisak" PreviewKeyDown="TabItem_PreviewKeyDown_Feedback">

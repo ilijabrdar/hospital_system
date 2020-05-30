@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:upravnikKT2"
         mc:Ignorable="d"
         FontSize="18"
-        Title="Dodavanje smene" Height="456.917" Width="688.998">
+        Title="Dodavanje smene" Height="456.917" Width="688.998" PreviewKeyDown="Window_PreviewKeyDown">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" MinHeight="26" />

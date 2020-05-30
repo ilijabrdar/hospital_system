@@ -8,7 +8,7 @@
         xmlns:local="clr-namespace:upravnikKT2"
         mc:Ignorable="d"
         FontSize="18"
-        Title="Raspored opreme po prostorijama" Height="450" Width="450" Loaded="Window_Loaded">
+        Title="Raspored opreme po prostorijama" Height="450" Width="450" Loaded="Window_Loaded" PreviewKeyDown="Window_PreviewKeyDown">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60" />

@@ -4,6 +4,8 @@ using Model.Director;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.IO.Packaging;
 using System.Linq;
 using System.Net;
 using System.Windows;
@@ -17,14 +19,115 @@ namespace upravnikKT2
     /// <summary>
     /// Interaction logic for DashboardWindow.xaml
     /// </summary>
-    public partial class DashboardWindow : Window
+    public partial class DashboardWindow : Window, INotifyPropertyChanged
     {
         private readonly IRoomController _roomController;
         private readonly IEquipmentController _equipmentController;
         private readonly IRenovationController _renovationController;
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+        private string _firstName;
+        public string FirstName
+        {
+            get
+            {
+                return _firstName;
+            }
+            set
+            {
+                if (value != _firstName)
+                {
+                    _firstName = value;
+                    OnPropertyChanged("FirstName");
+                }
+            }
+        }
+
+        private string _lastName;
+        public string LastName
+        {
+            get
+            {
+                return _lastName;
+            }
+            set
+            {
+                if (value != _lastName)
+                {
+                    _lastName = value;
+                    OnPropertyChanged("LastName");
+                }
+            }
+        }
+
+        private string _jmbg;
+        public string JMBG
+        {
+            get
+            {
+                return _jmbg;
+            }
+            set
+            {
+                if (value != _jmbg)
+                {
+                    _jmbg = value;
+                    OnPropertyChanged("JMBG");
+                }
+            }
+        }
+
+        private string _email;
+        public string EMAIL
+        {
+            get
+            {
+                return _email;
+            }
+            set
+            {
+                if (value != _email)
+                {
+                    _email = value;
+                    OnPropertyChanged("EMAIL");
+                }
+            }
+        }
+
+        private string _phone;
+        public string Phone
+        {
+            get
+            {
+                return _phone;
+            }
+            set
+            {
+                if (value != _phone)
+                {
+                    _phone = value;
+                    OnPropertyChanged("Phone");
+                }
+            }
+        }
+
         public DashboardWindow()
         {
             InitializeComponent();
+            this.DataContext = this;
+
+            FirstName = "Marko";
+            LastName = "Markovic";
+            EMAIL = "marko@bolnica.com";
+            Phone = "12312333";
+            JMBG = "1122334455645";
 
             var app = Application.Current as App;
             _roomController = app.RoomController;
@@ -642,6 +745,16 @@ namespace upravnikKT2
 
                 MessageBox.Show(messageBoxText, caption, button, icon);
             }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            string messageBoxText = "Uspesno izmenjeni podaci!";
+            string caption = "Informacija";
+            MessageBoxButton button = MessageBoxButton.OK;
+            MessageBoxImage icon = MessageBoxImage.Information;
+
+            MessageBox.Show(messageBoxText, caption, button, icon);
         }
     }
 }

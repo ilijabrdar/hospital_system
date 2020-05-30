@@ -34,5 +34,13 @@ namespace upravnikKT2
         {
             this.Close();
         }
+
+        private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Escape)
+            {
+                this.Close();
+            }
+        }
     }
 }

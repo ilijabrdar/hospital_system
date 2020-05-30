@@ -49,7 +49,7 @@ namespace upravnikKT2.Validation
 
             try
             {
-                bool isJMBG = Regex.IsMatch(value as string, "[0-9]{13,13}", RegexOptions.IgnoreCase);
+                bool isJMBG = Regex.IsMatch(value as string, "^[0-9]{13}$", RegexOptions.IgnoreCase);
 
                 if (isJMBG)  
                 {

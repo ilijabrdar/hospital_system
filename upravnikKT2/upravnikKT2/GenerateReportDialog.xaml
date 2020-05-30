@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:upravnikKT2"
         mc:Ignorable="d"
         FontSize="18"
-        Title="GenerateReportDialog" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="GenerateReportDialog" Height="450" Width="800" Loaded="Window_Loaded" PreviewKeyDown="Window_PreviewKeyDown">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="191" />

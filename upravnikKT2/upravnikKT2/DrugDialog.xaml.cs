@@ -112,5 +112,13 @@ namespace upravnikKT2
 
             Save.IsEnabled = _noOfErrorsOnScreen > 0 ? false : true;
         }
+
+        private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Escape)
+            {
+                this.Close();
+            }
+        }
     }
 }

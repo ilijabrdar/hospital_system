@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:upravnikKT2" xmlns:val="clr-namespace:upravnikKT2.Validation"
         mc:Ignorable="d"
         FontSize="18"
-        Title="Manipulacija lekova" Height="448.276" Width="520.327">
+        Title="Manipulacija lekova" Height="448.276" Width="520.327" PreviewKeyDown="Window_PreviewKeyDown">
     <Window.Resources>
         <Style TargetType="Button" x:Key="MyButton2">
             <Setter Property="OverridesDefaultStyle" Value="True" />

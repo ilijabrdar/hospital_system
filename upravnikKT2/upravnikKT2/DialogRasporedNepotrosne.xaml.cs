@@ -55,5 +55,13 @@ namespace upravnikKT2
             
             this.DataGridRasporedOpremePoProstorijama.ItemsSource = data_rooms;
         }
+
+        private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Escape)
+            {
+                this.Close();
+            }
+        }
     }
 }

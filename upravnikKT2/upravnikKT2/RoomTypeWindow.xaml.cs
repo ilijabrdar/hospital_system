@@ -63,29 +63,59 @@ namespace upravnikKT2
 
         private void Button_Click_Edit(object sender, RoutedEventArgs e)
         {
-            AddRoomType dialog = new AddRoomType(listViewRoomTypes, (RoomType) listViewRoomTypes.SelectedItem);
-            dialog.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            dialog.ShowDialog();
+            if (listViewRoomTypes.SelectedItem != null)
+            {
+                AddRoomType dialog = new AddRoomType(listViewRoomTypes, (RoomType)listViewRoomTypes.SelectedItem);
+                dialog.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                dialog.ShowDialog();
+            }
+            else
+            {
+                string messageBoxText = "Morate selektovati tip prostorije da biste ga izmenili!";
+                string caption = "Greska";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Error;
+
+                MessageBox.Show(messageBoxText, caption, button, icon);
+            }
         }
 
         private void Button_Click_Delete(object sender, RoutedEventArgs e)
         {
-            _roomTypeController.Delete((RoomType) listViewRoomTypes.SelectedItem);
+            if (listViewRoomTypes.SelectedItem != null)
+            {
+                _roomTypeController.Delete((RoomType)listViewRoomTypes.SelectedItem);
 
 
-            listViewRoomTypes.ItemsSource = null;
+                listViewRoomTypes.ItemsSource = null;
 
-            List<RoomType> roomTypes = new List<RoomType>();
-            roomTypes = _roomTypeController.GetAll().ToList();
+                List<RoomType> roomTypes = new List<RoomType>();
+                roomTypes = _roomTypeController.GetAll().ToList();
 
-            ObservableCollection<RoomType> temp = new ObservableCollection<RoomType>(roomTypes);
+                ObservableCollection<RoomType> temp = new ObservableCollection<RoomType>(roomTypes);
 
-            listViewRoomTypes.ItemsSource = temp;
-            listViewRoomTypes.DisplayMemberPath = "Name";
-            listViewRoomTypes.SelectedValuePath = "Id";
-            listViewRoomTypes.SelectedValue = "2";
+                listViewRoomTypes.ItemsSource = temp;
+                listViewRoomTypes.DisplayMemberPath = "Name";
+                listViewRoomTypes.SelectedValuePath = "Id";
+                listViewRoomTypes.SelectedValue = "2";
+            }
+            else
+            {
+                string messageBoxText = "Morate selektovati tip prostorije da biste ga izbrisali!";
+                string caption = "Greska";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Error;
+
+                MessageBox.Show(messageBoxText, caption, button, icon);
+            }
         }
 
-
+        private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Escape)
+            {
+                this.Close();
+            }
+        }
     }
 }

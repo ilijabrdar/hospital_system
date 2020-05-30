@@ -35,5 +35,13 @@ namespace upravnikKT2
             this.lista.ItemsSource = lista_opreme;
 
         }
+
+        private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Escape)
+            {
+                this.Close();
+            }
+        }
     }
 }

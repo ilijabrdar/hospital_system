@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Threading;
 
 namespace upravnikKT2
@@ -119,6 +120,14 @@ namespace upravnikKT2
         private void Button_Click_Cancel(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void Window_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Escape)
+            {
+                this.Close();
+            }
         }
     }
 }
