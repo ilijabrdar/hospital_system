@@ -13,5 +13,7 @@ namespace bolnica.Controller
         Boolean AddEquipment(Equipment equipment, Model.Director.Room room);
 
         Boolean ChangeRoomType(Room room, RoomType roomType);
+
+        IEnumerable<Room> getRoomsContainingEquipment(Equipment equipment);
     }
 }
