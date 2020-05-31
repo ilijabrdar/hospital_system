@@ -450,7 +450,7 @@ namespace upravnikKT2
 
         private void PrikaziRasporedNepotrosne(object sender, RoutedEventArgs e)
         {
-            DialogRasporedNepotrosne dialog = new DialogRasporedNepotrosne();
+            DialogRasporedNepotrosne dialog = new DialogRasporedNepotrosne((Equipment) DataGridOpremaNepotrosna.SelectedItem);
             dialog.ShowDialog();
         }
 

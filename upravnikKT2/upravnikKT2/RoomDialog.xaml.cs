@@ -59,6 +59,8 @@ namespace upravnikKT2
 
             _selectedRoom = selectedRoom;
             RoomCode = _selectedRoom.RoomCode;
+
+            comboRoomTypes.SelectedItem = selectedRoom.RoomType.GetId();
             
         }
 
@@ -86,7 +88,6 @@ namespace upravnikKT2
         }
 
         private string _roomCode;
-        private Room selectedRoom;
 
         public string RoomCode
         {
@@ -114,9 +115,9 @@ namespace upravnikKT2
             comboRoomTypes.SelectedValuePath = "Id";
             comboRoomTypes.SelectedValue = "2";
 
-            if (selectedRoom != null)
+            if (_selectedRoom != null)
             {
-                comboRoomTypes.SelectedItem = selectedRoom.RoomType;
+                comboRoomTypes.SelectedValue = _selectedRoom.RoomType.GetId();
             }
         }
 

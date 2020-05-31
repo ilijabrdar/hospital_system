@@ -115,6 +115,7 @@
     </Compile>
     <Compile Include="ModelMock\WorkingShift.cs" />
     <Compile Include="Validation\ValidationsRules.cs" />
+    <Compile Include="ViewModel\RoomEquipment.cs" />
     <Page Include="AddRoomTypeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
