@@ -8,6 +8,9 @@
          xmlns:resource="clr-namespace:PacijentBolnicaZdravo.Properties" xmlns:p="clr-namespace:MyProject.Language"
         mc:Ignorable="d"
         Title="{x:Static p:Resources.Title}" Height="504" Width="827">
+    <mah:MetroWindow.Resources>
+        <DatePickerFormat x:Key="DatePickerFormat1">Short</DatePickerFormat>
+    </mah:MetroWindow.Resources>
     <DockPanel>
         <DockPanel DockPanel.Dock="Top" Height="35">
             <Button Name="LogOutButton" Content="{x:Static p:Resources.LogOut}"  DockPanel.Dock="Left" VerticalContentAlignment="Center" Margin="5" Click="LogOut"/>
@@ -44,13 +47,13 @@
             </TabControl.Resources>
             <TabItem Header="{x:Static p:Resources.TabArticles}" Name="Articles"  >
                 <DockPanel>
-                    
-                        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right">
+
+                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right">
                         <TextBox BorderThickness="3" BorderBrush="LightBlue" Height="30" VerticalContentAlignment="Center" Margin="0,5,0,5" Width="200" HorizontalAlignment="left" Name="SearchBox" ></TextBox>
                         <Button x:Name="SearchButton" Width="49" Margin="0,5,5,5" Height="30" Background="#FFF2EDED" Click="Search" >
-                                <Image Margin="2" Source="/PacijentBolnicaZdravo;component/Images/search.png"></Image>
-                            </Button>
-                        </StackPanel>
+                            <Image Margin="2" Source="/PacijentBolnicaZdravo;component/Images/search.png"></Image>
+                        </Button>
+                    </StackPanel>
 
                     <ScrollViewer VerticalScrollBarVisibility="auto">
                         <StackPanel x:Name="ArticlesPanel" Orientation="Vertical">
@@ -72,7 +75,7 @@ Piramida ishrane je vizuelni prikaz namirnica koje treba da budu zastupljenje u 
                     </StackPanel>
                     <StackPanel x:Name="DatePicker" Orientation="Horizontal">
                         <TextBlock Name="ChooseDate" Text="{x:Static p:Resources.ChooseDate}" FontSize="19" Margin="20" Width="150"/>
-                        <DatePicker  CalendarClosed="CalendarClosedDate" Name="Picker" Margin="20" Width="200"/>
+                        <DatePicker Name="Picker" Margin="20" Width="200" FirstDayOfWeek="Monday" SelectedDateFormat="{DynamicResource DatePickerFormat1}"/>
                     </StackPanel>
                     <Border x:Name="Termins" BorderBrush="Black" CornerRadius="8,8,3,3" BorderThickness="1" Height="163" Margin="0.1">
                         <GroupBox x:Name="RadioButtons"></GroupBox>
@@ -93,7 +96,7 @@ Piramida ishrane je vizuelni prikaz namirnica koje treba da budu zastupljenje u 
                             </StackPanel>
                             <Border  BorderBrush="Black" BorderThickness="1" Margin="5" Width="165">
                                 <StackPanel x:Name="FirstExam" Orientation="Vertical">
-                                    
+
                                 </StackPanel>
                             </Border>
                             <Border  BorderBrush="Black" BorderThickness="1" Margin="5" Width="165"></Border>
@@ -104,29 +107,41 @@ Piramida ishrane je vizuelni prikaz namirnica koje treba da budu zastupljenje u 
                 </StackPanel>
             </TabItem>
             <TabItem Header="{x:Static p:Resources.TabFile}" Name="TabFile">
-                <DockPanel>
-                    <Button DockPanel.Dock="Top" HorizontalAlignment="Left" x:Name="GetTherapy"  Width="150" Height="27" Margin="30,15,10,10" Background="#FFF2EDED" Click="CurrentTherapy" >
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Name="CurrentTherapyLabel" Text="{x:Static p:Resources.CurrentTherapy}" Margin="-1" FontSize="12" Foreground="Black"></TextBlock>
-                            <Image Margin="3,-5,0,0"  Height="23" Width="20" Source="/PacijentBolnicaZdravo;component/Images/PDF1.png"></Image>
-                        </StackPanel>
-                    </Button>
-                    <ScrollViewer VerticalScrollBarVisibility="auto">
-                        <StackPanel x:Name="Exeminations" Orientation="Vertical">
+                <TabControl BorderBrush="LightBlue" BorderThickness="1" x:Name="TabControl2" TabStripPlacement="Top" Margin="0.3">
+                    <TabItem Header="Examinations">
+                        <DockPanel>
+                            <Button DockPanel.Dock="Top" HorizontalAlignment="Left" x:Name="GetTherapy"  Width="150" Height="27" Margin="30,15,10,10" Background="#FFF2EDED" Click="CurrentTherapy" >
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Name="CurrentTherapyLabel" Text="{x:Static p:Resources.CurrentTherapy}" Margin="-1" FontSize="12" Foreground="Black"></TextBlock>
+                                    <Image Margin="3,-5,0,0"  Height="23" Width="20" Source="/PacijentBolnicaZdravo;component/Images/PDF1.png"></Image>
+                                </StackPanel>
+                            </Button>
+                            <ScrollViewer VerticalScrollBarVisibility="auto">
+                                <StackPanel x:Name="Exeminations" Orientation="Vertical">
 
-                        </StackPanel>
-                    </ScrollViewer>
-                </DockPanel>
-  
+                                </StackPanel>
+                            </ScrollViewer>
+                        </DockPanel>
+                    </TabItem>
+                    <TabItem Header="Hospitalization">
+                        <DockPanel>
+                            <TextBlock>
+
+                            </TextBlock>
+                        </DockPanel>
+                    </TabItem>
+                    <TabItem Header="Operation">
+                    </TabItem>
+                </TabControl>
             </TabItem>
             <TabItem Header="{x:Static p:Resources.Tabaccount}" Name="TabAccount">
                 <ScrollViewer>
                     <StackPanel Orientation="Vertical">
                         <TextBlock Name="BasicInf"  Text="{x:Static p:Resources.BasicInf}" Margin="10" FontSize="18"/>
                         <StackPanel Orientation="Horizontal">
-                            
+
                             <StackPanel Orientation="Vertical">
-                               
+
                                 <TextBlock Name="NameLabel" Text="{x:Static p:Resources.Name}" Margin="15" FontSize="15"/>
                                 <TextBlock Margin="15" FontSize="15" Name="SurnameLabel"  Text="{x:Static p:Resources.Surname}"/>
                                 <TextBlock Name="IDLabel" Margin="15" FontSize="15"  Text="{x:Static p:Resources.ID}" />
@@ -134,7 +149,7 @@ Piramida ishrane je vizuelni prikaz namirnica koje treba da budu zastupljenje u 
                                 <TextBlock Margin="15" FontSize="15" >E-mail:</TextBlock>
                                 <TextBlock Name="AdressLabel"  Text="{x:Static p:Resources.Adress}" Margin="15" FontSize="15"/>
                                 <TextBlock Name="PhoneLabel" Margin="15" FontSize="15"  Text="{x:Static p:Resources.NumberPhone}" />
-                               
+
                             </StackPanel>
                             <StackPanel Orientation="Vertical">
                                 <TextBox TextAlignment="Left" BorderThickness="3" BorderBrush="LightBlue" Name="Name" Margin="10" FontSize="15" Width="220">Jovan</TextBox>
@@ -152,8 +167,8 @@ Piramida ishrane je vizuelni prikaz namirnica koje treba da budu zastupljenje u 
                                     <Button Margin="20" Name="ChoosePhotoButton"  Content="{x:Static p:Resources.Photo}" HorizontalAlignment="Right" VerticalAlignment="Center" Click="ChoosePhoto"></Button>
                                 </StackPanel>
                             </StackPanel>
-                          
-                           
+
+
                         </StackPanel>
                         <StackPanel Orientation="Vertical">
                             <TextBlock Name="PwLabel"  Margin="10,10,0,0" FontSize="18" Text="{x:Static p:Resources.ChangePw}" />
@@ -180,9 +195,9 @@ Piramida ishrane je vizuelni prikaz namirnica koje treba da budu zastupljenje u 
                     <TextBlock Name="OpinionName" FontSize="14" HorizontalAlignment="Center" Margin="5" Text="{x:Static p:Resources.OpinionDesc}" />
 
                     <TextBox BorderThickness="2" Name="FeedBack" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="auto" Height="200" TextAlignment="Left" FontSize="14"></TextBox>
-                   
+
                     <Button Name="FeedBackButton" Content="{x:Static p:Resources.Send}"  Width="60" Margin="10,10,20,10" HorizontalAlignment="Right" Click="Feedback"></Button>
-                    
+
                 </StackPanel>
             </TabItem>
         </TabControl>

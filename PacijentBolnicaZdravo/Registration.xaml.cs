@@ -14,12 +14,14 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Documents.DocumentStructures;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MahApps.Metro;
 using MahApps.Metro.Controls;
+using Model.Users;
 using PacijentBolnicaZdravo.Properties;
 
 namespace PacijentBolnicaZdravo
@@ -32,9 +34,13 @@ namespace PacijentBolnicaZdravo
         public ChangeLanguage cl = new ChangeLanguage();
         public Registration()
         {
+   
+
             Thread.CurrentThread.CurrentCulture = MainWindow.culture;
             Thread.CurrentThread.CurrentUICulture = MainWindow.culture;
+
             InitializeComponent();
+            
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             if (Thread.CurrentThread.CurrentCulture.Equals(new CultureInfo("sr")))
                 Language.SelectedItem = Language.Items[0];
@@ -126,7 +132,26 @@ namespace PacijentBolnicaZdravo
 
         private void UpdateInfo(object sender, RoutedEventArgs e)
         {
-
+            String name = Name.Text.ToString();
+            String surname = Surname.Text.ToString();
+            String Id = ID.Text.ToString();
+            DateTime date = DateTime.Parse(DateBirth.Text);
+            String email = Email.Text.ToString();
+            String address = Adress.Text.ToString();
+            String phone = PhoneNumber.Text.ToString();
+            String passw = NewPassword.Password.ToString();
+            
+            Patient patient = new Patient(-1, name, surname, Id, email, phone, date, address, name, passw, null);
+            var app = Application.Current as App;
+            var temp = app.userController.Save(patient);
+            if (temp == null)
+            {
+                Console.WriteLine("Nije uspeo");
+            }
+            App.j = 0;
+            WindowLogIn lg = new WindowLogIn();
+            lg.Show();
+            this.Close();
         }
 
         private void UpdatePw(object sender, RoutedEventArgs e)

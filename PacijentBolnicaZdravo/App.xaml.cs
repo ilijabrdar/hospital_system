@@ -1,4 +1,12 @@
-﻿using System;
+﻿using bolnica.Controller;
+using bolnica.Repository;
+using bolnica.Repository.CSV.Converter;
+using Controller;
+using Model.PatientSecretary;
+using Model.Users;
+using Repository;
+using Service;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -17,10 +25,19 @@ namespace PacijentBolnicaZdravo
     public partial class App : Application
     {
           public static int j = 0;
+        private readonly String _patient_File = "../../ResourcesFiles/patient.csv";
+        private readonly String _patientFile_File = "../../ResourcesFiles/patientFile.csv";
+
+        public IUserController userController;
       
         App()
         {
-           
+            var patientFileRepo = new PatientFileRepository(new CSVStream<PatientFile>(_patientFile_File, new PatientFileCSVConverter()), new LongSequencer());
+            var patientFileService = new PatientFileService(patientFileRepo);
+            var patientRepo = new PatientRepository(new CSVStream<Patient>(_patient_File, new PatientCSVConverter()), new LongSequencer());
+            var patientService = new PatientService(patientRepo, patientFileService);
+            var userService = new UserService(patientService);
+            userController = new UserController(userService);
            
         }
     /*    public static void ChangeCulture(CultureInfo info)

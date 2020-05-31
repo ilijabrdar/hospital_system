@@ -83,7 +83,7 @@
                                     </Binding>
                                 </TextBox.Text>
                             </TextBox>
-                            <DatePicker Margin="0,12,10,10" Width="220" Height="30">
+                            <DatePicker Margin="0,12,10,10" Width="220" Height="30" Name="DateBirth">
                             </DatePicker>
                             <TextBox Margin="0,12,10,10" BorderThickness="3" BorderBrush="LightBlue" TextAlignment="Left" FontSize="15" Name="Email"  Width="220">
                                 <TextBox.Text>
