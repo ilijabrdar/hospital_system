@@ -65,5 +65,29 @@ namespace Service
         {
             return _repository.GetEager(id);
         }
+
+        public IEnumerable<Room> getRoomsCointainingEquipment(Equipment equipment)
+        {
+            IEnumerable<Room> rooms = this.GetAll();
+            List<Room> result = new List<Room>();
+            foreach (Room room in rooms)
+            {
+                //if (room.Equipment_inventory.ContainsKey(equipment))
+                //{
+                //    result.Add(room);
+                //}
+
+                foreach (KeyValuePair<Equipment, int> pair in room.Equipment_inventory)
+                {
+                    if (pair.Key.id == equipment.id)
+                    {
+                        result.Add(room);
+                    }
+                }
+            }
+
+            return result;
+        }
+
     }
 }
