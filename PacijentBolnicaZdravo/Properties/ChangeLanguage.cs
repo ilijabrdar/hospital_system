@@ -56,6 +56,10 @@ namespace PacijentBolnicaZdravo.Properties
                 currentWindow.OpinionName.Text = MyProject.Language.Resources.OpinionDesc;
                 currentWindow.FeedBackButton.Content = MyProject.Language.Resources.Send;
                 currentWindow.Title = MyProject.Language.Resources.Title;
+                currentWindow.Examinations.Header = MyProject.Language.Resources.Examinations;
+            currentWindow.Surgery.Header = MyProject.Language.Resources.Surgeries;
+            currentWindow.Hospitalizations.Header = MyProject.Language.Resources.Hospitalizations;
+            currentWindow.UsernameLabel.Text = MyProject.Language.Resources.Username;
         }   
 
         public void changeLogInWindow(WindowLogIn currentWindow)
@@ -66,11 +70,13 @@ namespace PacijentBolnicaZdravo.Properties
             currentWindow.LogIn.Content = MyProject.Language.Resources.LogIn;
             currentWindow.QuestionReg.Text = MyProject.Language.Resources.LabelRegistration;
             currentWindow.RegisterButton.Content = MyProject.Language.Resources.Register;
+            currentWindow.Title = MyProject.Language.Resources.TitleLogIn;
 
         }
 
         public void changeRegistrationWindow(Registration regWindow)
         {
+            regWindow.Title = MyProject.Language.Resources.TitleRegistration;
             regWindow.BasicInf.Text = MyProject.Language.Resources.BasicInf;
             regWindow.NameLabel.Text = MyProject.Language.Resources.Name;
             regWindow.SurnameLabel.Text = MyProject.Language.Resources.Surname;
@@ -78,7 +84,7 @@ namespace PacijentBolnicaZdravo.Properties
             regWindow.DateBirthLabel.Text = MyProject.Language.Resources.DateBirth;
             regWindow.AdressLabel.Text = MyProject.Language.Resources.Adress;
             regWindow.PhoneLabel.Text = MyProject.Language.Resources.NumberPhone;
-            regWindow.UpdateData.Content = MyProject.Language.Resources.UpdateData;
+            regWindow.Register.Content = MyProject.Language.Resources.Register;
             regWindow.ChoosePhotoButton.Content = MyProject.Language.Resources.Photo;
             regWindow.NewPw.Text = MyProject.Language.Resources.NewPw;
             regWindow.ConfirmPw.Text = MyProject.Language.Resources.ConfirmPw;

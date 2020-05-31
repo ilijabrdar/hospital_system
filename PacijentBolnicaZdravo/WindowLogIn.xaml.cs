@@ -41,7 +41,7 @@ namespace PacijentBolnicaZdravo
             if (MainWindow.Theme == 1)
             {
                 ThemeManager.ChangeAppStyle(this,
-                                   ThemeManager.GetAccent("Red"),
+                                   ThemeManager.GetAccent("Teal"),
                                    ThemeManager.GetAppTheme("BaseDark"));
                 DarkMode.Value = DarkMode.Maximum;
             }
@@ -93,7 +93,7 @@ namespace PacijentBolnicaZdravo
             if ((int)DarkMode.Value == 1)
             {
                 ThemeManager.ChangeAppStyle(this,
-                                    ThemeManager.GetAccent("Red"),
+                                    ThemeManager.GetAccent("Teal"),
                                     ThemeManager.GetAppTheme("BaseDark"));
                 MainWindow.Theme = 1;
             }

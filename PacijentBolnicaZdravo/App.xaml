@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:PacijentBolnicaZdravo"
              xmlns:resource="clr-namespace:PacijentBolnicaZdravo.Properties" xmlns:resource1="clr-namespace:MyProject.Language"
-             StartupUri="MainWindow.xaml">
+             StartupUri="WindowLogIn.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

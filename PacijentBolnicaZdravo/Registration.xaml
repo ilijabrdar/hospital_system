@@ -7,7 +7,7 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:resource="clr-namespace:PacijentBolnicaZdravo.Properties" xmlns:p="clr-namespace:MyProject.Language"
         mc:Ignorable="d"
-        Title="Registration" Height="504" Width="827">
+       Title="{x:Static p:Resources.TitleRegistration}" Height="450" Width="800">
     <DockPanel>
         <DockPanel Height="40" DockPanel.Dock="Top">
             <ComboBox DockPanel.Dock="Left" x:Name="Language"  SelectionChanged="Language_SelectionChanged"  Margin="10,4,10,2" Height="25" Width="120" FontSize="13">
@@ -45,6 +45,7 @@
 
                             <TextBlock Name="NameLabel" Text="{x:Static p:Resources.Name}" Margin="15" FontSize="15"/>
                             <TextBlock Margin="15" FontSize="15" Name="SurnameLabel"  Text="{x:Static p:Resources.Surname}"/>
+                            <TextBlock Margin="15" FontSize="15" Name="UsernameLabel"  Text="{x:Static p:Resources.Username}"/>
                             <TextBlock Name="IDLabel" Margin="15" FontSize="15"  Text="{x:Static p:Resources.ID}" />
                             <TextBlock Name="DateBirthLabel" FontSize="15" Margin="15" Text="{x:Static p:Resources.DateBirth}" ></TextBlock>
                             <TextBlock Margin="15" FontSize="15" >E-mail:</TextBlock>
@@ -68,6 +69,15 @@
                             <TextBox Margin="0,12,10,10" BorderThickness="3" BorderBrush="LightBlue" TextAlignment="Left" FontSize="15" Name="Surname"  Width="220">
                                 <TextBox.Text>
                                     <Binding Path="Prezime" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <local:ValidationRules/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBox Margin="0,12,10,10" BorderThickness="3" BorderBrush="LightBlue" TextAlignment="Left" FontSize="15" Name="Username"  Width="220">
+                                <TextBox.Text>
+                                    <Binding Path="USERNAME" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                                         <Binding.ValidationRules>
                                             <local:ValidationRules/>
                                         </Binding.ValidationRules>
@@ -113,15 +123,15 @@
                                 </TextBox.Text>
                             </TextBox>
                             <PasswordBox Margin="0,12,10,10" BorderThickness="3" BorderBrush="LightBlue" FontSize="15" Name="NewPassword"  Width="220">
-                              
+
                             </PasswordBox>
                             <PasswordBox Margin="0,12,10,10" BorderThickness="3" BorderBrush="LightBlue" FontSize="15" Name="CheckPassword"  Width="220"></PasswordBox>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                <Button  Content="{x:Static p:Resources.Register}" Name="UpdateData"  Margin="10" Click="UpdateInfo"></Button>
+                                <Button  Content="{x:Static p:Resources.Register}" Name="Register"  Margin="10" Click="UpdateInfo"></Button>
                                 <Button x:Name="CancelRegistration" Content="{x:Static p:Resources.Cancel}" Margin="10"  Click="LogInPage"/>
                             </StackPanel>
                         </WrapPanel>
-                       
+
                         <StackPanel Orientation="Vertical">
                             <StackPanel Orientation="Vertical">
                                 <Image x:Name="ProfileImage" Height="100" Width="90" Margin="10" Source="/PacijentBolnicaZdravo;component/Images/User.png"></Image>

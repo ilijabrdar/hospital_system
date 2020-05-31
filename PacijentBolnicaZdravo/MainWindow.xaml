@@ -7,7 +7,7 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
          xmlns:resource="clr-namespace:PacijentBolnicaZdravo.Properties" xmlns:p="clr-namespace:MyProject.Language"
         mc:Ignorable="d"
-        Title="{x:Static p:Resources.Title}" Height="504" Width="827">
+         Height="504" Width="827">
     <mah:MetroWindow.Resources>
         <DatePickerFormat x:Key="DatePickerFormat1">Short</DatePickerFormat>
     </mah:MetroWindow.Resources>
@@ -39,7 +39,7 @@
             </ComboBox>
 
         </DockPanel>
-        <TabControl x:Name="TabControl" TabStripPlacement="Left" Margin="0.3" SelectionChanged="TabControl_SelectionChanged">
+        <TabControl BorderBrush="LightBlue" BorderThickness="1" x:Name="TabControl" TabStripPlacement="Left" Margin="0.3" SelectionChanged="TabControl_SelectionChanged">
             <TabControl.Resources>
                 <Style TargetType="{x:Type TabItem}" BasedOn="{StaticResource {x:Type TabItem}}">
                     <Setter Property="mah:ControlsHelper.HeaderFontSize" Value="15" />
@@ -75,10 +75,10 @@ Piramida ishrane je vizuelni prikaz namirnica koje treba da budu zastupljenje u 
                     </StackPanel>
                     <StackPanel x:Name="DatePicker" Orientation="Horizontal">
                         <TextBlock Name="ChooseDate" Text="{x:Static p:Resources.ChooseDate}" FontSize="19" Margin="20" Width="150"/>
-                        <DatePicker Name="Picker" Margin="20" Width="200" FirstDayOfWeek="Monday" SelectedDateFormat="{DynamicResource DatePickerFormat1}"/>
+                        <DatePicker Name="Picker" Margin="20" Width="200" FirstDayOfWeek="Monday" CalendarClosed="CalendarClosedDate"/>
                     </StackPanel>
                     <Border x:Name="Termins" BorderBrush="Black" CornerRadius="8,8,3,3" BorderThickness="1" Height="163" Margin="0.1">
-                        <GroupBox x:Name="RadioButtons"></GroupBox>
+                        <GroupBox x:Name="RadioButtons" BorderBrush="{x:Null}" Background="{x:Null}" />
                     </Border>
                     <Button Name="Schedule" Content="{x:Static p:Resources.Schedule}" HorizontalAlignment="Right" Margin="15"  Width="76" Click="Zakazi" />
                 </StackPanel>
@@ -108,7 +108,7 @@ Piramida ishrane je vizuelni prikaz namirnica koje treba da budu zastupljenje u 
             </TabItem>
             <TabItem Header="{x:Static p:Resources.TabFile}" Name="TabFile">
                 <TabControl BorderBrush="LightBlue" BorderThickness="1" x:Name="TabControl2" TabStripPlacement="Top" Margin="0.3">
-                    <TabItem Header="Examinations">
+                    <TabItem Header="{x:Static p:Resources.Examinations}" Name="Examinations">
                         <DockPanel>
                             <Button DockPanel.Dock="Top" HorizontalAlignment="Left" x:Name="GetTherapy"  Width="150" Height="27" Margin="30,15,10,10" Background="#FFF2EDED" Click="CurrentTherapy" >
                                 <StackPanel Orientation="Horizontal">
@@ -123,14 +123,14 @@ Piramida ishrane je vizuelni prikaz namirnica koje treba da budu zastupljenje u 
                             </ScrollViewer>
                         </DockPanel>
                     </TabItem>
-                    <TabItem Header="Hospitalization">
+                    <TabItem Header="{x:Static p:Resources.Hospitalizations}" Name="Hospitalizations">
                         <DockPanel>
                             <TextBlock>
 
                             </TextBlock>
                         </DockPanel>
                     </TabItem>
-                    <TabItem Header="Operation">
+                    <TabItem Header="{x:Static p:Resources.Surgeries}" Name="Surgery">
                     </TabItem>
                 </TabControl>
             </TabItem>
@@ -142,6 +142,7 @@ Piramida ishrane je vizuelni prikaz namirnica koje treba da budu zastupljenje u 
 
                             <StackPanel Orientation="Vertical">
 
+                                <TextBlock Name="UsernameLabel" Text="{x:Static p:Resources.Username}" Margin="15" FontSize="15"/>
                                 <TextBlock Name="NameLabel" Text="{x:Static p:Resources.Name}" Margin="15" FontSize="15"/>
                                 <TextBlock Margin="15" FontSize="15" Name="SurnameLabel"  Text="{x:Static p:Resources.Surname}"/>
                                 <TextBlock Name="IDLabel" Margin="15" FontSize="15"  Text="{x:Static p:Resources.ID}" />
@@ -152,6 +153,7 @@ Piramida ishrane je vizuelni prikaz namirnica koje treba da budu zastupljenje u 
 
                             </StackPanel>
                             <StackPanel Orientation="Vertical">
+                                <TextBlock Margin="13" FontSize="15" Width="220" FontWeight="Bold" Opacity="0.6"> JovanJelicki</TextBlock>
                                 <TextBox TextAlignment="Left" BorderThickness="3" BorderBrush="LightBlue" Name="Name" Margin="10" FontSize="15" Width="220">Jovan</TextBox>
                                 <TextBox TextAlignment="Left" BorderThickness="3" BorderBrush="LightBlue" FontSize="15" Name="Surname" Margin="10,12,10,10" Width="220">Jelicki</TextBox>
                                 <TextBox TextAlignment="Left" BorderThickness="3" BorderBrush="LightBlue" FontSize="15" Name="ID" Margin="10,12,10,10"  Width="220">2001998800114</TextBox>

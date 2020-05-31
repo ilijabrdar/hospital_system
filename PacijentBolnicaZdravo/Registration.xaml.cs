@@ -50,7 +50,7 @@ namespace PacijentBolnicaZdravo
             if (MainWindow.Theme == 1)
             {
                 ThemeManager.ChangeAppStyle(this,
-                                   ThemeManager.GetAccent("Red"),
+                                   ThemeManager.GetAccent("Teal"),
                                    ThemeManager.GetAppTheme("BaseDark"));
                 DarkMode.Value = DarkMode.Maximum;
             }
@@ -70,7 +70,7 @@ namespace PacijentBolnicaZdravo
             if ((int)DarkMode.Value == 1)
             {
                 ThemeManager.ChangeAppStyle(this,
-                                    ThemeManager.GetAccent("Red"),
+                                    ThemeManager.GetAccent("Teal"),
                                     ThemeManager.GetAppTheme("BaseDark"));
                 MainWindow.Theme = 1;
             }
@@ -215,6 +215,23 @@ namespace PacijentBolnicaZdravo
                 {
                     _jmbg = value;
                     OnPropertyChanged("JMBG");
+                }
+            }
+        }
+
+        private String _username;
+        public String USERNAME
+        {
+            get
+            {
+                return _username;
+            }
+            set
+            {
+                if (value != _username)
+                {
+                    _username = value;
+                    OnPropertyChanged("USERNAME");
                 }
             }
         }

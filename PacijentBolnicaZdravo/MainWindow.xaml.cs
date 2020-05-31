@@ -42,7 +42,10 @@ namespace PacijentBolnicaZdravo
             Thread.CurrentThread.CurrentCulture = culture;
             Thread.CurrentThread.CurrentUICulture = culture;
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
+            Title = "JovanJelicki";
             
+
             InitializeComponent();
             if (Thread.CurrentThread.CurrentCulture.Equals(new CultureInfo("sr")))
                 Language.SelectedItem = Language.Items[0];
@@ -52,7 +55,7 @@ namespace PacijentBolnicaZdravo
             if (Theme == 1)
             {
                 ThemeManager.ChangeAppStyle(this,
-                                   ThemeManager.GetAccent("Red"),
+                                   ThemeManager.GetAccent("Teal"),
                                    ThemeManager.GetAppTheme("BaseDark"));
                 DarkMode.Value = DarkMode.Maximum;
             }else
@@ -89,7 +92,7 @@ namespace PacijentBolnicaZdravo
             if((int) DarkMode.Value == 1)
             {
                 ThemeManager.ChangeAppStyle(this,
-                                    ThemeManager.GetAccent("Red"),
+                                    ThemeManager.GetAccent("Teal"),//teal Steel
                                     ThemeManager.GetAppTheme("BaseDark"));
                 Theme = 1;
             }

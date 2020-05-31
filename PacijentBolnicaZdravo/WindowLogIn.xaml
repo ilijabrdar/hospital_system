@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:resource="clr-namespace:PacijentBolnicaZdravo.Properties" xmlns:p="clr-namespace:MyProject.Language"
-        Title="WindowLogIn" Height="450" Width="800">
+        Title="{x:Static p:Resources.TitleLogIn}" Height="450" Width="800">
     <DockPanel>
         <DockPanel DockPanel.Dock="Top" Height="66">
             <ComboBox SelectionChanged="Language_SelectionChanged" DockPanel.Dock="Left" x:Name="Language"   Margin="10,4,10,-3" Height="25" Width="120" FontSize="13">

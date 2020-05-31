@@ -196,11 +196,29 @@ namespace MyProject.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Examinations.
+        /// </summary>
+        public static string Examinations {
+            get {
+                return ResourceManager.GetString("Examinations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Feedback.
         /// </summary>
         public static string FeedBack {
             get {
                 return ResourceManager.GetString("FeedBack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hospitalizations.
+        /// </summary>
+        public static string Hospitalizations {
+            get {
+                return ResourceManager.GetString("Hospitalizations", resourceCulture);
             }
         }
         
@@ -340,6 +358,15 @@ namespace MyProject.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Surgeries.
+        /// </summary>
+        public static string Surgeries {
+            get {
+                return ResourceManager.GetString("Surgeries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Surname:.
         /// </summary>
         public static string Surname {
@@ -408,6 +435,24 @@ namespace MyProject.Language {
         public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Welcome.
+        /// </summary>
+        public static string TitleLogIn {
+            get {
+                return ResourceManager.GetString("TitleLogIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Registration.
+        /// </summary>
+        public static string TitleRegistration {
+            get {
+                return ResourceManager.GetString("TitleRegistration", resourceCulture);
             }
         }
         
