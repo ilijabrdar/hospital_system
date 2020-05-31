@@ -4,9 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:cmd="clr-namespace:UserInterface.Commands"
+        xmlns:val="clr-namespace:UserInterface.Validation"
         xmlns:local="clr-namespace:UserInterface"
         mc:Ignorable="d"
-        Title="Bolnica Zdravo" Height="550" Width="800"
+        Title="Bolnica Zdravo" Height="660" Width="800"
         WindowStartupLocation="CenterScreen"
         Background="#1771F1">
     <Window.CommandBindings>
@@ -14,9 +15,9 @@
     </Window.CommandBindings>
     <DockPanel>
         <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TabStripPlacement="Left">
-            <TabItem Header="Pera Peric" Height="40" Background="#D7E1E9">
+            <TabItem Header="{Binding Secretary.Username}" Height="40" Background="#D7E1E9">
                 <Grid>
-                    <Grid x:Name="profile">
+                    <Grid x:Name="profile" Visibility="Collapsed">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="2*"></ColumnDefinition>
@@ -53,7 +54,7 @@
                         </StackPanel>
                     </Grid>
 
-                    <Grid x:Name="changeProfile" Visibility="Collapsed">
+                    <Grid x:Name="changeProfile" >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="2*"></RowDefinition>
                             <RowDefinition Height="1*"></RowDefinition>
@@ -65,37 +66,122 @@
                                     <ColumnDefinition Width="*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
                                 <Grid Grid.Column="0">
-                                    <Label Content="Ime" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                                    <Label Content="Prezime" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top"/>
-                                    <Label Content="JMBG" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top"/>
-                                    <Label Content="E-mail" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top"/>
-                                    <Label Content="Telefon" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top"/>
-                                    <Label Content="Datum rodjenja" HorizontalAlignment="Left" Margin="10,160,0,0" VerticalAlignment="Top"/>
-                                    <Label Content="Država" HorizontalAlignment="Left" Margin="10,190,0,0" VerticalAlignment="Top"/>
-                                    <Label Content="Grad" HorizontalAlignment="Left" Margin="10,220,0,0" VerticalAlignment="Top"/>
-                                    <Label Content="Ulica" HorizontalAlignment="Left" Margin="10,250,0,0" VerticalAlignment="Top"/>
-                                    <TextBox HorizontalAlignment="Left" Height="23" Margin="150,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="263" Text="{Binding Secretary.FirstName}"/>
-                                    <TextBox HorizontalAlignment="Left" Height="23" Margin="150,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="263" Text="{Binding Secretary.LastName}"/>
-                                    <TextBox HorizontalAlignment="Left" Height="23" Margin="150,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="263" Text="{Binding Secretary.Jmbg}"/>
-                                    <TextBox HorizontalAlignment="Left" Height="23" Margin="150,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="263" Text="{Binding Secretary.Email}"/>
-                                    <TextBox HorizontalAlignment="Left" Height="23" Margin="150,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="263" Text="{Binding Secretary.Phone}"/>
-                                    <TextBox HorizontalAlignment="Left" Height="23" Margin="150,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" Text="{Binding Day}"/>
-                                    <TextBox HorizontalAlignment="Left" Height="23" Margin="248,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" Text="{Binding Month}"/>
-                                    <TextBox HorizontalAlignment="Left" Height="23" Margin="343,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" Text="{Binding Year}"/>
-                                    <ComboBox HorizontalAlignment="Left" Margin="150,190,0,0" VerticalAlignment="Top" Width="263" />
-                                    <ComboBox HorizontalAlignment="Left" Margin="150,220,0,0" VerticalAlignment="Top" Width="263"/>
-                                    <ComboBox HorizontalAlignment="Left" Margin="150,250,0,0" VerticalAlignment="Top" Width="152"/>
-                                    <Label Content="/" HorizontalAlignment="Left" Margin="228,160,0,0" VerticalAlignment="Top"/>
-                                    <Label Content="/" HorizontalAlignment="Left" Margin="323,160,0,0" VerticalAlignment="Top"/>
-                                    <TextBox HorizontalAlignment="Left" Height="23" Margin="343,250,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70"/>
-                                    <Label Content="Broj" HorizontalAlignment="Left" Margin="307,250,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.548,0.154"/>
+                                    <Label Content="Ime" HorizontalAlignment="Left" Margin="10,20,0,0" VerticalAlignment="Top"/>
+                                    <Label Content="Prezime" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top"/>
+                                    <Label Content="JMBG" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top"/>
+                                    <Label Content="E-mail" HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top"/>
+                                    <Label Content="Telefon" HorizontalAlignment="Left" Margin="10,180,0,0" VerticalAlignment="Top"/>
+                                    <Label Content="Datum rodjenja" HorizontalAlignment="Left" Margin="10,220,0,0" VerticalAlignment="Top"/>
+                                    <Label Content="Država" HorizontalAlignment="Left" Margin="10,260,0,0" VerticalAlignment="Top"/>
+                                    <Label Content="Grad" HorizontalAlignment="Left" Margin="10,300,0,0" VerticalAlignment="Top"/>
+                                    <Label Content="Ulica" HorizontalAlignment="Left" Margin="10,340,0,0" VerticalAlignment="Top"/>
+                                    <TextBox x:Name="IFirstName" HorizontalAlignment="Left" Height="23" Margin="150,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="263">
+                                        <TextBox.Text>
+                                            <Binding Path="Secretary.FirstName" UpdateSourceTrigger="PropertyChanged">
+                                                <Binding.ValidationRules>
+                                                    <val:OnlyStringValidationRule ValidationStep="RawProposedValue"/>
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </TextBox.Text>
+                                    </TextBox>
+                                    <TextBox x:Name="ILastName" HorizontalAlignment="Left" Height="23" Margin="150,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="263">
+                                    <TextBox.Text>
+                                        <Binding Path="Secretary.LastName" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <val:OnlyStringValidationRule ValidationStep="RawProposedValue"/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                    </TextBox>
+                                    <TextBox x:Name="IJMBG" HorizontalAlignment="Left" Height="23" Margin="150,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="263">
+                                        <TextBox.Text>
+                                            <Binding Path="Secretary.Jmbg" UpdateSourceTrigger="PropertyChanged">
+                                                <Binding.ValidationRules>
+                                                    <val:JMBGValidation ValidationStep="RawProposedValue"/>
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </TextBox.Text>
+                                    </TextBox>
+                                    <TextBox x:Name="IEmail" HorizontalAlignment="Left" Height="23" Margin="150,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="263">
+                                    <TextBox.Text>
+                                        <Binding Path="Secretary.Email" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <val:EmailValidation ValidationStep="RawProposedValue"/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                    </TextBox>
+                                    <TextBox x:Name="IPhone" HorizontalAlignment="Left" Height="23" Margin="150,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="263">
+                                        <TextBox.Text>
+                                            <Binding Path="Secretary.Phone" UpdateSourceTrigger="PropertyChanged">
+                                                <Binding.ValidationRules>
+                                                    <val:PhoneValidation ValidationStep="RawProposedValue"/>
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </TextBox.Text>
+                                    </TextBox>
+                                    <TextBox x:Name="IDay" HorizontalAlignment="Left" Height="23" Margin="150,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70">
+                                        <TextBox.Text>
+                                            <Binding Path="Day" UpdateSourceTrigger="PropertyChanged">
+                                                <Binding.ValidationRules>
+                                                    <val:DayValidation ValidationStep="RawProposedValue"/>
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </TextBox.Text>
+                                    </TextBox>
+                                    <TextBox x:Name="IMonth" HorizontalAlignment="Left" Height="23" Margin="248,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70">
+                                        <TextBox.Text>
+                                            <Binding Path="Month" UpdateSourceTrigger="PropertyChanged">
+                                                <Binding.ValidationRules>
+                                                    <val:MonthValidation ValidationStep="RawProposedValue"/>
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </TextBox.Text>
+                                    </TextBox>
+                                    <TextBox x:Name="IYear" HorizontalAlignment="Left" Height="23" Margin="343,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70">
+                                        <TextBox.Text>
+                                            <Binding Path="Year" UpdateSourceTrigger="PropertyChanged">
+                                                <Binding.ValidationRules>
+                                                    <val:YearValidation ValidationStep="RawProposedValue"/>
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </TextBox.Text>
+                                    </TextBox>
+                                    <ComboBox HorizontalAlignment="Left" Margin="150,260,0,0" VerticalAlignment="Top" Width="263" />
+                                    <ComboBox HorizontalAlignment="Left" Margin="150,300,0,0" VerticalAlignment="Top" Width="263"/>
+                                    <ComboBox HorizontalAlignment="Left" Margin="150,340,0,0" VerticalAlignment="Top" Width="152"/>
+                                    <Label Content="/" HorizontalAlignment="Left" Margin="228,220,0,0" VerticalAlignment="Top"/>
+                                    <Label Content="/" HorizontalAlignment="Left" Margin="323,220,0,0" VerticalAlignment="Top"/>
+                                    <TextBox HorizontalAlignment="Left" Height="23" Margin="343,340,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70"/>
+                                    <Label Content="Broj" HorizontalAlignment="Left" Margin="307,340,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.548,0.154"/>
                                 </Grid>
-                                <StackPanel Grid.Column="1" VerticalAlignment="Top">
+                                <StackPanel Grid.Column="1" VerticalAlignment="Bottom" Height="372" Margin="0,0,0,10">
                                     <Border BorderBrush="Black" BorderThickness="1" Height="220">
                                         <Image/>
                                     </Border>
                                     <Button Content="Izmeni sliku" Width="Auto" Margin="10 5 10 0"/>
-                                    <Button Content="Potrdi" Width="Auto" Margin="10 5 10 5"/>
+                                    <Button Content="Potrdi" Width="Auto" Margin="10 5 10 5">
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Setter Property="IsEnabled" Value="False"/>
+                                                <Style.Triggers>
+                                                    <MultiDataTrigger>
+                                                        <MultiDataTrigger.Conditions>
+                                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IFirstName}" Value="False"/>
+                                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=ILastName}" Value="False"/>
+                                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IJMBG}" Value="False"/>
+                                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IEmail}" Value="False"/>
+                                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IPhone}" Value="False"/>
+                                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IDay}" Value="False"/>
+                                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IMonth}" Value="False"/>
+                                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IYear}" Value="False"/>
+                                                        </MultiDataTrigger.Conditions>
+                                                        <Setter Property="IsEnabled" Value="True"/>
+                                                    </MultiDataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
                                     <Button Content="Odustani" Width="Auto" Margin="10 0 10 0" Click="CancelProfileChangeDialog"/>
                                 </StackPanel>
                                    
@@ -165,44 +251,92 @@
             <TabItem Header="Novi pacijent" Height="40" Background="#D7E1E9">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="1.6*"></RowDefinition>
+                        <RowDefinition Height="1.8*"></RowDefinition>
                         <RowDefinition Height="1.7*"></RowDefinition>
                         <RowDefinition Height="0.3*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
-                        <Label Content="JMBG" HorizontalAlignment="Left" Margin="40,10,0,0" VerticalAlignment="Top"/>
-                        <Label Content="Ime" HorizontalAlignment="Left" Margin="40,40,0,0" VerticalAlignment="Top"/>
-                        <Label Content="Prezime" HorizontalAlignment="Left" Margin="40,70,0,0" VerticalAlignment="Top"/>
-                        <Label Content="Datum rodjenja" HorizontalAlignment="Left" Margin="40,100,0,0" VerticalAlignment="Top"/>
-                        <Label Content="Telefon" HorizontalAlignment="Left" Margin="40,130,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.579,0.5"/>
-                        <Label Content="E-mail" HorizontalAlignment="Left" Margin="40,160,0,0" VerticalAlignment="Top"/>
-                        <TextBox HorizontalAlignment="Left" Height="23" Margin="192,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240">
-                            <Validation.ErrorTemplate>
-                                <ControlTemplate>
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition/>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition/>
-                                        </Grid.ColumnDefinitions>
-                                        <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0"></AdornedElementPlaceholder>
-                                        <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding [0].ErrorContent}" Foreground="Red"></TextBlock>
-                                    </Grid>
-                                </ControlTemplate>
-                            </Validation.ErrorTemplate>
+                        <Label Content="JMBG" HorizontalAlignment="Left" Margin="40,20,0,0" VerticalAlignment="Top"/>
+                        <Label Content="Ime" HorizontalAlignment="Left" Margin="40,60,0,0" VerticalAlignment="Top"/>
+                        <Label Content="Prezime" HorizontalAlignment="Left" Margin="40,100,0,0" VerticalAlignment="Top"/>
+                        <Label Content="Datum rodjenja" HorizontalAlignment="Left" Margin="40,140,0,0" VerticalAlignment="Top"/>
+                        <Label Content="Telefon" HorizontalAlignment="Left" Margin="40,180,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.579,0.5"/>
+                        <Label Content="E-mail" HorizontalAlignment="Left" Margin="40,220,0,0" VerticalAlignment="Top"/>
+                        <TextBox x:Name="IGuestJMBG" HorizontalAlignment="Left" Height="23" Margin="192,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" LostFocus="RequiredFieldError">
+                            <TextBox.Text>
+                                <Binding Path="GuestPatient.Jmbg" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
+                                    <Binding.ValidationRules>
+                                        <val:JMBGValidation ValidationStep="RawProposedValue"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
                         </TextBox>
-                        <TextBox HorizontalAlignment="Left" Height="23" Margin="192,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240"/>
-                        <TextBox HorizontalAlignment="Left" Height="23" Margin="192,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240"/>
-                        <TextBox HorizontalAlignment="Left" Height="23" Margin="192,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50"/>
-                        <TextBox HorizontalAlignment="Left" Height="23" Margin="267,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50"/>
-                        <TextBox HorizontalAlignment="Left" Height="23" Margin="342,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50"/>
-                        <TextBox HorizontalAlignment="Left" Height="23" Margin="192,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240"/>
-                        <TextBox HorizontalAlignment="Left" Height="23" Margin="192,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240"/>
-                        <Label Content="/" HorizontalAlignment="Left" Margin="247,99,0,0" VerticalAlignment="Top"/>
-                        <Label Content="/" HorizontalAlignment="Left" Margin="322,99,0,0" VerticalAlignment="Top"/>
-                        <Button Content="_Pretraži" HorizontalAlignment="Left" Margin="40,199,0,0" VerticalAlignment="Top" Click="FindFreeAppointment" ToolTip ="ctrl + F" GotFocus="DisplayToolTip" LostFocus="RemoveToolTip"/>
+                        <TextBox x:Name="IGuestFirstName" HorizontalAlignment="Left" Height="23" Margin="192,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" LostFocus="RequiredFieldError">
+                            <TextBox.Text>
+                                <Binding Path="GuestPatient.FirstName" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <val:OnlyStringValidationRule ValidationStep="RawProposedValue"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <TextBox x:Name="IGuestLastName" HorizontalAlignment="Left" Height="23" Margin="192,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" LostFocus="RequiredFieldError">
+                            <TextBox.Text>
+                                <Binding Path="GuestPatient.LastName" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <val:OnlyStringValidationRule ValidationStep="RawProposedValue"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <TextBox x:Name="IGuestDay" HorizontalAlignment="Left" Height="23" Margin="192,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" LostFocus="RequiredFieldError">
+                            <TextBox.Text>
+                                <Binding Path="NewDay" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <val:GuestDayValidation ValidationStep="RawProposedValue"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <TextBox x:Name="IGuestMonth" HorizontalAlignment="Left" Height="23" Margin="267,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" LostFocus="RequiredFieldError">
+                            <TextBox.Text>
+                                <Binding Path="NewMonth" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <val:MonthValidation ValidationStep="RawProposedValue"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <TextBox x:Name="IGuestYear" HorizontalAlignment="Left" Height="23" Margin="342,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" LostFocus="RequiredFieldError">
+                        <TextBox.Text>
+                            <Binding Path="NewYear" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <val:YearValidation ValidationStep="RawProposedValue"/>
+                                    </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                        </TextBox>
+                        <TextBox x:Name="IGuestPhone" HorizontalAlignment="Left" Height="23" Margin="192,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240">
+                            <TextBox.Text>
+                                <Binding Path="GuestPatient.Phone" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <val:PhoneValidation ValidationStep="RawProposedValue"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <TextBox x:Name="IGuestEmail" HorizontalAlignment="Left" Height="23" Margin="192,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240">
+                            <TextBox.Text>
+                                <Binding Path="GuestPatient.Email" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <val:EmailValidation ValidationStep="RawProposedValue"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <Label Content="/" HorizontalAlignment="Left" Margin="247,140,0,0" VerticalAlignment="Top"/>
+                        <Label Content="/" HorizontalAlignment="Left" Margin="322,140,0,0" VerticalAlignment="Top"/>
+                        <Button Content="_Pretraži" HorizontalAlignment="Left" Margin="40,260,0,0" VerticalAlignment="Top" Click="FindFreeAppointment" ToolTip ="ctrl + F" GotFocus="DisplayToolTip" LostFocus="RemoveToolTip"/>
                     </Grid>
                     <DataGrid Grid.Row="1" HorizontalAlignment="Stretch" Margin="10,10,10,10" VerticalAlignment="Stretch" ItemsSource="{Binding freeSlots}" 
                               IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False">
@@ -213,7 +347,28 @@
                             <DataGridTextColumn Header="Sala" Binding="{Binding room}" Width="*"></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button Grid.Row="2" Content="Zakaži" HorizontalAlignment="Right" Width="200" Height="25" Margin="0 0 10 0" ToolTip ="ctrl + A" GotFocus="DisplayToolTip" LostFocus="RemoveToolTip"></Button>
+                    <Button Grid.Row="2" Content="Zakaži" HorizontalAlignment="Right" Width="200" Height="25" Margin="0 0 10 0" ToolTip ="ctrl + A" GotFocus="DisplayToolTip" LostFocus="RemoveToolTip">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="IsEnabled" Value="False"/>
+                                <Style.Triggers>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IGuestFirstName}" Value="False"/>
+                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IGuestLastName}" Value="False"/>
+                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IGuestJMBG}" Value="False"/>
+                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IGuestDay}" Value="False"/>
+                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IGuestMonth}" Value="False"/>
+                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IGuestYear}" Value="False"/>
+                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IGuestPhone}" Value="False"/>
+                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IGuestEmail}" Value="False"/>
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter Property="IsEnabled" Value="True"/>
+                                    </MultiDataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
                 </Grid>
             </TabItem>
             <TabItem Header="Pomoć" Height="40" Background="#D7E1E9">

@@ -23,9 +23,13 @@ namespace UserInterface
     public partial class MainWindow : Window
     {
         public Secretary Secretary { get; set; }
+        public Patient GuestPatient { get; set; }
         public int Day { get; set; }
-        public int Month { get; set; }
-        public int Year { get; set; }
+        public int NewDay { get; set; }
+        public static int Month { get; set; }
+        public static int NewMonth { get; set; }
+        public static int Year { get; set; }
+        public static int NewYear { get; set; }
         public BitmapSource Image { get; set; }
         public List<Examination> examinations { get; set; }
         public List<Examination> freeSlots { get; set; }
@@ -38,6 +42,7 @@ namespace UserInterface
             InitializeComponent();
             this.DataContext = this;
             App app = Application.Current as App;
+            GuestPatient = new Patient(true);
             Secretary = secretary;
             Day = secretary.DateOfBirth.Day;
             Month = secretary.DateOfBirth.Month;
@@ -157,6 +162,12 @@ namespace UserInterface
         {
             if(_isToolTipAvailable)
             _toolTip.IsOpen = false;
+        }
+
+        private void RequiredFieldError(object sender, RoutedEventArgs e)
+        {
+            TextBox textField = sender as TextBox;
+            textField.GetBindingExpression(TextBox.TextProperty).UpdateSource();
         }
     }
 }

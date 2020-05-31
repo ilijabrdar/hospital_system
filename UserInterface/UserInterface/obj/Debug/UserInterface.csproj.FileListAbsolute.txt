@@ -54,3 +54,4 @@ C:\Users\Asus\Desktop\SIMS\hospital_system\UserInterface\UserInterface\obj\Debug
 C:\Users\Asus\Desktop\SIMS\hospital_system\UserInterface\UserInterface\bin\Debug\UserInterface.exe.config
 C:\Users\Asus\Desktop\SIMS\hospital_system\UserInterface\UserInterface\bin\Debug\UserInterface.pdb
 C:\Users\Asus\Desktop\SIMS\hospital_system\UserInterface\UserInterface\obj\Debug\UserInterface.csproj.CopyComplete
+C:\Users\Asus\Desktop\SIMS\hospital_system\UserInterface\UserInterface\obj\Debug\GeneratedInternalTypeHelper.g.cs

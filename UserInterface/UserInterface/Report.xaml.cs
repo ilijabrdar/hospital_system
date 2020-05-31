@@ -19,9 +19,22 @@ namespace UserInterface
     /// </summary>
     public partial class Report : Window
     {
+        public static int FromDay { get; set; }
+        public static int ToDay { get; set; }
+        public static int FromMonth { get; set; }
+        public static int ToMonth { get; set; }
+        public static int FromYear { get; set; }
+        public static int ToYear { get; set; }
+        public static int FromHour { get; set; }
+        public static int ToHour { get; set; }
+        public static int FromMinute { get; set; }
+        public static int ToMinute { get; set; }
+
+
         public Report()
         {
             InitializeComponent();
+            this.DataContext = this;
         }
 
         private void CloseWindow(object sender, RoutedEventArgs e)

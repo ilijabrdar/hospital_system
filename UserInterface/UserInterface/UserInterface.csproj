@@ -73,6 +73,11 @@
     <Compile Include="Report.xaml.cs">
       <DependentUpon>Report.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Validation\DateTimeValidation.cs" />
+    <Compile Include="Validation\EmailValidation.cs" />
+    <Compile Include="Validation\NumberValidation.cs" />
+    <Compile Include="Validation\OnlyStringValidationRule.cs" />
+    <Compile Include="Validation\JMBGValidation.cs" />
     <Page Include="AppointmentFilter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
