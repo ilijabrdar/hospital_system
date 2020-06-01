@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\Tamara Kovacevic\Desktop\HCIproject\obj\Debug\
+C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\
 HCIproject
 none
 false
 DEBUG;TRACE
-C:\Users\Tamara Kovacevic\Desktop\HCIproject\App.xaml
+C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\App.xaml
 15730316477
 
 20-478992087
-13-1505183044
+152049061776
 Article.xaml;CreateArticle.xaml;DrugAlternative.xaml;DrugValidation.xaml;EditDrug.xaml;Examination.xaml;Hospitalization.xaml;Log.xaml;Operation.xaml;PatientFile.xaml;Prescription.xaml;Refferal.xaml;ScheduleExamination.xaml;SideBar.xaml;MainWindow.xaml;
 
 True

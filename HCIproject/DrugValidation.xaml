@@ -46,13 +46,13 @@
                         <Label Content="diklofenak-natrijum" Grid.Row="1" Grid.Column="0" FontSize="18" FontWeight="Bold"/>
                         <Label Content="100" Grid.Row="1" Grid.Column="1" FontSize="16" FontWeight="Bold"/>
                     </Grid>
-                    <Button Content="Izmeni" FontSize="18" Height="30" Width="100"  Margin="10" Background="#A2D9CE" Click="Button_Click_2"/>
+                    <Button Content="Izmeni" FontSize="18" Height="30" Width="100"  Margin="10" Background="#A2D9CE" Click="Button_Click_2" BorderBrush="#FF1FEECD"/>
                 </StackPanel>
             </StackPanel>
         </Border>
         <WrapPanel FlowDirection="RightToLeft">
-            <Button Content="Otkaži" FontSize="18" Height="30" Width="100"  Margin="10,0,10,50" Background="#A2D9CE" Click="Button_Click" ></Button>
-            <Button Content="Potvrdi" FontSize="18" Height="30" Width="100"  Margin="10,0,10,50" Background="#A2D9CE" Click="Button_Click_1" ></Button>
+            <Button Content="Otkaži" FontSize="18" Height="30" Width="100"  Margin="10,0,10,50" Background="#A2D9CE" Click="Button_Click" BorderBrush="#FF1FEECD" ></Button>
+            <Button Content="Potvrdi" FontSize="18" Height="30" Width="100"  Margin="10,0,10,50" Background="#A2D9CE" Click="Button_Click_1" BorderBrush="#FF1FEECD" ></Button>
         </WrapPanel>
     </StackPanel>
 </Window>

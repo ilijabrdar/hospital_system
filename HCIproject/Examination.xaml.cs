@@ -75,5 +75,10 @@ namespace HCIproject
             this.Visibility = Visibility.Hidden;
             opeWin.Show();
         }
+
+        private void examScrool_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            examScrool.Height = this.ActualHeight - 150;
+        }
     }
 }

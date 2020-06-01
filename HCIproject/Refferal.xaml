@@ -29,7 +29,7 @@
             <TextBlock Text="OVDE CE SE PRENETI UNETA Anamneza" Grid.Row="1" Grid.Column="1" Margin="20"/>
 
             <Label Content="Napomena" Grid.Row="2" Grid.Column="0" FontSize="18" Margin="20"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Margin="20" AcceptsReturn="True"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Margin="20" AcceptsReturn="True" CaretBrush="#FF1FEECD"/>
         </Grid>
         <Label Content="NAPRAVITI TABELU SA IZBOROM DATUM/SALA/VREME" FontWeight="Bold"  FontSize="20"/>
 
@@ -40,10 +40,10 @@
         </DataGrid>
          -->
         <WrapPanel FlowDirection="RightToLeft" Background="#D5F5E3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <Button Content="Otkaži" FontSize="18" Height="30" Width="100"  Margin="10,0,10,50" Background="#A2D9CE" Click="Button_Click" ></Button>
-            <Button Content="Štampaj" FontSize="18" Height="30" Width="100"  Margin="10,0,10,50" Background="#A2D9CE"  ></Button>
+            <Button Content="Otkaži" FontSize="18" Height="30" Width="100"  Margin="10,0,10,50" Background="#A2D9CE" Click="Button_Click" BorderBrush="#FF1FEECD" ></Button>
+            <Button Content="Štampaj" FontSize="18" Height="30" Width="100"  Margin="10,0,10,50" Background="#A2D9CE" BorderBrush="#FF1FEECD"  ></Button>
 
-            <Button Content="Potvrdi" FontSize="18" Height="30" Width="100"  Margin="10,0,10,50" Background="#A2D9CE" Click="Button_Click_1" ></Button>
+            <Button Content="Potvrdi" FontSize="18" Height="30" Width="100"  Margin="10,0,10,50" Background="#A2D9CE" Click="Button_Click_1" BorderBrush="#FF1FEECD" ></Button>
         </WrapPanel>
     </StackPanel>
 </Window>

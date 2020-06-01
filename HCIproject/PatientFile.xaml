@@ -13,7 +13,7 @@
         <Border  BorderBrush="#A2D9CE" BorderThickness="5" CornerRadius="8,8,8,8"  Margin="5">
                 <WrapPanel>
                     <Label Content="Pretraga kartona po lekaru ili po dijagnozi" Margin="10" FontSize="16"/>
-                    <TextBox x:Name="search_files" HorizontalAlignment="Center"  Text="Pretraga" Margin="10" Background="#EBF5FB" FontSize="16" Foreground="#AAB7B8" Width="127" />
+                    <TextBox x:Name="search_files" HorizontalAlignment="Center"  Text="Pretraga" Margin="10" Background="#EBF5FB" FontSize="16" Foreground="#AAB7B8" Width="127" CaretBrush="#FF1FEECD" />
                 </WrapPanel>
           </Border>
             <ScrollViewer CanContentScroll="True" VerticalScrollBarVisibility="Visible">
@@ -54,14 +54,14 @@
                             <TextBlock Grid.Row="2" Margin="5" Grid.Column="1"  Text="tekst preuzet iz textboxa pregleda terpija bl abla bala naojofajfeojfjeijfjreo"/>
                             <WrapPanel Grid.Row="3" Grid.Column="1">
                                 <Label Content="Štampaj recept" Margin="5" HorizontalAlignment="Left" />
-                                <Button Content="Štampaj" Margin="5" Height="20" Width="50"/>
+                                <Button Content="Štampaj" Margin="5" Background="#FFA2D9CE" Height="25" BorderBrush="#FF1FEECD" />
 
                             </WrapPanel>
                             <Label Grid.Row="4" Margin="5" Grid.Column="0"  Grid.ColumnSpan="2" FontWeight="Bold" Content="UKOLIKO JE BILA HOSPITALIZACIJA, KONTROLA, UPUT, ILI NESTO OD TOGA OVDE SE POJAVI" />
 
                             <WrapPanel x:Name="Izvestaj"  Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2">
                                 <Label Content="Izveštaj anamneza i recept" FontWeight="SemiBold"  Margin="5" />
-                                <Button Content="Štampaj" Margin="5" Height="20" Width="50"/>
+                                <Button Content="Štampaj" Margin="5"  Background="#FFA2D9CE" Height="23" BorderBrush="#FF1FEECD"/>
                             </WrapPanel>
                         </Grid>
                     </StackPanel>
@@ -69,7 +69,7 @@
             </StackPanel>
              </ScrollViewer>
         <WrapPanel FlowDirection="RightToLeft" Background="#D5F5E3" VerticalAlignment="Bottom" >
-            <Button Content="Povratak" FontSize="18" Height="30" Width="100"  Margin="10,10,10,10" Background="#A2D9CE" Click="Button_Click"   />
+            <Button Content="Povratak" FontSize="18" Height="30" Width="100"  Margin="10,10,10,10" Background="#A2D9CE" Click="Button_Click" BorderBrush="#FF1FEECD"   />
         </WrapPanel>
     </StackPanel>
 </Window>

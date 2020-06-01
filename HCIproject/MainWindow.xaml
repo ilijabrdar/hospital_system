@@ -4,23 +4,50 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HCIproject"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Bolnica zdravo" Height="450" Width="800">
+        Title="Bolnica zdravo" Height="450" Width="800"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+         TextElement.FontSize="13"
+         TextOptions.TextFormattingMode="Ideal"
+         TextOptions.TextRenderingMode="Auto"
+         Background="{DynamicResource MaterialDesignPaper}"
+         FontFamily="{DynamicResource MaterialDesignFont}">
     <StackPanel x:Name="Resize" Orientation="Vertical" Background="#D0ECE7" >
         <Border  BorderBrush="#A2D9CE" BorderThickness="8" CornerRadius="8,8,8,8"  Margin="5">
             <WrapPanel Height="70">
-                <Label Content="Prijavljivanje" Foreground="#2C3E50" FontSize="17" Margin="20" Height="53" HorizontalAlignment="Left"/>
-                <Button x:Name="logBtn" Content="Log in" Foreground="#2C3E50" FontSize="17" Width="89" Margin="0,20,0,20.2" HorizontalAlignment="Right" Click="open_LogIn" Height="26"/>
+                <Label Content="Prijavljivanje" Foreground="#2C3E50" FontSize="17" Margin="20" Height="53" HorizontalAlignment="Left" />
+                <Button x:Name="logBtn"
+                        Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10"  ToolTip="MaterialDesignRaisedButton with Round Corners"
+                        Content="Log in"  FontSize="17" Width="89" Margin="0,20,0,20.2" HorizontalAlignment="Right" Click="open_LogIn" Height="26" Background="#FFA2D9CE" BorderBrush="#FF1FEECD"/>
+
             </WrapPanel>
         </Border>
         <Border  BorderBrush="#A2D9CE" BorderThickness="8" CornerRadius="8,8,8,8" Margin="5">
             <WrapPanel Height="70">
                 <Label Content="Pretraga clanaka" Margin="20" VerticalAlignment="Center" Foreground="#2C3E50" FontSize="17" Height="30"/>
-                <TextBox x:Name="searchTxt" Text="Unesite parametar pretrage" Height="30" Width="203" Background="#EBF5FB" FontSize="16" Foreground="#AAB7B8" Focusable="True" Margin="20" IsKeyboardFocusedChanged="search_text_IsKeyboardFocusedChanged" KeyDown="search_text_KeyDown"/>
+                <TextBox x:Name="searchTxt" Text="Unesite parametar pretrage" Height="30" Width="203" Background="#EBF5FB" FontSize="16" Foreground="#AAB7B8" Focusable="True" Margin="20" IsKeyboardFocusedChanged="search_text_IsKeyboardFocusedChanged" KeyDown="search_text_KeyDown" CaretBrush="#FF1FEECD"/>
             </WrapPanel>
         </Border>
-        <Border  BorderBrush="#A2D9CE" BorderThickness="8" CornerRadius="8,8,8,8" Margin="5">
-            <StackPanel Orientation="Vertical" Background="#D0ECE7" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="310"/>
-        </Border>
+        <StackPanel Orientation="Vertical" Background="#D0ECE7" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
+            <Border  BorderBrush="#A2D9CE" BorderThickness="8" CornerRadius="8,8,8,8"  Margin="5">
+                <StackPanel x:Name="Article" Height="150">
+                    <Grid>
+                        <Label x:Name="Topic" Content="Koji su simptomi korona virusa i kako se zaštititi?" HorizontalAlignment="Center" />
+                        <TextBlock x:Name="Author" Text="AUTOR" HorizontalAlignment="Right"/>
+                    </Grid>
+                    <StackPanel>
+                        <ScrollViewer Height="120" >
+                            <TextBlock x:Name="ArticleText" TextWrapping="Wrap" 
+                                       ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True"
+                                      Text="Groznica, kašalj, grlobolja i otežano disanje neki su od najčešćih simptoma novog korona virusa. Može biti ozbiljnija za neke osobe i može dovesti do upale pluća ili otežanog disanja. Ređe je da virus može biti fatalan. Stariji ljudi i ljudi sa postojećim medicinskim stanjima (poput dijabetesa i srčanih bolesti) izgleda da su ranjiviji da obole od virusa. Važno je da kompanije ohrabruju bolesne zaposlene da ostanu kod kuće. Nemojte tražiti napomenu zdravstvenog radnika za zaposlene koji su bolesni od akutne respiratorne bolesti, pošto su kancelarije zdravstvenih ustanova i medicinske ustanove možda izuzetno zauzete i nisu u mogućnosti da dostave takvu dokumentaciju na vreme. Bolesni zaposleni ne bi trebali da se vraćaju na posao sve dok njihova temperatura ne bude ispod 37,8 stepeni Celzijusa tokom najmanje 24 sata, bez pomoći leka koji smanjuje temperaturu ili drugog leka koji menja simptome. Redovno čistite sve površine koje se često dodiruju na radnom mestu, kao što su radne stanice, radne površine i kvake za vrata. Obezbedite maramice za jednokratnu upotrebu da zaposleni pre svake upotrebe mogu obrisati najčešće korišćene površine (na primer, kvake za vrata, tastature, daljinski upravljač, sto). I dok se ovo može činiti osnovnim, mnogi odrasli ne praktikuju pravilno etiku kašljanja i kijanja (pokrijte usta i nos potpuno maramicom ili gornjim rukavom) ili pravilno pranje ruku najmanje 20 sekundi toplom vodom. Tako savetujemo kompanije da istaknu plakate o tome kako da spreče širenje bolesti."/>
+                        </ScrollViewer>
+                    </StackPanel>
+
+                </StackPanel>
+            </Border>
+            
+        </StackPanel>
     </StackPanel>
 </Window>

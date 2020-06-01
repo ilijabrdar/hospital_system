@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:HCIproject"
         mc:Ignorable="d"
         Title="SideBar"  Height="450" Width="800">
@@ -60,31 +61,39 @@
                         <Label Content="5" Grid.Column="1" Grid.Row="0" FontSize="16"  Height="29"   Width="50" FontWeight="Bold"/>
                         <Label Content="5" Grid.Column="1" Grid.Row="1" FontSize="16"  Height="29"  Width="50" FontWeight="Bold"/>
                     </Grid>
-                    <Button Content="Odjava" Background="#A2D9CE" Foreground="#2C3E50" FontSize="14" HorizontalAlignment="Right" Margin="10"  Width="102" Click="Button_Click"  />
+                    <Button Content="Odjava" Background="#A2D9CE" Foreground="#2C3E50" FontSize="14" HorizontalAlignment="Right" Margin="10"  Width="102" Click="Button_Click" BorderBrush="#FF1FEECD"  />
 
                 </StackPanel>
             </TabItem>
-            <TabItem Header="Članci o zdravlju" FontSize="19" Background="#A2D9CE" Height="28" VerticalAlignment="Top">
+            <TabItem Header="Članci o zdravlju" FontSize="19" Background="#A2D9CE">
                 <StackPanel x:Name="clanciGrid" Background="#D5F5E3"  Orientation="Vertical">
                     <Grid>
                         <Border BorderBrush="#A2D9CE" BorderThickness="0,0,0,5" />
-                        <TextBox x:Name="search_article"  HorizontalAlignment="Left" Text="Pretraga" Margin="5" Background="#EBF5FB" FontSize="16" Foreground="#AAB7B8" Width="127" Height="30"/>
-                        <Button Content="Novi članak" Margin="10" HorizontalAlignment="Right" Background="#A2D9CE" Click="Button_Click_7"/>
+                        <TextBox x:Name="search_article"  HorizontalAlignment="Left" Text="Pretraga" Margin="5" Background="#EBF5FB" FontSize="16" Foreground="#AAB7B8" Width="127" Height="30" CaretBrush="#FF1FEECD"/>
+                        <Button Content="Novi članak" Margin="10" HorizontalAlignment="Right" Background="#A2D9CE" Click="Button_Click_7" BorderBrush="#FF1FEECD"/>
                     </Grid>
-                    <StackPanel x:Name="Articles">
+                    <StackPanel x:Name="Articles" >
                         <Border  BorderBrush="#A2D9CE" BorderThickness="8" CornerRadius="8,8,8,8"  Margin="5">
                             <StackPanel x:Name="Article">
                                 <Grid>
-                                    <Label x:Name="Topic" Content="NASLOV" HorizontalAlignment="Center"/>
-                                    <TextBlock x:Name="Author" Text="AUTOR" HorizontalAlignment="Right"/>
+                                    <Label x:Name="Topic" Content="Koji su simptomi korona virusa i kako se zaštititi?" HorizontalAlignment="Center"/>
+                                    <TextBlock x:Name="Author" Text="dr Ana Matar"  FontSize="12" HorizontalAlignment="Right"/>
                                 </Grid>
-                                <TextBlock x:Name="ArticleText" Text="TEXT PREUZET IZ POLJA U KOJE JE UNET" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <StackPanel >
+                                    <ScrollViewer Height="180">
+                                        <TextBlock 
+                                        ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                        ScrollViewer.CanContentScroll="True"
+                                        x:Name="ArticleText" TextWrapping="Wrap"   Text="Groznica, kašalj, grlobolja i otežano disanje neki su od najčešćih simptoma novog korona virusa. Može biti ozbiljnija za neke osobe i može dovesti do upale pluća ili otežanog disanja. Ređe je da virus može biti fatalan. Stariji ljudi i ljudi sa postojećim medicinskim stanjima (poput dijabetesa i srčanih bolesti) izgleda da su ranjiviji da obole od virusa. Važno je da kompanije ohrabruju bolesne zaposlene da ostanu kod kuće. Nemojte tražiti napomenu zdravstvenog radnika za zaposlene koji su bolesni od akutne respiratorne bolesti, pošto su kancelarije zdravstvenih ustanova i medicinske ustanove možda izuzetno zauzete i nisu u mogućnosti da dostave takvu dokumentaciju na vreme. Bolesni zaposleni ne bi trebali da se vraćaju na posao sve dok njihova temperatura ne bude ispod 37,8 stepeni Celzijusa tokom najmanje 24 sata, bez pomoći leka koji smanjuje temperaturu ili drugog leka koji menja simptome. Redovno čistite sve površine koje se često dodiruju na radnom mestu, kao što su radne stanice, radne površine i kvake za vrata. Obezbedite maramice za jednokratnu upotrebu da zaposleni pre svake upotrebe mogu obrisati najčešće korišćene površine (na primer, kvake za vrata, tastature, daljinski upravljač, sto). I dok se ovo može činiti osnovnim, mnogi odrasli ne praktikuju pravilno etiku kašljanja i kijanja (pokrijte usta i nos potpuno maramicom ili gornjim rukavom) ili pravilno pranje ruku najmanje 20 sekundi toplom vodom. Tako savetujemo kompanije da istaknu plakate o tome kako da spreče širenje bolesti."
+                                           HorizontalAlignment="Center" FontSize="14" VerticalAlignment="Center"/>
+                                    </ScrollViewer>
+                                </StackPanel>
                             </StackPanel>
                         </Border>
                     </StackPanel>
                 </StackPanel>
             </TabItem>
-            <TabItem Header="Pregled" FontSize="19" Background="#A2D9CE" Height="33" Margin="-2,-1.6,-0.2,-1.8" VerticalAlignment="Bottom" >
+            <TabItem Header="Pregled" FontSize="19" Background="#A2D9CE"  >
                 <StackPanel x:Name="pregledGrid" Background="#D5F5E3" SizeChanged="myGrid_SizeChanged" Orientation="Vertical">
                     <Border  BorderBrush="#A2D9CE" BorderThickness="8" CornerRadius="8,8,8,8"  Margin="5">
                         <Label Content="Zakazani termini" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold"/>
@@ -106,55 +115,57 @@
                         </Grid.ColumnDefinitions>
                         <Label Content="Jovana Makaric" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="30,0,0,0.2"/>
                         <Label Content="16/10/1995" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="30,0,100.4,0.2" Grid.ColumnSpan="3"/>
-                        <Button Content="Započni" Grid.Row="0" Grid.Column="3" Margin="10,10,0,10" FontSize="16" Background="#A2D9CE" Click="Button_Click_6" />
-                        <Button Content="Otkaži" Grid.Row="0" Grid.Column="5" Margin="30,10,70,10" FontSize="16" Background="#A2D9CE" />
+                        <Button Content="Započni"  Grid.Row="0" Grid.Column="3" Margin="10,10,0,10" FontSize="16" Background="#A2D9CE" Click="Button_Click_6" BorderBrush="#FF1FEECD" />
+                        <Button Content="Otkaži" Grid.Row="0" Grid.Column="5" Margin="30,10,70,10" FontSize="16" Background="#A2D9CE" BorderBrush="#FF1FEECD" />
 
                         <Label Content="Zorana Jović" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="30,0,0,0.2"/>
                         <Label Content="10/10/1995" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="30,0,100.4,0.2" Grid.ColumnSpan="3"/>
-                        <Button Content="Započni" Grid.Row="1" Grid.Column="3" Margin="10,10,0,10" FontSize="16" Background="#A2D9CE" />
-                        <Button Content="Otkaži" Grid.Row="1" Grid.Column="5" Margin="30,10,70,10" FontSize="16" Background="#A2D9CE" />
+                        <Button Content="Započni" Grid.Row="1" Grid.Column="3" Margin="10,10,0,10" FontSize="16" Background="#A2D9CE" BorderBrush="#FF1FEECD" />
+                        <Button Content="Otkaži" Grid.Row="1" Grid.Column="5" Margin="30,10,70,10" FontSize="16" Background="#A2D9CE" BorderBrush="#FF1FEECD" />
                     </Grid>
                 </StackPanel>
             </TabItem>
-            <TabItem Header="Kartoni" FontSize="19" Background="#A2D9CE" Height="28"  VerticalAlignment="Top">
+            <TabItem Header="Kartoni" FontSize="19" Background="#A2D9CE" Height="28" >
                 <StackPanel  x:Name="kartoniGrid" Background="#D5F5E3" SizeChanged="myGrid_SizeChanged">
                     <StackPanel Orientation="Vertical">
                         <Border  BorderBrush="#A2D9CE" BorderThickness="8" CornerRadius="8,8,8,8"  Margin="5">
                             <StackPanel Orientation="Horizontal">
                                 <Label  Content="Pretraga kartona po imenu ili prezimenu pacijenta" HorizontalAlignment="Center" FontSize="14" />
-                                <TextBox x:Name="search_patient" HorizontalAlignment="Center"  Text="Pretraga" Margin="5" Background="#EBF5FB" FontSize="16" Foreground="#AAB7B8" IsKeyboardFocusedChanged="search_text_IsKeyboardFocusedChanged" KeyDown="search_text_KeyDown" Width="127" />
+                                <TextBox x:Name="search_patient" HorizontalAlignment="Center"  Text="Pretraga" Margin="5" Background="#EBF5FB" FontSize="16" Foreground="#AAB7B8" IsKeyboardFocusedChanged="search_text_IsKeyboardFocusedChanged" KeyDown="search_text_KeyDown" Width="127" CaretBrush="#FF1FEECD" />
                             </StackPanel>
                         </Border>
-                        <ScrollViewer>
-                            <Grid  HorizontalAlignment="Center">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="300"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <Label Grid.Row="0" Grid.Column="0" Content="Milan Jovanovic" FontSize="16" />
-                                <Label Grid.Row="1" Grid.Column="0" Content="Zorana Markovic" FontSize="16" />
-                                <Label Grid.Row="2" Grid.Column="0" Content="Filip Jovic" FontSize="16" />
-                                <Label Grid.Row="3" Grid.Column="0" Content="Milan Zoric" FontSize="16" />
-                                <Label Grid.Row="4" Grid.Column="0" Content="Sinisa Pavlovic" FontSize="16" />
-                                <Label Grid.Row="5" Grid.Column="0" Content="Anja Stramic" FontSize="16" />
+                        <StackPanel>
+                            <ScrollViewer Height="180">
+                                <Grid  HorizontalAlignment="Center">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="300"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Row="0" Grid.Column="0" Content="Milan Jovanovic" FontSize="16" />
+                                    <Label Grid.Row="1" Grid.Column="0" Content="Zorana Markovic" FontSize="16" />
+                                    <Label Grid.Row="2" Grid.Column="0" Content="Filip Jovic" FontSize="16" />
+                                    <Label Grid.Row="3" Grid.Column="0" Content="Milan Zoric" FontSize="16" />
+                                    <Label Grid.Row="4" Grid.Column="0" Content="Sinisa Pavlovic" FontSize="16" />
+                                    <Label Grid.Row="5" Grid.Column="0" Content="Anja Stramic" FontSize="16" />
 
-                                <Button Grid.Row="0" Grid.Column="1" Content="otvori" FontSize="15" Margin="4,0,-20,4" Foreground="#2C3E50" Background="#A2D9CE" Click="Button_Click_1" Height="24" VerticalAlignment="Bottom" />
-                                <Button Grid.Row="1" Grid.Column="1" Content="otvori" Margin="4,4,-20,4" FontSize="14" Foreground="#2C3E50" Background="#A2D9CE" />
-                                <Button Grid.Row="2" Grid.Column="1" Content="otvori" Width="60" FontSize="15" Margin="4,4,-20,4" Foreground="#2C3E50" Background="#A2D9CE" />
-                                <Button Grid.Row="3" Grid.Column="1" Content="otvori" Width="60" FontSize="15" Margin="4,4,-20,4" Foreground="#2C3E50" Background="#A2D9CE" />
-                                <Button Grid.Row="4" Grid.Column="1" Content="otvori" Width="60" FontSize="15" Margin="4,4,-20,4" Foreground="#2C3E50" Background="#A2D9CE" />
-                                <Button Grid.Row="5" Grid.Column="1" Content="otvori" Width="60" FontSize="15" Margin="4,4,-20,4" Background="#A2D9CE"/>
-                            </Grid>
-                        </ScrollViewer>
+                                    <Button Grid.Row="0" Grid.Column="1" Content="otvori" FontSize="15" Margin="4,0,-20,4" Foreground="#DDFFFFFF" Background="#A2D9CE" Click="Button_Click_1"  VerticalAlignment="Bottom" BorderBrush="#FF1FEECD" />
+                                    <Button Grid.Row="1" Grid.Column="1" Content="otvori" Margin="4,4,-20,4" FontSize="14" Foreground="#DDFFFFFF" Background="#A2D9CE" BorderBrush="#FF1FEECD" />
+                                    <Button Grid.Row="2" Grid.Column="1" Content="otvori"  FontSize="15" Margin="4,4,-20,4" Foreground="#DDFFFFFF" Background="#A2D9CE" BorderBrush="#FF1FEECD" />
+                                    <Button Grid.Row="3" Grid.Column="1" Content="otvori"  FontSize="15" Margin="4,4,-20,4" Foreground="#DDFFFFFF" Background="#A2D9CE" BorderBrush="#FF1FEECD" />
+                                    <Button Grid.Row="4" Grid.Column="1" Content="otvori"  FontSize="15" Margin="4,4,-20,4" Foreground="#DDFFFFFF" Background="#A2D9CE" BorderBrush="#FF1FEECD" />
+                                    <Button Grid.Row="5" Grid.Column="1" Content="otvori"  FontSize="15" Margin="4,4,-20,4" Background="#A2D9CE" BorderBrush="#FF1FEECD"/>
+                                </Grid>
+                            </ScrollViewer>
+                        </StackPanel>
                     </StackPanel>
 
                 </StackPanel>
@@ -162,7 +173,7 @@
             <TabItem Header="Evidencija lekova" FontSize="19"  Background="#A2D9CE">
                 <StackPanel  x:Name="evidencijaGrid" Background="#D5F5E3" Orientation="Vertical" >
                     <Label Content="Validacija sastava leka" FontSize="17" FontWeight="Bold"/>
-                    <Border  BorderBrush="#A2D9CE" BorderThickness="8" CornerRadius="8,8,8,8"  Margin="5">
+                    <Border  BorderBrush="#FFA2D9CE" BorderThickness="8" CornerRadius="8,8,8,8"  Margin="5">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
@@ -181,22 +192,22 @@
                             <Label Content="Klikom na dugme validirajte sastav leka" Margin="10" HorizontalContentAlignment="Center" Grid.Row="0" Grid.Column="1" FontSize="14" FontWeight="UltraLight" />
 
                             <Label Content="Nimulid" Grid.Row="1" FontSize="17"  Margin="10" Grid.Column="0" FontWeight="Bold"/>
-                            <Button Content="Validiraj" HorizontalAlignment="Center" FontWeight="Bold" Grid.Row="1" FontSize="15" Margin="95.2,10,68,10" Grid.Column="1" Background="#A2D9CE" Foreground="#2C3E50"  Click="Button_Click_2" Width="96"/>
+                            <Button Content="Validiraj" HorizontalAlignment="Center" FontWeight="Bold" Grid.Row="1" FontSize="15" Margin="95.2,10,68,10" Grid.Column="1" Background="#A2D9CE" Foreground="#FF63788C"  Click="Button_Click_2" Width="96" BorderBrush="#FF1FEECD"/>
 
                             <Label Content="Bromazepam" FontSize="17"  Grid.Row="2" Margin="10" Grid.Column="0" FontWeight="Bold" />
-                            <Button Content="Validiraj" HorizontalAlignment="Center" Grid.Row="2"  Margin="95.2,10,68,10" Grid.Column="1" FontSize="15" FontWeight="Bold" Background="#A2D9CE" Foreground="#2C3E50" Click="Button_Click_2" Width="95"/>
+                            <Button Content="Validiraj" HorizontalAlignment="Center" Grid.Row="2"  Margin="95.2,10,68,10" Grid.Column="1" FontSize="15" FontWeight="Bold" Background="#A2D9CE" Foreground="#FF63788C" Click="Button_Click_2" Width="95" BorderBrush="#FF1FEECD"/>
                         </Grid>
                     </Border>
                     <Label Content="Alternativni lekovi" FontSize="17" FontWeight="Bold"/>
                     <Border  BorderBrush="#A2D9CE" BorderThickness="8" CornerRadius="8,8,8,8"  Margin="5">
                         <StackPanel Orientation="Vertical">
 
-                            <Button Content="Dodaj alternativni" Margin="20" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#2C3E50" Background="#A2D9CE" Click="Button_Click_3"/>
+                            <Button Content="Dodaj alternativni" Margin="20" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#FF63788C" Background="#A2D9CE" Click="Button_Click_3" BorderBrush="#FF1FEECD"/>
                         </StackPanel>
                     </Border>
                 </StackPanel>
             </TabItem>
-            <TabItem Header="Izmena naloga" FontSize="19" Background="#A2D9CE" Height="33" Margin="-2,-1.8,-0.2,-1.6" VerticalAlignment="Top">
+            <TabItem Header="Izmena naloga" FontSize="19" Background="#A2D9CE" >
                 <Grid  x:Name="izmenaGrid" Background="#D5F5E3" SizeChanged="myGrid_SizeChanged" >
                     <StackPanel Background="#D5F5E3" Orientation="Vertical">
                         <StackPanel  Orientation="Horizontal">
@@ -223,16 +234,16 @@
                                 <Label Grid.Column="0" Grid.Row="4" Foreground="#2C3E50" Content="Email" FontSize="16" />
                                 <Label Grid.Column="0" Grid.Row="5" Foreground="#2C3E50" Content="Telefon" FontSize="16" />
 
-                                <TextBox x:Name="izImePrzTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="0" Margin="5" HorizontalAlignment="Right" FontSize="15" Initialized="izImePrzTxt_Initialized" />
-                                <TextBox x:Name="izSpecTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="1"  Margin="5" HorizontalAlignment="Right" FontSize="15" Initialized="izSpecTxt_Initialized" />
-                                <TextBox x:Name="izDatTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="2"  Margin="5" HorizontalAlignment="Right" FontSize="15" Initialized="izDatTxt_Initialized" />
-                                <TextBox x:Name="izJmbgTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="3"  Margin="5" HorizontalAlignment="Right" FontSize="15" Initialized="izJmbgTxt_Initialized" />
-                                <TextBox x:Name="izEmailTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="4"  Margin="5" HorizontalAlignment="Right" FontSize="15" Initialized="izEmailTxt_Initialized" />
-                                <TextBox x:Name="izTelTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="5"  Margin="5" HorizontalAlignment="Right" FontSize="15" Initialized="izTelTxt_Initialized" />
+                                <TextBox x:Name="izImePrzTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="0" Margin="5" HorizontalAlignment="Right" FontSize="15" Initialized="izImePrzTxt_Initialized" CaretBrush="#FF1FEECD" />
+                                <TextBox x:Name="izSpecTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="1"  Margin="5" HorizontalAlignment="Right" FontSize="15" Initialized="izSpecTxt_Initialized" CaretBrush="#FF1FEECD" />
+                                <TextBox x:Name="izDatTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="2"  Margin="5" HorizontalAlignment="Right" FontSize="15" Initialized="izDatTxt_Initialized" CaretBrush="#FF1FEECD" />
+                                <TextBox x:Name="izJmbgTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="3"  Margin="5" HorizontalAlignment="Right" FontSize="15" Initialized="izJmbgTxt_Initialized" CaretBrush="#FF1FEECD" />
+                                <TextBox x:Name="izEmailTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="4"  Margin="5" HorizontalAlignment="Right" FontSize="15" Initialized="izEmailTxt_Initialized" CaretBrush="#FF1FEECD" />
+                                <TextBox x:Name="izTelTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="5"  Margin="5" HorizontalAlignment="Right" FontSize="15" Initialized="izTelTxt_Initialized" CaretBrush="#FF1FEECD" />
 
                             </Grid>
                         </StackPanel>
-                        <Button Content="Potvrdi izmene" HorizontalAlignment="Right" Foreground="#2C3E50" FontSize="16" Background="#A2D9CE" Margin="0,0,10,0" Click="Button_Click_4" />
+                        <Button Content="Potvrdi izmene" HorizontalAlignment="Right" Foreground="#2C3E50" FontSize="16" Background="#A2D9CE" Margin="0,0,9.6,0" Click="Button_Click_4" BorderBrush="#FF1FEECD" Height="29" />
                         <Grid  VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
@@ -250,14 +261,14 @@
                             <Label Grid.Column="0" Grid.Row="1" Foreground="#2C3E50" Content="Nova lozinka" FontSize="16" Margin="10,0,0,0" />
                             <Label Grid.Column="0" Grid.Row="2" Foreground="#2C3E50" Content="Potvrda lozinke" FontSize="16" Margin="10,0,0,0"/>
 
-                            <PasswordBox x:Name="LozinkaTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="0" Margin="5" HorizontalAlignment="Right" FontSize="15" Initialized="izImePrzTxt_Initialized" />
-                            <PasswordBox x:Name="NovaLozTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="1" Margin="5" HorizontalAlignment="Right" FontSize="15" Initialized="izImePrzTxt_Initialized" />
-                            <PasswordBox x:Name="PotvNovaLozTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="2" Margin="5" HorizontalAlignment="Right" FontSize="15" Initialized="izImePrzTxt_Initialized" />
+                            <PasswordBox x:Name="LozinkaTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="0" Margin="5" HorizontalAlignment="Right" FontSize="15" Initialized="izImePrzTxt_Initialized" CaretBrush="#FF1FEECD" />
+                            <PasswordBox x:Name="NovaLozTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="1" Margin="5" HorizontalAlignment="Right" FontSize="15" Initialized="izImePrzTxt_Initialized" CaretBrush="#FF1FEECD" />
+                            <PasswordBox x:Name="PotvNovaLozTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="2" Margin="5" HorizontalAlignment="Right" FontSize="15" Initialized="izImePrzTxt_Initialized" CaretBrush="#FF1FEECD" />
 
                             <Label x:Name="obavesti" FontSize="12" Grid.Column="2" Grid.Row="1" Foreground="#A2D9CE"></Label>
                             <Label x:Name="obavesti1" FontSize="12" Grid.Column="2" Grid.Row="2" Foreground="#A2D9CE" ></Label>
                         </Grid>
-                        <Button Content="Izmeni lozinku" HorizontalAlignment="Right" FontSize="16" Foreground="#2C3E50" Background="#A2D9CE" Margin="0,0,10,0" Click="Button_Click_5"/>
+                        <Button Content="Izmeni lozinku" HorizontalAlignment="Right" FontSize="16" Foreground="#2C3E50" Background="#A2D9CE" Margin="0,0,10,0" Click="Button_Click_5" BorderBrush="#FF1FEECD"/>
 
                     </StackPanel>
 
@@ -266,8 +277,8 @@
             <TabItem Header="Utisak o aplikaciji" FontSize="19" Background="#A2D9CE">
                 <StackPanel x:Name="utisakGrid" Orientation="Vertical" Background="#D5F5E3" SizeChanged="myGrid_SizeChanged">
                     <Label Content="Ostavite vaše mišljenje!" HorizontalAlignment="Center" FontSize="25"  Foreground="#2C3E50"  Margin="20"/>
-                    <TextBox x:Name="misljenje" FontSize="14" Background="#EAFAF1" />
-                    <Button Content="Pošalji" FontSize="17" HorizontalAlignment="Right" Margin="0,20,19.6,20" Background="#A2D9CE" Foreground="#2C3E50"  Width="71"/>
+                    <TextBox x:Name="misljenje" FontSize="14" Background="#EAFAF1" CaretBrush="#FF1FEECD" />
+                    <Button Content="Pošalji" FontSize="17" HorizontalAlignment="Right" Margin="0,20,19.6,20" Background="#A2D9CE" Foreground="#2C3E50" BorderBrush="#FF1FEECD" />
                 </StackPanel>
             </TabItem>
 

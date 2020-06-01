@@ -45,11 +45,11 @@
             </WrapPanel>
 
             <Label Content="Napomena" Grid.Row="5" Grid.Column="0" FontSize="18" Margin="10"/>
-            <TextBox Grid.Row="5" Grid.Column="1" Margin="10" AcceptsReturn="True"/>
+            <TextBox Grid.Row="5" Grid.Column="1" Margin="10" AcceptsReturn="True" CaretBrush="#FF1FEECD" BorderBrush="#FF1FEECD"/>
         </Grid>
         <WrapPanel FlowDirection="RightToLeft" Background="#D5F5E3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <Button Content="Otkaži" FontSize="18" Height="30" Width="100"  Margin="10,0,10,50" Background="#A2D9CE" Click="Button_Click" ></Button>
-            <Button Content="Potvrdi" FontSize="18" Height="30" Width="100"  Margin="10,0,10,50" Background="#A2D9CE" Click="Button_Click_1" ></Button>
+            <Button Content="Otkaži" FontSize="18" Height="30" Width="100"  Margin="10,0,10,50" Background="#A2D9CE" Click="Button_Click" BorderBrush="#FF1FEECD" ></Button>
+            <Button Content="Potvrdi" FontSize="18" Height="30" Width="100"  Margin="10,0,10,50" Background="#A2D9CE" Click="Button_Click_1" BorderBrush="#FF1FEECD" ></Button>
         </WrapPanel>
     </StackPanel>
 </Window>
