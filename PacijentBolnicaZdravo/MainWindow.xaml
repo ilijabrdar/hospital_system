@@ -50,7 +50,7 @@
 
                     <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right">
                         <TextBox BorderThickness="3" BorderBrush="LightBlue" Height="30" VerticalContentAlignment="Center" Margin="0,5,0,5" Width="200" HorizontalAlignment="left" Name="SearchBox" ></TextBox>
-                        <Button x:Name="SearchButton" Width="49" Margin="0,5,5,5" Height="30" Background="#FFF2EDED" Click="Search" >
+                        <Button x:Name="SearchButton" ToolTip="{x:Static p:Resources.ToolTipSearch}" Width="49" Margin="0,5,5,5" Height="30" Background="#FFF2EDED" Click="Search" >
                             <Image Margin="2" Source="/PacijentBolnicaZdravo;component/Images/search.png"></Image>
                         </Button>
                     </StackPanel>
@@ -80,7 +80,7 @@ Piramida ishrane je vizuelni prikaz namirnica koje treba da budu zastupljenje u 
                     <Border x:Name="Termins" BorderBrush="Black" CornerRadius="8,8,3,3" BorderThickness="1" Height="163" Margin="0.1">
                         <GroupBox x:Name="RadioButtons" BorderBrush="{x:Null}" Background="{x:Null}" />
                     </Border>
-                    <Button Name="Schedule" Content="{x:Static p:Resources.Schedule}" HorizontalAlignment="Right" Margin="15"  Width="76" Click="Zakazi" />
+                    <Button Name="Schedule" ToolTip="{x:Static p:Resources.ToolTipSchedule}"  Content="{x:Static p:Resources.Schedule}" HorizontalAlignment="Right" Margin="15"  Width="76" Click="Zakazi" />
                 </StackPanel>
             </TabItem>
             <TabItem Header="{x:Static p:Resources.TabCancel}" Name="TabCancel">
@@ -94,7 +94,7 @@ Piramida ishrane je vizuelni prikaz namirnica koje treba da budu zastupljenje u 
                                 <TextBlock  FontSize="14" Name="Time" Margin="10,5,10,15" Text="{x:Static p:Resources.Time}"/>
                                 <TextBlock  FontSize="14" Name="Ordination" Margin="10,5,10,15" Text="{x:Static p:Resources.Ordination}"/>
                             </StackPanel>
-                            <Border  BorderBrush="Black" BorderThickness="1" Margin="5" Width="165">
+                            <Border  BorderBrush="Black" BorderThickness="1" Margin="5" Width="165" >
                                 <StackPanel x:Name="FirstExam" Orientation="Vertical">
 
                                 </StackPanel>
@@ -103,7 +103,7 @@ Piramida ishrane je vizuelni prikaz namirnica koje treba da budu zastupljenje u 
                             <Border  BorderBrush="Black" BorderThickness="1" Margin="5" Width="165"></Border>
                         </StackPanel>
                     </Border>
-                    <Button Name="Cancel" Content="{x:Static p:Resources.Cancel}" HorizontalAlignment="Right" Margin="15" Width="74" Click="Otkazi"/>
+                    <Button Name="Cancel" ToolTip="{x:Static p:Resources.ToolTipCancel}" Content="{x:Static p:Resources.Cancel}" HorizontalAlignment="Right" Margin="15" Width="74" Click="Otkazi"/>
                 </StackPanel>
             </TabItem>
             <TabItem Header="{x:Static p:Resources.TabFile}" Name="TabFile">
@@ -118,7 +118,7 @@ Piramida ishrane je vizuelni prikaz namirnica koje treba da budu zastupljenje u 
                             </Button>
                             <ScrollViewer VerticalScrollBarVisibility="auto">
                                 <StackPanel x:Name="Exeminations" Orientation="Vertical">
-
+                                    <TextBlock Margin="70,100,70,10" TextDecorations="{x:Null}" Opacity="0.4" FontSize="20" Text="{x:Static p:Resources.ExaminationHardCore}" Name="ExaminationHardCore" FontWeight="Bold"/>
                                 </StackPanel>
                             </ScrollViewer>
                         </DockPanel>
@@ -136,7 +136,7 @@ Piramida ishrane je vizuelni prikaz namirnica koje treba da budu zastupljenje u 
             </TabItem>
             <TabItem Header="{x:Static p:Resources.Tabaccount}" Name="TabAccount">
                 <ScrollViewer>
-                    <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                         <TextBlock Name="BasicInf"  Text="{x:Static p:Resources.BasicInf}" Margin="10" FontSize="18"/>
                         <StackPanel Orientation="Horizontal">
 

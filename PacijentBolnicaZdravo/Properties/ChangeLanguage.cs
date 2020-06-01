@@ -15,7 +15,7 @@ namespace PacijentBolnicaZdravo.Properties
     {
         
 
-        public  void changeMainWindow(MainWindow currentWindow)
+        public  void ChangeMainWindow(MainWindow currentWindow)
         {
 
             Console.WriteLine("Ovdesam");
@@ -55,14 +55,17 @@ namespace PacijentBolnicaZdravo.Properties
                 currentWindow.Opinion.Text = MyProject.Language.Resources.Opinion;
                 currentWindow.OpinionName.Text = MyProject.Language.Resources.OpinionDesc;
                 currentWindow.FeedBackButton.Content = MyProject.Language.Resources.Send;
-                currentWindow.Title = MyProject.Language.Resources.Title;
                 currentWindow.Examinations.Header = MyProject.Language.Resources.Examinations;
             currentWindow.Surgery.Header = MyProject.Language.Resources.Surgeries;
             currentWindow.Hospitalizations.Header = MyProject.Language.Resources.Hospitalizations;
             currentWindow.UsernameLabel.Text = MyProject.Language.Resources.Username;
+            currentWindow.ExaminationHardCore.Text = MyProject.Language.Resources.ExaminationHardCore;
+            currentWindow.Schedule.ToolTip = MyProject.Language.Resources.ToolTipSchedule;
+            currentWindow.Cancel.ToolTip = MyProject.Language.Resources.ToolTipCancel;
+            currentWindow.SearchButton.ToolTip = MyProject.Language.Resources.ToolTipSearch;
         }   
 
-        public void changeLogInWindow(WindowLogIn currentWindow)
+        public void ChangeLogInWindow(WindowLogIn currentWindow)
         {
             currentWindow.DarkModeLabel.Text = MyProject.Language.Resources.DarkMode;
             currentWindow.UsernameLabel.Text = MyProject.Language.Resources.Username;
@@ -74,7 +77,7 @@ namespace PacijentBolnicaZdravo.Properties
 
         }
 
-        public void changeRegistrationWindow(Registration regWindow)
+        public void ChangeRegistrationWindow(Registration regWindow)
         {
             regWindow.Title = MyProject.Language.Resources.TitleRegistration;
             regWindow.BasicInf.Text = MyProject.Language.Resources.BasicInf;

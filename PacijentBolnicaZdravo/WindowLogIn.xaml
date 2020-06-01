@@ -39,8 +39,9 @@
 
                 </StackPanel>
 
-                <Button Name="LogIn" Content="{x:Static p:Resources.LogIn}" Width="50" Height="30" Margin="20,14,10,10" Click="Button_Click"></Button>
+                <Button Name="LogIn" Content="{x:Static p:Resources.LogIn}" IsDefault="True"  Width="50" Height="30" Margin="20,14,10,10" Click="Button_Click"></Button>
             </StackPanel>
+            
 
             <StackPanel Margin="10,-23,45,-30" Orientation="Horizontal">
                 <TextBlock Name="DarkModeLabel" Text="{x:Static p:Resources.DarkMode}" FontSize="15" Margin="15,48,0,50" DockPanel.Dock="Right" />

@@ -117,14 +117,14 @@ namespace PacijentBolnicaZdravo
                     System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("en-GB");
                     System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-GB");
                     MainWindow.culture = new CultureInfo("en-GB");
-                    cl.changeMainWindow(this);
+                    cl.ChangeMainWindow(this);
                 }
                 else
                 {
                     System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("sr");
                     System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo("sr");
                     MainWindow.culture = new CultureInfo("sr");
-                    cl.changeMainWindow(this);
+                    cl.ChangeMainWindow(this);
 
                 }
             }

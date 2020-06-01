@@ -196,6 +196,15 @@ namespace MyProject.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You currently do not have any examnations.
+        /// </summary>
+        public static string ExaminationHardCore {
+            get {
+                return ResourceManager.GetString("ExaminationHardCore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Examinations.
         /// </summary>
         public static string Examinations {
@@ -453,6 +462,33 @@ namespace MyProject.Language {
         public static string TitleRegistration {
             get {
                 return ResourceManager.GetString("TitleRegistration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel chosen examination.
+        /// </summary>
+        public static string ToolTipCancel {
+            get {
+                return ResourceManager.GetString("ToolTipCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Schedule the selected date.
+        /// </summary>
+        public static string ToolTipSchedule {
+            get {
+                return ResourceManager.GetString("ToolTipSchedule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search for articles by the entered criteria.
+        /// </summary>
+        public static string ToolTipSearch {
+            get {
+                return ResourceManager.GetString("ToolTipSearch", resourceCulture);
             }
         }
         

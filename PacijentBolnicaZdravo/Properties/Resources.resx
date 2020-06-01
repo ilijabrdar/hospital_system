@@ -162,6 +162,9 @@
   <data name="Email" xml:space="preserve">
     <value>Email:</value>
   </data>
+  <data name="ExaminationHardCore" xml:space="preserve">
+    <value>You currently do not have any examnations</value>
+  </data>
   <data name="Examinations" xml:space="preserve">
     <value>Examinations</value>
   </data>
@@ -248,6 +251,15 @@
   </data>
   <data name="TitleRegistration" xml:space="preserve">
     <value>Registration</value>
+  </data>
+  <data name="ToolTipCancel" xml:space="preserve">
+    <value>Cancel chosen examination</value>
+  </data>
+  <data name="ToolTipSchedule" xml:space="preserve">
+    <value>Schedule the selected date</value>
+  </data>
+  <data name="ToolTipSearch" xml:space="preserve">
+    <value>Search for articles by the entered criteria</value>
   </data>
   <data name="UpdateData" xml:space="preserve">
     <value>Update data</value>
