@@ -11,8 +11,8 @@ namespace bolnica.Service
     {
         Boolean ChangeRoomType(Room room, RoomType roomType);
 
-        Boolean AddEquipment(Equipment equipment, Model.Director.Room room);
+        Boolean AddEquipment(Equipment equipment, Room room);
 
-        Model.Director.Room[] GetVacantRooms();
+        List<Room> GetVacantRooms();
     }
 }
