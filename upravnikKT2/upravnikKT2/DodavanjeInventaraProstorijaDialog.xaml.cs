@@ -175,6 +175,7 @@ namespace upravnikKT2
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             List<Room> rooms = _roomController.GetAll().ToList();
+            rooms.Sort((x, y) => x.RoomCode.CompareTo(y.RoomCode));
             comboRoomCode.ItemsSource = rooms;
             comboRoomCode.DisplayMemberPath = "RoomCode";
             comboRoomCode.SelectedValuePath = "Id";

@@ -11,8 +11,8 @@
         <ListView x:Name="lista">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Naziv" Width="150" DisplayMemberBinding="{Binding Naziv}"/>
-                    <GridViewColumn Header="Kolicina" Width="150" DisplayMemberBinding="{Binding Kolicina}"/>
+                    <GridViewColumn Header="Naziv" Width="150" DisplayMemberBinding="{Binding EquipmentName}"/>
+                    <GridViewColumn Header="Kolicina" Width="150" DisplayMemberBinding="{Binding Equipment_Amount}"/>
                 </GridView>
             </ListView.View>
         </ListView>

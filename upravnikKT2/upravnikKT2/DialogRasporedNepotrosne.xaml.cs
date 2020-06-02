@@ -52,7 +52,7 @@ namespace upravnikKT2
                 {
                     if (pair.Key.id == _selectedEquipment.id)
                     {
-                        result.Add(new RoomEquipment(room.Id ,room.RoomCode, pair.Value));
+                        result.Add(new RoomEquipment(room.Id ,room.RoomCode, pair.Value, _selectedEquipment.Name));
                     }
                 }
             }
@@ -83,7 +83,7 @@ namespace upravnikKT2
                     {
                         if (pair.Key.id == _selectedEquipment.id)
                         {
-                            result.Add(new RoomEquipment(room.Id, room.RoomCode, pair.Value));
+                            result.Add(new RoomEquipment(room.Id, room.RoomCode, pair.Value, _selectedEquipment.Name));
                         }
                     }
                 }
@@ -134,7 +134,7 @@ namespace upravnikKT2
                     {
                         if (pair.Key.id == _selectedEquipment.id)
                         {
-                            result.Add(new RoomEquipment(room.Id, room.RoomCode, pair.Value));
+                            result.Add(new RoomEquipment(room.Id, room.RoomCode, pair.Value, _selectedEquipment.Name));
                         }
                     }
                 }
@@ -166,7 +166,7 @@ namespace upravnikKT2
                 {
                     if (pair.Key.id == _selectedEquipment.id)
                     {
-                        result.Add(new RoomEquipment(room.Id, room.RoomCode, pair.Value));
+                        result.Add(new RoomEquipment(room.Id, room.RoomCode, pair.Value, _selectedEquipment.Name));
                     }
                 }
             }

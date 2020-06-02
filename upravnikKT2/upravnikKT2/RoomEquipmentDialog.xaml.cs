@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model.Director;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using upravnikKT2.ViewModel;
 
 namespace upravnikKT2
 {
@@ -19,18 +21,21 @@ namespace upravnikKT2
     /// </summary>
     public partial class RoomEquipmentDialog : Window
     {
-        public RoomEquipmentDialog()
+        private Room _selectedRoom;
+        public RoomEquipmentDialog(Room selectedRoom)
         {
             InitializeComponent();
+            _selectedRoom = selectedRoom;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
-            List<Oprema> lista_opreme = new List<Oprema>();
-            lista_opreme.Add(new Oprema { Naziv = "Sto", Kolicina = "1" });
-            lista_opreme.Add(new Oprema { Naziv = "Krevet", Kolicina = "3" });
-            lista_opreme.Add(new Oprema { Naziv = "Stolica", Kolicina = "5" });
+            List<RoomEquipment> lista_opreme = new List<RoomEquipment>();
+            foreach (KeyValuePair<Equipment,int> pair in _selectedRoom.Equipment_inventory)
+            {
+                lista_opreme.Add(new RoomEquipment(pair.Key.Name, pair.Value));
+            }
 
             this.lista.ItemsSource = lista_opreme;
 

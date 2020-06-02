@@ -33,7 +33,8 @@
         </TextBox>
 
         <Label Grid.Row="1" Grid.Column="0" Width="81" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,44" Content="Tip"/>
-        <ComboBox x:Name="comboRoomTypes" Grid.Row="1" Grid.Column="1" Width="141"  Margin="0,41,10,44" HorizontalAlignment="Right" VerticalContentAlignment="Top" Height="45" materialDesign:HintAssist.Hint="Pretrazi" IsTextSearchEnabled="True"></ComboBox>
+        <ComboBox x:Name="comboRoomTypes" Grid.Row="1" Grid.Column="1" Width="141"  Margin="0,41,10,44" HorizontalAlignment="Right" VerticalContentAlignment="Top" Height="45" materialDesign:HintAssist.Hint="Pretrazi" IsTextSearchEnabled="True"
+                   IsEditable="True"></ComboBox>
 
         <WrapPanel  Grid.Column="1" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10">
             <Button x:Name="ButtonOK" Height="28" Width="100" Click="Button_Click_OK_Room">Potvrdi

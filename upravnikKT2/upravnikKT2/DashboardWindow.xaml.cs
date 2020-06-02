@@ -13,6 +13,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace upravnikKT2
 {
@@ -470,7 +471,7 @@ namespace upravnikKT2
 
         private void PrikaziSpisakOpremeProstorije(object sender, RoutedEventArgs e)
         {
-            RoomEquipmentDialog dialog = new RoomEquipmentDialog();
+            RoomEquipmentDialog dialog = new RoomEquipmentDialog((Room) DataGridRooms.SelectedItem);
             dialog.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             dialog.ShowDialog();
         }
@@ -755,6 +756,91 @@ namespace upravnikKT2
             MessageBoxImage icon = MessageBoxImage.Information;
 
             MessageBox.Show(messageBoxText, caption, button, icon);
+        }
+
+        private void searchTxtAppear_Button_Click(object sender, RoutedEventArgs e)
+        {
+            //searchRenovationsBtn.Background = Brushes.Gray;
+
+            //if (searchRenovationsBtn.Background == Brushes.Purple)
+            //{
+            //    searchRenovationsBtn.Background = Brushes.Gray;
+            //}
+            //else
+            //{
+            //    searchRenovationsBtn.Background = Brushes.Purple;
+            //}
+
+            //searchRenovationsBtn.Background = searchRenovationsBtn.Background == Brushes.Gray ? (SolidColorBrush)(new BrushConverter().ConvertFrom("#FF673AB7")) : Brushes.Gray;
+
+            //if (searchRenovationsBtn.Background == (SolidColorBrush) new BrushConverter().ConvertFrom("#FF673AB7")) {
+            //    searchRenovationsBtn.Background = Brushes.Gray;
+            //    txtSearchRenovations.Visibility = Visibility.Visible;
+            //}
+            //else
+            //{
+            //    searchRenovationsBtn.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#FF673AB7");
+            //    txtSearchRenovations.Visibility = Visibility.Hidden;
+            //}
+
+            if (searchRenovationsBtn.Background == Brushes.Gray)
+            {
+                searchRenovationsBtn.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#FF673AB7");
+                txtSearchRenovations.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                searchRenovationsBtn.Background = Brushes.Gray;
+                txtSearchRenovations.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void searchTxtAppear_Button_Click_Room(object sender, RoutedEventArgs e)
+        {
+            if (searchRoomBtn.Background == Brushes.Gray)
+            {
+                searchRoomBtn.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#FF673AB7");
+                txtsearchRooms.Visibility = Visibility.Hidden;
+                //TODO: vrati nazad tabelu
+
+                List<Room> rooms = _roomController.GetAll().ToList();
+                ObservableCollection<Room> DataRooms = new ObservableCollection<Room>(rooms);
+                this.DataGridRooms.ItemsSource = DataRooms;
+                txtsearchRooms.Clear();
+            }
+            else
+            {
+                searchRoomBtn.Background = Brushes.Gray;
+                txtsearchRooms.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void tabControlMini_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            //if (e.Key == Key.LeftCtrl | e.Key == Key.Tab)
+            //{
+            //    tabControlMain.SelectedIndex++;
+            //    e.Handled = true;
+            //}
+
+            if (e.Key == Key.Tab && (Keyboard.Modifiers & (ModifierKeys.Control | ModifierKeys.Shift)) == (ModifierKeys.Control | ModifierKeys.Shift))
+            {
+                tabControlMain.SelectedIndex--;
+                e.Handled = true;
+            }
+
+            else if (e.Key == Key.Tab && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
+            {
+                tabControlMain.SelectedIndex++;
+                e.Handled = true;
+            }
+
+            else if (e.Key == Key.Oem3 && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
+            {
+                tabControlOprema.SelectedIndex = tabControlOprema.SelectedIndex == 0 ? 1 : 0;
+                tabControlLekari.SelectedIndex = tabControlLekari.SelectedIndex == 0 ? 1 : 0;
+                e.Handled = true;
+            }
         }
     }
 }

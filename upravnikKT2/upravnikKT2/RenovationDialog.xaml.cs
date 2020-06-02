@@ -92,6 +92,7 @@ namespace upravnikKT2
             //TODO: display custom enum names
 
             List<Room> rooms = _roomController.GetAll().ToList();
+            rooms.Sort((x, y) => x.RoomCode.CompareTo(y.RoomCode));
             comboRoomCode.ItemsSource = rooms;
             comboRoomCode.DisplayMemberPath = "RoomCode";
             comboRoomCode.SelectedValuePath = "Id";

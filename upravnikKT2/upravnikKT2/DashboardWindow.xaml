@@ -94,7 +94,7 @@
                 </TabItem>
                 <TabItem Header="Lekari">
                     <Grid Background="White">
-                        <TabControl x:Name="tabControlLekari" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                        <TabControl x:Name="tabControlLekari" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" PreviewKeyDown="tabControlMini_PreviewKeyDown">
                             <TabItem Header="Pregled lekara" PreviewKeyDown="TabItem_PreviewKeyDown_Doctors">
                                 <DockPanel>
                                     
@@ -337,7 +337,7 @@
 
                 <TabItem Header="Oprema">
                     <Grid Background="White">
-                        <TabControl x:Name="tabControlOprema" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <TabControl x:Name="tabControlOprema" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" PreviewKeyDown="tabControlMini_PreviewKeyDown"  >
                             <TabItem Header="Potrošna" PreviewKeyDown="TabItem_PreviewKeyDown_Equipment_Consumable">
                                 <DockPanel>
                                     <DockPanel DockPanel.Dock="Top">
@@ -432,7 +432,7 @@
                                     Height="24"
                                     Width="24" />
                                         </Button>
-                                        <TextBox x:Name="txtsearchInconsumable" DockPanel.Dock="Right" Margin="10" TextChanged="TextBox_TextChanged" MinWidth="100" materialDesign:HintAssist.Hint="Pretrazi" KeyUp="TextBox_KeyUp"/>
+                                        <TextBox x:Name="txtsearchInconsumable" DockPanel.Dock="Right" Margin="10"  MinWidth="100" materialDesign:HintAssist.Hint="Pretrazi" KeyUp="TextBox_KeyUp"/>
                                         <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                                     </DockPanel>
                                     <DockPanel DockPanel.Dock="Bottom">
@@ -588,7 +588,7 @@
                                     Height="24"
                                     Width="24" />
                             </Button>
-                            <Button DockPanel.Dock="Right" Margin="10,10,20,10"
+                            <Button x:Name="searchRoomBtn" DockPanel.Dock="Right" Margin="10,10,20,10" Click="searchTxtAppear_Button_Click_Room"
                                   Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
                                   HorizontalAlignment="Left"
                                   ToolTip="Pretraži">
@@ -597,7 +597,7 @@
                                     Height="24"
                                     Width="24" />
                             </Button>
-                            <TextBox x:Name="txtsearchRooms" DockPanel.Dock="Right" Margin="10" TextChanged="TextBox_TextChanged" MinWidth="100" materialDesign:HintAssist.Hint="Pretrazi" KeyUp="searchRooms_KeyUp"/>
+                            <TextBox x:Name="txtsearchRooms" DockPanel.Dock="Right" Margin="10" TextChanged="TextBox_TextChanged" MinWidth="100" materialDesign:HintAssist.Hint="Pretrazi" KeyUp="searchRooms_KeyUp" Visibility="Hidden"/>
                             <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Bottom">
@@ -653,7 +653,7 @@
                                     Width="24" />
                             </Button>
 
-                            <Button DockPanel.Dock="Right" Margin="10,10,20,10"
+                            <Button x:Name="searchRenovationsBtn" DockPanel.Dock="Right" Margin="10,10,20,10" Click="searchTxtAppear_Button_Click"
                                   Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
                                   HorizontalAlignment="Left"
                                   ToolTip="Pretraži">
@@ -662,7 +662,7 @@
                                     Height="24"
                                     Width="24" />
                             </Button>
-                            <TextBox x:Name="txtSearchRenovations" DockPanel.Dock="Right" Margin="10" TextChanged="TextBox_TextChanged" MinWidth="100" materialDesign:HintAssist.Hint="Pretrazi"/>
+                            <TextBox x:Name="txtSearchRenovations" DockPanel.Dock="Right" Margin="10"  MinWidth="100" materialDesign:HintAssist.Hint="Pretrazi" Visibility="Hidden"/>
                             <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Bottom">
@@ -686,47 +686,44 @@
                         <GroupBox DockPanel.Dock="Top" x:Name="groupBoxNalog" Header="Vaši podaci" Margin="10,10,10,0" materialDesign:ShadowAssist.ShadowDepth="Depth1" materialDesign:ColorZoneAssist.Mode="Light">
                             <StackPanel Orientation="Vertical">
                                 <DockPanel Margin="3">
-                                    <Label DockPanel.Dock="Left">ime</Label>
-                                    <Label DockPanel.Dock="Right" Width="300" FontWeight="Bold">Marko</Label>
+                                    <Label DockPanel.Dock="Left" Width="150">ime</Label>
+                                        <Label DockPanel.Dock="Left" Width="150" FontWeight="Bold" Margin="500,0,0,0">Marko</Label>
                                     <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                                 </DockPanel>
 
                                 <DockPanel Margin="3">
-                                    <Label DockPanel.Dock="Left">prezime</Label>
-                                    <Label DockPanel.Dock="Right" Width="300"  FontWeight="Bold" >Markovic</Label>
-                                    <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
-                                </DockPanel>
-                                
-                                <DockPanel Margin="3">
-                                    <Label DockPanel.Dock="Left">JMBG</Label>
-                                    <Label DockPanel.Dock="Right" Width="300"  FontWeight="Bold">324295934234</Label>
+                                    <Label DockPanel.Dock="Left" Width="150">prezime</Label>
+                                        <Label DockPanel.Dock="Left" Width="150"  FontWeight="Bold" Margin="500,0,0,0" >Markovic</Label>
                                     <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                                 </DockPanel>
                                 
                                 <DockPanel Margin="3">
-                                        <Label DockPanel.Dock="Left">Adresa</Label>
-                                        <Label DockPanel.Dock="Right" Width="300"  FontWeight="Bold" >Cirpanova 1, Novi Sad, Srbija</Label>
+                                    <Label DockPanel.Dock="Left" Width="150">JMBG</Label>
+                                        <Label DockPanel.Dock="Left" Width="150"  FontWeight="Bold" Margin="500,0,0,0">324295934234</Label>
                                     <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                                 </DockPanel>
-
-                                <DockPanel Margin="3">
-                                    <Label DockPanel.Dock="Left">e-mail</Label>
-                                    <Label DockPanel.Dock="Right" Width="300"  FontWeight="Bold" >marko@bolnica.com</Label>
-                                    <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
-                                </DockPanel>
-
-                                <DockPanel Margin="3">
-                                    <Label DockPanel.Dock="Left">telefon</Label>
-                                    <Label DockPanel.Dock="Right" Width="300"  FontWeight="Bold" >02135422</Label>
-                                    <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
-                                </DockPanel>
-
                                 
-
+                                <DockPanel Margin="3">
+                                        <Label DockPanel.Dock="Left" Width="150">Adresa</Label>
+                                        <Label DockPanel.Dock="Left" Width="400"  FontWeight="Bold" Margin="500,0,0,0">Cirpanova 1, Novi Sad, Srbija</Label>
+                                    <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
+                                </DockPanel>
 
                                 <DockPanel Margin="3">
-                                    <Label DockPanel.Dock="Left">datum rodjenja</Label>
-                                    <Label DockPanel.Dock="Right" Width="300" IsManipulationEnabled="False" AllowDrop="False" Content="14/05/1967"  FontWeight="Bold"></Label>
+                                    <Label DockPanel.Dock="Left" Width="150">e-mail</Label>
+                                        <Label DockPanel.Dock="Left" Width="400"  FontWeight="Bold" Margin="500,0,0,0">marko@bolnica.com</Label>
+                                    <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
+                                </DockPanel>
+
+                                <DockPanel Margin="3">
+                                    <Label DockPanel.Dock="Left" Width="150">telefon</Label>
+                                        <Label DockPanel.Dock="Left" Width="150"  FontWeight="Bold" Margin="500,0,0,0">02135422</Label>
+                                    <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
+                                </DockPanel>
+
+                                <DockPanel Margin="3">
+                                    <Label DockPanel.Dock="Left" Width="150">datum rodjenja</Label>
+                                        <Label DockPanel.Dock="Left" Width="150" IsManipulationEnabled="False" AllowDrop="False" Content="14/05/1967"  FontWeight="Bold" Margin="500,0,0,0"></Label>
                                     <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                                 </DockPanel>
 
@@ -737,8 +734,8 @@
                         <GroupBox DockPanel.Dock="Top" x:Name="groupBox1" Header="Ažuriraj nalog" Margin="10,10,10,0" materialDesign:ShadowAssist.ShadowDepth="Depth1" materialDesign:ColorZoneAssist.Mode="Light">
                             <StackPanel Orientation="Vertical">
                                 <DockPanel Margin="3">
-                                    <Label DockPanel.Dock="Left">ime</Label>
-                                    <TextBox x:Name="txtFirstNameEdit" DockPanel.Dock="Right" Width="170">
+                                    <Label DockPanel.Dock="Left" Width="150">ime</Label>
+                                        <TextBox x:Name="txtFirstNameEdit" DockPanel.Dock="Left" Width="170" Margin="500,0,0,0">
                                         <TextBox.Text>
                                             <Binding Path="FirstName" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                                                 <Binding.ValidationRules>
@@ -751,8 +748,8 @@
                                 </DockPanel>
 
                                 <DockPanel Margin="3">
-                                    <Label DockPanel.Dock="Left">prezime</Label>
-                                    <TextBox  x:Name="txtLastNameEdit" DockPanel.Dock="Right" Width="170">
+                                    <Label DockPanel.Dock="Left" Width="150">prezime</Label>
+                                        <TextBox  x:Name="txtLastNameEdit" DockPanel.Dock="Left" Width="170" Margin="500,0,0,0">
                                         <TextBox.Text>
                                             <Binding Path="LastName" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                                                 <Binding.ValidationRules>
@@ -765,8 +762,8 @@
                                 </DockPanel>
                                 
                                 <DockPanel Margin="3">
-                                    <Label DockPanel.Dock="Left">JMBG</Label>
-                                    <TextBox x:Name="txtJMBGEdit" DockPanel.Dock="Right" Width="170">
+                                    <Label DockPanel.Dock="Left" Width="150">JMBG</Label>
+                                    <TextBox x:Name="txtJMBGEdit" DockPanel.Dock="Left" Width="170" Margin="500,0,0,0">
                                         <TextBox.Text>
                                             <Binding Path="JMBG" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                                                 <Binding.ValidationRules>
@@ -779,17 +776,17 @@
                                 </DockPanel>
 
                                 <DockPanel Margin="3">
-                                    <Label DockPanel.Dock="Left">Adresa</Label>
-                                    <WrapPanel DockPanel.Dock="Right"  Grid.Column="1" Grid.Row="3" HorizontalAlignment="Right" Height="40" VerticalAlignment="Bottom">
-                                        <ComboBox Width="80" Margin="0,0,30,0" materialDesign:HintAssist.Hint="Drzava"/>
+                                    <Label DockPanel.Dock="Left" Width="150">Adresa</Label>
+                                    <WrapPanel DockPanel.Dock="Left"  Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" Height="40" VerticalAlignment="Bottom" Margin="500,0,0,0">
+                                        <ComboBox Width="80" Margin="0,0,30,0" materialDesign:HintAssist.Hint="Drzava" />
                                         <ComboBox Width="80" Margin="0,0,30,0" materialDesign:HintAssist.Hint="Grad"/>
-                                        <ComboBox Width="80" materialDesign:HintAssist.Hint="Ulica"/>
+                                        <ComboBox Width="80" Margin="0,0,30,0" materialDesign:HintAssist.Hint="Ulica"/>
                                     </WrapPanel>
                                 </DockPanel>
 
                                 <DockPanel Margin="3">
-                                    <Label DockPanel.Dock="Left">e-mail</Label>
-                                    <TextBox x:Name="txtEmailEdit" DockPanel.Dock="Right" Width="170">
+                                    <Label DockPanel.Dock="Left" Width="150">e-mail</Label>
+                                    <TextBox x:Name="txtEmailEdit" DockPanel.Dock="Left" Width="170" Margin="500,0,0,0">
                                         <TextBox.Text>
                                             <Binding Path="EMAIL" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                                                 <Binding.ValidationRules>
@@ -802,8 +799,8 @@
                                 </DockPanel>
 
                                 <DockPanel Margin="3">
-                                    <Label DockPanel.Dock="Left">telefon</Label>
-                                    <TextBox x:Name="txtPhoneEdit" DockPanel.Dock="Right" Width="170">
+                                    <Label DockPanel.Dock="Left" Width="150">telefon</Label>
+                                    <TextBox x:Name="txtPhoneEdit" DockPanel.Dock="Left" Width="170" Margin="500,0,0,0">
                                         <TextBox.Text>
                                             <Binding Path="Phone" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                                                 <Binding.ValidationRules>
@@ -816,12 +813,12 @@
                                 </DockPanel>
 
                                 <DockPanel Margin="3">
-                                    <Label DockPanel.Dock="Left">datum rodjenja</Label>
-                                    <DatePicker x:Name="birthDatePickerEdit" DockPanel.Dock="Right" Width="170" DisplayDate="1967-05-14" Text="14/05/1967"></DatePicker>
+                                    <Label DockPanel.Dock="Left" Width="150">datum rodjenja</Label>
+                                    <DatePicker x:Name="birthDatePickerEdit" DockPanel.Dock="Left" Width="170" DisplayDate="1967-05-14" Text="14/05/1967" Margin="500,0,0,0"></DatePicker>
                                     <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                                 </DockPanel>
 
-                                <Button HorizontalAlignment="Center"  Padding="5" Width="160" Click="Button_Click_1">Azuriraj podatke
+                                <Button HorizontalAlignment="Left"  Padding="5" Width="160" Margin="250,0,0,0" Click="Button_Click_1">Azuriraj podatke
                                     <Button.Style>
                                         <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
                                             <Style.Triggers>
@@ -854,23 +851,23 @@
                         <GroupBox DockPanel.Dock="Bottom" Header="Izmeni lozinku" Margin="10,0,10,10" materialDesign:ShadowAssist.ShadowDepth="Depth1" materialDesign:ColorZoneAssist.Mode="Light">
                             <StackPanel Orientation="Vertical">
                                 <DockPanel Margin="3">
-                                    <Label DockPanel.Dock="Left">stara lozinka</Label>
-                                    <PasswordBox DockPanel.Dock="Right" Width="170"></PasswordBox>
+                                    <Label DockPanel.Dock="Left" Width="150">stara lozinka</Label>
+                                    <PasswordBox DockPanel.Dock="Left" Width="170" Margin="500,0,0,0"></PasswordBox>
                                     <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                                 </DockPanel>
 
                                 <DockPanel Margin="3">
-                                    <Label DockPanel.Dock="Left">nova lozinka</Label>
-                                    <PasswordBox DockPanel.Dock="Right" Width="170"></PasswordBox>
+                                    <Label DockPanel.Dock="Left" Width="150">nova lozinka</Label>
+                                    <PasswordBox DockPanel.Dock="Left" Width="170" Margin="500,0,0,0"></PasswordBox>
                                     <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                                 </DockPanel>
 
                                 <DockPanel Margin="3">
-                                    <Label DockPanel.Dock="Left">potvrdite novu lozinku</Label>
-                                    <PasswordBox DockPanel.Dock="Right" Width="170"></PasswordBox>
+                                    <Label DockPanel.Dock="Left" Width="200">potvrdite novu lozinku</Label>
+                                    <PasswordBox DockPanel.Dock="Left" Width="170" Margin="450,0,0,0"></PasswordBox>
                                     <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                                 </DockPanel>
-                                <Button HorizontalAlignment="Center" Margin="252,3" Padding="5" Width="160" Content="Azuriraj lozinku"/>
+                                <Button HorizontalAlignment="Left" Margin="250,0,0,0" Padding="5" Width="160" Content="Azuriraj lozinku"/>
                             </StackPanel>
 
                         </GroupBox>
