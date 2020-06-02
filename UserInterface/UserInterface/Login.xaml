@@ -4,9 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UserInterface"
+        xmlns:com="clr-namespace:UserInterface.Commands"
         mc:Ignorable="d"
         Title="Login" Height="450" Width="800"
         WindowStartupLocation="CenterScreen">
+    <Window.CommandBindings>
+        <CommandBinding Command="com:RoutedCommands.Login" Executed="Button_Click"/>
+    </Window.CommandBindings>
     <StackPanel HorizontalAlignment="Center" Height="308" VerticalAlignment="Center" Width="374" Margin="209,47,209,64">
         <Label Content="Bolnica Zdravo" FontSize="48" HorizontalContentAlignment="Center" Foreground="#1771F1"/>
         <Label HorizontalAlignment="Center" Margin="10,50,0,0" FontSize="9">Korisničko ime</Label>

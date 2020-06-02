@@ -8,6 +8,11 @@
         mc:Ignorable="d"
         Title="Generisanje izveštaja" Height="200" Width="610"
         ResizeMode="NoResize">
+    <Window.Resources>
+    <Style TargetType="TextBox">
+        <EventSetter Event="GotFocus" Handler="SelectAllOnFocus"/>
+    </Style>
+    </Window.Resources>
     <Grid>
         <Label Content="Lekar" HorizontalAlignment="Left" Margin="40,10,0,0" VerticalAlignment="Top"/>
         <Label Content="Datum" HorizontalAlignment="Left" Margin="40,50,0,0" VerticalAlignment="Top"/>
@@ -15,7 +20,7 @@
         <ComboBox HorizontalAlignment="Left" Margin="130,10,0,0" VerticalAlignment="Top" Width="425"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="130,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50">
             <TextBox.Text>
-                <Binding Path="FromDay" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                <Binding Path="FromDay" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
                         <val:FromDayReportValidation ValidationStep="RawProposedValue"/>
                     </Binding.ValidationRules>
@@ -40,13 +45,69 @@
             </Binding>
         </TextBox.Text>
         </TextBox>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="355,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="430,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="505,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="130,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="205,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="355,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="430,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="355,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50">
+            <TextBox.Text>
+                <Binding Path="ToDay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:DayValidation ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="430,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50">
+            <TextBox.Text>
+                <Binding Path="ToMonth" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:YearValidation ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="505,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50">
+            <TextBox.Text>
+                <Binding Path="ToYear" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:YearValidation ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="130,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50">
+            <TextBox.Text>
+                <Binding Path="FromHour" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:YearValidation ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="205,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50">
+            <TextBox.Text>
+                <Binding Path="FromMinute" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:YearValidation ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="355,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50">
+            <TextBox.Text>
+                <Binding Path="ToHour" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:YearValidation ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="430,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50">
+            <TextBox.Text>
+                <Binding Path="ToMinute" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:YearValidation ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
         <Button Content="Generiši" HorizontalAlignment="Left" Margin="389,135,0,0" VerticalAlignment="Top" Width="75"/>
         <Button Content="Odustani" HorizontalAlignment="Left" Margin="480,135,0,0" VerticalAlignment="Top" Width="75" Click="CloseWindow"/>
         <Label Content="/" HorizontalAlignment="Left" Margin="185,50,0,0" VerticalAlignment="Top"/>

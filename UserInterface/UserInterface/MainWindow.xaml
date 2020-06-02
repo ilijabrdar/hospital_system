@@ -17,7 +17,7 @@
         <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TabStripPlacement="Left">
             <TabItem Header="{Binding Secretary.Username}" Height="40" Background="#D7E1E9">
                 <Grid>
-                    <Grid x:Name="profile" Visibility="Collapsed">
+                    <Grid x:Name="profile" >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="2*"></ColumnDefinition>
@@ -54,7 +54,7 @@
                         </StackPanel>
                     </Grid>
 
-                    <Grid x:Name="changeProfile" >
+                    <Grid x:Name="changeProfile" Visibility="Collapsed">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="2*"></RowDefinition>
                             <RowDefinition Height="1*"></RowDefinition>

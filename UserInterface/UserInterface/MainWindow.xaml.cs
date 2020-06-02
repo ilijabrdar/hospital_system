@@ -169,5 +169,11 @@ namespace UserInterface
             TextBox textField = sender as TextBox;
             textField.GetBindingExpression(TextBox.TextProperty).UpdateSource();
         }
+
+        private void SelectAllOnFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textField = sender as TextBox;
+            textField.SelectAll();
+        }
     }
 }

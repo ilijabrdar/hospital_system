@@ -35,11 +35,22 @@ namespace UserInterface
         {
             InitializeComponent();
             this.DataContext = this;
+            FromDay = ToDay = DateTime.Now.Day;
+            FromMonth = ToMonth = DateTime.Now.Month;
+            FromYear = ToYear = DateTime.Now.Year;
+            FromHour = ToHour = DateTime.Now.Hour;
+            FromHour = ToHour = DateTime.Now.Minute;
         }
 
         private void CloseWindow(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void SelectAllOnFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textField = sender as TextBox;
+            textField.SelectAll();
         }
     }
 }
