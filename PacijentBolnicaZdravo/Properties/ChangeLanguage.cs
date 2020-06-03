@@ -62,7 +62,9 @@ namespace PacijentBolnicaZdravo.Properties
             currentWindow.ExaminationHardCore.Text = MyProject.Language.Resources.ExaminationHardCore;
             currentWindow.Schedule.ToolTip = MyProject.Language.Resources.ToolTipSchedule;
             currentWindow.Cancel.ToolTip = MyProject.Language.Resources.ToolTipCancel;
-            currentWindow.SearchButton.ToolTip = MyProject.Language.Resources.ToolTipSearch;
+            currentWindow.ToolTipSchedule.Content = MyProject.Language.Resources.ToolTipSearch;
+            currentWindow.GradeADoctor.Text = MyProject.Language.Resources.GradeADoctor;
+            currentWindow.ChooseDoctorForGrade.Text = MyProject.Language.Resources.ChooseDoctor;
         }   
 
         public void ChangeLogInWindow(WindowLogIn currentWindow)

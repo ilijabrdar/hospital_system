@@ -45,7 +45,7 @@
 
             <StackPanel Margin="10,-23,45,-30" Orientation="Horizontal">
                 <TextBlock Name="DarkModeLabel" Text="{x:Static p:Resources.DarkMode}" FontSize="15" Margin="15,48,0,50" DockPanel.Dock="Right" />
-                <Slider Name="DarkMode" Width="35" Height="16" ValueChanged="Slider_ValueChanged" IsSnapToTickEnabled="True"
+                <Slider Name="DarkMode" Width="15" Height="16" ValueChanged="Slider_ValueChanged" IsSnapToTickEnabled="True"
                 Value="0"
                 Minimum="0"
                 Maximum="1" 

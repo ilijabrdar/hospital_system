@@ -223,6 +223,15 @@ namespace MyProject.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Grade a doctor.
+        /// </summary>
+        public static string GradeADoctor {
+            get {
+                return ResourceManager.GetString("GradeADoctor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hospitalizations.
         /// </summary>
         public static string Hospitalizations {

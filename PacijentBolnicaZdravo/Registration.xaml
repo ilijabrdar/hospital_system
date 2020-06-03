@@ -26,7 +26,7 @@
             </ComboBox>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="{x:Static p:Resources.DarkMode }" FontSize="15" Margin="1,10,2,1" DockPanel.Dock="Right"/>
-                <Slider Name="DarkMode" Width="35" Height="16" ValueChanged="Slider_ValueChanged" IsSnapToTickEnabled="True"
+                <Slider Name="DarkMode" Width="15" Height="16" ValueChanged="Slider_ValueChanged" IsSnapToTickEnabled="True"
                 Value="0"
                 Minimum="0"
                 Maximum="1" 

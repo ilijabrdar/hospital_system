@@ -15,7 +15,7 @@
         <DockPanel DockPanel.Dock="Top" Height="35">
             <Button Name="LogOutButton" Content="{x:Static p:Resources.LogOut}"  DockPanel.Dock="Left" VerticalContentAlignment="Center" Margin="5" Click="LogOut"/>
 
-            <Slider Name="DarkMode"  Width="35" Height="16"  ValueChanged="Slider_ValueChanged" IsSnapToTickEnabled="True"
+            <Slider Name="DarkMode"  Width="15" Height="16"  ValueChanged="Slider_ValueChanged" IsSnapToTickEnabled="True"
             Value="0"
             Minimum="0"
             Maximum="1" 
@@ -80,7 +80,11 @@ Piramida ishrane je vizuelni prikaz namirnica koje treba da budu zastupljenje u 
                     <Border x:Name="Termins" BorderBrush="Black" CornerRadius="8,8,3,3" BorderThickness="1" Height="163" Margin="0.1">
                         <GroupBox x:Name="RadioButtons" BorderBrush="{x:Null}" Background="{x:Null}" />
                     </Border>
-                    <Button Name="Schedule" ToolTip="{x:Static p:Resources.ToolTipSchedule}"  Content="{x:Static p:Resources.Schedule}" HorizontalAlignment="Right" Margin="15"  Width="76" Click="Zakazi" />
+                    <Button Name="Schedule" Content="{x:Static p:Resources.Schedule}" HorizontalAlignment="Right" Margin="15"  Width="76" Click="Zakazi" >
+                        <Button.ToolTip>
+                            <ToolTip x:Name="ToolTipSchedule"  Content = "{x:Static p:Resources.ToolTipSchedule}" Background="#FFA0A0A0"/>
+                        </Button.ToolTip>
+                    </Button>
                 </StackPanel>
             </TabItem>
             <TabItem Header="{x:Static p:Resources.TabCancel}" Name="TabCancel">
@@ -154,13 +158,13 @@ Piramida ishrane je vizuelni prikaz namirnica koje treba da budu zastupljenje u 
                             </StackPanel>
                             <StackPanel Orientation="Vertical">
                                 <TextBlock Margin="13" FontSize="15" Width="220" FontWeight="Bold" Opacity="0.6"> JovanJelicki</TextBlock>
-                                <TextBox TextAlignment="Left" BorderThickness="3" BorderBrush="LightBlue" Name="Name" Margin="10" FontSize="15" Width="220">Jovan</TextBox>
-                                <TextBox TextAlignment="Left" BorderThickness="3" BorderBrush="LightBlue" FontSize="15" Name="Surname" Margin="10,12,10,10" Width="220">Jelicki</TextBox>
-                                <TextBox TextAlignment="Left" BorderThickness="3" BorderBrush="LightBlue" FontSize="15" Name="ID" Margin="10,12,10,10"  Width="220">2001998800114</TextBox>
+                                <TextBox TextAlignment="Left" BorderThickness="1.5" BorderBrush="LightBlue" Name="Name" Margin="10" FontSize="15" Width="220">Jovan</TextBox>
+                                <TextBox TextAlignment="Left" BorderThickness="1.5" BorderBrush="LightBlue" FontSize="15" Name="Surname" Margin="10,12,10,10" Width="220">Jelicki</TextBox>
+                                <TextBox TextAlignment="Left" BorderThickness="1.5" BorderBrush="LightBlue" FontSize="15" Name="ID" Margin="10,12,10,10"  Width="220">2001998800114</TextBox>
                                 <DatePicker SelectedDate="01/20/1998"  Margin="10,12,10,10" Width="220" Height="30"/>
-                                <TextBox TextAlignment="Left" BorderThickness="3" BorderBrush="LightBlue" FontSize="15" Name="Email" Margin="10"  Width="220">jovanzte@gmail.com</TextBox>
-                                <TextBox TextAlignment="Left" BorderThickness="3" BorderBrush="LightBlue" FontSize="15" Name="Adress" Margin="10,12,10,10" Width="220">Mišarska 40</TextBox>
-                                <TextBox TextAlignment="Left" BorderThickness="3" BorderBrush="LightBlue" FontSize="15" Name="PhoneNumber" Margin="10,12,10,10" Width="220"></TextBox>
+                                <TextBox TextAlignment="Left" BorderThickness="1.5" BorderBrush="LightBlue" FontSize="15" Name="Email" Margin="10"  Width="220">jovanzte@gmail.com</TextBox>
+                                <TextBox TextAlignment="Left" BorderThickness="1.5" BorderBrush="LightBlue" FontSize="15" Name="Adress" Margin="10,12,10,10" Width="220">Mišarska 40</TextBox>
+                                <TextBox TextAlignment="Left" BorderThickness="1.5" BorderBrush="LightBlue" FontSize="15" Name="PhoneNumber" Margin="10,12,10,10" Width="220"></TextBox>
                                 <Button  Content="{x:Static p:Resources.UpdateData}" Name="UpdateData" Width="120" HorizontalAlignment="Right" Margin="10" Click="UpdateInfo"></Button>
                             </StackPanel>
                             <StackPanel Orientation="Vertical">
@@ -176,15 +180,15 @@ Piramida ishrane je vizuelni prikaz namirnica koje treba da budu zastupljenje u 
                             <TextBlock Name="PwLabel"  Margin="10,10,0,0" FontSize="18" Text="{x:Static p:Resources.ChangePw}" />
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock  Name="CurrentPw" Margin="10,10,43,10" FontSize="15" Text="{x:Static p:Resources.CurrentPw}"/>
-                                <PasswordBox BorderThickness="3" BorderBrush="LightBlue"  FontSize="15" Name="CurrentPassword"  Margin="10" Width="220"></PasswordBox>
+                                <PasswordBox BorderThickness="1.5" BorderBrush="LightBlue"  FontSize="15" Name="CurrentPassword"  Margin="10" Width="220"></PasswordBox>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Name="NewPw" Margin="10,10,66,10" FontSize="15" Text="{x:Static p:Resources.NewPw}"/>
-                                <PasswordBox BorderThickness="3" BorderBrush="LightBlue"  FontSize="15" Name="NewPassword" Margin="10"  Width="220"></PasswordBox>
+                                <PasswordBox BorderThickness="1.5" BorderBrush="LightBlue"  FontSize="15" Name="NewPassword" Margin="10"  Width="220"></PasswordBox>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Name="ConfirmPw" Margin="10,10,50,10" FontSize="15"  Text="{x:Static p:Resources.ConfirmPw}"/>
-                                <PasswordBox BorderThickness="3" BorderBrush="LightBlue"  FontSize="15" Name="CheckPassword" Margin="10" Width="220"></PasswordBox>
+                                <PasswordBox BorderThickness="1.5" BorderBrush="LightBlue"  FontSize="15" Name="CheckPassword" Margin="10" Width="220"></PasswordBox>
                             </StackPanel>
                             <Button Content="{x:Static p:Resources.UpdatePw}" Name="UpdatePwButton" Margin="10"  Height="25" Width="110" Click="UpdatePw"></Button>
                         </StackPanel>
@@ -196,10 +200,33 @@ Piramida ishrane je vizuelni prikaz namirnica koje treba da budu zastupljenje u 
                     <TextBlock Name="Opinion"  Text="{x:Static p:Resources.Opinion}"  HorizontalAlignment="Center" FontSize="20" FontWeight="Bold"/>
                     <TextBlock Name="OpinionName" FontSize="14" HorizontalAlignment="Center" Margin="5" Text="{x:Static p:Resources.OpinionDesc}" />
 
-                    <TextBox BorderThickness="2" Name="FeedBack" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="auto" Height="200" TextAlignment="Left" FontSize="14"></TextBox>
+                    <TextBox BorderThickness="1.5" Name="FeedBack" BorderBrush="LightBlue" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="auto" Height="100" TextAlignment="Left" FontSize="14"></TextBox>
 
                     <Button Name="FeedBackButton" Content="{x:Static p:Resources.Send}"  Width="60" Margin="10,10,20,10" HorizontalAlignment="Right" Click="Feedback"></Button>
-
+                    <Border BorderThickness="0.5" BorderBrush="LightBlue"></Border>
+                    <TextBlock x:Name="GradeADoctor" Text="{x:Static p:Resources.GradeADoctor}" FontSize="16" HorizontalAlignment="Center" Margin="5" FontWeight="Bold"></TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="10,5,5,5" Name="ChooseDoctorForGrade" FontSize="16" Text="{x:Static p:Resources.ChooseDoctor}"/>
+                        <ComboBox Margin="10,5,5,5" Width="150"></ComboBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+               
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                            <TextBlock Margin="10,5,5,5" FontSize="14">Pitanje broj jedan</TextBlock>
+                            <TextBlock Margin="10,5,5,5" FontSize="14">Pitanje broj jedan</TextBlock>
+                            <TextBlock Margin="10,5,5,5" FontSize="14">Pitanje broj jedan</TextBlock>
+                            <TextBlock Margin="10,5,5,5" FontSize="14">Pitanje broj jedan</TextBlock>
+                            <TextBlock Margin="10,5,5,5" FontSize="14">Pitanje broj jedan</TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <Slider Margin="10,10,5,5" Name="Slider1"></Slider>
+                            <Slider Margin="10,10,5,5" Name="Slider2"></Slider>
+                            <Slider Margin="10,7,5,5" Name="Slider3"></Slider>
+                            <Slider Margin="10,7,5,5" Name="Slider4"></Slider>
+                            <Slider Margin="10,7,5,5" Name="Slider5"></Slider>
+                        </StackPanel>
+                    </StackPanel>
+                    
                 </StackPanel>
             </TabItem>
         </TabControl>
