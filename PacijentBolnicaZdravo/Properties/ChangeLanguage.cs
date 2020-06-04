@@ -65,6 +65,7 @@ namespace PacijentBolnicaZdravo.Properties
             currentWindow.ToolTipSchedule.Content = MyProject.Language.Resources.ToolTipSearch;
             currentWindow.GradeADoctor.Text = MyProject.Language.Resources.GradeADoctor;
             currentWindow.ChooseDoctorForGrade.Text = MyProject.Language.Resources.ChooseDoctor;
+            currentWindow.GradeADoctorButton.Content = MyProject.Language.Resources.Send;
         }   
 
         public void ChangeLogInWindow(WindowLogIn currentWindow)

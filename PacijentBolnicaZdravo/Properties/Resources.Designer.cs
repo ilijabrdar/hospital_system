@@ -223,7 +223,7 @@ namespace MyProject.Language {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Grade a doctor.
+        ///   Looks up a localized string similar to Grade a doctor!.
         /// </summary>
         public static string GradeADoctor {
             get {

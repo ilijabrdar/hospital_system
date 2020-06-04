@@ -7,7 +7,7 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
          xmlns:resource="clr-namespace:PacijentBolnicaZdravo.Properties" xmlns:p="clr-namespace:MyProject.Language"
         mc:Ignorable="d"
-         Height="504" Width="827">
+         Height="600" Width="850">
     <mah:MetroWindow.Resources>
         <DatePickerFormat x:Key="DatePickerFormat1">Short</DatePickerFormat>
     </mah:MetroWindow.Resources>
@@ -196,7 +196,8 @@ Piramida ishrane je vizuelni prikaz namirnica koje treba da budu zastupljenje u 
                 </ScrollViewer>
             </TabItem>
             <TabItem Name="FeedbackHeader" Header="{x:Static p:Resources.FeedBack}">
-                <StackPanel Orientation="Vertical">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">              
+                    <StackPanel Orientation="Vertical">
                     <TextBlock Name="Opinion"  Text="{x:Static p:Resources.Opinion}"  HorizontalAlignment="Center" FontSize="20" FontWeight="Bold"/>
                     <TextBlock Name="OpinionName" FontSize="14" HorizontalAlignment="Center" Margin="5" Text="{x:Static p:Resources.OpinionDesc}" />
 
@@ -212,22 +213,25 @@ Piramida ishrane je vizuelni prikaz namirnica koje treba da budu zastupljenje u 
                     <StackPanel Orientation="Horizontal">
                
                         <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                            <TextBlock Margin="10,5,5,5" FontSize="14">Pitanje broj jedan</TextBlock>
-                            <TextBlock Margin="10,5,5,5" FontSize="14">Pitanje broj jedan</TextBlock>
-                            <TextBlock Margin="10,5,5,5" FontSize="14">Pitanje broj jedan</TextBlock>
-                            <TextBlock Margin="10,5,5,5" FontSize="14">Pitanje broj jedan</TextBlock>
-                            <TextBlock Margin="10,5,5,5" FontSize="14">Pitanje broj jedan</TextBlock>
+                                <TextBlock Margin="6"  Height="24"  FontSize="14">Pitanje broj jedan</TextBlock>
+                                <TextBlock Margin="6"  Height="24"  FontSize="14">Pitanje broj jedan</TextBlock>
+                                <TextBlock Margin="6"  Height="24" FontSize="14">Pitanje broj jedan</TextBlock>
+                                <TextBlock Margin="6"  Height="24" FontSize="14">Pitanje broj jedan</TextBlock>
+                                <TextBlock Margin="6,6,6,50"  Height="24" FontSize="14">Pitanje broj jedan</TextBlock>
                         </StackPanel>
                         <StackPanel Orientation="Vertical">
-                            <Slider Margin="10,10,5,5" Name="Slider1"></Slider>
-                            <Slider Margin="10,10,5,5" Name="Slider2"></Slider>
-                            <Slider Margin="10,7,5,5" Name="Slider3"></Slider>
-                            <Slider Margin="10,7,5,5" Name="Slider4"></Slider>
-                            <Slider Margin="10,7,5,5" Name="Slider5"></Slider>
+                            <Slider Style="{StaticResource SliderGrade}" Minimum="1" Maximum="5" TickFrequency="1" Width="100"  Margin="10,14,5,5" Name="Slider1"></Slider>
+                            <Slider Style="{StaticResource SliderGrade}" Minimum="1" Maximum="5" TickFrequency="1" Margin="10,10,5,5" Name="Slider2"></Slider>
+                            <Slider Style="{StaticResource SliderGrade}" Minimum="1" Maximum="5" TickFrequency="1" Margin="10,7,5,5" Name="Slider3"></Slider>
+                            <Slider Style="{StaticResource SliderGrade}" Minimum="1" Maximum="5" TickFrequency="1" Margin="10,7,5,5" Name="Slider4"></Slider>
+                            <Slider Style="{StaticResource SliderGrade}" Minimum="1" Maximum="5" TickFrequency="1" Margin="10,7,5,5" Name="Slider5"></Slider>
+                                <Button x:Name="GradeADoctorButton" Content="{x:Static p:Resources.Send}" HorizontalAlignment="Right" Width="60" Margin="10"></Button>
                         </StackPanel>
                     </StackPanel>
                     
                 </StackPanel>
+                </ScrollViewer>
+
             </TabItem>
         </TabControl>
 
