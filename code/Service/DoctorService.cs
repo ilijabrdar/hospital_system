@@ -20,7 +20,7 @@ namespace Service
             _doctorRepository = repo;
         }
 
-        public bool ChangeSpeciality(Specialty specialty, Doctor doctor)
+        public bool ChangeSpeciality(Model.Doctor.Speciality specialty, Doctor doctor)
         {
             throw new NotImplementedException();
         }
@@ -45,7 +45,7 @@ namespace Service
             throw new NotImplementedException();
         }
 
-        public List<Doctor> GetDoctorsBySpeciality(Specialty specialty)
+        public List<Doctor> GetDoctorsBySpeciality(Model.Doctor.Speciality specialty)
         {
             return _doctorRepository.GetDoctorsBySpeciality(specialty);
         }

@@ -8,8 +8,10 @@ using System.Text;
 
 namespace bolnica.Controller
 {
-   public interface IDoctorController : IController<Doctor, long>
-{
-         List<Doctor> GetDoctorsBySpeciality(Speciality specialty);
+   public interface IDoctorGradeController : IController<DoctorGrade,long>
+    {
+
+        List<String> GetQuestions();
+        double GetAverageGrade( Doctor doctor, List<int> grades);
     }
 }

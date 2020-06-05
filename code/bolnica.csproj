@@ -99,6 +99,7 @@
     <Compile Include="Controller\abstract\IBusinessDayController.cs" />
     <Compile Include="Controller\abstract\IDiagnosisController.cs" />
     <Compile Include="Controller\abstract\IDoctorController.cs" />
+    <Compile Include="Controller\abstract\IDoctorGradeController.cs" />
     <Compile Include="Controller\abstract\IEquipmentController.cs" />
     <Compile Include="Controller\abstract\IAricleController.cs" />
     <Compile Include="Controller\abstract\IExaminationController.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="Controller\abstract\IPrescriptionController.cs" />
     <Compile Include="Controller\abstract\IRefferalController.cs" />
     <Compile Include="Controller\abstract\IRenovationController.cs" />
+    <Compile Include="Controller\abstract\ISpecialityController.cs" />
     <Compile Include="Controller\abstract\ITherapyController.cs" />
     <Compile Include="Controller\AnemnesisController.cs">
       <SubType>Code</SubType>
@@ -438,7 +440,6 @@
     <Compile Include="Repository\SecretaryRepository.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Repository\Speciality.cs" />
     <Compile Include="Repository\CSV\Converter\SpecialityCSVConverter.cs" />
     <Compile Include="Repository\SpecialityRepository.cs">
       <SubType>Code</SubType>
@@ -451,6 +452,7 @@
     <Compile Include="Service\abstract\IArticleService.cs" />
     <Compile Include="Service\abstract\IBusinessDayService.cs" />
     <Compile Include="Service\abstract\IDiagnosisService.cs" />
+    <Compile Include="Service\abstract\IDoctorGradeService.cs" />
     <Compile Include="Service\abstract\IDoctorService.cs" />
     <Compile Include="Service\abstract\IEquipmentService.cs" />
     <Compile Include="Service\abstract\IExaminationService.cs" />
@@ -463,6 +465,7 @@
     <Compile Include="Service\abstract\IReferalService.cs" />
     <Compile Include="Service\abstract\IRenovationService.cs" />
     <Compile Include="Service\abstract\IRoomTypeService.cs" />
+    <Compile Include="Service\abstract\ISpecialityService.cs" />
     <Compile Include="Service\abstract\ITherapyService.cs" />
     <Compile Include="Service\abstract\Refferal.cs" />
     <Compile Include="Service\AnemnesisService.cs">
