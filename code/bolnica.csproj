@@ -312,6 +312,7 @@
     <Compile Include="Repository\BusinessDayRepository.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Repository\RefferalRepository.cs" />
     <Compile Include="Repository\CSV\Converter\ArticleCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\BusinessDayCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\DiagnosisCSVConverter.cs" />
@@ -420,7 +421,6 @@
     <Compile Include="Repository\CSV\Converter\IngredientsCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\RoomCSVConverter.cs" />
     <Compile Include="Repository\PrescriptionRepository.cs" />
-    <Compile Include="Repository\RefferalRepository.cs" />
     <Compile Include="Repository\Sequencer\ISequencer.cs" />
     <Compile Include="Repository\abstract\ISpecialityRepository.cs">
       <SubType>Code</SubType>

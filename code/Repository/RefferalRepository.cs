@@ -9,7 +9,7 @@ using System.Text;
 
 namespace Repository
 {
-   public class RefferalRepository : CSVRepository<Referral, long>, IReferralRepository
+    public class RefferalRepository : CSVRepository<Referral, long>, IReferralRepository
     {
         public RefferalRepository(ICSVStream<Model.Doctor.Referral> stream, ISequencer<long> sequencer)
           : base(stream, sequencer)
