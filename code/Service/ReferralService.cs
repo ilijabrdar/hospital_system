@@ -17,6 +17,11 @@ namespace Service
     {
         private IReferralRepository _repository;
 
+        public ReferralService(IReferralRepository repository)
+        {
+            _repository = repository;
+        }
+
         public void Delete(Referral entity)
         {
             _repository.Delete(entity);

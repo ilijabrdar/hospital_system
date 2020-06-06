@@ -312,7 +312,10 @@
     <Compile Include="Repository\BusinessDayRepository.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Repository\RefferalRepository.cs" />
+    <Compile Include="Repository\CSV\Converter\ReferralCSVConverter.cs" />
+    <Compile Include="Repository\CSV\Converter\SymptomCSVConverter.cs" />
+    <Compile Include="Repository\CSV\Converter\TherapyCSVConverter.cs" />
+    <Compile Include="Repository\ReferralRepository.cs" />
     <Compile Include="Repository\CSV\Converter\ArticleCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\BusinessDayCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\DiagnosisCSVConverter.cs" />
@@ -456,7 +459,7 @@
     <Compile Include="Repository\CSV\Converter\StateCSVConverter.cs" />
     <Compile Include="Repository\StateRepository.cs" />
     <Compile Include="Repository\CSV\Converter\TownCSVConverter.cs" />
-    <Compile Include="Repository\SymptomRespository.cs" />
+    <Compile Include="Repository\SymptomRepository.cs" />
     <Compile Include="Repository\TherapyRepository.cs" />
     <Compile Include="Repository\TownRepository.cs" />
     <Compile Include="Service\abstract\IArticleService.cs" />

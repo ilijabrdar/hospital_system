@@ -12,6 +12,13 @@ namespace bolnica.Repository.CSV.Converter
         private readonly String _delimiterDictionary = ";";
         private readonly String _delimiterQuestionGrades = ":";
 
+        public DoctorGradeCSVConverter(string delimiter, string delimiterDictionary, string delimiterQuestionGrades)
+        {
+            _delimiter = delimiter;
+            _delimiterDictionary = delimiterDictionary;
+            _delimiterQuestionGrades = delimiterQuestionGrades;
+        }
+
         public DoctorGrade ConvertCSVFormatToEntity(string entityCSVFormat)
         {
             string[] tokens = entityCSVFormat.Split(_delimiter.ToCharArray()); 

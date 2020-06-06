@@ -23,7 +23,7 @@
             </Grid.ColumnDefinitions>
             <Image Height="44" Width="56" Grid.Row="0" Grid.Column="0" Source="user.png"/>
             <Label Content="korisničko ime" FontSize="18" Grid.Row="0" Grid.Column="1"/>
-            <TextBox x:Name="username_text" Text="unesite vaše korisničko ime" Grid.Row="0" Grid.Column="2" Height="33" FontSize="16" TextWrapping="Wrap" Width="245" Foreground="#515A5A" Focusable="True" IsKeyboardFocusedChanged="TextBox_IsKeyboardFocusedChanged" KeyDown="username_text_KeyDown" CaretBrush="#FF1FEECD" />
+            <TextBox x:Name="username_text" Text="{Binding Username}" Grid.Row="0" Grid.Column="2" Height="33" FontSize="16" TextWrapping="Wrap" Width="245" Foreground="#515A5A" Focusable="True" IsKeyboardFocusedChanged="TextBox_IsKeyboardFocusedChanged" KeyDown="username_text_KeyDown" CaretBrush="#FF1FEECD" />
 
 
             <Image Height="44" Width="56" Grid.Row="1" Grid.Column="0" Source="password.png"/>

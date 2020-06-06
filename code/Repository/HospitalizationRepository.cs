@@ -14,9 +14,10 @@ namespace Repository
     {
       private String FilePath;
         public HospitalizationRepository(ICSVStream<Hospitalization> stream, ISequencer<long> sequencer)
-  : base(stream, sequencer)
+            : base(stream, sequencer)
         {
 
         }
+
     }
 }

@@ -8,7 +8,7 @@ namespace bolnica.Repository
 {
      public class PrescriptionRepository : CSVRepository<Prescription, long>, IPrescriptionRepository
     {
-        public PrescriptionRepository(ICSVStream<Model.Doctor.Referral> stream, ISequencer<long> sequencer)
+        public PrescriptionRepository(ICSVStream<Prescription> stream, ISequencer<long> sequencer)
           : base(stream, sequencer)
         {
 

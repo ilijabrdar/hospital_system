@@ -10,7 +10,7 @@ using System.Text;
 
 namespace bolnica.Repository
 {
-    class OperationCSVConverter : ICSVConverter<Operation>
+    public class OperationCSVConverter : ICSVConverter<Operation>
     {
         private readonly string _delimiter;
 

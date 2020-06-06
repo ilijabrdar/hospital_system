@@ -74,11 +74,8 @@ C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\DrugAlter
 C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\DrugValidation.g.cs
 C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\EditDrug.g.cs
 C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\Examination.g.cs
-C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\Hospitalization.g.cs
 C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\Log.g.cs
-C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\Operation.g.cs
 C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\PatientFile.g.cs
-C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\Prescription.g.cs
 C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\Refferal.g.cs
 C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\ScheduleExamination.g.cs
 C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\SideBar.g.cs
@@ -101,11 +98,8 @@ C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\DrugAlter
 C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\DrugValidation.baml
 C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\EditDrug.baml
 C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\Examination.baml
-C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\Hospitalization.baml
 C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\Log.baml
-C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\Operation.baml
 C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\PatientFile.baml
-C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\Prescription.baml
 C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\Refferal.baml
 C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\ScheduleExamination.baml
 C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\SideBar.baml
@@ -117,3 +111,12 @@ C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\HCIprojec
 C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\HCIproject.csproj.CopyComplete
 C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\HCIproject.exe
 C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\HCIproject.pdb
+C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\HCIproject.csprojAssemblyReference.cache
+C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\HospitalizationWin.g.cs
+C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\bin\Debug\bolnica.dll
+C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\bin\Debug\bolnica.pdb
+C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\HospitalizationWin.baml
+C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\OperationWin.g.cs
+C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\OperationWin.baml
+C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\PrescriptionWin.g.cs
+C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\PrescriptionWin.baml

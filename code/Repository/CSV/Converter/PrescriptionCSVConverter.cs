@@ -9,11 +9,12 @@ namespace bolnica.Repository.CSV.Converter
     public class PrescriptionCSVConverter : ICSVConverter<Prescription>
     {
         private readonly String _delimiter = ",";
-        private readonly String _drugDelimiter = ",";
+        private readonly String _drugDelimiter = ";";
 
-        public PrescriptionCSVConverter(string delimiter)
+        public PrescriptionCSVConverter(string delimiter, string drugDelimiter)
         {
             _delimiter = delimiter;
+            _drugDelimiter = drugDelimiter;
         }
 
         public Prescription ConvertCSVFormatToEntity(string entityCSVFormat)

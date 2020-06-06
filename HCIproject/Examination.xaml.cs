@@ -42,7 +42,7 @@ namespace HCIproject
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         { //recept
-            Prescription presWin = new Prescription();
+            PrescriptionWin presWin = new PrescriptionWin();
             this.Visibility = Visibility.Hidden;
             presWin.Show();
         }
@@ -56,7 +56,7 @@ namespace HCIproject
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
         { //hospitalizacija
-            Hospitalization hosWin = new Hospitalization();
+            HospitalizationWin hosWin = new HospitalizationWin();
             this.Visibility = Visibility.Hidden;
             hosWin.Show();
 
@@ -71,7 +71,7 @@ namespace HCIproject
 
         private void Button_Click_6(object sender, RoutedEventArgs e)
         {
-            Operation opeWin = new Operation();
+            OperationWin opeWin = new OperationWin();
             this.Visibility = Visibility.Hidden;
             opeWin.Show();
         }

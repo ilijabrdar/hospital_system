@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("graph.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/therapyfile.txt")]
 
 

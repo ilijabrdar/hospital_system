@@ -10,6 +10,11 @@ namespace Service
     {
         private readonly ITherapyRepository _repository;
 
+        public TherapyService(ITherapyRepository repository)
+        {
+            _repository = repository;
+        }
+
         public Therapy AssignCurrentTherapy(PatientFile patientFile)
         {
             throw new NotImplementedException();

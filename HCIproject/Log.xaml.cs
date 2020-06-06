@@ -14,11 +14,10 @@ using System.Windows.Shapes;
 
 namespace HCIproject
 {
-    /// <summary>
-    /// Interaction logic for Log.xaml
-    /// </summary>
     public partial class Log : Window
     {
+        public String Username { get; set; }
+
         public Log()
         {
             InitializeComponent();

@@ -6,10 +6,10 @@ using System.Text;
 
 namespace bolnica.Repository.CSV.Converter
 {
-    class DiagnosisCSVConverter : ICSVConverter<Diagnosis>
+     public  class DiagnosisCSVConverter : ICSVConverter<Diagnosis>
     {
         private readonly String _delimiter = ",";
-        private readonly string _symptomDelimiter;
+        private readonly string _symptomDelimiter=":";
 
         public DiagnosisCSVConverter(string delimiter, string symptomDelimiter)
         {
