@@ -16,7 +16,7 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <Button  HorizontalAlignment="Left" Margin="20,10,0,10" Click="Button_Click_Add" Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+        <Button x:Name="addRoomEquipmentBtn"  HorizontalAlignment="Left" Margin="20,10,0,10" Click="Button_Click_Add" Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
                  ToolTip="Dodaj opremu u prostoriju">
             <materialDesign:PackIcon
                                     Kind="Add"
@@ -27,7 +27,7 @@
 
 
 
-        <Button  HorizontalAlignment="Left" Margin="87,10,0,10" Click="Button_Click_Edit" Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+        <Button x:Name="editRoomEquipmentBtn"  HorizontalAlignment="Left" Margin="87,10,0,10" Click="Button_Click_Edit" Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
                  ToolTip="Izmeni opremu prostorije">
             <materialDesign:PackIcon
                                     Kind="Edit"
@@ -38,7 +38,7 @@
 
 
 
-        <Button  HorizontalAlignment="Left" Margin="157,10,0,10"  Style="{StaticResource MaterialDesignFloatingActionMiniButton}" Click="Button_Click_Delete"
+        <Button x:Name="deleteRoomEquipmentBtn" HorizontalAlignment="Left" Margin="157,10,0,10"  Style="{StaticResource MaterialDesignFloatingActionMiniButton}" Click="Button_Click_Delete"
                  ToolTip="Izbrisi opremu iz prostorije" RenderTransformOrigin="1.775,0.6">
             <materialDesign:PackIcon
                                     Kind="DeleteForever"

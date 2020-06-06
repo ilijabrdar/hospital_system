@@ -150,7 +150,17 @@
                                                 <DataGridTextColumn Header="Telefon" Binding="{Binding Telefon}" Width="*" />
                                                 <DataGridTextColumn Header="Datum rodjenja" Binding="{Binding Datum_rodjenja}" Width="*"/>
                                                 <DataGridTextColumn Header="Odeljenje" Binding="{Binding Odeljenje}" Width="*"/>
-                                                <DataGridTextColumn Header="Ocena" Binding="{Binding Ocena}" Width="*"/>
+                                                <!-- <DataGridTextColumn Header="Ocena" Binding="{Binding Ocena}" Width="*"/> -->
+                                                <DataGridTemplateColumn Header="Ocena" Width="*">
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <materialDesign:RatingBar
+                                                                  Value="4"
+                                                                  IsReadOnly="True"
+                                                                  x:Name="ReadOnlyRatingBar" />
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
                                             </DataGrid.Columns>
                                         </DataGrid>
 
@@ -369,7 +379,7 @@
                                     Width="24" />
                                         </Button>
 
-                                        <Button DockPanel.Dock="Right" Margin="10,10,20,10"
+                                        <Button x:Name="searchConsumableEquipmentBtn" DockPanel.Dock="Right" Margin="10,10,20,10" Click="searchTxtAppear_Button_Click_ConsumableEq"
                                   Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
                                   HorizontalAlignment="Left"
                                   ToolTip="Pretraži">
@@ -378,7 +388,7 @@
                                     Height="24"
                                     Width="24" />
                                         </Button>
-                                        <TextBox x:Name="txtsearcConsumable" DockPanel.Dock="Right" Margin="10" TextChanged="TextBox_TextChanged" MinWidth="100" materialDesign:HintAssist.Hint="Pretrazi" KeyUp="TextBox_KeyUp"/>
+                                        <TextBox x:Name="txtsearcConsumable" DockPanel.Dock="Right" Margin="10" TextChanged="TextBox_TextChanged" MinWidth="100" materialDesign:HintAssist.Hint="Pretrazi" KeyUp="TextBox_KeyUp" Visibility="Hidden"/>
                                         <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                                     </DockPanel>
                                     <DockPanel DockPanel.Dock="Bottom">
@@ -423,7 +433,7 @@
                                     Width="24" />
                                         </Button>
 
-                                        <Button DockPanel.Dock="Right" Margin="10,10,20,10"
+                                        <Button x:Name="searchInconsumableEquipmentBtn" DockPanel.Dock="Right" Margin="10,10,20,10" Click="searchTxtAppear_Button_Click_InconsumableEq"
                                   Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
                                   HorizontalAlignment="Left"
                                   ToolTip="Pretraži">
@@ -432,7 +442,7 @@
                                     Height="24"
                                     Width="24" />
                                         </Button>
-                                        <TextBox x:Name="txtsearchInconsumable" DockPanel.Dock="Right" Margin="10"  MinWidth="100" materialDesign:HintAssist.Hint="Pretrazi" KeyUp="TextBox_KeyUp"/>
+                                        <TextBox x:Name="txtsearchInconsumable" DockPanel.Dock="Right" Margin="10"  MinWidth="100" materialDesign:HintAssist.Hint="Pretrazi" KeyUp="TextBox_KeyUp" Visibility="Hidden"/>
                                         <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                                     </DockPanel>
                                     <DockPanel DockPanel.Dock="Bottom">
@@ -492,8 +502,8 @@
                                     Height="24"
                                     Width="24" />
                             </Button>
-                            
-                            <Button DockPanel.Dock="Right" Margin="10,10,20,10"
+
+                            <Button x:Name="searchDrugBtn" DockPanel.Dock="Right" Margin="10,10,20,10" Click="searchTxtAppear_Button_Click_Drug"
                                   Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
                                   HorizontalAlignment="Left"
                                   ToolTip="Pretraži">
@@ -502,7 +512,7 @@
                                     Height="24"
                                     Width="24" />
                             </Button>
-                            <TextBox DockPanel.Dock="Right" Margin="10" TextChanged="TextBox_TextChanged" MinWidth="100"/>
+                            <TextBox x:Name="txtsearchDrug" DockPanel.Dock="Right" Margin="10" TextChanged="TextBox_TextChanged" MinWidth="100" Visibility="Hidden"/>
                             <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Bottom">
@@ -911,7 +921,9 @@
 
                     </Grid>
                 </TabItem>
+                <TabItem Header="Pomoć">
 
+                </TabItem>
 
             </TabControl>
 

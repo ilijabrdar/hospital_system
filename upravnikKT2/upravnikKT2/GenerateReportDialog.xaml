@@ -41,7 +41,7 @@
         <DatePicker x:Name="endDatePicker" Grid.Row="3" Grid.Column="1" FontSize="20" Margin="193,10,20,10"></DatePicker>
 
         <WrapPanel  Grid.Column="1" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,20,0">
-            <Button Height="34" Width="146" Click="Button_Click_SacuvajPDF" Margin="0,0,0,20" Content="Sacuvaj kao PDF">
+            <Button x:Name="OKBtn" Height="34" Width="146" Click="Button_Click_OK" Margin="0,0,0,20" Content="Sacuvaj kao PDF">
                 <Button.Style>
                     <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
                         <Style.Triggers>

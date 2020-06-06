@@ -91,7 +91,7 @@
 
 
         <WrapPanel  Grid.Column="1" Grid.Row="8" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="28" Width="210">
-            <Button Height="28" Width="100" Click="Button_Click_OK" Content="Potvrdi">
+            <Button x:Name="OKBtn" Height="28" Width="100" Click="Button_Click_OK" Content="Potvrdi">
                 <Button.Style>
                     <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
                         <Style.Triggers>

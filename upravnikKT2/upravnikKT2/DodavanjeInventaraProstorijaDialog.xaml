@@ -36,7 +36,7 @@
         </TextBox>
 
         <WrapPanel Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10"  Grid.ColumnSpan="2">
-            <Button Height="28" Width="100" Click="Button_Click_OK">Potvrdi
+            <Button x:Name="OKBtn" Height="28" Width="100" Click="Button_Click_OK">Potvrdi
                 <Button.Style>
                     <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
                         <Style.Triggers>

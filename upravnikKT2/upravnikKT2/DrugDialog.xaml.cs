@@ -120,5 +120,12 @@ namespace upravnikKT2
                 this.Close();
             }
         }
+
+        private void tutorialBtn_Click(object sender, RoutedEventArgs e)
+        {
+            TutorialVideoDialog dialog = new TutorialVideoDialog();
+            dialog.Show();
+            
+        }
     }
 }

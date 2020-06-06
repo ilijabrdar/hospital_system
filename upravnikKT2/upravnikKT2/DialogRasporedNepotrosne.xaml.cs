@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -108,41 +109,52 @@ namespace upravnikKT2
         {
             if (DataGridRasporedOpremePoProstorijama.SelectedItem != null)
             {
-                RoomEquipment roomEq = (RoomEquipment)DataGridRasporedOpremePoProstorijama.SelectedItem;
-                Room room_full = _roomController.Get(roomEq.Id);
+                RoomEquipment roomEquipment = (RoomEquipment)DataGridRasporedOpremePoProstorijama.SelectedItem;
+                string messageBoxText = "Da li ste sigurni da zelite da obrisete opremu pod nazivom " + roomEquipment.EquipmentName + "u prostoriji " + roomEquipment.RoomCode + "?";
+                string caption = "Potvrda brisanja";
+                MessageBoxButton button = MessageBoxButton.YesNo;
+                MessageBoxImage icon = MessageBoxImage.Question;
 
-                //room_full.Equipment_inventory.Remove(_selectedEquipment); TODO: why doesn't it work
-                Equipment temp = null;
-                foreach (KeyValuePair<Equipment, int> pair in room_full.Equipment_inventory)
+                MessageBoxResult resultMSG = MessageBox.Show(messageBoxText, caption, button, icon);
+                if (resultMSG == MessageBoxResult.Yes)
                 {
-                    if (pair.Key.id == _selectedEquipment.id)
-                    {
-                        temp = pair.Key as Equipment;
-                    }
-                }
 
+                    RoomEquipment roomEq = (RoomEquipment)DataGridRasporedOpremePoProstorijama.SelectedItem;
+                    Room room_full = _roomController.Get(roomEq.Id);
 
-                room_full.Equipment_inventory.Remove(temp);
-                _roomController.Edit(room_full);
-
-                List<Room> rooms = _roomController.getRoomsContainingEquipment(_selectedEquipment).ToList();
-                List<RoomEquipment> result = new List<RoomEquipment>();
-
-                foreach (Room room in rooms)
-                {
-                    foreach (KeyValuePair<Equipment, int> pair in room.Equipment_inventory)
+                    //room_full.Equipment_inventory.Remove(_selectedEquipment); TODO: why doesn't it work
+                    Equipment temp = null;
+                    foreach (KeyValuePair<Equipment, int> pair in room_full.Equipment_inventory)
                     {
                         if (pair.Key.id == _selectedEquipment.id)
                         {
-                            result.Add(new RoomEquipment(room.Id, room.RoomCode, pair.Value, _selectedEquipment.Name));
+                            temp = pair.Key as Equipment;
                         }
                     }
+
+
+                    room_full.Equipment_inventory.Remove(temp);
+                    _roomController.Edit(room_full);
+
+                    List<Room> rooms = _roomController.getRoomsContainingEquipment(_selectedEquipment).ToList();
+                    List<RoomEquipment> result = new List<RoomEquipment>();
+
+                    foreach (Room room in rooms)
+                    {
+                        foreach (KeyValuePair<Equipment, int> pair in room.Equipment_inventory)
+                        {
+                            if (pair.Key.id == _selectedEquipment.id)
+                            {
+                                result.Add(new RoomEquipment(room.Id, room.RoomCode, pair.Value, _selectedEquipment.Name));
+                            }
+                        }
+                    }
+
+
+                    ObservableCollection<RoomEquipment> data_rooms = new ObservableCollection<RoomEquipment>(result);
+
+                    this.DataGridRasporedOpremePoProstorijama.ItemsSource = data_rooms;
                 }
-
-
-                ObservableCollection<RoomEquipment> data_rooms = new ObservableCollection<RoomEquipment>(result);
-
-                this.DataGridRasporedOpremePoProstorijama.ItemsSource = data_rooms;
             }
             else
             {
@@ -182,6 +194,18 @@ namespace upravnikKT2
             if (e.Key == System.Windows.Input.Key.Escape)
             {
                 this.Close();
+            }
+            else if (e.Key == System.Windows.Input.Key.N && Keyboard.Modifiers == ModifierKeys.Control)
+            {
+                addRoomEquipmentBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+            }
+            else if (e.Key == System.Windows.Input.Key.E && Keyboard.Modifiers == ModifierKeys.Control)
+            {
+                editRoomEquipmentBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+            }
+            else if (e.Key == System.Windows.Input.Key.Delete)
+            {
+                deleteRoomEquipmentBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
             }
         }
     }

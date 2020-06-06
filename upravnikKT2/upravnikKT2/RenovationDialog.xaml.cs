@@ -108,6 +108,15 @@ namespace upravnikKT2
             {
                 this.Close();
             }
+
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                if (OKBtn.IsEnabled)
+                {
+                    Button_Click_OK_Renovation(sender, e);
+                    e.Handled = true;
+                }
+            }
         }
     }
 }

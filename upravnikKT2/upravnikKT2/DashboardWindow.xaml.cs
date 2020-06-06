@@ -1,6 +1,7 @@
 ﻿using bolnica.Controller;
 using Controller;
 using Model.Director;
+using Model.PatientSecretary;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -238,7 +239,7 @@ namespace upravnikKT2
             }
             else
             {
-                if (DataGridOpremaNepotrosna != null)
+                if (DataGridOpremaNepotrosna.SelectedItem != null)
                 {
                     EquipmentDialog window = new EquipmentDialog(false, (Equipment) DataGridOpremaNepotrosna.SelectedItem);
                     window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
@@ -630,13 +631,24 @@ namespace upravnikKT2
         {
             if (DataGridRooms.SelectedItem != null)
             {
-                _roomController.Delete((Room)DataGridRooms.SelectedItem);
+                Room room = (Room)DataGridRooms.SelectedItem;
 
-                this.DataGridRooms.ItemsSource = null;
-                List<Room> rooms = _roomController.GetAll().ToList();
-                ObservableCollection<Room> DataRooms = new ObservableCollection<Room>(rooms);
-                this.DataGridRooms.ItemsSource = DataRooms;
-                txtsearchRooms.Clear();
+                string messageBoxText = "Da li ste sigurni da zelite da obrisete opremu pod sifrom " + room.RoomCode + "?";
+                string caption = "Potvrda brisanja";
+                MessageBoxButton button = MessageBoxButton.YesNo;
+                MessageBoxImage icon = MessageBoxImage.Question;
+                MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    _roomController.Delete((Room)DataGridRooms.SelectedItem);
+
+                    this.DataGridRooms.ItemsSource = null;
+                    List<Room> rooms = _roomController.GetAll().ToList();
+                    ObservableCollection<Room> DataRooms = new ObservableCollection<Room>(rooms);
+                    this.DataGridRooms.ItemsSource = DataRooms;
+                    txtsearchRooms.Clear();
+                }
             }
             else
             {
@@ -663,13 +675,23 @@ namespace upravnikKT2
             {
                 if (DataGridOpremaPotrosna.SelectedItem != null)
                 {
-                    _equipmentController.Delete((Equipment)DataGridOpremaPotrosna.SelectedItem);
+                    Equipment eq = (Equipment)DataGridOpremaPotrosna.SelectedItem;
+                    string messageBoxText = "Da li ste sigurni da zelite da obrisete opremu pod nazivom " + eq.Name + "?";
+                    string caption = "Potvrda brisanja";
+                    MessageBoxButton button = MessageBoxButton.YesNo;
+                    MessageBoxImage icon = MessageBoxImage.Question;
 
-                    DataGridOpremaPotrosna.ItemsSource = null;
+                    MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        _equipmentController.Delete((Equipment)DataGridOpremaPotrosna.SelectedItem);
 
-                    List<Equipment> consumable_equipment = _equipmentController.getConsumableEquipment().ToList();
-                    ObservableCollection<Equipment> data_consumable = new ObservableCollection<Equipment>(consumable_equipment);
-                    this.DataGridOpremaPotrosna.ItemsSource = data_consumable;
+                        DataGridOpremaPotrosna.ItemsSource = null;
+
+                        List<Equipment> consumable_equipment = _equipmentController.getConsumableEquipment().ToList();
+                        ObservableCollection<Equipment> data_consumable = new ObservableCollection<Equipment>(consumable_equipment);
+                        this.DataGridOpremaPotrosna.ItemsSource = data_consumable;
+                    }
                 }
                 else
                 {
@@ -687,13 +709,24 @@ namespace upravnikKT2
             {
                 if (DataGridOpremaNepotrosna != null)
                 {
-                    _equipmentController.Delete((Equipment)DataGridOpremaNepotrosna.SelectedItem);
+                    Equipment eq = (Equipment)DataGridOpremaNepotrosna.SelectedItem;
+                    string messageBoxText = "Da li ste sigurni da zelite da obrisete opremu pod nazivom " + eq.Name + "?";
+                    string caption = "Potvrda brisanja";
+                    MessageBoxButton button = MessageBoxButton.YesNo;
+                    MessageBoxImage icon = MessageBoxImage.Question;
 
-                    DataGridOpremaNepotrosna.ItemsSource = null;
+                    MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+                    if (result == MessageBoxResult.Yes)
+                    {
 
-                    List<Equipment> inconsumable_equipment = _equipmentController.getInconsumableEquipment().ToList();
-                    ObservableCollection<Equipment> data_inconsumable = new ObservableCollection<Equipment>(inconsumable_equipment);
-                    this.DataGridOpremaNepotrosna.ItemsSource = data_inconsumable;
+                        _equipmentController.Delete((Equipment)DataGridOpremaNepotrosna.SelectedItem);
+
+                        DataGridOpremaNepotrosna.ItemsSource = null;
+
+                        List<Equipment> inconsumable_equipment = _equipmentController.getInconsumableEquipment().ToList();
+                        ObservableCollection<Equipment> data_inconsumable = new ObservableCollection<Equipment>(inconsumable_equipment);
+                        this.DataGridOpremaNepotrosna.ItemsSource = data_inconsumable;
+                    }
                 }
                 else
                 {
@@ -729,13 +762,24 @@ namespace upravnikKT2
         {
             if (DataGridRenovation.SelectedItem != null)
             {
-                _renovationController.Delete((Renovation) DataGridRenovation.SelectedItem);
+                Renovation renovation = (Renovation)DataGridRenovation.SelectedItem;
 
-                DataGridRenovation.ItemsSource = null;
-                List<Renovation> renovations = _renovationController.GetAll().ToList();
-                ObservableCollection<Renovation> data_renovations = new ObservableCollection<Renovation>(renovations);
-                this.DataGridRenovation.ItemsSource = data_renovations;
-                txtSearchRenovations.Clear();
+                string messageBoxText = "Da li ste sigurni da zelite da obrisete renoviranje prostorije pod sifrom " + renovation.Room.RoomCode + "?";
+                string caption = "Potvrda brisanja";
+                MessageBoxButton button = MessageBoxButton.YesNo;
+                MessageBoxImage icon = MessageBoxImage.Question;
+
+                MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+                if (result == MessageBoxResult.Yes)
+                {
+                    _renovationController.Delete((Renovation)DataGridRenovation.SelectedItem);
+
+                    DataGridRenovation.ItemsSource = null;
+                    List<Renovation> renovations = _renovationController.GetAll().ToList();
+                    ObservableCollection<Renovation> data_renovations = new ObservableCollection<Renovation>(renovations);
+                    this.DataGridRenovation.ItemsSource = data_renovations;
+                    txtSearchRenovations.Clear();
+                }
             }
             else
             {
@@ -840,6 +884,66 @@ namespace upravnikKT2
                 tabControlOprema.SelectedIndex = tabControlOprema.SelectedIndex == 0 ? 1 : 0;
                 tabControlLekari.SelectedIndex = tabControlLekari.SelectedIndex == 0 ? 1 : 0;
                 e.Handled = true;
+            }
+        }
+
+        private void searchTxtAppear_Button_Click_Drug(object sender, RoutedEventArgs e)
+        {
+            //if (searchDrugBtn.Background == Brushes.Gray)
+            //{
+            //    searchDrugBtn.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#FF673AB7");
+            //    txtsearchDrug.Visibility = Visibility.Hidden;
+            //    //TODO: vrati nazad tabelu
+
+            //    List<Drug> drugs;
+            //    ObservableCollection<Drug> DataDrugs = new ObservableCollection<Drug>(drugs);
+            //    this.DataGridLekovi.ItemsSource = DataDrugs;
+            //    txtsearchDrug.Clear();
+            //}
+            //else
+            //{
+            //    searchDrugBtn.Background = Brushes.Gray;
+            //    txtsearchDrug.Visibility = Visibility.Visible;
+            //}
+        }
+
+        private void searchTxtAppear_Button_Click_ConsumableEq(object sender, RoutedEventArgs e)
+        {
+            if (searchConsumableEquipmentBtn.Background == Brushes.Gray)
+            {
+                searchConsumableEquipmentBtn.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#FF673AB7");
+                txtsearcConsumable.Visibility = Visibility.Hidden;
+                //TODO: vrati nazad tabelu
+
+                List<Equipment> equipments = _equipmentController.getConsumableEquipment().ToList();
+                ObservableCollection<Equipment> data_equipments = new ObservableCollection<Equipment>(equipments);
+                this.DataGridOpremaPotrosna.ItemsSource = data_equipments;
+                txtsearcConsumable.Clear();
+            }
+            else
+            {
+                searchConsumableEquipmentBtn.Background = Brushes.Gray;
+                txtsearcConsumable.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void searchTxtAppear_Button_Click_InconsumableEq(object sender, RoutedEventArgs e)
+        {
+            if (searchInconsumableEquipmentBtn.Background == Brushes.Gray)
+            {
+                searchInconsumableEquipmentBtn.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#FF673AB7");
+                txtsearchInconsumable.Visibility = Visibility.Hidden;
+                //TODO: vrati nazad tabelu
+
+                List<Equipment> equipments = _equipmentController.getInconsumableEquipment().ToList();
+                ObservableCollection<Equipment> data_equipments = new ObservableCollection<Equipment>(equipments);
+                this.DataGridOpremaNepotrosna.ItemsSource = data_equipments;
+                txtsearchInconsumable.Clear();
+            }
+            else
+            {
+                searchInconsumableEquipmentBtn.Background = Brushes.Gray;
+                txtsearchInconsumable.Visibility = Visibility.Visible;
             }
         }
     }

@@ -34,5 +34,17 @@ namespace upravnikKT2
 
             
         }
+
+        private void Window_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                if (OKBtn.IsEnabled)
+                {
+                    button_Click(sender, e);
+                    e.Handled = true;
+                }
+            }
+        }
     }
 }

@@ -58,6 +58,7 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="UIAutomationProvider" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -118,6 +119,9 @@
       <DependentUpon>ShiftWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ModelMock\WorkingShift.cs" />
+    <Compile Include="TutorialVideoDialog.xaml.cs">
+      <DependentUpon>TutorialVideoDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Validation\ValidationsRules.cs" />
     <Compile Include="ViewModel\RoomEquipment.cs" />
     <Page Include="AddRoomTypeWindow.xaml">
@@ -199,6 +203,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ShiftWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TutorialVideoDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

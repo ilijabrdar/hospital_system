@@ -37,7 +37,7 @@
 
 
 
-                <Button Margin="0,50,0,0" Width="94" Click="button_Click">Uloguj se</Button>
+                <Button x:Name="OKBtn" Margin="0,50,0,0" Width="94" Click="button_Click">Uloguj se</Button>
             </StackPanel>
         </StackPanel>
         

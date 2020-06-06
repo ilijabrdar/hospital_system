@@ -29,7 +29,7 @@ namespace upravnikKT2
         {
             this.Close();
         }
-        private void Button_Click_SacuvajPDF(object sender, RoutedEventArgs e)
+        private void Button_Click_OK(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
             dlg.FileName = "Izvestaj"; // Default file name
@@ -64,6 +64,15 @@ namespace upravnikKT2
             if (e.Key == System.Windows.Input.Key.Escape)
             {
                 this.Close();
+            }
+
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                if (OKBtn.IsEnabled)
+                {
+                    Button_Click_OK(sender, e);
+                    e.Handled = true;
+                }
             }
         }
     }

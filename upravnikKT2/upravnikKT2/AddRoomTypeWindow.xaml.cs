@@ -7,7 +7,10 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Automation.Peers;
+using System.Windows.Automation.Provider;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Threading;
 
@@ -127,6 +130,14 @@ namespace upravnikKT2
             if (e.Key == System.Windows.Input.Key.Escape)
             {
                 this.Close();
+            }
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                if (OKBtn.IsEnabled)
+                {
+                    Button_Click_OK(sender, e);
+                    e.Handled = true;
+                }
             }
         }
     }
