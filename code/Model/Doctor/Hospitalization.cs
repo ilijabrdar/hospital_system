@@ -1,8 +1,4 @@
-/***********************************************************************
- * Module:  Hospitalization.cs
- * Author:  Zorana
- * Purpose: Definition of the Class Doctor.Hospitalization
- ***********************************************************************/
+
 
 using Model.Director;
 using Model.PatientSecretary;

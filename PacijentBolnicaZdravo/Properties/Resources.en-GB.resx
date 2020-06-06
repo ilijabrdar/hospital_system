@@ -235,10 +235,10 @@
     <value>Health articles</value>
   </data>
   <data name="TabCancel" xml:space="preserve">
-    <value>Cancel examination</value>
+    <value>Yours examinations</value>
   </data>
   <data name="TabExemination" xml:space="preserve">
-    <value>Schedul examination</value>
+    <value>Schedule examination</value>
   </data>
   <data name="TabFile" xml:space="preserve">
     <value>Patient file</value>
@@ -259,7 +259,7 @@
     <value>Cancel chosen examination</value>
   </data>
   <data name="ToolTipSchedule" xml:space="preserve">
-    <value>Schedule the selected date</value>
+    <value>Schedule the selected examination</value>
   </data>
   <data name="ToolTipSearch" xml:space="preserve">
     <value>Search for articles by the entered criteria</value>

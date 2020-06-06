@@ -129,9 +129,24 @@ namespace PacijentBolnicaZdravo
 
             App.j++;
         }
+        public ValidationResult ConfirmPassword()
+        {
+            if(CheckPassword.Password != NewPassword.Password)
+            {
+                if (Thread.CurrentThread.CurrentCulture.Equals(new CultureInfo("sr")))
+                    return new ValidationResult(false, "Lozinke se ne poklapaju!");
+                return new ValidationResult(false, "Passwords are not the same!");
+            }
+            return ValidationResult.ValidResult;
+        }
 
         private void UpdateInfo(object sender, RoutedEventArgs e)
         {
+            if(ValidationResult.ValidResult != ConfirmPassword()) {
+                return;
+            }
+
+            return;
             String name = Name.Text.ToString();
             String surname = Surname.Text.ToString();
             String Id = ID.Text.ToString();
@@ -185,6 +200,25 @@ namespace PacijentBolnicaZdravo
                 }
             }
         }
+
+
+        private DateTime _dateTime = DateTime.Today;
+        public DateTime DATETIME
+        {
+            get
+            {
+                return _dateTime;
+            }
+            set
+            {
+                if (value != _dateTime)
+                {
+                    _dateTime = value;
+                    OnPropertyChanged("DATETIME");
+                }
+            }
+        }
+
 
         private String _prezime;
         public String Prezime

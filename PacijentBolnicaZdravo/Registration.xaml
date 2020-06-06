@@ -56,7 +56,7 @@
 
                         </StackPanel>
                         <WrapPanel Orientation="Vertical">
-                            <TextBox  FontFamily="pack://application:,,,/Resources/#password" Margin="0,10,10,10" BorderThickness="3" BorderBrush="LightBlue" TextAlignment="Left" Name="Name" FontSize="15" Width="220">
+                            <TextBox FontFamily="ms-appx:///Assets/PassDot.ttf#PassDot"  Margin="0,10,10,10" BorderThickness="3" BorderBrush="LightBlue" TextAlignment="Left" Name="Name" FontSize="15" Width="220">
                                 <TextBox.Text>
                                     <Binding Path="Ime" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                                         <Binding.ValidationRules>
@@ -93,7 +93,14 @@
                                     </Binding>
                                 </TextBox.Text>
                             </TextBox>
-                            <DatePicker Margin="0,12,10,10" Width="220" Height="30" Name="DateBirth">
+                            <DatePicker Margin="0,12,10,10" Width="220" Height="30" Name="DateBirth" >
+                                <DatePicker.SelectedDate>
+                                    <Binding Path="DATETIME" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <local:DateTimeValidationRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </DatePicker.SelectedDate>
                             </DatePicker>
                             <TextBox Margin="0,12,10,10" BorderThickness="3" BorderBrush="LightBlue" TextAlignment="Left" FontSize="15" Name="Email"  Width="220">
                                 <TextBox.Text>

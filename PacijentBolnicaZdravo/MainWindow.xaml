@@ -7,7 +7,7 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
          xmlns:resource="clr-namespace:PacijentBolnicaZdravo.Properties" xmlns:p="clr-namespace:MyProject.Language"
         mc:Ignorable="d"
-         Height="600" Width="850">
+         Title="{x:Static p:Resources.Title}"  Height="600" Width="850">
     <mah:MetroWindow.Resources>
         <DatePickerFormat x:Key="DatePickerFormat1">Short</DatePickerFormat>
     </mah:MetroWindow.Resources>
@@ -77,9 +77,32 @@ Piramida ishrane je vizuelni prikaz namirnica koje treba da budu zastupljenje u 
                         <TextBlock Name="ChooseDate" Text="{x:Static p:Resources.ChooseDate}" FontSize="19" Margin="20" Width="150"/>
                         <DatePicker Name="Picker" Margin="20" Width="200" FirstDayOfWeek="Monday" CalendarClosed="CalendarClosedDate"/>
                     </StackPanel>
-                    <Border x:Name="Termins" BorderBrush="Black" CornerRadius="8,8,3,3" BorderThickness="1" Height="163" Margin="0.1">
-                        <GroupBox x:Name="RadioButtons" BorderBrush="{x:Null}" Background="{x:Null}" />
-                    </Border>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                      
+                        <DataGrid Margin="15" FontSize="14" BorderThickness="1" x:Name="scheduleExaminationsGrid" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" ItemsSource ="{Binding Path=upcomingExaminations}" >
+                            <DataGrid.CellStyle>
+                                <Style TargetType="DataGridCell">
+                                    <Setter Property="Margin" Value="0"/>
+                                    <Setter Property="Padding" Value="0"/>
+                                    <Setter Property="BorderThickness" Value="0.5"/>
+                                </Style>
+                            </DataGrid.CellStyle>
+
+                            <DataGrid.Columns>
+                                <DataGridTextColumn  x:Name="ColumnDoctorForSchedule" Header="{x:Static p:Resources.Doctor}" Binding="{Binding doctor.FirstName}" Width="*"></DataGridTextColumn>
+                                <DataGridTextColumn x:Name="ColumnDateForSchedule" Header="{x:Static p:Resources.Date}" Binding="{Binding period.StartDate.Date }" Width="*"></DataGridTextColumn>
+                                <DataGridTextColumn x:Name="ColumnTimeForSchedule" Header="{x:Static p:Resources.Time}" Binding="{Binding period.StartDate.TimeOfDay}" Width="*"></DataGridTextColumn>
+                                <DataGridTextColumn x:Name="ColumnOrdinationForSchedule" Header="{x:Static p:Resources.Ordination}" Binding="{Binding room.RoomCode }" Width="*"></DataGridTextColumn>
+                                
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
                     <Button Name="Schedule" Content="{x:Static p:Resources.Schedule}" HorizontalAlignment="Right" Margin="15"  Width="76" Click="Zakazi" >
                         <Button.ToolTip>
                             <ToolTip x:Name="ToolTipSchedule"  Content = "{x:Static p:Resources.ToolTipSchedule}" Background="#FFA0A0A0"/>
@@ -90,23 +113,24 @@ Piramida ishrane je vizuelni prikaz namirnica koje treba da budu zastupljenje u 
             <TabItem Header="{x:Static p:Resources.TabCancel}" Name="TabCancel">
                 <StackPanel Orientation="Vertical">
                     <TextBlock Name="CancelCondition" Margin="20" Text="{x:Static p:Resources.CancelCondition}" FontSize="14" ></TextBlock>
-                    <Border BorderBrush="Black"  CornerRadius="8,8,3,3" BorderThickness="1" Height="236" Margin="0.1">
-                        <StackPanel x:Name="TERMIN" Orientation="Horizontal">
-                            <StackPanel  Orientation="Vertical">
-                                <TextBlock  FontSize="14" Name="Doctor" Margin="10,15,10,15" Text="{x:Static p:Resources.Doctor}"/>
-                                <TextBlock  FontSize="14" Name="Date" Margin="10,5,10,15" Text="{x:Static p:Resources.Date}"/>
-                                <TextBlock  FontSize="14" Name="Time" Margin="10,5,10,15" Text="{x:Static p:Resources.Time}"/>
-                                <TextBlock  FontSize="14" Name="Ordination" Margin="10,5,10,15" Text="{x:Static p:Resources.Ordination}"/>
-                            </StackPanel>
-                            <Border  BorderBrush="Black" BorderThickness="1" Margin="5" Width="165" >
-                                <StackPanel x:Name="FirstExam" Orientation="Vertical">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition  Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <DataGrid FontSize="14" Margin="15" BorderThickness="1" x:Name="scheduledExaminationsGrid" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" ItemsSource ="{Binding Path=scheduledExaminations}" >
 
-                                </StackPanel>
-                            </Border>
-                            <Border  BorderBrush="Black" BorderThickness="1" Margin="5" Width="165"></Border>
-                            <Border  BorderBrush="Black" BorderThickness="1" Margin="5" Width="165"></Border>
-                        </StackPanel>
-                    </Border>
+                            <DataGrid.Columns>
+                                <DataGridTextColumn x:Name="ColumnDoctor" Header="{x:Static p:Resources.Doctor}" Binding="{Binding doctor.FirstName}" Width="*"></DataGridTextColumn>
+                                <DataGridTextColumn x:Name="ColumnDate" Header="{x:Static p:Resources.Date}" Binding="{Binding period.StartDate.Date }" Width="*"></DataGridTextColumn>
+                                <DataGridTextColumn x:Name="ColumnTime" Header="{x:Static p:Resources.Time}" Binding="{Binding period.StartDate.TimeOfDay}" Width="*"></DataGridTextColumn>
+                                <DataGridTextColumn x:Name="ColumnOrdination" Header="{x:Static p:Resources.Ordination}" Binding="{Binding room.RoomCode }" Width="*"></DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                    
                     <Button Name="Cancel" ToolTip="{x:Static p:Resources.ToolTipCancel}" Content="{x:Static p:Resources.Cancel}" HorizontalAlignment="Right" Margin="15" Width="74" Click="Otkazi"/>
                 </StackPanel>
             </TabItem>
@@ -158,10 +182,18 @@ Piramida ishrane je vizuelni prikaz namirnica koje treba da budu zastupljenje u 
                             </StackPanel>
                             <StackPanel Orientation="Vertical">
                                 <TextBlock Margin="13" FontSize="15" Width="220" FontWeight="Bold" Opacity="0.6"> JovanJelicki</TextBlock>
-                                <TextBox TextAlignment="Left" BorderThickness="1.5" BorderBrush="LightBlue" Name="Name" Margin="10" FontSize="15" Width="220">Jovan</TextBox>
-                                <TextBox TextAlignment="Left" BorderThickness="1.5" BorderBrush="LightBlue" FontSize="15" Name="Surname" Margin="10,12,10,10" Width="220">Jelicki</TextBox>
-                                <TextBox TextAlignment="Left" BorderThickness="1.5" BorderBrush="LightBlue" FontSize="15" Name="ID" Margin="10,12,10,10"  Width="220">2001998800114</TextBox>
-                                <DatePicker SelectedDate="01/20/1998"  Margin="10,12,10,10" Width="220" Height="30"/>
+                                <TextBox TextAlignment="Left" BorderThickness="1.5" BorderBrush="LightBlue" Name="Name" Margin="10" FontSize="15" Width="220">
+                          
+                                </TextBox>
+                                <TextBox TextAlignment="Left" BorderThickness="1.5" BorderBrush="LightBlue" FontSize="15" Name="Surname" Margin="10,12,10,10" Width="220">
+         
+                                </TextBox>
+                                <TextBox TextAlignment="Left" BorderThickness="1.5" BorderBrush="LightBlue" FontSize="15" Name="ID" Margin="10,12,10,10"  Width="220">
+                                  
+                                </TextBox>
+                                <DatePicker Margin="10,12,10,10" Width="220" Height="30">
+                         
+                                </DatePicker>
                                 <TextBox TextAlignment="Left" BorderThickness="1.5" BorderBrush="LightBlue" FontSize="15" Name="Email" Margin="10"  Width="220">jovanzte@gmail.com</TextBox>
                                 <TextBox TextAlignment="Left" BorderThickness="1.5" BorderBrush="LightBlue" FontSize="15" Name="Adress" Margin="10,12,10,10" Width="220">Mišarska 40</TextBox>
                                 <TextBox TextAlignment="Left" BorderThickness="1.5" BorderBrush="LightBlue" FontSize="15" Name="PhoneNumber" Margin="10,12,10,10" Width="220"></TextBox>

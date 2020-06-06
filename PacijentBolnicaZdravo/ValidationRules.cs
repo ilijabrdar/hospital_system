@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
@@ -17,15 +18,42 @@ namespace PacijentBolnicaZdravo
         }
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-
-            return string.IsNullOrWhiteSpace((value ?? "").ToString())
-               ? new ValidationResult(false, "Polje za unos mora biti popunjeno.")
-               : ValidationResult.ValidResult;
+            if (value.ToString() == "" || value == null)
+            {
+                if (Thread.CurrentThread.CurrentCulture.Equals(new CultureInfo("sr")))
+                {
+                    return new ValidationResult(false, "Polje za unos mora biti popunjeno.");
+                }
+                return new ValidationResult(false, "The input field must be filled.");
+            }
+            return  ValidationResult.ValidResult;
         }
 
 
 
     }
+
+    class DateTimeValidationRule : ValidationRule
+    {
+        public DateTimeValidationRule()
+        {
+
+        }
+
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+           if((DateTime)value > DateTime.Today)
+            {
+                if (!Thread.CurrentThread.CurrentCulture.Equals(new CultureInfo("sr")))
+                {
+                    return new ValidationResult(false, "It is not possible to enter a date greater than today!");
+                }
+                return new ValidationResult(false, "Nije moguce uneti datum veci od danasnjeg!");
+            }
+            return ValidationResult.ValidResult;
+        }
+    }
+
     class JMBGValidationRule : ValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
@@ -39,6 +67,10 @@ namespace PacijentBolnicaZdravo
                     if (s.Any(char.IsDigit))
                         return new ValidationResult(true, null);
 
+                }
+                if (!Thread.CurrentThread.CurrentCulture.Equals(new CultureInfo("sr")))
+                {
+                    return new ValidationResult(false, "You must enter 13 numbers for the ID.");
                 }
                 return new ValidationResult(false, "Morate uneti 13 brojeva za JMBG.");
             }
@@ -61,7 +93,7 @@ namespace PacijentBolnicaZdravo
                 if (isEmail)
                     return new ValidationResult(true, null);
 
-                return new ValidationResult(false, "Format email-a xxxx@xx.x");
+                return new ValidationResult(false, "Format e-mail xxxx@xx.x");
 
             }
             catch
@@ -82,12 +114,16 @@ namespace PacijentBolnicaZdravo
                 if (isPhone)
                     return new ValidationResult(true, null);
 
-                return new ValidationResult(false, "Phone number is not in correct format");
+                if (!Thread.CurrentThread.CurrentCulture.Equals(new CultureInfo("sr")))
+                {
+                    return new ValidationResult(false, "Phone number is not in correct format!");
+                }
+                return new ValidationResult(false, "Broj telefona nije u dobrom formatu!" );
 
             }
             catch
             {
-                return new ValidationResult(false, "Niste dobro uneli email.");
+                return new ValidationResult(false, "Niste dobro uneli telefon.");
             }
         }
     }

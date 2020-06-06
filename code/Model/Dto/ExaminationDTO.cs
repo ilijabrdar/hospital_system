@@ -10,10 +10,15 @@ namespace Model.Dto
 {
    public class ExaminationDTO
    {
-      private Model.Users.Doctor doctor;
-      private Model.Users.Patient patient;
-      private Model.Director.Room room;
-      private Model.PatientSecretary.Period period;
-   
-   }
+      public Model.Users.Doctor doctor { get; set; }
+      public Model.Users.Patient patient { get; set; }
+      public Model.Director.Room room { get; set; }
+      public Model.PatientSecretary.Period period { get; set; }
+     
+        public ExaminationDTO()
+        {
+
+        }
+
+    }
 }

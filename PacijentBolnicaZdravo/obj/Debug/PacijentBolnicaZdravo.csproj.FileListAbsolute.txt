@@ -88,3 +88,5 @@ C:\Users\jovan\Desktop\hospital_system\PacijentBolnicaZdravo\obj\Debug\PacijentB
 C:\Users\jovan\Desktop\hospital_system\PacijentBolnicaZdravo\obj\Debug\PacijentBolnicaZdravo.pdb
 C:\Users\jovan\Desktop\hospital_system\PacijentBolnicaZdravo\bin\Debug\bolnica.dll
 C:\Users\jovan\Desktop\hospital_system\PacijentBolnicaZdravo\bin\Debug\bolnica.pdb
+C:\Users\jovan\Desktop\hospital_system\PacijentBolnicaZdravo\bin\Debug\Caliburn.Micro.dll
+C:\Users\jovan\Desktop\hospital_system\PacijentBolnicaZdravo\bin\Debug\Caliburn.Micro.xml

@@ -26,27 +26,40 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using MahApps.Metro.Controls;
 using MahApps.Metro;
+using Model.Dto;
+using Caliburn.Micro;
+using Model.Users;
+using Model.PatientSecretary;
+using Model.Director;
+using ControlzEx.Standard;
 
 namespace PacijentBolnicaZdravo
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : MetroWindow
+    public partial class MainWindow : MetroWindow, INotifyPropertyChanged
     {
         public ChangeLanguage cl = new ChangeLanguage();
         public static CultureInfo culture = new CultureInfo("sr");
+        public List<ExaminationDTO> scheduledExaminations { get; set; }
+        public List<ExaminationDTO> upcomingExaminations { get; set; }
+        public Patient patient { get; set; }
         public static int Theme = 0;
+
         public MainWindow()
         {
             Thread.CurrentThread.CurrentCulture = culture;
             Thread.CurrentThread.CurrentUICulture = culture;
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
-            Title = "JovanJelicki";
-            
 
+
+            scheduledExaminations = getScheduledExaminations();
+            
             InitializeComponent();
+            this.ID.Text = "1111111111111";
+            this.DataContext = this;
             if (Thread.CurrentThread.CurrentCulture.Equals(new CultureInfo("sr")))
                 Language.SelectedItem = Language.Items[0];
             else
@@ -66,9 +79,30 @@ namespace PacijentBolnicaZdravo
                 DarkMode.Value = DarkMode.Minimum;
             }
 
-            
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
 
-
+        private List<ExaminationDTO> getScheduledExaminations()
+        {
+            List<ExaminationDTO> retVal = new List<ExaminationDTO>();
+            Doctor dr = new Doctor(1, "Pera", "Peric", "213123123123", "sadsds@sadsa.com", "2312312312", new DateTime(), "Mileve Maric", "DDD", "ddd", null, null);
+            Period period = new Period(new DateTime(2020, 7, 7, 12, 20, 0), new DateTime(2020, 7, 7, 12, 40, 0));
+           
+            Room room = new Room("213", null, null, null);
+            ExaminationDTO examination = new ExaminationDTO();
+            examination.doctor = dr;
+            examination.period = period;
+            examination.room = room;
+            examination.patient = null;
+            retVal.Add(examination);
+            return retVal;
         }
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -138,36 +172,20 @@ namespace PacijentBolnicaZdravo
 
         private void Zakazi(object sender, RoutedEventArgs e)
         {
-            Label dr = new Label();
-            Label date = new Label();
-            Label time = new Label();
-            Label room = new Label();
-
-            dr.Content = "dr Jovan Jovanović";
-            dr.Margin = new Thickness(8);
-            date.Content = Picker.Text;
-            date.Margin = new Thickness(8);
-            time.Content = "10:30";
-            time.Margin = new Thickness(8);
-            room.Content = "308";
-            room.Margin = new Thickness(8);
-
-            FirstExam.Children.Add(dr);
-            FirstExam.Children.Add(date);
-            FirstExam.Children.Add(time);
-            FirstExam.Children.Add(room);
-
-            RadioButton r = new RadioButton();
-            r.Margin = new Thickness(60, 8, 8, 8);
-            r.Content = "Izaberi";
-            FirstExam.Children.Add(r);
-
-            RadioButtons.Content = "";
+            
         }
 
         private void Otkazi(object sender, RoutedEventArgs e)
         {
-            FirstExam.Children.Clear();
+            var selectedItem = scheduledExaminationsGrid.SelectedItem;
+            if (selectedItem == null)
+            {
+                return;
+            }
+            
+            scheduledExaminations.Remove((ExaminationDTO)selectedItem);
+
+            scheduledExaminationsGrid.Items.Refresh();
         }
 
         private void ChoosePhoto(object sender, RoutedEventArgs e)
@@ -222,22 +240,143 @@ namespace PacijentBolnicaZdravo
 
         private void CalendarClosedDate(object sender, RoutedEventArgs e)
         {
-            RadioButton r = new RadioButton();
-            r.Content = "10:30";
-            r.Margin = new Thickness(5);
-            Border g = new Border();
-            g.BorderThickness = new Thickness(1);
-            g.BorderBrush = Brushes.Black;
-            g.Height = 40;
-            g.Width = 100;
-            g.CornerRadius = new CornerRadius(3);
+           
 
-            g.Margin = new Thickness(5);
+        }
 
-            g.Child = r;
+        private String _ime;
+        public String Ime
+        {
+            get
+            {
+                return _ime;
+            }
+            set
+            {
+                if (value != _ime)
+                {
+                    _ime = value;
+                    OnPropertyChanged("Ime");
+                }
+            }
+        }
 
-            RadioButtons.Content = g;
 
+        private DateTime _dateTime = DateTime.Today;
+        public DateTime DATETIME
+        {
+            get
+            {
+                return _dateTime;
+            }
+            set
+            {
+                if (value != _dateTime)
+                {
+                    _dateTime = value;
+                    OnPropertyChanged("DATETIME");
+                }
+            }
+        }
+
+
+        private String _prezime;
+        public String Prezime
+        {
+            get
+            {
+                return _prezime;
+            }
+            set
+            {
+                if (value != _prezime)
+                {
+                    _prezime = value;
+                    OnPropertyChanged("Prezime");
+                }
+            }
+        }
+        private String _jmbg;
+        public String JMBG
+        {
+            get
+            {
+                return _jmbg;
+            }
+            set
+            {
+                if (value != _jmbg)
+                {
+                    _jmbg = value;
+                    OnPropertyChanged("JMBG");
+                }
+            }
+        }
+
+        private String _username;
+        public String USERNAME
+        {
+            get
+            {
+                return _username;
+            }
+            set
+            {
+                if (value != _username)
+                {
+                    _username = value;
+                    OnPropertyChanged("USERNAME");
+                }
+            }
+        }
+        private String _email;
+        public String EMAIL
+        {
+            get
+            {
+                return _email;
+            }
+            set
+            {
+                if (value != _email)
+                {
+                    _email = value;
+                    OnPropertyChanged("EMAIL");
+                }
+            }
+        }
+        private String _adress;
+        public String ADRESS
+        {
+            get
+            {
+                return _adress;
+            }
+            set
+            {
+                if (value != _adress)
+                {
+                    _adress = value;
+                    OnPropertyChanged("ADRESS");
+                }
+            }
+        }
+
+        private String _phone;
+        public String Phone
+        {
+            get
+            {
+                return _phone;
+            }
+            set
+            {
+                if (value != _phone)
+                {
+                    _phone = value;
+                    OnPropertyChanged("Phone");
+                }
+            }
         }
     }
 }

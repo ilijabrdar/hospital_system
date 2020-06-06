@@ -235,10 +235,10 @@
     <value>Članci o zdravlju</value>
   </data>
   <data name="TabCancel" xml:space="preserve">
-    <value>Otkazivanje pregleda</value>
+    <value>Vaši pregledi</value>
   </data>
   <data name="TabExemination" xml:space="preserve">
-    <value>Zakazivanje pregleda</value>
+    <value>Zakažite pregled</value>
   </data>
   <data name="TabFile" xml:space="preserve">
     <value>Pristup kartonu</value>
@@ -259,7 +259,7 @@
     <value>Otkaži odabrani pregled</value>
   </data>
   <data name="ToolTipSchedule" xml:space="preserve">
-    <value>Zakaži odabrani termin</value>
+    <value>Zakaži odabrani pregled</value>
   </data>
   <data name="ToolTipSearch" xml:space="preserve">
     <value>Pretraži članke po unetom kriterijumu</value>
