@@ -17,7 +17,7 @@
             <RowDefinition Height="300" />
         </Grid.RowDefinitions>
 
-        <Button  HorizontalAlignment="Left" Margin="20,10,0,0" Click="Button_Click_Add" Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+        <Button x:Name="addRoomTypeBtn"  HorizontalAlignment="Left" Margin="20,10,0,0" Click="Button_Click_Add" Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
                  ToolTip="Dodaj tip prostorije">
             <materialDesign:PackIcon
                                     Kind="Add"
@@ -28,7 +28,7 @@
 
 
 
-        <Button  HorizontalAlignment="Left" Margin="87,10,0,0" Click="Button_Click_Edit" Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+        <Button x:Name="editRoomTypeBtn"  HorizontalAlignment="Left" Margin="87,10,0,0" Click="Button_Click_Edit" Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
                  ToolTip="Izmeni tip prostorije">
             <materialDesign:PackIcon
                                     Kind="Edit"
@@ -39,7 +39,7 @@
 
 
 
-        <Button  HorizontalAlignment="Left" Margin="157,10,0,0"  Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+        <Button x:Name="deleteRoomTypeBtn" HorizontalAlignment="Left" Margin="157,10,0,0"  Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
                  ToolTip="Izbrisi tip prostorije prostorije" RenderTransformOrigin="1.775,0.6" Click="Button_Click_Delete">
             <materialDesign:PackIcon
                                     Kind="DeleteForever"

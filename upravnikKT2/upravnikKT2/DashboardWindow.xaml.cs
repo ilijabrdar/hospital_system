@@ -512,7 +512,7 @@ namespace upravnikKT2
             {
                 editRoomBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
             }
-            else if (e.Key == System.Windows.Input.Key.R && Keyboard.Modifiers == ModifierKeys.Control)
+            else if (e.Key == System.Windows.Input.Key.I && Keyboard.Modifiers == ModifierKeys.Control)
             {
                 generateRoomReportBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
             }

@@ -922,7 +922,37 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="Pomoć">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
 
+                        <GroupBox Grid.Row="0" Grid.Column="0" Header="Precice" Margin="20" materialDesign:ShadowAssist.ShadowDepth="Depth1" materialDesign:ColorZoneAssist.Mode="Light">
+                            <TextBlock>
+                               <Bold>CTRL+TAB</Bold> tab unapred <LineBreak />
+                               <Bold>CTRL+SHIFT+TAB</Bold> tab unazad <LineBreak />
+                               <Bold>CTRL+`</Bold> tab unapred za Opremu i Lekare <LineBreak/>
+                               <Bold>CTRL+SHIFT+`</Bold> tab unazad za Opremu i Lekare <LineBreak/>
+                               <Bold>CTRL+N</Bold> unos entiteta u sistem <LineBreak />
+                               <Bold>CTRL+E</Bold> izmena entiteta<LineBreak />
+                               <Bold>DELETE</Bold> brisanje entiteta<LineBreak />
+                               <Bold>CTRL+T</Bold> otvaranje prozora za pregled tipova prostorija <LineBreak/>
+                               <Bold>CTRL+I</Bold> generisanje izvestaja prostorija <LineBreak />
+                               <Bold>TAB</Bold> kretanje unapred kroz polja za unos<LineBreak />
+                               <Bold>SHIFT+TAB</Bold> kretanje unazad kroz polja za unos<LineBreak/>
+                               <Bold>ESCAPE</Bold> zatvaranje prozora <LineBreak />
+                               <Bold>ENTER</Bold> umesto dugmeta za potvrdu <LineBreak />
+                            </TextBlock>
+                        </GroupBox>
+                        <Button Grid.Column="1" Grid.Row="0" Content="Snimak">
+                        </Button>
+                        
+                    </Grid>
                 </TabItem>
 
             </TabControl>

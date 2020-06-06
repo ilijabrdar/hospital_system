@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -84,20 +85,32 @@ namespace upravnikKT2
         {
             if (listViewRoomTypes.SelectedItem != null)
             {
-                _roomTypeController.Delete((RoomType)listViewRoomTypes.SelectedItem);
+                RoomType roomType = (RoomType) listViewRoomTypes.SelectedItem;
+
+                string messageBoxText = "Da li ste sigurni da zelite da obrisete ti prostorije pod nazivom " + roomType.Name + "?";
+                string caption = "Potvrda brisanja";
+                MessageBoxButton button = MessageBoxButton.YesNo;
+                MessageBoxImage icon = MessageBoxImage.Question;
+                MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+
+                if (result == MessageBoxResult.Yes)
+                {
+
+                    _roomTypeController.Delete((RoomType)listViewRoomTypes.SelectedItem);
 
 
-                listViewRoomTypes.ItemsSource = null;
+                    listViewRoomTypes.ItemsSource = null;
 
-                List<RoomType> roomTypes = new List<RoomType>();
-                roomTypes = _roomTypeController.GetAll().ToList();
+                    List<RoomType> roomTypes = new List<RoomType>();
+                    roomTypes = _roomTypeController.GetAll().ToList();
 
-                ObservableCollection<RoomType> temp = new ObservableCollection<RoomType>(roomTypes);
+                    ObservableCollection<RoomType> temp = new ObservableCollection<RoomType>(roomTypes);
 
-                listViewRoomTypes.ItemsSource = temp;
-                listViewRoomTypes.DisplayMemberPath = "Name";
-                listViewRoomTypes.SelectedValuePath = "Id";
-                listViewRoomTypes.SelectedValue = "2";
+                    listViewRoomTypes.ItemsSource = temp;
+                    listViewRoomTypes.DisplayMemberPath = "Name";
+                    listViewRoomTypes.SelectedValuePath = "Id";
+                    listViewRoomTypes.SelectedValue = "2";
+                }
             }
             else
             {
@@ -115,6 +128,18 @@ namespace upravnikKT2
             if (e.Key == System.Windows.Input.Key.Escape)
             {
                 this.Close();
+            }
+            else if (e.Key == System.Windows.Input.Key.N && Keyboard.Modifiers == ModifierKeys.Control)
+            {
+                addRoomTypeBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+            }
+            else if (e.Key == System.Windows.Input.Key.E && Keyboard.Modifiers == ModifierKeys.Control)
+            {
+                editRoomTypeBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+            }
+            else if (e.Key == System.Windows.Input.Key.Delete)
+            {
+                deleteRoomTypeBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
             }
         }
     }
