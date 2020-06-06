@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  EquipmentService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.EquipmentService
- ***********************************************************************/
-
 using bolnica.Service;
 using Model.Director;
 using Repository;
@@ -15,7 +9,7 @@ namespace Service
    public class EquipmentService : IEquipmentService
    {
 
-        private IEquipmentRepository _repository;
+        private readonly IEquipmentRepository _repository;
 
         public EquipmentService(IEquipmentRepository repository)
         {

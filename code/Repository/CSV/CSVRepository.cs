@@ -1,4 +1,5 @@
-﻿using Repository;
+﻿using Model.Doctor;
+using Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,12 +15,27 @@ namespace bolnica.Repository
     {
         protected ICSVStream<E> _stream;
         protected ISequencer<ID> _sequencer;
+        private ICSVStream<Referral> stream;
+        private ISequencer<long> sequencer;
+        private ICSVStream<Operation> stream1;
 
         public CSVRepository(ICSVStream<E> stream, ISequencer<ID> sequencer)
         {
             _stream = stream;
             _sequencer = sequencer;
             InitializeId();
+        }
+
+        public CSVRepository(ICSVStream<Referral> stream, ISequencer<long> sequencer)
+        {
+            this.stream = stream;
+            this.sequencer = sequencer;
+        }
+
+        public CSVRepository(ICSVStream<Operation> stream1, ISequencer<long> sequencer)
+        {
+            this.stream1 = stream1;
+            this.sequencer = sequencer;
         }
 
         public void Delete(E entity)

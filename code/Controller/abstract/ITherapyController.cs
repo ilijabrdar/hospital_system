@@ -1,4 +1,5 @@
-﻿using Model.PatientSecretary;
+﻿using Controller;
+using Model.PatientSecretary;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,9 +7,8 @@ using System.Text;
 
 namespace bolnica.Controller
 {
-   public interface ITherapyController
+   public interface ITherapyController : IController<Therapy,long>
     {
-        Therapy CreateTherapy(Therapy therapy, Examination examination);
-        Therapy CreateCurrentTherapy(PatientFile patientFile);
+        Therapy AssignCurrentTherapy(PatientFile patientFile);
     }
 }

@@ -7,8 +7,7 @@ using System.Text;
 
 namespace bolnica.Controller
 {
-    interface IAnamnesisController 
-    {
-        Anemnesis createAnemnesis(Anemnesis anamnesis, Examination examination);
-    }
+    public interface ISymptomController : IController<Symptom, long>
+{
+}
 }

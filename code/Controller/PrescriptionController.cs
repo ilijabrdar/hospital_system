@@ -8,6 +8,7 @@ using bolnica.Controller;
 using bolnica.Service;
 using Model.PatientSecretary;
 using System;
+using System.Collections.Generic;
 using System.Drawing.Text;
 
 namespace Controller
@@ -21,9 +22,29 @@ namespace Controller
             _service = service;
         }
 
-        public Prescription CreatePrescription(Prescription prescription, Examination examination)
+        public void Delete(Prescription entity)
         {
-            throw new NotImplementedException();
+            _service.Delete(entity);
+        }
+
+        public void Edit(Prescription entity)
+        {
+            _service.Edit(entity);
+        }
+
+        public Prescription Get(long id)
+        {
+            return _service.Get(id);
+        }
+
+        public IEnumerable<Prescription> GetAll()
+        {
+            return _service.GetAll();
+        }
+
+        public Prescription Save(Prescription entity)
+        {
+            return _service.Save(entity);
         }
     }
 }

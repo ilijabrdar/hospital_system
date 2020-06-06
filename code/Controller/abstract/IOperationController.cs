@@ -1,4 +1,5 @@
-﻿using Model.Doctor;
+﻿using Controller;
+using Model.Doctor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,9 +7,7 @@ using System.Text;
 
 namespace bolnica.Controller
 {
-   public interface IOperationController
+   public interface IOperationController : IController<Operation,long>
     {
-        Operation CreateOperation(Operation operation);
-        Boolean DeleteOperation(Operation operation);
     }
 }

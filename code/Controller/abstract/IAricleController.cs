@@ -9,6 +9,6 @@ namespace bolnica.Controller
 {
     interface IArticleController :IController<Article,long>
     {
-        Article[] searchArticle(String criteria);
+        List<Article> searchArticle(String criteria);
     }
 }

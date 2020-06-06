@@ -9,6 +9,12 @@ namespace bolnica.Repository.CSV.Converter
     class ArticleCSVConverter : ICSVConverter<Article>
     {
         private readonly String _delimiter=",";
+
+        public ArticleCSVConverter(string delimiter)
+        {
+            _delimiter = delimiter;
+        }
+
         public Article ConvertCSVFormatToEntity(string entityCSVFormat)
         {
             string[] tokens = entityCSVFormat.Split(_delimiter.ToCharArray());

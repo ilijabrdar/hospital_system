@@ -28,9 +28,6 @@ namespace bolnica.Repository
             return operation;
         }
 
-        //long id,Users.Doctor[] doctor, string description, Period period, Room room, PatientFile patientFile
-
-
         public string ConvertEntityToCSVFormat(Operation entity)
         {
             return string.Join(_delimiter, entity.Id, entity.doctor.GetId(), entity.Description, entity.period.StartDate, entity.period.EndDate,

@@ -1,4 +1,5 @@
 ﻿using bolnica.Service;
+using Model.Doctor;
 using Model.PatientSecretary;
 using Model.Users;
 using System;
@@ -26,7 +27,7 @@ namespace bolnica.Repository.CSV.Converter
             Examination examination = new Examination(long.Parse(tokens[0]),
                                                         new Doctor(long.Parse(tokens[2])), new Period(DateTime.Parse(tokens[3])),
                                                         new Diagnosis(long.Parse(tokens[4])),
-                                                        new Anemnesis(tokens[5]), new Therapy(long.Parse(tokens[6])), new Refferal(long.Parse(tokens[7])));
+                                                        new Anemnesis(tokens[5]), new Therapy(long.Parse(tokens[6])), new Referral(long.Parse(tokens[7])));
 
             examination.User = new Patient(long.Parse(tokens[1]));
 
@@ -49,9 +50,9 @@ namespace bolnica.Repository.CSV.Converter
 
             stringBuilder.Append(format);
             stringBuilder.Append(_delimiter);
-            foreach(Prescription prs in entity.Prescription)
+            foreach(Prescription prescription in entity.Prescription)
             {
-                stringBuilder.Append(prs.GetId());
+                stringBuilder.Append(prescription.GetId());
                 stringBuilder.Append(_prescriptonDelimiter);
             }
             return stringBuilder.ToString();

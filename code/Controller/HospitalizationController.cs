@@ -8,6 +8,7 @@ using bolnica.Controller;
 using bolnica.Service;
 using Model.Doctor;
 using System;
+using System.Collections.Generic;
 
 namespace Controller
 {
@@ -20,14 +21,29 @@ namespace Controller
             _service = service;
         }
 
-        public Hospitalization CreateHospitalization(Hospitalization hospitalization)
+        public void Delete(Hospitalization entity)
         {
-            throw new NotImplementedException();
+            _service.Delete(entity);
         }
 
-        public bool DeleteHospitalization(Hospitalization hospitalization)
+        public void Edit(Hospitalization entity)
         {
-            throw new NotImplementedException();
+            _service.Edit(entity);
+        }
+
+        public Hospitalization Get(long id)
+        {
+            return _service.Get(id);
+        }
+
+        public IEnumerable<Hospitalization> GetAll()
+        {
+            return _service.GetAll();
+        }
+
+        public Hospitalization Save(Hospitalization entity)
+        {
+            return _service.Save(entity);
         }
     }
 }

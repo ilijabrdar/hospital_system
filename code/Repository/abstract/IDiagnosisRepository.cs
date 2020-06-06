@@ -1,13 +1,14 @@
 ﻿using Model.PatientSecretary;
+using Repository;
 using Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace bolnica.Service
+namespace bolnica.Repository
 {
-    public interface IPrescriptionService  : IService<Prescription,long>
+    public interface IDiagnosisRepository : IRepository<Diagnosis, long>
     {
-    }
+}
 }

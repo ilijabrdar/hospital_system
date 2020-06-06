@@ -1,9 +1,4 @@
-/***********************************************************************
- * Module:  ExaminationService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.ExaminationService
- ***********************************************************************/
-
+// TODO: TAMARA srediti metodeeeeeeeeee
 using bolnica.Service;
 using Model.PatientSecretary;
 using Model.Users;
@@ -14,20 +9,22 @@ using System.Collections.Generic;
 namespace Service
 {
     public class ExaminationService : IExaminationService
-    { // TODO srediti oko repozitorijuma 
+    { 
         private IExaminationUpcomingRepository _upcomingRepository;
         private IExaminationPreviousRepository previousRepository;
+
+        public IDiagnosisService _IDiagnosisService;
+        public IPrescriptionService _IPrescriptionService;
+        public ISymptomService _ISymptomService;
+        public ITherapyService _ITherapyService;
+        public IReferralService _IReferralService;
+
         public void Delete(Examination entity)
         {
             throw new NotImplementedException();
         }
 
         public void Edit(Examination entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Examination FinishExamination(Examination examination)
         {
             throw new NotImplementedException();
         }
@@ -42,12 +39,17 @@ namespace Service
             throw new NotImplementedException();
         }
 
-        public Examination[] GetExaminationsByUser(User user)
+        //public List<Examination> GetExaminationFilter(ExaminationDTO examinationDTO)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        public List<Examination> GetFinishedxaminationsByUser(User user)
         {
             throw new NotImplementedException();
         }
 
-        public Examination[] GetSheduledUserExaminations(User user)
+        public List<Examination> GetUpcomingExaminationsByUser(User user)
         {
             throw new NotImplementedException();
         }
@@ -57,7 +59,12 @@ namespace Service
             throw new NotImplementedException();
         }
 
-        public Examination StartScheduledExamination(Examination examination)
+        public Examination SaveFinishedExamination(Examination examination)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Examination StartUpcomingExamination(Examination examination)
         {
             throw new NotImplementedException();
         }

@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  Dijagnoza.cs
- * Author:  Tamara Kovacevic
- * Purpose: Definition of the Class Pacijent.Dijagnoza
- ***********************************************************************/
-
 using Repository;
 using System;
 using System.Collections;
@@ -15,32 +9,35 @@ namespace Model.PatientSecretary
    public class Diagnosis : IIdentifiable<long>
    {
         public long Id;
-        public string code;
-        private List<Symptom> symptom;
+        public string Name;
+        public List<Symptom> Symptom;
 
         public Diagnosis(long id)
         {
             Id = id;
         }
 
-        public Diagnosis(long id, string code, List<Symptom> symptom)
+        public Diagnosis(long id, string name) : this(id)
+        {
+            this.Name = name;
+        }
+
+        public Diagnosis(long id, string name, List<Symptom> symptom)
         {
             Id = id;
-            this.code = code;
-            this.symptom = symptom;
+            this.Name = name;
+            this.Symptom = symptom;
         }
 
         public long GetId()
         {
-            throw new NotImplementedException();
+            return this.Id;
         }
 
         public void SetId(long id)
         {
-            throw new NotImplementedException();
+            this.Id = id;
         }
-
-
 
     }
 }

@@ -1,4 +1,6 @@
 ﻿using bolnica.Service;
+using Controller;
+using Model.Doctor;
 using Model.PatientSecretary;
 using System;
 using System.Collections.Generic;
@@ -7,8 +9,7 @@ using System.Text;
 
 namespace bolnica.Controller
 {
-    public interface IRefferalController
+    public interface IReferralController : IController<Referral, long>
     {
-        Refferal CreateRefferal(Refferal refferal, Examination examination);
     }
 }

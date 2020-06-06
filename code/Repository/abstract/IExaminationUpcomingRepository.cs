@@ -7,15 +7,14 @@
 using Model.PatientSecretary;
 using Model.Users;
 using System;
+using System.Collections.Generic;
+using System.Windows.Documents;
 
 namespace Repository
 {
-   public interface IExaminationUpcomingRepository
+   public interface IExaminationUpcomingRepository : IRepository<Examination, long>
    {
-      Examination SaveExamination(Examination examination);
-      Examination EditExamination(Examination newExamination);
-      Boolean DeleteExamination(Examination examination);
-      Examination[] GetScheduledUserExaminations(User user);
-      Examination StartScheduledExamination(Examination examination);
+      List<Examination> GetScheduledUserExaminations(User user);
+      Examination StartUpcomingExamination(Examination examination);
    }
 }

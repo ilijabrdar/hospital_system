@@ -13,20 +13,38 @@ using System.Collections.Generic;
 
 namespace Controller
 {
-    public class ReferralController : IRefferalController
+    public class ReferralController : IReferralController
     {
-        private IReferalService _service;
+        private IReferralService _service;
 
-        public ReferralController(IReferalService service)
+        public ReferralController(IReferralService service)
         {
             _service = service;
         }
 
-        public Refferal CreateRefferal(Refferal refferal, Examination examination)
+        public void Delete(Referral entity)
         {
-            throw new NotImplementedException();
+            _service.Delete(entity);
         }
 
-       
+        public void Edit(Referral entity)
+        {
+            _service.Edit(entity);
+        }
+
+        public Referral Get(long id)
+        {
+            return _service.Get(id);
+        }
+
+        public IEnumerable<Referral> GetAll()
+        {
+            return _service.GetAll();
+        }
+
+        public Referral Save(Referral entity)
+        {
+            return _service.Save(entity);
+        }
     }
 }

@@ -10,9 +10,10 @@ namespace bolnica.Controller
 {
     interface IExaminationController : IController<Examination, long>
     {
-        Examination StartScheduledExamination(Examination examination);
-        Examination FinishExamination(Examination examination);
-        Examination[] GetSheduledUserExaminations(User user);
-        Examination[] GetExaminationsByUser(User user);
+        Examination StartUpcomingExamination(Examination examination);
+        Examination SaveFinishedExamination(Examination examination);
+        List<Examination> GetUpcomingExaminationsByUser(User user);
+        List<Examination> GetFinishedxaminationsByUser(User user);
+       // List<Examination> GetExaminationFilter(ExaminationDTO examinationDTO);
     }
 }

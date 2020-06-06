@@ -7,15 +7,15 @@ namespace Model.Doctor
 {
    public class Speciality : IIdentifiable<long>
     {
-      public String Name { get; set; }
-      public long Id { get; set; }
+        public String Name;
+        public long Id;
         
       public Speciality (long id, String name)
         {
             this.Name = name;
             this.Id = id;
         }
-    public Speciality(long id)
+      public Speciality(long id)
         {
             this.Id = id;
         }

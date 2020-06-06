@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  OperationService.cs
- * Author:  david
- * Purpose: Definition of the Class Service.OperationService
- ***********************************************************************/
-
 using bolnica.Repository;
 using Model.Doctor;
 using System;
