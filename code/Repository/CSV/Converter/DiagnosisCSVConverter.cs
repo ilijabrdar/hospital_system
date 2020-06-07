@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web.UI;
 
 namespace bolnica.Repository.CSV.Converter
 {
@@ -18,7 +19,7 @@ namespace bolnica.Repository.CSV.Converter
         }
 
         public Diagnosis ConvertCSVFormatToEntity(string entityCSVFormat)
-        {
+        {//111,"imedijagnoze", s
             string[] tokens = entityCSVFormat.Split(_delimiter.ToCharArray());
             Diagnosis diagnosis = new Diagnosis(long.Parse(tokens[0]), tokens[1]);
 
@@ -41,11 +42,14 @@ namespace bolnica.Repository.CSV.Converter
             String format = String.Join(_delimiter, entity.Id, entity.Name);
             stringBuilder.Append(format);
             stringBuilder.Append(_delimiter);
-            foreach(Symptom symptom in entity.Symptom)
-            {
-                stringBuilder.Append(symptom.GetId());
-                stringBuilder.Append(_symptomDelimiter);
-            }
+            int numOfDelimiters = -1;
+                foreach (Symptom symptom in entity.Symptom)
+                {
+                    stringBuilder.Append(symptom.GetId());
+                    ++numOfDelimiters;
+                    if(numOfDelimiters < entity.Symptom.Count-1)
+                        stringBuilder.Append(_symptomDelimiter);
+                }
             return stringBuilder.ToString();
         }
     }

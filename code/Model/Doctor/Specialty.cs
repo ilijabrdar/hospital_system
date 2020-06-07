@@ -9,8 +9,13 @@ namespace Model.Doctor
     {
         public String Name;
         public long Id;
-        
-      public Speciality (long id, String name)
+
+        public Speciality(string name)
+        {
+            Name = name;
+        }
+
+        public Speciality (long id, String name)
         {
             this.Name = name;
             this.Id = id;

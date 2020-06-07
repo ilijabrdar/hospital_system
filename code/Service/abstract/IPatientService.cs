@@ -5,11 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace bolnica.Services
+namespace bolnica.Service
 {
     public interface IPatientService : IService<Patient, long>
-{
+    {
         Patient ClaimAccount(long id);
+        Patient GetPatientByUsername(String username);
 
     }
 }

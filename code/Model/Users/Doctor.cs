@@ -6,12 +6,12 @@ using System.Drawing;
 
 namespace Model.Users
 {
-   public class Doctor : User
-   {
-        public List<Article> articles { get; set; } 
-        public List<BusinessDay> businessDay { get; set; }
-        public Speciality specialty { get; set; }
-        public DoctorGrade doctorGrade { get; set; }
+   public class Doctor : User, Repository.IIdentifiable<long>
+    {
+        public List<Article> Articles { get; set; } 
+        public List<BusinessDay> BusinessDay { get; set; }
+        public Speciality Specialty { get; set; }
+        public DoctorGrade DoctorGrade { get; set; }
         public Doctor(long id, String name, String surname, String jmbg, String email, String phone, DateTime birth, String adress, String username, String password, Image img,Speciality spec )
         {
             this.Id = id;
@@ -25,7 +25,7 @@ namespace Model.Users
             this.Username = username;
             this.Password = password;
             this.Image = img;
-            this.specialty = spec;
+            this.Specialty = spec;
         }
         public Doctor(long id, String name, String surname, String jmbg, String email, String phone, DateTime birth, String adress, String username, String password, Image img, Speciality speciality, List<Article> articles, List<BusinessDay> businessDay ,DoctorGrade doctGrade)
         {
@@ -40,11 +40,30 @@ namespace Model.Users
             this.Username = username;
             this.Password = password;
             this.Image = img;
-            this.articles = articles;
-            this.businessDay = businessDay;
-            this.specialty = speciality;
-            this.doctorGrade = doctGrade;
+            this.Articles = articles;
+            this.BusinessDay = businessDay;
+            this.Specialty = speciality;
+            this.DoctorGrade = doctGrade;
         }
+
+        public Doctor( String name, String surname, String jmbg, String email, String phone, DateTime birth, String adress, String username, String password, Image img, Speciality speciality, List<Article> articles, List<BusinessDay> businessDay, DoctorGrade doctGrade)
+        {
+            this.FirstName = name;
+            this.LastName = surname;
+            this.Jmbg = jmbg;
+            this.Email = email;
+            this.Phone = phone;
+            this.DateOfBirth = birth;
+            this.address = adress;
+            this.Username = username;
+            this.Password = password;
+            this.Image = img;
+            this.Articles = articles;
+            this.BusinessDay = businessDay;
+            this.Specialty = speciality;
+            this.DoctorGrade = doctGrade;
+        }
+
         public Doctor(long id)
         {
             this.Id = id;

@@ -6,9 +6,11 @@ namespace Model.Doctor
 {
    public class DoctorGrade : IIdentifiable<long>
     {
-        public Dictionary<String,double> GradesForEachQuestions;
-        public int NumberOfGrades;
         public long Id;
+        public int NumberOfGrades;
+        public Dictionary<String,double> GradesForEachQuestions;
+
+
 
         public DoctorGrade(long id, int numberOfGrades)
         {
@@ -16,11 +18,17 @@ namespace Model.Doctor
             Id = id;
         }
 
-        public DoctorGrade(Dictionary<string, double> gradesForEachQuestions, int numberOfGrades, long id)
+        public DoctorGrade( long id, int numberOfGrades, Dictionary<string, double> gradesForEachQuestions)
         {
             GradesForEachQuestions = gradesForEachQuestions;
             NumberOfGrades = numberOfGrades;
             Id = id;
+        }
+
+        public DoctorGrade(int numberOfGrades, Dictionary<string, double> gradesForEachQuestions)
+        {
+            NumberOfGrades = numberOfGrades;
+            GradesForEachQuestions = gradesForEachQuestions;
         }
 
         public DoctorGrade(long id)

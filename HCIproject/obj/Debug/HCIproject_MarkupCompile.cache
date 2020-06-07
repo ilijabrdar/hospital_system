@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\App.xaml
-151012353840
+15-1888489163
 
-19-138045511
+19-2051306910
 16-1760338702
-Article.xaml;CreateArticle.xaml;DrugAlternative.xaml;DrugValidation.xaml;EditDrug.xaml;Examination.xaml;HospitalizationWin.xaml;Log.xaml;OperationWin.xaml;PatientFile.xaml;PrescriptionWin.xaml;Refferal.xaml;ScheduleExamination.xaml;SideBar.xaml;MainWindow.xaml;
+ArticleWin.xaml;CreateArticle.xaml;DrugAlternative.xaml;DrugValidation.xaml;EditDrug.xaml;Examination.xaml;HospitalizationWin.xaml;Log.xaml;OperationWin.xaml;PatientFileWin.xaml;PrescriptionWin.xaml;RefferalWin.xaml;ScheduleExamination.xaml;SideBar.xaml;MainWindow.xaml;
 
-True
+False
 

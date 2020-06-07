@@ -11,9 +11,8 @@ namespace bolnica.Service
    public interface IDoctorService : IService<Doctor, long>
 {
     List<Doctor> GetDoctorsBySpeciality(Speciality specialty);
+       Doctor GetDoctorByUsername(String username);
 
-   Boolean ChangeSpeciality(Speciality specialty, Model.Users.Doctor doctor);
 
-   DoctorGrade GiveGrade(DoctorGrade doctorGrade);
 }
 }

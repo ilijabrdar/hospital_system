@@ -13,16 +13,21 @@ namespace Model.PatientSecretary
    {
         public long Id;
         public String Note;
-        public DateTime BeginDate;
-        public DateTime EndDate;
+        public Period Period;
         public int DrugDosage;
 
-        public Therapy(long id, DateTime beginDate, DateTime endDate, int drugDosage, string note) 
+        public Therapy(long id, Period period, int drugDosage, string note) 
         {
             Id = id;
             Note = note;
-            BeginDate = beginDate;
-            EndDate = endDate;
+            Period =period;
+            DrugDosage = drugDosage;
+        }
+
+        public Therapy(string note, Period period, int drugDosage)
+        {
+            Note = note;
+            Period = period;
             DrugDosage = drugDosage;
         }
 

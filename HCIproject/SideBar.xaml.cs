@@ -50,7 +50,7 @@ namespace HCIproject
                 }
                 else
                 {
-                    Article artWind = new Article();
+                    ArticleWin artWind = new ArticleWin();
                     this.Visibility = Visibility.Hidden;
                     artWind.Show();
                 }
@@ -59,7 +59,7 @@ namespace HCIproject
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {//otvara karton
-            PatientFile fileWin = new PatientFile();
+            PatientFileWin fileWin = new PatientFileWin();
             this.Visibility = Visibility.Hidden;
             fileWin.Show();
         }

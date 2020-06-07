@@ -54,7 +54,7 @@ namespace HCIproject
                 }
                 else
                 {
-                    Article artWind = new Article();
+                    ArticleWin artWind = new ArticleWin();
                     this.Visibility = Visibility.Hidden;
                     artWind.Show();
                 }

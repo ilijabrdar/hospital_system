@@ -32,6 +32,13 @@ namespace Model.Doctor
             Id = id;
         }
 
+        public Referral(DateTime date, DateTime expirationDate, Users.Doctor doctor)
+        {
+            Date = date;
+            ExpirationDate = expirationDate;
+            Doctor = doctor;
+        }
+
         public long GetId()
         {
             return Id;

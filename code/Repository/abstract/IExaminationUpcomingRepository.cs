@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  IExaminationUpcomingRepository.cs
- * Author:  david
- * Purpose: Definition of the Interface Repository.IExaminationUpcomingRepository
- ***********************************************************************/
-
 using Model.PatientSecretary;
 using Model.Users;
 using System;

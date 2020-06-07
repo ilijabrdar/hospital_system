@@ -465,6 +465,7 @@
     <Compile Include="Service\abstract\IArticleService.cs" />
     <Compile Include="Service\abstract\IBusinessDayService.cs" />
     <Compile Include="Service\abstract\IDiagnosisService.cs" />
+    <Compile Include="Service\abstract\IDirectorService.cs" />
     <Compile Include="Service\abstract\IDoctorGradeService.cs" />
     <Compile Include="Service\abstract\IDoctorService.cs" />
     <Compile Include="Service\abstract\IEquipmentService.cs" />
@@ -478,6 +479,7 @@
     <Compile Include="Service\abstract\IReferralService.cs" />
     <Compile Include="Service\abstract\IRenovationService.cs" />
     <Compile Include="Service\abstract\IRoomTypeService.cs" />
+    <Compile Include="Service\abstract\ISecretaryService.cs" />
     <Compile Include="Service\abstract\ISpecialityService.cs" />
     <Compile Include="Service\abstract\ISymptomService.cs" />
     <Compile Include="Service\abstract\ITherapyService.cs" />

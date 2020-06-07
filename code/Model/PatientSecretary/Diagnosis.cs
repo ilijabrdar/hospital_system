@@ -17,9 +17,10 @@ namespace Model.PatientSecretary
             Id = id;
         }
 
-        public Diagnosis(long id, string name) : this(id)
+        public Diagnosis(string name, List<Symptom> symptom)
         {
-            this.Name = name;
+            Name = name;
+            Symptom = symptom;
         }
 
         public Diagnosis(long id, string name, List<Symptom> symptom)

@@ -48,19 +48,11 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        public bool IsPasswordValid(string password)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool IsUsernameValid(string username)
-        {
-            throw new NotImplementedException();
-        }
-
         public User Login(string username, string password)
         {
-            return _userService.Login(username, password);
+            User user = _userService.Login(username, password);
+            if (user == null) throw new NullReferenceException("User not found");
+            else return user;
         }
 
         public bool Logout(User user)

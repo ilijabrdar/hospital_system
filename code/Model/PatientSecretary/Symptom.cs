@@ -14,6 +14,11 @@ namespace Model.PatientSecretary
       public String Name;
       public long Id;
 
+        public Symptom(string name)
+        {
+            Name = name;
+        }
+
         public Symptom(long id)
         {
             Id = id;

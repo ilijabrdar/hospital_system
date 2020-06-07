@@ -10,8 +10,18 @@ namespace Service
 {
     public class ExaminationService : IExaminationService
     { 
-        private IExaminationUpcomingRepository _upcomingRepository;
-        private IExaminationPreviousRepository previousRepository;
+        private readonly IExaminationUpcomingRepository _upcomingRepository;
+        private readonly IExaminationPreviousRepository _previousRepository;
+
+        public ExaminationService(IExaminationUpcomingRepository upcomingRepository)
+        {
+            _upcomingRepository = upcomingRepository;
+        }
+
+        public ExaminationService(IExaminationPreviousRepository previousRepository)
+        {
+            _previousRepository = previousRepository;
+        }
 
         public IDiagnosisService _IDiagnosisService;
         public IPrescriptionService _IPrescriptionService;
@@ -26,7 +36,7 @@ namespace Service
 
         public void Edit(Examination entity)
         {
-            throw new NotImplementedException();
+            _upcomingRepository.Edit(entity);
         }
 
         public Examination Get(long id)

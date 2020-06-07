@@ -8,6 +8,8 @@ namespace Model.PatientSecretary
       public DateTime StartDate { get; set; }
       public DateTime EndDate { get; set; }
 
+
+
       public Period(DateTime start)
         {
             this.StartDate = start;

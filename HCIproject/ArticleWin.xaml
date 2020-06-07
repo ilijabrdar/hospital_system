@@ -1,0 +1,19 @@
+﻿<Window x:Class="HCIproject.ArticleWin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HCIproject"
+        mc:Ignorable="d"
+        Title="Article" Height="450" Width="800">
+    
+    <Grid Background="#D0ECE7">
+        <Label Content="Koji su simptomi korona virusa i kako se zaštititi?" FontSize="20" HorizontalAlignment="Left" Height="50" Margin="170,38,0,0" VerticalAlignment="Top" Width="497" FontWeight="Bold"/>
+        <Label Content="dr Ana Matar" FontSize="18" HorizontalAlignment="Left" Height="41" Margin="646,79,0,0" VerticalAlignment="Top" Width="125"/>
+        <TextBox  VerticalScrollBarVisibility="Visible"
+            TextWrapping="Wrap"  HorizontalAlignment="Left" FontSize="16" Height="247" Margin="10,125,0,0"  VerticalAlignment="Top" Width="774" 
+            Text="Groznica, kašalj, grlobolja i otežano disanje neki su od najčešćih simptoma novog korona virusa. Može biti ozbiljnija za neke osobe i može dovesti do upale pluća ili otežanog disanja. Ređe je da virus može biti fatalan. Stariji ljudi i ljudi sa postojećim medicinskim stanjima (poput dijabetesa i srčanih bolesti) izgleda da su ranjiviji da obole od virusa. Važno je da kompanije ohrabruju bolesne zaposlene da ostanu kod kuće. Nemojte tražiti napomenu zdravstvenog radnika za zaposlene koji su bolesni od akutne respiratorne bolesti, pošto su kancelarije zdravstvenih ustanova i medicinske ustanove možda izuzetno zauzete i nisu u mogućnosti da dostave takvu dokumentaciju na vreme. Bolesni zaposleni ne bi trebali da se vraćaju na posao sve dok njihova temperatura ne bude ispod 37,8 stepeni Celzijusa tokom najmanje 24 sata, bez pomoći leka koji smanjuje temperaturu ili drugog leka koji menja simptome. Redovno čistite sve površine koje se često dodiruju na radnom mestu, kao što su radne stanice, radne površine i kvake za vrata. Obezbedite maramice za jednokratnu upotrebu da zaposleni pre svake upotrebe mogu obrisati najčešće korišćene površine (na primer, kvake za vrata, tastature, daljinski upravljač, sto). I dok se ovo može činiti osnovnim, mnogi odrasli ne praktikuju pravilno etiku kašljanja i kijanja (pokrijte usta i nos potpuno maramicom ili gornjim rukavom) ili pravilno pranje ruku najmanje 20 sekundi toplom vodom. Tako savetujemo kompanije da istaknu plakate o tome kako da spreče širenje bolesti."/>
+        <Button Content="Povratak" FontSize="16" HorizontalAlignment="Left" Height="33" Margin="646,377,0,0" VerticalAlignment="Top" Width="125" Click="Button_Click" Background="#FFA2D9CE" BorderBrush="#FF1FEECD"/>
+
+    </Grid>
+</Window>

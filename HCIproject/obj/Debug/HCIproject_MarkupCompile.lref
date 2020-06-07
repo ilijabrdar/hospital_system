@@ -1,6 +1,6 @@
 ﻿
 FC:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\App.xaml;;
-FC:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\Article.xaml;;
+FC:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\ArticleWin.xaml;;
 FC:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\CreateArticle.xaml;;
 FC:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\DrugAlternative.xaml;;
 FC:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\DrugValidation.xaml;;
@@ -9,9 +9,9 @@ FC:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\Examination.xaml;;
 FC:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\HospitalizationWin.xaml;;
 FC:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\Log.xaml;;
 FC:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\OperationWin.xaml;;
-FC:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\PatientFile.xaml;;
+FC:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\PatientFileWin.xaml;;
 FC:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\PrescriptionWin.xaml;;
-FC:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\Refferal.xaml;;
+FC:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\RefferalWin.xaml;;
 FC:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\ScheduleExamination.xaml;;
 FC:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\SideBar.xaml;;
 FC:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\MainWindow.xaml;;

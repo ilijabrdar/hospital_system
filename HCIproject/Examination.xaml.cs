@@ -49,7 +49,7 @@ namespace HCIproject
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {//uput
-            Refferal refWin = new Refferal();
+            RefferalWin refWin = new RefferalWin();
             this.Visibility = Visibility.Hidden;
             refWin.Show();
         }

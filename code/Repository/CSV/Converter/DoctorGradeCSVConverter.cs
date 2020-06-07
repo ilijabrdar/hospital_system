@@ -47,17 +47,19 @@ namespace bolnica.Repository.CSV.Converter
             stringBuilder.Append(format);
             stringBuilder.Append(_delimiter);
 
-            foreach(String question in entity.GradesForEachQuestions.Keys)
+            int numOfDelimiter = -1;
+            foreach(KeyValuePair<String,double> map in entity.GradesForEachQuestions)
             {
-                stringBuilder.Append(question);
+                ++numOfDelimiter;
+                stringBuilder.Append(map.Key);
                 stringBuilder.Append(_delimiterQuestionGrades);
+                stringBuilder.Append(map.Value);
 
-                foreach(Double grade in entity.GradesForEachQuestions.Values)
-                {
-                    stringBuilder.Append(grade);
+                if(numOfDelimiter<entity.GradesForEachQuestions.Count-1)
                     stringBuilder.Append(_delimiterDictionary);
-                }
+
             }
+            
             return stringBuilder.ToString();
 
         }

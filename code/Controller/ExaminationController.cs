@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  ExaminationService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.ExaminationService
- ***********************************************************************/
-
 using bolnica.Controller;
 using bolnica.Service;
 using Model.PatientSecretary;

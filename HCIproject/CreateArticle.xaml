@@ -10,10 +10,10 @@
     <StackPanel x:Name="ResizePanel" Background="#D0ECE7" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
         <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="50,50,50,10">
             <Label Content="Unesite naslov članka:" FontWeight="SemiBold" FontSize="18"></Label>
-            <TextBox FontSize="16" Height="30" Width="300" AcceptsReturn="True" CaretBrush="#FF1FEECD"/>
+            <TextBox Text="{Binding Topic}" FontSize="16" Height="30" Width="300" AcceptsReturn="True" CaretBrush="#FF1FEECD"/>
         </WrapPanel>
         <Label Content="Unesite željeni tekst članka" FontWeight="SemiBold" FontSize="18" Margin="30,0,0,0" />
-        <TextBox Margin="30,0,29.6,0" Height="220" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AcceptsReturn="True" CaretBrush="#FF1FEECD" SelectionBrush="#FF1FEECD" Foreground="#FF1FEECD" BorderBrush="#FF1FEECD"/>
+        <TextBox Margin="30,0,29.6,0" Height="220" Text="{Binding NewArticle}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AcceptsReturn="True" CaretBrush="#FF1FEECD" SelectionBrush="#FF1FEECD" Foreground="#FF1FEECD" BorderBrush="#FF1FEECD"/>
         <WrapPanel FlowDirection="RightToLeft" Background="#D5F5E3" >
             <Button Content="Otkaži" FontSize="18" Height="30" Width="100"  Margin="10,20,10,50" Background="#A2D9CE" Click="Button_Click_1" BorderBrush="#FF1FEECD" ></Button>
             <Button Content="Potvrdi" FontSize="18" Height="30" Width="100"  Margin="10,20,10,50" Background="#A2D9CE" Click="Button_Click" BorderBrush="#FF1FEECD" ></Button>

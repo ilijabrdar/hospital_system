@@ -8,7 +8,7 @@ namespace Controller
 {
     public class OperationController : IOperationController
     {
-        private IOperationService _service;
+        private readonly IOperationService _service;
 
         public OperationController(IOperationService service)
         {

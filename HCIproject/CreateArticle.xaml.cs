@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Controller;
+using Model.Doctor;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,13 +21,21 @@ namespace HCIproject
     /// </summary>
     public partial class CreateArticle : Window
     {
+        private readonly IController<Article, long> _articleController;
+
+        public String Topic { get; set; }
+        public String NewArticle { get; set; }
         public CreateArticle()
         {
+            this.DataContext = this;
             InitializeComponent();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            var app = Application.Current as App;
+            Article article = new Article(111, DateTime.Today, Topic, NewArticle);
+            //_articleController.Save(article);
             SideBar sideBarWin = new SideBar();
             this.Visibility = Visibility.Hidden;
             sideBarWin.MyTabControl.SelectedIndex = 1;

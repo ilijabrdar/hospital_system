@@ -20,7 +20,7 @@ namespace Model.Doctor
         public Period period;
         public Room room;
         public PatientFile patientFile;
-        public long Id { get; set; }
+        public long Id;
 
         public Operation( long id,Users.Doctor doctor, string description, Period period, Room room, PatientFile patientFile)
         {
@@ -30,6 +30,15 @@ namespace Model.Doctor
             this.room = room;
             this.patientFile = patientFile;
             this.Id = id;
+        }
+
+        public Operation(Users.Doctor doctor, string description, Period period, Room room, PatientFile patientFile)
+        {
+            this.doctor = doctor;
+            Description = description;
+            this.period = period;
+            this.room = room;
+            this.patientFile = patientFile;
         }
 
         public Operation(long id)

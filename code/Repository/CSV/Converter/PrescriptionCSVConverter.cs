@@ -44,10 +44,15 @@ namespace bolnica.Repository.CSV.Converter
             stringBuilder.Append(format);
             stringBuilder.Append(_delimiter);
 
+
+            int numOfDelimiters = -1;
             foreach (Drug drug in entity.Drug)
             {
+                ++numOfDelimiters;
                 stringBuilder.Append(drug.GetId());
-                stringBuilder.Append(_drugDelimiter);
+
+                if(numOfDelimiters<entity.Drug.Count-1)
+                 stringBuilder.Append(_drugDelimiter);
             }
             return stringBuilder.ToString();
         }

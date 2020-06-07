@@ -21,6 +21,13 @@ namespace Model.Doctor
             this.Room = room;
         }
 
+        public Hospitalization(Period period, PatientFile patientFile, Room room)
+        {
+            Period = period;
+            PatientFile = patientFile;
+            Room = room;
+        }
+
         public Hospitalization(long id)
         {
             Id = id;
@@ -28,12 +35,12 @@ namespace Model.Doctor
 
         public long GetId()
         {
-            throw new NotImplementedException();
+            return this.Id;
         }
 
         public void SetId(long id)
         {
-            throw new NotImplementedException();
+            this.Id = id;
         }
     }
 }

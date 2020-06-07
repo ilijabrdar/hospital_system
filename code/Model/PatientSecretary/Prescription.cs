@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  Recept.cs
- * Author:  Tamara Kovacevic
- * Purpose: Definition of the Class Pacijent.Recept
- ***********************************************************************/
-
 using Repository;
 using System;
 using System.Collections.Generic;
@@ -32,6 +26,14 @@ namespace Model.PatientSecretary
             Note = note;
             Id = id;
             this.Drug = alternative;
+        }
+
+        public Prescription(DateTime dateOfIssue, DateTime expirationDate, string note, List<Drug> drug)
+        {
+            DateOfIssue = dateOfIssue;
+            ExpirationDate = expirationDate;
+            Note = note;
+            Drug = drug;
         }
 
         public Prescription(long id)

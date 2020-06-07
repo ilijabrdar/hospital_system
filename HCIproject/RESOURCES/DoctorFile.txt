@@ -1,1 +1,2 @@
-﻿111; Snezana; Bulajic; 1610998805456; sne@gmail.com;064-569548;11.12.1998;Vuka Karadzica 18; sneki123; sneki; ;2
+﻿111, Snezana, Bulajic, 1610998805456, sne@gmail.com,064-569548,5.5.1998,Vuka Karadzica 18,sneki,sneki,C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\graph.png,2,empty,empty,empty
+111, Petar, Peric, 1610998805456, sne@gmail.com,064-569548,5.5.1998,Vuka Karadzica 18,pera,pera,C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\graph.png,2,empty,empty,empty
