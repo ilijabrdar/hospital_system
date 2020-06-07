@@ -95,22 +95,21 @@
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controller\abstract\IAnamnesisController.cs" />
     <Compile Include="Controller\abstract\IBusinessDayController.cs" />
     <Compile Include="Controller\abstract\IDiagnosisController.cs" />
     <Compile Include="Controller\abstract\IDoctorController.cs" />
+    <Compile Include="Controller\abstract\IDoctorGradeController.cs" />
     <Compile Include="Controller\abstract\IEquipmentController.cs" />
     <Compile Include="Controller\abstract\IAricleController.cs" />
     <Compile Include="Controller\abstract\IExaminationController.cs" />
     <Compile Include="Controller\abstract\IHospitalizationController.cs" />
     <Compile Include="Controller\abstract\IOperationController.cs" />
     <Compile Include="Controller\abstract\IPrescriptionController.cs" />
-    <Compile Include="Controller\abstract\IRefferalController.cs" />
+    <Compile Include="Controller\abstract\IReferralController.cs" />
     <Compile Include="Controller\abstract\IRenovationController.cs" />
+    <Compile Include="Controller\abstract\ISpecialityController.cs" />
+    <Compile Include="Controller\abstract\ISymptomController.cs" />
     <Compile Include="Controller\abstract\ITherapyController.cs" />
-    <Compile Include="Controller\AnemnesisController.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Controller\ArticleController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -187,6 +186,7 @@
     <Compile Include="Controller\SpecialityController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controller\SymptomController.cs" />
     <Compile Include="Controller\TherapyController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -301,25 +301,38 @@
     <Compile Include="Model\Users\User.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Repository\abstract\IDiagnosisRepository.cs" />
+    <Compile Include="Repository\abstract\IPrescriptionRepository.cs" />
+    <Compile Include="Repository\abstract\IReferralRepository.cs" />
+    <Compile Include="Repository\abstract\ISymptomRepository.cs" />
+    <Compile Include="Repository\abstract\ITherapyRepository.cs" />
     <Compile Include="Repository\ArticleRepository.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Repository\BusinessDayRepository.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Repository\CSV\Converter\ReferralCSVConverter.cs" />
+    <Compile Include="Repository\CSV\Converter\SymptomCSVConverter.cs" />
+    <Compile Include="Repository\CSV\Converter\TherapyCSVConverter.cs" />
+    <Compile Include="Repository\ReferralRepository.cs" />
     <Compile Include="Repository\CSV\Converter\ArticleCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\BusinessDayCSVConverter.cs" />
+    <Compile Include="Repository\CSV\Converter\DiagnosisCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\DoctorCSVConverter.cs" />
+    <Compile Include="Repository\CSV\Converter\DoctorGradeCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\DrugCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\HospitalizationCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\OperationCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\PatientCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\PatientFileCSVConverter.cs" />
+    <Compile Include="Repository\CSV\Converter\PrescriptionCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\PreviousExaminationCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\RenovationCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\UpcomingExaminationCSVConverter.cs" />
     <Compile Include="Repository\CSV\CSVRepository.cs" />
     <Compile Include="Repository\CSV\Stream\CSVStream.cs" />
+    <Compile Include="Repository\DiagnosisRepository.cs" />
     <Compile Include="Repository\DirectorRepository.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -410,6 +423,7 @@
     </Compile>
     <Compile Include="Repository\CSV\Converter\IngredientsCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\RoomCSVConverter.cs" />
+    <Compile Include="Repository\PrescriptionRepository.cs" />
     <Compile Include="Repository\Sequencer\ISequencer.cs" />
     <Compile Include="Repository\abstract\ISpecialityRepository.cs">
       <SubType>Code</SubType>
@@ -438,7 +452,6 @@
     <Compile Include="Repository\SecretaryRepository.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Repository\Speciality.cs" />
     <Compile Include="Repository\CSV\Converter\SpecialityCSVConverter.cs" />
     <Compile Include="Repository\SpecialityRepository.cs">
       <SubType>Code</SubType>
@@ -446,11 +459,14 @@
     <Compile Include="Repository\CSV\Converter\StateCSVConverter.cs" />
     <Compile Include="Repository\StateRepository.cs" />
     <Compile Include="Repository\CSV\Converter\TownCSVConverter.cs" />
+    <Compile Include="Repository\SymptomRepository.cs" />
+    <Compile Include="Repository\TherapyRepository.cs" />
     <Compile Include="Repository\TownRepository.cs" />
-    <Compile Include="Service\abstract\IAnemnesisService.cs" />
     <Compile Include="Service\abstract\IArticleService.cs" />
     <Compile Include="Service\abstract\IBusinessDayService.cs" />
     <Compile Include="Service\abstract\IDiagnosisService.cs" />
+    <Compile Include="Service\abstract\IDirectorService.cs" />
+    <Compile Include="Service\abstract\IDoctorGradeService.cs" />
     <Compile Include="Service\abstract\IDoctorService.cs" />
     <Compile Include="Service\abstract\IEquipmentService.cs" />
     <Compile Include="Service\abstract\IExaminationService.cs" />
@@ -460,14 +476,13 @@
     <Compile Include="Service\abstract\IPatientFileService.cs" />
     <Compile Include="Service\abstract\IPatientService.cs" />
     <Compile Include="Service\abstract\IPrescriptionService.cs" />
-    <Compile Include="Service\abstract\IReferalService.cs" />
+    <Compile Include="Service\abstract\IReferralService.cs" />
     <Compile Include="Service\abstract\IRenovationService.cs" />
     <Compile Include="Service\abstract\IRoomTypeService.cs" />
+    <Compile Include="Service\abstract\ISecretaryService.cs" />
+    <Compile Include="Service\abstract\ISpecialityService.cs" />
+    <Compile Include="Service\abstract\ISymptomService.cs" />
     <Compile Include="Service\abstract\ITherapyService.cs" />
-    <Compile Include="Service\abstract\Refferal.cs" />
-    <Compile Include="Service\AnemnesisService.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Service\ArticleService.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -542,6 +557,7 @@
     <Compile Include="Service\SpecialityService.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Service\SymptomService.cs" />
     <Compile Include="Service\TherapyService.cs">
       <SubType>Code</SubType>
     </Compile>

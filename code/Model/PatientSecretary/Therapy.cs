@@ -11,22 +11,24 @@ namespace Model.PatientSecretary
 {
    public class Therapy : IIdentifiable<long>
    {
-      public long Id;
-      private String Note;
-      private DateTime BeginDate;
-      private DateTime EndDate;
-      private int Amount;
-      private int Span;
+        public long Id;
+        public String Note;
+        public Period Period;
+        public int DrugDosage;
 
-        public Therapy(long id, string note, DateTime beginDate, DateTime endDate, int amount, int span)
+        public Therapy(long id, Period period, int drugDosage, string note) 
         {
             Id = id;
             Note = note;
-            BeginDate = beginDate;
-            EndDate = endDate;
-            Amount = amount;
-            Span = span;
+            Period =period;
+            DrugDosage = drugDosage;
+        }
 
+        public Therapy(string note, Period period, int drugDosage)
+        {
+            Note = note;
+            Period = period;
+            DrugDosage = drugDosage;
         }
 
         public Therapy(long id)
@@ -36,12 +38,12 @@ namespace Model.PatientSecretary
 
         public long GetId()
         {
-            throw new NotImplementedException();
+            return this.Id;
         }
 
         public void SetId(long id)
         {
-            throw new NotImplementedException();
+            this.Id = id;
         }
     }
 }

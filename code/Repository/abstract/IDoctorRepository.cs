@@ -13,7 +13,7 @@ namespace Repository
 {
    public interface IDoctorRepository : IRepository<Doctor,long>
    {
-      List<Doctor> GetDoctorsBySpeciality(Specialty specialty);
+      List<Doctor> GetDoctorsBySpeciality(Model.Doctor.Speciality specialty);
       Doctor GetDoctorByUsername(String username);
    }
 }

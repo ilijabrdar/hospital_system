@@ -1,4 +1,5 @@
 ﻿using Model.PatientSecretary;
+using Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,10 +7,8 @@ using System.Text;
 
 namespace bolnica.Service
 {
-    public interface ITherapyService 
-
+    public interface ITherapyService : IService<Therapy,long>
     {
-        Therapy CreateTherapy(Therapy therapy, Examination examination);
-        Therapy CreateCurrentTherapy(PatientFile patientFile);
+        Therapy AssignCurrentTherapy(PatientFile patientFile);
     }
 }

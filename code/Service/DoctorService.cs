@@ -15,16 +15,12 @@ namespace Service
         //private IService DoctorGrade;
       private readonly IDoctorRepository _doctorRepository;
 
-        public DoctorService(IDoctorRepository repo)
+        public DoctorService(IDoctorRepository doctorRepository)
         {
-            _doctorRepository = repo;
+            _doctorRepository = doctorRepository;
         }
 
-        public bool ChangeSpeciality(Specialty specialty, Doctor doctor)
-        {
-            throw new NotImplementedException();
-        }
-
+   
         public void Delete(Doctor entity)
         {
             throw new NotImplementedException();
@@ -45,15 +41,16 @@ namespace Service
             throw new NotImplementedException();
         }
 
-        public List<Doctor> GetDoctorsBySpeciality(Specialty specialty)
+        public List<Doctor> GetDoctorsBySpeciality(Model.Doctor.Speciality specialty)
         {
             return _doctorRepository.GetDoctorsBySpeciality(specialty);
         }
 
-        public DoctorGrade GiveGrade(DoctorGrade doctorGrade)
+        public Doctor GetDoctorByUsername(string username)
         {
-            throw new NotImplementedException();
+            return _doctorRepository.GetDoctorByUsername(username);
         }
+
 
         public Doctor Save(Doctor entity)
         {

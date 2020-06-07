@@ -14,7 +14,12 @@ namespace Model.PatientSecretary
       public Ingredient[] ingredient { get; set; }
       public Drug[] Alternative { get; set; }
 
-      public Drug (long id, String name, int ammount, Boolean approved, Ingredient[] ing, Drug[] alter)
+        public Drug(long id)
+        {
+            Id = id;
+        }
+
+        public Drug (long id, String name, int ammount, Boolean approved, Ingredient[] ing, Drug[] alter)
         {
             this.Id = id;
             this.Name = name;

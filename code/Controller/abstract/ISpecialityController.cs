@@ -1,5 +1,5 @@
 ﻿using Controller;
-using Model.PatientSecretary;
+using Model.Doctor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +7,7 @@ using System.Text;
 
 namespace bolnica.Controller
 {
-    interface IAnamnesisController 
+    public interface ISpecialityController : IController<Speciality,long>
     {
-        Anemnesis createAnemnesis(Anemnesis anamnesis, Examination examination);
     }
 }

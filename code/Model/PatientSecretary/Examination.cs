@@ -9,6 +9,7 @@ using System;
 using Model.Users;
 using bolnica.Service;
 using System.Collections.Generic;
+using Model.Doctor;
 
 namespace Model.PatientSecretary
 {
@@ -22,7 +23,7 @@ namespace Model.PatientSecretary
         public List<Prescription> Prescription;
         public Anemnesis Anemnesis;
         public Therapy Therapy;
-        public Refferal Refferal;
+        public Referral Refferal;
 
         public Examination(long id,  Users.Doctor doctor, Period period)
         {
@@ -30,7 +31,7 @@ namespace Model.PatientSecretary
             Doctor = doctor;
             Period = period;
         }
-        public Examination(long id, Users.Doctor doctor, Period period, Diagnosis diagnosis, Anemnesis anemnesis, Therapy therapy, Refferal refferal)
+        public Examination(long id, Users.Doctor doctor, Period period, Diagnosis diagnosis, Anemnesis anemnesis, Therapy therapy, Referral refferal)
         {
             Id = id;
             Doctor = doctor;
@@ -48,12 +49,12 @@ namespace Model.PatientSecretary
 
         public long GetId()
         {
-            throw new NotImplementedException();
+            return this.Id;
         }
 
         public void SetId(long id)
         {
-            throw new NotImplementedException();
+            this.Id = id;
         }
 
     }

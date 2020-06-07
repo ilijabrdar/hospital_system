@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  ExaminationService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.ExaminationService
- ***********************************************************************/
-
 using bolnica.Controller;
 using bolnica.Service;
 using Model.PatientSecretary;
@@ -30,12 +24,6 @@ namespace Controller
         {
             _service.Edit(entity);
         }
-
-        public Examination FinishExamination(Examination examination)
-        {
-            throw new NotImplementedException();
-        }
-
         public Examination Get(long id)
         {
             return _service.Get(id);
@@ -46,22 +34,58 @@ namespace Controller
             return _service.GetAll();
         }
 
-        public Examination[] GetExaminationsByUser(User user)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Examination[] GetSheduledUserExaminations(User user)
-        {
-            throw new NotImplementedException();
-        }
 
         public Examination Save(Examination entity)
         {
             return _service.Save(entity);
         }
 
-        public Examination StartScheduledExamination(Examination examination)
+        void IController<Examination, long>.Delete(Examination entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IController<Examination, long>.Edit(Examination entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        Examination IController<Examination, long>.Get(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerable<Examination> IController<Examination, long>.GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        //List<Examination> IExaminationController.GetExaminationFilter(ExaminationDTO examinationDTO)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        List<Examination> IExaminationController.GetFinishedxaminationsByUser(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        List<Examination> IExaminationController.GetUpcomingExaminationsByUser(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        Examination IController<Examination, long>.Save(Examination entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        Examination IExaminationController.SaveFinishedExamination(Examination examination)
+        {
+            throw new NotImplementedException();
+        }
+
+        Examination IExaminationController.StartUpcomingExamination(Examination examination)
         {
             throw new NotImplementedException();
         }

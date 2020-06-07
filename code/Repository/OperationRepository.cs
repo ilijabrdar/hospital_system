@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  OperationService.cs
- * Author:  david
- * Purpose: Definition of the Class Service.OperationService
- ***********************************************************************/
-
 using bolnica.Repository;
 using Model.Doctor;
 using System;
@@ -13,7 +7,6 @@ namespace Repository
 {
    public class OperationRepository : CSVRepository<Operation,long>, IOperationRepository
    {
-      private String FilePath;
         public OperationRepository(ICSVStream<Operation> stream, ISequencer<long> sequencer)
           : base(stream, sequencer)
         {

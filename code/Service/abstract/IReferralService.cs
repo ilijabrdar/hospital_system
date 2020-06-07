@@ -1,5 +1,7 @@
-﻿
+﻿using bolnica.Service;
+using Model.Doctor;
 using Model.PatientSecretary;
+using Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +9,7 @@ using System.Text;
 
 namespace bolnica.Service
 {
-    public interface IAnemnesisService //: IExaminationService
+    public interface IReferralService : IService<Referral,long>
     {
-        Anemnesis[] createAnemnesis(Anemnesis anemnesis, Examination examination);
     }
 }

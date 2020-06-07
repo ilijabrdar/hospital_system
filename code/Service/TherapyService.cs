@@ -1,25 +1,48 @@
-/***********************************************************************
- * Module:  TherapyService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.TherapyService
- ***********************************************************************/
-
+using bolnica.Repository;
 using bolnica.Service;
 using Model.PatientSecretary;
 using System;
+using System.Collections.Generic;
 
 namespace Service
 {
     public class TherapyService : ITherapyService
     {
-        public Therapy CreateCurrentTherapy(PatientFile patientFile)
+        private readonly ITherapyRepository _repository;
+
+        public TherapyService(ITherapyRepository repository)
+        {
+            _repository = repository;
+        }
+
+        public Therapy AssignCurrentTherapy(PatientFile patientFile)
         {
             throw new NotImplementedException();
         }
 
-        public Therapy CreateTherapy(Therapy therapy, Examination examination)
+        public void Delete(Therapy entity)
         {
-            throw new NotImplementedException();
+            _repository.Delete(entity);
+        }
+
+        public void Edit(Therapy entity)
+        {
+            _repository.Edit(entity);
+        }
+
+        public Therapy Get(long id)
+        {
+            return _repository.Get(id);
+        }
+
+        public IEnumerable<Therapy> GetAll()
+        {
+            return _repository.GetAll();
+        }
+
+        public Therapy Save(Therapy entity)
+        {
+            return _repository.Save(entity);
         }
     }
 }

@@ -28,13 +28,13 @@ namespace Repository
             return null;
         }
 
-        public List<Doctor> GetDoctorsBySpeciality(Specialty specialty)
+        public List<Doctor> GetDoctorsBySpeciality(Model.Doctor.Speciality specialty)
         {
             List<Doctor> doctors = this.GetAll().ToList();
             List<Doctor> retVal = new List<Doctor>();
             foreach(Doctor doct in doctors)
             {
-                if (doct.specialty.Equals(specialty))
+                if (doct.Specialty.Equals(specialty))
                     retVal.Add(doct);
             }
             return retVal;

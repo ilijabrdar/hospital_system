@@ -8,7 +8,7 @@ using System.Text;
 
 namespace bolnica.Repository.CSV.Converter
 {
-    class HospitalizationCSVConverter : ICSVConverter<Hospitalization>
+    public class HospitalizationCSVConverter : ICSVConverter<Hospitalization>
     {
         private readonly string _delimiter;
 
@@ -16,7 +16,6 @@ namespace bolnica.Repository.CSV.Converter
         {
             _delimiter = delimiter;
         }
-        //long id, Period period, List<PatientFile> patientFile, Room room
         public Hospitalization ConvertCSVFormatToEntity(string entityCSVFormat)
         {
             string[] tokens = entityCSVFormat.Split(_delimiter.ToCharArray());

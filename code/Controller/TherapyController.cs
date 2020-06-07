@@ -8,6 +8,7 @@ using bolnica.Controller;
 using bolnica.Service;
 using Model.PatientSecretary;
 using System;
+using System.Collections.Generic;
 
 namespace Controller
 {
@@ -20,14 +21,34 @@ namespace Controller
             _service = service;
         }
 
-        public Therapy CreateCurrentTherapy(PatientFile patientFile)
+        public Therapy AssignCurrentTherapy(PatientFile patientFile)
         {
             throw new NotImplementedException();
         }
 
-        public Therapy CreateTherapy(Therapy therapy, Examination examination)
+        public void Delete(Therapy entity)
         {
-            throw new NotImplementedException();
+            _service.Delete(entity);
+        }
+
+        public void Edit(Therapy entity)
+        {
+            _service.Edit(entity);
+        }
+
+        public Therapy Get(long id)
+        {
+            return _service.Get(id);
+        }
+
+        public IEnumerable<Therapy> GetAll()
+        {
+            return _service.GetAll();
+        }
+
+        public Therapy Save(Therapy entity)
+        {
+            return _service.Save(entity);
         }
     }
 }

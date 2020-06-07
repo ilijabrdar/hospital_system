@@ -10,7 +10,7 @@ using System.Text;
 
 namespace bolnica.Repository
 {
-    class OperationCSVConverter : ICSVConverter<Operation>
+    public class OperationCSVConverter : ICSVConverter<Operation>
     {
         private readonly string _delimiter;
 
@@ -27,9 +27,6 @@ namespace bolnica.Repository
                                     new Room(long.Parse(tokens[5])), new PatientFile(long.Parse(tokens[6])));
             return operation;
         }
-
-        //long id,Users.Doctor[] doctor, string description, Period period, Room room, PatientFile patientFile
-
 
         public string ConvertEntityToCSVFormat(Operation entity)
         {
