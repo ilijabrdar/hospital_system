@@ -30,6 +30,9 @@ namespace upravnikKT2
         private readonly IDrugController _drugController;
         private Drug _selectedDrug;
 
+        private ObservableCollection<Ingredient> currentOriginal = new ObservableCollection<Ingredient>();
+        private ObservableCollection<Ingredient> currentSelected = new ObservableCollection<Ingredient>();
+
         protected virtual void OnPropertyChanged(string name)
         {
             if (PropertyChanged != null)
@@ -167,6 +170,16 @@ namespace upravnikKT2
                     e.Handled = true;
                 }
             }
+            else if (e.Key == Key.Right && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
+            {
+                AddIngredient_Btn_Click(sender, e);
+                e.Handled = true;
+            }
+            else if (e.Key == Key.Left && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
+            {
+                RemoveIngredient_Btn_Click(sender, e);
+                e.Handled = true;
+            }
 
         }
 
@@ -221,18 +234,37 @@ namespace upravnikKT2
                 listSelectedIngredients.ItemsSource = new ObservableCollection<Ingredient>();
             }
 
+            currentOriginal = (ObservableCollection<Ingredient>)listAllIngredients.ItemsSource;
+            currentSelected = (ObservableCollection<Ingredient>)listSelectedIngredients.ItemsSource;
+
+
+        }
+
+        private void undoSearch()
+        {
+
+            listAllIngredients.ItemsSource = currentOriginal;
+            txtsearchOriginalIngredients.Clear();
+
+            listSelectedIngredients.ItemsSource = currentSelected;
+            txtsearchSelectedIngredients.Clear();
 
         }
 
         private void AddIngredient_Btn_Click(object sender, RoutedEventArgs e)
         {
             if (listAllIngredients.SelectedItem != null)
-            {                
+            {
+                undoSearch();
+
                     ObservableCollection<Ingredient> selected = (ObservableCollection<Ingredient>)listSelectedIngredients.ItemsSource;
                     selected.Add((Ingredient)listAllIngredients.SelectedItem);
 
                     ObservableCollection<Ingredient> original = (ObservableCollection<Ingredient>) listAllIngredients.ItemsSource;
                     original.Remove((Ingredient)listAllIngredients.SelectedItem);
+
+                    currentOriginal = (ObservableCollection<Ingredient>)listAllIngredients.ItemsSource;
+                    currentSelected = (ObservableCollection<Ingredient>)listSelectedIngredients.ItemsSource;
             }
             else
             {
@@ -249,11 +281,16 @@ namespace upravnikKT2
         {
             if (listSelectedIngredients.SelectedItem != null)
             {
+                undoSearch();
+
                 ObservableCollection<Ingredient> original = (ObservableCollection<Ingredient>)listAllIngredients.ItemsSource;
                 original.Add((Ingredient)listSelectedIngredients.SelectedItem);
 
                 ObservableCollection<Ingredient> selected = (ObservableCollection<Ingredient>)listSelectedIngredients.ItemsSource;
                 selected.Remove((Ingredient)listSelectedIngredients.SelectedItem);
+
+                currentOriginal = (ObservableCollection<Ingredient>)listAllIngredients.ItemsSource;
+                currentSelected = (ObservableCollection<Ingredient>)listSelectedIngredients.ItemsSource;
 
 
             }
@@ -266,6 +303,16 @@ namespace upravnikKT2
 
                 MessageBox.Show(messageBoxText, caption, button, icon);
             }
+        }
+
+        private void searchOriginalIngredientsKeyUp(object sender, KeyEventArgs e)
+        {
+            listAllIngredients.ItemsSource = currentOriginal.Where(input => input.Name.Contains(txtsearchOriginalIngredients.Text));
+        }
+
+        private void searchSelectedIngredientsKeyUp(object sender, KeyEventArgs e)
+        {
+            listSelectedIngredients.ItemsSource = currentSelected.Where(input => input.Name.Contains(txtsearchSelectedIngredients.Text));
         }
     }
 }

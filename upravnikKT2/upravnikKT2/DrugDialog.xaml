@@ -44,13 +44,14 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="304" />
-            <ColumnDefinition />
+            <ColumnDefinition Width="285" />
+            <ColumnDefinition Width="68" />
+            <ColumnDefinition  Width="297" />
         </Grid.ColumnDefinitions>
 
 
         <Label Grid.Row="0" Grid.Column="0" Width="91" HorizontalAlignment="Left" Margin="10,10,0,0">Naziv</Label>
-        <TextBox x:Name="txtName" Grid.Row="0" Grid.Column="1" Width="159" Margin="0,10,10,0" HorizontalAlignment="Right" Validation.Error="mojtext_Error">
+        <TextBox x:Name="txtName" Grid.Row="0" Grid.Column="2" Width="159" Margin="0,10,10,0" HorizontalAlignment="Right" Validation.Error="mojtext_Error">
             <TextBox.Text>
                 <Binding Path="DrugName" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -72,7 +73,7 @@
         </TextBox> -->
 
         <Label Grid.Row="2" Grid.Column="0" Width="91" HorizontalAlignment="Left" Margin="10,10,0,0" Content="Kolicina"/>
-        <TextBox x:Name="txtAmount" Grid.Row="2" Grid.Column="1" Width="159"  Margin="0,10,10,0" HorizontalAlignment="Right">
+        <TextBox x:Name="txtAmount" Grid.Row="2" Grid.Column="2" Width="159"  Margin="0,10,10,0" HorizontalAlignment="Right">
             <TextBox.Text>
                 <Binding Path="Amount" StringFormat="{}{0:#.##}" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -84,17 +85,13 @@
 
         <DockPanel Grid.Row="3" Grid.Column="0">
             <WrapPanel DockPanel.Dock="Top" Margin="10">
-                <Label  Width="91" HorizontalAlignment="Left"  Content="Sastav"/>
-                <Separator Margin="120,0,0,0"></Separator>
-                <Button  HorizontalAlignment="Right"  Style="{StaticResource MaterialDesignFloatingActionMiniButton}" Click="AddIngredient_Btn_Click"
-                 ToolTip="Dodaj sastav" Margin="0,20,0,0">
-                    <materialDesign:PackIcon
-                                    Kind="Add"
-                                    Height="24"
-                                    Width="24" />
-                </Button>
+                <Label  Width="91" HorizontalAlignment="Left"  Content="Sastav" Visibility="Hidden"/> <!-- hidden label, mozda zatreba-->
+                <Separator Margin="100,0,0,0"></Separator>
+                <TextBox x:Name="txtsearchOriginalIngredients" materialDesign:HintAssist.Hint="Pretrazi" HorizontalAlignment="Right" Width="73" KeyUp="searchOriginalIngredientsKeyUp"/>
 
             </WrapPanel>
+
+
 
             <ListView x:Name="listAllIngredients" DockPanel.Dock="Bottom" Margin="10,0" >
                 <ListView.View>
@@ -106,17 +103,27 @@
             </ListView>
         </DockPanel>
 
-        <!--<TextBox Grid.Row="3" Grid.Column="1" Width="159"  Margin="0,10,10,7" HorizontalAlignment="Right" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" TextWrapping="Wrap" BorderThickness="1"/>-->
-        <WrapPanel DockPanel.Dock="Top" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Right" Margin="0,10,10,10" Width="40">
-            <Button  HorizontalAlignment="Right"  Style="{StaticResource MaterialDesignFloatingActionMiniButton}" Click="RemoveIngredient_Btn_Click"
-                 ToolTip="Izbrisi sastav" Margin="0,20,0,0">
-                <materialDesign:PackIcon
-                                    Kind="Delete"
+        <Button Grid.Column="1" Grid.Row="3" HorizontalAlignment="Right"  Style="{StaticResource MaterialDesignFloatingActionMiniButton}" Click="AddIngredient_Btn_Click"
+                 ToolTip="Dodaj sastav | CTRL+STRELICA DESNO" Margin="0,125,10,189" Height="Auto" >
+            <materialDesign:PackIcon
+                                    Kind="ArrowRight"
                                     Height="24"
                                     Width="24" />
-            </Button>
+        </Button>
+
+        <Button Grid.Column="1" Grid.Row="3"  HorizontalAlignment="Right"  Style="{StaticResource MaterialDesignFloatingActionMiniButton}" Click="RemoveIngredient_Btn_Click"
+                 ToolTip="Izbrisi sastav | CTRL+STRELICA LEVO" Margin="0,206,10,108" RenderTransformOrigin="0.282,0.827" Height="Auto">
+            <materialDesign:PackIcon
+                                    Kind="ArrowLeft"
+                                    Height="24"
+                                    Width="24" />
+        </Button>
+        <!--<TextBox Grid.Row="3" Grid.Column="1" Width="159"  Margin="0,10,10,7" HorizontalAlignment="Right" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" TextWrapping="Wrap" BorderThickness="1"/>-->
+        <WrapPanel DockPanel.Dock="Top" Grid.Column="2" Grid.Row="3" VerticalAlignment="Top"  Margin="0,10,10,0" Height="33" >
+            <Separator Margin="200,0,0,0"></Separator>
+            <TextBox materialDesign:HintAssist.Hint="Pretrazi" x:Name="txtsearchSelectedIngredients" HorizontalAlignment="Right" Width="73" KeyUp="searchSelectedIngredientsKeyUp"/>
         </WrapPanel>
-        <ListView x:Name="listSelectedIngredients" Grid.Row="3" Grid.Column="1" Margin="10,81,10,0">
+        <ListView x:Name="listSelectedIngredients" Grid.Row="3" Grid.Column="2" Margin="10,52,10,0">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Naziv" Width="130" DisplayMemberBinding="{Binding Name}"/>
@@ -126,14 +133,14 @@
         </ListView>
 
         <Button x:Name="tutorialBtn" Grid.Column="0" Grid.Row="4"  HorizontalAlignment="Left"  Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
-                 ToolTip="Pomoc - pogledaj uputstvo" Margin="10,11,0,11" Click="tutorialBtn_Click" Height="Auto" >
+                 ToolTip="Pomoc - pogledaj uputstvo" Margin="10,10,0,10" Click="tutorialBtn_Click" Height="Auto" >
             <materialDesign:PackIcon
                                     Kind="Help"
                                     Height="24"
                                     Width="24" />
         </Button>
 
-        <WrapPanel  Grid.Column="1" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10" Height="28" Width="210"  >
+        <WrapPanel  Grid.Column="2" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10" Height="28" Width="210"  >
             <Button Name="OKBtn" Height="28" Width="100" Click="Button_Click_OK_Drug" Content="Potvrdi">
                 <Button.Style>
                     <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
