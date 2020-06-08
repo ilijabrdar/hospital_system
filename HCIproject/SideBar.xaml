@@ -5,12 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:HCIproject"
+        xmlns:val="clr-namespace:HCIproject.Validation"
+
         mc:Ignorable="d"
         Title="SideBar"  Height="450" Width="800">
+    <Window.Resources>
+        <Color x:Key="Color1">#FFA2D9CE</Color>
+    </Window.Resources>
     <StackPanel x:Name="ResizePanel" Background="#D0ECE7" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
 
-        <TabControl x:Name="MyTabControl"  TabStripPlacement="Left"  Margin="20" >
-            <TabItem Header="Početna stranica" FontSize="19" Background="#A2D9CE">
+        <TabControl x:Name="MyTabControl"  TabStripPlacement="Left"  Margin="20" SelectionChanged="MyTabControl_SelectionChanged" >
+            <TabItem x:Name="tabPocetna" Header="Početna stranica" FontSize="19" Background="#A2D9CE" >
                 <StackPanel x:Name="pocetnaGrid" Background="#D5F5E3"  Orientation="Vertical" HorizontalAlignment="Stretch">
                     <StackPanel Background="#D5F5E3"  Orientation="Horizontal">
                         <Image HorizontalAlignment="Left" Height="106" Margin="36,45,0,0" VerticalAlignment="Top" Width="103" Source="user.png"/>
@@ -29,20 +34,20 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock x:Name="ImePrzTxt" Grid.Column="0" Grid.Row="0" Text="MARKO MARKOVIĆ" FontSize="20" FontWeight="Bold" />
-                            <TextBlock x:Name="SpecTxt" Grid.Column="0" Grid.Row="1" Text="Lekar opšte prakse" FontSize="16" />
+                            <TextBlock x:Name="ImePrzSet" Text="{Binding ImePrezime}" Grid.Column="0" Grid.Row="0"  FontSize="20" FontWeight="Bold" />
+                            <TextBlock x:Name="SpecSet" Grid.Column="0" Grid.Row="1" Text="Lekar opšte prakse" FontSize="16" />
 
                             <Label Grid.Column="0" Grid.Row="2" Content="Datum rođenja" FontSize="13" />
-                            <TextBlock x:Name="DatTxt" Grid.Column="1" Grid.Row="2" Text="16.06.1972" HorizontalAlignment="Right" FontSize="13" />
+                            <TextBlock x:Name="DatSet" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Right" FontSize="13" />
 
                             <Label Grid.Column="0" Grid.Row="3" Content="Jmbg" FontSize="13" />
-                            <TextBlock x:Name="JmbgTxt" Grid.Column="1" Grid.Row="3" Text="1606972804098" HorizontalAlignment="Right" FontSize="13" />
+                            <TextBlock x:Name="JmbgSet" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Right" FontSize="13" />
 
                             <Label Grid.Column="0" Grid.Row="4" Content="Email" FontSize="13" />
-                            <TextBlock x:Name="EmailTxt" Grid.Column="1" Grid.Row="4" Text="markomark@gmail.com" HorizontalAlignment="Right" FontSize="13" />
+                            <TextBlock x:Name="EmailSet" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Right" FontSize="13" />
 
                             <Label Grid.Column="0" Grid.Row="5" Content="Telefon" FontSize="13" />
-                            <TextBlock x:Name="TelTxt" Grid.Column="1" Grid.Row="5" Text="064058629" HorizontalAlignment="Right" FontSize="13" />
+                            <TextBlock x:Name="TelSet" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Right" FontSize="13" />
                         </Grid>
                     </StackPanel>
                     <Grid  Margin="20" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
@@ -234,16 +239,147 @@
                                 <Label Grid.Column="0" Grid.Row="4" Foreground="#2C3E50" Content="Email" FontSize="16" />
                                 <Label Grid.Column="0" Grid.Row="5" Foreground="#2C3E50" Content="Telefon" FontSize="16" />
 
-                                <TextBox x:Name="izImePrzTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="0" Margin="5" HorizontalAlignment="Right" FontSize="15" Initialized="izImePrzTxt_Initialized" CaretBrush="#FF1FEECD" />
-                                <TextBox x:Name="izSpecTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="1"  Margin="5" HorizontalAlignment="Right" FontSize="15" Initialized="izSpecTxt_Initialized" CaretBrush="#FF1FEECD" />
-                                <TextBox x:Name="izDatTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="2"  Margin="5" HorizontalAlignment="Right" FontSize="15" Initialized="izDatTxt_Initialized" CaretBrush="#FF1FEECD" />
-                                <TextBox x:Name="izJmbgTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="3"  Margin="5" HorizontalAlignment="Right" FontSize="15" Initialized="izJmbgTxt_Initialized" CaretBrush="#FF1FEECD" />
-                                <TextBox x:Name="izEmailTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="4"  Margin="5" HorizontalAlignment="Right" FontSize="15" Initialized="izEmailTxt_Initialized" CaretBrush="#FF1FEECD" />
-                                <TextBox x:Name="izTelTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="5"  Margin="5" HorizontalAlignment="Right" FontSize="15" Initialized="izTelTxt_Initialized" CaretBrush="#FF1FEECD" />
+                                <TextBox x:Name="izImePrzTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="0" Margin="5" HorizontalAlignment="Right" FontSize="15" CaretBrush="#FF1FEECD" >
+                                    <TextBox.Text>
+                                        <Binding Path="TestImePrezime" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <val:StringValidationRule ValidationStep="RawProposedValue"/>
 
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                    <Validation.ErrorTemplate>
+                                        <ControlTemplate>
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition />
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+                                                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Validation.ErrorTemplate>
+                                </TextBox>
+
+
+                                <TextBox x:Name="izSpecTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="1"  Margin="5" HorizontalAlignment="Right" FontSize="15" CaretBrush="#FF1FEECD">
+                                    <TextBox.Text>
+                                        <Binding Path="TestSpec" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <val:StringValidationRule ValidationStep="RawProposedValue"/>
+
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                    <Validation.ErrorTemplate>
+                                        <ControlTemplate>
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition />
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+                                                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Validation.ErrorTemplate>
+                                </TextBox>
+                                <TextBox x:Name="izDatTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="2"  Margin="5" HorizontalAlignment="Right" FontSize="15" CaretBrush="#FF1FEECD" />
+
+                                <TextBox x:Name="izJmbgTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="3"  Margin="5" HorizontalAlignment="Right" FontSize="15"  CaretBrush="#FF1FEECD" >
+                                    <TextBox.Text>
+                                        <Binding Path="TestJMBG" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <val:JMBGValidationRule ValidationStep="RawProposedValue"/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                    <Validation.ErrorTemplate>
+                                        <ControlTemplate>
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition />
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+                                                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Validation.ErrorTemplate>
+                                </TextBox>
+
+
+                                <TextBox x:Name="izEmailTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="4"  Margin="5" HorizontalAlignment="Right" FontSize="15" CaretBrush="#FF1FEECD" >
+                                    <TextBox.Text>
+                                        <Binding Path="TestEmail" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <val:EmailValidationRule ValidationStep="RawProposedValue"/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                    <Validation.ErrorTemplate>
+                                        <ControlTemplate>
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition />
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+                                                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Validation.ErrorTemplate>
+                                </TextBox>
+
+                                <TextBox x:Name="izTelTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="5"  Margin="5" HorizontalAlignment="Right" FontSize="15"  CaretBrush="#FF1FEECD" >
+                                    <TextBox.Text>
+                                        <Binding Path="TestPhoneNumber" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <val:TelephoneNumberValidationRule ValidationStep="RawProposedValue"/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                    <Validation.ErrorTemplate>
+                                        <ControlTemplate>
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition />
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+                                                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Validation.ErrorTemplate>
+                                </TextBox>
                             </Grid>
                         </StackPanel>
-                        <Button Content="Potvrdi izmene" HorizontalAlignment="Right" Foreground="#2C3E50" FontSize="16" Background="#A2D9CE" Margin="0,0,9.6,0" Click="Button_Click_4" BorderBrush="#FF1FEECD" Height="29" />
+                        <Button Content="Potvrdi izmene" HorizontalAlignment="Right" Foreground="#2C3E50" FontSize="16" Margin="0,0,9.6,0" Click="Button_Click_4" BorderBrush="#FF1FEECD" Height="29" >
+                            <Button.Background>
+                                <SolidColorBrush Color="{DynamicResource Color1}"/>
+                            </Button.Background>
+                        </Button>
                         <Grid  VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
@@ -261,12 +397,11 @@
                             <Label Grid.Column="0" Grid.Row="1" Foreground="#2C3E50" Content="Nova lozinka" FontSize="16" Margin="10,0,0,0" />
                             <Label Grid.Column="0" Grid.Row="2" Foreground="#2C3E50" Content="Potvrda lozinke" FontSize="16" Margin="10,0,0,0"/>
 
-                            <PasswordBox x:Name="LozinkaTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="0" Margin="5" HorizontalAlignment="Right" FontSize="15" Initialized="izImePrzTxt_Initialized" CaretBrush="#FF1FEECD" />
-                            <PasswordBox x:Name="NovaLozTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="1" Margin="5" HorizontalAlignment="Right" FontSize="15" Initialized="izImePrzTxt_Initialized" CaretBrush="#FF1FEECD" />
-                            <PasswordBox x:Name="PotvNovaLozTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="2" Margin="5" HorizontalAlignment="Right" FontSize="15" Initialized="izImePrzTxt_Initialized" CaretBrush="#FF1FEECD" />
+                            <PasswordBox x:Name="LozinkaTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="0" Margin="5" HorizontalAlignment="Right" FontSize="15" CaretBrush="#FF1FEECD" />
+                            <PasswordBox x:Name="NovaLozTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="1" Margin="5" HorizontalAlignment="Right" FontSize="15" CaretBrush="#FF1FEECD" />
+                            <PasswordBox x:Name="PotvNovaLozTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="2" Margin="5" HorizontalAlignment="Right" FontSize="15" CaretBrush="#FF1FEECD"/>
 
-                            <Label x:Name="obavesti" FontSize="12" Grid.Column="2" Grid.Row="1" Foreground="#A2D9CE"></Label>
-                            <Label x:Name="obavesti1" FontSize="12" Grid.Column="2" Grid.Row="2" Foreground="#A2D9CE" ></Label>
+                            <TextBlock x:Name="obavesti" Text="" FontSize="12" Grid.Column="2" Grid.Row="2" Foreground="#FF18C7C4" ></TextBlock>
                         </Grid>
                         <Button Content="Izmeni lozinku" HorizontalAlignment="Right" FontSize="16" Foreground="#2C3E50" Background="#A2D9CE" Margin="0,0,10,0" Click="Button_Click_5" BorderBrush="#FF1FEECD"/>
 

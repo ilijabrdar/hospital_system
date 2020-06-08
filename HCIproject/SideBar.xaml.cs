@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Model.Users;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,12 +20,43 @@ namespace HCIproject
     /// <summary>
     /// Interaction logic for DockPanel.xaml
     /// </summary>
-    public partial class SideBar : Window
+    public partial class SideBar : Window,INotifyPropertyChanged
     {
+        public string Username;
         public SideBar()
         {
             InitializeComponent();
+            this.DataContext = this;
         }
+        public SideBar(string _username)
+        {
+            InitializeComponent();
+            this.DataContext = this;
+            Username = _username;
+
+            var app = Application.Current as App;
+            Doctor doctor = app.DoctorController.GetDoctorByUsername(Username);
+            ImePrzSet.Text = doctor.FirstName + " " + doctor.LastName;
+            SpecSet.Text = doctor.Specialty.Name;
+            DatSet.Text = doctor.DateOfBirth.ToString();
+            JmbgSet.Text = doctor.Jmbg.ToString();
+            EmailSet.Text = doctor.Email;
+            TelSet.Text = doctor.Phone;
+
+            izImePrzTxt.Text = doctor.FirstName + " " + doctor.LastName;
+        }
+        
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+        //pocetna stranica binduj imena
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -93,56 +126,111 @@ namespace HCIproject
             //pocetnaGrid.Height = this.ActualHeight - 40;
         }
 
-        private void izImePrzTxt_Initialized(object sender, EventArgs e)
+        private string _testImePrz;
+        private string _testSpec;
+        private string _testEmail;
+        private string _testPhoneNum;
+        private string _testJMBG;
+        public string TestImePrezime
         {
-            izImePrzTxt.Text = ImePrzTxt.Text;
-            
+            get
+            {
+                return _testImePrz;
+            }
+            set
+            {
+                if (value != _testImePrz)
+                {
+                    _testImePrz = value;
+                    OnPropertyChanged("TestImePrezime");
+                }
+            }
         }
 
-        private void izSpecTxt_Initialized(object sender, EventArgs e)
+        public string TestSpec
         {
-            izSpecTxt.Text = SpecTxt.Text;
+            get
+            {
+                return _testSpec;
+            }
+            set
+            {
+                if (value != _testSpec)
+                {
+                    _testSpec = value;
+                    OnPropertyChanged("TestSpec");
+                }
+            }
         }
 
-        private void izDatTxt_Initialized(object sender, EventArgs e)
+        public string TestEmail
         {
-            izDatTxt.Text = DatTxt.Text;
+            get
+            {
+                return _testEmail;
+            }
+            set
+            {
+                if (value != _testEmail)
+                {
+                    _testEmail = value;
+                    OnPropertyChanged("TestEmail");
+                }
+            }
         }
 
-        private void izJmbgTxt_Initialized(object sender, EventArgs e)
-        {          
-            izJmbgTxt.Text = JmbgTxt.Text;
-        }
-
-        private void izEmailTxt_Initialized(object sender, EventArgs e)
+        public string TestPhoneNumber
         {
-            izEmailTxt.Text = EmailTxt.Text;
+            get
+            {
+                return _testPhoneNum;
+            }
+            set
+            {
+                if (value != _testPhoneNum)
+                {
+                    _testPhoneNum = value;
+                    OnPropertyChanged("TestPhoneNumber");
+                }
+            }
         }
 
-        private void izTelTxt_Initialized(object sender, EventArgs e)
+        public string TestJMBG
         {
-            izTelTxt.Text = TelTxt.Text;
+            get
+            {
+                return _testJMBG;
+            }
+            set
+            {
+                if (value != _testJMBG)
+                {
+                    _testJMBG = value;
+                    OnPropertyChanged("TestJMBG");
+                }
+            }
         }
-
-
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
-        {
-            ImePrzTxt.Text = izImePrzTxt.Text;
-            SpecTxt.Text = izSpecTxt.Text;
-            DatTxt.Text = izDatTxt.Text;
-            JmbgTxt.Text = izJmbgTxt.Text;
-            EmailTxt.Text = izEmailTxt.Text;
-            TelTxt.Text = izTelTxt.Text; 
+        {//posalji izmene
+
         }
 
         private void Button_Click_5(object sender, RoutedEventArgs e)
-        {
-            if(NovaLozTxt.Password != PotvNovaLozTxt.Password)
+        {//sacuvaj lozinku
+             //TODO provera da li je dobra stara sifra
+            if (NovaLozTxt.Password != PotvNovaLozTxt.Password)
             {
-                NovaLozTxt.Background = new SolidColorBrush(Color.FromRgb(255, 160, 122));
-                obavesti.Content = "Lozinke se ne poklapaju.";
-                obavesti1.Content = "Molimo pokušajte ponovo.";
+               obavesti.Foreground= new SolidColorBrush(Color.FromRgb(199, 24, 24));
+               obavesti.Text = "Unos se ne poklapa.Pokusajte ponovo.";
+            }
+            else
+            {
+                obavesti.Foreground = new SolidColorBrush(Color.FromRgb(64, 85, 81));
+
+                obavesti.Text = "Uspešno ste promenili lozinku.";
+                NovaLozTxt.Password = "";
+                PotvNovaLozTxt.Password = "";
             }
         }
 
@@ -158,6 +246,24 @@ namespace HCIproject
             CreateArticle creWin = new CreateArticle();
             this.Visibility = Visibility.Hidden;
             creWin.Show();
+        }
+
+        private void MyTabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //if (tabPocetna.IsSelected)
+            //{
+            //    var app = Application.Current as App;
+            //    Doctor doctor=app.DoctorController.GetDoctorByUsername(Username);
+            //    ImePrzSet.Text = doctor.FirstName +" "+ doctor.LastName;
+            //    SpecSet.Text = doctor.Specialty.Name;
+            //    DatSet.Text = doctor.DateOfBirth.ToString();
+            //    JmbgSet.Text = doctor.Jmbg.ToString();
+            //    EmailSet.Text = doctor.Email;
+            //    TelSet.Text = doctor.Phone;
+
+            //    izImePrzTxt.Text= doctor.FirstName + " " + doctor.LastName;
+
+            //}
         }
     }
 }

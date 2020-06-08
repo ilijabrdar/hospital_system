@@ -21,6 +21,7 @@ namespace HCIproject
     public partial class App : Application
     {
         public IUserController UserController { get; private set; }
+        public IDoctorController DoctorController { get; private set; }
 
         private const String CSV_DELIMITER = ",";
         private const String CSV_DELIMITER2 = "|";
@@ -70,6 +71,7 @@ namespace HCIproject
             UserService userService = new UserService(null, doctorService,null,null);
 
             UserController = new UserController(userService);
+            DoctorController = new DoctorController(doctorService);
 
 
             ArticleController articleController = new ArticleController(articleService);
@@ -112,8 +114,6 @@ namespace HCIproject
         }
         public IController<Article, long> ArticleController { get; private set; }
 
-
-        public IController<Doctor, long> DoctorController { get; private set; }
         public IController<DoctorGrade, long> DoctorGradeController { get; private set; }
         public IController<Speciality, long> SpecialityController { get; private set; }
         public IController<Hospitalization, long> HospitalizationController { get; private set; }

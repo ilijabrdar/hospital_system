@@ -1,6 +1,8 @@
 ﻿using Model.Users;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO.Packaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +20,6 @@ namespace HCIproject
     public partial class Log : Window
     {
         public String Username { get; set; }
-
         public Log()
         {
             this.DataContext = this;
@@ -34,30 +35,23 @@ namespace HCIproject
             try
             {
                 Doctor user = (Doctor)app.UserController.Login(Username, passwordBox.Password);
-                SideBar sidBarWin = new SideBar();
-                this.Visibility = Visibility.Hidden;
-                sidBarWin.Show();
+                if (user == null)
+                {
+                    obavestiGreska.Text = "Uneti podaci su neispravni. Molimo pokusajte ponovo";
+                }
+                else
+                {
+                    SideBar sidBarWin = new SideBar(Username);
+                    this.Visibility = Visibility.Hidden;
+                    sidBarWin.Show();
+                }
 
-            }catch(Exception exception)
+            }
+            catch (Exception exception)
             {
                 MessageBox.Show(exception.Message);
             }
 
-            ////if (username_text.Text == "" || username_text.Text == "unesite vaše korisničko ime" || username_text.Text == "Molimo pokušajte ponovo")
-            ////{
-            ////    username_text.Text = "Molimo pokušajte ponovo";
-
-            ////}
-            ////else if (password_text.Password == "")
-            ////{
-            ////    return;
-            ////}
-            ////else
-            ////{
-            ////    SideBar sidBarWin = new SideBar();
-            ////    this.Visibility = Visibility.Hidden;
-            ////    sidBarWin.Show();
-            ////}
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -67,28 +61,10 @@ namespace HCIproject
             mainWin.Show();
         }
 
-        //private void TextBox_IsKeyboardFocusedChanged(object sender, DependencyPropertyChangedEventArgs e)
-        //{
-        //    if (username_text.Text == "unesite vaše korisničko ime" || username_text.Text == "Molimo pokušajte ponovo")
-        //    {
-        //        username_text.Text = "";
-        //    }
-        //}
+        private void username_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            obavestiGreska.Text = "";
 
-        //private void username_text_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //    if (e.Key == Key.Return)
-        //    {
-        //        password_text.Focus();
-        //    }
-        //}
-        //private void password_text_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //    if (e.Key == Key.Return)
-        //    {
-        //        prijavaBtn.Focus();
-        //    }
-        //}
-
+        }
     }
 }

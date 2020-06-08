@@ -22,6 +22,7 @@ namespace HCIproject
         public Examination()
         {
             InitializeComponent();
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -43,8 +44,8 @@ namespace HCIproject
         private void Button_Click_2(object sender, RoutedEventArgs e)
         { //recept
             PrescriptionWin presWin = new PrescriptionWin();
-            this.Visibility = Visibility.Hidden;
-            presWin.Show();
+            //this.Visibility = Visibility.Hidden;
+            presWin.ShowDialog();
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
