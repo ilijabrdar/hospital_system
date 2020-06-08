@@ -1,5 +1,8 @@
-﻿using System;
+﻿using bolnica.Controller;
+using Model.PatientSecretary;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -22,6 +25,9 @@ namespace upravnikKT2
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        private readonly IIngredientController _ingredientController;
+        private List<Ingredient> listOfSelectedIngredients = new List<Ingredient>();
+
         protected virtual void OnPropertyChanged(string name)
         {
             if (PropertyChanged != null)
@@ -34,6 +40,9 @@ namespace upravnikKT2
             InitializeComponent();
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             this.DataContext = this;
+
+            var app = Application.Current as App;
+            _ingredientController = app.IngredientController;
         }
 
         private void TextBox_Scroll(object sender, System.Windows.Controls.Primitives.ScrollEventArgs e)
@@ -126,6 +135,54 @@ namespace upravnikKT2
             TutorialVideoDialog dialog = new TutorialVideoDialog();
             dialog.Show();
             
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<Ingredient> ingredients = new List<Ingredient>();
+            ingredients =  _ingredientController.GetAll().ToList();
+
+            ObservableCollection<Ingredient> collection = new ObservableCollection<Ingredient>(ingredients);
+            listAllIngredients.ItemsSource = collection;
+            listAllIngredients.DisplayMemberPath = "Name";
+            listAllIngredients.SelectedValuePath = "Id";
+
+
+        }
+
+        private void AddIngredient_Btn_Click(object sender, RoutedEventArgs e)
+        {
+            if (listAllIngredients.SelectedItem != null)
+            {
+                if (!listOfSelectedIngredients.Contains((Ingredient)listAllIngredients.SelectedItem))
+                {
+                    listOfSelectedIngredients.Add((Ingredient)listAllIngredients.SelectedItem);
+
+                    ObservableCollection<Ingredient> collection = new ObservableCollection<Ingredient>(listOfSelectedIngredients);
+                    listSelectedIngredients.ItemsSource = collection;
+                    listSelectedIngredients.DisplayMemberPath = "Name";
+                    listSelectedIngredients.SelectedValuePath = "Id";
+                    listSelectedIngredients.SelectedValue = "2";
+                }
+                else
+                {
+                    string messageBoxText = "Taj sastojak ste već dodali!";
+                    string caption = "Greska";
+                    MessageBoxButton button = MessageBoxButton.OK;
+                    MessageBoxImage icon = MessageBoxImage.Error;
+
+                    MessageBox.Show(messageBoxText, caption, button, icon);
+                }
+            }
+            else
+            {
+                string messageBoxText = "Morate selektovati sastojak da biste ga dodali!";
+                string caption = "Greska";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Error;
+
+                MessageBox.Show(messageBoxText, caption, button, icon);
+            }
         }
     }
 }
