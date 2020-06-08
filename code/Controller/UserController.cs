@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  UserService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.UserService
- ***********************************************************************/
-
 using bolnica.Controller;
 using bolnica.Service;
 using Model.Users;
@@ -33,26 +27,9 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        public object Delete()
-        {
-            throw new NotImplementedException();
-        }
-
-        public object Edit()
-        {
-            throw new NotImplementedException();
-        }
-
-        public object GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
         public User Login(string username, string password)
         {
             User user = _userService.Login(username, password);
-            //  if (user == null) throw new NullReferenceException("User not found");
-            //   else return user;
             return user;
         }
 
@@ -78,12 +55,22 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        IEnumerable<User> IController<User, long>.GetAll()
+        public IEnumerable<User> GetAll()
         {
             throw new NotImplementedException();
         }
 
         public User Get(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsPasswordValid(string password)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsUsernamedValid(string username)
         {
             throw new NotImplementedException();
         }

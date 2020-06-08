@@ -1,16 +1,12 @@
-/***********************************************************************
- * Module:  ISecretaryRepository.cs
- * Author:  david
- * Purpose: Definition of the Interface Repository.ISecretaryRepository
- ***********************************************************************/
 
+
+using bolnica.Repository;
 using Model.Users;
 using System;
 
 namespace Repository
 {
-   public interface ISecretaryRepository
+   public interface ISecretaryRepository : IRepository<Secretary,long>, IUserGetterRepository, IEagerRepository<Secretary,long>
    {
-      Secretary GetSecretaryByUsername(String username);
    }
 }

@@ -1,8 +1,3 @@
-/***********************************************************************
- * Module:  RoomType.cs
- * Author:  david
- * Purpose: Definition of the Class Director.RoomType
- ***********************************************************************/
 
 using Repository;
 using System;

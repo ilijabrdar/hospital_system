@@ -1,12 +1,7 @@
-/***********************************************************************
- * Module:  ArticleService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.ArticleService
- ***********************************************************************/
-
 using bolnica.Repository;
 using Model.Doctor;
 using System;
+using System.Collections.Generic;
 
 namespace Repository
 {
@@ -16,9 +11,17 @@ namespace Repository
         public ArticleRepository(ICSVStream<Article> stream, ISequencer<long> sequencer)
              : base(stream, sequencer)
         {
-
+            
         }
 
-     
+        public IEnumerable<Article> GetAllEager()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Article GetEager(long id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

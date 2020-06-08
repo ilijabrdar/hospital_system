@@ -1,8 +1,4 @@
-/***********************************************************************
- * Module:  Ingredient.cs
- * Author:  Tamara Kovacevic
- * Purpose: Definition of the Class PatientSecretary.Ingredient
- ***********************************************************************/
+
 
 using Repository;
 using System;
@@ -25,6 +21,11 @@ namespace Model.PatientSecretary
         {
             Quantity = quantity;
             Name = name;
+        }
+
+        public Ingredient(long id)
+        {
+            Id = id;
         }
 
         public long Id { get; set; }

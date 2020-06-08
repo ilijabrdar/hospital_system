@@ -51,10 +51,6 @@ namespace Controller
             return _doctorservice.GetDoctorsBySpeciality(specialty);
         }
 
-        public Doctor GetDoctorByUsername(string username)
-        {
-            return _doctorservice.GetDoctorByUsername(username);
-        }
 
         public DoctorGrade GiveGrade(DoctorGrade doctorGrade)
         {

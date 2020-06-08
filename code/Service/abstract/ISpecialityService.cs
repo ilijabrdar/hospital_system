@@ -7,7 +7,7 @@ using System.Text;
 
 namespace bolnica.Service
 {
-    public interface ISpecialityService : IService<Speciality, long>
+    public interface ISpecialityService : IGetterService<Speciality, long>
     {
     }
 }

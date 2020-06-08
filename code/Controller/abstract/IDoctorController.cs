@@ -9,9 +9,9 @@ using System.Text;
 namespace bolnica.Controller
 {
    public interface IDoctorController : IController<Doctor, long>
-{
+    {
          List<Doctor> GetDoctorsBySpeciality(Speciality specialty);
-        Doctor GetDoctorByUsername(String username);
+
 
     }
 }

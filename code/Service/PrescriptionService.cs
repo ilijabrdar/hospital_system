@@ -14,7 +14,7 @@ namespace Service
 {
     public class PrescriptionService : IPrescriptionService
     {
-        private IPrescriptionRepository _repository;
+        private readonly IPrescriptionRepository _repository;
 
         public PrescriptionService(IPrescriptionRepository repository)
         {

@@ -1,5 +1,3 @@
-
-
 using bolnica.Service;
 using Model.Doctor;
 using Model.Users;
@@ -9,49 +7,59 @@ using System.Collections.Generic;
 
 namespace Service
 {
-    public class DoctorGradeService : IDoctorGradeService
-    {
 
-        private readonly IDoctorGradeRepository _repository;
+   public class DoctorGradeService : IDoctorGradeService
+   {
+   
+        private readonly IDoctorGradeRepository _doctorGradeRepository;
 
-        public DoctorGradeService(IDoctorGradeRepository repository)
+        public DoctorGradeService(IDoctorGradeRepository doctorGradeRepository)
         {
-            _repository = repository;
+            _doctorGradeRepository = doctorGradeRepository;
         }
 
         public void Delete(DoctorGrade entity)
         {
-            _repository.Delete(entity);
+           _doctorGradeRepository.Delete(entity);
         }
 
         public void Edit(DoctorGrade entity)
         {
-            _repository.Edit(entity);
+            _doctorGradeRepository.Edit(entity);
         }
 
         public DoctorGrade Get(long id)
         {
-            return _repository.Get(id);
+            return _doctorGradeRepository.Get(id);
         }
 
         public IEnumerable<DoctorGrade> GetAll()
         {
-            return _repository.GetAll();
+            return _doctorGradeRepository.GetAll();
         }
 
-        public double GetAverageGrade(Doctor doctor, List<int> grades)
+        public double GetAverageGrade(Doctor doctor)
         {
-            throw new NotImplementedException();
+            Dictionary<String, double> doctorGrades = doctor.DoctorGrade.GradesForEachQuestions;
+            double retVal = 0;
+            foreach(var value in doctorGrades.Values)
+            {
+                retVal += value;
+            }
+            retVal /= doctorGrades.Count;
+
+            return retVal;
+            
         }
 
         public List<string> GetQuestions()
         {
-            throw new NotImplementedException();
+            return _doctorGradeRepository.GetQuestions();
         }
 
         public DoctorGrade Save(DoctorGrade entity)
         {
-            return _repository.Save(entity);
+            return _doctorGradeRepository.Save(entity);
         }
     }
 }

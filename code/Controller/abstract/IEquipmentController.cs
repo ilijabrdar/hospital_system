@@ -9,6 +9,11 @@ namespace bolnica.Controller
 {
     public interface IEquipmentController : IController<Equipment,long>
     {
-        Room[] GetRoomsContainingEquipment(String name);
+
+        Boolean CheckEquipmentNameUnique(Equipment equipment);
+
+        IEnumerable<Equipment> getConsumableEquipment();
+
+        IEnumerable<Equipment> getInconsumableEquipment();
     }
 }

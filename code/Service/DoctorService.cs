@@ -1,5 +1,3 @@
-
-
 using bolnica.Service;
 using Model.Doctor;
 using Model.Users;
@@ -12,12 +10,13 @@ namespace Service
    public class DoctorService : IDoctorService
    {
 
-        //private IService DoctorGrade;
+        private readonly IDoctorGradeService _doctorGradeService;
       private readonly IDoctorRepository _doctorRepository;
 
-        public DoctorService(IDoctorRepository doctorRepository)
+        public DoctorService(IDoctorRepository doctorRepository, IDoctorGradeService doctorGradeService)
         {
             _doctorRepository = doctorRepository;
+            _doctorGradeService = doctorGradeService;
         }
 
    
@@ -41,20 +40,20 @@ namespace Service
             throw new NotImplementedException();
         }
 
-        public List<Doctor> GetDoctorsBySpeciality(Model.Doctor.Speciality specialty)
+        public List<Doctor> GetDoctorsBySpeciality(Speciality specialty)
         {
             return _doctorRepository.GetDoctorsBySpeciality(specialty);
         }
 
-        public Doctor GetDoctorByUsername(string username)
+        public User GetUserByUsername(string username)
         {
-            return _doctorRepository.GetDoctorByUsername(username);
+            return _doctorRepository.GetUserByUsername(username);
         }
 
 
         public Doctor Save(Doctor entity)
         {
-            if (_doctorRepository.GetDoctorByUsername(entity.Username).Equals(null))
+            if (_doctorRepository.GetUserByUsername(entity.Username) != null)
                 {
                     return null;
                 }

@@ -7,7 +7,7 @@ using System.Text;
 
 namespace bolnica.Repository
 {
-    public interface ITherapyRepository : IRepository<Therapy,long>
-{
+    public interface ITherapyRepository : IRepository<Therapy,long>, IEagerRepository<Therapy , long>
+    {
 }
 }

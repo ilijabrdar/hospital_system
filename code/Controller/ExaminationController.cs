@@ -1,5 +1,6 @@
 using bolnica.Controller;
 using bolnica.Service;
+using Model.Dto;
 using Model.PatientSecretary;
 using Model.Users;
 using System;
@@ -9,7 +10,7 @@ namespace Controller
 {
     public class ExaminationController : IExaminationController
     {
-        private IExaminationService _service;
+        private readonly IExaminationService _service;
 
         public ExaminationController(IExaminationService service)
         {
@@ -34,36 +35,15 @@ namespace Controller
             return _service.GetAll();
         }
 
+        public List<Examination> GetExaminationFilter(ExaminationDTO examinationDTO)
+        {
+            throw new NotImplementedException();
+        }
 
         public Examination Save(Examination entity)
         {
             return _service.Save(entity);
         }
-
-        void IController<Examination, long>.Delete(Examination entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        void IController<Examination, long>.Edit(Examination entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        Examination IController<Examination, long>.Get(long id)
-        {
-            throw new NotImplementedException();
-        }
-
-        IEnumerable<Examination> IController<Examination, long>.GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        //List<Examination> IExaminationController.GetExaminationFilter(ExaminationDTO examinationDTO)
-        //{
-        //    throw new NotImplementedException();
-        //}
 
         List<Examination> IExaminationController.GetFinishedxaminationsByUser(User user)
         {

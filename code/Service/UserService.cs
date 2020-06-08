@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  UserService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.UserService
- ***********************************************************************/
-
 using bolnica.Service;
 using Model.PatientSecretary;
 using Model.Users;
@@ -15,12 +9,11 @@ namespace Service
 {
     public class UserService : IUserService
     {
-        private IDoctorService _doctorService;
-        private IPatientService _patientService;
-        private ISecretaryService _secretaryService;
-        private IDirectorService _directorService;
+        private readonly IDoctorService _doctorService;
+        private readonly IPatientService _patientService;
+        private readonly ISecretaryService _secretaryService;
+        private readonly IDirectorService _directorService;
 
-        private readonly IPatientFileRepository _patientFileRepo;
         public UserService(IPatientService patientServ, IDoctorService _doctor, ISecretaryService secretaryService, IDirectorService directorService)
         {
             _patientService = patientServ;
@@ -30,7 +23,7 @@ namespace Service
         }
         public UserService(IPatientService patientService)
         {
-            this._patientService = patientService;
+            _patientService = patientService;
         }
 
         public User Save(User entity)
@@ -62,11 +55,6 @@ namespace Service
             throw new NotImplementedException();
         }
 
-        public object GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
         public bool IsPasswordValid(User user, String password)
         {
             if (user.Password != password)
@@ -75,22 +63,18 @@ namespace Service
                 return true;
         }
 
-        // TODO: Zasto svaka rola ima svoju get<>ByID, Zasto to nije u Useru??
         public User IsUsernameValid(string username)
         {
             User user = null;
-            //if ((user = _patientService.GetPatientByUsername(username)) != null)
-            //    return user;
-           // if ((user = _secretaryService.GetSecretaryByUsername(username)) != null)
-            //    return user;
-            //else if ((user = _directorService.GetDirectorByUsername(username)) != null)
-            //    return user;
-             if ((user = _doctorService.GetDoctorByUsername(username)) != null)
-               return user;
-            //else if ((user = _directorRepo.GetDirectorByUsername(username)) != null)
-            //    return user;
-            //else if ((user = _doctorRepo.GetDoctorByUsername(username)) != null)
-            //    return user;
+            if ((user = _patientService.GetUserByUsername(username)) != null)
+                return user;
+            if ((user = _secretaryService.GetUserByUsername(username)) != null)
+                return user;
+            else if ((user = _directorService.GetUserByUsername(username)) != null)
+                return user;
+            else if ((user = _doctorService.GetUserByUsername(username)) != null)
+              return user;
+
             return user;
         }
 
@@ -124,7 +108,7 @@ namespace Service
             throw new NotImplementedException();
         }
 
-        IEnumerable<User> IService<User, long>.GetAll()
+        public IEnumerable<User> GetAll()
         {
             throw new NotImplementedException();
         }

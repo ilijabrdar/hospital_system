@@ -1,5 +1,7 @@
 // TODO: TAMARA srediti metodeeeeeeeeee
+using bolnica.Repository;
 using bolnica.Service;
+using Model.Dto;
 using Model.PatientSecretary;
 using Model.Users;
 using Repository;
@@ -12,6 +14,11 @@ namespace Service
     { 
         private readonly IExaminationUpcomingRepository _upcomingRepository;
         private readonly IExaminationPreviousRepository _previousRepository;
+        private readonly IDiagnosisService _diagnosisService;
+        private readonly IPrescriptionService _prescriptionService;
+        private readonly IReferralService _referralService;
+        private readonly ISymptomService _symptomService;
+        private readonly ITherapyService _therapyService;
 
         public ExaminationService(IExaminationUpcomingRepository upcomingRepository)
         {
@@ -22,12 +29,6 @@ namespace Service
         {
             _previousRepository = previousRepository;
         }
-
-        public IDiagnosisService _IDiagnosisService;
-        public IPrescriptionService _IPrescriptionService;
-        public ISymptomService _ISymptomService;
-        public ITherapyService _ITherapyService;
-        public IReferralService _IReferralService;
 
         public void Delete(Examination entity)
         {
@@ -49,10 +50,6 @@ namespace Service
             throw new NotImplementedException();
         }
 
-        //public List<Examination> GetExaminationFilter(ExaminationDTO examinationDTO)
-        //{
-        //    throw new NotImplementedException();
-        //}
 
         public List<Examination> GetFinishedxaminationsByUser(User user)
         {
@@ -75,6 +72,11 @@ namespace Service
         }
 
         public Examination StartUpcomingExamination(Examination examination)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Examination> GetExaminationFilter(ExaminationDTO examinationDTO)
         {
             throw new NotImplementedException();
         }

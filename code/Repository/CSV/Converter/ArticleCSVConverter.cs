@@ -6,7 +6,9 @@ using System.Text;
 
 namespace bolnica.Repository.CSV.Converter
 {
-    public  class ArticleCSVConverter : ICSVConverter<Article>
+
+   public class ArticleCSVConverter : ICSVConverter<Article>
+
     {
         private readonly String _delimiter=",";
 

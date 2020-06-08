@@ -9,6 +9,6 @@ namespace bolnica.Service
 {
     public interface IArticleService : IService<Article, long>
     {
-        Article[] searchArticle(String criteria);
+        List<Article> SearchArticle(String criteria);
     }
 }

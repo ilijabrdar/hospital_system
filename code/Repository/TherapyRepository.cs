@@ -14,5 +14,14 @@ namespace bolnica.Repository
 
         }
 
+        public IEnumerable<Therapy> GetAllEager()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Therapy GetEager(long id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

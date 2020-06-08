@@ -1,4 +1,5 @@
-﻿using Model.Doctor;
+﻿using bolnica.Repository;
+using Model.Doctor;
 using Repository;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace Repository
 {
-   public interface IReferralRepository : IRepository<Referral,long> 
+   public interface IReferralRepository : IRepository<Referral,long> , IEagerRepository<Referral, long>
     {
     }
 }

@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  DoctorGradeService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.DoctorGradeService
- ***********************************************************************/
-
 using bolnica.Controller;
 using bolnica.Service;
 using Model.Doctor;
@@ -13,38 +7,41 @@ using System.Collections.Generic;
 
 namespace Controller
 {
-    public class DoctorGradeController :   IDoctorGradeController
-    {
-        private IDoctorGradeService _service;
 
-        public DoctorGradeController(IDoctorGradeService service)
+    public class DoctorGradeController : IDoctorGradeController
+    {
+        private readonly IDoctorGradeService _doctorGradeService;
+
+        public DoctorGradeController(IDoctorGradeService doctorGradeService)
         {
-            _service = service;
+            _doctorGradeService = doctorGradeService;
         }
 
         public void Delete(DoctorGrade entity)
         {
-            _service.Delete(entity);
+            _doctorGradeService.Delete(entity);
+
         }
 
         public void Edit(DoctorGrade entity)
         {
-            _service.Edit(entity);
+            _doctorGradeService.Edit(entity);
         }
 
         public DoctorGrade Get(long id)
         {
-            return _service.Get(id);
+            return _doctorGradeService.Get(id);
         }
 
         public IEnumerable<DoctorGrade> GetAll()
         {
-            return _service.GetAll();
+            return _doctorGradeService.GetAll();
         }
 
-        public double GetAverageGrade(Doctor doctor, List<int> grades)
+        public double GetAverageGrade(Doctor doctor)
         {
-            throw new NotImplementedException();
+           return _doctorGradeService.GetAverageGrade(doctor);
+
         }
 
         public List<string> GetQuestions()
@@ -54,7 +51,7 @@ namespace Controller
 
         public DoctorGrade Save(DoctorGrade entity)
         {
-            return _service.Save(entity);
+            return _doctorGradeService.Save(entity);
         }
     }
 }
