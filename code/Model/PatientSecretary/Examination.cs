@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  Examination.cs
- * Author:  david
- * Purpose: Definition of the Class PatientSecretary.Examination
- ***********************************************************************/
-
 using Repository;
 using System;
 using Model.Users;
