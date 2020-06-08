@@ -4,6 +4,7 @@
  * Purpose: Definition of the Interface Repository.IDrugRepository
  ***********************************************************************/
 
+using bolnica.Repository;
 using Model.PatientSecretary;
 using System;
 

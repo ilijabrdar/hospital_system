@@ -14,7 +14,7 @@ namespace Model.Users
         private long _id;
         public String Name { get; set; }
         public String PostalNumber { get; set; }
-        public State state { get; set; }
+        public State State { get; set; }
 
         private List<Address> address;
       
@@ -23,13 +23,19 @@ namespace Model.Users
             _id = id;
             Name = name;
             PostalNumber = postalNumber;
-            this.state = state;
+            State = state;
             address = new List<Address>();
         }
 
         public Town(long id)
         {
             _id = id;
+        }
+
+        public Town(long id, long stateID)
+        {
+            _id = id;
+            State = new State(stateID);
         }
 
         /// <pdGenerated>default getter</pdGenerated>
@@ -93,25 +99,25 @@ namespace Model.Users
         /// <pdGenerated>default parent getter</pdGenerated>
         public State GetState()
         {
-            return state;
+            return State;
         }
       
         /// <pdGenerated>default parent setter</pdGenerated>
         /// <param>newState</param>
         public void SetState(State newState)
         {
-            if (this.state != newState)
+            if (State != newState)
             {
-            if (this.state != null)
+            if (State != null)
             {
-                State oldState = this.state;
-                this.state = null;
+                State oldState = State;
+                State = null;
                 oldState.RemoveTown(this);
             }
             if (newState != null)
             {
-                this.state = newState;
-                this.state.AddTown(this);
+                State = newState;
+                State.AddTown(this);
             }
             }
         }

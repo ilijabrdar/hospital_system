@@ -4,35 +4,36 @@
  * Purpose: Definition of the Class Service.BusinessDayService
  ***********************************************************************/
 
+using bolnica.Repository;
 using Model.Director;
 using Model.Users;
+using Service;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Repository
 {
-   public class BusinessDayRepository : IBusinessDayRepository
+   public class BusinessDayRepository : CSVRepository<BusinessDay,long>, IBusinessDayRepository, IEagerRepository<BusinessDay,long>
    {
       private String FilePath;
-
-        public void Delete(BusinessDay entity)
+        private readonly IDoctorRepository doctorRepo;
+        private readonly IRoomRepository roomRepo;
+        public BusinessDayRepository(ICSVStream<BusinessDay> stream, ISequencer<long> sequencer, IDoctorRepository doctor, IRoomRepository room)
+           : base(stream, sequencer)
         {
-            throw new NotImplementedException();
+            doctorRepo = doctor;
+            roomRepo = room;
         }
 
-        public void Edit(BusinessDay entity)
+        public IEnumerable<BusinessDay> GetAllEager()
         {
-            throw new NotImplementedException();
-        }
-
-        public BusinessDay Get(long id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<BusinessDay> GetAll()
-        {
-            throw new NotImplementedException();
+            List<BusinessDay> businessDays = new List<BusinessDay>();
+            foreach(BusinessDay day in GetAll().ToList())
+            {
+                businessDays.Add(GetEager(day.GetId()));
+            }
+            return businessDays;
         }
 
         public List<BusinessDay> GetBusinessDaysByDate(DateTime date)
@@ -40,9 +41,12 @@ namespace Repository
             throw new NotImplementedException();
         }
 
-        public BusinessDay Save(BusinessDay entity)
+        public BusinessDay GetEager(long id)
         {
-            throw new NotImplementedException();
+            BusinessDay businessDay = Get(id);
+            businessDay.doctor = doctorRepo.Get(businessDay.doctor.GetId());
+            businessDay.room = roomRepo.Get(businessDay.room.GetId());
+            return businessDay;
         }
 
         public bool SetRoomForBusinessDay(BusinessDay businessDay, Room room)

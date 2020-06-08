@@ -4,6 +4,7 @@
  * Purpose: Definition of the Interface Repository.IPatientRepository
  ***********************************************************************/
 
+using bolnica.Repository;
 using Model.Users;
 using System;
 

@@ -20,7 +20,7 @@ namespace Service
             _doctorRepository = repo;
         }
 
-        public bool ChangeSpeciality(Specialty specialty, Doctor doctor)
+        public bool ChangeSpeciality(Speciality specialty, Doctor doctor)
         {
             throw new NotImplementedException();
         }
@@ -45,9 +45,14 @@ namespace Service
             throw new NotImplementedException();
         }
 
-        public List<Doctor> GetDoctorsBySpeciality(Specialty specialty)
+        public List<Doctor> GetDoctorsBySpeciality(Speciality specialty)
         {
             return _doctorRepository.GetDoctorsBySpeciality(specialty);
+        }
+
+        public Doctor GetDoctorByUsername(string username)
+        {
+            return _doctorRepository.GetDoctorByUsername(username);
         }
 
         public DoctorGrade GiveGrade(DoctorGrade doctorGrade)
@@ -57,7 +62,7 @@ namespace Service
 
         public Doctor Save(Doctor entity)
         {
-            if (_doctorRepository.GetDoctorByUsername(entity.Username).Equals(null))
+            if (_doctorRepository.GetDoctorByUsername(entity.Username) != null)
                 {
                     return null;
                 }
