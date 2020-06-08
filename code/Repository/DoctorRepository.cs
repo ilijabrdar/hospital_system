@@ -1,8 +1,4 @@
-/***********************************************************************
- * Module:  DoctorService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.DoctorService
- ***********************************************************************/
+
 
 using Model.Doctor;
 using Model.Users;
@@ -19,13 +15,16 @@ namespace Repository
         private readonly IArticleRepository articleRepo;
         private readonly IEagerRepository<BusinessDay,long> businessDayRepo;
         private readonly ISpecialityRepository specialityRepo;
+        private readonly IDoctorGradeRepository doctorGradeRepository;
         public DoctorRepository(ICSVStream<Doctor> stream, ISequencer<long> sequencer,
-            IArticleRepository article, IEagerRepository<BusinessDay,long> businessDay, ISpecialityRepository speciality) 
+            IArticleRepository article, IEagerRepository<BusinessDay,long> businessDay, ISpecialityRepository speciality,
+            IDoctorGradeRepository doctorGrade) 
             : base(stream, sequencer)
         {
             articleRepo = article;
             specialityRepo = speciality;
             businessDayRepo = businessDay;
+            doctorGradeRepository = doctorGrade;
         }
 
         public IEnumerable<Doctor> GetAllEager()
@@ -55,8 +54,9 @@ namespace Repository
             }
             doctor.businessDay = businessDays;
             doctor.specialty = specialityRepo.Get(doctor.specialty.GetId());
-            // TODO : uraditi za GradeDoctor i repo i interfejs i cuvanje Converter i ovde ga onda staviti!
-            throw new NotImplementedException();
+            doctor.doctorGrade = doctorGradeRepository.Get(doctor.doctorGrade.GetId());
+
+            return doctor;
         }
 
         public Doctor GetDoctorByUsername(string username)

@@ -1,8 +1,4 @@
-/***********************************************************************
- * Module:  BusinessDayService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.BusinessDayService
- ***********************************************************************/
+
 
 using bolnica.Controller;
 using bolnica.Model.Dto;

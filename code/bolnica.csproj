@@ -96,7 +96,9 @@
     </Compile>
     <Compile Include="Controller\abstract\IBusinessDayController.cs" />
     <Compile Include="Controller\abstract\IDoctorController.cs" />
+    <Compile Include="Controller\abstract\IDoctorGradeController.cs" />
     <Compile Include="Controller\abstract\IEquipmentController.cs" />
+    <Compile Include="Controller\abstract\IPatientController.cs" />
     <Compile Include="Controller\abstract\IRenovationController.cs" />
     <Compile Include="Controller\AnamnesisController.cs">
       <SubType>Code</SubType>
@@ -442,6 +444,7 @@
     <Compile Include="Repository\TownRepository.cs" />
     <Compile Include="Service\abstract\IBusinessDayService.cs" />
     <Compile Include="Service\abstract\IDirectorService.cs" />
+    <Compile Include="Service\abstract\IDoctorGradeService.cs" />
     <Compile Include="Service\abstract\IDoctorService.cs" />
     <Compile Include="Service\abstract\IEquipmentService.cs" />
     <Compile Include="Service\abstract\IIngredientService.cs" />

@@ -1,18 +1,13 @@
-/***********************************************************************
- * Module:  DoctorGrade.cs
- * Author:  Asus
- * Purpose: Definition of the Class Doctor.DoctorGrade
- ***********************************************************************/
-
 using Repository;
 using System;
+using System.Collections.Generic;
 
 namespace Model.Doctor
 {
    public class DoctorGrade : IIdentifiable<long>
     {
-      private String Review;
-      private int TotalGraded;
+        public Dictionary<String, double> GradesForEachQuestions { get; set; }
+        public int numberOfGrades { get; set; }
         public long Id;
 
         public DoctorGrade(long id)
