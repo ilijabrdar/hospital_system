@@ -98,8 +98,8 @@
     <Compile Include="Controller\abstract\IBusinessDayController.cs" />
     <Compile Include="Controller\abstract\IDiagnosisController.cs" />
     <Compile Include="Controller\abstract\IDoctorController.cs" />
-
     <Compile Include="Controller\abstract\IDrugController.cs" />
+    <Compile Include="Controller\abstract\IGetterController.cs" />
     <Compile Include="Controller\abstract\IPatientController.cs" />
     <Compile Include="Controller\abstract\IDoctorGradeController.cs" />
     <Compile Include="Controller\abstract\IEquipmentController.cs" />
@@ -321,7 +321,7 @@
     </Compile>
     <Compile Include="Repository\BusinessDayRepository.cs">
       <SubType>Code</SubType>
-  </Compile>
+    </Compile>
     <Compile Include="Repository\CSV\Converter\AddressCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\ReferralCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\SymptomCSVConverter.cs" />
@@ -483,6 +483,7 @@
     <Compile Include="Service\abstract\IDrugService.cs" />
     <Compile Include="Service\abstract\IEquipmentService.cs" />
     <Compile Include="Service\abstract\IExaminationService.cs" />
+    <Compile Include="Service\abstract\IGetterService.cs" />
     <Compile Include="Service\abstract\IHospitalizationService.cs" />
     <Compile Include="Service\abstract\IIngredientService.cs" />
     <Compile Include="Service\abstract\IOperationService.cs" />
@@ -494,7 +495,6 @@
     <Compile Include="Service\abstract\IRoomTypeService.cs" />
     <Compile Include="Service\abstract\ISearchPeriods.cs" />
     <Compile Include="Service\abstract\ISecretaryService.cs" />
-
     <Compile Include="Service\abstract\ISpecialityService.cs" />
     <Compile Include="Service\abstract\ISymptomService.cs" />
     <Compile Include="Service\abstract\ITherapyService.cs" />

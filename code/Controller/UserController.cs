@@ -27,21 +27,6 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        public object Delete()
-        {
-            throw new NotImplementedException();
-        }
-
-        public object Edit()
-        {
-            throw new NotImplementedException();
-        }
-
-        public object GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
         public User Login(string username, string password)
         {
             User user = _userService.Login(username, password);
@@ -72,7 +57,7 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        IEnumerable<User> IController<User, long>.GetAll()
+        public IEnumerable<User> GetAll()
         {
             throw new NotImplementedException();
         }

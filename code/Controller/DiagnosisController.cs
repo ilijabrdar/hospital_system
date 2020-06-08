@@ -20,17 +20,6 @@ namespace Controller
             _service = service;
         }
 
-        public void Delete(Diagnosis entity)
-        {
-            _service.Delete(entity);
-
-        }
-
-        public void Edit(Diagnosis entity)
-        {
-            _service.Edit(entity);
-        }
-
         public Diagnosis Get(long id)
         {
             return _service.Get(id); throw new NotImplementedException();
@@ -46,9 +35,5 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        public Diagnosis Save(Diagnosis entity)
-        {
-            return _service.Save(entity);
-        }
     }
 }

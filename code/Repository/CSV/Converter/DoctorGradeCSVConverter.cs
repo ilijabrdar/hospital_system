@@ -43,7 +43,7 @@ namespace bolnica.Repository.CSV.Converter
         public string ConvertEntityToCSVFormat(DoctorGrade entity)
         {
             StringBuilder stringBuilder = new StringBuilder();
-            String format = String.Join(_delimiter, entity.Id, entity.NumberOfGrades);
+            String format = String.Join(_delimiter, entity.Id, entity.numberOfGrades);
             stringBuilder.Append(format);
             stringBuilder.Append(_delimiter);
 

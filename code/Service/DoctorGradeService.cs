@@ -40,7 +40,7 @@ namespace Service
 
         public double GetAverage(Doctor doctor)
         {
-            Dictionary<String, double> doctorGrades = doctor.doctorGrade.GradesForEachQuestions;
+            Dictionary<String, double> doctorGrades = doctor.DoctorGrade.GradesForEachQuestions;
             double retVal = 0;
             foreach(var value in doctorGrades.Values)
             {

@@ -42,19 +42,19 @@ namespace Repository
         {
             Doctor doctor = Get(id);
             List<Article> articles = new List<Article>();
-            foreach(Article art in doctor.articles)
+            foreach(Article art in doctor.Articles)
             {
                 articles.Add(articleRepo.Get(art.GetId()));
             }
-            doctor.articles = articles;
+            doctor.Articles = articles;
             List<BusinessDay> businessDays = new List<BusinessDay>();
-            foreach(BusinessDay day in doctor.businessDay)
+            foreach(BusinessDay day in doctor.BusinessDay)
             {
                 businessDays.Add(businessDayRepo.GetEager(day.GetId()));
             }
-            doctor.businessDay = businessDays;
-            doctor.specialty = specialityRepo.Get(doctor.specialty.GetId());
-            doctor.doctorGrade = doctorGradeRepository.Get(doctor.doctorGrade.GetId());
+            doctor.BusinessDay = businessDays;
+            doctor.Specialty = specialityRepo.Get(doctor.Specialty.GetId());
+            doctor.DoctorGrade = doctorGradeRepository.Get(doctor.DoctorGrade.GetId());
 
             return doctor;
         }

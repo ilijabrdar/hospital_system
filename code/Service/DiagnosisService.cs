@@ -22,15 +22,7 @@ namespace Service
             _repository = repository;
         }
 
-        public void Delete(Diagnosis entity)
-        {
-            _repository.Delete(entity);
-        }
-
-        public void Edit(Diagnosis entity)
-        {
-            _repository.Edit(entity);
-        }
+   
 
         public Diagnosis Get(long id)
         {
@@ -47,10 +39,5 @@ namespace Service
             throw new NotImplementedException();
         }
 
-
-        public Diagnosis Save(Diagnosis entity)
-        {
-            return _repository.Save(entity);
-        }
     }
 }

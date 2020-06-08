@@ -6,6 +6,7 @@
 
 using bolnica.Service;
 using Model.Director;
+using Model.Users;
 using Repository;
 using System;
 using System.Collections;
@@ -89,7 +90,7 @@ namespace Service
             return result;
         }
 
-        bolnica.Model.Director.Room[] IRoomService.GetVacantRooms()
+        List<Room> IRoomService.GetVacantRooms()
         {
             throw new NotImplementedException();
         }

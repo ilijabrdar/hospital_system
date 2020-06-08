@@ -7,7 +7,7 @@ using System.Text;
 
 namespace bolnica.Controller
 {
-    interface IDiagnosisController :IController<Diagnosis,long> 
+    interface IDiagnosisController :IGetterController<Diagnosis,long> 
     {
         Diagnosis RecommendDiagnosisBasedOnSymptoms(Symptom symptom, Diagnosis diagnosis);
     }

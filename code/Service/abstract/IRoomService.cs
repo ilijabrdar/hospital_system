@@ -14,7 +14,7 @@ namespace bolnica.Service
         Boolean AddEquipment(Equipment equipment, Room room);
 
 
-        Model.Director.Room[] GetVacantRooms();
+        List<Room> GetVacantRooms();
         IEnumerable<Room> getRoomsCointainingEquipment(Equipment equipment);
 
     }

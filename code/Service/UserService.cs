@@ -56,11 +56,6 @@ namespace Service
             throw new NotImplementedException();
         }
 
-        public object GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
         public bool IsPasswordValid(User user, String password)
         {
             if (user.Password != password)
@@ -114,7 +109,7 @@ namespace Service
             throw new NotImplementedException();
         }
 
-        IEnumerable<User> IService<User, long>.GetAll()
+        public IEnumerable<User> GetAll()
         {
             throw new NotImplementedException();
         }

@@ -18,7 +18,7 @@ namespace bolnica.Service
 
         public List<ExaminationDTO> Search(BusinessDayDTO businessDayDTO, List<BusinessDay> businessDayCollection)
         {
-            List<BusinessDay> IterationDays = DaysForExactPeriod(businessDayDTO.Period, businessDayDTO.Doctor.businessDay);
+            List<BusinessDay> IterationDays = DaysForExactPeriod(businessDayDTO.Period, businessDayDTO.Doctor.BusinessDay);
             foreach (BusinessDay day in IterationDays)
             {
                List<ExaminationDTO> examinationDTOCollection = CreateExaminationDTO(day);
@@ -28,7 +28,7 @@ namespace bolnica.Service
                 }
             }
 
-            return AlternativeForPeriod(businessDayDTO.Period.EndDate, businessDayDTO.Doctor.businessDay.Except(IterationDays));
+            return AlternativeForPeriod(businessDayDTO.Period.EndDate, businessDayDTO.Doctor.BusinessDay.Except(IterationDays));
         }
 
         private List<ExaminationDTO> AlternativeForPeriod(DateTime endOfPeriod, IEnumerable<BusinessDay> enumerable)

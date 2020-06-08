@@ -36,7 +36,7 @@ namespace Service
             _repository.Edit(entity);
         }
 
-        IEnumerable<Equipment> IService<Equipment, long>.GetAll()
+       public IEnumerable<Equipment> GetAll()
         {
             return _repository.GetAll();
         }

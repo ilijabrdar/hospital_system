@@ -37,18 +37,12 @@ namespace Service
             return _repository.Get(id);
         }
 
-        public object GetAll()
-        {
-            return _repository.GetAll();
-        }
-
-
         public Ingredient Save(Ingredient entity)
         {
             return _repository.Save(entity);
         }
 
-        IEnumerable<Ingredient> IService<Ingredient, long>.GetAll()
+        public IEnumerable<Ingredient> GetAll()
         {
             return _repository.GetAll();
         }

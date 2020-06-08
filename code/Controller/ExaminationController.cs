@@ -40,31 +40,6 @@ namespace Controller
             return _service.Save(entity);
         }
 
-        void IController<Examination, long>.Delete(Examination entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        void IController<Examination, long>.Edit(Examination entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        Examination IController<Examination, long>.Get(long id)
-        {
-            throw new NotImplementedException();
-        }
-
-        IEnumerable<Examination> IController<Examination, long>.GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        //List<Examination> IExaminationController.GetExaminationFilter(ExaminationDTO examinationDTO)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
         List<Examination> IExaminationController.GetFinishedxaminationsByUser(User user)
         {
             throw new NotImplementedException();

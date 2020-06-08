@@ -71,7 +71,7 @@ namespace Service
 
         public DoctorGrade GiveGrade(Doctor doctor, Dictionary<string, double> gradesForDoctor)
         {
-            DoctorGrade doctorGrade = doctor.doctorGrade;
+            DoctorGrade doctorGrade = doctor.DoctorGrade;
             doctorGrade.numberOfGrades++;
             foreach(String question in doctorGrade.GradesForEachQuestions.Keys)
             {
