@@ -18,13 +18,12 @@ namespace bolnica.Controller
 
          Boolean SetRoomForBusinessDay(BusinessDay businessDay, Room room);
 
-        //  List<Period> GenerateAvailablePeriods(BusinessDay bussinesDay);
 
         List<ExaminationDTO> Search(BusinessDayDTO businessDayDTO);
 
         Boolean MarkAsOccupied(Period period, BusinessDay businessDay);
 
-       // List<Examination> PeriodRecommendationByDate(DateTime date);
+        BusinessDay getDoctorWorkingHoursForSpecificDate(Doctor doctor, DateTime date);
 
          List<BusinessDay> GetBusinessDaysByDoctor(Doctor doctor);
     }

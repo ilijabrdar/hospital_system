@@ -1,8 +1,4 @@
-/***********************************************************************
- * Module:  DiagnosisService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.DiagnosisService
- ***********************************************************************/
+
 
 using bolnica.Controller;
 using bolnica.Service;

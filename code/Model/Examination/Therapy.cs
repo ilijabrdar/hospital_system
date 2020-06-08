@@ -1,8 +1,4 @@
-/***********************************************************************
- * Module:  Therapy.cs
- * Author:  david
- * Purpose: Definition of the Class Model.PatientSecretary.Therapy
- ***********************************************************************/
+
 
 using Repository;
 using System;

@@ -1,8 +1,4 @@
-/***********************************************************************
- * Module:  ExaminationService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.ExaminationService
- ***********************************************************************/
+
 
 using bolnica.Repository;
 using Model.PatientSecretary;
@@ -19,6 +15,17 @@ namespace Repository
         {
 
         }
+
+        public IEnumerable<Examination> GetAllEager()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Examination GetEager(long id)
+        {
+            throw new NotImplementedException();
+        }
+
         List<Examination> IExaminationPreviousRepository.GetExaminationsByUser(User user)
         {
             throw new NotImplementedException();

@@ -1,8 +1,4 @@
-/***********************************************************************
- * Module:  IBusinessDayRepository.cs
- * Author:  david
- * Purpose: Definition of the Interface Repository.IBusinessDayRepository
- ***********************************************************************/
+
 
 using bolnica.Repository;
 using Model.Director;

@@ -13,5 +13,15 @@ namespace bolnica.Repository
         {
 
         }
+
+        public IEnumerable<Prescription> GetAllEager()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Prescription GetEager(long id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,8 +1,4 @@
-/***********************************************************************
- * Module:  Secretary.cs
- * Author:  Asus
- * Purpose: Definition of the Class Users.Secretary
- ***********************************************************************/
+
 
 using System;
 using System.Drawing;

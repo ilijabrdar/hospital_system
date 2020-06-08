@@ -8,14 +8,13 @@ using System.Text;
 
 namespace bolnica.Service
 {
-    public interface IPatientService : IService<Patient, long>
+    public interface IPatientService : IService<Patient, long>, IUserGetterService
 {
-        Patient ClaimAccount(String id);
-        Patient GetPatientByUsername(String username);
+        Patient ClaimAccount(String jmbg);
 
         Patient GetPatientByJMBG(String jmbg);
 
-        DoctorGrade GiveGrade(Doctor doctor, Dictionary<String, double> gradesForDoctor);
+        DoctorGrade GiveGradeToDoctor(Doctor doctor, Dictionary<String, double> gradesForDoctor);
 
     }
 }

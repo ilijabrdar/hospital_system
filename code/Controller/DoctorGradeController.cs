@@ -38,9 +38,9 @@ namespace Controller
             return _doctorGradeService.GetAll();
         }
 
-        public double GetAverage(Doctor doctor)
+        public double GetAverageGrade(Doctor doctor)
         {
-           return _doctorGradeService.GetAverage(doctor);
+           return _doctorGradeService.GetAverageGrade(doctor);
 
         }
 

@@ -16,5 +16,15 @@ namespace Repository
         {
 
         }
+
+        public IEnumerable<Referral> GetAllEager()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Referral GetEager(long id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

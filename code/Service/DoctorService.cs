@@ -10,12 +10,13 @@ namespace Service
    public class DoctorService : IDoctorService
    {
 
-        //private IService DoctorGrade;
+        private readonly IDoctorGradeService _doctorGradeService;
       private readonly IDoctorRepository _doctorRepository;
 
-        public DoctorService(IDoctorRepository doctorRepository)
+        public DoctorService(IDoctorRepository doctorRepository, IDoctorGradeService doctorGradeService)
         {
             _doctorRepository = doctorRepository;
+            _doctorGradeService = doctorGradeService;
         }
 
    
@@ -44,15 +45,15 @@ namespace Service
             return _doctorRepository.GetDoctorsBySpeciality(specialty);
         }
 
-        public Doctor GetDoctorByUsername(string username)
+        public User GetUserByUsername(string username)
         {
-            return _doctorRepository.GetDoctorByUsername(username);
+            return _doctorRepository.GetUserByUsername(username);
         }
 
 
         public Doctor Save(Doctor entity)
         {
-            if (_doctorRepository.GetDoctorByUsername(entity.Username) != null)
+            if (_doctorRepository.GetUserByUsername(entity.Username) != null)
                 {
                     return null;
                 }

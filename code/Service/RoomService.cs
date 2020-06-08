@@ -1,8 +1,4 @@
-/***********************************************************************
- * Module:  RoomService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.RoomService
- ***********************************************************************/
+
 
 using bolnica.Service;
 using Model.Director;
@@ -22,11 +18,6 @@ namespace Service
         {
             _repository = repository;
         }
-      public Boolean ChangeRoomType(Room room, RoomType roomType)
-      {
-         // TODO: implement
-         return false;
-      }
       
       public Boolean AddEquipment(Equipment equipment, Room room)
       {
@@ -67,7 +58,7 @@ namespace Service
             return _repository.GetEager(id);
         }
 
-        public IEnumerable<Room> getRoomsCointainingEquipment(Equipment equipment)
+        public IEnumerable<Room> GetRoomsCointainingEquipment(Equipment equipment)
         {
             IEnumerable<Room> rooms = this.GetAll();
             List<Room> result = new List<Room>();
@@ -80,7 +71,7 @@ namespace Service
 
                 foreach (KeyValuePair<Equipment, int> pair in room.Equipment_inventory)
                 {
-                    if (pair.Key.id == equipment.id)
+                    if (pair.Key.Id == equipment.Id)
                     {
                         result.Add(room);
                     }
@@ -91,6 +82,11 @@ namespace Service
         }
 
         List<Room> IRoomService.GetVacantRooms()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool CheckRoomNameUnique(Room room)
         {
             throw new NotImplementedException();
         }

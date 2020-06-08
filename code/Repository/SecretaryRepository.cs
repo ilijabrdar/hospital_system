@@ -1,8 +1,4 @@
-/***********************************************************************
- * Module:  SecretaryService.cs
- * Author:  david
- * Purpose: Definition of the Class Service.SecretaryService
- ***********************************************************************/
+
 
 using bolnica.Repository;
 using Model.Users;
@@ -50,7 +46,7 @@ namespace Repository
             return secretary;
         }
 
-        public Secretary GetSecretaryByUsername(string username)
+        public User GetUserByUsername(string username)
         {
             List<Secretary> entities = this.GetAllEager().ToList();
             foreach(Secretary entity in entities)

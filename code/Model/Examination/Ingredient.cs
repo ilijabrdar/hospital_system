@@ -1,8 +1,4 @@
-/***********************************************************************
- * Module:  Ingredient.cs
- * Author:  Tamara Kovacevic
- * Purpose: Definition of the Class PatientSecretary.Ingredient
- ***********************************************************************/
+
 
 using Repository;
 using System;

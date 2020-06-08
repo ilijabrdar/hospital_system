@@ -1,12 +1,9 @@
-/***********************************************************************
- * Module:  HospitalizationService.cs
- * Author:  david
- * Purpose: Definition of the Class Service.HospitalizationService
- ***********************************************************************/
+
 
 using bolnica.Repository;
 using Model.Doctor;
 using System;
+using System.Collections.Generic;
 
 namespace Repository
 {
@@ -19,5 +16,14 @@ namespace Repository
 
         }
 
+        public IEnumerable<Hospitalization> GetAllEager()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Hospitalization GetEager(long id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

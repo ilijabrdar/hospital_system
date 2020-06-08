@@ -7,7 +7,7 @@ using System.Text;
 
 namespace bolnica.Repository
 {
-   public interface IPrescriptionRepository : IRepository<Prescription,long>
+   public interface IPrescriptionRepository : IRepository<Prescription,long>, IEagerRepository<Prescription, long>
     {
     }
 }

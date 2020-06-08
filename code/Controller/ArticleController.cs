@@ -47,7 +47,7 @@ namespace Controller
         }
 
 
-        public List<Article> searchArticle(string criteria)
+        public List<Article> SearchArticle(string criteria)
         {
             throw new NotImplementedException();
         }

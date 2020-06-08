@@ -1,8 +1,4 @@
-/***********************************************************************
- * Module:  Referral.cs
- * Author:  Asus
- * Purpose: Definition of the Class Doctor.Referral
- ***********************************************************************/
+
 
 using Model.PatientSecretary;
 using Repository;

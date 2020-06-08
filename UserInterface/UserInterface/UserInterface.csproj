@@ -145,12 +145,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\code\bolnica.csproj">
-      <Project>{687C36BC-852F-46BE-9095-77CC66EFE752}</Project>
-      <Name>bolnica</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\StateFile.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -161,6 +155,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\SecretaryFile.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\code\bolnica.csproj">
+      <Project>{687C36BC-852F-46BE-9095-77CC66EFE752}</Project>
+      <Name>bolnica</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

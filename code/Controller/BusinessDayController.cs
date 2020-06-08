@@ -57,6 +57,11 @@ namespace Controller
             throw new NotImplementedException();
         }
 
+        public BusinessDay getDoctorWorkingHoursForSpecificDate(Doctor doctor, DateTime date)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool MarkAsOccupied(Period period, BusinessDay businessDay)
         {
             throw new NotImplementedException();

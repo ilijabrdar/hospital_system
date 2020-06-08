@@ -1,8 +1,3 @@
-/***********************************************************************
- * Module:  IngredientService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.IngredientService
- ***********************************************************************/
 
 using bolnica.Service;
 using Model.PatientSecretary;

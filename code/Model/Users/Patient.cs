@@ -1,8 +1,4 @@
-/***********************************************************************
- * Module:  Patient.cs
- * Author:  Asus
- * Purpose: Definition of the Class Users.Patient
- ***********************************************************************/
+
 
 using Model.PatientSecretary;
 using Repository;

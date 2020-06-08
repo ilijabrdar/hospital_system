@@ -59,7 +59,7 @@ namespace Repository
             return doctor;
         }
 
-        public Doctor GetDoctorByUsername(string username)
+        public User GetUserByUsername(string username)
         {
             IEnumerable<Doctor> entities = this.GetAll();
             foreach (Doctor entity in entities)

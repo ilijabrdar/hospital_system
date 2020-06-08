@@ -1,8 +1,4 @@
-/***********************************************************************
- * Module:  BusinessDay.cs
- * Author:  Zorana
- * Purpose: Definition of the Class Users.BusinessDay
- ***********************************************************************/
+
 
 using Model.Director;
 using Model.PatientSecretary;

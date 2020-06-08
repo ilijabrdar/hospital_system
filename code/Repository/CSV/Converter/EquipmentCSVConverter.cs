@@ -27,7 +27,7 @@ namespace bolnica.Repository
 
         public string ConvertEntityToCSVFormat(Equipment entity)
         {
-            return string.Join(_delimiter, entity.id,entity.Type, entity.Name, entity.Amount);
+            return string.Join(_delimiter, entity.Id,entity.Type, entity.Name, entity.Amount);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Service
 
    public class SecretaryService : ISecretaryService
    {
-      private ISecretaryRepository _secretaryRepository;
+      private readonly ISecretaryRepository _secretaryRepository;
 
         public SecretaryService(ISecretaryRepository secretaryRepository)
         {
@@ -37,9 +37,9 @@ namespace Service
             throw new NotImplementedException();
         }
 
-        public Secretary GetSecretaryByUsername(string username)
+        public User GetUserByUsername(string username)
         {
-            return _secretaryRepository.GetSecretaryByUsername(username);
+            return _secretaryRepository.GetUserByUsername(username);
         }
 
         public Secretary Save(Secretary entity)

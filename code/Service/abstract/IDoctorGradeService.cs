@@ -12,6 +12,6 @@ namespace bolnica.Service
 {
          List<String> GetQuestions();
 
-         double GetAverage(Doctor doctor);
+         double GetAverageGrade(Doctor doctor);
     }
 }

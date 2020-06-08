@@ -9,10 +9,10 @@ namespace bolnica.Service
 {
     public interface IEquipmentService : IService<Equipment, long>
     {
-        Room[] GetRoomsContainingEquipment(String name);
 
-        IEnumerable<Equipment> getConsumableEquipment();
+        IEnumerable<Equipment> GetConsumableEquipment();
 
-        IEnumerable<Equipment> getInconsumableEquipment();
+        Boolean CheckEquipmentNameUnique(Equipment equipment);
+        IEnumerable<Equipment> GetInconsumableEquipment();
     }
 }
