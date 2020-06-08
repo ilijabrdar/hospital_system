@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model.PatientSecretary;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -20,22 +21,31 @@ namespace upravnikKT2
     /// </summary>
     public partial class AlternativeDrugDialog : Window
     {
-        public AlternativeDrugDialog()
+        private Drug selectedDrug;
+
+        public AlternativeDrugDialog(Drug selectedDrug)
         {
             InitializeComponent();
+            this.selectedDrug = selectedDrug;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            
-            List<String> alternativni = new List<String>();
-            alternativni.Add("Bromazepan");
-            alternativni.Add("Linex");
-            alternativni.Add("Brufen");
-            alternativni.Add("Valijum");
 
-            this.MyListView.ItemsSource = alternativni;
-            
+            //List<String> alternativni = new List<String>();
+            //alternativni.Add("Bromazepan");
+            //alternativni.Add("Linex");
+            //alternativni.Add("Brufen");
+            //alternativni.Add("Valijum");
+
+            //this.MyListView.ItemsSource = alternativni;
+
+            List<Drug> alternatives = selectedDrug.Alternative;
+            ObservableCollection<Drug> collection = new ObservableCollection<Drug>(alternatives);
+            lista.ItemsSource = collection;
+            lista.DisplayMemberPath = "Name";
+            lista.SelectedValuePath = "Id";
+
         }
 
         private void Window_PreviewKeyDown(object sender, KeyEventArgs e)

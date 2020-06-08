@@ -8,8 +8,13 @@
         FontSize="18"
         Title="Sastojci leka" Height="350" Width="350" Loaded="Window_Loaded" PreviewKeyDown="Window_PreviewKeyDown">
     <DockPanel>
-        <ListView x:Name="lista">
-
+        <ListView x:Name="lista" Margin="10">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Naziv" Width="130" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Kolicina" Width="50" DisplayMemberBinding="{Binding Quantity}"/>
+                </GridView>
+            </ListView.View>
         </ListView>
     </DockPanel>
 </Window>

@@ -4,107 +4,71 @@
  * Purpose: Definition of the Class Service.DrugService
  ***********************************************************************/
 
+using bolnica.Controller;
+using bolnica.Service;
 using Model.PatientSecretary;
 using System;
+using System.Collections.Generic;
 
 namespace Controller
 {
-   public class DrugController// : IController
-   {
-      public Drug CreateDrugBasedOnDiagnosis(Diagnosis diagnosis, Examination examination)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Drug AddAlternativeDrug(Drug originalDrug, Drug alternativeDrug)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Drug ApproveDrug(Drug drug)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Drug[] GetAlternativeDrug(Drug drug)
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Drug[] GetNotApproved()
-      {
-         // TODO: implement
-         return null;
-      }
-   
-      public System.Collections.ArrayList iService;
-      
-      /// <pdGenerated>default getter</pdGenerated>
-      public System.Collections.ArrayList GetIService()
-      {
-         if (iService == null)
-            iService = new System.Collections.ArrayList();
-         return iService;
-      }
-      
-      /// <pdGenerated>default setter</pdGenerated>
-      //public void SetIService(System.Collections.ArrayList newIService)
-      //{
-      //   RemoveAllIService();
-      //   foreach (Service.IService oIService in newIService)
-      //      AddIService(oIService);
-      //}
-      
-      ///// <pdGenerated>default Add</pdGenerated>
-      //public void AddIService(Service.IService newIService)
-      //{
-      //   if (newIService == null)
-      //      return;
-      //   if (this.iService == null)
-      //      this.iService = new System.Collections.ArrayList();
-      //   if (!this.iService.Contains(newIService))
-      //      this.iService.Add(newIService);
-      //}
-      
-      ///// <pdGenerated>default Remove</pdGenerated>
-      //public void RemoveIService(Service.IService oldIService)
-      //{
-      //   if (oldIService == null)
-      //      return;
-      //   if (this.iService != null)
-      //      if (this.iService.Contains(oldIService))
-      //         this.iService.Remove(oldIService);
-      //}
-      
-      /// <pdGenerated>default removeAll</pdGenerated>
-      public void RemoveAllIService()
-      {
-         if (iService != null)
-            iService.Clear();
-      }
+    public class DrugController : IDrugController
+    {
+        private readonly IDrugService _service;
 
-        public object Save()
+        public DrugController(IDrugService service)
+        {
+            _service = service;
+        }
+
+        public Drug AddAlternativeDrug(Drug originalDrug, Drug alternativeDrug)
         {
             throw new NotImplementedException();
         }
 
-        public object Delete()
+        public Drug ApproveDrug(Drug drug)
         {
             throw new NotImplementedException();
         }
 
-        public object Edit()
+        public Drug CreateDrugBasedOnDiagnosis(Diagnosis diagnosis, Examination examination)
         {
             throw new NotImplementedException();
         }
 
-        public object GetAll()
+        public void Delete(Drug entity)
+        {
+            _service.Delete(entity);
+        }
+
+        public void Edit(Drug entity)
+        {
+            _service.Edit(entity);
+        }
+
+        public Drug Get(long id)
+        {
+            return _service.Get(id);
+        }
+
+        public IEnumerable<Drug> GetAll()
+        {
+            return _service.GetAll();
+        }
+
+        public List<Drug> GetAlternativeDrug(Drug drug)
         {
             throw new NotImplementedException();
+        }
+
+        public List<Drug> GetNotApproved()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Drug Save(Drug entity)
+        {
+            return _service.Save(entity);
         }
     }
 }

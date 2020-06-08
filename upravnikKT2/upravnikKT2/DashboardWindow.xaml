@@ -496,7 +496,7 @@
                             <Button Margin="10,10,30,10" x:Name="deleteDrugBtn"
                                   Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
                                   HorizontalAlignment="Left"
-                                  ToolTip="Izbriši lek">
+                                  ToolTip="Izbriši lek" Click="deleteDrugBtn_Click">
                                 <materialDesign:PackIcon
                                     Kind="DeleteForever"
                                     Height="24"
@@ -512,16 +512,16 @@
                                     Height="24"
                                     Width="24" />
                             </Button>
-                            <TextBox x:Name="txtsearchDrug" DockPanel.Dock="Right" Margin="10" TextChanged="TextBox_TextChanged" MinWidth="100" Visibility="Hidden"/>
+                            <TextBox x:Name="txtsearchDrug" DockPanel.Dock="Right" Margin="10" TextChanged="TextBox_TextChanged" MinWidth="100" Visibility="Hidden" KeyUp="searchDrugsKeyUp" materialDesign:HintAssist.Hint="Pretrazi"/>
                             <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Bottom">
                             <DataGrid Margin="10" x:Name="DataGridLekovi" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Naziv"  Binding="{Binding Naziv}" Width="*"/>
-                                    <DataGridTextColumn Header="Sifra" Binding="{Binding Sifra}"  Width="*"/>
-                                    <DataGridTextColumn Header="Kolicina"  Binding="{Binding Kolicina}" Width="*"/>
-                                    <DataGridTextColumn Header="Status"  Binding="{Binding Status}" Width="*" />
+                                    <DataGridTextColumn Header="Naziv"  Binding="{Binding Name}" Width="*"/>
+                                    <!-- <DataGridTextColumn Header="Sifra" Binding="{Binding Sifra}"  Width="*"/>-->
+                                    <DataGridTextColumn Header="Kolicina"  Binding="{Binding Amount}" Width="*"/>
+                                    <DataGridTextColumn Header="Status"  Binding="{Binding Approved}" Width="*" />
                                     <DataGridTemplateColumn Header="Alternativni lekovi" Width="*">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>

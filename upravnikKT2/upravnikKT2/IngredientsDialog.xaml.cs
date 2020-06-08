@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Model.PatientSecretary;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,21 +21,21 @@ namespace upravnikKT2
     /// </summary>
     public partial class IngredientsDialog : Window
     {
-        public IngredientsDialog()
+        private Drug selectedDrug;
+        public IngredientsDialog(Drug selectedDrug)
         {
             InitializeComponent();
-            
+            this.selectedDrug = selectedDrug;
         }
 
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            List<String> sastojci = new List<String>();
-            sastojci.Add("glicerol-dibehenat");
-            sastojci.Add("natrijum-laurilsulfat");
-            sastojci.Add("magnezijum-stearat");
-
-            this.lista.ItemsSource = sastojci;
+            List<Ingredient> ingredients = selectedDrug.Ingredients;
+            ObservableCollection<Ingredient> collection = new ObservableCollection<Ingredient>(ingredients);
+            lista.ItemsSource = collection;
+            lista.DisplayMemberPath = "Name";
+            lista.SelectedValuePath = "Id";
         }
 
         private void Window_PreviewKeyDown(object sender, KeyEventArgs e)

@@ -27,6 +27,8 @@ namespace upravnikKT2
 
         private readonly IIngredientController _ingredientController;
         private List<Ingredient> listOfSelectedIngredients = new List<Ingredient>();
+        private readonly IDrugController _drugController;
+        private Drug _selectedDrug;
 
         protected virtual void OnPropertyChanged(string name)
         {
@@ -43,6 +45,25 @@ namespace upravnikKT2
 
             var app = Application.Current as App;
             _ingredientController = app.IngredientController;
+            _drugController = app.DrugController;
+        }
+
+        public DrugDialog(Drug selectedDrug)
+        {
+            InitializeComponent();
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            this.DataContext = this;
+
+
+            var app = Application.Current as App;
+            _ingredientController = app.IngredientController;
+            _drugController = app.DrugController;
+
+
+            _selectedDrug = selectedDrug;
+
+            DrugName = _selectedDrug.Name;
+            Amount = _selectedDrug.Amount;
         }
 
         private void TextBox_Scroll(object sender, System.Windows.Controls.Primitives.ScrollEventArgs e)
@@ -52,7 +73,33 @@ namespace upravnikKT2
 
         private void Button_Click_OK_Drug(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            ObservableCollection<Ingredient> selectedIngredients = (ObservableCollection < Ingredient >) listSelectedIngredients.ItemsSource;
+            var count = selectedIngredients == null ? 0 : selectedIngredients.Count;
+            if (count!=0)
+            {
+                if (_selectedDrug == null)
+                {
+                    _drugController.Save(new Drug(txtName.Text, Amount, false, selectedIngredients.ToList(), null));
+
+                }
+                else
+                {
+                    _selectedDrug.Name = DrugName;
+                    _selectedDrug.Amount = Amount;
+                    _selectedDrug.Ingredients = selectedIngredients.ToList();
+                    _drugController.Edit(_selectedDrug);
+                }
+                this.Close();
+            }
+            else
+            {
+                string messageBoxText = "Morate uneti sastojke leka!";
+                string caption = "Greska";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Error;
+
+                MessageBox.Show(messageBoxText, caption, button, icon);
+            }
         }
 
         private void Button_Click_Cancel_Drug(object sender, RoutedEventArgs e)
@@ -60,53 +107,37 @@ namespace upravnikKT2
             this.Close();
         }
 
-        private double _test3;
-        public double Test3
+        private int _amount;
+        public int Amount
         {
             get
             {
-                return _test3;
+                return _amount;
             }
             set
             {
-                if (value != _test3)
+                if (value != _amount)
                 {
-                    _test3 = value;
-                    OnPropertyChanged("Test3");
+                    _amount = value;
+                    OnPropertyChanged("Amount");
                 }
             }
         }
 
-        private string _test2;
-        public string Test2
-        {
-            get
-            {
-                return _test2;
-            }
-            set
-            {
-                if (value != _test2)
-                {
-                    _test2 = value;
-                    OnPropertyChanged("Test2");
-                }
-            }
-        }
 
-        private string _test1;
-        public string Test1
+        private string _name;
+        public string DrugName
         {
             get
             {
-                return _test1;
+                return _name;
             }
             set
             {
-                if (value != _test1)
+                if (value != _name)
                 {
-                    _test1 = value;
-                    OnPropertyChanged("Test1");
+                    _name = value;
+                    OnPropertyChanged("DrugName");
                 }
             }
         }
@@ -119,7 +150,7 @@ namespace upravnikKT2
             else
                 _noOfErrorsOnScreen--;
 
-            Save.IsEnabled = _noOfErrorsOnScreen > 0 ? false : true;
+            OKBtn.IsEnabled = _noOfErrorsOnScreen > 0 ? false : true;
         }
 
         private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -128,6 +159,15 @@ namespace upravnikKT2
             {
                 this.Close();
             }
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                if (OKBtn.IsEnabled)
+                {
+                    Button_Click_OK_Drug(sender, e);
+                    e.Handled = true;
+                }
+            }
+
         }
 
         private void tutorialBtn_Click(object sender, RoutedEventArgs e)
@@ -142,10 +182,44 @@ namespace upravnikKT2
             List<Ingredient> ingredients = new List<Ingredient>();
             ingredients =  _ingredientController.GetAll().ToList();
 
-            ObservableCollection<Ingredient> collection = new ObservableCollection<Ingredient>(ingredients);
-            listAllIngredients.ItemsSource = collection;
             listAllIngredients.DisplayMemberPath = "Name";
             listAllIngredients.SelectedValuePath = "Id";
+
+            
+            listSelectedIngredients.DisplayMemberPath = "Name";
+            listSelectedIngredients.SelectedValuePath = "Id";
+
+            if (_selectedDrug != null)
+            {
+                ObservableCollection<Ingredient> original = new ObservableCollection<Ingredient>(ingredients);
+                ObservableCollection<Ingredient> selected = new ObservableCollection<Ingredient>(_selectedDrug.Ingredients);
+
+                List<Ingredient> forRemoval = new List<Ingredient>();
+
+                foreach (Ingredient temp in original)
+                {
+                    if (selected.Any(ing => ing.Id == temp.Id) == true)
+                        //original.Remove(temp);
+                        forRemoval.Add(temp);
+                }
+
+                //foreach (int i in forRemoval)
+                //    original.RemoveAt(i);
+
+                //original.ToList().RemoveAll(drug => forRemoval.Contains(original.IndexOf(drug)));
+                //original.ToList().RemoveAll(drug => forRemoval.Contains(drug));
+                foreach (Ingredient temp in forRemoval)
+                    original.Remove(temp);
+
+                listAllIngredients.ItemsSource = original;
+                listSelectedIngredients.ItemsSource = selected;
+
+            }
+            else
+            {
+                listAllIngredients.ItemsSource = new ObservableCollection<Ingredient>(ingredients);
+                listSelectedIngredients.ItemsSource = new ObservableCollection<Ingredient>();
+            }
 
 
         }
@@ -153,30 +227,39 @@ namespace upravnikKT2
         private void AddIngredient_Btn_Click(object sender, RoutedEventArgs e)
         {
             if (listAllIngredients.SelectedItem != null)
-            {
-                if (!listOfSelectedIngredients.Contains((Ingredient)listAllIngredients.SelectedItem))
-                {
-                    listOfSelectedIngredients.Add((Ingredient)listAllIngredients.SelectedItem);
+            {                
+                    ObservableCollection<Ingredient> selected = (ObservableCollection<Ingredient>)listSelectedIngredients.ItemsSource;
+                    selected.Add((Ingredient)listAllIngredients.SelectedItem);
 
-                    ObservableCollection<Ingredient> collection = new ObservableCollection<Ingredient>(listOfSelectedIngredients);
-                    listSelectedIngredients.ItemsSource = collection;
-                    listSelectedIngredients.DisplayMemberPath = "Name";
-                    listSelectedIngredients.SelectedValuePath = "Id";
-                    listSelectedIngredients.SelectedValue = "2";
-                }
-                else
-                {
-                    string messageBoxText = "Taj sastojak ste već dodali!";
-                    string caption = "Greska";
-                    MessageBoxButton button = MessageBoxButton.OK;
-                    MessageBoxImage icon = MessageBoxImage.Error;
-
-                    MessageBox.Show(messageBoxText, caption, button, icon);
-                }
+                    ObservableCollection<Ingredient> original = (ObservableCollection<Ingredient>) listAllIngredients.ItemsSource;
+                    original.Remove((Ingredient)listAllIngredients.SelectedItem);
             }
             else
             {
                 string messageBoxText = "Morate selektovati sastojak da biste ga dodali!";
+                string caption = "Greska";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Error;
+
+                MessageBox.Show(messageBoxText, caption, button, icon);
+            }
+        }
+
+        private void RemoveIngredient_Btn_Click(object sender, RoutedEventArgs e)
+        {
+            if (listSelectedIngredients.SelectedItem != null)
+            {
+                ObservableCollection<Ingredient> original = (ObservableCollection<Ingredient>)listAllIngredients.ItemsSource;
+                original.Add((Ingredient)listSelectedIngredients.SelectedItem);
+
+                ObservableCollection<Ingredient> selected = (ObservableCollection<Ingredient>)listSelectedIngredients.ItemsSource;
+                selected.Remove((Ingredient)listSelectedIngredients.SelectedItem);
+
+
+            }
+            else
+            {
+                string messageBoxText = "Morate selektovati sastojak da biste ga izbrisali!";
                 string caption = "Greska";
                 MessageBoxButton button = MessageBoxButton.OK;
                 MessageBoxImage icon = MessageBoxImage.Error;

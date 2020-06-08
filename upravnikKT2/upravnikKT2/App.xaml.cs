@@ -20,6 +20,7 @@ namespace upravnikKT2
         private const string ROOMS_FILE = "../../Resources/Data/rooms.csv";
         private const string EQUIPMENT_FILE = "../../Resources/Data/equipment.csv";
         private const string RENOVATIONS_FILE = "../../Resources/Data/renovations.csv";
+        private const string DRUGS_FILE = "../../Resources/Data/drugs.csv";
         private const string CSV_DELIMITER = ",";
 
         public IRoomTypeController RoomTypeController { get; private set; }
@@ -29,6 +30,8 @@ namespace upravnikKT2
         public IEquipmentController EquipmentController { get; private set; }
 
         public IRenovationController RenovationController { get; private set; }
+
+        public IDrugController DrugController { get; private set; }
 
         public App()
         {
@@ -48,9 +51,6 @@ namespace upravnikKT2
             var ingredientService = new IngredientService(ingredientRepository);
 
             IngredientController = new IngredientController(ingredientService);
-
-
-
 
 
             var equipmentRepository = new EquipmentRepository(
@@ -73,6 +73,10 @@ namespace upravnikKT2
             var renovationRepository = new RenovationRepository(new CSVStream<Renovation>(RENOVATIONS_FILE, new RenovationCSVConverter(CSV_DELIMITER)), new LongSequencer(),roomRepository);
             var renovationService = new RenovationService(renovationRepository);
             RenovationController = new RenovationController(renovationService);
+
+            var drugRepository = new DrugRepository(new CSVStream<Drug>(DRUGS_FILE, new DrugCSVConverter(CSV_DELIMITER)), new LongSequencer(), ingredientRepository);
+            var drugService = new DrugService(drugRepository);
+            DrugController = new DrugController(drugService);
 
         }
     }

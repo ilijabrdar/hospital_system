@@ -38,9 +38,9 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
+            <RowDefinition Height="19" />
             <RowDefinition Height="40" />
-            <RowDefinition Height="40" />
-            <RowDefinition Height="337" />
+            <RowDefinition Height="355" />
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -52,7 +52,7 @@
         <Label Grid.Row="0" Grid.Column="0" Width="91" HorizontalAlignment="Left" Margin="10,10,0,0">Naziv</Label>
         <TextBox x:Name="txtName" Grid.Row="0" Grid.Column="1" Width="159" Margin="0,10,10,0" HorizontalAlignment="Right" Validation.Error="mojtext_Error">
             <TextBox.Text>
-                <Binding Path="Test1" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                <Binding Path="DrugName" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
                         <val:NotEmptyValidationRule ValidatesOnTargetUpdated="True"/>
                     </Binding.ValidationRules>
@@ -60,7 +60,7 @@
             </TextBox.Text>
         </TextBox>
 
-        <Label Grid.Row="1" Grid.Column="0" Width="91" HorizontalAlignment="Left" Margin="10,10,0,0" Content="Sifra"/>
+        <!-- <Label Grid.Row="1" Grid.Column="0" Width="91" HorizontalAlignment="Left" Margin="10,10,0,0" Content="Sifra"/>
         <TextBox x:Name="txtID" Grid.Row="1" Grid.Column="1" Width="159"  Margin="0,10,10,0" HorizontalAlignment="Right">
             <TextBox.Text>
                 <Binding Path="Test2" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
@@ -69,12 +69,12 @@
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
-        </TextBox>
+        </TextBox> -->
 
         <Label Grid.Row="2" Grid.Column="0" Width="91" HorizontalAlignment="Left" Margin="10,10,0,0" Content="Kolicina"/>
         <TextBox x:Name="txtAmount" Grid.Row="2" Grid.Column="1" Width="159"  Margin="0,10,10,0" HorizontalAlignment="Right">
             <TextBox.Text>
-                <Binding Path="Test3" StringFormat="{}{0:#.##}" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                <Binding Path="Amount" StringFormat="{}{0:#.##}" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
                         <val:OnlyNumbersValidationRule  ValidationStep="RawProposedValue" ValidatesOnTargetUpdated="True"/>
                     </Binding.ValidationRules>
@@ -84,7 +84,7 @@
 
         <DockPanel Grid.Row="3" Grid.Column="0">
             <WrapPanel DockPanel.Dock="Top" Margin="10">
-                <Label  Width="91" HorizontalAlignment="Left" Margin="10,10,0,0" Content="Sastav"/>
+                <Label  Width="91" HorizontalAlignment="Left"  Content="Sastav"/>
                 <Separator Margin="120,0,0,0"></Separator>
                 <Button  HorizontalAlignment="Right"  Style="{StaticResource MaterialDesignFloatingActionMiniButton}" Click="AddIngredient_Btn_Click"
                  ToolTip="Dodaj sastav" Margin="0,20,0,0">
@@ -95,7 +95,7 @@
                 </Button>
 
             </WrapPanel>
-            
+
             <ListView x:Name="listAllIngredients" DockPanel.Dock="Bottom" Margin="10,0" >
                 <ListView.View>
                     <GridView>
@@ -105,10 +105,10 @@
                 </ListView.View>
             </ListView>
         </DockPanel>
-        
+
         <!--<TextBox Grid.Row="3" Grid.Column="1" Width="159"  Margin="0,10,10,7" HorizontalAlignment="Right" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" TextWrapping="Wrap" BorderThickness="1"/>-->
-        <WrapPanel DockPanel.Dock="Top" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Right" Margin="10">
-            <Button  HorizontalAlignment="Right"  Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+        <WrapPanel DockPanel.Dock="Top" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Right" Margin="0,10,10,10" Width="40">
+            <Button  HorizontalAlignment="Right"  Style="{StaticResource MaterialDesignFloatingActionMiniButton}" Click="RemoveIngredient_Btn_Click"
                  ToolTip="Izbrisi sastav" Margin="0,20,0,0">
                 <materialDesign:PackIcon
                                     Kind="Delete"
@@ -126,7 +126,7 @@
         </ListView>
 
         <Button x:Name="tutorialBtn" Grid.Column="0" Grid.Row="4"  HorizontalAlignment="Left"  Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
-                 ToolTip="Pomoc - pogledaj uputstvo" Margin="10,0,0,0" Click="tutorialBtn_Click" >
+                 ToolTip="Pomoc - pogledaj uputstvo" Margin="10,11,0,11" Click="tutorialBtn_Click" Height="Auto" >
             <materialDesign:PackIcon
                                     Kind="Help"
                                     Height="24"
@@ -134,16 +134,16 @@
         </Button>
 
         <WrapPanel  Grid.Column="1" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10" Height="28" Width="210"  >
-            <Button x:Name="Save" Height="28" Width="100" Click="Button_Click_OK_Drug" Content="Potvrdi">
+            <Button Name="OKBtn" Height="28" Width="100" Click="Button_Click_OK_Drug" Content="Potvrdi">
                 <Button.Style>
                     <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding Path=(Validation.HasError), ElementName=txtName}" Value="True">
                                 <Setter Property="IsEnabled" Value="False" />
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=(Validation.HasError), ElementName=txtID}" Value="True">
+                            <!-- <DataTrigger Binding="{Binding Path=(Validation.HasError), ElementName=txtID}" Value="True">
                                 <Setter Property="IsEnabled" Value="False" />
-                            </DataTrigger>
+                            </DataTrigger> -->
                             <DataTrigger Binding="{Binding Path=(Validation.HasError), ElementName=txtAmount}" Value="True">
                                 <Setter Property="IsEnabled" Value="False" />
                             </DataTrigger>
@@ -153,7 +153,7 @@
             </Button>
             <Button Height="28" Width="100" Click="Button_Click_Cancel_Drug" Margin="10,0,0,0">Odustani</Button>
         </WrapPanel>
-        
+
 
     </Grid>
 </Window>

@@ -26,6 +26,8 @@ namespace upravnikKT2
         private readonly IRoomController _roomController;
         private readonly IEquipmentController _equipmentController;
         private readonly IRenovationController _renovationController;
+        private readonly IDrugController _drugController;
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string name)
@@ -135,6 +137,7 @@ namespace upravnikKT2
             _roomController = app.RoomController;
             _equipmentController = app.EquipmentController;
             _renovationController = app.RenovationController;
+            _drugController = app.DrugController;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -282,13 +285,31 @@ namespace upravnikKT2
             DrugDialog window = new DrugDialog();
             window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             window.ShowDialog();
+
+            DataGridLekovi.ItemsSource = null;
+            this.DataGridLekovi.ItemsSource = new ObservableCollection<Drug>(_drugController.GetAll().ToList());
         }
 
         private void Button_Click_Edit_Drug(object sender, RoutedEventArgs e)
         {
-            DrugDialog window = new DrugDialog();
-            window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            window.ShowDialog();
+            if (DataGridLekovi.SelectedItem != null)
+            {
+                DrugDialog window = new DrugDialog((Drug)DataGridLekovi.SelectedItem);
+                window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                window.ShowDialog();
+
+                DataGridLekovi.ItemsSource = null;
+                this.DataGridLekovi.ItemsSource = new ObservableCollection<Drug>(_drugController.GetAll().ToList());
+            }
+            else
+            {
+                string messageBoxText = "Morate selektovati lek da biste izvrsili izmenu!";
+                string caption = "Greska";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Error;
+
+                MessageBox.Show(messageBoxText, caption, button, icon);
+            }
         }
 
 
@@ -430,12 +451,14 @@ namespace upravnikKT2
             ObservableCollection<Equipment> data_inconsumable = new ObservableCollection<Equipment>(inconsumable_equipment);
             this.DataGridOpremaNepotrosna.ItemsSource = data_inconsumable;
 
-            ObservableCollection<DrugMockup> DataGridDrugs = new ObservableCollection<DrugMockup>();
-            DataGridDrugs.Add(new DrugMockup { Naziv = "Bromazepan", Kolicina = "20", Sifra = "131233", Status = "odobren", Sastojci = "asdasd asdasd, fdsfds,a sfadsf, asadf", Alternativa = "asdas asd, asd fdsf2q3e 123" });
-            DataGridDrugs.Add(new DrugMockup { Naziv = "Brufen", Kolicina = "212", Sifra = "32424", Status = "neodobren", Sastojci = "asdasd asdasd, fdsfds,a sfadsf, asadf", Alternativa = "asdas asd, asd fdsf2q3e 123" });
-            DataGridDrugs.Add(new DrugMockup { Naziv = "Xanax", Kolicina = "34", Sifra = "54352", Status = "odobren", Sastojci = "asdasd asdasd, fdsfds,a sfadsf, asadf", Alternativa = "asdas asd, asd fdsf2q3e 123" });
-            DataGridDrugs.Add(new DrugMockup { Naziv = "Paracetamol", Kolicina = "10", Sifra = "6435754", Status = "neodobren", Sastojci = "asdasd asdasd, fdsfds,a sfadsf, asadf", Alternativa = "asdas asd, asd fdsf2q3e 123" });
-            this.DataGridLekovi.ItemsSource = DataGridDrugs;
+            List<Drug> drugs = _drugController.GetAll().ToList();
+            ObservableCollection<Drug> lekovi = new ObservableCollection<Drug>(drugs);
+            //ObservableCollection<DrugMockup> drug_collection = new ObservableCollection<DrugMockup>();
+            //drug_collection.Add(new DrugMockup { Naziv = "Bromazepan", Kolicina = "20", Sifra = "131233", Status = "odobren", Sastojci = "asdasd asdasd, fdsfds,a sfadsf, asadf", Alternativa = "asdas asd, asd fdsf2q3e 123" });
+            //drug_collection.Add(new DrugMockup { Naziv = "Brufen", Kolicina = "212", Sifra = "32424", Status = "neodobren", Sastojci = "asdasd asdasd, fdsfds,a sfadsf, asadf", Alternativa = "asdas asd, asd fdsf2q3e 123" });
+            //drug_collection.Add(new DrugMockup { Naziv = "Xanax", Kolicina = "34", Sifra = "54352", Status = "odobren", Sastojci = "asdasd asdasd, fdsfds,a sfadsf, asadf", Alternativa = "asdas asd, asd fdsf2q3e 123" });
+            //drug_collection.Add(new DrugMockup { Naziv = "Paracetamol", Kolicina = "10", Sifra = "6435754", Status = "neodobren", Sastojci = "asdasd asdasd, fdsfds,a sfadsf, asadf", Alternativa = "asdas asd, asd fdsf2q3e 123" });
+            this.DataGridLekovi.ItemsSource = lekovi;
 
 
             List<Renovation> renovations = _renovationController.GetAll().ToList();
@@ -458,14 +481,14 @@ namespace upravnikKT2
 
         private void PrikaziSastojkeLeka(object sender, RoutedEventArgs e)
         {
-            IngredientsDialog dialog = new IngredientsDialog();
+            IngredientsDialog dialog = new IngredientsDialog((Drug) DataGridLekovi.SelectedItem);
             dialog.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             dialog.ShowDialog();
         }
 
         private void PrikaziAlternativneLekove(object sender, RoutedEventArgs e)
         {
-            AlternativeDrugDialog dialog = new AlternativeDrugDialog();
+            AlternativeDrugDialog dialog = new AlternativeDrugDialog((Drug)DataGridLekovi.SelectedItem);
             dialog.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             dialog.ShowDialog();
         }
@@ -667,6 +690,13 @@ namespace upravnikKT2
             ObservableCollection<Room> DataRooms = new ObservableCollection<Room>(rooms);
 
             this.DataGridRooms.ItemsSource = DataRooms.Where(input => input.RoomCode.Contains(txtsearchRooms.Text));
+        }
+
+        private void searchDrugsKeyUp(object sender, KeyEventArgs e)
+        {
+            ObservableCollection<Drug> data_drug = new ObservableCollection<Drug>(_drugController.GetAll());
+
+            this.DataGridLekovi.ItemsSource = data_drug.Where(input => input.Name.Contains(txtsearchDrug.Text));
         }
 
         private void deleteEquipment_Btn_Click(object sender, RoutedEventArgs e)
@@ -889,22 +919,20 @@ namespace upravnikKT2
 
         private void searchTxtAppear_Button_Click_Drug(object sender, RoutedEventArgs e)
         {
-            //if (searchDrugBtn.Background == Brushes.Gray)
-            //{
-            //    searchDrugBtn.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#FF673AB7");
-            //    txtsearchDrug.Visibility = Visibility.Hidden;
-            //    //TODO: vrati nazad tabelu
+            if (searchDrugBtn.Background == Brushes.Gray)
+            {
+                searchDrugBtn.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#FF673AB7");
+                txtsearchDrug.Visibility = Visibility.Hidden;
+                //TODO: vrati nazad tabelu
 
-            //    List<Drug> drugs;
-            //    ObservableCollection<Drug> DataDrugs = new ObservableCollection<Drug>(drugs);
-            //    this.DataGridLekovi.ItemsSource = DataDrugs;
-            //    txtsearchDrug.Clear();
-            //}
-            //else
-            //{
-            //    searchDrugBtn.Background = Brushes.Gray;
-            //    txtsearchDrug.Visibility = Visibility.Visible;
-            //}
+                this.DataGridLekovi.ItemsSource = new ObservableCollection<Drug>(_drugController.GetAll());
+                txtsearchDrug.Clear();
+            }
+            else
+            {
+                searchDrugBtn.Background = Brushes.Gray;
+                txtsearchDrug.Visibility = Visibility.Visible;
+            }
         }
 
         private void searchTxtAppear_Button_Click_ConsumableEq(object sender, RoutedEventArgs e)
@@ -944,6 +972,40 @@ namespace upravnikKT2
             {
                 searchInconsumableEquipmentBtn.Background = Brushes.Gray;
                 txtsearchInconsumable.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void deleteDrugBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataGridLekovi.SelectedItem != null)
+            {
+                Drug drug = (Drug)DataGridLekovi.SelectedItem;
+
+                string messageBoxText = "Da li ste sigurni da zelite da obrisete lek pod nazivom " + drug.Name + "?";
+                string caption = "Potvrda brisanja";
+                MessageBoxButton button = MessageBoxButton.YesNo;
+                MessageBoxImage icon = MessageBoxImage.Question;
+
+                MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+                if (result == MessageBoxResult.Yes)
+                {
+                    _drugController.Delete((Drug)DataGridLekovi.SelectedItem);
+
+                    DataGridRenovation.ItemsSource = null;
+                    List<Drug> drugs = _drugController.GetAll().ToList();
+                    ObservableCollection<Drug> data_drugs = new ObservableCollection<Drug>(drugs);
+                    this.DataGridLekovi.ItemsSource = data_drugs;
+                    txtsearchDrug.Clear();
+                }
+            }
+            else
+            {
+                string messageBoxText = "Morate selektovati lek da biste ga obrisali!";
+                string caption = "Greska";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Error;
+
+                MessageBox.Show(messageBoxText, caption, button, icon);
             }
         }
     }
