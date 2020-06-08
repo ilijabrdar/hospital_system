@@ -100,8 +100,6 @@
     <Compile Include="Controller\abstract\IDoctorController.cs" />
 
     <Compile Include="Controller\abstract\IDrugController.cs" />
-    <Compile Include="Controller\abstract\IDoctorGradeController.cs" />
-    <Compile Include="Controller\abstract\IEquipmentController.cs" />
     <Compile Include="Controller\abstract\IPatientController.cs" />
     <Compile Include="Controller\abstract\IDoctorGradeController.cs" />
     <Compile Include="Controller\abstract\IEquipmentController.cs" />
@@ -496,10 +494,7 @@
     <Compile Include="Service\abstract\IRoomTypeService.cs" />
     <Compile Include="Service\abstract\ISearchPeriods.cs" />
     <Compile Include="Service\abstract\ISecretaryService.cs" />
-    <Compile Include="Service\AnamnesisService.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Service\abstract\ISecretaryService.cs" />
+
     <Compile Include="Service\abstract\ISpecialityService.cs" />
     <Compile Include="Service\abstract\ISymptomService.cs" />
     <Compile Include="Service\abstract\ITherapyService.cs" />

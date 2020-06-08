@@ -10,7 +10,6 @@ namespace Model.Doctor
         public int numberOfGrades { get; set; }
 
         public long Id;
-        public Dictionary<String,double> GradesForEachQuestions;
 
 
 

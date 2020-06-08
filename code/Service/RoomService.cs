@@ -89,5 +89,9 @@ namespace Service
             return result;
         }
 
+        bolnica.Model.Director.Room[] IRoomService.GetVacantRooms()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

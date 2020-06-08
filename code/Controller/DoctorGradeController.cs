@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Controller
 {
-<<<<<<< HEAD
+
     public class DoctorGradeController : IDoctorGradeController
     {
         private readonly IDoctorGradeService _doctorGradeService;
