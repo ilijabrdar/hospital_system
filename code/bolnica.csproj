@@ -96,8 +96,13 @@
     </Compile>
     <Compile Include="Controller\abstract\IBusinessDayController.cs" />
     <Compile Include="Controller\abstract\IDoctorController.cs" />
+<<<<<<< HEAD
     <Compile Include="Controller\abstract\IDrugController.cs" />
+=======
+    <Compile Include="Controller\abstract\IDoctorGradeController.cs" />
+>>>>>>> masterpatient
     <Compile Include="Controller\abstract\IEquipmentController.cs" />
+    <Compile Include="Controller\abstract\IPatientController.cs" />
     <Compile Include="Controller\abstract\IRenovationController.cs" />
     <Compile Include="Controller\AnamnesisController.cs">
       <SubType>Code</SubType>
@@ -217,6 +222,7 @@
     <Compile Include="Model\Doctor\Specialty.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Model\Dto\BusinessDayDTO.cs" />
     <Compile Include="Model\Dto\DoctorReportDTO.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -443,6 +449,7 @@
     <Compile Include="Repository\TownRepository.cs" />
     <Compile Include="Service\abstract\IBusinessDayService.cs" />
     <Compile Include="Service\abstract\IDirectorService.cs" />
+    <Compile Include="Service\abstract\IDoctorGradeService.cs" />
     <Compile Include="Service\abstract\IDoctorService.cs" />
     <Compile Include="Service\abstract\IDrugService.cs" />
     <Compile Include="Service\abstract\IEquipmentService.cs" />
@@ -451,6 +458,7 @@
     <Compile Include="Service\abstract\IPatientService.cs" />
     <Compile Include="Service\abstract\IRenovationService.cs" />
     <Compile Include="Service\abstract\IRoomTypeService.cs" />
+    <Compile Include="Service\abstract\ISearchPeriods.cs" />
     <Compile Include="Service\abstract\ISecretaryService.cs" />
     <Compile Include="Service\AnamnesisService.cs">
       <SubType>Code</SubType>
@@ -461,6 +469,7 @@
     <Compile Include="Service\BusinessDayService.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Service\DatePrioritySearch.cs" />
     <Compile Include="Service\DiagnosisService.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -470,6 +479,7 @@
     <Compile Include="Service\DoctorGradeService.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Service\DoctorPrioritySearch.cs" />
     <Compile Include="Service\DoctorService.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -493,6 +503,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Service\abstract\IUserService.cs" />
+    <Compile Include="Service\NoPrioritySearch.cs" />
     <Compile Include="Service\NotificationService.cs">
       <SubType>Code</SubType>
     </Compile>

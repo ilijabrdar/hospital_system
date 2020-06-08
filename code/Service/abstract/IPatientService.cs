@@ -1,4 +1,5 @@
-﻿using Model.Users;
+﻿using Model.Doctor;
+using Model.Users;
 using Service;
 using System;
 using System.Collections.Generic;
@@ -9,8 +10,12 @@ namespace bolnica.Service
 {
     public interface IPatientService : IService<Patient, long>
 {
-        Patient ClaimAccount(long id);
+        Patient ClaimAccount(String id);
         Patient GetPatientByUsername(String username);
+
+        Patient GetPatientByJMBG(String jmbg);
+
+        DoctorGrade GiveGrade(Doctor doctor, Dictionary<String, double> gradesForDoctor);
 
     }
 }

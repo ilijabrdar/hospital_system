@@ -12,7 +12,7 @@ namespace bolnica.Service
 {
         List<Doctor> GetDoctorsBySpeciality(Speciality specialty);
 
-       Boolean ChangeSpeciality(Speciality specialty, Model.Users.Doctor doctor);
+       Boolean ChangeSpeciality(Speciality specialty, Doctor doctor);
 
        DoctorGrade GiveGrade(DoctorGrade doctorGrade);
        Doctor GetDoctorByUsername(String username);

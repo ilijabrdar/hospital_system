@@ -27,13 +27,13 @@ namespace Service
          return false;
       }
       
-      public Boolean AddEquipment(Equipment equipment, Model.Director.Room room)
+      public Boolean AddEquipment(Equipment equipment, Room room)
       {
          // TODO: implement
          return false;
       }
       
-      public Model.Director.Room[] GetVacantRooms()
+      public List<Room> GetVacantRooms()
       {
          // TODO: implement
          return null;

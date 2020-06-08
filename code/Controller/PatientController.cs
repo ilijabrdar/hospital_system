@@ -1,86 +1,60 @@
-/***********************************************************************
- * Module:  PatientService.cs
- * Author:  david
- * Purpose: Definition of the Class Service.PatientService
- ***********************************************************************/
 
+
+using bolnica.Controller;
+using bolnica.Service;
+using Model.Doctor;
 using Model.Users;
 using System;
+using System.Collections.Generic;
 
 namespace Controller
 {
-   public class PatientController// : IController
-   {
-      public Patient ClaimAccount(String jmbg)
-      {
-         // TODO: implement
-         return null;
-      }
-   
-      private System.Collections.ArrayList _service;
-      
-      /// <pdGenerated>default getter</pdGenerated>
-      public System.Collections.ArrayList Get_service()
-      {
-         if (_service == null)
-            _service = new System.Collections.ArrayList();
-         return _service;
-      }
-      
-      /// <pdGenerated>default setter</pdGenerated>
-      //public void Set_service(System.Collections.ArrayList new_service)
-      //{
-      //   RemoveAll_service();
-      //   foreach (Service.IService oIService in new_service)
-      //      Add_service(oIService);
-      //}
-      
-      ///// <pdGenerated>default Add</pdGenerated>
-      //public void Add_service(Service.IService newIService)
-      //{
-      //   if (newIService == null)
-      //      return;
-      //   if (this._service == null)
-      //      this._service = new System.Collections.ArrayList();
-      //   if (!this._service.Contains(newIService))
-      //      this._service.Add(newIService);
-      //}
-      
-      ///// <pdGenerated>default Remove</pdGenerated>
-      //public void Remove_service(Service.IService oldIService)
-      //{
-      //   if (oldIService == null)
-      //      return;
-      //   if (this._service != null)
-      //      if (this._service.Contains(oldIService))
-      //         this._service.Remove(oldIService);
-      //}
-      
-      /// <pdGenerated>default removeAll</pdGenerated>
-      public void RemoveAll_service()
-      {
-         if (_service != null)
-            _service.Clear();
-      }
+    public class PatientController : IPatientController
+    {
+        private readonly IPatientService _patientService;
 
-        public object Save()
+        public PatientController(IPatientService patientService)
         {
-            throw new NotImplementedException();
+            _patientService = patientService;
+        }
+        public Patient ClaimAccount(String jmbg)
+        {
+            return _patientService.ClaimAccount(jmbg);
         }
 
-        public object Delete()
+        public void Delete(Patient entity)
         {
-            throw new NotImplementedException();
+            _patientService.Delete(entity);
         }
 
-        public object Edit()
+        public void Edit(Patient entity)
         {
-            throw new NotImplementedException();
+            _patientService.Edit(entity);
         }
 
-        public object GetAll()
+        public Patient Get(long id)
         {
-            throw new NotImplementedException();
+            return _patientService.Get(id);
+        }
+
+        public IEnumerable<Patient> GetAll()
+        {
+            return _patientService.GetAll();
+        }
+
+        public Patient GetPatientByJMBG(string jmbg)
+        {
+            return _patientService.GetPatientByJMBG(jmbg);
+        }
+
+        public DoctorGrade GiveGrade(Doctor doctor, Dictionary<string, double> gradesForDoctor)
+        {
+            return _patientService.GiveGrade(doctor, gradesForDoctor);
+        }
+
+        public Patient Save(Patient entity)
+        {
+            return _patientService.Save(entity);
         }
     }
 }
