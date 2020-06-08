@@ -14,6 +14,6 @@ namespace bolnica.Controller
 
         Patient ClaimAccount(String jmbg);
 
-        DoctorGrade GiveGrade(Doctor doctor, Dictionary<String, double> gradesForDoctor);
+        DoctorGrade GiveGradeToDoctor(Doctor doctor, Dictionary<String, double> gradesForDoctor);
     }
 }

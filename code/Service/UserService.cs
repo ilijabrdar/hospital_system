@@ -9,12 +9,11 @@ namespace Service
 {
     public class UserService : IUserService
     {
-        private IDoctorService _doctorService;
-        private IPatientService _patientService;
-        private ISecretaryService _secretaryService;
-        private IDirectorService _directorService;
+        private readonly IDoctorService _doctorService;
+        private readonly IPatientService _patientService;
+        private readonly ISecretaryService _secretaryService;
+        private readonly IDirectorService _directorService;
 
-        private readonly IPatientFileRepository _patientFileRepo;
         public UserService(IPatientService patientServ, IDoctorService _doctor, ISecretaryService secretaryService, IDirectorService directorService)
         {
             _patientService = patientServ;
@@ -67,13 +66,13 @@ namespace Service
         public User IsUsernameValid(string username)
         {
             User user = null;
-            if ((user = _patientService.GetPatientByUsername(username)) != null)
+            if ((user = _patientService.GetUserByUsername(username)) != null)
                 return user;
-            if ((user = _secretaryService.GetSecretaryByUsername(username)) != null)
+            if ((user = _secretaryService.GetUserByUsername(username)) != null)
                 return user;
-            else if ((user = _directorService.GetDirectorByUsername(username)) != null)
+            else if ((user = _directorService.GetUserByUsername(username)) != null)
                 return user;
-            else if ((user = _doctorService.GetDoctorByUsername(username)) != null)
+            else if ((user = _doctorService.GetUserByUsername(username)) != null)
               return user;
 
             return user;

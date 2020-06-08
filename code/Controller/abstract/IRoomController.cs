@@ -12,8 +12,9 @@ namespace bolnica.Controller
         IEnumerable<Room> GetVacantRooms();
         Boolean AddEquipment(Equipment equipment, Room room);
 
-        Boolean ChangeRoomType(Room room, RoomType roomType);
 
-        IEnumerable<Room> getRoomsContainingEquipment(Equipment equipment);
+        Boolean CheckRoomNameUnique(Room room);
+
+        IEnumerable<Room> GetRoomsContainingEquipment(Equipment equipment);
     }
 }

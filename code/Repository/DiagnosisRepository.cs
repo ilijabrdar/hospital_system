@@ -15,5 +15,15 @@ namespace Repository
         {
 
         }
+
+        public IEnumerable<Diagnosis> GetAllEager()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Diagnosis GetEager(long id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,8 +1,4 @@
-/***********************************************************************
- * Module:  BusinessDayService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.BusinessDayService
- ***********************************************************************/
+
 
 using bolnica.Model.Dto;
 using bolnica.Repository;
@@ -41,29 +37,7 @@ namespace Service
             throw new NotImplementedException();
         }
 
-  /*      public List<Period> GenerateAvailablePeriods(BusinessDay businessDay)
-        {
-            BusinessDay thatDay = getExactDay(businessDay);
-            if (thatDay.Equals(null))
-            {
-                return null;
-            }
-            List<Period> retVal = new List<Period>();
-            DateTime start = thatDay.Shift.StartDate;
-            DateTime end = start.AddMinutes(durationOfExamination);
-            while(end < thatDay.Shift.EndDate)
-            {
-                retVal.Add(new Period(start, end));
-                start.AddMinutes(durationOfExamination);
-                end.AddMinutes(durationOfExamination);
-            }
-            if (thatDay.ScheduledPeriods.Count == 0) { return retVal; }
-            foreach (Period i in thatDay.ScheduledPeriods)
-                retVal.Remove(i);
-            return retVal;
-        }
-*/
-        private BusinessDay getExactDay(Doctor doctor, DateTime date)
+        public BusinessDay GetExactDay(Doctor doctor, DateTime date)
         {
             foreach (BusinessDay day in _businessDayRepository.GetAllEager())
             {
@@ -81,12 +55,6 @@ namespace Service
 
         }
 
-        /*       public List<Examination> PeriodRecommendationByDate(DateTime date)
-               {
-                   List<BusinessDay> businessDays = _businessDayRepository.GetBusinessDaysByDate(date);
-
-                   throw new NotImplementedException();
-               }*/
 
         public BusinessDay Get(long id)
         {

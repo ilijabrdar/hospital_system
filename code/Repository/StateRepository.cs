@@ -8,7 +8,7 @@ using Repository;
 
 namespace bolnica.Repository
 {
-    public class StateRepository : CSVGetterRepository<State, long>, IStateRepository ,IEagerRepository<State, long>
+    public class StateRepository : CSVGetterRepository<State, long>, IStateRepository 
     {
         private readonly IEagerRepository<Town, long> _townRepository;
 

@@ -9,22 +9,14 @@ namespace Controller
 {
     public class SpecialityController : ISpecialityController
     {
-        private ISpecialityService _service;
+        private readonly ISpecialityService _service;
 
         public SpecialityController(ISpecialityService service)
         {
             _service = service;
         }
 
-        public void Delete(Speciality entity)
-        {
-            _service.Delete(entity);
-        }
 
-        public void Edit(Speciality entity)
-        {
-            _service.Edit(entity);
-        }
 
         public Speciality Get(long id)
         {
@@ -36,9 +28,5 @@ namespace Controller
             return _service.GetAll();
         }
 
-        public Speciality Save(Speciality entity)
-        {
-            return _service.Save(entity);
-        }
     }
 }

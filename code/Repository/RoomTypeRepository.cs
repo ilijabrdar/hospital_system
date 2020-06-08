@@ -1,12 +1,9 @@
-/***********************************************************************
- * Module:  RoomTypeService.cs
- * Author:  david
- * Purpose: Definition of the Class Service.RoomTypeService
- ***********************************************************************/
+
 
 using bolnica.Repository;
 using Model.Director;
 using System;
+using System.Collections.Generic;
 
 namespace Repository
 {
@@ -19,5 +16,14 @@ namespace Repository
 
         }
 
+        public IEnumerable<RoomType> GetAllEager()
+        {
+            throw new NotImplementedException();
+        }
+
+        public RoomType GetEager(long id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

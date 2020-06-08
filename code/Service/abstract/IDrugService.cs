@@ -9,9 +9,11 @@ namespace bolnica.Service
 {
     public interface IDrugService : IService<Drug, long>
     {
-        Drug CreateDrugBasedOnDiagnosis(Diagnosis diagnosis, Examination examination);
+        Drug RecommendDrugBasedOnDiagnosis(Diagnosis diagnosis);
 
         Drug AddAlternativeDrug(Drug originalDrug, Drug alternativeDrug);
+
+        Boolean CheckDrugNameUnique(Drug drug);
 
         Drug ApproveDrug(Drug drug);
 

@@ -1,8 +1,3 @@
-/***********************************************************************
- * Module:  Renovation.cs
- * Author:  david
- * Purpose: Definition of the Class Director.Renovation
- ***********************************************************************/
 
 using Model.PatientSecretary;
 using Repository;

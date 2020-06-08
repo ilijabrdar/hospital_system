@@ -1,8 +1,4 @@
-/***********************************************************************
- * Module:  DirectorService.cs
- * Author:  david
- * Purpose: Definition of the Class Service.DirectorService
- ***********************************************************************/
+
 
 using Model.Users;
 using System;
@@ -26,7 +22,7 @@ namespace Repository
             _stateRepository = stateRepository;
 
         }
-        public Director GetDirectorByUsername(string username) 
+        public User GetUserByUsername(string username) 
         {
             IEnumerable<Director> entities = this.GetAll();
             foreach (Director entity in entities)

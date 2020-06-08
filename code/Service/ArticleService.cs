@@ -8,7 +8,7 @@ namespace Service
 {
    public class ArticleService : IArticleService
    {
-       private IArticleRepository _repository;
+       private readonly IArticleRepository _repository;
 
         public ArticleService(IArticleRepository repository)
         {
@@ -40,7 +40,7 @@ namespace Service
             return _repository.Save(entity);
         }
 
-        public Article[] searchArticle(string criteria)
+        public List<Article> SearchArticle(string criteria)
         {
             throw new NotImplementedException();
         }

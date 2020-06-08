@@ -1,5 +1,5 @@
 ﻿using Controller;
-using Model.Doctor;
+using Model.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +7,9 @@ using System.Text;
 
 namespace bolnica.Controller
 {
-    interface IArticleController :IController<Article,long>
-    {
-        List<Article> SearchArticle(String criteria);
+   public interface IDirectorController : IController<Director, long>
+{
+        Doctor RegisterDoctor(Doctor doctor);
+
     }
 }

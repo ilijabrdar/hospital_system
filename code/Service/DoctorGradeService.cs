@@ -38,7 +38,7 @@ namespace Service
             return _doctorGradeRepository.GetAll();
         }
 
-        public double GetAverage(Doctor doctor)
+        public double GetAverageGrade(Doctor doctor)
         {
             Dictionary<String, double> doctorGrades = doctor.DoctorGrade.GradesForEachQuestions;
             double retVal = 0;

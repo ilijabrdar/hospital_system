@@ -24,7 +24,7 @@ namespace Service
 
         public Patient Save(Patient entity)
         {
-            if (_patientRepository.GetPatientByUsername(entity.Username) != null)
+            if (_patientRepository.GetUserByUsername(entity.Username) != null)
             {
                 return null;
             }
@@ -59,9 +59,9 @@ namespace Service
             throw new NotImplementedException();
         }
 
-        public Patient GetPatientByUsername(string username)
+        public User GetUserByUsername(String username)
         {
-            return _patientRepository.GetPatientByUsername(username);
+            return _patientRepository.GetUserByUsername(username);
         }
 
         public Patient GetPatientByJMBG(string jmbg)
@@ -69,14 +69,14 @@ namespace Service
             return _patientRepository.GetPatientByJMBG(jmbg);
         }
 
-        public DoctorGrade GiveGrade(Doctor doctor, Dictionary<string, double> gradesForDoctor)
+        public DoctorGrade GiveGradeToDoctor(Doctor doctor, Dictionary<string, double> gradesForDoctor)
         {
             DoctorGrade doctorGrade = doctor.DoctorGrade;
-            doctorGrade.numberOfGrades++;
+            doctorGrade.NumberOfGrades++;
             foreach(String question in doctorGrade.GradesForEachQuestions.Keys)
             {
                 doctorGrade.GradesForEachQuestions[question] = (doctorGrade.GradesForEachQuestions[question] +
-                                                                gradesForDoctor[question]) / doctorGrade.numberOfGrades;
+                                                                gradesForDoctor[question]) / doctorGrade.NumberOfGrades;
             }
 
              _doctorGradeService.Edit(doctorGrade);

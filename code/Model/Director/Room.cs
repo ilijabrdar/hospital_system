@@ -1,8 +1,4 @@
-/***********************************************************************
- * Module:  Room.cs
- * Author:  david
- * Purpose: Definition of the Class Director.Room
- ***********************************************************************/
+
 
 using Repository;
 using System;

@@ -28,9 +28,9 @@ namespace bolnica.Service
             return AlternativeForDoctor(businessDayDTO, businessDayCollection.Except(IterationDays));
         }
 
-        private List<ExaminationDTO> AlternativeForDoctor(BusinessDayDTO businessDayDTO, IEnumerable<BusinessDay> enumerable)
+        private List<ExaminationDTO> AlternativeForDoctor(BusinessDayDTO businessDayDTO, IEnumerable<BusinessDay> businessDayCollection)
         {
-            foreach(BusinessDay day in enumerable.ToList())
+            foreach(BusinessDay day in businessDayCollection.ToList())
             {
                 if (day.Shift.EndDate >= businessDayDTO.Period.StartDate && day.Shift.EndDate <= businessDayDTO.Period.EndDate) {
 
@@ -45,7 +45,7 @@ namespace bolnica.Service
             return null;
         }
 
-        private List<ExaminationDTO> CreateExaminationDTO(BusinessDay businessDay)
+        public List<ExaminationDTO> CreateExaminationDTO(BusinessDay businessDay)
         {
             List<ExaminationDTO> retVal = new List<ExaminationDTO>();
             DateTime Start = businessDay.Shift.StartDate;
@@ -56,9 +56,9 @@ namespace bolnica.Service
                 {
                     ExaminationDTO examinationDTO = new ExaminationDTO
                     {
-                        room = businessDay.room,
-                        period = new Period(Start, End),
-                        doctor = businessDay.doctor
+                        Room = businessDay.room,
+                        Period = new Period(Start, End),
+                        Doctor = businessDay.doctor
                     };
                     retVal.Add(examinationDTO);
                     return retVal;
@@ -69,7 +69,7 @@ namespace bolnica.Service
         }
 
 
-        private List<BusinessDay> DaysForExactPeriod(Period period, List<BusinessDay> businessDaysCollection)
+        public List<BusinessDay> DaysForExactPeriod(Period period, List<BusinessDay> businessDaysCollection)
         {
             List<BusinessDay> businessDays = new List<BusinessDay>();
             foreach (BusinessDay day in businessDaysCollection)
@@ -82,5 +82,7 @@ namespace bolnica.Service
 
             return businessDays;
         }
+
+
     }
 }

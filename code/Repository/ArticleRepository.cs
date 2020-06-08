@@ -1,6 +1,7 @@
 using bolnica.Repository;
 using Model.Doctor;
 using System;
+using System.Collections.Generic;
 
 namespace Repository
 {
@@ -13,6 +14,14 @@ namespace Repository
             
         }
 
-     
+        public IEnumerable<Article> GetAllEager()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Article GetEager(long id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

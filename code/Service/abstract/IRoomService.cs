@@ -9,13 +9,12 @@ namespace bolnica.Service
 {
     public interface IRoomService : IService<Room, long>
     {
-        Boolean ChangeRoomType(Room room, RoomType roomType);
 
         Boolean AddEquipment(Equipment equipment, Room room);
 
-
+        Boolean CheckRoomNameUnique(Room room);
         List<Room> GetVacantRooms();
-        IEnumerable<Room> getRoomsCointainingEquipment(Equipment equipment);
+        IEnumerable<Room> GetRoomsCointainingEquipment(Equipment equipment);
 
     }
 }

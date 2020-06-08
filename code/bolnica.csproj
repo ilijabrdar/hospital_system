@@ -97,6 +97,7 @@
     </Compile>
     <Compile Include="Controller\abstract\IBusinessDayController.cs" />
     <Compile Include="Controller\abstract\IDiagnosisController.cs" />
+    <Compile Include="Controller\abstract\IDirectorController.cs" />
     <Compile Include="Controller\abstract\IDoctorController.cs" />
     <Compile Include="Controller\abstract\IDrugController.cs" />
     <Compile Include="Controller\abstract\IGetterController.cs" />
@@ -107,9 +108,11 @@
     <Compile Include="Controller\abstract\IExaminationController.cs" />
     <Compile Include="Controller\abstract\IHospitalizationController.cs" />
     <Compile Include="Controller\abstract\IOperationController.cs" />
+    <Compile Include="Controller\abstract\IPatientFileController.cs" />
     <Compile Include="Controller\abstract\IPrescriptionController.cs" />
     <Compile Include="Controller\abstract\IReferralController.cs" />
     <Compile Include="Controller\abstract\IRenovationController.cs" />
+    <Compile Include="Controller\abstract\ISecretaryController.cs" />
     <Compile Include="Controller\abstract\ISpecialityController.cs" />
     <Compile Include="Controller\abstract\ISymptomController.cs" />
     <Compile Include="Controller\abstract\ITherapyController.cs" />
@@ -239,37 +242,37 @@
     <Compile Include="Model\Dto\SecretaryReportDTO.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\PatientSecretary\Allergy.cs">
+    <Compile Include="Model\Examination\Allergy.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\PatientSecretary\Anemnesis.cs">
+    <Compile Include="Model\Examination\Anemnesis.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\PatientSecretary\Diagnosis.cs">
+    <Compile Include="Model\Examination\Diagnosis.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\PatientSecretary\Drug.cs">
+    <Compile Include="Model\Examination\Drug.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\PatientSecretary\Examination.cs">
+    <Compile Include="Model\Examination\Examination.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\PatientSecretary\Ingredient.cs">
+    <Compile Include="Model\Examination\Ingredient.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\PatientSecretary\PatientFile.cs">
+    <Compile Include="Model\Examination\PatientFile.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\PatientSecretary\Period.cs">
+    <Compile Include="Model\Examination\Period.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\PatientSecretary\Prescription.cs">
+    <Compile Include="Model\Examination\Prescription.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\PatientSecretary\Symptom.cs">
+    <Compile Include="Model\Examination\Symptom.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\PatientSecretary\Therapy.cs">
+    <Compile Include="Model\Examination\Therapy.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model\Users\Address.cs">
@@ -310,6 +313,7 @@
     <Compile Include="Repository\abstract\IGetterRepository.cs" />
     <Compile Include="Repository\abstract\IStateRepository.cs" />
     <Compile Include="Repository\abstract\ITownRepository.cs" />
+    <Compile Include="Repository\abstract\IUserGetterRepository.cs" />
     <Compile Include="Repository\AddressRepository.cs" />
     <Compile Include="Repository\abstract\IDiagnosisRepository.cs" />
     <Compile Include="Repository\abstract\IPrescriptionRepository.cs" />
@@ -498,6 +502,7 @@
     <Compile Include="Service\abstract\ISpecialityService.cs" />
     <Compile Include="Service\abstract\ISymptomService.cs" />
     <Compile Include="Service\abstract\ITherapyService.cs" />
+    <Compile Include="Service\abstract\IUserGetterService.cs" />
     <Compile Include="Service\ArticleService.cs">
       <SubType>Code</SubType>
     </Compile>

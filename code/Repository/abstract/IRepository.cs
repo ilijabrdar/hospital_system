@@ -1,8 +1,4 @@
-/***********************************************************************
- * Module:  IRepository.cs
- * Author:  david
- * Purpose: Definition of the Interface Repository.IRepository
- ***********************************************************************/
+
 
 using System;
 using System.Collections;

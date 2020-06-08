@@ -6,7 +6,7 @@ using Model.Users;
 
 namespace bolnica.Repository
 {
-    public interface ITownRepository : IGetterRepository<Town, long>
+    public interface ITownRepository : IGetterRepository<Town, long>, IEagerRepository<Town, long>
     {
     }
 }

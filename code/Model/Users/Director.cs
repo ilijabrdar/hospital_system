@@ -1,8 +1,4 @@
-/***********************************************************************
- * Module:  Director.cs
- * Author:  Asus
- * Purpose: Definition of the Class Users.Director
- ***********************************************************************/
+
 
 using System;
 using System.Drawing;

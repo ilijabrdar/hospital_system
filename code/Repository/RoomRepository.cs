@@ -1,8 +1,4 @@
-/***********************************************************************
- * Module:  RoomService.cs
- * Author:  david
- * Purpose: Definition of the Class Service.RoomService
- ***********************************************************************/
+
 
 using bolnica.Repository;
 using Model.Director;
@@ -69,7 +65,7 @@ namespace Repository
             
             foreach (KeyValuePair<Equipment,int> pair in room.Equipment_inventory)
             {
-                Equipment temp = _equipmentRepository.Get(pair.Key.id);
+                Equipment temp = _equipmentRepository.Get(pair.Key.Id);
                 pair.Key.Name = temp.Name;
                 pair.Key.Type = temp.Type;
                 pair.Key.Amount = temp.Amount;
@@ -87,5 +83,9 @@ namespace Repository
             throw new NotImplementedException();
         }
 
+        public IEnumerable<Room> GetRoomsContainingEquipment(Equipment equipment)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

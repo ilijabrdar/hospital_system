@@ -1,8 +1,3 @@
-/***********************************************************************
- * Module:  DrugService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.DrugService
- ***********************************************************************/
 
 using bolnica.Service;
 using Model.PatientSecretary;
@@ -14,8 +9,8 @@ namespace Service
 {
    public class DrugService : IDrugService
    {
-      private IDrugRepository _repository;
-
+      private readonly IDrugRepository _repository;
+        private readonly IIngredientService _ingredientService;
         public DrugService(IDrugRepository repository)
         {
             _repository = repository;
@@ -31,7 +26,7 @@ namespace Service
             throw new NotImplementedException();
         }
 
-        public Drug CreateDrugBasedOnDiagnosis(Diagnosis diagnosis, Examination examination)
+        public Drug RecommendDrugBasedOnDiagnosis(Diagnosis diagnosis)
         {
             throw new NotImplementedException();
         }
@@ -69,6 +64,11 @@ namespace Service
         public Drug Save(Drug entity)
         {
             return _repository.Save(entity);
+        }
+
+        public bool CheckDrugNameUnique(Drug drug)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -58,7 +58,7 @@ namespace Repository
             }
         }
 
-        public Drug[] GetAlternative(Drug drug)
+        public List<Drug> GetAlternativeDrugs(Drug drug)
         {
             throw new NotImplementedException();
         }
@@ -85,7 +85,7 @@ namespace Repository
             return drug;
         }
 
-        public Drug[] GetNotApproved()
+        public List<Drug> GetNotApprovedDrugs()
         {
             //IEnumerable<Drug> drugs = this.GetAll();
             return null;

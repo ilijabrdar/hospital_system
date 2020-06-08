@@ -1,8 +1,4 @@
-/***********************************************************************
- * Module:  Symptom.cs
- * Author:  david
- * Purpose: Definition of the Class PatientSecretary.Symptom
- ***********************************************************************/
+
 
 using Repository;
 using System;

@@ -16,10 +16,6 @@ namespace Service
             _repository = repository;
         }
 
-        public Room[] GetRoomsContainingEquipment(string name) //TODO: GetRoomsContainingEquipment
-        {
-            throw new NotImplementedException();
-        }
 
         public Equipment Save(Equipment entity)
         {
@@ -46,8 +42,13 @@ namespace Service
             return _repository.Get(id);
         }
 
-        public IEnumerable<Equipment> getConsumableEquipment() => _repository.getConsumableEquipment();
+        public IEnumerable<Equipment> GetConsumableEquipment() => _repository.getConsumableEquipment();
 
-        public IEnumerable<Equipment> getInconsumableEquipment() => _repository.getInconsumableEquipment();
+        public IEnumerable<Equipment> GetInconsumableEquipment() => _repository.getInconsumableEquipment();
+
+        public bool CheckEquipmentNameUnique(Equipment equipment)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

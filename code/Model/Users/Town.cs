@@ -1,8 +1,4 @@
-/***********************************************************************
- * Module:  Town.cs
- * Author:  Asus
- * Purpose: Definition of the Class Users.Town
- ***********************************************************************/
+
 
 using System;
 using System.Collections.Generic;
@@ -11,7 +7,7 @@ namespace Model.Users
 {
    public class Town : Repository.IIdentifiable<long>
    {
-        private long _id;
+        public long Id;
         public String Name { get; set; }
         public String PostalNumber { get; set; }
         public State State { get; set; }
@@ -20,7 +16,7 @@ namespace Model.Users
       
         public Town(long id, string name, string postalNumber, State state)
         {
-            _id = id;
+            Id = id;
             Name = name;
             PostalNumber = postalNumber;
             State = state;
@@ -29,12 +25,12 @@ namespace Model.Users
 
         public Town(long id)
         {
-            _id = id;
+            Id = id;
         }
 
         public Town(long id, long stateID)
         {
-            _id = id;
+            Id = id;
             State = new State(stateID);
         }
 
@@ -124,12 +120,12 @@ namespace Model.Users
 
         public long GetId()
         {
-            return _id;
+            return Id;
         }
 
         public void SetId(long id)
         {
-            _id = id;
+            Id = id;
         }
     }
 }

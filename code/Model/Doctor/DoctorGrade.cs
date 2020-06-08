@@ -7,7 +7,7 @@ namespace Model.Doctor
    public class DoctorGrade : IIdentifiable<long>
     {
         public Dictionary<String, double> GradesForEachQuestions { get; set; }
-        public int numberOfGrades { get; set; }
+        public int NumberOfGrades { get; set; }
 
         public long Id;
 
@@ -15,20 +15,20 @@ namespace Model.Doctor
 
         public DoctorGrade(long id, int numberOfGrades)
         {
-            numberOfGrades = numberOfGrades;
+            NumberOfGrades = numberOfGrades;
             Id = id;
         }
 
         public DoctorGrade( long id, int numberOfGrades, Dictionary<string, double> gradesForEachQuestions)
         {
             GradesForEachQuestions = gradesForEachQuestions;
-            numberOfGrades = numberOfGrades;
+            NumberOfGrades = numberOfGrades;
             Id = id;
         }
 
         public DoctorGrade(int numberOfGrades, Dictionary<string, double> gradesForEachQuestions)
         {
-            numberOfGrades = numberOfGrades;
+            NumberOfGrades = numberOfGrades;
             GradesForEachQuestions = gradesForEachQuestions;
         }
 

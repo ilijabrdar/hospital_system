@@ -7,9 +7,8 @@ using Service;
 
 namespace bolnica.Service
 {
-    public interface IDirectorService : IService<Director, long>
+    public interface IDirectorService : IService<Director, long>, IUserGetterService
     {
-        Director GetDirectorByUsername(String username);
         Doctor RegisterDoctor(Doctor doctor);
     }
 }

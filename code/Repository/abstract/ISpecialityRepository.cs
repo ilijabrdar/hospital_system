@@ -5,7 +5,7 @@ using System;
 
 namespace Repository
 {
-   public interface ISpecialityRepository : IRepository<Speciality,long>
+   public interface ISpecialityRepository : IGetterRepository<Speciality,long>
    {
     }
 }

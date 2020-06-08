@@ -47,9 +47,9 @@ namespace Controller
             return _patientService.GetPatientByJMBG(jmbg);
         }
 
-        public DoctorGrade GiveGrade(Doctor doctor, Dictionary<string, double> gradesForDoctor)
+        public DoctorGrade GiveGradeToDoctor(Doctor doctor, Dictionary<string, double> gradesForDoctor)
         {
-            return _patientService.GiveGrade(doctor, gradesForDoctor);
+            return _patientService.GiveGradeToDoctor(doctor, gradesForDoctor);
         }
 
         public Patient Save(Patient entity)
