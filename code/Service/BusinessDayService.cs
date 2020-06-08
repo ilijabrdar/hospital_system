@@ -4,20 +4,26 @@
  * Purpose: Definition of the Class Service.BusinessDayService
  ***********************************************************************/
 
+using bolnica.Model.Dto;
+using bolnica.Repository;
 using bolnica.Service;
 using Model.Director;
+using Model.Dto;
 using Model.PatientSecretary;
 using Model.Users;
 using Repository;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 
 namespace Service
 {
    public class BusinessDayService : IBusinessDayService
    {
     
-        private IBusinessDayRepository _businessDayRepository;
+        private readonly IBusinessDayRepository _businessDayRepository;
+        public ISearchPeriods _searchPeriods { get; set; }
         public static double durationOfExamination = 20;
 
         public void Delete(BusinessDay entity)
@@ -35,7 +41,7 @@ namespace Service
             throw new NotImplementedException();
         }
 
-        public List<Period> GenerateAvailablePeriods(BusinessDay businessDay)
+  /*      public List<Period> GenerateAvailablePeriods(BusinessDay businessDay)
         {
             BusinessDay thatDay = getExactDay(businessDay);
             if (thatDay.Equals(null))
@@ -51,43 +57,61 @@ namespace Service
                 start.AddMinutes(durationOfExamination);
                 end.AddMinutes(durationOfExamination);
             }
+            if (thatDay.ScheduledPeriods.Count == 0) { return retVal; }
+            foreach (Period i in thatDay.ScheduledPeriods)
+                retVal.Remove(i);
             return retVal;
         }
-
-        private BusinessDay getExactDay(BusinessDay businessDay)
+*/
+        private BusinessDay getExactDay(Doctor doctor, DateTime date)
         {
-            foreach (BusinessDay day in _businessDayRepository.GetAll())
+            foreach (BusinessDay day in _businessDayRepository.GetAllEager())
             {
-                if (day.doctor.Equals(businessDay.doctor) && day.Shift.EndDate.Date.Equals(businessDay.Shift.EndDate.Date))
+                if (day.doctor.Id == doctor.Id && day.Shift.EndDate.Date.Equals(date.Date))
                    return day;
             }
             return null;
         }
 
+
+        public List<ExaminationDTO> Search(BusinessDayDTO businessDayDTO)
+        {
+            List<BusinessDay> businessDayCollection = _businessDayRepository.GetAllEager().ToList();
+            return _searchPeriods.Search(businessDayDTO, businessDayCollection);
+
+        }
+
+        /*       public List<Examination> PeriodRecommendationByDate(DateTime date)
+               {
+                   List<BusinessDay> businessDays = _businessDayRepository.GetBusinessDaysByDate(date);
+
+                   throw new NotImplementedException();
+               }*/
+
         public BusinessDay Get(long id)
         {
-            throw new NotImplementedException();
+            return _businessDayRepository.GetEager(id);
         }
 
         public IEnumerable<BusinessDay> GetAll()
         {
-            throw new NotImplementedException();
+            return _businessDayRepository.GetAllEager().ToList();
         }
 
         public List<BusinessDay> GetBusinessDaysByDoctor(Doctor doctor)
         {
+
             throw new NotImplementedException();
         }
 
         public bool MarkAsOccupied(Period period, BusinessDay businessDay)
         {
+            
             throw new NotImplementedException();
         }
 
-        public List<BusinessDay> PeriodRecommendationByDate(Period period)
-        {
-            throw new NotImplementedException();
-        }
+
+        
 
         public BusinessDay Save(BusinessDay entity)
         {
@@ -98,5 +122,6 @@ namespace Service
         {
             throw new NotImplementedException();
         }
+
     }
 }

@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  SecretaryService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.SecretaryService
- ***********************************************************************/
-
 using System;
 using System.Collections.Generic;
 using bolnica.Service;
@@ -12,6 +6,7 @@ using Repository;
 
 namespace Service
 {
+
    public class SecretaryService : ISecretaryService
    {
       private ISecretaryRepository _secretaryRepository;
@@ -25,6 +20,7 @@ namespace Service
         {
             throw new NotImplementedException();
         }
+
 
         public void Edit(Secretary entity)
         {

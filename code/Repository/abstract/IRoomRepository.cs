@@ -14,5 +14,6 @@ namespace Repository
     {
       int GetVacantRooms();
       int GetRoomByID();
+
    }
 }

@@ -1,8 +1,4 @@
-/***********************************************************************
- * Module:  DoctorService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.DoctorService
- ***********************************************************************/
+
 
 using Model.Doctor;
 using Model.Users;
@@ -14,18 +10,21 @@ using Service;
 
 namespace Repository
 {
-   public class DoctorRepository : CSVRepository<Doctor, long>, IDoctorRepository, IEagerRepository<Doctor,long>
+   public class DoctorRepository : CSVRepository<Doctor, long>, IDoctorRepository
    {
         private readonly IArticleRepository articleRepo;
         private readonly IEagerRepository<BusinessDay,long> businessDayRepo;
         private readonly ISpecialityRepository specialityRepo;
+        private readonly IDoctorGradeRepository doctorGradeRepository;
         public DoctorRepository(ICSVStream<Doctor> stream, ISequencer<long> sequencer,
-            IArticleRepository article, IEagerRepository<BusinessDay,long> businessDay, ISpecialityRepository speciality) 
+            IArticleRepository article, IEagerRepository<BusinessDay,long> businessDay, ISpecialityRepository speciality,
+            IDoctorGradeRepository doctorGrade) 
             : base(stream, sequencer)
         {
             articleRepo = article;
             specialityRepo = speciality;
             businessDayRepo = businessDay;
+            doctorGradeRepository = doctorGrade;
         }
 
         public IEnumerable<Doctor> GetAllEager()
@@ -43,20 +42,21 @@ namespace Repository
         {
             Doctor doctor = Get(id);
             List<Article> articles = new List<Article>();
-            foreach(Article art in doctor.articles)
+            foreach(Article art in doctor.Articles)
             {
                 articles.Add(articleRepo.Get(art.GetId()));
             }
-            doctor.articles = articles;
+            doctor.Articles = articles;
             List<BusinessDay> businessDays = new List<BusinessDay>();
-            foreach(BusinessDay day in doctor.businessDay)
+            foreach(BusinessDay day in doctor.BusinessDay)
             {
                 businessDays.Add(businessDayRepo.GetEager(day.GetId()));
             }
-            doctor.businessDay = businessDays;
-            doctor.specialty = specialityRepo.Get(doctor.specialty.GetId());
-            // TODO : uraditi za GradeDoctor i repo i interfejs i cuvanje Converter i ovde ga onda staviti!
-            throw new NotImplementedException();
+            doctor.BusinessDay = businessDays;
+            doctor.Specialty = specialityRepo.Get(doctor.Specialty.GetId());
+            doctor.DoctorGrade = doctorGradeRepository.Get(doctor.DoctorGrade.GetId());
+
+            return doctor;
         }
 
         public Doctor GetDoctorByUsername(string username)
@@ -76,7 +76,7 @@ namespace Repository
             List<Doctor> retVal = new List<Doctor>();
             foreach(Doctor doct in doctors)
             {
-                if (doct.specialty.Equals(specialty))
+                if (doct.Specialty.Equals(specialty))
                     retVal.Add(doct);
             }
             return retVal;

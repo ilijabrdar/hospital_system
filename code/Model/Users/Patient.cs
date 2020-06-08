@@ -32,6 +32,10 @@ namespace Model.Users
             this.Password = password;
             this.Image = img;
         }
+        public Patient(long id)
+        {
+            this.Id = id;
+        }
 
         public Patient(Boolean guest)
         {

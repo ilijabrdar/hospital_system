@@ -6,6 +6,7 @@
 
 using bolnica.Service;
 using Model.Director;
+using Model.Users;
 using Repository;
 using System;
 using System.Collections;
@@ -27,13 +28,13 @@ namespace Service
          return false;
       }
       
-      public Boolean AddEquipment(Equipment equipment, Model.Director.Room room)
+      public Boolean AddEquipment(Equipment equipment, Room room)
       {
          // TODO: implement
          return false;
       }
       
-      public Model.Director.Room[] GetVacantRooms()
+      public List<Room> GetVacantRooms()
       {
          // TODO: implement
          return null;
@@ -64,6 +65,34 @@ namespace Service
         public Room Get(long id)
         {
             return _repository.GetEager(id);
+        }
+
+        public IEnumerable<Room> getRoomsCointainingEquipment(Equipment equipment)
+        {
+            IEnumerable<Room> rooms = this.GetAll();
+            List<Room> result = new List<Room>();
+            foreach (Room room in rooms)
+            {
+                //if (room.Equipment_inventory.ContainsKey(equipment))
+                //{
+                //    result.Add(room);
+                //}
+
+                foreach (KeyValuePair<Equipment, int> pair in room.Equipment_inventory)
+                {
+                    if (pair.Key.id == equipment.id)
+                    {
+                        result.Add(room);
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        List<Room> IRoomService.GetVacantRooms()
+        {
+            throw new NotImplementedException();
         }
     }
 }

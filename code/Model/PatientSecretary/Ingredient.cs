@@ -27,6 +27,11 @@ namespace Model.PatientSecretary
             Name = name;
         }
 
+        public Ingredient(long id)
+        {
+            Id = id;
+        }
+
         public long Id { get; set; }
 
         public long GetId() => Id;

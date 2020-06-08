@@ -62,5 +62,11 @@ namespace Controller
         {
             return _service.Get(id);
         }
+
+        public IEnumerable<Room> getRoomsContainingEquipment (Equipment equipment)
+        {
+            return _service.getRoomsCointainingEquipment(equipment);
+        }
+
     }
 }

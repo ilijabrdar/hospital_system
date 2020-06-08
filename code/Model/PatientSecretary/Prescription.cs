@@ -1,64 +1,54 @@
-/***********************************************************************
- * Module:  Recept.cs
- * Author:  Tamara Kovacevic
- * Purpose: Definition of the Class Pacijent.Recept
- ***********************************************************************/
-
+using Repository;
 using System;
+using System.Collections.Generic;
+using System.Windows.Documents;
 
 namespace Model.PatientSecretary
 {
-   public class Prescription
+   public class Prescription: IIdentifiable<long>
    {
-      private DateTime DateOfIssue;
-      private DateTime ExpirationDate;
-      private String Note;
-      
-      private System.Collections.ArrayList drug;
-      
-      /// <pdGenerated>default getter</pdGenerated>
-      public System.Collections.ArrayList GetDrug()
-      {
-         if (drug == null)
-            drug = new System.Collections.ArrayList();
-         return drug;
-      }
-      
-      /// <pdGenerated>default setter</pdGenerated>
-      public void SetDrug(System.Collections.ArrayList newDrug)
-      {
-         RemoveAllDrug();
-         foreach (Drug oDrug in newDrug)
-            AddDrug(oDrug);
-      }
-      
-      /// <pdGenerated>default Add</pdGenerated>
-      public void AddDrug(Drug newDrug)
-      {
-         if (newDrug == null)
-            return;
-         if (this.drug == null)
-            this.drug = new System.Collections.ArrayList();
-         if (!this.drug.Contains(newDrug))
-            this.drug.Add(newDrug);
-      }
-      
-      /// <pdGenerated>default Remove</pdGenerated>
-      public void RemoveDrug(Drug oldDrug)
-      {
-         if (oldDrug == null)
-            return;
-         if (this.drug != null)
-            if (this.drug.Contains(oldDrug))
-               this.drug.Remove(oldDrug);
-      }
-      
-      /// <pdGenerated>default removeAll</pdGenerated>
-      public void RemoveAllDrug()
-      {
-         if (drug != null)
-            drug.Clear();
-      }
-   
-   }
+      public long Id;
+      public DateTime DateOfIssue;
+      public DateTime ExpirationDate;
+      public String Note;
+      public List<Drug> Drug;
+        public Prescription(long id, DateTime dateOfIssue, DateTime expirationDate, string note)
+        {
+            DateOfIssue = dateOfIssue;
+            ExpirationDate = expirationDate;
+            Note = note;
+        }
+
+        public Prescription(long id, DateTime dateOfIssue, DateTime expirationDate, string note, List<Drug> alternative)
+        {
+            DateOfIssue = dateOfIssue;
+            ExpirationDate = expirationDate;
+            Note = note;
+            Id = id;
+            this.Drug = alternative;
+        }
+
+        public Prescription(DateTime dateOfIssue, DateTime expirationDate, string note, List<Drug> drug)
+        {
+            DateOfIssue = dateOfIssue;
+            ExpirationDate = expirationDate;
+            Note = note;
+            Drug = drug;
+        }
+
+        public Prescription(long id)
+        {
+            Id = id;
+        }
+
+        public long GetId()
+        {
+            return this.Id;
+        }
+
+        public void SetId(long id)
+        {
+            this.Id = id;
+        }
+    }
 }

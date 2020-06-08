@@ -1,6 +1,7 @@
 
 using Repository;
 using System;
+using System.Collections.Generic;
 
 namespace Model.PatientSecretary
 {
@@ -11,17 +12,31 @@ namespace Model.PatientSecretary
       public int Amount { get; set; }
       public Boolean Approved = false;
       
-      public Ingredient[] ingredient { get; set; }
-      public Drug[] Alternative { get; set; }
+      public List<Ingredient> Ingredients { get; set; }
+      public List<Drug> Alternative { get; set; }
 
-      public Drug (long id, String name, int ammount, Boolean approved, Ingredient[] ing, Drug[] alter)
+      public Drug (long id, String name, int amount, Boolean approved, List<Ingredient> ingredients, List<Drug> alternative)
         {
             this.Id = id;
             this.Name = name;
-            this.Amount = ammount;
+            this.Amount = amount;
             this.Approved = approved;
-            this.ingredient = ing;
-            this.Alternative = alter;
+            this.Ingredients = ingredients;
+            this.Alternative = alternative;
+        }
+
+        public Drug(long id)
+        {
+            Id = id;
+        }
+
+        public Drug(string name, int amount, bool approved, List<Ingredient> ingredients, List<Drug> alternative)
+        {
+            Name = name;
+            Amount = amount;
+            Approved = approved;
+            Ingredients = ingredients;
+            Alternative = alternative;
         }
 
         public long GetId()

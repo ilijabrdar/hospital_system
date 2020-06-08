@@ -65,8 +65,15 @@ namespace Repository
         public Room GetEager(long id)
         {
             Room room = base.Get(id);
-            room.RoomType = _roomTypeRepository.Get(id);
-
+            room.RoomType = _roomTypeRepository.Get(room.RoomType.Id);
+            
+            foreach (KeyValuePair<Equipment,int> pair in room.Equipment_inventory)
+            {
+                Equipment temp = _equipmentRepository.Get(pair.Key.id);
+                pair.Key.Name = temp.Name;
+                pair.Key.Type = temp.Type;
+                pair.Key.Amount = temp.Amount;
+            }
             return room;
         }
 
@@ -79,8 +86,6 @@ namespace Repository
         {
             throw new NotImplementedException();
         }
-
-        
 
     }
 }

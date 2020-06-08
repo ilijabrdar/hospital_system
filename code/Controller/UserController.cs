@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  UserService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.UserService
- ***********************************************************************/
-
 using bolnica.Controller;
 using bolnica.Service;
 using Model.Users;
@@ -29,21 +23,6 @@ namespace Controller
         }
 
         public bool BlockUser(string username)
-        {
-            throw new NotImplementedException();
-        }
-
-        public object Delete()
-        {
-            throw new NotImplementedException();
-        }
-
-        public object Edit()
-        {
-            throw new NotImplementedException();
-        }
-
-        public object GetAll()
         {
             throw new NotImplementedException();
         }
@@ -77,7 +56,7 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        IEnumerable<User> IController<User, long>.GetAll()
+        public IEnumerable<User> GetAll()
         {
             throw new NotImplementedException();
         }
