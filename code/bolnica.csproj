@@ -432,7 +432,6 @@
     <Compile Include="Repository\SecretaryRepository.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Repository\Speciality.cs" />
     <Compile Include="Repository\CSV\Converter\SpecialityCSVConverter.cs" />
     <Compile Include="Repository\SpecialityRepository.cs">
       <SubType>Code</SubType>
@@ -442,6 +441,7 @@
     <Compile Include="Repository\CSV\Converter\TownCSVConverter.cs" />
     <Compile Include="Repository\TownRepository.cs" />
     <Compile Include="Service\abstract\IBusinessDayService.cs" />
+    <Compile Include="Service\abstract\IDirectorService.cs" />
     <Compile Include="Service\abstract\IDoctorService.cs" />
     <Compile Include="Service\abstract\IEquipmentService.cs" />
     <Compile Include="Service\abstract\IIngredientService.cs" />
@@ -449,6 +449,7 @@
     <Compile Include="Service\abstract\IPatientService.cs" />
     <Compile Include="Service\abstract\IRenovationService.cs" />
     <Compile Include="Service\abstract\IRoomTypeService.cs" />
+    <Compile Include="Service\abstract\ISecretaryService.cs" />
     <Compile Include="Service\AnamnesisService.cs">
       <SubType>Code</SubType>
     </Compile>

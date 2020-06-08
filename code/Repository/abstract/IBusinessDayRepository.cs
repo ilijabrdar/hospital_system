@@ -12,7 +12,7 @@ using System.Collections.Generic;
 
 namespace Repository
 {
-   public interface IBusinessDayRepository : IRepository<BusinessDay, long>, IGetterRepository<BusinessDay, long>
+   public interface IBusinessDayRepository : IRepository<BusinessDay, long>
    {
       Boolean SetRoomForBusinessDay(BusinessDay businessDay, Room room);
       List<BusinessDay> GetBusinessDaysByDate(DateTime date);

@@ -10,8 +10,8 @@ namespace bolnica.Controller
 {
    public interface IDoctorController : IController<Doctor, long>
 {
-         List<Doctor> GetDoctorsBySpeciality(Specialty specialty);
-         Boolean ChangeSpeciality(Specialty speciality, Doctor doctor);
+         List<Doctor> GetDoctorsBySpeciality(Speciality specialty);
+         Boolean ChangeSpeciality(Speciality speciality, Doctor doctor);
 
         DoctorGrade GiveGrade(DoctorGrade doctorGrade);
     }

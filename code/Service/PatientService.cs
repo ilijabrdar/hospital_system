@@ -5,7 +5,6 @@
  ***********************************************************************/
 
 using bolnica.Service;
-using bolnica.Services;
 using Model.PatientSecretary;
 using Model.Users;
 using Repository;
@@ -28,7 +27,7 @@ namespace Service
 
         public Patient Save(Patient entity)
         {
-            if (_patientRepository.GetPatientByUsername(entity.Username).Equals(null))
+            if (_patientRepository.GetPatientByUsername(entity.Username) != null)
             {
                 return null;
             }
@@ -61,6 +60,11 @@ namespace Service
         public Patient ClaimAccount(long id)
         {
             throw new NotImplementedException();
+        }
+
+        public Patient GetPatientByUsername(string username)
+        {
+            return _patientRepository.GetPatientByUsername(username);
         }
     }
 }
