@@ -67,14 +67,14 @@ namespace Service
         public User IsUsernameValid(string username)
         {
             User user = null;
-            if ((user = _patientService.GetPatientByUsername(username)) != null)
-                return user;
+            //if ((user = _patientService.GetPatientByUsername(username)) != null)
+            //    return user;
             if ((user = _secretaryService.GetSecretaryByUsername(username)) != null)
                 return user;
-            else if ((user = _directorService.GetDirectorByUsername(username)) != null)
-                return user;
-            else if ((user = _doctorService.GetDoctorByUsername(username)) != null)
-              return user;
+            //else if ((user = _directorService.GetDirectorByUsername(username)) != null)
+            //    return user;
+            //else if ((user = _doctorService.GetDoctorByUsername(username)) != null)
+            //  return user;
 
             return user;
         }

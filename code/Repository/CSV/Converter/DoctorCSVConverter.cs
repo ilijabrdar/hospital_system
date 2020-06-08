@@ -48,12 +48,8 @@ namespace bolnica.Repository.CSV.Converter
         {
             StringBuilder sb = new StringBuilder();
             entity.Image.Save("../../Images/" + entity.Username + "Jpeg", System.Drawing.Imaging.ImageFormat.Jpeg);
-<<<<<<< HEAD
-            string generalData = string.Join(_delimiter, entity.Id, entity.FirstName, entity.LastName, entity.Jmbg, entity.Email, entity.Phone, entity.DateOfBirth, entity.Address, entity.Username, entity.Password,  entity.specialty.GetId());
-=======
             string generalData = string.Join(_delimiter, entity.Id, entity.FirstName, entity.LastName, entity.Jmbg, entity.Email, entity.Phone, entity.DateOfBirth, entity.Address, entity.Username, entity.Password,  entity.Specialty.GetId());
 
->>>>>>> login
             sb.Append(generalData);
             sb.Append(_delimiter);
             if(entity.Articles.Count != 0)

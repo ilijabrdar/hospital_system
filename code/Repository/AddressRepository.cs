@@ -7,7 +7,7 @@ using Model.Users;
 
 namespace bolnica.Repository
 {
-    public class AddressRepository : CSVGetterRepository<Address, long>, IAddressRepository, IEagerRepository<Address, long>
+    public class AddressRepository : CSVGetterRepository<Address, long>, IAddressRepository
     {
         public AddressRepository(ICSVStream<Address> stream, ISequencer<long> sequencer) : base(stream, sequencer)
         {

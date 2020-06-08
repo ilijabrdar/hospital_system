@@ -13,6 +13,7 @@ using Controller;
 using bolnica.Controller;
 using bolnica.Repository.CSV.Converter;
 using System.Windows.Controls;
+using bolnica.Service;
 
 namespace UserInterface
 {
@@ -44,6 +45,9 @@ namespace UserInterface
 
             UserService userService = new UserService(null, null, secretaryService, null);
             UserController = new UserController(userService);
+
+            StateService stateService = new StateService(stateRepository);
+            Console.WriteLine(stateService.GetAll());
 
             //User user = userController.Login("pera", "pera");
             //Secretary secretary = (Secretary)user;
