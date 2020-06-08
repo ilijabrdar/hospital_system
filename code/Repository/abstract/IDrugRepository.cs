@@ -10,7 +10,7 @@ using System;
 
 namespace Repository
 {
-   public interface IDrugRepository : IRepository<Drug,long>
+   public interface IDrugRepository : IRepository<Drug,long>, IEagerRepository<Drug,long>
    {
       Drug[] GetAlternative(Drug drug);
       Drug[] GetNotApproved();
