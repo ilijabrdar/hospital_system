@@ -43,7 +43,8 @@ namespace UserInterface
             }
             catch(Exception exception)
             {
-                MessageBox.Show(exception.Message);
+                TextBlock err = (TextBlock)FindName("ErrorMessage");
+                err.Visibility = Visibility.Visible;
             }     
         }
     }

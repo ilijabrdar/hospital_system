@@ -33,6 +33,7 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <EventSetter Event="GotFocus" Handler="TextBox_GotFocus"/>
         </Style>
     </Application.Resources>
 </Application>

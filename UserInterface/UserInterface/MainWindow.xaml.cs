@@ -25,11 +25,11 @@ namespace UserInterface
         public Secretary Secretary { get; set; }
         public Patient GuestPatient { get; set; }
         public int Day { get; set; }
-        public int NewDay { get; set; }
+        public String NewDay { get; set; }
         public static int Month { get; set; }
-        public static int NewMonth { get; set; }
+        public static String NewMonth { get; set; }
         public static int Year { get; set; }
-        public static int NewYear { get; set; }
+        public static String NewYear { get; set; }
         public BitmapSource Image { get; set; }
         public List<Examination> examinations { get; set; }
         public List<Examination> freeSlots { get; set; }
@@ -107,13 +107,13 @@ namespace UserInterface
         private void FindAppointment(object sender, RoutedEventArgs e)
         {
             AppointmentFilter filterWindow = new AppointmentFilter();
-            filterWindow.Show();
+            filterWindow.ShowDialog();
         }
 
         private void FindFreeAppointment(object sender, RoutedEventArgs e)
         {
             AppointmentSearch searchDialog = new AppointmentSearch();
-            searchDialog.Show();
+            searchDialog.ShowDialog();
         }
 
         private void OpenEditPanel(object sender, RoutedEventArgs e)
@@ -137,7 +137,7 @@ namespace UserInterface
         private void EditSelectedAppointment(object sender, RoutedEventArgs e)
         {
             EditAppointment editDialog = new EditAppointment();
-            editDialog.Show();
+            editDialog.ShowDialog();
         }
 
         private void FreeSelectedAppointment(object sender, RoutedEventArgs e)
@@ -170,10 +170,34 @@ namespace UserInterface
             textField.GetBindingExpression(TextBox.TextProperty).UpdateSource();
         }
 
-        private void SelectAllOnFocus(object sender, RoutedEventArgs e)
+        private void DayPlaceHolderDisappear(object sender, RoutedEventArgs e)
         {
-            TextBox textField = sender as TextBox;
-            textField.SelectAll();
+            TextBox textBox = sender as TextBox;
+            TextBlock placeHolder = (TextBlock)FindName("DayPlaceHolder");
+            if(String.IsNullOrEmpty(textBox.Text))
+                placeHolder.Visibility = Visibility.Visible;
+            else
+                placeHolder.Visibility = Visibility.Collapsed;
+        }
+
+        private void MonthPlaceHolderDisappear(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            TextBlock placeHolder = (TextBlock)FindName("MonthPlaceHolder");
+            if (String.IsNullOrEmpty(textBox.Text))
+                placeHolder.Visibility = Visibility.Visible;
+            else
+                placeHolder.Visibility = Visibility.Collapsed;
+        }
+
+        private void YearPlaceHolderDisappear(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            TextBlock placeHolder = (TextBlock)FindName("YearPlaceHolder");
+            if (String.IsNullOrEmpty(textBox.Text))
+                placeHolder.Visibility = Visibility.Visible;
+            else
+                placeHolder.Visibility = Visibility.Collapsed;
         }
     }
 }

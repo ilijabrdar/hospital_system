@@ -39,7 +39,7 @@ namespace UserInterface
             FromMonth = ToMonth = DateTime.Now.Month;
             FromYear = ToYear = DateTime.Now.Year;
             FromHour = ToHour = DateTime.Now.Hour;
-            FromHour = ToHour = DateTime.Now.Minute;
+            FromMinute = ToMinute = DateTime.Now.Minute;
         }
 
         private void CloseWindow(object sender, RoutedEventArgs e)

@@ -18,5 +18,6 @@
         <Label HorizontalAlignment="Center" Margin="10 5 10 0" FontSize="9">Lozinka</Label>
         <PasswordBox x:Name="password" Height="23" Margin="10 0 10 20"/>
         <Button Content="Prijavi se" Margin="50 0 50 0" Height="30" Background="#1771F1" Foreground="White" Click="Button_Click"/>
+        <TextBlock x:Name="ErrorMessage" TextWrapping="Wrap" HorizontalAlignment="Center" Text="Pogrešno korisničko ime ili lozinka." Margin="10" Visibility="Hidden" Foreground="Red"/>
     </StackPanel>
 </Window>

@@ -4,27 +4,157 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UserInterface"
+        xmlns:val="clr-namespace:UserInterface.Validation"
         mc:Ignorable="d"
-        Title="Izmena pregleda" Height="250" Width="400"
+        Title="Izmena pregleda" Height="280" Width="400"
         ResizeMode="NoResize">
     <Grid>
         <Label Content="Lekar" HorizontalAlignment="Left" Margin="40,10,0,0" VerticalAlignment="Top"/>
-        <Label Content="Pacijent" HorizontalAlignment="Left" Margin="40,40,0,0" VerticalAlignment="Top"/>
-        <Label Content="Datum" HorizontalAlignment="Left" Margin="40,70,0,0" VerticalAlignment="Top"/>
-        <Label Content="Termin" HorizontalAlignment="Left" Margin="40,100,0,0" VerticalAlignment="Top"/>
-        <Label Content="Sala" HorizontalAlignment="Left" Margin="40,130,0,0" VerticalAlignment="Top"/>
+        <Label Content="Pacijent" HorizontalAlignment="Left" Margin="40,50,0,0" VerticalAlignment="Top"/>
+        <Label Content="Datum" HorizontalAlignment="Left" Margin="40,90,0,0" VerticalAlignment="Top"/>
+        <Label Content="Termin" HorizontalAlignment="Left" Margin="40,130,0,0" VerticalAlignment="Top"/>
+        <Label Content="Sala" HorizontalAlignment="Left" Margin="40,170,0,0" VerticalAlignment="Top"/>
         <ComboBox HorizontalAlignment="Left" Margin="130,10,0,0" VerticalAlignment="Top" Width="200"/>
-        <ComboBox HorizontalAlignment="Left" Margin="130,40,0,0" VerticalAlignment="Top" Width="200"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="130,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="205,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="280,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="130,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="205,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50"/>
-        <ComboBox HorizontalAlignment="Left" Margin="130,130,0,0" VerticalAlignment="Top" Width="200"/>
-        <Label Content="/" HorizontalAlignment="Left" Margin="185,70,0,0" VerticalAlignment="Top"/>
-        <Label Content="/" HorizontalAlignment="Left" Margin="260,70,0,0" VerticalAlignment="Top"/>
-        <Label Content=":" HorizontalAlignment="Left" Margin="185,100,0,0" VerticalAlignment="Top"/>
-        <Button Content="Pretraži" HorizontalAlignment="Left" Margin="175,167,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Content="Odustani" HorizontalAlignment="Left" Margin="255,167,0,0" VerticalAlignment="Top" Width="75" Click="CloseDialog"/>
+        <ComboBox HorizontalAlignment="Left" Margin="130,50,0,0" VerticalAlignment="Top" Width="200"/>
+        <TextBlock HorizontalAlignment="Left" Margin="140,74,0,0" TextWrapping="Wrap" Text="YYYY" VerticalAlignment="Top" FontWeight="Bold" Foreground="gray" Opacity="50">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IYear}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <TextBox x:Name="IYear" HorizontalAlignment="Left" Height="23" Margin="130,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50">
+            <TextBox.Text>
+                <Binding Path="Year" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:YearValidation ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBlock HorizontalAlignment="Left" Margin="220,74,0,0" TextWrapping="Wrap" Text="MM" VerticalAlignment="Top" FontWeight="Bold" Foreground="gray" Opacity="50">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IMonth}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <TextBox x:Name="IMonth" HorizontalAlignment="Left" Height="23" Margin="205,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50">
+            <TextBox.Text>
+                <Binding Path="Month" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:MonthValidation ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBlock HorizontalAlignment="Left" Margin="295,74,0,0" TextWrapping="Wrap" Text="DD" VerticalAlignment="Top" FontWeight="Bold" Foreground="gray" Opacity="50">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IDay}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <TextBox x:Name="IDay" HorizontalAlignment="Left" Height="23" Margin="280,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50">
+            <TextBox.Text>
+                <Binding Path="Day" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:DayEditValidation ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBlock HorizontalAlignment="Left" Margin="145,115,0,0" TextWrapping="Wrap" Text="HH" VerticalAlignment="Top" FontWeight="Bold" Foreground="gray" Opacity="50">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IHour}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <TextBox x:Name="IHour" HorizontalAlignment="Left" Height="23" Margin="130,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50">
+            <TextBox.Text>
+                <Binding Path="Hour" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:HourValidation ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBlock HorizontalAlignment="Left" Margin="220,115,0,0" TextWrapping="Wrap" Text="MM" VerticalAlignment="Top" FontWeight="Bold" Foreground="gray" Opacity="50">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IMinute}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <TextBox x:Name="IMinute" HorizontalAlignment="Left" Height="23" Margin="205,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50">
+            <TextBox.Text>
+                <Binding Path="Minute" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:MinuteValidation ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <ComboBox HorizontalAlignment="Left" Margin="130,170,0,0" VerticalAlignment="Top" Width="200"/>
+        <Label Content="/" HorizontalAlignment="Left" Margin="185,90,0,0" VerticalAlignment="Top"/>
+        <Label Content="/" HorizontalAlignment="Left" Margin="260,90,0,0" VerticalAlignment="Top"/>
+        <Label Content=":" HorizontalAlignment="Left" Margin="185,130,0,0" VerticalAlignment="Top"/>
+        <Button Content="Pretraži" HorizontalAlignment="Left" Margin="175,216,0,0" VerticalAlignment="Top" Width="75" Height="25">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="IsEnabled" Value="False"/>
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IYear}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IMonth}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IDay}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IHour}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IMinute}" Value="False"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="True"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button Content="Odustani" HorizontalAlignment="Left" Margin="255,216,0,0" VerticalAlignment="Top" Width="75" Click="CloseDialog"/>
+        
     </Grid>
 </Window>

@@ -19,9 +19,21 @@ namespace UserInterface
     /// </summary>
     public partial class AppointmentSearch : Window
     {
+        public int Day { get; set; }
+        public static int Month { get; set; }
+        public static int Year { get; set; }
+        public int Hour  { get; set; }
+        public int Minute { get; set; }
+
         public AppointmentSearch()
         {
             InitializeComponent();
+            this.DataContext = this;
+            Day = DateTime.Now.Day;
+            Month = DateTime.Now.Month;
+            Year = DateTime.Now.Year;
+            Hour = DateTime.Now.Hour;
+            Minute = DateTime.Now.Minute;
         }
 
         private void CencelDialog(object sender, RoutedEventArgs e)

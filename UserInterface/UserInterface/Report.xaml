@@ -6,28 +6,51 @@
         xmlns:local="clr-namespace:UserInterface"
         xmlns:val="clr-namespace:UserInterface.Validation"
         mc:Ignorable="d"
-        Title="Generisanje izveštaja" Height="200" Width="610"
+        Title="Generisanje izveštaja" Height="220" Width="610"
         ResizeMode="NoResize">
-    <Window.Resources>
-    <Style TargetType="TextBox">
-        <EventSetter Event="GotFocus" Handler="SelectAllOnFocus"/>
-    </Style>
-    </Window.Resources>
     <Grid>
         <Label Content="Lekar" HorizontalAlignment="Left" Margin="40,10,0,0" VerticalAlignment="Top"/>
         <Label Content="Datum" HorizontalAlignment="Left" Margin="40,50,0,0" VerticalAlignment="Top"/>
         <Label Content="Termin" HorizontalAlignment="Left" Margin="40,90,0,0" VerticalAlignment="Top"/>
         <ComboBox HorizontalAlignment="Left" Margin="130,10,0,0" VerticalAlignment="Top" Width="425"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="130,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50">
+        <TextBlock Text="YYYY" HorizontalAlignment="Left" Height="15" Margin="140,35,0,0" VerticalAlignment="Top" Width="50" FontWeight="Bold" Foreground="gray" Opacity="50">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IFromYear}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <TextBox x:Name="IFromYear" HorizontalAlignment="Left" Height="23" Margin="130,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50">
             <TextBox.Text>
-                <Binding Path="FromDay" UpdateSourceTrigger="PropertyChanged">
+                <Binding Path="FromYear" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
-                        <val:FromDayReportValidation ValidationStep="RawProposedValue"/>
+                        <val:YearValidation ValidationStep="RawProposedValue"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="205,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50">
+        <TextBlock Text="MM" HorizontalAlignment="Left" Height="15" Margin="220,35,0,0" VerticalAlignment="Top" Width="50" FontWeight="Bold" Foreground="gray" Opacity="50">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IFromMonth}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <TextBox x:Name="IFromMonth" HorizontalAlignment="Left" Height="23" Margin="205,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50">
         <TextBox.Text>
             <Binding Path="FromMonth" UpdateSourceTrigger="PropertyChanged">
                 <Binding.ValidationRules>
@@ -36,79 +59,214 @@
             </Binding>
         </TextBox.Text>
         </TextBox>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="280,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50">
+        <TextBlock Text="DD" HorizontalAlignment="Left" Height="15" Margin="295,35,0,0" VerticalAlignment="Top" Width="50" FontWeight="Bold" Foreground="gray" Opacity="50">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IFromDay}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <TextBox x:Name="IFromDay" HorizontalAlignment="Left" Height="23" Margin="280,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50">
         <TextBox.Text>
-            <Binding Path="FromYear" UpdateSourceTrigger="PropertyChanged">
+            <Binding Path="FromDay" UpdateSourceTrigger="PropertyChanged">
                 <Binding.ValidationRules>
-                    <val:YearValidation ValidationStep="RawProposedValue"/>
+                    <val:FromDayReportValidation ValidationStep="RawProposedValue"/>
                 </Binding.ValidationRules>
             </Binding>
         </TextBox.Text>
         </TextBox>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="355,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50">
-            <TextBox.Text>
-                <Binding Path="ToDay" UpdateSourceTrigger="PropertyChanged">
-                    <Binding.ValidationRules>
-                        <val:DayValidation ValidationStep="RawProposedValue"/>
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="430,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50">
-            <TextBox.Text>
-                <Binding Path="ToMonth" UpdateSourceTrigger="PropertyChanged">
-                    <Binding.ValidationRules>
-                        <val:YearValidation ValidationStep="RawProposedValue"/>
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="505,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50">
+        <TextBlock Text="YYYY" HorizontalAlignment="Left" Height="15" Margin="365,35,0,0" VerticalAlignment="Top" Width="50" FontWeight="Bold" Foreground="gray" Opacity="50">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IToYear}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <TextBox x:Name="IToYear" HorizontalAlignment="Left" Height="23" Margin="355,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50">
             <TextBox.Text>
                 <Binding Path="ToYear" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
-                        <val:YearValidation ValidationStep="RawProposedValue"/>
+                        <val:ToYearReportValidation ValidationStep="RawProposedValue"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="130,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50">
+        <TextBlock Text="MM" HorizontalAlignment="Left" Height="15" Margin="445,35,0,0" VerticalAlignment="Top" Width="50" FontWeight="Bold" Foreground="gray" Opacity="50">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IToMonth}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <TextBox x:Name="IToMonth" HorizontalAlignment="Left" Height="23" Margin="430,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50">
+            <TextBox.Text>
+                <Binding Path="ToMonth" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:ToMonthReportValidation ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBlock Text="DD" HorizontalAlignment="Left" Height="15" Margin="515,35,0,0" VerticalAlignment="Top" Width="50" FontWeight="Bold" Foreground="gray" Opacity="50">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IToDay}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <TextBox x:Name="IToDay" HorizontalAlignment="Left" Height="23" Margin="505,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50">
+            <TextBox.Text>
+                <Binding Path="ToDay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:ToDayReportValidation ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBlock Text="HH" HorizontalAlignment="Left" Height="15" Margin="145,75,0,0" VerticalAlignment="Top" Width="50" FontWeight="Bold" Foreground="gray" Opacity="50">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IFromHour}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <TextBox x:Name="IFromHour" HorizontalAlignment="Left" Height="23" Margin="130,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50">
             <TextBox.Text>
                 <Binding Path="FromHour" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
-                        <val:YearValidation ValidationStep="RawProposedValue"/>
+                        <val:HourValidation ValidationStep="RawProposedValue"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="205,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50">
+        <TextBlock Text="MM" HorizontalAlignment="Left" Height="15" Margin="220,75,0,0" VerticalAlignment="Top" Width="50" FontWeight="Bold" Foreground="gray" Opacity="50">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IFromMinute}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <TextBox x:Name="IFromMinute" HorizontalAlignment="Left" Height="23" Margin="205,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50">
             <TextBox.Text>
                 <Binding Path="FromMinute" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
-                        <val:YearValidation ValidationStep="RawProposedValue"/>
+                        <val:MinuteValidation ValidationStep="RawProposedValue"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="355,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50">
+        <TextBlock Text="HH" HorizontalAlignment="Left" Height="15" Margin="370,75,0,0" VerticalAlignment="Top" Width="50" FontWeight="Bold" Foreground="gray" Opacity="50">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IToHour}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <TextBox x:Name="IToHour" HorizontalAlignment="Left" Height="23" Margin="355,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50">
             <TextBox.Text>
                 <Binding Path="ToHour" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
-                        <val:YearValidation ValidationStep="RawProposedValue"/>
+                        <val:ToHourValidation ValidationStep="RawProposedValue"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="430,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50">
+        <TextBlock Text="MM" HorizontalAlignment="Left" Height="15" Margin="445,75,0,0" VerticalAlignment="Top" Width="50" FontWeight="Bold" Foreground="gray" Opacity="50">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IToMinute}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <TextBox x:Name="IToMinute" HorizontalAlignment="Left" Height="23" Margin="430,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50">
             <TextBox.Text>
                 <Binding Path="ToMinute" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
-                        <val:YearValidation ValidationStep="RawProposedValue"/>
+                        <val:ToMinuteValidation ValidationStep="RawProposedValue"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <Button Content="Generiši" HorizontalAlignment="Left" Margin="389,135,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Generiši" HorizontalAlignment="Left" Margin="389,135,0,0" VerticalAlignment="Top" Width="75" Height="25">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="IsEnabled" Value="False"/>
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IFromYear}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IFromMonth}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IFromDay}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IToYear}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IToMonth}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IToDay}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IFromHour}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IFromMinute}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IToHour}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IToMinute}" Value="False"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="True"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
         <Button Content="Odustani" HorizontalAlignment="Left" Margin="480,135,0,0" VerticalAlignment="Top" Width="75" Click="CloseWindow"/>
         <Label Content="/" HorizontalAlignment="Left" Margin="185,50,0,0" VerticalAlignment="Top"/>
         <Label Content="/" HorizontalAlignment="Left" Margin="260,50,0,0" VerticalAlignment="Top"/>

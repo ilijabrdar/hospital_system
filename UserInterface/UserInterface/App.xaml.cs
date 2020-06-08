@@ -12,6 +12,7 @@ using Service;
 using Controller;
 using bolnica.Controller;
 using bolnica.Repository.CSV.Converter;
+using System.Windows.Controls;
 
 namespace UserInterface
 {
@@ -55,6 +56,12 @@ namespace UserInterface
             //Console.WriteLine(secretary.address.Street);
             //Console.WriteLine(secretary.address.GetTown().Name);
             //Console.WriteLine(secretary.address.GetTown().GetState().Name);
+        }
+
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textField = sender as TextBox;
+            textField.SelectAll();
         }
     }
 }

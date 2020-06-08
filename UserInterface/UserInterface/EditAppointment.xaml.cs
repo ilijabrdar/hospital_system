@@ -19,9 +19,21 @@ namespace UserInterface
     /// </summary>
     public partial class EditAppointment : Window
     {
+        public static int Day { get; set; }
+        public static int Month { get; set; }
+        public static int Year { get; set; }
+        public static int Hour { get; set; }
+        public static int Minute { get; set; }
+
         public EditAppointment()
         {
             InitializeComponent();
+            this.DataContext = this;
+            Day = DateTime.Now.Day;
+            Month = DateTime.Now.Month;
+            Year = DateTime.Now.Year;
+            Hour = DateTime.Now.Hour;
+            Minute = DateTime.Now.Minute;
         }
 
         private void CloseDialog(object sender, RoutedEventArgs e)

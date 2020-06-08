@@ -289,16 +289,17 @@
                                 </Binding>
                             </TextBox.Text>
                         </TextBox>
-                        <TextBox x:Name="IGuestDay" HorizontalAlignment="Left" Height="23" Margin="192,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" LostFocus="RequiredFieldError">
+                        <TextBox x:Name="IGuestYear" HorizontalAlignment="Left" Height="23" Margin="192,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" KeyUp="YearPlaceHolderDisappear" LostFocus="RequiredFieldError">
                             <TextBox.Text>
-                                <Binding Path="NewDay" UpdateSourceTrigger="PropertyChanged">
+                                <Binding Path="NewYear" UpdateSourceTrigger="PropertyChanged">
                                     <Binding.ValidationRules>
-                                        <val:GuestDayValidation ValidationStep="RawProposedValue"/>
+                                        <val:YearValidation ValidationStep="RawProposedValue"/>
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
                         </TextBox>
-                        <TextBox x:Name="IGuestMonth" HorizontalAlignment="Left" Height="23" Margin="267,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" LostFocus="RequiredFieldError">
+                        <TextBlock x:Name="YearPlaceHolder" Text="YYYY" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="200,143,0,0" Height="23" Width="30" FontWeight="Bold" Foreground="Gray" Opacity="50"/>
+                        <TextBox x:Name="IGuestMonth" HorizontalAlignment="Left" Height="23" Margin="267,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" KeyUp="MonthPlaceHolderDisappear" LostFocus="RequiredFieldError">
                             <TextBox.Text>
                                 <Binding Path="NewMonth" UpdateSourceTrigger="PropertyChanged">
                                     <Binding.ValidationRules>
@@ -307,15 +308,17 @@
                                 </Binding>
                             </TextBox.Text>
                         </TextBox>
-                        <TextBox x:Name="IGuestYear" HorizontalAlignment="Left" Height="23" Margin="342,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" LostFocus="RequiredFieldError">
+                        <TextBlock x:Name="MonthPlaceHolder" Text="MM" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="280,143,0,0" Height="23" Width="30" FontWeight="Bold" Foreground="Gray" Opacity="50"/>
+                        <TextBox x:Name="IGuestDay" HorizontalAlignment="Left" Height="23" Margin="342,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" KeyUp="DayPlaceHolderDisappear" LostFocus="RequiredFieldError">
                         <TextBox.Text>
-                            <Binding Path="NewYear" UpdateSourceTrigger="PropertyChanged">
+                            <Binding Path="NewDay" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
-                                    <val:YearValidation ValidationStep="RawProposedValue"/>
+                                    <val:GuestDayValidation ValidationStep="RawProposedValue"/>
                                     </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
                         </TextBox>
+                        <TextBlock x:Name="DayPlaceHolder" Text="DD" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="355,143,0,0" Height="23" Width="30" FontWeight="Bold" Foreground="Gray" Opacity="50"/>
                         <TextBox x:Name="IGuestPhone" HorizontalAlignment="Left" Height="23" Margin="192,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240">
                             <TextBox.Text>
                                 <Binding Path="GuestPatient.Phone" UpdateSourceTrigger="PropertyChanged">

@@ -18,7 +18,7 @@ namespace UserInterface.Validation
 
             if (long.TryParse(val, out _))
             {
-                if (val.Trim().Length > 13)
+                if (val.Trim().Length != 13)
                     return new ValidationResult(false, "Broj cifara mora biti 13.");
                 return new ValidationResult(true, null);
             }
