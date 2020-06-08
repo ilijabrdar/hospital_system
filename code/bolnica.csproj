@@ -96,11 +96,8 @@
     </Compile>
     <Compile Include="Controller\abstract\IBusinessDayController.cs" />
     <Compile Include="Controller\abstract\IDoctorController.cs" />
-<<<<<<< HEAD
     <Compile Include="Controller\abstract\IDrugController.cs" />
-=======
     <Compile Include="Controller\abstract\IDoctorGradeController.cs" />
->>>>>>> masterpatient
     <Compile Include="Controller\abstract\IEquipmentController.cs" />
     <Compile Include="Controller\abstract\IPatientController.cs" />
     <Compile Include="Controller\abstract\IRenovationController.cs" />
