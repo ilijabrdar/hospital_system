@@ -1,8 +1,4 @@
-/***********************************************************************
- * Module:  Specialty.cs
- * Author:  Asus
- * Purpose: Definition of the Class Doctor.Specialty
- ***********************************************************************/
+
 
 using Repository;
 using System;
@@ -11,10 +7,15 @@ namespace Model.Doctor
 {
    public class Speciality : IIdentifiable<long>
     {
-      public String Name { get; set; }
-      public long Id { get; set; }
-        
-      public Speciality (long id, String name)
+        public String Name;
+        public long Id;
+
+        public Speciality(string name)
+        {
+            Name = name;
+        }
+
+        public Speciality (long id, String name)
         {
             this.Name = name;
             this.Id = id;

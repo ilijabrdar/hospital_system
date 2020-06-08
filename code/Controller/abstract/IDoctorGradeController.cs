@@ -7,13 +7,15 @@ using System.Linq;
 using System.Text;
 
 namespace bolnica.Controller
-{
+{ 
+
   public  interface IDoctorGradeController : IController<DoctorGrade,long>
-{
+    {
         List<String> GetQuestions();
 
 
         double GetAverage(Doctor doctor);
+
 
     }
 }

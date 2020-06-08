@@ -1,5 +1,3 @@
-
-
 using bolnica.Service;
 using Model.Doctor;
 using Model.PatientSecretary;
@@ -10,9 +8,9 @@ using System.Collections.Generic;
 
 namespace Service
 {
-   public class PatientService : IPatientService
-   {
-        
+    public class PatientService : IPatientService
+    {
+
         private readonly IPatientRepository _patientRepository;
         private readonly IPatientFileService _patientFileService;
         private readonly IDoctorGradeService _doctorGradeService;
@@ -39,7 +37,6 @@ namespace Service
         public void Delete(Patient entity)
         {
             _patientRepository.Delete(entity);
-            //TODO : Da li treba da se brise i PatientFIle nisam siguran
         }
 
         public void Edit(Patient entity)
@@ -86,5 +83,6 @@ namespace Service
 
             return doctorGrade;
         }
+
     }
 }

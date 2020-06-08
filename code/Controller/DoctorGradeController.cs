@@ -7,6 +7,7 @@ using System.Collections.Generic;
 
 namespace Controller
 {
+<<<<<<< HEAD
     public class DoctorGradeController : IDoctorGradeController
     {
         private readonly IDoctorGradeService _doctorGradeService;
@@ -19,6 +20,7 @@ namespace Controller
         public void Delete(DoctorGrade entity)
         {
             _doctorGradeService.Delete(entity);
+
         }
 
         public void Edit(DoctorGrade entity)
@@ -39,6 +41,7 @@ namespace Controller
         public double GetAverage(Doctor doctor)
         {
            return _doctorGradeService.GetAverage(doctor);
+
         }
 
         public List<string> GetQuestions()

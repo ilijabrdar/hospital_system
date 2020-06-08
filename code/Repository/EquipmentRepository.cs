@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  EquipmentService.cs
- * Author:  david
- * Purpose: Definition of the Class Service.EquipmentService
- ***********************************************************************/
-
 using bolnica.Repository;
 using Model.Director;
 using System;

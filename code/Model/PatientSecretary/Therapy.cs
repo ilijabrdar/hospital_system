@@ -4,17 +4,46 @@
  * Purpose: Definition of the Class Model.PatientSecretary.Therapy
  ***********************************************************************/
 
+using Repository;
 using System;
 
 namespace Model.PatientSecretary
 {
-   public class Therapy
+   public class Therapy : IIdentifiable<long>
    {
-      private String Note;
-      private DateTime BeginDate;
-      private DateTime EndDate;
-      private int Amount;
-      private int Span;
-   
-   }
+        public long Id;
+        public String Note;
+        public Period Period;
+        public int DrugDosage;
+
+        public Therapy(long id, Period period, int drugDosage, string note) 
+        {
+            Id = id;
+            Note = note;
+            Period =period;
+            DrugDosage = drugDosage;
+        }
+
+        public Therapy(string note, Period period, int drugDosage)
+        {
+            Note = note;
+            Period = period;
+            DrugDosage = drugDosage;
+        }
+
+        public Therapy(long id)
+        {
+            Id = id;
+        }
+
+        public long GetId()
+        {
+            return this.Id;
+        }
+
+        public void SetId(long id)
+        {
+            this.Id = id;
+        }
+    }
 }

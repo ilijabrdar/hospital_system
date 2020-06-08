@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  Employees.cs
- * Author:  david
- * Purpose: Definition of the Class Users.Employees
- ***********************************************************************/
-
 using Repository;
 using System;
 using System.Drawing;
@@ -16,10 +10,6 @@ namespace Model.Users
         public String Password { get; set; }
         public Bitmap Image { get; set; }
         public long Id;
-       
 
-     
-
-     
     }
 }

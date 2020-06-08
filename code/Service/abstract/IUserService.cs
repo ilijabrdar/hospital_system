@@ -8,7 +8,7 @@ using System.Web.Configuration;
 
 namespace bolnica.Service
 {
-     public interface IUserService : IService<User, long>
+    public interface IUserService : IService<User, long>
     {
         Boolean IsPasswordValid(User user, String password);
         User IsUsernameValid(String username);

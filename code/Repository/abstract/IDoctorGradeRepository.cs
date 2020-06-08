@@ -7,7 +7,6 @@ namespace Repository
 {
    public interface IDoctorGradeRepository : IRepository<DoctorGrade, long>
    {    
-      
       List<String> GetQuestions();
    }
 }

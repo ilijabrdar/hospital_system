@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  UserService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.UserService
- ***********************************************************************/
-
 using bolnica.Controller;
 using bolnica.Service;
 using Model.Users;
@@ -51,6 +45,7 @@ namespace Controller
         public User Login(string username, string password)
         {
             User user = _userService.Login(username, password);
+
             if (user == null) throw new NullReferenceException("User not found");
             else return user;
         }

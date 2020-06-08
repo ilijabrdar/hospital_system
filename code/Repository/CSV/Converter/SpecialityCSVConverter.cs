@@ -18,9 +18,9 @@ namespace bolnica.Repository
         public Speciality ConvertCSVFormatToEntity(string entityCSVFormat)
         {
             string[] tokens = entityCSVFormat.Split(_delimiter.ToCharArray());
-            return new Speciality(
-                long.Parse(tokens[0]),
-                tokens[1]);
+
+            return new Speciality( long.Parse(tokens[0]), tokens[1]);
+
         }
 
         public string ConvertEntityToCSVFormat(Speciality entity)
