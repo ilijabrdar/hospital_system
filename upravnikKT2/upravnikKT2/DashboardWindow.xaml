@@ -117,7 +117,7 @@
                                     Height="24"
                                     Width="24" />
                                         </Button>
-                                        <Button Margin="10,10,30,10"  x:Name="deleteDoctorBtn"
+                                        <Button Margin="10,10,30,10"  x:Name="deleteDoctorBtn" Click="deleteDoctorBtn_Click"
                                   Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
                                   HorizontalAlignment="Left"
                                   ToolTip="Izbriši lekara">
@@ -136,20 +136,20 @@
                                     Height="24"
                                     Width="24" />
                                         </Button>
-                                        <TextBox DockPanel.Dock="Right" Margin="10" TextChanged="TextBox_TextChanged" MinWidth="100"/>
+                                        <TextBox DockPanel.Dock="Right" Margin="10" TextChanged="TextBox_TextChanged" MinWidth="100" x:Name="txtSearchDoctors"/>
                                         <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                                     </DockPanel>
                                     <DockPanel DockPanel.Dock="Bottom">
                                         <DataGrid Margin="10" x:Name="dataGridLekari" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
                                             <DataGrid.Columns>
-                                                <DataGridTextColumn Header="Ime" Binding="{Binding Ime}" Width="*"  />
-                                                <DataGridTextColumn Header="Prezime" Binding="{Binding Prezime}" Width="*"/>
-                                                <DataGridTextColumn Header="ID" Binding="{Binding ID}" Width="*"/>
-                                                <DataGridTextColumn Header="JMBG" Binding="{Binding JMBG}" Width="*"/>
+                                                <DataGridTextColumn Header="Ime" Binding="{Binding FirstName}" Width="*"  />
+                                                <DataGridTextColumn Header="Prezime" Binding="{Binding LastName}" Width="*"/>
+                                                <!--<DataGridTextColumn Header="ID" Binding="{Binding ID}" Width="*"/>-->
+                                                <DataGridTextColumn Header="JMBG" Binding="{Binding Jmbg}" Width="*"/>
                                                 <DataGridTextColumn Header="e-mail" Binding="{Binding Email}" Width="*"/>
-                                                <DataGridTextColumn Header="Telefon" Binding="{Binding Telefon}" Width="*" />
-                                                <DataGridTextColumn Header="Datum rodjenja" Binding="{Binding Datum_rodjenja}" Width="*"/>
-                                                <DataGridTextColumn Header="Odeljenje" Binding="{Binding Odeljenje}" Width="*"/>
+                                                <DataGridTextColumn Header="Telefon" Binding="{Binding Phone}" Width="*" />
+                                                <DataGridTextColumn Header="Datum rodjenja" Binding="{Binding DateOfBirth, StringFormat=\{0:dd.MM.yyyy.\}}" Width="*"/>
+                                                <DataGridTextColumn Header="Odeljenje" Binding="{Binding Specialty.Name}" Width="*"/>
                                                 <!-- <DataGridTextColumn Header="Ocena" Binding="{Binding Ocena}" Width="*"/> -->
                                                 <DataGridTemplateColumn Header="Ocena" Width="*">
                                                     <DataGridTemplateColumn.CellTemplate>
@@ -218,7 +218,7 @@
                                                 <DataGrid.Columns>
                                                     <DataGridTextColumn Header="Ime" Binding="{Binding Ime}"  />
                                                     <DataGridTextColumn Header="Prezime" Binding="{Binding Prezime}" />
-                                                    <DataGridTextColumn Header="ID" Binding="{Binding ID}" />
+                                                    <DataGridTextColumn Header="JMBG" Binding="{Binding JMBG}" />
                                                     <DataGridTextColumn Header="11.05" Binding="{Binding Period}" />
                                                     <DataGridTextColumn Header="12.05" Binding="{Binding Period}" />
                                                     <DataGridTextColumn Header="13.05" Binding="{Binding Period}" />
@@ -682,7 +682,7 @@
                                     <DataGridTextColumn Header="Sifra prostorije" Binding="{Binding Room.RoomCode}" Width="*"/>
                                     <DataGridTextColumn Header="Tip prostorije" Binding="{Binding Room.RoomType.Name}" Width="*"/>
                                     <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="*"/>
-                                    <DataGridTextColumn Header="Datum pocetka" Binding="{Binding Period.StartDate.Date, StringFormat=\{0:dd.MM.yy\}}" Width="*"/>
+                                    <DataGridTextColumn Header="Datum pocetka" Binding="{Binding Period.StartDate.Date, StringFormat=\{0:dd.MM.yyyy.\}}" Width="*"/>
                                     <DataGridTextColumn Header="Datum kraja" Binding="{Binding Period.EndDate, StringFormat=\{0:dd.MM.yy\}}" Width="*"/>
                                     <DataGridTextColumn Header="Opis" Binding="{Binding Description}" Width="*"/>
                                 </DataGrid.Columns>

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using bolnica.Controller;
+using Model.Doctor;
+using Model.Users;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -22,6 +25,10 @@ namespace upravnikKT2
     public partial class DoctorAddWindow : Window, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+
+        private readonly ISpecialityController _specialityController;
+        private readonly IDoctorController _doctorController;
+
 
         protected virtual void OnPropertyChanged(string name)
         {
@@ -156,10 +163,24 @@ namespace upravnikKT2
             InitializeComponent();
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             this.DataContext = this;
+
+            var app = Application.Current as App;
+            _specialityController = app.SpecialityController;
+            _doctorController = app.DoctorController;
         }
 
         private void Button_Click_OK(object sender, RoutedEventArgs e)
         {
+            //String name, String surname, String jmbg, String email, String phone, DateTime birth, Address adress, String username, String password, Bitmap img, Speciality speciality, List<Article> articles, List<BusinessDay> businessDay, DoctorGrade doctGrade
+            var datum = birthDatePicker.SelectedDate;
+            var state = new State(1, "state", "code");
+            var town = new Town(1, "ns", "21000", state);
+            var address = new Address(1, "street", 32, 12, town);
+            
+
+            //JMBG for password and username
+            var doctor = new Doctor(Ime, Prezime, JMBG, EMAIL, Phone, (DateTime)datum, address, JMBG, JMBG, null, (Speciality)comboSpeciality.SelectedItem, null, null, null);
+            _doctorController.Save(doctor);
             this.Close();
         }
 
@@ -194,6 +215,16 @@ namespace upravnikKT2
                     e.Handled = true;
                 }
             }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<Speciality> list_speciality = new List<Speciality>();
+            list_speciality = _specialityController.GetAll().ToList();
+
+            comboSpeciality.ItemsSource = list_speciality;
+            comboSpeciality.DisplayMemberPath = "Name";
+            comboSpeciality.SelectedValuePath = "Id";
         }
     }
 }

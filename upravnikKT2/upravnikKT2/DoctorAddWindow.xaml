@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="clr-namespace:upravnikKT2.Validation" xmlns:val="clr-namespace:upravnikKT2.Validation"
         mc:Ignorable="d"
         FontSize="18"
-        Title="Dodavanje lekara" Height="588" Width="630.5" PreviewKeyDown="Window_PreviewKeyDown">
+        Title="Dodavanje lekara" Height="588" Width="630.5" PreviewKeyDown="Window_PreviewKeyDown" Loaded="Window_Loaded">
     <Grid Margin="30">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" MinHeight="26" />
@@ -87,7 +87,7 @@
             </TextBox.Text>
         </TextBox>
         <DatePicker x:Name="birthDatePicker" Grid.Column="1" Grid.Row="6" HorizontalAlignment="Right" Margin="0,10,10,10" Width="139" Height="33"></DatePicker>
-        <ComboBox Grid.Column="1" Grid.Row="7" HorizontalAlignment="Right" Margin="0,10,10,10" Width="139" materialDesign:HintAssist.Hint="Pretrazi" IsEditable="True" Height="36"></ComboBox>
+        <ComboBox x:Name="comboSpeciality" Grid.Column="1" Grid.Row="7" HorizontalAlignment="Right" Margin="0,10,10,10" Width="139" materialDesign:HintAssist.Hint="Pretrazi" IsEditable="True" Height="36"></ComboBox>
 
 
         <WrapPanel  Grid.Column="1" Grid.Row="8" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="28" Width="210">

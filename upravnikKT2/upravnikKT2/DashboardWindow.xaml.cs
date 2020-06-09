@@ -2,6 +2,7 @@
 using Controller;
 using Model.Director;
 using Model.PatientSecretary;
+using Model.Users;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -27,6 +28,7 @@ namespace upravnikKT2
         private readonly IEquipmentController _equipmentController;
         private readonly IRenovationController _renovationController;
         private readonly IDrugController _drugController;
+        private readonly IDoctorController _doctorController;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -138,6 +140,7 @@ namespace upravnikKT2
             _equipmentController = app.EquipmentController;
             _renovationController = app.RenovationController;
             _drugController = app.DrugController;
+            _doctorController = app.DoctorController;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -145,6 +148,9 @@ namespace upravnikKT2
             DoctorAddWindow window = new DoctorAddWindow();
             window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             window.ShowDialog();
+
+            dataGridLekari.ItemsSource = null;
+            dataGridLekari.ItemsSource = new ObservableCollection<Doctor>(_doctorController.GetAll());
         }
 
         private void editDoctor(object sender, RoutedEventArgs e)
@@ -435,13 +441,13 @@ namespace upravnikKT2
             dataGridSmene.ItemsSource = Smene;
 
             ObservableCollection<Lekar> Lekari = new ObservableCollection<Lekar>();
-            Lekari.Add(new Lekar { Ime="Marko", Prezime="Markovic",ID="ASD12A", JMBG="124534534", Email="marko@gmail.com", Telefon="02131243", Datum_rodjenja="21.4.1983.", Odeljenje="kardiologija",  Ocena="5.00"});
-            Lekari.Add(new Lekar { Ime = "Pera", Prezime = "Peric", ID = "AS3212", JMBG = "234321543", Email = "pera@gmail.com", Telefon = "4253212", Datum_rodjenja = "03.01.1944.", Odeljenje = "opsta praksa",  Ocena = "3.00" });
-            Lekari.Add(new Lekar { Ime = "Seka", Prezime = "Sekic", ID = "ASFE32", JMBG = "315434232", Email = "seka@gmail.com", Telefon = "23421223", Datum_rodjenja = "12.01.1976.", Odeljenje = "opsta praksa", Ocena = "4.00" });
-            Lekari.Add(new Lekar { Ime = "Nenad", Prezime = "Nedic", ID = "DAGD32", JMBG = "1254324", Email = "nenad@gmail.com", Telefon = "12343212", Datum_rodjenja = "01.01.1988.", Odeljenje = "orl", Ocena = "3.94" });
-            Lekari.Add(new Lekar { Ime = "Sima", Prezime = "Simic", ID = "AS424D", JMBG = "133122123", Email = "sima@gmail.com", Telefon = "5438575", Datum_rodjenja = "01.01.1991.", Odeljenje = "ocno", Ocena = "4.85" });
+            //Lekari.Add(new Lekar { Ime="Marko", Prezime="Markovic",ID="ASD12A", JMBG="124534534", Email="marko@gmail.com", Telefon="02131243", Datum_rodjenja="21.4.1983.", Odeljenje="kardiologija",  Ocena="5.00"});
+            //Lekari.Add(new Lekar { Ime = "Pera", Prezime = "Peric", ID = "AS3212", JMBG = "234321543", Email = "pera@gmail.com", Telefon = "4253212", Datum_rodjenja = "03.01.1944.", Odeljenje = "opsta praksa",  Ocena = "3.00" });
+            //Lekari.Add(new Lekar { Ime = "Seka", Prezime = "Sekic", ID = "ASFE32", JMBG = "315434232", Email = "seka@gmail.com", Telefon = "23421223", Datum_rodjenja = "12.01.1976.", Odeljenje = "opsta praksa", Ocena = "4.00" });
+            //Lekari.Add(new Lekar { Ime = "Nenad", Prezime = "Nedic", ID = "DAGD32", JMBG = "1254324", Email = "nenad@gmail.com", Telefon = "12343212", Datum_rodjenja = "01.01.1988.", Odeljenje = "orl", Ocena = "3.94" });
+            //Lekari.Add(new Lekar { Ime = "Sima", Prezime = "Simic", ID = "AS424D", JMBG = "133122123", Email = "sima@gmail.com", Telefon = "5438575", Datum_rodjenja = "01.01.1991.", Odeljenje = "ocno", Ocena = "4.85" });
 
-            dataGridLekari.ItemsSource = Lekari;
+            dataGridLekari.ItemsSource = new ObservableCollection<Doctor>(_doctorController.GetAll());
 
             List<Equipment> consumable_equipment = _equipmentController.getConsumableEquipment().ToList();
             ObservableCollection<Equipment> data_consumable = new ObservableCollection<Equipment>(consumable_equipment);
@@ -656,7 +662,7 @@ namespace upravnikKT2
             {
                 Room room = (Room)DataGridRooms.SelectedItem;
 
-                string messageBoxText = "Da li ste sigurni da zelite da obrisete opremu pod sifrom " + room.RoomCode + "?";
+                string messageBoxText = "Da li ste sigurni da zelite da obrisete prostoriju pod sifrom " + room.RoomCode + "?";
                 string caption = "Potvrda brisanja";
                 MessageBoxButton button = MessageBoxButton.YesNo;
                 MessageBoxImage icon = MessageBoxImage.Question;
@@ -1009,6 +1015,40 @@ namespace upravnikKT2
             else
             {
                 string messageBoxText = "Morate selektovati lek da biste ga obrisali!";
+                string caption = "Greska";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Error;
+
+                MessageBox.Show(messageBoxText, caption, button, icon);
+            }
+        }
+
+        private void deleteDoctorBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (dataGridLekari.SelectedItem != null)
+            {
+                Doctor doctor = (Doctor)dataGridLekari.SelectedItem;
+
+                string messageBoxText = "Da li ste sigurni da zelite da obrisete lekara " + doctor.FirstName + " " + doctor.LastName + " ?";
+                string caption = "Potvrda brisanja";
+                MessageBoxButton button = MessageBoxButton.YesNo;
+                MessageBoxImage icon = MessageBoxImage.Question;
+                MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    _doctorController.Delete((Doctor)dataGridLekari.SelectedItem);
+
+                    this.DataGridRooms.ItemsSource = null;
+                    List<Doctor> doctors = _doctorController.GetAll().ToList();
+                    ObservableCollection<Doctor> data_doctors = new ObservableCollection<Doctor>(doctors);
+                    this.dataGridLekari.ItemsSource = data_doctors;
+                    txtSearchDoctors.Clear();
+                }
+            }
+            else
+            {
+                string messageBoxText = "Morate selektovati lekara da biste ga izbrisali!";
                 string caption = "Greska";
                 MessageBoxButton button = MessageBoxButton.OK;
                 MessageBoxImage icon = MessageBoxImage.Error;

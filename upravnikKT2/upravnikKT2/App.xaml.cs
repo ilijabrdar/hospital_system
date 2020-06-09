@@ -3,7 +3,9 @@ using bolnica.Repository;
 using bolnica.Repository.CSV.Converter;
 using Controller;
 using Model.Director;
+using Model.Doctor;
 using Model.PatientSecretary;
+using Model.Users;
 using Repository;
 using Service;
 using System.Windows;
@@ -21,6 +23,8 @@ namespace upravnikKT2
         private const string EQUIPMENT_FILE = "../../Resources/Data/equipment.csv";
         private const string RENOVATIONS_FILE = "../../Resources/Data/renovations.csv";
         private const string DRUGS_FILE = "../../Resources/Data/drugs.csv";
+        private const string DOCTORS_FILE = "../../Resources/Data/doctors.csv";
+        private const string SPECIALITY_FILE = "../../Resources/Data/speciality.csv";
         private const string CSV_DELIMITER = ",";
 
         public IRoomTypeController RoomTypeController { get; private set; }
@@ -32,6 +36,10 @@ namespace upravnikKT2
         public IRenovationController RenovationController { get; private set; }
 
         public IDrugController DrugController { get; private set; }
+
+        public IDoctorController DoctorController { get; private set; }
+
+        public ISpecialityController SpecialityController { get; private set; }
 
         public App()
         {
@@ -78,6 +86,13 @@ namespace upravnikKT2
             var drugService = new DrugService(drugRepository);
             DrugController = new DrugController(drugService);
 
+            var specialityRepository = new SpecialityRepository(new CSVStream<Speciality>(SPECIALITY_FILE, new SpecialityCSVConverter(CSV_DELIMITER)), new LongSequencer());
+            var specialityService = new SpecialityService(specialityRepository);
+            SpecialityController = new SpecialityController(specialityService);
+
+            var doctorRepository = new DoctorRepository(new CSVStream<Doctor>(DOCTORS_FILE, new DoctorCSVConverter(CSV_DELIMITER)), new LongSequencer(),null,null,specialityRepository,null);
+            var doctorService = new DoctorService(doctorRepository,null);
+            DoctorController = new DoctorController(doctorService);
         }
     }
 }
