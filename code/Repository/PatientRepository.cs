@@ -1,8 +1,4 @@
-/***********************************************************************
- * Module:  PatientService.cs
- * Author:  david
- * Purpose: Definition of the Class Service.PatientService
- ***********************************************************************/
+
 
 using bolnica.Repository;
 using Model.PatientSecretary;
@@ -16,11 +12,11 @@ namespace Repository
    public class PatientRepository : CSVRepository<Patient,long> ,IPatientRepository, IEagerRepository<Patient,long>
    {
       private String FilePath;
-        private readonly IEagerRepository<PatientFile, long> patientFleRepository;
-        public PatientRepository(ICSVStream<Patient> stream, ISequencer<long> sequencer, IEagerRepository<PatientFile,long> patientFile)
+        private readonly IPatientFileRepository patientFleRepository;
+        public PatientRepository(ICSVStream<Patient> stream, ISequencer<long> sequencer, IPatientFileRepository patientFileRepository)
             : base(stream, sequencer)
         {
-            patientFleRepository = patientFile;
+            patientFleRepository = patientFileRepository;
         }
 
         public IEnumerable<Patient> GetAllEager()

@@ -376,6 +376,24 @@ namespace MyProject.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You have successfully exchanged data.
+        /// </summary>
+        public static string SuccessUpdateData {
+            get {
+                return ResourceManager.GetString("SuccessUpdateData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have successfully exchanged password.
+        /// </summary>
+        public static string SuccessUpdatePw {
+            get {
+                return ResourceManager.GetString("SuccessUpdatePw", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Surgeries.
         /// </summary>
         public static string Surgeries {

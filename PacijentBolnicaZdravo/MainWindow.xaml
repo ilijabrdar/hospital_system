@@ -181,14 +181,14 @@ Piramida ishrane je vizuelni prikaz namirnica koje treba da budu zastupljenje u 
 
                             </StackPanel>
                             <StackPanel Orientation="Vertical">
-                                <TextBlock Margin="13" FontSize="15" Width="220" FontWeight="Bold" Opacity="0.6"> JovanJelicki</TextBlock>
-                                <TextBlock TextAlignment="Left" FontWeight="Bold" Opacity="0.6"  Name="Name2" Margin="13" FontSize="15" Width="220">Jovan </TextBlock>
-                                <TextBlock TextAlignment="Left" FontWeight="Bold" Opacity="0.6" FontSize="15" Name="Surname2" Margin="13,20,13,13" Width="220">Jelicki</TextBlock>
-                                <TextBlock TextAlignment="Left"  FontWeight="Bold" Opacity="0.6" FontSize="15" Name="ID2" Margin="13"  Width="220">2001998800114</TextBlock>
-                                <TextBlock Name="DateBirthTextBlock"  Margin="13,22,13,13" Width="220" FontSize="15" Height="30"  FontWeight="Bold" Opacity="0.6">20.01.1998.</TextBlock>
-                                <TextBlock TextAlignment="Left"  FontSize="15"  FontWeight="Bold" Opacity="0.6" Name="Email2" Margin="13,8,13,13"  Width="220">jovanzte@gmail.com</TextBlock>
-                                <TextBlock TextAlignment="Left"  FontSize="15"  FontWeight="Bold" Opacity="0.6" Name="Adress2" Margin="13,15,13,13" Width="220">Mišarska 40</TextBlock>
-                                <TextBlock TextAlignment="Left"  FontSize="15" FontWeight="Bold" Opacity="0.6" Name="PhoneNumber2" Margin="13,20,13,13" Width="220">2132132</TextBlock>
+                                <TextBlock Name="Username2" Margin="13" FontSize="15" Width="220" FontWeight="Bold" Opacity="0.6"></TextBlock>
+                                <TextBlock TextAlignment="Left" FontWeight="Bold" Opacity="0.6"  Name="Name2" Margin="13" FontSize="15" Width="220"></TextBlock>
+                                <TextBlock TextAlignment="Left" FontWeight="Bold" Opacity="0.6" FontSize="15" Name="Surname2" Margin="13,20,13,13" Width="220"></TextBlock>
+                                <TextBlock TextAlignment="Left"  FontWeight="Bold" Opacity="0.6" FontSize="15" Name="ID2" Margin="13"  Width="220"></TextBlock>
+                                <TextBlock Name="DateBirthTextBlock"  Margin="13,22,13,13" Width="220" FontSize="15" Height="30"  FontWeight="Bold" Opacity="0.6"></TextBlock>
+                                <TextBlock TextAlignment="Left"  FontSize="15"  FontWeight="Bold" Opacity="0.6" Name="Email2" Margin="13,8,13,13"  Width="220"></TextBlock>
+                                <TextBlock TextAlignment="Left"  FontSize="15"  FontWeight="Bold" Opacity="0.6" Name="Adress2" Margin="13,15,13,13" Width="220"> </TextBlock>
+                                <TextBlock TextAlignment="Left"  FontSize="15" FontWeight="Bold" Opacity="0.6" Name="PhoneNumber2" Margin="13,20,13,13" Width="220"></TextBlock>
                             </StackPanel>
                             <StackPanel Orientation="Vertical">
                                 <StackPanel Orientation="Vertical">
@@ -218,7 +218,7 @@ Piramida ishrane je vizuelni prikaz namirnica koje treba da budu zastupljenje u 
 
                             </StackPanel>
                             <StackPanel Orientation="Vertical">
-                                <TextBlock Margin="13" FontSize="15" Width="220" FontWeight="Bold" Opacity="0.6"> JovanJelicki</TextBlock>
+                                <TextBlock Margin="13" FontSize="15" Width="220" FontWeight="Bold" Opacity="0.6"></TextBlock>
                                 <TextBox TextAlignment="Left" BorderThickness="1.5" BorderBrush="LightBlue" Name="Name" Margin="10" FontSize="15" Width="220">
                                     <TextBox.Text>
                                         <Binding Path="Ime" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
@@ -282,6 +282,7 @@ Piramida ishrane je vizuelni prikaz namirnica koje treba da budu zastupljenje u 
                                         </Binding>
                                     </TextBox.Text>
                                 </TextBox>
+                                <TextBlock Name="SuccessUpdateData" Text="{x:Static p:Resources.SuccessUpdateData}" Visibility="Hidden" FontSize="15" HorizontalAlignment="Right"  Margin="0,0,10,-5" Foreground="#FF16D900"></TextBlock>
                                 <Button  Content="{x:Static p:Resources.UpdateData}" Name="UpdateData" Width="120" HorizontalAlignment="Right" Margin="10" Click="UpdateInfo"></Button>
                             </StackPanel>
                             <StackPanel Orientation="Vertical">
@@ -307,6 +308,7 @@ Piramida ishrane je vizuelni prikaz namirnica koje treba da budu zastupljenje u 
                                 <TextBlock Name="ConfirmPw" Margin="10,10,50,10" FontSize="15"  Text="{x:Static p:Resources.ConfirmPw}"/>
                                 <PasswordBox BorderThickness="1.5" BorderBrush="LightBlue"  FontSize="15" Name="CheckPassword" Margin="10" Width="220"></PasswordBox>
                             </StackPanel>
+                            <TextBlock Name="SuccessUpdatePw" Text="{x:Static p:Resources.SuccessUpdatePw}" Visibility="Hidden" FontSize="15" HorizontalAlignment="Right"  Margin="0,0,10,-5" Foreground="#FF16D900"></TextBlock>
                             <Button Content="{x:Static p:Resources.UpdatePw}" Name="UpdatePwButton" Margin="10"  Height="25" Width="110" Click="UpdatePw"></Button>
                         </StackPanel>
                     </StackPanel>

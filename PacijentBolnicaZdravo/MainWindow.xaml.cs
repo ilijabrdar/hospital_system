@@ -31,33 +31,34 @@ using Model.Users;
 using Model.PatientSecretary;
 using Model.Director;
 using ControlzEx.Standard;
+using System.Windows.Threading;
+using System.Windows.Media.Animation;
 
 namespace PacijentBolnicaZdravo
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+
     public partial class MainWindow : MetroWindow, INotifyPropertyChanged
     {
         public ChangeLanguage cl = new ChangeLanguage();
         public static CultureInfo culture = new CultureInfo("sr");
         public List<ExaminationDTO> scheduledExaminations { get; set; }
         public List<ExaminationDTO> upcomingExaminations { get; set; }
-        public Patient patient { get; set; }
+        public Patient _patient { get; set; }
         public static int Theme = 0;
 
-        public MainWindow()
+        public MainWindow(Patient patient)
         {
             Thread.CurrentThread.CurrentCulture = culture;
             Thread.CurrentThread.CurrentUICulture = culture;
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-
-
+            _patient = patient;     
 
             scheduledExaminations = getScheduledExaminations();
             
             InitializeComponent();
-            this.ID.Text = "1111111111111";
+
+            FillAccountData(_patient);
+
             this.DataContext = this;
             if (Thread.CurrentThread.CurrentCulture.Equals(new CultureInfo("sr")))
                 Language.SelectedItem = Language.Items[0];
@@ -79,6 +80,21 @@ namespace PacijentBolnicaZdravo
             }
 
         }
+
+        private void FillAccountData(Patient patient)
+        {
+            Username2.Text = _patient.Username;
+            Name2.Text = _patient.FirstName;
+            Surname2.Text = _patient.LastName;
+            ID2.Text = _patient.Jmbg;
+            Adress2.Text = "Adresa ne radi"; //TODO: _patient.Address.ToString();
+            DateBirthTextBlock.Text = _patient.DateOfBirth.Date.ToString();
+            Email2.Text = _patient.Email;
+            PhoneNumber2.Text = _patient.Phone;
+        }
+
+
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string name)
         {
@@ -91,15 +107,15 @@ namespace PacijentBolnicaZdravo
         private List<ExaminationDTO> getScheduledExaminations()
         {
             List<ExaminationDTO> retVal = new List<ExaminationDTO>();
-            Doctor dr = new Doctor(1, "Pera", "Peric", "213123123123", "sadsds@sadsa.com", "2312312312", new DateTime(), "Mileve Maric", "DDD", "ddd", null, null);
+            Doctor dr = new Doctor(1, "Pera", "Peric", "213123123123", "sadsds@sadsa.com", "2312312312", new DateTime(), null, "DDD", "ddd", null, null);
             Period period = new Period(new DateTime(2020, 7, 7, 12, 20, 0), new DateTime(2020, 7, 7, 12, 40, 0));
            
-            Room room = new Room("213", null, null, null);
+            Room room = new Room(213, null, null, null);
             ExaminationDTO examination = new ExaminationDTO();
-            examination.doctor = dr;
-            examination.period = period;
-            examination.room = room;
-            examination.patient = null;
+            examination.Doctor = dr;
+            examination.Period = period;
+            examination.Room = room;
+            examination.Patient = null;
             retVal.Add(examination);
             return retVal;
         }
@@ -111,12 +127,24 @@ namespace PacijentBolnicaZdravo
 
         private void LogOut(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Da li ste sigurni da želite da se odjavite?", "Odjava", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            if (System.Threading.Thread.CurrentThread.CurrentCulture.Equals("sr"))
             {
-                App.j = 0;
-                WindowLogIn wl = new WindowLogIn();
-                wl.Show();
-                this.Close();
+                if (MessageBox.Show("Da li ste sigurni da želite da se odjavite?", "Odjava", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    App.j = 0;
+                    WindowLogIn wl = new WindowLogIn();
+                    wl.Show();
+                    this.Close();
+                }
+            } else
+            {
+                if (MessageBox.Show("Are you sure you want to log out?", "Log out", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    App.j = 0;
+                    WindowLogIn wl = new WindowLogIn();
+                    wl.Show();
+                    this.Close();
+                }
             }
         }
 
@@ -194,8 +222,62 @@ namespace PacijentBolnicaZdravo
 
         private void UpdateInfo(object sender, RoutedEventArgs e)
         {
+            int prom = 0;
+            
+            
+            if (!Name.Text.ToString().Equals(""))
+            {
+                prom++;
+                _patient.FirstName = Name.Text.ToString();
+                Name.Undo();
+            }
+            if (!Surname.Text.ToString().Equals(""))
+            {
+                prom++;
+                _patient.LastName = Surname.Text.ToString();
+                Surname.Clear();
+            }
+            if (!ID.Text.ToString().Equals(""))
+            {
+                prom++;
+                _patient.Jmbg = ID.Text.ToString();
+                ID.Clear();
+            }
+            if (!Adress.Text.ToString().Equals(""))
+            {
+                prom++;
+                _patient.Address = null; //TODO : ne zaboravi
+                Adress.Clear();
+            }
+            if (!PhoneNumber.Text.ToString().Equals(""))
+            {
+                prom++;
+                _patient.Phone = PhoneNumber.Text.ToString();
+                PhoneNumber.Clear();
+            }
+            if (!Email.Text.ToString().Equals(""))
+            {
+                prom++;
+                _patient.Email = Email.Text.ToString();
+                Email.Clear();
+            }
+            if (!DateBirthPicker.Text.ToString().Equals(""))
+            {
+                prom++;
+                _patient.DateOfBirth = DateTime.Parse(DateBirthPicker.Text);
+            }
+
+            if (prom != 0)
+            {
+                //userService.Edit(_patient);
+                FillAccountData(_patient);
+                //TODO : Ispisi poruku za uspesan tok
+            }
+      
 
         }
+
+
 
         private void UpdatePw(object sender, RoutedEventArgs e)
         {

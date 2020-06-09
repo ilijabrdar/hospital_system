@@ -222,6 +222,12 @@
   <data name="Send" xml:space="preserve">
     <value>Send</value>
   </data>
+  <data name="SuccessUpdateData" xml:space="preserve">
+    <value>You have successfully exchanged data</value>
+  </data>
+  <data name="SuccessUpdatePw" xml:space="preserve">
+    <value>You have successfully exchanged password</value>
+  </data>
   <data name="Surgeries" xml:space="preserve">
     <value>Surgeries</value>
   </data>

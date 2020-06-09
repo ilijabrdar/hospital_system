@@ -16,12 +16,11 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using MahApps.Metro;
+using Model.Users;
 
 namespace PacijentBolnicaZdravo
 {
-    /// <summary>
-    /// Interaction logic for WindowLogIn.xaml
-    /// </summary>
+
     public partial class WindowLogIn : MetroWindow
     {
         public ChangeLanguage cl = new ChangeLanguage();
@@ -60,17 +59,23 @@ namespace PacijentBolnicaZdravo
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if(UsernameLogIn.Text == "admin" && PasswordLogIn.Password.ToString() == "admin")
-            {
+            String username = UsernameLogIn.Text.ToString();
+            String password = PasswordLogIn.Password.ToString();
+            
+                var app = Application.Current as App;
+                var temp = app.userController.Login(username,password);
+            if (temp != null) {
+                
                 App.j = 0;
-                MainWindow mw = new MainWindow();
+                MainWindow mw = new MainWindow((Patient)temp);
                 mw.Show();
+                //TODO : provera za ako ne nadje
 
-               
                 this.Close();
                 return;
             }
-            if (UsernameLogIn.Text != "admin")
+            return;
+            /*if (UsernameLogIn.Text != "admin")
             {
                 WrongUsername.Visibility = Visibility.Visible;
                 return;
@@ -82,10 +87,7 @@ namespace PacijentBolnicaZdravo
             if (PasswordLogIn.Password.ToString() != "admin")
             {
                 WrongPw.Visibility = Visibility.Visible;
-            }
-        
-
-           
+            }*/    
         }
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)

@@ -26,9 +26,7 @@ using PacijentBolnicaZdravo.Properties;
 
 namespace PacijentBolnicaZdravo
 {
-    /// <summary>
-    /// Interaction logic for Registration.xaml
-    /// </summary>
+
     public partial class Registration : MetroWindow, INotifyPropertyChanged
     {
         public ChangeLanguage cl = new ChangeLanguage();
@@ -142,11 +140,8 @@ namespace PacijentBolnicaZdravo
 
         private void UpdateInfo(object sender, RoutedEventArgs e)
         {
-            if(ValidationResult.ValidResult != ConfirmPassword()) {
-                return;
-            }
 
-            return;
+            String username = Username.Text.ToString();
             String name = Name.Text.ToString();
             String surname = Surname.Text.ToString();
             String Id = ID.Text.ToString();
@@ -156,7 +151,7 @@ namespace PacijentBolnicaZdravo
             String phone = PhoneNumber.Text.ToString();
             String passw = NewPassword.Password.ToString();
             
-            Patient patient = new Patient(-1, name, surname, Id, email, phone, date, address, name, passw, null);
+            Patient patient = new Patient(-1, name, surname, Id, email, phone, date, null, username, passw, null);
             var app = Application.Current as App;
             var temp = app.userController.Save(patient);
             if (temp == null)

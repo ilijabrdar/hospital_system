@@ -13,5 +13,14 @@ namespace Repository
   
         }
 
+        public IEnumerable<Operation> GetAllEager()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Operation GetEager(long id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
