@@ -20,11 +20,11 @@ namespace bolnica.Repository.CSV.Converter
         }
 
         public Doctor ConvertCSVFormatToEntity(string entityCSVFormat)
-        {           // id, String name, String surname, String jmbg, String email, String phone, DateTime birth, String adress, String username, String password, Image img, Speciality spec
+        {           // id, String name, String surname, String jmbg, String email, String phone, DateTime birth, String adress, town.Id, state.Id, String username, String password, Image img, Speciality spec
            string[] tokens = entityCSVFormat.Split(_delimiter.ToCharArray());
 
-            Doctor doct = new Doctor(long.Parse(tokens[0]), tokens[1], tokens[2], tokens[3], tokens[4], tokens[5], DateTime.Parse(tokens[6]), new Address(long.Parse(tokens[7])), tokens[8], tokens[9],null, new Speciality(long.Parse(tokens[10]))); //(Bitmap)Bitmap.FromFile("../../Images/"+tokens[8]+".Jpeg")
-            if (!tokens[11].Equals("empty"))
+            Doctor doct = new Doctor(long.Parse(tokens[0]), tokens[1], tokens[2], tokens[3], tokens[4], tokens[5], DateTime.Parse(tokens[6]), new Address(long.Parse(tokens[7]),long.Parse(tokens[8]),long.Parse(tokens[9])), tokens[10], tokens[11],null, new Speciality(long.Parse(tokens[12]))); //(Bitmap)Bitmap.FromFile("../../Images/"+tokens[8]+".Jpeg")
+            if (!tokens[13].Equals("empty"))
             {
                 string[] articlesIds = tokens[12].Split("|".ToCharArray());
                 for (int i = 0; i < articlesIds.Length; i++)
@@ -32,7 +32,7 @@ namespace bolnica.Repository.CSV.Converter
             }
             else
                 doct.Articles = new List<Article>();
-            if (!tokens[12].Equals("empty"))
+            if (!tokens[14].Equals("empty"))
             {
                 string[] daysIds = tokens[13].Split("|".ToCharArray());
                 for (int i = 0; i < daysIds.Length; i++)
@@ -40,7 +40,7 @@ namespace bolnica.Repository.CSV.Converter
             }
             else
                 doct.BusinessDay = new List<BusinessDay>();
-            if (!tokens[13].Equals("empty"))
+            if (!tokens[15].Equals("empty"))
             {
                 doct.DoctorGrade = new DoctorGrade(long.Parse(tokens[14]));
             }
@@ -53,7 +53,7 @@ namespace bolnica.Repository.CSV.Converter
         {
             StringBuilder sb = new StringBuilder();
            // entity.Image.Save("../../Images/" + entity.Username + "Jpeg", System.Drawing.Imaging.ImageFormat.Jpeg);
-            string generalData = string.Join(_delimiter, entity.Id, entity.FirstName, entity.LastName, entity.Jmbg, entity.Email, entity.Phone, entity.DateOfBirth, entity.Address.GetId(), entity.Username, entity.Password,  entity.Specialty.GetId());
+            string generalData = string.Join(_delimiter, entity.Id, entity.FirstName, entity.LastName, entity.Jmbg, entity.Email, entity.Phone, entity.DateOfBirth, entity.Address.GetId(), entity.Address.Town.GetId(), entity.Address.Town.State.GetId(), entity.Username, entity.Password,  entity.Specialty.GetId());
 
             var article_count = entity.Articles == null ? 0 : entity.Articles.Count;
 

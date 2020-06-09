@@ -8,7 +8,7 @@ namespace Model.Users
    public class State : Repository.IIdentifiable<long>
    {
 
-      public long Id;
+      public long Id { get; set; }
       public String Name { get; set; }
       public String Code { get; set; }
 

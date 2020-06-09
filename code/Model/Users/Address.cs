@@ -7,7 +7,7 @@ namespace Model.Users
 {
    public class Address : IIdentifiable<long>
    {
-        private long _id;
+        public long Id { get; set; }
         public String Street { get; set; }
         public int Number { get; set; }
         public String FullAddress { get; set; }
@@ -16,7 +16,7 @@ namespace Model.Users
       
         public Address(long id, string street, int number, Town town)
         {
-            _id = id;
+            Id = id;
             Street = street;
             Number = number;
             Town = town;
@@ -25,12 +25,12 @@ namespace Model.Users
 
         public Address(long id)
         {
-            _id = id; 
+            Id = id; 
         }
 
         public Address(long id, long townID, long stateID)
         {
-            _id = id;
+            Id = id;
             Town = new Town(townID, stateID);
         }
 
@@ -67,12 +67,12 @@ namespace Model.Users
 
         public long GetId()
         {
-            return _id;
+            return Id;
         }
 
         public void SetId(long id)
         {
-            _id = id;
+            Id = id;
         }
     }
 }
