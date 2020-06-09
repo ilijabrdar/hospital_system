@@ -147,13 +147,11 @@
                                             </Binding>
                                         </TextBox.Text>
                                     </TextBox>
-                                    <ComboBox HorizontalAlignment="Left" Margin="150,260,0,0" VerticalAlignment="Top" Width="263" />
-                                    <ComboBox HorizontalAlignment="Left" Margin="150,300,0,0" VerticalAlignment="Top" Width="263"/>
-                                    <ComboBox HorizontalAlignment="Left" Margin="150,340,0,0" VerticalAlignment="Top" Width="152"/>
+                                    <ComboBox x:Name="StateCombo" HorizontalAlignment="Left" Margin="150,260,0,0" VerticalAlignment="Top" Width="263" DisplayMemberPath="Name" LostFocus="UpdateTownAddress"/>
+                                    <ComboBox x:Name="TownCombo" HorizontalAlignment="Left" Margin="150,300,0,0" VerticalAlignment="Top" Width="263" DisplayMemberPath="Name" LostFocus="UpdateAddress"/>
+                                    <ComboBox x:Name="AddressCombo" HorizontalAlignment="Left" Margin="150,340,0,0" VerticalAlignment="Top" Width="263" DisplayMemberPath="FullAddress"/>
                                     <Label Content="/" HorizontalAlignment="Left" Margin="228,220,0,0" VerticalAlignment="Top"/>
                                     <Label Content="/" HorizontalAlignment="Left" Margin="323,220,0,0" VerticalAlignment="Top"/>
-                                    <TextBox HorizontalAlignment="Left" Height="23" Margin="343,340,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70"/>
-                                    <Label Content="Broj" HorizontalAlignment="Left" Margin="307,340,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.548,0.154"/>
                                 </Grid>
                                 <StackPanel Grid.Column="1" VerticalAlignment="Bottom" Height="372" Margin="0,0,0,10">
                                     <Border BorderBrush="Black" BorderThickness="1" Height="220">

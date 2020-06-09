@@ -1,2 +1,2 @@
-﻿1,Vuka Karadzica,12,1,11
-2,Branka Radicevica,1,2,12
+﻿1,Vuka Karadzica,12,11
+2,Branka Radicevica,1,12

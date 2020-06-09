@@ -7,7 +7,7 @@ using Model.Users;
 
 namespace bolnica.Controller
 {
-    class StateController : IStateController
+    public class StateController : IStateController
     {
         IStateService _service;
 

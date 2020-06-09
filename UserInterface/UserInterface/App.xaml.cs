@@ -30,6 +30,7 @@ namespace UserInterface
         private const String STATE_FILE = "C:/Users/Asus/Desktop/SIMS/hospital_system/UserInterface/UserInterface/Resources/StateFile.txt";
 
         public IUserController UserController { get; private set; }
+        public IStateController StateController { get; private set; }
         public App()
         {
             AddressRepository addressRepository = new AddressRepository(new CSVStream<Address>(ADDRESS_FILE, new AddressCSVConverter(CSV_DELIMITER)), new LongSequencer());
@@ -47,7 +48,7 @@ namespace UserInterface
             UserController = new UserController(userService);
 
             StateService stateService = new StateService(stateRepository);
-            Console.WriteLine(stateService.GetAll());
+            StateController = new StateController(stateService);
 
             //User user = userController.Login("pera", "pera");
             //Secretary secretary = (Secretary)user;

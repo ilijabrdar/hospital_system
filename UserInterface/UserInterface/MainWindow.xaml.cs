@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using bolnica.Controller;
 using Model.Users;
 
 namespace UserInterface
@@ -34,19 +35,28 @@ namespace UserInterface
         public List<Examination> examinations { get; set; }
         public List<Examination> freeSlots { get; set; }
 
+        public List<State> States { get; set; }
+        public List<Town> Towns { get; set; }
+        public List<Address> Addresses { get; set; }
+
         private ToolTip _toolTip = new ToolTip();
         private Boolean _isToolTipAvailable = true;
+
+        public State SelectedState { get; set; }
+        public Town SelectedTown { get; set; }
+        public Address SelectedAddress { get; set; }
 
         public MainWindow(Secretary secretary)
         {
             InitializeComponent();
             this.DataContext = this;
-            App app = Application.Current as App;
+            
             GuestPatient = new Patient(true);
             Secretary = secretary;
             Day = secretary.DateOfBirth.Day;
             Month = secretary.DateOfBirth.Month;
             Year = secretary.DateOfBirth.Year;
+            PopulateCombos();
             //Image = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(Secretary.Image, Int)
             this.examinations = new List<Examination>();
             this.examinations.Add(new Examination(new DateTime(2020, 1, 2, 12, 00, 00), "Pera Peric", "Petar Petrovic", "S12"));
@@ -91,6 +101,41 @@ namespace UserInterface
             this.freeSlots.Add(new Examination(new DateTime(2020, 1, 5, 18, 55, 00), "Marko Markovic", "S15"));
             this.freeSlots.Add(new Examination(new DateTime(2020, 1, 5, 19, 10, 00), "Nikola Nikolic", "S55"));
             this.freeSlots.Add(new Examination(new DateTime(2020, 1, 5, 20, 00, 00), "Marko Markovic", "S15"));
+        }
+
+        private void PopulateCombos()
+        {
+            ComboBox states = FindName("StateCombo") as ComboBox;
+            ComboBox towns = FindName("TownCombo") as ComboBox;
+            ComboBox addresses = FindName("AddressCombo") as ComboBox;
+            App app = Application.Current as App;
+            States = app.StateController.GetAll().ToList();
+            states.ItemsSource = States;
+            foreach(State state in States)
+                if(Secretary.Address.Town.State.Name == state.Name)
+                {
+                    states.SelectedItem = state;
+                    SelectedState = state;
+                    break;
+                }
+            Towns = Secretary.Address.Town.State.GetTown();
+            towns.ItemsSource = Towns;
+            foreach (Town town in Towns)
+                if (Secretary.Address.Town.Name == town.Name)
+                {
+                    towns.SelectedItem = town;
+                    SelectedTown = town;
+                    break;
+                }
+            Addresses = Secretary.Address.Town.GetAddress();
+            addresses.ItemsSource = Addresses;
+            foreach (Address address in Addresses)
+                if (Secretary.Address.FullAddress == address.FullAddress)
+                {
+                    addresses.SelectedItem = address;
+                    SelectedAddress = address;
+                    break;
+                }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -198,6 +243,38 @@ namespace UserInterface
                 placeHolder.Visibility = Visibility.Visible;
             else
                 placeHolder.Visibility = Visibility.Collapsed;
+        }
+
+        private void UpdateTownAddress(object sender, RoutedEventArgs e)
+        {
+            ComboBox states = FindName("StateCombo") as ComboBox;
+            ComboBox towns = FindName("TownCombo") as ComboBox;
+            State state = states.SelectedItem as State;
+            if (SelectedState.GetId() == state.GetId())
+                return;
+            SelectedState = state;
+            Towns = SelectedState.GetTown();
+            towns.ItemsSource = Towns;
+            towns.SelectedItem = Towns[0];
+
+            ComboBox addresses = FindName("AddressCombo") as ComboBox;
+            SelectedTown = towns.SelectedItem as Town;
+            Addresses = SelectedTown.GetAddress();
+            addresses.ItemsSource = Addresses;
+            addresses.SelectedItem = Addresses[0];
+        }
+
+        private void UpdateAddress(object sender, RoutedEventArgs e)
+        {
+            ComboBox towns = FindName("TownCombo") as ComboBox;
+            ComboBox addresses = FindName("AddressCombo") as ComboBox;
+            Town town = towns.SelectedItem as Town;
+            if (SelectedTown.GetId() == town.GetId())
+                return;
+            SelectedTown = town;
+            Addresses = SelectedTown.GetAddress();
+            addresses.ItemsSource = Addresses;
+            addresses.SelectedItem = Addresses[0];
         }
     }
 }
