@@ -1,78 +1,78 @@
-/***********************************************************************
- * Module:  PatientFileService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.PatientFileService
- ***********************************************************************/
 
 using bolnica.Controller;
+using bolnica.Service;
 using Model.Doctor;
 using Model.PatientSecretary;
 using Model.Users;
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace Controller
 {
     public class PatientFileController : IPatientFileController
     {
+        private readonly IPatientFileService _patientFileService;
+
+        public PatientFileController(IPatientFileService patientFileService)
+        {
+            _patientFileService = patientFileService;
+        }
+
         public Allergy AddAllergy(Allergy allergy, PatientFile patientFile)
         {
-            throw new NotImplementedException();
+            return _patientFileService.AddAllergy(allergy, patientFile);
         }
 
         public Examination AddExamination(Examination examination, PatientFile patientFile)
         {
-            throw new NotImplementedException();
+            return _patientFileService.AddExamination(examination, patientFile);
         }
 
         public Hospitalization AddHospitalization(Hospitalization hospitalization, PatientFile patientFile)
         {
-            throw new NotImplementedException();
+            return _patientFileService.AddHospitalization(hospitalization, patientFile);
         }
 
         public Operation AddOperation(Operation operations, PatientFile patientFile)
         {
-            throw new NotImplementedException();
+            return _patientFileService.AddOperation(operations, patientFile);
         }
 
         public void Delete(PatientFile entity)
         {
-            throw new NotImplementedException();
+            _patientFileService.Delete(entity);
         }
 
         public bool DeleteAllergy(Allergy allergy, PatientFile patientFile)
         {
-            throw new NotImplementedException();
+            return _patientFileService.DeleteAllergy(patientFile, allergy);
         }
 
         public void Edit(PatientFile entity)
         {
-            throw new NotImplementedException();
+           _patientFileService.Edit(entity);
         }
 
-        public Allergy EditAllergy(Allergy allergy, PatientFile patientFile)
-        {
-            throw new NotImplementedException();
-        }
 
         public PatientFile Get(long id)
         {
-            throw new NotImplementedException();
+           return _patientFileService.Get(id);
         }
 
         public IEnumerable<PatientFile> GetAll()
         {
-            throw new NotImplementedException();
+            return _patientFileService.GetAll();
         }
 
         public PatientFile GetPatientFile(Patient patient)
         {
-            throw new NotImplementedException();
+            return _patientFileService.GetPatientFile(patient);
         }
 
         public PatientFile Save(PatientFile entity)
         {
-            throw new NotImplementedException();
+            return _patientFileService.Save(entity);
         }
     }
 }
