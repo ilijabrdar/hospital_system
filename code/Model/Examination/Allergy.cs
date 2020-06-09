@@ -5,7 +5,12 @@ namespace Model.PatientSecretary
 {
    public class Allergy
    {
-      private String Name;
+      public String Name { get; set; }
+
+      public Allergy(String name)
+        {
+            Name = name;
+        }
    
    }
 }
