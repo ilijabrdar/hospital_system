@@ -9,10 +9,9 @@ using System.Text;
 namespace bolnica.Controller
 {
    public interface IDoctorController : IController<Doctor, long>
-{
-         List<Doctor> GetDoctorsBySpeciality(Specialty specialty);
-         Boolean ChangeSpeciality(Specialty speciality, Doctor doctor);
+    {
+         List<Doctor> GetDoctorsBySpeciality(Speciality specialty);
 
-        DoctorGrade GiveGrade(DoctorGrade doctorGrade);
+
     }
 }

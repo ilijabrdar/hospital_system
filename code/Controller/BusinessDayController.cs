@@ -1,12 +1,10 @@
-/***********************************************************************
- * Module:  BusinessDayService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.BusinessDayService
- ***********************************************************************/
+
 
 using bolnica.Controller;
+using bolnica.Model.Dto;
 using bolnica.Service;
 using Model.Director;
+using Model.Dto;
 using Model.PatientSecretary;
 using Model.Users;
 using System;
@@ -39,10 +37,10 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        public List<Period> GenerateAvailablePeriods(BusinessDay bussinesDay)
+  /*      public List<Period> GenerateAvailablePeriods(BusinessDay bussinesDay)
         {
             return _businessDayService.GenerateAvailablePeriods(bussinesDay);
-        }
+        }*/
 
         public BusinessDay Get(long id)
         {
@@ -59,17 +57,27 @@ namespace Controller
             throw new NotImplementedException();
         }
 
+        public BusinessDay getDoctorWorkingHoursForSpecificDate(Doctor doctor, DateTime date)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool MarkAsOccupied(Period period, BusinessDay businessDay)
         {
             throw new NotImplementedException();
         }
 
-        public List<BusinessDay> PeriodRecommendationByDate(Period period)
+  /*      public List<Examination> PeriodRecommendationByDate(DateTime date)
+        {
+            throw new NotImplementedException();
+        }
+*/
+        public BusinessDay Save(BusinessDay entity)
         {
             throw new NotImplementedException();
         }
 
-        public BusinessDay Save(BusinessDay entity)
+        public List<ExaminationDTO> Search(BusinessDayDTO businessDayDTO)
         {
             throw new NotImplementedException();
         }

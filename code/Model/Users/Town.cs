@@ -1,40 +1,49 @@
-/***********************************************************************
- * Module:  Town.cs
- * Author:  Asus
- * Purpose: Definition of the Class Users.Town
- ***********************************************************************/
+
 
 using System;
+using System.Collections.Generic;
 
 namespace Model.Users
 {
    public class Town : Repository.IIdentifiable<long>
    {
-        private long _id;
+        public long Id;
         public String Name { get; set; }
         public String PostalNumber { get; set; }
-        public State state { get; set; }
+        public State State { get; set; }
 
-        private System.Collections.ArrayList address;
+        private List<Address> address;
       
-        public Town(long id, string name, string postalNumber)
+        public Town(long id, string name, string postalNumber, State state)
         {
-            _id = id;
+            Id = id;
             Name = name;
             PostalNumber = postalNumber;
-            address = new System.Collections.ArrayList();
+            State = state;
+            address = new List<Address>();
+        }
+
+        public Town(long id)
+        {
+            Id = id;
+        }
+
+        public Town(long id, long stateID)
+        {
+            Id = id;
+            State = new State(stateID);
         }
 
         /// <pdGenerated>default getter</pdGenerated>
-        public System.Collections.ArrayList GetAddress()
+        public List<Address> GetAddress()
         {
             if (address == null)
-            address = new System.Collections.ArrayList();
+            address = new List<Address>();
             return address;
         }
       
         /// <pdGenerated>default setter</pdGenerated>
-        public void SetAddress(System.Collections.ArrayList newAddress)
+        public void SetAddress(List<Address> newAddress)
         {
             RemoveAllAddress();
             foreach (Address oAddress in newAddress)
@@ -47,7 +56,7 @@ namespace Model.Users
             if (newAddress == null)
             return;
             if (this.address == null)
-            this.address = new System.Collections.ArrayList();
+            this.address = new List<Address>();
             if (!this.address.Contains(newAddress))
             {
             this.address.Add(newAddress);
@@ -73,7 +82,7 @@ namespace Model.Users
         {
             if (address != null)
             {
-            System.Collections.ArrayList tmpAddress = new System.Collections.ArrayList();
+                List<Address> tmpAddress = new List<Address>();
             foreach (Address oldAddress in address)
                 tmpAddress.Add(oldAddress);
             address.Clear();
@@ -86,37 +95,37 @@ namespace Model.Users
         /// <pdGenerated>default parent getter</pdGenerated>
         public State GetState()
         {
-            return state;
+            return State;
         }
       
         /// <pdGenerated>default parent setter</pdGenerated>
         /// <param>newState</param>
         public void SetState(State newState)
         {
-            if (this.state != newState)
+            if (State != newState)
             {
-            if (this.state != null)
+            if (State != null)
             {
-                State oldState = this.state;
-                this.state = null;
+                State oldState = State;
+                State = null;
                 oldState.RemoveTown(this);
             }
             if (newState != null)
             {
-                this.state = newState;
-                this.state.AddTown(this);
+                State = newState;
+                State.AddTown(this);
             }
             }
         }
 
         public long GetId()
         {
-            return _id;
+            return Id;
         }
 
         public void SetId(long id)
         {
-            _id = id;
+            Id = id;
         }
     }
 }

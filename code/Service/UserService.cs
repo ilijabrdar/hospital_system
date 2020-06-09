@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  UserService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.UserService
- ***********************************************************************/
-
 using bolnica.Service;
 using Model.PatientSecretary;
 using Model.Users;
@@ -15,35 +9,28 @@ namespace Service
 {
     public class UserService : IUserService
     {
-        private IDoctorService _doctorService;
-        private IPatientService _patientService;
-        //private IService _secretaryService;
-        //private IService _directorService;
+        private readonly IDoctorService _doctorService;
+        private readonly IPatientService _patientService;
+        private readonly ISecretaryService _secretaryService;
+        private readonly IDirectorService _directorService;
 
-        //TODO : u klas dijagram dodati ove veze ako vam se ovo svidja
-        private readonly IPatientRepository _patientRepo;
-        private readonly IDoctorRepository _doctorRepo;
-        private readonly ISecretaryRepository _secretaryRepo;
-        private readonly IDirectorRepository _directorRepo;
-
-        private readonly IPatientFileRepository _patientFileRepo;
-
-
-        public UserService(IPatientService patientServ, IDoctorService _doctor)
+        public UserService(IPatientService patientServ, IDoctorService _doctor, ISecretaryService secretaryService, IDirectorService directorService)
         {
-            this._patientService = patientServ;
-            this._doctorService = _doctor;
+            _patientService = patientServ;
+            _doctorService = _doctor;
+            _secretaryService = secretaryService;
+            _directorService = directorService;
         }
         public UserService(IPatientService patientService)
         {
-            this._patientService = patientService;
+            _patientService = patientService;
         }
 
         public User Save(User entity)
         {
             try
             {
-                Patient patient = (Patient)entity; 
+                Patient patient = (Patient)entity;
                 return _patientService.Save(patient);
 
             }
@@ -68,11 +55,6 @@ namespace Service
             throw new NotImplementedException();
         }
 
-        public object GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
         public bool IsPasswordValid(User user, String password)
         {
             if (user.Password != password)
@@ -81,18 +63,18 @@ namespace Service
                 return true;
         }
 
-        // TODO: Zasto svaka rola ima svoju get<>ByID, Zasto to nije u Useru??
         public User IsUsernameValid(string username)
         {
             User user = null;
-            if ((user = _patientRepo.GetPatientByUsername(username)) != null)
+            //if ((user = _patientService.GetUserByUsername(username)) != null)
+            //    return user;
+            if ((user = _secretaryService.GetUserByUsername(username)) != null)
                 return user;
-            else if ((user = _secretaryRepo.GetSecretaryByUsername(username)) != null)
-                return user;
-            else if ((user = _directorRepo.GetDirectorByUsername(username)) != null)
-                return user;
-            else if ((user = _doctorRepo.GetDoctorByUsername(username)) != null)
-                return user;
+            //else if ((user = _directorService.GetUserByUsername(username)) != null)
+            //    return user;
+            //else if ((user = _doctorService.GetUserByUsername(username)) != null)
+            //  return user;
+
             return user;
         }
 
@@ -126,7 +108,7 @@ namespace Service
             throw new NotImplementedException();
         }
 
-        IEnumerable<User> IService<User, long>.GetAll()
+        public IEnumerable<User> GetAll()
         {
             throw new NotImplementedException();
         }
@@ -140,7 +122,5 @@ namespace Service
         {
             throw new NotImplementedException();
         }
-
-
     }
 }

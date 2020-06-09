@@ -8,12 +8,9 @@ using System.Text;
 
 namespace bolnica.Service
 {
-   public interface IDoctorService : IService<Doctor, long>
-{
-    List<Doctor> GetDoctorsBySpeciality(Specialty specialty);
+   public interface IDoctorService : IService<Doctor, long>, IUserGetterService
+    {
+    List<Doctor> GetDoctorsBySpeciality(Speciality specialty);
 
-   Boolean ChangeSpeciality(Specialty specialty, Model.Users.Doctor doctor);
-
-   DoctorGrade GiveGrade(DoctorGrade doctorGrade);
-}
+    }
 }

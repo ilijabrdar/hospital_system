@@ -1,14 +1,12 @@
-/***********************************************************************
- * Module:  IHospitalizationRepository.cs
- * Author:  Asus
- * Purpose: Definition of the Interface Repository.IHospitalizationRepository
- ***********************************************************************/
 
+
+using bolnica.Repository;
+using Model.Doctor;
 using System;
 
 namespace Repository
 {
-   public interface IHospitalizationRepository// : IRepository
-   {
+   public interface IHospitalizationRepository : IRepository<Hospitalization, long>, IEagerRepository<Hospitalization, long>
+    {
    }
 }

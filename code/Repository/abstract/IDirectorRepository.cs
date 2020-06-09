@@ -1,16 +1,13 @@
-/***********************************************************************
- * Module:  IDirectorRepository.cs
- * Author:  david
- * Purpose: Definition of the Interface Repository.IDirectorRepository
- ***********************************************************************/
 
+
+using bolnica.Repository;
 using Model.Users;
 using System;
 
 namespace Repository
 {
-   public interface IDirectorRepository// : IRepository
+   public interface IDirectorRepository : IRepository<Director, long>, IUserGetterRepository, IEagerRepository<Director, long>
    {
-      Director GetDirectorByUsername(String username);
+
    }
 }

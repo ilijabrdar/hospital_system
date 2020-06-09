@@ -1,42 +1,48 @@
-/***********************************************************************
- * Module:  ArticleService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.ArticleService
- ***********************************************************************/
-
+using bolnica.Service;
+using Model.Doctor;
+using Repository;
 using System;
+using System.Collections.Generic;
 
 namespace Service
 {
-   public class ArticleService// : IService
+   public class ArticleService : IArticleService
    {
-      public Model.Doctor.Article[] SearchArticle(String criteria)
-      {
-         // TODO: implement
-         return null;
-      }
+       private readonly IArticleRepository _repository;
 
-        public object Save()
+        public ArticleService(IArticleRepository repository)
+        {
+            _repository = repository;
+        }
+
+        public void Delete(Article entity)
+        {
+            _repository.Delete(entity);
+        }
+
+        public void Edit(Article entity)
+        {
+            _repository.Edit(entity);
+        }
+
+        public Article Get(long id)
+        {
+            return _repository.Get(id);
+        }
+
+        public IEnumerable<Article> GetAll()
+        {
+            return _repository.GetAll();
+        }
+
+        public Article Save(Article entity)
+        {
+            return _repository.Save(entity);
+        }
+
+        public List<Article> SearchArticle(string criteria)
         {
             throw new NotImplementedException();
         }
-
-        public object Delete()
-        {
-            throw new NotImplementedException();
-        }
-
-        public object Edit()
-        {
-            throw new NotImplementedException();
-        }
-
-        public object GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        private Repository.IArticleRepository _articleRepository;
-   
-   }
+    }
 }

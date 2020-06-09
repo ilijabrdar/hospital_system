@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  EquipmentService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.EquipmentService
- ***********************************************************************/
-
 using bolnica.Service;
 using Model.Director;
 using Repository;
@@ -15,17 +9,13 @@ namespace Service
    public class EquipmentService : IEquipmentService
    {
 
-        private IEquipmentRepository _repository;
+        private readonly IEquipmentRepository _repository;
 
         public EquipmentService(IEquipmentRepository repository)
         {
             _repository = repository;
         }
 
-        public Room[] GetRoomsContainingEquipment(string name) //TODO: GetRoomsContainingEquipment
-        {
-            throw new NotImplementedException();
-        }
 
         public Equipment Save(Equipment entity)
         {
@@ -42,7 +32,7 @@ namespace Service
             _repository.Edit(entity);
         }
 
-        IEnumerable<Equipment> IService<Equipment, long>.GetAll()
+       public IEnumerable<Equipment> GetAll()
         {
             return _repository.GetAll();
         }
@@ -50,6 +40,15 @@ namespace Service
         public Equipment Get(long id)
         {
             return _repository.Get(id);
+        }
+
+        public IEnumerable<Equipment> GetConsumableEquipment() => _repository.getConsumableEquipment();
+
+        public IEnumerable<Equipment> GetInconsumableEquipment() => _repository.getInconsumableEquipment();
+
+        public bool CheckEquipmentNameUnique(Equipment equipment)
+        {
+            throw new NotImplementedException();
         }
     }
 }

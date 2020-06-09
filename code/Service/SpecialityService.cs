@@ -1,35 +1,31 @@
-/***********************************************************************
- * Module:  SpecialityService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.SpecialityService
- ***********************************************************************/
-
+using bolnica.Service;
+using Model.Doctor;
+using Repository;
 using System;
+using System.Collections.Generic;
+using Speciality = Model.Doctor.Speciality;
 
 namespace Service
 {
-   public class SpecialityService// : IService
+   public class SpecialityService : ISpecialityService
    {
-      private Repository.ISpecialityRepository _specialityRepository;
+      private readonly ISpecialityRepository _repository;
 
-        public object Delete()
+        public SpecialityService(ISpecialityRepository repository)
         {
-            throw new NotImplementedException();
+            _repository = repository;
         }
 
-        public object Edit()
+
+        public Speciality Get(long id)
         {
-            throw new NotImplementedException();
+            return _repository.Get(id);
         }
 
-        public object GetAll()
+        public IEnumerable<Speciality> GetAll()
         {
-            throw new NotImplementedException();
+            return _repository.GetAll();
         }
 
-        public object Save()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

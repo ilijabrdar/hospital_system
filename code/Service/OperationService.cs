@@ -4,32 +4,47 @@
  * Purpose: Definition of the Class Service.OperationService
  ***********************************************************************/
 
+using bolnica.Service;
+using Model.Doctor;
+using Repository;
 using System;
+using System.Collections.Generic;
 
 namespace Service
 {
-   public class OperationService// : IService
+   public class OperationService : IOperationService
    {
-      private Repository.IOperationRepository _operationRepository;
+      private IOperationRepository _repository;
 
-        public object Delete()
+        public OperationService(IOperationRepository repository)
         {
-            throw new NotImplementedException();
+            _repository = repository;
         }
 
-        public object Edit()
+        public void Delete(Operation entity)
         {
-            throw new NotImplementedException();
+            _repository.Delete(entity);
         }
 
-        public object GetAll()
+        public void Edit(Operation entity)
         {
-            throw new NotImplementedException();
+            _repository.Edit(entity);
         }
 
-        public object Save()
+        public Operation Get(long id)
         {
-            throw new NotImplementedException();
+            return _repository.Get(id);
+        }
+
+        public IEnumerable<Operation> GetAll()
+        {
+            return _repository.GetAll();
+        }
+
+        public Operation Save(Operation entity)
+        {
+
+           return _repository.Save(entity);
         }
     }
 }

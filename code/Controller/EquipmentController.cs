@@ -1,8 +1,3 @@
-/***********************************************************************
- * Module:  EquipmentService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.EquipmentService
- ***********************************************************************/
 
 using bolnica.Controller;
 using bolnica.Service;
@@ -37,11 +32,6 @@ namespace Controller
         }
 
 
-        public Room[] GetRoomsContainingEquipment(string name)
-        {
-            throw new NotImplementedException();
-        }
-
         public Equipment Get(long id)
         {
             return _service.Get(id);
@@ -50,6 +40,15 @@ namespace Controller
         public IEnumerable<Equipment> GetAll()
         {
             return _service.GetAll();
+        }
+
+        public IEnumerable<Equipment> getConsumableEquipment() => _service.GetConsumableEquipment();
+
+        public IEnumerable<Equipment> getInconsumableEquipment() => _service.GetInconsumableEquipment();
+
+        public bool CheckEquipmentNameUnique(Equipment equipment)
+        {
+            throw new NotImplementedException();
         }
     }
 }

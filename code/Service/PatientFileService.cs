@@ -1,8 +1,4 @@
-/***********************************************************************
- * Module:  PatientFileService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.PatientFileService
- ***********************************************************************/
+
 
 using bolnica.Service;
 using Model.Doctor;
@@ -17,8 +13,8 @@ namespace Service
    public class PatientFileService : IPatientFileService
     { 
 
-        // private IService Hospitalisation;
-        //private IService Operation;
+         private readonly  IHospitalizationService _hospitalisationService;
+        private readonly  IOperationService _operationService;
         private readonly IPatientFileRepository _fileRepo;
      
         public PatientFileService(IPatientFileRepository repo) { _fileRepo = repo; }

@@ -1,43 +1,54 @@
-/***********************************************************************
- * Module:  DirectorService.cs
- * Author:  david
- * Purpose: Definition of the Class Service.DirectorService
- ***********************************************************************/
-
 using Model.Users;
 using System;
+using bolnica.Service;
+using System.Collections.Generic;
+using bolnica.Repository;
+using Repository;
 
 namespace Service
 {
-   public class DirectorService// : IService
-   {
-      public Doctor RegisterDoctor(Doctor doctor)
-      {
-         // TODO: implement
-         return null;
-      }
+    public class DirectorService : IDirectorService 
+    { 
+        private readonly IDirectorRepository _directorRepository;
 
-        public object Save()
+        public DirectorService(IDirectorRepository directorRepository)
+        {
+            _directorRepository = directorRepository;
+        }
+
+        public void Delete(Director entity)
         {
             throw new NotImplementedException();
         }
 
-        public object Delete()
+        public void Edit(Director entity)
         {
             throw new NotImplementedException();
         }
 
-        public object Edit()
+        public Director Get(long id)
         {
             throw new NotImplementedException();
         }
 
-        public object GetAll()
+        public IEnumerable<Director> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        private Repository.IDirectorRepository _directorRepository;
-   
-   }
+        public User GetUserByUsername(string username)
+        {
+            return _directorRepository.GetUserByUsername(username);
+        }
+
+        public Doctor RegisterDoctor(Doctor doctor)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Director Save(Director entity)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

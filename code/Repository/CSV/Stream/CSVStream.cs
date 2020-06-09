@@ -1,4 +1,5 @@
-﻿using System;
+﻿using bolnica.Repository.CSV.Converter;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -16,7 +17,6 @@ namespace bolnica.Repository
             _path = path;
             _converter = converter;
         }
-
         public void AppendToFile(E entity)
             => File.AppendAllText(_path,
                _converter.ConvertEntityToCSVFormat(entity) + Environment.NewLine);

@@ -9,5 +9,6 @@ namespace bolnica.Controller
 {
     public interface IRoomTypeController : IController<RoomType,long>
     {
+        Room CheckRoomTypeUnique(RoomType roomType);
     }
 }

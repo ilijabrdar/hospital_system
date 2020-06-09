@@ -1,8 +1,4 @@
-/***********************************************************************
- * Module:  RoomTypeService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.RoomTypeService
- ***********************************************************************/
+
 
 using bolnica.Service;
 using Model.Director;
@@ -24,7 +20,10 @@ namespace Service
             _repository = repository;
         }
 
-        
+        public bool CheckRoomTypeUnique(RoomType roomType)
+        {
+            throw new NotImplementedException();
+        }
 
         public void Delete(RoomType entity)
         {

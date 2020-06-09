@@ -1,8 +1,4 @@
-/***********************************************************************
- * Module:  Patient.cs
- * Author:  Asus
- * Purpose: Definition of the Class Users.Patient
- ***********************************************************************/
+
 
 using Model.PatientSecretary;
 using Repository;
@@ -18,7 +14,7 @@ namespace Model.Users
       public Boolean Guest = false;
        
 
-        public Patient(long id,String name, String surname, String jmbg, String email, String phone, DateTime birth, String adress, String username, String password, Image img)
+        public Patient(long id,String name, String surname, String jmbg, String email, String phone, DateTime birth, Address address, String username, String password, Bitmap img)
         {
             this.Id = id;
             this.FirstName = name;
@@ -27,12 +23,20 @@ namespace Model.Users
             this.Email = email;
             this.Phone = phone;
             this.DateOfBirth = birth;
-            this.address = adress;
+            this.Address = address;
             this.Username = username;
             this.Password = password;
             this.Image = img;
         }
+        public Patient(long id)
+        {
+            this.Id = id;
+        }
 
+        public Patient(Boolean guest)
+        {
+            Guest = guest;
+        }
         override
         public long GetId()
         {

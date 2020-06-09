@@ -1,8 +1,4 @@
-/***********************************************************************
- * Module:  Address.cs
- * Author:  Asus
- * Purpose: Definition of the Class Users.Address
- ***********************************************************************/
+
 
 using System;
 using Repository;
@@ -14,39 +10,57 @@ namespace Model.Users
         private long _id;
         public String Street { get; set; }
         public int Number { get; set; }
-        public int ApartmentNumber { get; set; }
+        public String FullAddress { get; set; }
 
-        private Town town;
+        public Town Town { get; set; }
       
-        public Address(string street, int number, int apartmentNumber)
+        public Address(long id, string street, int number, Town town)
         {
+            _id = id;
             Street = street;
             Number = number;
-            ApartmentNumber = apartmentNumber;
+            Town = town;
+            FullAddress = GetFullAddress();
         } 
+
+        public Address(long id)
+        {
+            _id = id; 
+        }
+
+        public Address(long id, long townID, long stateID)
+        {
+            _id = id;
+            Town = new Town(townID, stateID);
+        }
+
+        public String GetFullAddress()
+        {
+            return String.Join(", ", Street, Number);
+        }
 
         /// <pdGenerated>default parent getter</pdGenerated>
         public Town GetTown()
         {
-            return town;
+            return Town;
         }
       
         /// <pdGenerated>default parent setter</pdGenerated>
         /// <param>newTown</param>
         public void SetTown(Town newTown)
         {
-            if (this.town != newTown)
+            if (Town != newTown)
             {
-            if (this.town != null)
+            if (Town != null)
             {
-                Town oldTown = this.town;
-                this.town = null;
+                Town oldTown = Town;
+                Town = null;
                 oldTown.RemoveAddress(this);
             }
             if (newTown != null)
             {
-                this.town = newTown;
-                this.town.AddAddress(this);
+                Town = newTown;
+                Town.AddAddress(this);
             }
             }
         }

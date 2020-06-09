@@ -1,8 +1,3 @@
-/***********************************************************************
- * Module:  DirectorService.cs
- * Author:  david
- * Purpose: Definition of the Class Service.DirectorService
- ***********************************************************************/
 
 using Model.Users;
 using System;

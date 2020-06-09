@@ -1,10 +1,5 @@
-/***********************************************************************
- * Module:  PatientService.cs
- * Author:  david
- * Purpose: Definition of the Class Service.PatientService
- ***********************************************************************/
-
 using bolnica.Service;
+using Model.Doctor;
 using Model.PatientSecretary;
 using Model.Users;
 using Repository;
@@ -13,21 +8,23 @@ using System.Collections.Generic;
 
 namespace Service
 {
-   public class PatientService : IPatientService
-   {
-        
+    public class PatientService : IPatientService
+    {
+
         private readonly IPatientRepository _patientRepository;
         private readonly IPatientFileService _patientFileService;
+        private readonly IDoctorGradeService _doctorGradeService;
 
-        public PatientService(IPatientRepository _patientRepo, IPatientFileService _servicePatientFile)
+        public PatientService(IPatientRepository _patientRepo, IPatientFileService _servicePatientFile, IDoctorGradeService doctorGradeService)
         {
+            _doctorGradeService = doctorGradeService;
             _patientRepository = _patientRepo;
             _patientFileService = _servicePatientFile;
         }
 
         public Patient Save(Patient entity)
         {
-            if (_patientRepository.GetPatientByUsername(entity.Username) != null)
+            if (_patientRepository.GetUserByUsername(entity.Username) != null)
             {
                 return null;
             }
@@ -39,12 +36,12 @@ namespace Service
 
         public void Delete(Patient entity)
         {
-            throw new NotImplementedException();
+            _patientRepository.Delete(entity);
         }
 
         public void Edit(Patient entity)
         {
-            throw new NotImplementedException();
+            _patientRepository.Edit(entity);
         }
 
         public IEnumerable<Patient> GetAll()
@@ -57,9 +54,35 @@ namespace Service
             throw new NotImplementedException();
         }
 
-        public Patient ClaimAccount(long id)
+        public Patient ClaimAccount(String id)
         {
             throw new NotImplementedException();
         }
+
+        public User GetUserByUsername(String username)
+        {
+            return _patientRepository.GetUserByUsername(username);
+        }
+
+        public Patient GetPatientByJMBG(string jmbg)
+        {
+            return _patientRepository.GetPatientByJMBG(jmbg);
+        }
+
+        public DoctorGrade GiveGradeToDoctor(Doctor doctor, Dictionary<string, double> gradesForDoctor)
+        {
+            DoctorGrade doctorGrade = doctor.DoctorGrade;
+            doctorGrade.NumberOfGrades++;
+            foreach(String question in doctorGrade.GradesForEachQuestions.Keys)
+            {
+                doctorGrade.GradesForEachQuestions[question] = (doctorGrade.GradesForEachQuestions[question] +
+                                                                gradesForDoctor[question]) / doctorGrade.NumberOfGrades;
+            }
+
+             _doctorGradeService.Edit(doctorGrade);
+
+            return doctorGrade;
+        }
+
     }
 }
