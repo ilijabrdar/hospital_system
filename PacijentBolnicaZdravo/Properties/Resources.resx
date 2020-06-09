@@ -237,6 +237,9 @@
   <data name="TabCancel" xml:space="preserve">
     <value>Cancel examination</value>
   </data>
+  <data name="TabChangeAccount" xml:space="preserve">
+    <value>Change account info</value>
+  </data>
   <data name="TabExemination" xml:space="preserve">
     <value>Schedul examination</value>
   </data>

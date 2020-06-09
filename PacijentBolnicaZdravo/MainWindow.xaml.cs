@@ -27,7 +27,6 @@ using System.Threading;
 using MahApps.Metro.Controls;
 using MahApps.Metro;
 using Model.Dto;
-using Caliburn.Micro;
 using Model.Users;
 using Model.PatientSecretary;
 using Model.Director;

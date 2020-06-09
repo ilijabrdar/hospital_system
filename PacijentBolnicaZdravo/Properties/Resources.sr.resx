@@ -237,6 +237,9 @@
   <data name="TabCancel" xml:space="preserve">
     <value>Vaši pregledi</value>
   </data>
+  <data name="TabChangeAccount" xml:space="preserve">
+    <value>Izmena naloga</value>
+  </data>
   <data name="TabExemination" xml:space="preserve">
     <value>Zakažite pregled</value>
   </data>

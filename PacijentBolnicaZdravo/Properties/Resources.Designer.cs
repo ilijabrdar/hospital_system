@@ -421,6 +421,15 @@ namespace MyProject.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change account info.
+        /// </summary>
+        public static string TabChangeAccount {
+            get {
+                return ResourceManager.GetString("TabChangeAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Schedul examination.
         /// </summary>
         public static string TabExemination {

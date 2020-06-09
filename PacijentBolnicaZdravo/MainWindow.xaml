@@ -165,6 +165,43 @@ Piramida ishrane je vizuelni prikaz namirnica koje treba da budu zastupljenje u 
             <TabItem Header="{x:Static p:Resources.Tabaccount}" Name="TabAccount">
                 <ScrollViewer>
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                        <TextBlock Name="BasicInf2"  Text="{x:Static p:Resources.BasicInf}" Margin="10" FontSize="18"/>
+                        <StackPanel Orientation="Horizontal">
+
+                            <StackPanel Orientation="Vertical">
+
+                                <TextBlock Name="UsernameLabel2" Text="{x:Static p:Resources.Username}" Margin="15" FontSize="15"/>
+                                <TextBlock Name="NameLabel2" Text="{x:Static p:Resources.Name}" Margin="15" FontSize="15"/>
+                                <TextBlock Margin="15" FontSize="15" Name="SurnameLabel2"  Text="{x:Static p:Resources.Surname}"/>
+                                <TextBlock Name="IDLabel2" Margin="15" FontSize="15"  Text="{x:Static p:Resources.ID}" />
+                                <TextBlock Name="DateBirthLabel2" FontSize="15" Margin="15" Text="{x:Static p:Resources.DateBirth}" ></TextBlock>
+                                <TextBlock Margin="15" FontSize="15" >E-mail:</TextBlock>
+                                <TextBlock Name="AdressLabel2"  Text="{x:Static p:Resources.Adress}" Margin="15" FontSize="15"/>
+                                <TextBlock Name="PhoneLabel2" Margin="15" FontSize="15"  Text="{x:Static p:Resources.NumberPhone}" />
+
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Margin="13" FontSize="15" Width="220" FontWeight="Bold" Opacity="0.6"> JovanJelicki</TextBlock>
+                                <TextBlock TextAlignment="Left" FontWeight="Bold" Opacity="0.6"  Name="Name2" Margin="13" FontSize="15" Width="220">Jovan </TextBlock>
+                                <TextBlock TextAlignment="Left" FontWeight="Bold" Opacity="0.6" FontSize="15" Name="Surname2" Margin="13,20,13,13" Width="220">Jelicki</TextBlock>
+                                <TextBlock TextAlignment="Left"  FontWeight="Bold" Opacity="0.6" FontSize="15" Name="ID2" Margin="13"  Width="220">2001998800114</TextBlock>
+                                <TextBlock Name="DateBirthTextBlock"  Margin="13,22,13,13" Width="220" FontSize="15" Height="30"  FontWeight="Bold" Opacity="0.6">20.01.1998.</TextBlock>
+                                <TextBlock TextAlignment="Left"  FontSize="15"  FontWeight="Bold" Opacity="0.6" Name="Email2" Margin="13,8,13,13"  Width="220">jovanzte@gmail.com</TextBlock>
+                                <TextBlock TextAlignment="Left"  FontSize="15"  FontWeight="Bold" Opacity="0.6" Name="Adress2" Margin="13,15,13,13" Width="220">Mišarska 40</TextBlock>
+                                <TextBlock TextAlignment="Left"  FontSize="15" FontWeight="Bold" Opacity="0.6" Name="PhoneNumber2" Margin="13,20,13,13" Width="220">2132132</TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel Orientation="Vertical">
+                                    <Image x:Name="ProfileImage2" Height="100" Width="90" Margin="10" Source="/PacijentBolnicaZdravo;component/Images/User.png"></Image>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="{x:Static p:Resources.TabChangeAccount}" Name="TabChangeAccount">
+                <ScrollViewer>
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                         <TextBlock Name="BasicInf"  Text="{x:Static p:Resources.BasicInf}" Margin="10" FontSize="18"/>
                         <StackPanel Orientation="Horizontal">
 
@@ -183,20 +220,68 @@ Piramida ishrane je vizuelni prikaz namirnica koje treba da budu zastupljenje u 
                             <StackPanel Orientation="Vertical">
                                 <TextBlock Margin="13" FontSize="15" Width="220" FontWeight="Bold" Opacity="0.6"> JovanJelicki</TextBlock>
                                 <TextBox TextAlignment="Left" BorderThickness="1.5" BorderBrush="LightBlue" Name="Name" Margin="10" FontSize="15" Width="220">
-                          
+                                    <TextBox.Text>
+                                        <Binding Path="Ime" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <local:ValidationRules />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
                                 </TextBox>
                                 <TextBox TextAlignment="Left" BorderThickness="1.5" BorderBrush="LightBlue" FontSize="15" Name="Surname" Margin="10,12,10,10" Width="220">
-         
+                                    <TextBox.Text>
+                                        <Binding Path="Prezime" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <local:ValidationRules/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
                                 </TextBox>
                                 <TextBox TextAlignment="Left" BorderThickness="1.5" BorderBrush="LightBlue" FontSize="15" Name="ID" Margin="10,12,10,10"  Width="220">
-                                  
+                                    <TextBox.Text>
+                                        <Binding Path="JMBG" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <local:JMBGValidationRule/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
                                 </TextBox>
-                                <DatePicker Margin="10,12,10,10" Width="220" Height="30">
-                         
+                                <DatePicker Name="DateBirthPicker" Margin="10,12,10,10" Width="220" Height="30">
+                                    <DatePicker.SelectedDate>
+                                        <Binding Path="DATETIME" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <local:DateTimeValidationRule/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </DatePicker.SelectedDate>
                                 </DatePicker>
-                                <TextBox TextAlignment="Left" BorderThickness="1.5" BorderBrush="LightBlue" FontSize="15" Name="Email" Margin="10"  Width="220">jovanzte@gmail.com</TextBox>
-                                <TextBox TextAlignment="Left" BorderThickness="1.5" BorderBrush="LightBlue" FontSize="15" Name="Adress" Margin="10,12,10,10" Width="220">Mišarska 40</TextBox>
-                                <TextBox TextAlignment="Left" BorderThickness="1.5" BorderBrush="LightBlue" FontSize="15" Name="PhoneNumber" Margin="10,12,10,10" Width="220"></TextBox>
+                                <TextBox TextAlignment="Left" BorderThickness="1.5" BorderBrush="LightBlue" FontSize="15" Name="Email" Margin="10"  Width="220">
+                                    <TextBox.Text>
+                                        <Binding Path="EMAIL" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <local:EmailValidationRule/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                                <TextBox TextAlignment="Left" BorderThickness="1.5" BorderBrush="LightBlue" FontSize="15" Name="Adress" Margin="10,12,10,10" Width="220">
+                                    <TextBox.Text>
+                                        <Binding Path="ADRESS" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <local:ValidationRules/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                                <TextBox TextAlignment="Left" BorderThickness="1.5" BorderBrush="LightBlue" FontSize="15" Name="PhoneNumber" Margin="10,12,10,10" Width="220">
+                                    <TextBox.Text>
+                                        <Binding Path="Phone" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <local:PhoneValidation/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
                                 <Button  Content="{x:Static p:Resources.UpdateData}" Name="UpdateData" Width="120" HorizontalAlignment="Right" Margin="10" Click="UpdateInfo"></Button>
                             </StackPanel>
                             <StackPanel Orientation="Vertical">
@@ -227,6 +312,7 @@ Piramida ishrane je vizuelni prikaz namirnica koje treba da budu zastupljenje u 
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
+
             <TabItem Name="FeedbackHeader" Header="{x:Static p:Resources.FeedBack}">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">              
                     <StackPanel Orientation="Vertical">

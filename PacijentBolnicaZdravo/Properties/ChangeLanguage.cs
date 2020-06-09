@@ -42,6 +42,7 @@ namespace PacijentBolnicaZdravo.Properties
                 currentWindow.TabFile.Header = MyProject.Language.Resources.TabFile;
                 currentWindow.CurrentTherapyLabel.Text = MyProject.Language.Resources.CurrentTherapy;
                 currentWindow.TabAccount.Header = MyProject.Language.Resources.Tabaccount;
+            currentWindow.TabChangeAccount.Header = MyProject.Language.Resources.TabChangeAccount;
                 currentWindow.BasicInf.Text = MyProject.Language.Resources.BasicInf;
                 currentWindow.NameLabel.Text = MyProject.Language.Resources.Name;
                 currentWindow.SurnameLabel.Text = MyProject.Language.Resources.Surname;
@@ -49,7 +50,15 @@ namespace PacijentBolnicaZdravo.Properties
                 currentWindow.DateBirthLabel.Text = MyProject.Language.Resources.DateBirth;
                 currentWindow.AdressLabel.Text = MyProject.Language.Resources.Adress;
                 currentWindow.PhoneLabel.Text = MyProject.Language.Resources.NumberPhone;
-                currentWindow.UpdateData.Content = MyProject.Language.Resources.UpdateData;
+            currentWindow.BasicInf2.Text = MyProject.Language.Resources.BasicInf;
+            currentWindow.NameLabel2.Text = MyProject.Language.Resources.Name;
+            currentWindow.SurnameLabel2.Text = MyProject.Language.Resources.Surname;
+            currentWindow.IDLabel2.Text = MyProject.Language.Resources.ID;
+            currentWindow.DateBirthLabel2.Text = MyProject.Language.Resources.DateBirth;
+            currentWindow.AdressLabel2.Text = MyProject.Language.Resources.Adress;
+            currentWindow.PhoneLabel2.Text = MyProject.Language.Resources.NumberPhone;
+            currentWindow.UpdateData.Content = MyProject.Language.Resources.UpdateData;
+            currentWindow.UsernameLabel2.Text = MyProject.Language.Resources.Username;
                 currentWindow.ChoosePhotoButton.Content = MyProject.Language.Resources.Photo;
                 currentWindow.PwLabel.Text = MyProject.Language.Resources.ChangePw;
                 currentWindow.CurrentPw.Text = MyProject.Language.Resources.CurrentPw;
