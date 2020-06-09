@@ -46,6 +46,8 @@ namespace UserInterface
         public Town SelectedTown { get; set; }
         public Address SelectedAddress { get; set; }
 
+        public String FullDate { get; set; }
+
         public MainWindow(Secretary secretary)
         {
             InitializeComponent();
@@ -56,6 +58,7 @@ namespace UserInterface
             Day = secretary.DateOfBirth.Day;
             Month = secretary.DateOfBirth.Month;
             Year = secretary.DateOfBirth.Year;
+            FullDate = string.Join("/", Day, Month, Year);
             PopulateCombos();
             //Image = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(Secretary.Image, Int)
             this.examinations = new List<Examination>();
@@ -138,9 +141,26 @@ namespace UserInterface
                 }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Edit(object sender, RoutedEventArgs e)
         {
+            App app = Application.Current as App;
+            Secretary.DateOfBirth = new DateTime(Year, Month, Day);
+            Secretary.Address = SelectedAddress;
+            Secretary.Address.Town = SelectedTown;
+            Secretary.Address.Town.State = SelectedState;
+            FullDate = string.Join("/", Day, Month, Year);
 
+            TextBlock date = FindName("txtDate") as TextBlock;
+            date.Text = FullDate;
+            TextBlock state = FindName("txtState") as TextBlock;
+            state.Text = SelectedState.Name;
+            TextBlock town = FindName("txtTown") as TextBlock;
+            town.Text = SelectedTown.Name;
+            TextBlock address = FindName("txtAddress") as TextBlock;
+            address.Text = SelectedAddress.FullAddress;
+
+            app.SecretaryController.Edit(Secretary);
+            CancelProfileChangeDialog(sender, e);
         }
 
         private void GenerateReport(object sender, RoutedEventArgs e)
@@ -249,6 +269,7 @@ namespace UserInterface
         {
             ComboBox states = FindName("StateCombo") as ComboBox;
             ComboBox towns = FindName("TownCombo") as ComboBox;
+
             State state = states.SelectedItem as State;
             if (SelectedState.GetId() == state.GetId())
                 return;
@@ -262,6 +283,7 @@ namespace UserInterface
             Addresses = SelectedTown.GetAddress();
             addresses.ItemsSource = Addresses;
             addresses.SelectedItem = Addresses[0];
+            SelectedAddress = Addresses[0];
         }
 
         private void UpdateAddress(object sender, RoutedEventArgs e)
@@ -275,6 +297,12 @@ namespace UserInterface
             Addresses = SelectedTown.GetAddress();
             addresses.ItemsSource = Addresses;
             addresses.SelectedItem = Addresses[0];
+            SelectedAddress = Addresses[0];
+        }
+
+        private void FindGuest(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

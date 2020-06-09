@@ -31,6 +31,7 @@ namespace UserInterface
 
         public IUserController UserController { get; private set; }
         public IStateController StateController { get; private set; }
+        public ISecretaryController SecretaryController { get;private set; }
         public App()
         {
             AddressRepository addressRepository = new AddressRepository(new CSVStream<Address>(ADDRESS_FILE, new AddressCSVConverter(CSV_DELIMITER)), new LongSequencer());
@@ -43,6 +44,7 @@ namespace UserInterface
             // PatientRepository patientRepository = new SecretaryRepository(new CSVStream<Secretary>(SECRETARY_FILE, new SecretaryCSVConverter(CSV_DELIMITER)), new LongSequencer());
 
             SecretaryService secretaryService = new SecretaryService(secretaryRepository);
+            SecretaryController = new SecretaryController(secretaryService);
 
             UserService userService = new UserService(null, null, secretaryService, null);
             UserController = new UserController(userService);

@@ -40,10 +40,10 @@
                             <TextBlock Margin="10 10 10 0" Height="29" Text="{Binding Secretary.Jmbg}" FontSize="14"/>
                             <TextBlock Margin="10 10 10 0" Height="29" Text="{Binding Secretary.Email}" FontSize="14"/>
                             <TextBlock Margin="10 10 10 0" Height="29" Text="{Binding Secretary.Phone}" FontSize="14"/>
-                            <TextBlock Margin="10 10 10 0" Height="29" Text="{Binding Secretary.DateOfBirth.Date}" FontSize="14"/>
-                            <TextBlock Margin="10 10 10 0" Height="29" Text="{Binding Secretary.Address.Town.State.Name}" FontSize="14"/>
-                            <TextBlock Margin="10 10 10 0" Height="29" Text="{Binding Secretary.Address.Town.Name}" FontSize="14"/>
-                            <TextBlock Margin="10 10 10 0" Height="29" Text="{Binding Secretary.Address.FullAddress}" FontSize="14"/>
+                            <TextBlock x:Name="txtDate" Margin="10 10 10 0" Height="29" Text="{Binding Path=FullDate}" FontSize="14"/>
+                            <TextBlock x:Name="txtState" Margin="10 10 10 0" Height="29" Text="{Binding Path=Secretary.Address.Town.State.Name}" FontSize="14"/>
+                            <TextBlock x:Name="txtTown" Margin="10 10 10 0" Height="29" Text="{Binding Path=Secretary.Address.Town.Name}" FontSize="14"/>
+                            <TextBlock x:Name="txtAddress" Margin="10 10 10 0" Height="29" Text="{Binding Path=Secretary.Address.FullAddress}" FontSize="14"/>
                         </StackPanel>
                         <StackPanel Grid.Column="2">
                             <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Stretch" Height="350" Margin="10 10 10 10">
@@ -120,15 +120,43 @@
                                             </Binding>
                                         </TextBox.Text>
                                     </TextBox>
-                                    <TextBox x:Name="IDay" HorizontalAlignment="Left" Height="23" Margin="150,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70">
+                                    <TextBlock HorizontalAlignment="Left" Margin="170,204,0,0" TextWrapping="Wrap" Text="YYYY" VerticalAlignment="Top" FontWeight="Bold" Foreground="gray" Opacity="50">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Style.Triggers>
+                                                    <MultiDataTrigger>
+                                                        <MultiDataTrigger.Conditions>
+                                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IYear}" Value="True"/>
+                                                        </MultiDataTrigger.Conditions>
+                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                    </MultiDataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                    <TextBox x:Name="IYear" HorizontalAlignment="Left" Height="23" Margin="150,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70">
                                         <TextBox.Text>
-                                            <Binding Path="Day" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding Path="Year" UpdateSourceTrigger="PropertyChanged">
                                                 <Binding.ValidationRules>
-                                                    <val:DayValidation ValidationStep="RawProposedValue"/>
+                                                    <val:YearValidation ValidationStep="RawProposedValue"/>
                                                 </Binding.ValidationRules>
                                             </Binding>
                                         </TextBox.Text>
                                     </TextBox>
+                                    <TextBlock HorizontalAlignment="Left" Margin="270,204,0,0" TextWrapping="Wrap" Text="MM" VerticalAlignment="Top" FontWeight="Bold" Foreground="gray" Opacity="50">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Style.Triggers>
+                                                    <MultiDataTrigger>
+                                                        <MultiDataTrigger.Conditions>
+                                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IMonth}" Value="True"/>
+                                                        </MultiDataTrigger.Conditions>
+                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                    </MultiDataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
                                     <TextBox x:Name="IMonth" HorizontalAlignment="Left" Height="23" Margin="248,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70">
                                         <TextBox.Text>
                                             <Binding Path="Month" UpdateSourceTrigger="PropertyChanged">
@@ -138,11 +166,25 @@
                                             </Binding>
                                         </TextBox.Text>
                                     </TextBox>
-                                    <TextBox x:Name="IYear" HorizontalAlignment="Left" Height="23" Margin="343,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70">
+                                    <TextBlock HorizontalAlignment="Left" Margin="368,204,0,0" TextWrapping="Wrap" Text="DD" VerticalAlignment="Top" FontWeight="Bold" Foreground="gray" Opacity="50">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Style.Triggers>
+                                                    <MultiDataTrigger>
+                                                        <MultiDataTrigger.Conditions>
+                                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IDay}" Value="True"/>
+                                                        </MultiDataTrigger.Conditions>
+                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                    </MultiDataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                    <TextBox x:Name="IDay" HorizontalAlignment="Left" Height="23" Margin="343,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70">
                                         <TextBox.Text>
-                                            <Binding Path="Year" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding Path="Day" UpdateSourceTrigger="PropertyChanged">
                                                 <Binding.ValidationRules>
-                                                    <val:YearValidation ValidationStep="RawProposedValue"/>
+                                                    <val:DayValidation ValidationStep="RawProposedValue"/>
                                                 </Binding.ValidationRules>
                                             </Binding>
                                         </TextBox.Text>
@@ -152,13 +194,14 @@
                                     <ComboBox x:Name="AddressCombo" HorizontalAlignment="Left" Margin="150,340,0,0" VerticalAlignment="Top" Width="263" DisplayMemberPath="FullAddress"/>
                                     <Label Content="/" HorizontalAlignment="Left" Margin="228,220,0,0" VerticalAlignment="Top"/>
                                     <Label Content="/" HorizontalAlignment="Left" Margin="323,220,0,0" VerticalAlignment="Top"/>
+                                    
                                 </Grid>
                                 <StackPanel Grid.Column="1" VerticalAlignment="Bottom" Height="372" Margin="0,0,0,10">
                                     <Border BorderBrush="Black" BorderThickness="1" Height="220">
                                         <Image/>
                                     </Border>
                                     <Button Content="Izmeni sliku" Width="Auto" Margin="10 5 10 0"/>
-                                    <Button Content="Potrdi" Width="Auto" Margin="10 5 10 5">
+                                    <Button Content="Potrdi" Width="Auto" Margin="10 5 10 5" Click="Edit">
                                         <Button.Style>
                                             <Style TargetType="Button">
                                                 <Setter Property="IsEnabled" Value="False"/>

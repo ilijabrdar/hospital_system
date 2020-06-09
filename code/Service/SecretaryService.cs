@@ -24,7 +24,7 @@ namespace Service
 
         public void Edit(Secretary entity)
         {
-            throw new NotImplementedException();
+            _secretaryRepository.Edit(entity);
         }
 
         public Secretary Get(long id)
