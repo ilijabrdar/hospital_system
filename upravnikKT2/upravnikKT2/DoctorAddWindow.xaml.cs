@@ -28,6 +28,15 @@ namespace upravnikKT2
 
         private readonly ISpecialityController _specialityController;
         private readonly IDoctorController _doctorController;
+        private Doctor _selectedDoctor;
+
+        public State SelectedState { get; set; }
+        public Town SelectedTown { get; set; }
+        public Address SelectedAddress { get; set; }
+
+        public List<State> States { get; set; }
+        public List<Town> Towns { get; set; }
+        public List<Address> Addresses { get; set; }
 
 
         protected virtual void OnPropertyChanged(string name)
@@ -38,22 +47,6 @@ namespace upravnikKT2
             }
         }
 
-        private double _test3;
-        public double Test3
-        {
-            get
-            {
-                return _test3;
-            }
-            set
-            {
-                if (value != _test3)
-                {
-                    _test3 = value;
-                    OnPropertyChanged("Test3");
-                }
-            }
-        }
 
         private string _jmbg;
         public string JMBG  
@@ -106,22 +99,6 @@ namespace upravnikKT2
             }
         }
 
-        private string _id;
-        public string ID
-        {
-            get
-            {
-                return _id;
-            }
-            set
-            {
-                if (value != _id)
-                {
-                    _id = value;
-                    OnPropertyChanged("ID");
-                }
-            }
-        }
 
         private string _ime;
         public string Ime
@@ -167,20 +144,67 @@ namespace upravnikKT2
             var app = Application.Current as App;
             _specialityController = app.SpecialityController;
             _doctorController = app.DoctorController;
+
+            PopulateCombos();
+        }
+
+        public DoctorAddWindow(Doctor selectedDoctor)
+        {
+            InitializeComponent();
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            this.DataContext = this;
+
+            var app = Application.Current as App;
+            _specialityController = app.SpecialityController;
+            _doctorController = app.DoctorController;
+
+            PopulateCombos();
+
+            this._selectedDoctor = selectedDoctor;
+            //comboSpeciality.SelectedValue = _selectedDoctor.Specialty.GetId();
+            Ime = _selectedDoctor.FirstName;
+            Prezime = _selectedDoctor.LastName;
+            JMBG = _selectedDoctor.Jmbg;
+            EMAIL = _selectedDoctor.Email;
+            Phone = _selectedDoctor.Phone;
+            birthDatePicker.SelectedDate = _selectedDoctor.DateOfBirth;
         }
 
         private void Button_Click_OK(object sender, RoutedEventArgs e)
         {
-            //String name, String surname, String jmbg, String email, String phone, DateTime birth, Address adress, String username, String password, Bitmap img, Speciality speciality, List<Article> articles, List<BusinessDay> businessDay, DoctorGrade doctGrade
-            var datum = birthDatePicker.SelectedDate;
-            var state = new State(1, "state", "code");
-            var town = new Town(1, "ns", "21000", state);
-            var address = new Address(1, "street", 32, 12, town);
-            
+            if (_selectedDoctor == null)
+            {
+                //String name, String surname, String jmbg, String email, String phone, DateTime birth, Address adress, String username, String password, Bitmap img, Speciality speciality, List<Article> articles, List<BusinessDay> businessDay, DoctorGrade doctGrade
+                var datum = birthDatePicker.SelectedDate;
+                var state = StateCombo.SelectedItem as State;
+                var town = TownCombo.SelectedItem as Town;
+                var selectedAddress = AddressCombo.SelectedItem as Address;
+                var address = new Address(selectedAddress.GetId(), town.GetId(), state.GetId());
 
-            //JMBG for password and username
-            var doctor = new Doctor(Ime, Prezime, JMBG, EMAIL, Phone, (DateTime)datum, address, JMBG, JMBG, null, (Speciality)comboSpeciality.SelectedItem, null, null, null);
-            _doctorController.Save(doctor);
+
+                //JMBG for password and username
+                var doctor = new Doctor(Ime, Prezime, JMBG, EMAIL, Phone, (DateTime)datum, address, JMBG, JMBG, null, (Speciality)comboSpeciality.SelectedItem, null, null, null);
+                _doctorController.Save(doctor);
+            }
+            else
+            {
+                _selectedDoctor.FirstName = Ime;
+                _selectedDoctor.LastName = Prezime;
+                _selectedDoctor.Jmbg = JMBG;
+                _selectedDoctor.Email = EMAIL;
+                _selectedDoctor.DateOfBirth = (DateTime)birthDatePicker.SelectedDate;
+                _selectedDoctor.Specialty = (Speciality)comboSpeciality.SelectedItem;
+                _selectedDoctor.Phone = Phone;
+
+                var state = StateCombo.SelectedItem as State;
+                var town = TownCombo.SelectedItem as Town;
+                var selectedAddress = AddressCombo.SelectedItem as Address;
+                var address = new Address(selectedAddress.GetId(), town.GetId(), state.GetId());
+                _selectedDoctor.Address = address;
+
+                _doctorController.Edit(_selectedDoctor);
+
+            }
             this.Close();
         }
 
@@ -225,6 +249,73 @@ namespace upravnikKT2
             comboSpeciality.ItemsSource = list_speciality;
             comboSpeciality.DisplayMemberPath = "Name";
             comboSpeciality.SelectedValuePath = "Id";
+
+
+            StateCombo.DisplayMemberPath = "Name";
+            StateCombo.SelectedValuePath = "Id";
+            App app = Application.Current as App;
+            States = app.StateController.GetAll().ToList();
+            StateCombo.ItemsSource = States;
+
+            TownCombo.DisplayMemberPath = "Name";
+            TownCombo.SelectedValuePath = "Id";
+
+            AddressCombo.DisplayMemberPath = "FullAddress";
+            AddressCombo.SelectedValuePath = "Id";
+
+            
+
+            
+
+            if (_selectedDoctor != null)
+            {
+                comboSpeciality.SelectedValue = _selectedDoctor.Specialty.GetId();
+                StateCombo.SelectedValue = _selectedDoctor.Address.Town.State.GetId(); 
+                TownCombo.SelectedValue = _selectedDoctor.Address.Town.GetId();
+                AddressCombo.SelectedValue = _selectedDoctor.Address.GetId();
+            }
+        }
+
+
+
+
+
+        private void UpdateTownAddress(object sender, RoutedEventArgs e)
+        {
+            State state = StateCombo.SelectedItem as State;
+            Towns = state.GetTown();
+            TownCombo.ItemsSource = Towns;
+            AddressCombo.ItemsSource = null;
+
+        }
+
+        private void UpdateAddress(object sender, RoutedEventArgs e)
+        {
+            Town town = TownCombo.SelectedItem as Town;
+            if (town == null)
+                return;
+            Addresses = town.GetAddress();
+            AddressCombo.ItemsSource = Addresses;
+
+        }
+
+        private void PopulateCombos()
+        {
+            //ComboBox states = FindName("StateCombo") as ComboBox;
+            //ComboBox towns = FindName("TownCombo") as ComboBox;
+            //ComboBox addresses = FindName("AddressCombo") as ComboBox;
+            //App app = Application.Current as App;
+            //States = app.StateController.GetAll().ToList();
+            //states.ItemsSource = States;
+
+            //if (_selectedDoctor != null)
+            //{
+            //    StateCombo.SelectedValue = _selectedDoctor.Address.Town.State.GetId();
+            //    TownCombo.SelectedValue = _selectedDoctor.Address.Town.GetId();
+            //    AddressCombo.SelectedValue = _selectedDoctor.Address.GetId();
+                
+            //}
+                 
         }
     }
 }

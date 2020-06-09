@@ -127,7 +127,7 @@
                                     Width="24" />
                                         </Button>
 
-                                        <Button DockPanel.Dock="Right" Margin="10,10,20,10"
+                                        <Button x:Name="searchDoctorBtn" DockPanel.Dock="Right" Margin="10,10,20,10" Click="searchTxtAppear_Button_Click_Doctor"
                                   Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
                                   HorizontalAlignment="Left"
                                   ToolTip="Pretraži">
@@ -136,7 +136,7 @@
                                     Height="24"
                                     Width="24" />
                                         </Button>
-                                        <TextBox DockPanel.Dock="Right" Margin="10" TextChanged="TextBox_TextChanged" MinWidth="100" x:Name="txtSearchDoctors"/>
+                                        <TextBox DockPanel.Dock="Right" Margin="10" TextChanged="TextBox_TextChanged" MinWidth="100" materialDesign:HintAssist.Hint="Pretrazi" KeyUp="searchDoctorsKeyUp" x:Name="txtSearchDoctors" Visibility="Hidden"/>
                                         <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                                     </DockPanel>
                                     <DockPanel DockPanel.Dock="Bottom">

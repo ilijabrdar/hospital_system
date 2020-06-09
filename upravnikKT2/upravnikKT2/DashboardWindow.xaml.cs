@@ -155,9 +155,25 @@ namespace upravnikKT2
 
         private void editDoctor(object sender, RoutedEventArgs e)
         {
-            DoctorAddWindow window = new DoctorAddWindow();
-            window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            window.ShowDialog();
+            if (dataGridLekari.SelectedItem != null)
+            {
+                DoctorAddWindow window = new DoctorAddWindow((Doctor)dataGridLekari.SelectedItem);
+                window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                window.ShowDialog();
+
+                dataGridLekari.ItemsSource = null;
+                dataGridLekari.ItemsSource = new ObservableCollection<Doctor>(_doctorController.GetAll());
+            }
+            else
+            {
+                string messageBoxText = "Morate selektovati lekara da biste izvrsili izmenu!";
+                string caption = "Greska";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Error;
+
+                MessageBox.Show(messageBoxText, caption, button, icon);
+            }
+
         }
 
         private void Button_Click_Add_Shift(object sender, RoutedEventArgs e)
@@ -713,6 +729,13 @@ namespace upravnikKT2
             this.DataGridRenovation.ItemsSource = data_renovation.Where(input => input.Room.RoomCode.Contains(txtSearchRenovations.Text));
         }
 
+        private void searchDoctorsKeyUp(object sender, KeyEventArgs e)
+        {
+            ObservableCollection<Doctor> data_doctor = new ObservableCollection<Doctor>(_doctorController.GetAll());
+
+            this.dataGridLekari.ItemsSource = data_doctor.Where(input => input.FirstName.Contains(txtSearchDoctors.Text));
+        }
+
         private void deleteEquipment_Btn_Click(object sender, RoutedEventArgs e)
         {
             if (tabControlOprema.SelectedIndex == 0)
@@ -1054,6 +1077,24 @@ namespace upravnikKT2
                 MessageBoxImage icon = MessageBoxImage.Error;
 
                 MessageBox.Show(messageBoxText, caption, button, icon);
+            }
+        }
+
+        private void searchTxtAppear_Button_Click_Doctor(object sender, RoutedEventArgs e)
+        {
+            if (searchDoctorBtn.Background == Brushes.Gray)
+            {
+                searchDoctorBtn.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#FF673AB7");
+                txtSearchDoctors.Visibility = Visibility.Hidden;
+                //TODO: vrati nazad tabelu
+
+                this.dataGridLekari.ItemsSource = new ObservableCollection<Doctor>(_doctorController.GetAll());
+                txtSearchDoctors.Clear();
+            }
+            else
+            {
+                searchDoctorBtn.Background = Brushes.Gray;
+                txtSearchDoctors.Visibility = Visibility.Visible;
             }
         }
     }

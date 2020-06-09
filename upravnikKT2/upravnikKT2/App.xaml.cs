@@ -1,6 +1,7 @@
 ﻿using bolnica.Controller;
 using bolnica.Repository;
 using bolnica.Repository.CSV.Converter;
+using bolnica.Service;
 using Controller;
 using Model.Director;
 using Model.Doctor;
@@ -8,6 +9,7 @@ using Model.PatientSecretary;
 using Model.Users;
 using Repository;
 using Service;
+using System;
 using System.Windows;
 
 namespace upravnikKT2
@@ -25,7 +27,12 @@ namespace upravnikKT2
         private const string DRUGS_FILE = "../../Resources/Data/drugs.csv";
         private const string DOCTORS_FILE = "../../Resources/Data/doctors.csv";
         private const string SPECIALITY_FILE = "../../Resources/Data/speciality.csv";
+        private const string ADDRESS_FILE = "../../Resources/Data/AddressFile.txt";
+        private const string TOWN_FILE = "../../Resources/Data/TownFile.txt";
+        private const string STATE_FILE = "../../Resources/Data/StateFile.txt";
+
         private const string CSV_DELIMITER = ",";
+        private const String CSV_ARRAY_DELIMITER = "|";
 
         public IRoomTypeController RoomTypeController { get; private set; }
         public IIngredientController IngredientController { get; private set; }
@@ -40,6 +47,8 @@ namespace upravnikKT2
         public IDoctorController DoctorController { get; private set; }
 
         public ISpecialityController SpecialityController { get; private set; }
+
+        public IStateController StateController { get; private set; }
 
         public App()
         {
@@ -93,6 +102,13 @@ namespace upravnikKT2
             var doctorRepository = new DoctorRepository(new CSVStream<Doctor>(DOCTORS_FILE, new DoctorCSVConverter(CSV_DELIMITER)), new LongSequencer(),null,null,specialityRepository,null);
             var doctorService = new DoctorService(doctorRepository,null);
             DoctorController = new DoctorController(doctorService);
+
+            AddressRepository addressRepository = new AddressRepository(new CSVStream<Address>(ADDRESS_FILE, new AddressCSVConverter(CSV_DELIMITER)), new LongSequencer());
+            TownRepository townRepository = new TownRepository(new CSVStream<Town>(TOWN_FILE, new TownCSVConverter(CSV_DELIMITER, CSV_ARRAY_DELIMITER)), new LongSequencer(), addressRepository);
+            StateRepository stateRepository = new StateRepository(new CSVStream<State>(STATE_FILE, new StateCSVConverter(CSV_DELIMITER, CSV_ARRAY_DELIMITER)), new LongSequencer(), townRepository);
+
+            StateService stateService = new StateService(stateRepository);
+            StateController = new StateController(stateService);
         }
     }
 }
