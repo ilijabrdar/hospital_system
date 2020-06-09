@@ -76,7 +76,7 @@ namespace upravnikKT2
 
                 foreach (KeyValuePair<Equipment, int> pair in room.Equipment_inventory)
                 {
-                    if (pair.Key.id == _selectedEquipment.id)
+                    if (pair.Key.Id == _selectedEquipment.Id)
                     {
                         string messageBoxText = "Prostorija vec sadrzi selektovanu opremu!";
                         string caption = "Greska";
@@ -103,7 +103,7 @@ namespace upravnikKT2
                     Equipment temp = null;
                     foreach (KeyValuePair<Equipment, int> pair in _selectedRoom.Equipment_inventory)
                     {
-                        if (pair.Key.id == _selectedEquipment.id)
+                        if (pair.Key.Id == _selectedEquipment.Id)
                         {
                             temp = pair.Key as Equipment;
                         }
@@ -117,7 +117,7 @@ namespace upravnikKT2
 
                     foreach (KeyValuePair<Equipment, int> pair in final_room.Equipment_inventory)
                     {
-                        if (pair.Key.id == _selectedEquipment.id)
+                        if (pair.Key.Id == _selectedEquipment.Id)
                         {
                             string messageBoxText = "Prostorija vec sadrzi selektovanu opremu!";
                             string caption = "Greska";
@@ -137,7 +137,7 @@ namespace upravnikKT2
                     Equipment temp = null;
                     foreach (KeyValuePair<Equipment, int> pair in final_room.Equipment_inventory)
                     {
-                        if (pair.Key.id == _selectedEquipment.id)
+                        if (pair.Key.Id == _selectedEquipment.Id)
                         {
                             temp = pair.Key;
                         }

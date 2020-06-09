@@ -699,6 +699,14 @@ namespace upravnikKT2
             this.DataGridLekovi.ItemsSource = data_drug.Where(input => input.Name.Contains(txtsearchDrug.Text));
         }
 
+
+        private void searchRenovations_KeyUp(object sender, KeyEventArgs e)
+        {
+            ObservableCollection<Renovation> data_renovation = new ObservableCollection<Renovation>(_renovationController.GetAll());
+
+            this.DataGridRenovation.ItemsSource = data_renovation.Where(input => input.Room.RoomCode.Contains(txtSearchRenovations.Text));
+        }
+
         private void deleteEquipment_Btn_Click(object sender, RoutedEventArgs e)
         {
             if (tabControlOprema.SelectedIndex == 0)

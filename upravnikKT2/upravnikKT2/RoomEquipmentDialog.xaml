@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:upravnikKT2"
         mc:Ignorable="d"
         FontSize="18"
-        Title="Spisak opreme" Height="350" Width="350" Loaded="Window_Loaded" PreviewKeyDown="Window_PreviewKeyDown">
+        Title="Spisak opreme" Height="350" Width="350" Loaded="Window_Loaded" PreviewKeyDown="Window_PreviewKeyDown" GotFocus="Window_GotFocus">
     <Grid>
         <ListView x:Name="lista">
             <ListView.View>

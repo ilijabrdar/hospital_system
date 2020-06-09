@@ -1,4 +1,5 @@
-﻿using Model.Director;
+﻿using bolnica.Controller;
+using Model.Director;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,17 +23,21 @@ namespace upravnikKT2
     public partial class RoomEquipmentDialog : Window
     {
         private Room _selectedRoom;
+        private readonly IRoomController _roomController;
         public RoomEquipmentDialog(Room selectedRoom)
         {
             InitializeComponent();
             _selectedRoom = selectedRoom;
+
+            var app = Application.Current as App;
+            _roomController = app.RoomController;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
             List<RoomEquipment> lista_opreme = new List<RoomEquipment>();
-            foreach (KeyValuePair<Equipment,int> pair in _selectedRoom.Equipment_inventory)
+            foreach (KeyValuePair<Equipment,int> pair in _roomController.Get(_selectedRoom.Id).Equipment_inventory)
             {
                 lista_opreme.Add(new RoomEquipment(pair.Key.Name, pair.Value));
             }
@@ -47,6 +52,11 @@ namespace upravnikKT2
             {
                 this.Close();
             }
+        }
+
+        private void Window_GotFocus(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

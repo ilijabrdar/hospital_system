@@ -44,14 +44,14 @@ namespace upravnikKT2
             dialog.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             dialog.ShowDialog();
 
-            List<Room> rooms = _roomController.getRoomsContainingEquipment(_selectedEquipment).ToList();
+            List<Room> rooms = _roomController.GetRoomsContainingEquipment(_selectedEquipment).ToList();
             List<RoomEquipment> result = new List<RoomEquipment>();
 
             foreach (Room room in rooms)
             {
                 foreach (KeyValuePair<Equipment, int> pair in room.Equipment_inventory)
                 {
-                    if (pair.Key.id == _selectedEquipment.id)
+                    if (pair.Key.Id == _selectedEquipment.Id)
                     {
                         result.Add(new RoomEquipment(room.Id ,room.RoomCode, pair.Value, _selectedEquipment.Name));
                     }
@@ -75,14 +75,14 @@ namespace upravnikKT2
 
 
 
-                List<Room> rooms = _roomController.getRoomsContainingEquipment(_selectedEquipment).ToList();
+                List<Room> rooms = _roomController.GetRoomsContainingEquipment(_selectedEquipment).ToList();
                 List<RoomEquipment> result = new List<RoomEquipment>();
 
                 foreach (Room room in rooms)
                 {
                     foreach (KeyValuePair<Equipment, int> pair in room.Equipment_inventory)
                     {
-                        if (pair.Key.id == _selectedEquipment.id)
+                        if (pair.Key.Id == _selectedEquipment.Id)
                         {
                             result.Add(new RoomEquipment(room.Id, room.RoomCode, pair.Value, _selectedEquipment.Name));
                         }
@@ -126,7 +126,7 @@ namespace upravnikKT2
                     Equipment temp = null;
                     foreach (KeyValuePair<Equipment, int> pair in room_full.Equipment_inventory)
                     {
-                        if (pair.Key.id == _selectedEquipment.id)
+                        if (pair.Key.Id == _selectedEquipment.Id)
                         {
                             temp = pair.Key as Equipment;
                         }
@@ -136,14 +136,14 @@ namespace upravnikKT2
                     room_full.Equipment_inventory.Remove(temp);
                     _roomController.Edit(room_full);
 
-                    List<Room> rooms = _roomController.getRoomsContainingEquipment(_selectedEquipment).ToList();
+                    List<Room> rooms = _roomController.GetRoomsContainingEquipment(_selectedEquipment).ToList();
                     List<RoomEquipment> result = new List<RoomEquipment>();
 
                     foreach (Room room in rooms)
                     {
                         foreach (KeyValuePair<Equipment, int> pair in room.Equipment_inventory)
                         {
-                            if (pair.Key.id == _selectedEquipment.id)
+                            if (pair.Key.Id == _selectedEquipment.Id)
                             {
                                 result.Add(new RoomEquipment(room.Id, room.RoomCode, pair.Value, _selectedEquipment.Name));
                             }
@@ -169,14 +169,14 @@ namespace upravnikKT2
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            List<Room> rooms = _roomController.getRoomsContainingEquipment(_selectedEquipment).ToList();
+            List<Room> rooms = _roomController.GetRoomsContainingEquipment(_selectedEquipment).ToList();
             List<RoomEquipment> result = new List<RoomEquipment>();
 
             foreach (Room room in rooms)
             {
                 foreach(KeyValuePair<Equipment,int> pair in room.Equipment_inventory)
                 {
-                    if (pair.Key.id == _selectedEquipment.id)
+                    if (pair.Key.Id == _selectedEquipment.Id)
                     {
                         result.Add(new RoomEquipment(room.Id, room.RoomCode, pair.Value, _selectedEquipment.Name));
                     }

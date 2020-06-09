@@ -607,7 +607,8 @@
                                     Height="24"
                                     Width="24" />
                             </Button>
-                            <TextBox x:Name="txtsearchRooms" DockPanel.Dock="Right" Margin="10" TextChanged="TextBox_TextChanged" MinWidth="100" materialDesign:HintAssist.Hint="Pretrazi" KeyUp="searchRooms_KeyUp" Visibility="Hidden"/>
+                            <TextBox x:Name="txtsearchRooms" DockPanel.Dock="Right" Margin="10" TextChanged="TextBox_TextChanged" MinWidth="100" materialDesign:HintAssist.Hint="Pretrazi" 
+                                     KeyUp="searchRooms_KeyUp" Visibility="Hidden"/>
                             <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Bottom">
@@ -672,7 +673,7 @@
                                     Height="24"
                                     Width="24" />
                             </Button>
-                            <TextBox x:Name="txtSearchRenovations" DockPanel.Dock="Right" Margin="10"  MinWidth="100" materialDesign:HintAssist.Hint="Pretrazi" Visibility="Hidden"/>
+                            <TextBox x:Name="txtSearchRenovations" DockPanel.Dock="Right" Margin="10"  MinWidth="100" materialDesign:HintAssist.Hint="Pretrazi" Visibility="Hidden" KeyUp="searchRenovations_KeyUp" />
                             <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Bottom">
