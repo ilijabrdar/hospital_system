@@ -4,32 +4,46 @@
  * Purpose: Definition of the Class Service.HospitalizationService
  ***********************************************************************/
 
+using bolnica.Service;
+using Model.Doctor;
+using Repository;
 using System;
+using System.Collections.Generic;
 
 namespace Service
 {
-   public class HospitalizationService// : IService
+   public class HospitalizationService : IHospitalizationService
    {
-      private Repository.IHospitalizationRepository _hospitalisationRepository;
+      private IHospitalizationRepository _repository;
 
-        public object Delete()
+        public HospitalizationService(IHospitalizationRepository repository)
         {
-            throw new NotImplementedException();
+            _repository = repository;
         }
 
-        public object Edit()
+        public void Delete(Hospitalization entity)
         {
-            throw new NotImplementedException();
+            _repository.Delete(entity);
         }
 
-        public object GetAll()
+        public void Edit(Hospitalization entity)
         {
-            throw new NotImplementedException();
+            _repository.Edit(entity);
         }
 
-        public object Save()
+        public Hospitalization Get(long id)
         {
-            throw new NotImplementedException();
+            return _repository.Get(id);
+        }
+
+        public IEnumerable<Hospitalization> GetAll()
+        {
+            return _repository.GetAll();
+        }
+
+        public Hospitalization Save(Hospitalization entity)
+        {
+            return _repository.Save(entity);
         }
     }
 }

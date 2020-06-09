@@ -1,26 +1,55 @@
-/***********************************************************************
- * Module:  Operation.cs
- * Author:  Zorana
- * Purpose: Definition of the Class Doctor.Operation
- ***********************************************************************/
 
+
+using Model.Director;
+using Model.PatientSecretary;
+using Repository;
 using System;
 
 namespace Model.Doctor
 {
-   public class Operation
-   {
-      public Model.Users.Doctor[] doctor;
-   
-      private String Description;
-      
-      private Model.PatientSecretary.Period period;
-      private Model.Director.Room room;
-      private Model.PatientSecretary.PatientFile patientFile;
-      
-      
-      
-      
-   
-   }
+   public class Operation : IIdentifiable<long>
+    {
+      public Model.Users.Doctor Doctor;
+
+        public String Description;
+
+        public Period Period;
+        public Room Room;
+        public PatientFile PatientFile;
+        public long Id;
+
+        public Operation( long id,Users.Doctor doctor, string description, Period period, Room room, PatientFile patientFile)
+        {
+            this.Doctor = doctor;
+            Description = description;
+            this.Period = period;
+            this.Room = room;
+            this.PatientFile = patientFile;
+            this.Id = id;
+        }
+
+        public Operation(Users.Doctor doctor, string description, Period period, Room room, PatientFile patientFile)
+        {
+            this.Doctor = doctor;
+            Description = description;
+            this.Period = period;
+            this.Room = room;
+            this.PatientFile = patientFile;
+        }
+
+        public Operation(long id)
+        {
+            Id = id;
+        }
+
+        public long GetId()
+        {
+            return Id;
+        }
+
+        public void SetId(long id)
+        {
+            this.Id = id;
+        }
+    }
 }

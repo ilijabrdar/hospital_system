@@ -1,40 +1,42 @@
-/***********************************************************************
- * Module:  ExaminationService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.ExaminationService
- ***********************************************************************/
 
+
+using bolnica.Repository;
 using Model.PatientSecretary;
 using Model.Users;
 using System;
+using System.Collections.Generic;
 
 namespace Repository
 {
-   public class ExaminationUpcomingRepository : IExaminationUpcomingRepository
-   {
-      private String FilePath;
+   public class ExaminationUpcomingRepository : CSVRepository<Examination, long>, IExaminationUpcomingRepository
+    {
+        public ExaminationUpcomingRepository(ICSVStream<Examination> stream, ISequencer<long> sequencer)
+  : base(stream, sequencer)
+        {
 
-        public bool DeleteExamination(Examination examination)
+        }
+
+        public IEnumerable<Examination> GetAllEager()
         {
             throw new NotImplementedException();
         }
 
-        public Examination EditExamination(Examination newExamination)
+        public Examination GetEager(long id)
         {
             throw new NotImplementedException();
         }
 
-        public Examination[] GetScheduledUserExaminations(User user)
+        List<Examination> IExaminationUpcomingRepository.GetScheduledUserExaminations(User user)
         {
             throw new NotImplementedException();
         }
 
-        public Examination SaveExamination(Examination examination)
+        Examination IRepository<Examination, long>.Save(Examination entity)
         {
             throw new NotImplementedException();
         }
 
-        public Examination StartScheduledExamination(Examination examination)
+        Examination IExaminationUpcomingRepository.StartUpcomingExamination(Examination examination)
         {
             throw new NotImplementedException();
         }

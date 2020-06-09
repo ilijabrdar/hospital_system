@@ -1,8 +1,4 @@
-/***********************************************************************
- * Module:  Patient.cs
- * Author:  Asus
- * Purpose: Definition of the Class Users.Patient
- ***********************************************************************/
+
 
 using Model.PatientSecretary;
 using Repository;
@@ -31,6 +27,10 @@ namespace Model.Users
             this.Username = username;
             this.Password = password;
             this.Image = img;
+        }
+        public Patient(long id)
+        {
+            this.Id = id;
         }
 
         override

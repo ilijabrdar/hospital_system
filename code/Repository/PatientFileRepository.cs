@@ -1,8 +1,3 @@
-/***********************************************************************
- * Module:  PatientFileService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.PatientFileService
- ***********************************************************************/
 
 using bolnica.Repository;
 using Model.PatientSecretary;
@@ -11,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Repository
 {
-    public class PatientFileRepository : CSVRepository<PatientFile, long>, IPatientFileRepository, IEagerRepository<PatientFile,long>
+    public class PatientFileRepository : CSVRepository<PatientFile, long>, IPatientFileRepository
     {
         private String FilePath;
 

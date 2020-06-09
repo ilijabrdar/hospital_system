@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  Article.cs
- * Author:  david
- * Purpose: Definition of the Class Model.Doctor.Article
- ***********************************************************************/
-
 using Repository;
 using System;
 
@@ -11,15 +5,26 @@ namespace Model.Doctor
 {
    public class Article : IIdentifiable<long>
     {
-      public DateTime DatePublished { get; set; }
-      public String Topic { get; set; }
-        public long Id { get; set; }
-      public Article (long id, DateTime date, String tp)
+        public long Id;
+        public DateTime DatePublished;
+        public String Topic;
+        public String Text;
+
+      public Article (long id, DateTime date, String topic, String txt)
         {
             this.Id = id;
             this.DatePublished = date;
-            this.Topic = tp;
+            this.Topic = topic;
+            this.Text = txt;
         }
+
+        public Article(DateTime datePublished, string topic, string text)
+        {
+            DatePublished = datePublished;
+            Topic = topic;
+            Text = text;
+        }
+
         public Article (long id)
         {
             this.Id = id;

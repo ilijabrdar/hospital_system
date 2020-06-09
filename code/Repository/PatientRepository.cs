@@ -56,7 +56,7 @@ namespace Repository
             return null;
         }
 
-        public Patient GetPatientByUsername(string username)
+        public User GetUserByUsername(string username)
         {
             List<Patient> patients = GetAllEager().ToList();
             foreach (Patient patient in patients)

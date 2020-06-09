@@ -1,8 +1,4 @@
-/***********************************************************************
- * Module:  Address.cs
- * Author:  Asus
- * Purpose: Definition of the Class Users.Address
- ***********************************************************************/
+
 
 using System;
 using Repository;

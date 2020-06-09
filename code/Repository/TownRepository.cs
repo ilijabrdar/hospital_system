@@ -7,7 +7,7 @@ using bolnica.Repository.CSV;
 
 namespace bolnica.Repository
 {
-    public class TownRepository : CSVGetterRepository<Town, long>, ITownRepository, IEagerRepository<Town, long>
+    public class TownRepository : CSVGetterRepository<Town, long>, ITownRepository
     {
         private readonly IEagerRepository<Address, long> _addressRepository;
 

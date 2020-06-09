@@ -1,8 +1,3 @@
-/***********************************************************************
- * Module:  Person.cs
- * Author:  Asus
- * Purpose: Definition of the Class Users.Person
- ***********************************************************************/
 
 using Repository;
 using System;

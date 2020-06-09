@@ -1,8 +1,4 @@
-/***********************************************************************
- * Module:  State.cs
- * Author:  Asus
- * Purpose: Definition of the Class Users.State
- ***********************************************************************/
+
 
 using System;
 using System.Collections.Generic;
@@ -12,7 +8,7 @@ namespace Model.Users
    public class State : Repository.IIdentifiable<long>
    {
 
-      private long _id;
+      public long Id;
       public String Name { get; set; }
       public String Code { get; set; }
 
@@ -20,7 +16,7 @@ namespace Model.Users
 
         public State(long id, String name, String code)
         {
-            _id = id;
+            Id = id;
             Name = name;
             Code = code;
             town = new List<Town>();
@@ -28,7 +24,7 @@ namespace Model.Users
       
         public State(long id)
         {
-            _id = id;
+            Id = id;
         }
 
       /// <pdGenerated>default getter</pdGenerated>
@@ -91,12 +87,12 @@ namespace Model.Users
 
         public long GetId()
         {
-            return _id;
+            return Id;
         }
 
         public void SetId(long id)
         {
-            _id = id;
+            Id = id;
         }
     }
 }

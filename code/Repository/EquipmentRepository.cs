@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  EquipmentService.cs
- * Author:  david
- * Purpose: Definition of the Class Service.EquipmentService
- ***********************************************************************/
-
 using bolnica.Repository;
 using Model.Director;
 using System;
@@ -21,9 +15,19 @@ namespace Repository
 
         }
 
+        public IEnumerable<Equipment> GetAllEager()
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Equipment> getConsumableEquipment()
         {
             return (IEnumerable<Equipment>) base.GetAll().Where(equipment => equipment.Type == EquipmentType.Consumable);
+        }
+
+        public Equipment GetEager(long id)
+        {
+            throw new NotImplementedException();
         }
 
         public IEnumerable<Equipment> getInconsumableEquipment()
@@ -31,10 +35,6 @@ namespace Repository
             return (IEnumerable<Equipment>) base.GetAll().Where(equipment => equipment.Type == EquipmentType.Inconsumable);
         }
 
-        public Room[] GetRoomsContainingEquipment(string name)
-        {
-            throw new NotImplementedException();
-        }
 
     }
 }

@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  DirectorService.cs
- * Author:  david
- * Purpose: Definition of the Class Service.DirectorService
- ***********************************************************************/
-
 using Model.Users;
 using System;
 using bolnica.Service;
@@ -15,7 +9,7 @@ namespace Service
 {
     public class DirectorService : IDirectorService 
     { 
-        private IDirectorRepository _directorRepository;
+        private readonly IDirectorRepository _directorRepository;
 
         public DirectorService(IDirectorRepository directorRepository)
         {
@@ -42,9 +36,9 @@ namespace Service
             throw new NotImplementedException();
         }
 
-        public Director GetDirectorByUsername(string username)
+        public User GetUserByUsername(string username)
         {
-            return _directorRepository.GetDirectorByUsername(username);
+            return _directorRepository.GetUserByUsername(username);
         }
 
         public Doctor RegisterDoctor(Doctor doctor)

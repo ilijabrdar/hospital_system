@@ -1,11 +1,8 @@
-/***********************************************************************
- * Module:  RoomService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.RoomService
- ***********************************************************************/
+
 
 using bolnica.Service;
 using Model.Director;
+using Model.Users;
 using Repository;
 using System;
 using System.Collections;
@@ -21,19 +18,14 @@ namespace Service
         {
             _repository = repository;
         }
-      public Boolean ChangeRoomType(Room room, RoomType roomType)
+      
+      public Boolean AddEquipment(Equipment equipment, Room room)
       {
          // TODO: implement
          return false;
       }
       
-      public Boolean AddEquipment(Equipment equipment, Model.Director.Room room)
-      {
-         // TODO: implement
-         return false;
-      }
-      
-      public Model.Director.Room[] GetVacantRooms()
+      public List<Room> GetVacantRooms()
       {
          // TODO: implement
          return null;
@@ -66,7 +58,7 @@ namespace Service
             return _repository.GetEager(id);
         }
 
-        public IEnumerable<Room> getRoomsCointainingEquipment(Equipment equipment)
+        public IEnumerable<Room> GetRoomsCointainingEquipment(Equipment equipment)
         {
             IEnumerable<Room> rooms = this.GetAll();
             List<Room> result = new List<Room>();
@@ -79,7 +71,7 @@ namespace Service
 
                 foreach (KeyValuePair<Equipment, int> pair in room.Equipment_inventory)
                 {
-                    if (pair.Key.id == equipment.id)
+                    if (pair.Key.Id == equipment.Id)
                     {
                         result.Add(room);
                     }
@@ -89,5 +81,14 @@ namespace Service
             return result;
         }
 
+        List<Room> IRoomService.GetVacantRooms()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool CheckRoomNameUnique(Room room)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

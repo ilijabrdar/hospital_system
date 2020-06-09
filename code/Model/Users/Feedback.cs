@@ -1,8 +1,4 @@
-/***********************************************************************
- * Module:  Feedback.cs
- * Author:  Zorana
- * Purpose: Definition of the Class Users.Feedback
- ***********************************************************************/
+
 
 using System;
 

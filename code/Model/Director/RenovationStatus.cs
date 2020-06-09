@@ -1,8 +1,3 @@
-/***********************************************************************
- * Module:  RenovationStatus.cs
- * Author:  david
- * Purpose: Definition of the Class Director.RenovationStatus
- ***********************************************************************/
 
 using System;
 using System.ComponentModel;

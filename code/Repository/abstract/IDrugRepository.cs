@@ -1,18 +1,15 @@
-/***********************************************************************
- * Module:  IDrugRepository.cs
- * Author:  david
- * Purpose: Definition of the Interface Repository.IDrugRepository
- ***********************************************************************/
+
 
 using bolnica.Repository;
 using Model.PatientSecretary;
 using System;
+using System.Collections.Generic;
 
 namespace Repository
 {
    public interface IDrugRepository : IRepository<Drug,long>, IEagerRepository<Drug,long>
    {
-      Drug[] GetAlternative(Drug drug);
-      Drug[] GetNotApproved();
+      List<Drug> GetAlternativeDrugs(Drug drug);
+      List<Drug> GetNotApprovedDrugs();
    }
 }

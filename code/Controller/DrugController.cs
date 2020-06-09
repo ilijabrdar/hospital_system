@@ -1,8 +1,4 @@
-/***********************************************************************
- * Module:  DrugService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.DrugService
- ***********************************************************************/
+
 
 using bolnica.Controller;
 using bolnica.Service;
@@ -31,7 +27,7 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        public Drug CreateDrugBasedOnDiagnosis(Diagnosis diagnosis, Examination examination)
+        public Drug RecommendDrugBasedOnDiagnosis(Diagnosis diagnosis)
         {
             throw new NotImplementedException();
         }
@@ -56,12 +52,12 @@ namespace Controller
             return _service.GetAll();
         }
 
-        public List<Drug> GetAlternativeDrug(Drug drug)
+        public List<Drug> GetAlternativeDrugs(Drug drug)
         {
             throw new NotImplementedException();
         }
 
-        public List<Drug> GetNotApproved()
+        public List<Drug> GetNotApprovedDrugs()
         {
             throw new NotImplementedException();
         }
@@ -69,6 +65,11 @@ namespace Controller
         public Drug Save(Drug entity)
         {
             return _service.Save(entity);
+        }
+
+        public bool CheckDrugNameUnique(Drug drug)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Model.Director;
+﻿using bolnica.Model.Dto;
+using Model.Director;
+using Model.Dto;
 using Model.PatientSecretary;
 using Model.Users;
 using Service;
@@ -16,11 +18,11 @@ namespace bolnica.Service
 
         Boolean SetRoomForBusinessDay(BusinessDay businessDay, Room room);
 
-        List<Period> GenerateAvailablePeriods(BusinessDay bussinesDay);
+        List<ExaminationDTO> Search(BusinessDayDTO businessDayDTO);
 
         Boolean MarkAsOccupied(Period period, BusinessDay businessDay);
 
-        List<BusinessDay> PeriodRecommendationByDate(Period period);
+        BusinessDay GetExactDay(Doctor doctor, DateTime date);
 
         List<BusinessDay> GetBusinessDaysByDoctor(Doctor doctor);
 
