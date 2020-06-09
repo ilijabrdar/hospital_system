@@ -28,22 +28,22 @@ namespace Controller
 
         public void Delete(Doctor entity)
         {
-            throw new NotImplementedException();
+            _doctorservice.Delete(entity);
         }
 
         public void Edit(Doctor entity)
         {
-            throw new NotImplementedException();
+            _doctorservice.Edit(entity);
         }
 
         public Doctor Get(long id)
         {
-            throw new NotImplementedException();
+            return _doctorservice.Get(id);
         }
 
         public IEnumerable<Doctor> GetAll()
         {
-            throw new NotImplementedException();
+            return _doctorservice.GetAll();
         }
 
         public List<Doctor> GetDoctorsBySpeciality(Speciality specialty)
@@ -59,7 +59,7 @@ namespace Controller
 
         public Doctor Save(Doctor entity)
         {
-            throw new NotImplementedException();
+            return _doctorservice.Save(entity);
         }
     }
 }
