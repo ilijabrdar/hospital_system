@@ -65,6 +65,7 @@ namespace Service
 
         public User IsUsernameValid(string username)
         {
+            
             User user = null;
             //if ((user = _patientService.GetUserByUsername(username)) != null)
             //    return user;
@@ -115,7 +116,11 @@ namespace Service
 
         public User Get(long id)
         {
-            throw new NotImplementedException();
+            User user = null;
+            if ((user = _doctorService.Get(id)) != null)
+                return user;
+
+            return user;
         }
 
         public bool IsPasswordValid(string password)

@@ -12,6 +12,12 @@ namespace bolnica.Repository.CSV.Converter
    public class BusinessDayCSVConverter : ICSVConverter<BusinessDay>
     {
         private readonly String _delimiter = ",";
+
+        public BusinessDayCSVConverter(string delimiter)
+        {
+            _delimiter = delimiter;
+        }
+
         public BusinessDay ConvertCSVFormatToEntity(string entityCSVFormat)
         {
             string[] tokens = entityCSVFormat.Split(_delimiter.ToCharArray());
@@ -48,8 +54,9 @@ namespace bolnica.Repository.CSV.Converter
                     sb.Append(period.EndDate);
                     sb.Append("|");
                 }
+                sb.Remove(sb.Length - 1, 1);
             }
-            sb.Remove(sb.Length - 1, 1);
+          
             return sb.ToString();
         }
     }

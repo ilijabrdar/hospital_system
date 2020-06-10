@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  BusinessDayService.cs
- * Author:  david
- * Purpose: Definition of the Class Service.BusinessDayService
- ***********************************************************************/
-
 using bolnica.Repository;
 using Model.Director;
 using Model.Users;
@@ -16,6 +10,7 @@ namespace Repository
 {
    public class BusinessDayRepository : CSVRepository<BusinessDay,long>, IBusinessDayRepository
    {
+
       private String FilePath;
         private readonly IDoctorRepository doctorRepo;
         private readonly IRoomRepository roomRepo;
@@ -33,6 +28,7 @@ namespace Repository
             {
                 businessDays.Add(GetEager(day.GetId()));
             }
+
             return businessDays;
         }
 

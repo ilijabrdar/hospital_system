@@ -1,4 +1,5 @@
 ﻿using Model.Doctor;
+using Model.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace bolnica.Repository.CSV.Converter
    public class ArticleCSVConverter : ICSVConverter<Article>
 
     {
-        private readonly String _delimiter=",";
+        private readonly String _delimiter="|";
 
         public ArticleCSVConverter(string delimiter)
         {
@@ -22,13 +23,13 @@ namespace bolnica.Repository.CSV.Converter
             string[] tokens = entityCSVFormat.Split(_delimiter.ToCharArray());
             return new Article(
                 long.Parse(tokens[0]),
-               (DateTime)DateTime.Parse(tokens[1]), tokens[2], tokens[3]);
+               (DateTime)DateTime.Parse(tokens[1]), new Doctor(long.Parse(tokens[2])), tokens[3], tokens[4]);
             
         }
 
         public string ConvertEntityToCSVFormat(Article entity)
         { 
-            return string.Join(_delimiter, entity.Id, entity.DatePublished, entity.Topic, entity.Text);
+            return string.Join(_delimiter, entity.Id, entity.DatePublished,entity.Doctor.GetId(), entity.Topic, entity.Text);
         }
     }
 }
