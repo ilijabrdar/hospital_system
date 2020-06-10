@@ -22,13 +22,6 @@ namespace Service
             _patientFileService = _servicePatientFile;
         }
 
-        public PatientService(IPatientRepository _patientRepo, IPatientFileService _servicePatientFile, IDoctorGradeService doctorGradeService)
-        {
-            _doctorGradeService = doctorGradeService;
-            _patientRepository = _patientRepo;
-            _patientFileService = _servicePatientFile;
-        }
-
         public Patient Save(Patient entity)
         {
             if (_patientRepository.GetUserByUsername(entity.Username) != null)

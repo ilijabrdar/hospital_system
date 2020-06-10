@@ -54,11 +54,7 @@ namespace Repository
             }
             doctor.BusinessDay = businessDays;
             doctor.Specialty = specialityRepo.Get(doctor.Specialty.GetId());
-<<<<<<< HEAD
             //doctor.DoctorGrade = doctorGradeRepository.Get(doctor.DoctorGrade.GetId());
-=======
-            doctor.DoctorGrade = doctorGradeRepository.Get(doctor.DoctorGrade.GetId());
->>>>>>> doctormaster
 
             return doctor;
         }
