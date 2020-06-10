@@ -4,7 +4,7 @@ using System;
 
 namespace Repository
 {
-   public interface IArticleRepository : IRepository<Article, long>
+   public interface IArticleRepository : IRepository<Article, long>, IEagerRepository<Article, long>
    {
 
    }

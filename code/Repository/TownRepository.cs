@@ -18,29 +18,12 @@ namespace bolnica.Repository
 
         public IEnumerable<Town> GetAllEager()
         {
-            List<Address> addresses = _addressRepository.GetAllEager().ToList();
             List<Town> towns = GetAll().ToList();
-            Join(addresses, towns);
+            for (int i = 0; i < towns.Count; i++)
+                towns[i] = GetEager(towns[i].GetId());
             return towns;
         }
 
-        private void Join(List<Address> addresses, List<Town> towns)
-        {
-            for (int i = 0; i < towns.Count; i++)
-            {
-                List<Address> oldAddresses = towns[i].GetAddress();
-                for (int j = 0; j < oldAddresses.Count; j++)
-                    oldAddresses[j] = GetAddressByID(addresses, oldAddresses[i].GetId());
-            }
-        }
-
-        private Address GetAddressByID(List<Address> addresses, long id)
-        {
-            foreach (Address address in addresses)
-                if (address.GetId() == id)
-                    return address;
-            return null;
-        }
 
         public Town GetEager(long id)
         {

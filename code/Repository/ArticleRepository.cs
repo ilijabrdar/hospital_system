@@ -11,8 +11,18 @@ namespace Repository
         public ArticleRepository(ICSVStream<Article> stream, ISequencer<long> sequencer)
              : base(stream, sequencer)
         {
-
+            
         }
 
+        public IEnumerable<Article> GetAllEager()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Article GetEager(long id)
+        {
+            throw new NotImplementedException();
+        }
+r
     }
 }

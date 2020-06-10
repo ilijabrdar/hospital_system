@@ -19,28 +19,10 @@ namespace bolnica.Repository
 
         public IEnumerable<State> GetAllEager()
         {
-            List<Town> towns = _townRepository.GetAllEager().ToList();
             List<State> states = GetAll().ToList();
-            Join(towns, states);
-            return states;
-        }
-
-        private void Join(List<Town> towns, List<State> states)
-        {
             for (int i = 0; i < states.Count; i++)
-            {
-                List<Town> oldTowns = states[i].GetTown();
-                for (int j = 0; j < oldTowns.Count; j++)
-                    oldTowns[j] = GetTownByID(towns, oldTowns[i].GetId());
-            }
-        }
-
-        private Town GetTownByID(List<Town> towns, long id)
-        {
-            foreach (Town town in towns)
-                if (town.GetId() == id)
-                    return town;
-            return null;
+                states[i] = GetEager(states[i].GetId());
+            return states;
         }
 
         public State GetEager(long id)

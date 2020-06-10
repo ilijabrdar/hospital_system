@@ -75,5 +75,15 @@ namespace Controller
         {
             throw new NotImplementedException();
         }
+
+        public bool IsPasswordValid(string password)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsUsernamedValid(string username)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

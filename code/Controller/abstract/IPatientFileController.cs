@@ -17,7 +17,6 @@ namespace bolnica.Controller
         Hospitalization AddHospitalization(Hospitalization hospitalization, PatientFile patientFile);
         Operation AddOperation(Operation operations, PatientFile patientFile);
         Allergy AddAllergy(Allergy allergy, PatientFile patientFile);
-        Allergy EditAllergy(Allergy allergy, PatientFile patientFile);
         Boolean DeleteAllergy(Allergy allergy, PatientFile patientFile);
 
     }
