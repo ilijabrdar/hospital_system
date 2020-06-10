@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Model.Users;
 
 namespace UserInterface
 {
@@ -29,7 +30,10 @@ namespace UserInterface
         public static int ToHour { get; set; }
         public static int FromMinute { get; set; }
         public static int ToMinute { get; set; }
-        public AppointmentFilter()
+
+        public List<Patient> Patients { get; set; }
+
+        public AppointmentFilter(List<Patient> patients)
         {
             InitializeComponent();
             this.DataContext = this;
@@ -38,6 +42,7 @@ namespace UserInterface
             FromYear = ToYear = DateTime.Now.Year;
             FromHour = ToHour = DateTime.Now.Hour;
             FromMinute = ToMinute = DateTime.Now.Minute;
+            Patients = patients;
         }
 
         private void CloseWindow(object sender, RoutedEventArgs e)

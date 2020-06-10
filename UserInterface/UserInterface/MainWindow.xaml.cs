@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using bolnica.Controller;
+using Controller;
 using Model.Users;
 
 namespace UserInterface
@@ -21,9 +23,10 @@ namespace UserInterface
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     /// 
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
         public Secretary Secretary { get; set; }
+        public List<Patient> Patients;
         public Patient GuestPatient { get; set; }
         public int Day { get; set; }
         public String NewDay { get; set; }
@@ -42,6 +45,8 @@ namespace UserInterface
         private ToolTip _toolTip = new ToolTip();
         private Boolean _isToolTipAvailable = true;
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public State SelectedState { get; set; }
         public Town SelectedTown { get; set; }
         public Address SelectedAddress { get; set; }
@@ -54,12 +59,15 @@ namespace UserInterface
             this.DataContext = this;
             
             GuestPatient = new Patient(true);
+            Patients = new List<Patient>();
             Secretary = secretary;
             Day = secretary.DateOfBirth.Day;
             Month = secretary.DateOfBirth.Month;
             Year = secretary.DateOfBirth.Year;
             FullDate = string.Join("/", Day, Month, Year);
             PopulateCombos();
+            PopulatePatients();
+
             //Image = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(Secretary.Image, Int)
             this.examinations = new List<Examination>();
             this.examinations.Add(new Examination(new DateTime(2020, 1, 2, 12, 00, 00), "Pera Peric", "Petar Petrovic", "S12"));
@@ -141,6 +149,13 @@ namespace UserInterface
                 }
         }
 
+        private void PopulatePatients()
+        {
+            App app = Application.Current as App;
+            IPatientController patientController = app.PatientController;
+            Patients = patientController.GetAll().ToList();
+        }
+
         private void Edit(object sender, RoutedEventArgs e)
         {
             App app = Application.Current as App;
@@ -171,7 +186,7 @@ namespace UserInterface
 
         private void FindAppointment(object sender, RoutedEventArgs e)
         {
-            AppointmentFilter filterWindow = new AppointmentFilter();
+            AppointmentFilter filterWindow = new AppointmentFilter(Patients);
             filterWindow.ShowDialog();
         }
 
@@ -302,7 +317,138 @@ namespace UserInterface
 
         private void FindGuest(object sender, RoutedEventArgs e)
         {
+            TextBox txtJmbg = sender as TextBox;
+            TextBox txtFirstName = FindName("IGuestFirstName") as TextBox;
+            TextBox txtLastName = FindName("IGuestLastName") as TextBox;
+            TextBox txtPhone = FindName("IGuestPhone") as TextBox;
+            TextBox txtEmail = FindName("IGuestEmail") as TextBox;
+            TextBox txtYear = FindName("IGuestYear") as TextBox;
+            TextBox txtMonth = FindName("IGuestMonth") as TextBox;
+            TextBox txtDay = FindName("IGuestDay") as TextBox;
+            TextBlock yearPlaceholder = FindName("YearPlaceHolder") as TextBlock;
+            TextBlock monthPlaceholder = FindName("MonthPlaceHolder") as TextBlock;
+            TextBlock dayPlaceholder = FindName("DayPlaceHolder") as TextBlock;
 
+            yearPlaceholder.Visibility = Visibility.Visible;
+            monthPlaceholder.Visibility = Visibility.Visible;
+            dayPlaceholder.Visibility = Visibility.Visible;
+
+            txtJmbg.IsEnabled = true;
+            txtFirstName.IsEnabled = true;
+            txtLastName.IsEnabled = true;
+            txtPhone.IsEnabled = true;
+            txtEmail.IsEnabled = true;
+            txtYear.IsEnabled = true;
+            txtMonth.IsEnabled = true;
+            txtDay.IsEnabled = true;
+
+            String jmbg = txtJmbg.Text;
+            if (jmbg.Trim() == "")
+            {
+                RequiredFieldError(sender, e);
+                return;
+            }
+            
+            App app = Application.Current as App;
+            IPatientController patientController = app.PatientController;
+            Patient guest = patientController.GetPatientByJMBG(jmbg);
+            
+            if (guest != null)
+            {
+                GuestPatient = guest;
+
+                txtFirstName.Text = guest.FirstName;
+                txtFirstName.IsEnabled = false;
+
+                txtLastName.Text = guest.LastName;
+                txtLastName.IsEnabled = false;
+
+                txtPhone.Text = guest.Phone;
+                txtPhone.IsEnabled = false;
+
+                txtEmail.Text = guest.Email;
+                txtEmail.IsEnabled = false;
+
+                NewDay = "" + guest.DateOfBirth.Day;
+                dayPlaceholder.Visibility = Visibility.Collapsed;
+                txtDay.Text = NewDay;
+                txtDay.IsEnabled = false;
+
+                NewMonth = "" + guest.DateOfBirth.Month;
+                monthPlaceholder.Visibility = Visibility.Collapsed;
+                txtMonth.Text = NewMonth;
+                txtMonth.IsEnabled = false;
+
+                NewYear = "" + guest.DateOfBirth.Year;
+                yearPlaceholder.Visibility = Visibility.Collapsed;
+                txtYear.Text = NewYear;
+                txtYear.IsEnabled = false;
+
+                Button search = FindName("SearchBtn") as Button;
+                search.Focus();
+            }
+            else
+            {
+                txtFirstName.Clear();
+                txtLastName.Clear();
+                txtPhone.Clear();
+                txtEmail.Clear();
+                txtYear.Clear();
+                txtMonth.Clear();
+                txtDay.Clear();
+                txtFirstName.Focus();
+            }
+
+            RequiredFieldError(sender, e);
+        }
+
+        private void PassValidation(object sender, KeyEventArgs e)
+        {
+            PasswordBox newPass = FindName("newPass") as PasswordBox;
+            PasswordBox confPass = FindName("confPass") as PasswordBox;
+            TextBlock err = FindName("ErrorMessage") as TextBlock;
+            Button cnf = FindName("confirmBtn") as Button;
+
+            if(newPass.Password.Trim() != confPass.Password.Trim())
+            {
+                err.Text = "Lozinke se ne poklapaju!";
+                err.Visibility = Visibility.Visible;
+                cnf.IsEnabled = false;
+            }
+            else
+            {
+                err.Visibility = Visibility.Collapsed;
+                cnf.IsEnabled = true;
+            }
+        }
+
+        private void CheckPass(object sender, RoutedEventArgs e)
+        {
+            PasswordBox pass = FindName("oldPass") as PasswordBox;
+            TextBlock err = FindName("WrongPass") as TextBlock;
+            Button cnf = FindName("confirmBtn") as Button;
+            if (pass.Password.Trim() != Secretary.Password)
+            {
+                err.Text = "Pogrešna lozinka!";
+                err.Visibility = Visibility.Visible;
+                cnf.IsEnabled = false;
+            }
+            else
+            {
+                err.Visibility = Visibility.Collapsed;
+                cnf.IsEnabled = true;
+            }
+        }
+
+        private void ChangePass(object sender, RoutedEventArgs e)
+        {
+            PasswordBox confPass = FindName("confPass") as PasswordBox;
+
+            Secretary.Password = confPass.Password;
+
+            App app = Application.Current as App;
+            app.SecretaryController.Edit(Secretary);
+            CancelProfileChangeDialog(sender, e);
         }
     }
 }

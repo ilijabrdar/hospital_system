@@ -33,7 +33,7 @@ namespace Repository
         }
 
         public PatientFile GetEager(long id)
-        {
+        {/*
             PatientFile patientFile = Get(id);
             List<Hospitalization> hospitalizatonCollection = new List<Hospitalization>();
             foreach (Hospitalization hospitalization in patientFile.Hospitalization)
@@ -54,7 +54,8 @@ namespace Repository
             }
             patientFile.Examination = examinationCollection;
             return patientFile;
-
+*/
+            return null;
         }
     }
 }

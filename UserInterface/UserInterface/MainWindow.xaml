@@ -11,13 +11,13 @@
         WindowStartupLocation="CenterScreen"
         Background="#1771F1">
     <Window.CommandBindings>
-        
+
     </Window.CommandBindings>
     <DockPanel>
         <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TabStripPlacement="Left">
             <TabItem Header="{Binding Secretary.Username}" Height="40" Background="#D7E1E9">
                 <Grid>
-                    <Grid x:Name="profile" >
+                    <Grid x:Name="profile"  >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="2*"></ColumnDefinition>
@@ -85,13 +85,13 @@
                                         </TextBox.Text>
                                     </TextBox>
                                     <TextBox x:Name="ILastName" HorizontalAlignment="Left" Height="23" Margin="150,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="263">
-                                    <TextBox.Text>
-                                        <Binding Path="Secretary.LastName" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <val:OnlyStringValidationRule ValidationStep="RawProposedValue"/>
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox.Text>
+                                        <TextBox.Text>
+                                            <Binding Path="Secretary.LastName" UpdateSourceTrigger="PropertyChanged">
+                                                <Binding.ValidationRules>
+                                                    <val:OnlyStringValidationRule ValidationStep="RawProposedValue"/>
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </TextBox.Text>
                                     </TextBox>
                                     <TextBox x:Name="IJMBG" HorizontalAlignment="Left" Height="23" Margin="150,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="263">
                                         <TextBox.Text>
@@ -103,13 +103,13 @@
                                         </TextBox.Text>
                                     </TextBox>
                                     <TextBox x:Name="IEmail" HorizontalAlignment="Left" Height="23" Margin="150,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="263">
-                                    <TextBox.Text>
-                                        <Binding Path="Secretary.Email" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <val:EmailValidation ValidationStep="RawProposedValue"/>
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox.Text>
+                                        <TextBox.Text>
+                                            <Binding Path="Secretary.Email" UpdateSourceTrigger="PropertyChanged">
+                                                <Binding.ValidationRules>
+                                                    <val:EmailValidation ValidationStep="RawProposedValue"/>
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </TextBox.Text>
                                     </TextBox>
                                     <TextBox x:Name="IPhone" HorizontalAlignment="Left" Height="23" Margin="150,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="263">
                                         <TextBox.Text>
@@ -194,7 +194,7 @@
                                     <ComboBox x:Name="AddressCombo" HorizontalAlignment="Left" Margin="150,340,0,0" VerticalAlignment="Top" Width="263" DisplayMemberPath="FullAddress"/>
                                     <Label Content="/" HorizontalAlignment="Left" Margin="228,220,0,0" VerticalAlignment="Top"/>
                                     <Label Content="/" HorizontalAlignment="Left" Margin="323,220,0,0" VerticalAlignment="Top"/>
-                                    
+
                                 </Grid>
                                 <StackPanel Grid.Column="1" VerticalAlignment="Bottom" Height="372" Margin="0,0,0,10">
                                     <Border BorderBrush="Black" BorderThickness="1" Height="220">
@@ -225,7 +225,7 @@
                                     </Button>
                                     <Button Content="Odustani" Width="Auto" Margin="10 0 10 0" Click="CancelProfileChangeDialog"/>
                                 </StackPanel>
-                                   
+
                             </Grid>
                         </GroupBox>
                         <GroupBox Grid.Row="1" Header="Izmena lozinke" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -238,12 +238,14 @@
                                     <Label Content="Stara lozinka" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                                     <Label Content="Nova lozinka" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top"/>
                                     <Label Content="Potvrda nove" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top"/>
-                                    <PasswordBox HorizontalAlignment="Left" Margin="150,10,0,0" VerticalAlignment="Top" Width="263"/>
-                                    <PasswordBox HorizontalAlignment="Left" Margin="150,40,0,0" VerticalAlignment="Top" Width="263"/>
-                                    <PasswordBox HorizontalAlignment="Left" Margin="150,70,0,0" VerticalAlignment="Top" Width="263"/>
+                                    <PasswordBox x:Name="oldPass" HorizontalAlignment="Left" Margin="150,10,0,0" VerticalAlignment="Top" Width="263" LostFocus="CheckPass"/>
+                                    <PasswordBox x:Name="newPass" HorizontalAlignment="Left" Margin="150,40,0,0" VerticalAlignment="Top" Width="263"/>
+                                    <PasswordBox x:Name="confPass" HorizontalAlignment="Left" Margin="150,70,0,0" VerticalAlignment="Top" Width="263" KeyUp="PassValidation"/>
+                                    <TextBlock x:Name="ErrorMessage" HorizontalAlignment="Left" Margin="456,70,-201,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" RenderTransformOrigin="-8.566,1.406" Width="183" Height="18" Visibility="Collapsed" Foreground="red"/>
+                                    <TextBlock x:Name="WrongPass" HorizontalAlignment="Left" Margin="441,10,-201,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="198" Visibility="Collapsed" Foreground="red"/>
                                 </Grid>
                                 <StackPanel Grid.Column="1" VerticalAlignment="Bottom">
-                                    <Button Content="Potvrdi" Margin="10, 10, 10, 10" Width="Auto"/>
+                                    <Button x:Name="confirmBtn" Content="Potvrdi" Margin="10, 10, 10, 10" Width="Auto" Click="ChangePass"/>
                                     <Button Content="Odustani" Margin="10, 0, 10, 10" Width="Auto"  Click="CancelProfileChangeDialog"/>
                                 </StackPanel>
                             </Grid>
@@ -263,7 +265,7 @@
                             <Button Content="_Pretraži" Margin="0,0,10,15" Click="FindAppointment" ToolTip ="Pretraga pregleda po parametrima, ctrl + F" GotFocus="DisplayToolTip" LostFocus="RemoveToolTip"/>
                             <Button Content="_Izveštaj" Margin="0,0,10,15" Click="GenerateReport" ToolTip ="Izveštaj o zauzetosti lekara, ctrl + I" GotFocus="DisplayToolTip" LostFocus="RemoveToolTip"/>
                         </StackPanel>
-                        
+
                     </DockPanel>
                     <DataGrid Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding examinations}" 
                               IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False" Margin="10, 0, 10, 10">
@@ -284,7 +286,7 @@
                             <DataGridTextColumn Header="Pacijent" Binding="{Binding patient}" Width="*"></DataGridTextColumn>
                             <DataGridTextColumn Header="Doktor" Binding="{Binding doctor}" Width="*"></DataGridTextColumn>
                             <DataGridTextColumn Header="Sala" Binding="{Binding room}" Width="*"></DataGridTextColumn>
-                                                
+
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
@@ -303,7 +305,7 @@
                         <Label Content="Datum rodjenja" HorizontalAlignment="Left" Margin="40,140,0,0" VerticalAlignment="Top"/>
                         <Label Content="Telefon" HorizontalAlignment="Left" Margin="40,180,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.579,0.5"/>
                         <Label Content="E-mail" HorizontalAlignment="Left" Margin="40,220,0,0" VerticalAlignment="Top"/>
-                        <TextBox x:Name="IGuestJMBG" HorizontalAlignment="Left" Height="23" Margin="192,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" LostFocus="RequiredFieldError">
+                        <TextBox x:Name="IGuestJMBG" HorizontalAlignment="Left" Height="23" Margin="192,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" LostFocus="FindGuest">
                             <TextBox.Text>
                                 <Binding Path="GuestPatient.Jmbg" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
                                     <Binding.ValidationRules>
@@ -351,13 +353,13 @@
                         </TextBox>
                         <TextBlock x:Name="MonthPlaceHolder" Text="MM" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="280,143,0,0" Height="23" Width="30" FontWeight="Bold" Foreground="Gray" Opacity="50"/>
                         <TextBox x:Name="IGuestDay" HorizontalAlignment="Left" Height="23" Margin="342,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" KeyUp="DayPlaceHolderDisappear" LostFocus="RequiredFieldError">
-                        <TextBox.Text>
-                            <Binding Path="NewDay" UpdateSourceTrigger="PropertyChanged">
-                                <Binding.ValidationRules>
-                                    <val:GuestDayValidation ValidationStep="RawProposedValue"/>
+                            <TextBox.Text>
+                                <Binding Path="NewDay" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <val:GuestDayValidation ValidationStep="RawProposedValue"/>
                                     </Binding.ValidationRules>
-                            </Binding>
-                        </TextBox.Text>
+                                </Binding>
+                            </TextBox.Text>
                         </TextBox>
                         <TextBlock x:Name="DayPlaceHolder" Text="DD" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="355,143,0,0" Height="23" Width="30" FontWeight="Bold" Foreground="Gray" Opacity="50"/>
                         <TextBox x:Name="IGuestPhone" HorizontalAlignment="Left" Height="23" Margin="192,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240">
@@ -380,7 +382,7 @@
                         </TextBox>
                         <Label Content="/" HorizontalAlignment="Left" Margin="247,140,0,0" VerticalAlignment="Top"/>
                         <Label Content="/" HorizontalAlignment="Left" Margin="322,140,0,0" VerticalAlignment="Top"/>
-                        <Button Content="_Pretraži" HorizontalAlignment="Left" Margin="40,260,0,0" VerticalAlignment="Top" Click="FindFreeAppointment" ToolTip ="ctrl + F" GotFocus="DisplayToolTip" LostFocus="RemoveToolTip"/>
+                        <Button x:Name="SearchBtn"  Content="_Pretraži" HorizontalAlignment="Left" Margin="40,260,0,0" VerticalAlignment="Top" Click="FindFreeAppointment" ToolTip ="ctrl + F" GotFocus="DisplayToolTip" LostFocus="RemoveToolTip"/>
                     </Grid>
                     <DataGrid Grid.Row="1" HorizontalAlignment="Stretch" Margin="10,10,10,10" VerticalAlignment="Stretch" ItemsSource="{Binding freeSlots}" 
                               IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False">

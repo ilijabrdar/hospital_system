@@ -14,6 +14,7 @@ using bolnica.Controller;
 using bolnica.Repository.CSV.Converter;
 using System.Windows.Controls;
 using bolnica.Service;
+using Model.PatientSecretary;
 
 namespace UserInterface
 {
@@ -29,7 +30,13 @@ namespace UserInterface
         private const String TOWN_FILE = "C:/Users/Asus/Desktop/SIMS/hospital_system/UserInterface/UserInterface/Resources/TownFile.txt";
         private const String STATE_FILE = "C:/Users/Asus/Desktop/SIMS/hospital_system/UserInterface/UserInterface/Resources/StateFile.txt";
 
+        private readonly String _patient_File = "C:/Users/Asus/Desktop/SIMS/hospital_system/UserInterface/UserInterface/Resources/PatientFile.txt";
+        private readonly String _patientFile_File = "C:/Users/Asus/Desktop/SIMS/hospital_system/UserInterface/UserInterface/Resources/patientFileFile.txt";
+
+
+
         public IUserController UserController { get; private set; }
+        public IPatientController PatientController { get; private set; }
         public IStateController StateController { get; private set; }
         public ISecretaryController SecretaryController { get;private set; }
         public App()
@@ -51,6 +58,13 @@ namespace UserInterface
 
             StateService stateService = new StateService(stateRepository);
             StateController = new StateController(stateService);
+
+            var patientFileRepo = new PatientFileRepository(new CSVStream<PatientFile>(_patientFile_File, new PatientFileCSVConverter()), new LongSequencer());
+            var patientFileService = new PatientFileService(patientFileRepo);
+            var patientRepo = new PatientRepository(new CSVStream<Patient>(_patient_File, new PatientCSVConverter()), new LongSequencer(), patientFileRepo);
+            var patientService = new PatientService(patientRepo, patientFileService);
+            PatientController = new PatientController(patientService);
+
 
             //User user = userController.Login("pera", "pera");
             //Secretary secretary = (Secretary)user;

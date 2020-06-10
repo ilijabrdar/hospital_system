@@ -15,7 +15,7 @@
         <Label Content="Termin" HorizontalAlignment="Left" Margin="40,130,0,0" VerticalAlignment="Top"/>
         <Label Content="Sala" HorizontalAlignment="Left" Margin="40,170,0,0" VerticalAlignment="Top"/>
         <ComboBox HorizontalAlignment="Left" Margin="130,10,0,0" VerticalAlignment="Top" Width="425"/>
-        <ComboBox HorizontalAlignment="Left" Margin="130,50,0,0" VerticalAlignment="Top" Width="425"/>
+        <ComboBox HorizontalAlignment="Left" Margin="130,50,0,0" VerticalAlignment="Top" Width="425" ItemsSource="{Binding Path=Patients}" DisplayMemberPath="FullName" SelectedIndex="0"/>
         <TextBlock HorizontalAlignment="Left" Margin="140,75,0,0" Text="YYYY" VerticalAlignment="Top" Height="15" FontWeight="Bold" Foreground="gray" Opacity="50">
             <TextBlock.Style>
                 <Style TargetType="TextBlock">

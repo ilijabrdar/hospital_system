@@ -11,6 +11,9 @@ namespace Model.Users
         public String Jmbg { get; set; }
         public String Email { get; set; }
         public String Phone { get; set; }
+
+        public String FullName { get; set; } 
+
         public DateTime DateOfBirth { get; set; }
 
         public Address Address { get; set; } 
