@@ -1,8 +1,4 @@
-/***********************************************************************
- * Module:  Secretary.cs
- * Author:  Asus
- * Purpose: Definition of the Class Users.Secretary
- ***********************************************************************/
+
 
 using System;
 using System.Drawing;
@@ -13,8 +9,8 @@ namespace Model.Users
     {
 
         public Secretary(long id, 
-            String username, String password, Image image, 
-            String firstName, String lastName, String jmbg, String email, String phone, DateTime dateOfBirth)
+            String username, String password, Bitmap image, 
+            String firstName, String lastName, String jmbg, String email, String phone, DateTime dateOfBirth, Address address)
         {
             this.Id = id;
             Username = username;
@@ -26,6 +22,7 @@ namespace Model.Users
             Email = email;
             Phone = phone;
             DateOfBirth = dateOfBirth;
+            Address = address;
         }
 
         override

@@ -1,4 +1,5 @@
 ﻿using Controller;
+using Model.Dto;
 using Model.PatientSecretary;
 using Model.Users;
 using System;
@@ -14,6 +15,7 @@ namespace bolnica.Controller
         Examination SaveFinishedExamination(Examination examination);
         List<Examination> GetUpcomingExaminationsByUser(User user);
         List<Examination> GetFinishedxaminationsByUser(User user);
-       // List<Examination> GetExaminationFilter(ExaminationDTO examinationDTO);
+
+       List<Examination> GetExaminationFilter(ExaminationDTO examinationDTO);
     }
 }

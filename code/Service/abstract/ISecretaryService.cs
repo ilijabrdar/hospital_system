@@ -7,8 +7,7 @@ using Service;
 
 namespace bolnica.Service
 {
-    public interface ISecretaryService : IService<Secretary, long>
+    public interface ISecretaryService : IService<Secretary, long>, IUserGetterService
     {
-        Secretary GetSecretaryByUsername(String username);
     }
 }

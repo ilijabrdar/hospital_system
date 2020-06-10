@@ -7,7 +7,7 @@ using System.Text;
 
 namespace bolnica.Service
 {
-    public interface IDiagnosisService : IService<Diagnosis,long>
+    public interface IDiagnosisService : IGetterService<Diagnosis,long>
     {
         Diagnosis RecommendDiagnosisBasedOnSymptoms(Symptom symptom, Diagnosis diagnosis);
 

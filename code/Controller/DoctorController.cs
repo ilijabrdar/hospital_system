@@ -21,10 +21,6 @@ namespace Controller
         {
             _doctorservice = service;
         }
-        public bool ChangeSpeciality(Speciality speciality, Doctor doctor)
-        {
-            throw new NotImplementedException();
-        }
 
         public void Delete(Doctor entity)
         {
@@ -51,10 +47,6 @@ namespace Controller
             return _doctorservice.GetDoctorsBySpeciality(specialty);
         }
 
-        public Doctor GetDoctorByUsername(string username)
-        {
-            return _doctorservice.GetDoctorByUsername(username);
-        }
 
         public DoctorGrade GiveGrade(DoctorGrade doctorGrade)
         {

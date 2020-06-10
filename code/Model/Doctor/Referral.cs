@@ -1,8 +1,4 @@
-/***********************************************************************
- * Module:  Referral.cs
- * Author:  Asus
- * Purpose: Definition of the Class Doctor.Referral
- ***********************************************************************/
+
 
 using Model.PatientSecretary;
 using Repository;
@@ -14,8 +10,7 @@ namespace Model.Doctor
    {
 
         public long Id;
-        public DateTime Date;
-        public DateTime ExpirationDate;
+        public Period Period;
         public Model.Users.Doctor Doctor;
 
 
@@ -24,18 +19,16 @@ namespace Model.Doctor
             Id = id;
         }
 
-        public Referral(long id,DateTime date, DateTime expirationDate, Users.Doctor doctor)
+        public Referral(long id,Period period, Users.Doctor doctor)
         {
-            Date = date;
-            ExpirationDate = expirationDate;
-            this.Doctor = doctor;
+            Period = period;
+            Doctor = doctor;
             Id = id;
         }
 
-        public Referral(DateTime date, DateTime expirationDate, Users.Doctor doctor)
+        public Referral(Period period, Users.Doctor doctor)
         {
-            Date = date;
-            ExpirationDate = expirationDate;
+            Period = period;
             Doctor = doctor;
         }
 

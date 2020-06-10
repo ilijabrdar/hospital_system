@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  UserService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.UserService
- ***********************************************************************/
-
 using bolnica.Controller;
 using bolnica.Service;
 using Model.Users;
@@ -23,6 +17,7 @@ namespace Controller
            this._userService = userService;
         }
 
+
         public User Save(User entity)
         {
             return _userService.Save(entity);
@@ -33,26 +28,9 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        public object Delete()
-        {
-            throw new NotImplementedException();
-        }
-
-        public object Edit()
-        {
-            throw new NotImplementedException();
-        }
-
-        public object GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
         public User Login(string username, string password)
         {
             User user = _userService.Login(username, password);
-            //  if (user == null) throw new NullReferenceException("User not found");
-            //   else return user;
             return user;
         }
 
@@ -70,20 +48,30 @@ namespace Controller
 
         public void Delete(User entity)
         {
-            throw new NotImplementedException();
+            _userService.Delete(entity);
         }
 
         public void Edit(User entity)
         {
-            throw new NotImplementedException();
+            _userService.Edit(entity);
         }
 
-        IEnumerable<User> IController<User, long>.GetAll()
+        public IEnumerable<User> GetAll()
+        {
+            return _userService.GetAll();
+        }
+
+        public User Get(long id)
+        {
+            return _userService.Get(id);
+        }
+
+        public bool IsPasswordValid(string password)
         {
             throw new NotImplementedException();
         }
 
-        public User Get(long id)
+        public bool IsUsernamedValid(string username)
         {
             throw new NotImplementedException();
         }

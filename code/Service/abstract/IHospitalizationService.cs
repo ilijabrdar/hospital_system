@@ -7,7 +7,7 @@ using System.Text;
 
 namespace bolnica.Service
 {
-    public interface IHospitalizationService :IService<Hospitalization, long>
+    public interface IHospitalizationService : IService<Hospitalization, long>
     {
     }
 }

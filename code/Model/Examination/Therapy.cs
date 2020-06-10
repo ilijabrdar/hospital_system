@@ -1,11 +1,6 @@
-/***********************************************************************
- * Module:  Therapy.cs
- * Author:  david
- * Purpose: Definition of the Class Model.PatientSecretary.Therapy
- ***********************************************************************/
-
 using Repository;
 using System;
+using System.Collections.Generic;
 
 namespace Model.PatientSecretary
 {
@@ -14,21 +9,33 @@ namespace Model.PatientSecretary
         public long Id;
         public String Note;
         public Period Period;
-        public int DrugDosage;
+        public double DrugDosage;
+        public List<Drug> Drug;
 
-        public Therapy(long id, Period period, int drugDosage, string note) 
+        public Therapy(long id, Period period, double drugDosage, string note, List<Drug> drug) 
         {
             Id = id;
             Note = note;
             Period =period;
             DrugDosage = drugDosage;
+            Drug = drug;
+
         }
 
-        public Therapy(string note, Period period, int drugDosage)
+        public Therapy(long id,Period period, double drugDosage, string note)
+        {
+            Id = id;
+            Note = note;
+            Period = period;
+            DrugDosage = drugDosage;
+        }
+
+        public Therapy(string note, Period period, double drugDosage, List<Drug> drug)
         {
             Note = note;
             Period = period;
             DrugDosage = drugDosage;
+            Drug = drug;
         }
 
         public Therapy(long id)

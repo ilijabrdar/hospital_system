@@ -1,4 +1,5 @@
 ﻿using Model.Doctor;
+using Model.PatientSecretary;
 using Model.Users;
 using Repository;
 using System;
@@ -21,13 +22,13 @@ namespace bolnica.Repository.CSV.Converter
         public Referral ConvertCSVFormatToEntity(string entityCSVFormat)
         {
             string[] tokens = entityCSVFormat.Split(_delimiter.ToCharArray());
-            return new Referral(long.Parse(tokens[0]), DateTime.Parse(tokens[1]), DateTime.Parse(tokens[2]), new Doctor(long.Parse(tokens[3])));
+            return new Referral(long.Parse(tokens[0]), new Period( DateTime.Parse(tokens[1]), DateTime.Parse(tokens[2])), new Doctor(long.Parse(tokens[3])));
            
         }
 
         public string ConvertEntityToCSVFormat(Referral entity)
         {
-            return string.Join(_delimiter, entity.Id, entity.Date, entity.ExpirationDate, entity.Doctor.GetId());
+            return string.Join(_delimiter, entity.Id, entity.Period.StartDate, entity.Period.EndDate, entity.Doctor.GetId());
         }
     }
 }

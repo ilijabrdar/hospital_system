@@ -6,9 +6,10 @@ namespace Model.Doctor
 {
    public class DoctorGrade : IIdentifiable<long>
     {
+        public Dictionary<String, double> GradesForEachQuestions { get; set; }
+        public int NumberOfGrades { get; set; }
+
         public long Id;
-        public int NumberOfGrades;
-        public Dictionary<String,double> GradesForEachQuestions;
 
 
 

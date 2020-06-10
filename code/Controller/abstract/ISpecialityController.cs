@@ -7,7 +7,7 @@ using System.Text;
 
 namespace bolnica.Controller
 {
-    public interface ISpecialityController : IController<Speciality,long>
+    public interface ISpecialityController : IGetterController<Speciality,long>
     {
     }
 }

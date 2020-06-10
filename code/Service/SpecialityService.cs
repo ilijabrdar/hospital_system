@@ -9,22 +9,13 @@ namespace Service
 {
    public class SpecialityService : ISpecialityService
    {
-      private ISpecialityRepository _repository;
+      private readonly ISpecialityRepository _repository;
 
         public SpecialityService(ISpecialityRepository repository)
         {
             _repository = repository;
         }
 
-        public void Delete(Speciality entity)
-        {
-            _repository.Delete(entity);
-        }
-
-        public void Edit(Speciality entity)
-        {
-            _repository.Edit(entity);
-        }
 
         public Speciality Get(long id)
         {
@@ -36,9 +27,5 @@ namespace Service
             return _repository.GetAll();
         }
 
-        public Speciality Save(Speciality entity)
-        {
-            return _repository.Save(entity);
-        }
     }
 }

@@ -30,8 +30,8 @@ namespace bolnica.Repository
 
         public string ConvertEntityToCSVFormat(Operation entity)
         {
-            return string.Join(_delimiter, entity.Id, entity.doctor.GetId(), entity.Description, entity.period.StartDate, entity.period.EndDate,
-                                  entity.room.GetId(), entity.patientFile.GetId());
+            return string.Join(_delimiter, entity.Id, entity.Doctor.GetId(), entity.Description, entity.Period.StartDate, entity.Period.EndDate,
+                                  entity.Room.GetId(), entity.PatientFile.GetId());
         }
     }
 }

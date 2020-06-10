@@ -1,8 +1,4 @@
-/***********************************************************************
- * Module:  RoomService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.RoomService
- ***********************************************************************/
+
 
 using bolnica.Controller;
 using bolnica.Service;
@@ -53,14 +49,20 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        public bool ChangeRoomType(Room room, RoomType roomType)
-        {
-            throw new NotImplementedException();
-        }
 
         public Room Get(long id)
         {
             return _service.Get(id);
+        }
+
+        public IEnumerable<Room> GetRoomsContainingEquipment (Equipment equipment)
+        {
+            return _service.GetRoomsCointainingEquipment(equipment);
+        }
+
+        public bool CheckRoomNameUnique(Room room)
+        {
+            throw new NotImplementedException();
         }
     }
 }

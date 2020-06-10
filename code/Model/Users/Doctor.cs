@@ -6,13 +6,14 @@ using System.Drawing;
 
 namespace Model.Users
 {
-   public class Doctor : User, Repository.IIdentifiable<long>
-    {
+   public class Doctor : User
+   {
         public List<Article> Articles { get; set; } 
         public List<BusinessDay> BusinessDay { get; set; }
         public Speciality Specialty { get; set; }
         public DoctorGrade DoctorGrade { get; set; }
-        public Doctor(long id, String name, String surname, String jmbg, String email, String phone, DateTime birth, String adress, String username, String password, Image img,Speciality spec )
+
+        public Doctor(long id, String name, String surname, String jmbg, String email, String phone, DateTime birth, Address address, String username, String password, Bitmap img,Speciality spec )
         {
             this.Id = id;
             this.FirstName = name;
@@ -21,13 +22,14 @@ namespace Model.Users
             this.Email = email;
             this.Phone = phone;
             this.DateOfBirth = birth;
-            this.address = adress;
+            this.Address = address;
             this.Username = username;
             this.Password = password;
             this.Image = img;
             this.Specialty = spec;
         }
-        public Doctor(long id, String name, String surname, String jmbg, String email, String phone, DateTime birth, String adress, String username, String password, Image img, Speciality speciality, List<Article> articles, List<BusinessDay> businessDay ,DoctorGrade doctGrade)
+
+        public Doctor(long id, String name, String surname, String jmbg, String email, String phone, DateTime birth, Address address, String username, String password, Bitmap img, Speciality speciality, List<Article> articles, List<BusinessDay> businessDay ,DoctorGrade doctGrade)
         {
             this.Id = id;
             this.FirstName = name;
@@ -36,7 +38,7 @@ namespace Model.Users
             this.Email = email;
             this.Phone = phone;
             this.DateOfBirth = birth;
-            this.address = adress;
+            this.Address = address;
             this.Username = username;
             this.Password = password;
             this.Image = img;
@@ -46,7 +48,7 @@ namespace Model.Users
             this.DoctorGrade = doctGrade;
         }
 
-        public Doctor( String name, String surname, String jmbg, String email, String phone, DateTime birth, String adress, String username, String password, Image img, Speciality speciality, List<Article> articles, List<BusinessDay> businessDay, DoctorGrade doctGrade)
+        public Doctor( String name, String surname, String jmbg, String email, String phone, DateTime birth, Address adress, String username, String password, Bitmap img, Speciality speciality, List<Article> articles, List<BusinessDay> businessDay, DoctorGrade doctGrade)
         {
             this.FirstName = name;
             this.LastName = surname;
@@ -54,7 +56,7 @@ namespace Model.Users
             this.Email = email;
             this.Phone = phone;
             this.DateOfBirth = birth;
-            this.address = adress;
+            this.Address = adress;
             this.Username = username;
             this.Password = password;
             this.Image = img;
