@@ -10,12 +10,14 @@ namespace bolnica.Repository.CSV.Converter
 {
    public class PatientFileCSVConverter : ICSVConverter<PatientFile>
     {
+
         private readonly string _delimiter = ",";
         private readonly string _arrayDelimiter = "|";
 
 
         public PatientFile ConvertCSVFormatToEntity(string entityCSVFormat)
         {
+<<<<<<< HEAD
             string[] tokens = entityCSVFormat.Split(_delimiter.ToCharArray());
 
             PatientFile patientFile = new PatientFile(long.Parse(tokens[0]));

@@ -1,4 +1,3 @@
-
 using bolnica.Repository;
 using Model.Doctor;
 using Model.PatientSecretary;
@@ -6,6 +5,7 @@ using Model.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
 
 namespace Repository
 {
@@ -54,6 +54,7 @@ namespace Repository
             }
             patientFile.Examination = examinationCollection;
             return patientFile;
+
         }
     }
 }

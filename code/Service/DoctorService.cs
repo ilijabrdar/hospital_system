@@ -19,7 +19,11 @@ namespace Service
             _doctorGradeService = doctorGradeService;
         }
 
-   
+        public DoctorService(IDoctorRepository doctorRepository)
+        {
+            _doctorRepository = doctorRepository;
+        }
+
         public void Delete(Doctor entity)
         {
             _doctorRepository.Delete(entity);

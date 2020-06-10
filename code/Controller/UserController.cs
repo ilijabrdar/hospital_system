@@ -17,6 +17,7 @@ namespace Controller
            this._userService = userService;
         }
 
+
         public User Save(User entity)
         {
             return _userService.Save(entity);
@@ -47,20 +48,30 @@ namespace Controller
 
         public void Delete(User entity)
         {
-            throw new NotImplementedException();
+            _userService.Delete(entity);
         }
 
         public void Edit(User entity)
         {
-            throw new NotImplementedException();
+            _userService.Edit(entity);
         }
 
         public IEnumerable<User> GetAll()
         {
-            throw new NotImplementedException();
+            return _userService.GetAll();
         }
 
         public User Get(long id)
+        {
+            return _userService.Get(id);
+        }
+
+        public bool IsPasswordValid(string password)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsUsernamedValid(string username)
         {
             throw new NotImplementedException();
         }

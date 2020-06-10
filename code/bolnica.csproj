@@ -510,8 +510,11 @@
     <Compile Include="Service\abstract\IStateService.cs" />
     <Compile Include="Service\abstract\ISymptomService.cs" />
     <Compile Include="Service\abstract\ITherapyService.cs" />
+<<<<<<< HEAD
     <Compile Include="Service\abstract\ITownService.cs" />
     <Compile Include="Service\AddressService.cs" />
+=======
+>>>>>>> doctormaster
     <Compile Include="Service\abstract\IUserGetterService.cs" />
     <Compile Include="Service\ArticleService.cs">
       <SubType>Code</SubType>
