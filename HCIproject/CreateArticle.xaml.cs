@@ -1,5 +1,6 @@
 ﻿using Controller;
 using Model.Doctor;
+using Model.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,10 +22,18 @@ namespace HCIproject
     /// </summary>
     public partial class CreateArticle : Window
     {
-        private readonly IController<Article, long> _articleController;
+        Article article;
 
+        public Doctor user;
         public String Topic { get; set; }
         public String NewArticle { get; set; }
+
+        public CreateArticle(Doctor _user)
+        {
+            this.DataContext = this;
+            InitializeComponent();
+            user = _user;
+        }
         public CreateArticle()
         {
             this.DataContext = this;
@@ -32,14 +41,24 @@ namespace HCIproject
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
-        {
+        {//potvrdi
             var app = Application.Current as App;
-            Article article = new Article(111, DateTime.Today, Topic, NewArticle);
-            //_articleController.Save(article);
-            SideBar sideBarWin = new SideBar();
-            this.Visibility = Visibility.Hidden;
-            sideBarWin.MyTabControl.SelectedIndex = 1;
-            sideBarWin.Show();
+            if (Topic ==null || NewArticle == null)
+            {
+                Obavesti.Content = "Da bi ste sačuvali članak neophodno je da uneste njegov naslov i sadržaj.";
+            }
+            else {
+                article = new Article(DateTime.Today, user, Topic, NewArticle);
+                article.Doctor.FirstName = user.FirstName;
+                article.Doctor.LastName = user.LastName;
+                app.ArticleController.Save(article);
+
+
+                SideBar sideBarWin = new SideBar((Doctor)user);
+                this.Visibility = Visibility.Hidden;
+                sideBarWin.MyTabControl.SelectedIndex = 1;
+                sideBarWin.Show();
+            }
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

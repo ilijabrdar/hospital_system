@@ -73,8 +73,8 @@ namespace HCIproject
         private void Button_Click_6(object sender, RoutedEventArgs e)
         {
             OperationWin opeWin = new OperationWin();
-            this.Visibility = Visibility.Hidden;
-            opeWin.Show();
+           // this.Visibility = Visibility.Hidden;
+            opeWin.ShowDialog();
         }
 
         private void examScrool_SizeChanged(object sender, SizeChangedEventArgs e)

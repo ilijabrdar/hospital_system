@@ -16,13 +16,13 @@ namespace Repository
 {
    public class BusinessDayRepository : CSVRepository<BusinessDay,long>, IBusinessDayRepository
    {
-      private String FilePath;
-        private readonly IDoctorRepository doctorRepo;
+        private String FilePath;
+        public  IDoctorRepository doctorRepo { get; set; }
         private readonly IRoomRepository roomRepo;
-        public BusinessDayRepository(ICSVStream<BusinessDay> stream, ISequencer<long> sequencer, IDoctorRepository doctor, IRoomRepository room)
+
+        public BusinessDayRepository(ICSVStream<BusinessDay> stream, ISequencer<long> sequencer,IRoomRepository room)
            : base(stream, sequencer)
         {
-            doctorRepo = doctor;
             roomRepo = room;
         }
 
@@ -33,6 +33,8 @@ namespace Repository
             {
                 businessDays.Add(GetEager(day.GetId()));
             }
+            
+
             return businessDays;
         }
 

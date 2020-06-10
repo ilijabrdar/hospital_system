@@ -1,51 +1,35 @@
-﻿using Model.Users;
-using System;
-using System.Collections.Generic;
+﻿using Model.Doctor;
+using Model.Users;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Xml.Schema;
 
 namespace HCIproject
 {
-    /// <summary>
-    /// Interaction logic for DockPanel.xaml
-    /// </summary>
-    public partial class SideBar : Window,INotifyPropertyChanged
+    public partial class SideBar : Window, INotifyPropertyChanged
     {
-        public string Username;
+        public Doctor user;
+        public string Naslov { get; set; }
+
+
         public SideBar()
         {
             InitializeComponent();
             this.DataContext = this;
+            setArticle();
+
         }
-        public SideBar(string _username)
+        public SideBar(Doctor _user)
         {
             InitializeComponent();
             this.DataContext = this;
-            Username = _username;
-
-            var app = Application.Current as App;
-            Doctor doctor = app.DoctorController.GetDoctorByUsername(Username);
-            ImePrzSet.Text = doctor.FirstName + " " + doctor.LastName;
-            SpecSet.Text = doctor.Specialty.Name;
-            DatSet.Text = doctor.DateOfBirth.ToString();
-            JmbgSet.Text = doctor.Jmbg.ToString();
-            EmailSet.Text = doctor.Email;
-            TelSet.Text = doctor.Phone;
-
-            izImePrzTxt.Text = doctor.FirstName + " " + doctor.LastName;
+            user = _user;
+            setArticle();
+            setDoctorsData();
         }
-        
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string name)
@@ -218,11 +202,11 @@ namespace HCIproject
 
         private void Button_Click_5(object sender, RoutedEventArgs e)
         {//sacuvaj lozinku
-             //TODO provera da li je dobra stara sifra
+         //TODO provera da li je dobra stara sifra
             if (NovaLozTxt.Password != PotvNovaLozTxt.Password)
             {
-               obavesti.Foreground= new SolidColorBrush(Color.FromRgb(199, 24, 24));
-               obavesti.Text = "Unos se ne poklapa.Pokusajte ponovo.";
+                obavesti.Foreground = new SolidColorBrush(Color.FromRgb(199, 24, 24));
+                obavesti.Text = "Unos se ne poklapa.Pokusajte ponovo.";
             }
             else
             {
@@ -242,28 +226,83 @@ namespace HCIproject
         }
 
         private void Button_Click_7(object sender, RoutedEventArgs e)
-        {
-            CreateArticle creWin = new CreateArticle();
+        {//novi clanak
+            CreateArticle creWin = new CreateArticle((Doctor)user);
             this.Visibility = Visibility.Hidden;
             creWin.Show();
         }
 
-        private void MyTabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void setDoctorsData()
         {
-            //if (tabPocetna.IsSelected)
-            //{
-            //    var app = Application.Current as App;
-            //    Doctor doctor=app.DoctorController.GetDoctorByUsername(Username);
-            //    ImePrzSet.Text = doctor.FirstName +" "+ doctor.LastName;
-            //    SpecSet.Text = doctor.Specialty.Name;
-            //    DatSet.Text = doctor.DateOfBirth.ToString();
-            //    JmbgSet.Text = doctor.Jmbg.ToString();
-            //    EmailSet.Text = doctor.Email;
-            //    TelSet.Text = doctor.Phone;
 
-            //    izImePrzTxt.Text= doctor.FirstName + " " + doctor.LastName;
+            var app = Application.Current as App;
 
-            //}
+            ImePrzSet.Text = user.FirstName + " " + user.LastName;
+            Speciality spec= app.SpecialityController.Get(user.Specialty.Id);
+            SpecSet.Text = spec.Name;
+            DatSet.Text = user.DateOfBirth.ToString();
+            JmbgSet.Text = user.Jmbg.ToString();
+            EmailSet.Text = user.Email;
+            TelSet.Text = user.Phone;
+            AdrSet.Text = user.Address.GetFullAddress();
+
+        }
+
+        //clanci
+        private void setArticle()
+        {
+            var app = Application.Current as App;
+
+
+            foreach (var article in app.ArticleController.GetAll())
+            {
+                var app1 = Application.Current as App;
+
+
+                Border b = new Border();
+                b.BorderThickness = new Thickness(5);
+                b.CornerRadius = new CornerRadius(5);
+                b.BorderBrush = new SolidColorBrush(Color.FromRgb(162, 217, 206));
+                b.Margin = new Thickness(10, 10, 10, 10);
+
+                StackPanel stackPanelArticle = new StackPanel();
+                TextBlock newTopic = new TextBlock();
+                TextBlock newText = new TextBlock();
+                TextBlock writer = new TextBlock();
+
+                newTopic.TextWrapping = TextWrapping.Wrap;
+                newTopic.FontSize = 12;
+                newTopic.FontWeight = FontWeights.Bold;
+                newTopic.MaxWidth = 700;
+                newTopic.HorizontalAlignment = HorizontalAlignment.Center;
+                newText.TextWrapping = TextWrapping.Wrap;
+                newText.FontSize = 10;
+                newText.MaxWidth = 700;
+                writer.FontSize = 8;
+                writer.HorizontalAlignment = HorizontalAlignment.Right;
+
+
+                newTopic.Text = article.Topic;
+                writer.Text =user.FirstName + " " + user.LastName;
+                newText.Text = article.Text;
+
+
+
+                stackPanelArticle.Children.Add(newTopic);
+                stackPanelArticle.Children.Add(writer);
+                stackPanelArticle.Children.Add(newText);
+
+                b.Child = stackPanelArticle;
+
+                Articles.Children.Add(b);
+
+            }
+
+        }
+
+        private void Button_Click_8(object sender, RoutedEventArgs e)
+        {//posalji utisak
+            misljenje.Text = "";
         }
     }
 }

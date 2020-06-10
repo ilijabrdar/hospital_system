@@ -14,7 +14,7 @@
     </Window.Resources>
     <StackPanel x:Name="ResizePanel" Background="#D0ECE7" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
 
-        <TabControl x:Name="MyTabControl"  TabStripPlacement="Left"  Margin="20" SelectionChanged="MyTabControl_SelectionChanged" >
+        <TabControl x:Name="MyTabControl"  TabStripPlacement="Left"  Margin="20" >
             <TabItem x:Name="tabPocetna" Header="Početna stranica" FontSize="19" Background="#A2D9CE" >
                 <StackPanel x:Name="pocetnaGrid" Background="#D5F5E3"  Orientation="Vertical" HorizontalAlignment="Stretch">
                     <StackPanel Background="#D5F5E3"  Orientation="Horizontal">
@@ -34,8 +34,8 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock x:Name="ImePrzSet" Text="{Binding ImePrezime}" Grid.Column="0" Grid.Row="0"  FontSize="20" FontWeight="Bold" />
-                            <TextBlock x:Name="SpecSet" Grid.Column="0" Grid.Row="1" Text="Lekar opšte prakse" FontSize="16" />
+                            <TextBlock x:Name="ImePrzSet"  Grid.Column="0" Grid.Row="0"  FontSize="20" FontWeight="Bold" />
+                            <TextBlock x:Name="SpecSet" Grid.Column="0" Grid.Row="1" FontSize="16" />
 
                             <Label Grid.Column="0" Grid.Row="2" Content="Datum rođenja" FontSize="13" />
                             <TextBlock x:Name="DatSet" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Right" FontSize="13" />
@@ -47,7 +47,13 @@
                             <TextBlock x:Name="EmailSet" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Right" FontSize="13" />
 
                             <Label Grid.Column="0" Grid.Row="5" Content="Telefon" FontSize="13" />
-                            <TextBlock x:Name="TelSet" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Right" FontSize="13" />
+                            <TextBlock x:Name="TelSet" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Right" FontSize="13" /> 
+                            
+                            <Label Grid.Column="0" Grid.Row="6" Content="Adresa" FontSize="13" />
+                            <TextBlock x:Name="AdrSet" Grid.Column="1" Grid.Row="6" HorizontalAlignment="Right" FontSize="13" />
+                            
+                            
+                            
                         </Grid>
                     </StackPanel>
                     <Grid  Margin="20" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
@@ -77,25 +83,12 @@
                         <TextBox x:Name="search_article"  HorizontalAlignment="Left" Text="Pretraga" Margin="5" Background="#EBF5FB" FontSize="16" Foreground="#AAB7B8" Width="127" Height="30" CaretBrush="#FF1FEECD"/>
                         <Button Content="Novi članak" Margin="10" HorizontalAlignment="Right" Background="#A2D9CE" Click="Button_Click_7" BorderBrush="#FF1FEECD"/>
                     </Grid>
-                    <StackPanel x:Name="Articles" >
-                        <Border  BorderBrush="#A2D9CE" BorderThickness="8" CornerRadius="8,8,8,8"  Margin="5">
-                            <StackPanel x:Name="Article">
-                                <Grid>
-                                    <Label x:Name="Topic" Content="Koji su simptomi korona virusa i kako se zaštititi?" HorizontalAlignment="Center"/>
-                                    <TextBlock x:Name="Author" Text="dr Ana Matar"  FontSize="12" HorizontalAlignment="Right"/>
-                                </Grid>
-                                <StackPanel >
-                                    <ScrollViewer Height="180">
-                                        <TextBlock 
-                                        ScrollViewer.VerticalScrollBarVisibility="Auto"
-                                        ScrollViewer.CanContentScroll="True"
-                                        x:Name="ArticleText" TextWrapping="Wrap"   Text="Groznica, kašalj, grlobolja i otežano disanje neki su od najčešćih simptoma novog korona virusa. Može biti ozbiljnija za neke osobe i može dovesti do upale pluća ili otežanog disanja. Ređe je da virus može biti fatalan. Stariji ljudi i ljudi sa postojećim medicinskim stanjima (poput dijabetesa i srčanih bolesti) izgleda da su ranjiviji da obole od virusa. Važno je da kompanije ohrabruju bolesne zaposlene da ostanu kod kuće. Nemojte tražiti napomenu zdravstvenog radnika za zaposlene koji su bolesni od akutne respiratorne bolesti, pošto su kancelarije zdravstvenih ustanova i medicinske ustanove možda izuzetno zauzete i nisu u mogućnosti da dostave takvu dokumentaciju na vreme. Bolesni zaposleni ne bi trebali da se vraćaju na posao sve dok njihova temperatura ne bude ispod 37,8 stepeni Celzijusa tokom najmanje 24 sata, bez pomoći leka koji smanjuje temperaturu ili drugog leka koji menja simptome. Redovno čistite sve površine koje se često dodiruju na radnom mestu, kao što su radne stanice, radne površine i kvake za vrata. Obezbedite maramice za jednokratnu upotrebu da zaposleni pre svake upotrebe mogu obrisati najčešće korišćene površine (na primer, kvake za vrata, tastature, daljinski upravljač, sto). I dok se ovo može činiti osnovnim, mnogi odrasli ne praktikuju pravilno etiku kašljanja i kijanja (pokrijte usta i nos potpuno maramicom ili gornjim rukavom) ili pravilno pranje ruku najmanje 20 sekundi toplom vodom. Tako savetujemo kompanije da istaknu plakate o tome kako da spreče širenje bolesti."
-                                           HorizontalAlignment="Center" FontSize="14" VerticalAlignment="Center"/>
-                                    </ScrollViewer>
-                                </StackPanel>
-                            </StackPanel>
-                        </Border>
-                    </StackPanel>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" Height="300">
+                        <StackPanel x:Name="Articles" Orientation="Vertical" >
+                            <Border  >
+                            </Border>
+                        </StackPanel>
+                    </ScrollViewer>
                 </StackPanel>
             </TabItem>
             <TabItem Header="Pregled" FontSize="19" Background="#A2D9CE"  >
@@ -413,7 +406,7 @@
                 <StackPanel x:Name="utisakGrid" Orientation="Vertical" Background="#D5F5E3" SizeChanged="myGrid_SizeChanged">
                     <Label Content="Ostavite vaše mišljenje!" HorizontalAlignment="Center" FontSize="25"  Foreground="#2C3E50"  Margin="20"/>
                     <TextBox x:Name="misljenje" FontSize="14" Background="#EAFAF1" CaretBrush="#FF1FEECD" />
-                    <Button Content="Pošalji" FontSize="17" HorizontalAlignment="Right" Margin="0,20,19.6,20" Background="#A2D9CE" Foreground="#2C3E50" BorderBrush="#FF1FEECD" />
+                    <Button Content="Pošalji" FontSize="17" HorizontalAlignment="Right" Margin="0,20,19.6,20" Background="#A2D9CE" Foreground="#2C3E50" BorderBrush="#FF1FEECD" Click="Button_Click_8" />
                 </StackPanel>
             </TabItem>
 

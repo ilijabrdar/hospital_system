@@ -41,7 +41,7 @@ namespace HCIproject
                 }
                 else
                 {
-                    SideBar sidBarWin = new SideBar(Username);
+                    SideBar sidBarWin = new SideBar((Doctor)user);
                     this.Visibility = Visibility.Hidden;
                     sidBarWin.Show();
                 }

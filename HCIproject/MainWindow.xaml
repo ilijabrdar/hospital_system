@@ -30,24 +30,12 @@
                 <TextBox x:Name="searchTxt" Text="Unesite parametar pretrage" Height="30" Width="203" Background="#EBF5FB" FontSize="16" Foreground="#AAB7B8" Focusable="True" Margin="20" IsKeyboardFocusedChanged="search_text_IsKeyboardFocusedChanged" KeyDown="search_text_KeyDown" CaretBrush="#FF1FEECD"/>
             </WrapPanel>
         </Border>
-        <StackPanel Orientation="Vertical" Background="#D0ECE7" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
-            <Border  BorderBrush="#A2D9CE" BorderThickness="8" CornerRadius="8,8,8,8"  Margin="5">
-                <StackPanel x:Name="Article" Height="150">
-                    <Grid>
-                        <Label x:Name="Topic" Content="Koji su simptomi korona virusa i kako se zaštititi?" HorizontalAlignment="Center" />
-                        <TextBlock x:Name="Author" Text="AUTOR" HorizontalAlignment="Right"/>
-                    </Grid>
-                    <StackPanel>
-                        <ScrollViewer Height="120" >
-                            <TextBlock x:Name="ArticleText" TextWrapping="Wrap" 
-                                       ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True"
-                                      Text="Groznica, kašalj, grlobolja i otežano disanje neki su od najčešćih simptoma novog korona virusa. Može biti ozbiljnija za neke osobe i može dovesti do upale pluća ili otežanog disanja. Ređe je da virus može biti fatalan. Stariji ljudi i ljudi sa postojećim medicinskim stanjima (poput dijabetesa i srčanih bolesti) izgleda da su ranjiviji da obole od virusa. Važno je da kompanije ohrabruju bolesne zaposlene da ostanu kod kuće. Nemojte tražiti napomenu zdravstvenog radnika za zaposlene koji su bolesni od akutne respiratorne bolesti, pošto su kancelarije zdravstvenih ustanova i medicinske ustanove možda izuzetno zauzete i nisu u mogućnosti da dostave takvu dokumentaciju na vreme. Bolesni zaposleni ne bi trebali da se vraćaju na posao sve dok njihova temperatura ne bude ispod 37,8 stepeni Celzijusa tokom najmanje 24 sata, bez pomoći leka koji smanjuje temperaturu ili drugog leka koji menja simptome. Redovno čistite sve površine koje se često dodiruju na radnom mestu, kao što su radne stanice, radne površine i kvake za vrata. Obezbedite maramice za jednokratnu upotrebu da zaposleni pre svake upotrebe mogu obrisati najčešće korišćene površine (na primer, kvake za vrata, tastature, daljinski upravljač, sto). I dok se ovo može činiti osnovnim, mnogi odrasli ne praktikuju pravilno etiku kašljanja i kijanja (pokrijte usta i nos potpuno maramicom ili gornjim rukavom) ili pravilno pranje ruku najmanje 20 sekundi toplom vodom. Tako savetujemo kompanije da istaknu plakate o tome kako da spreče širenje bolesti."/>
-                        </ScrollViewer>
-                    </StackPanel>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Height="300">
+            <StackPanel x:Name="Articles" Orientation="Vertical" >
+                <Border >
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
 
-                </StackPanel>
-            </Border>
-            
-        </StackPanel>
     </StackPanel>
 </Window>

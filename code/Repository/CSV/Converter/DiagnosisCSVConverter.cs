@@ -42,14 +42,13 @@ namespace bolnica.Repository.CSV.Converter
             String format = String.Join(_delimiter, entity.Id, entity.Name);
             stringBuilder.Append(format);
             stringBuilder.Append(_delimiter);
-            int numOfDelimiters = -1;
+
                 foreach (Symptom symptom in entity.Symptom)
                 {
                     stringBuilder.Append(symptom.GetId());
-                    ++numOfDelimiters;
-                    if(numOfDelimiters < entity.Symptom.Count-1)
-                        stringBuilder.Append(_symptomDelimiter);
+                     stringBuilder.Append(_symptomDelimiter);
                 }
+                stringBuilder.Remove(stringBuilder.Length - 1, 1);
             return stringBuilder.ToString();
         }
     }
