@@ -14,7 +14,7 @@ namespace Controller
 
         public UserController(IUserService userService)
         {
-           this._userService = userService;
+            this._userService = userService;
         }
 
 
@@ -39,7 +39,7 @@ namespace Controller
             throw new NotImplementedException();
         }
 
- 
+
 
         public Feedback SendFeedback(string feedback)
         {
@@ -64,16 +64,6 @@ namespace Controller
         public User Get(long id)
         {
             return _userService.Get(id);
-        }
-
-        public bool IsPasswordValid(string password)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool IsUsernamedValid(string username)
-        {
-            throw new NotImplementedException();
         }
 
         public bool IsPasswordValid(string password)

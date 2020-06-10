@@ -16,8 +16,7 @@ namespace bolnica.Repository.CSV.Converter
 
 
         public PatientFile ConvertCSVFormatToEntity(string entityCSVFormat)
-        {
-<<<<<<< HEAD
+        { 
             string[] tokens = entityCSVFormat.Split(_delimiter.ToCharArray());
 
             PatientFile patientFile = new PatientFile(long.Parse(tokens[0]));

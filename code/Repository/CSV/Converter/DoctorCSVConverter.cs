@@ -9,7 +9,6 @@ using System.Text;
 namespace bolnica.Repository.CSV.Converter
 {
     public class DoctorCSVConverter : ICSVConverter<Doctor>
->>>>>>> doctormaster
     {
         private readonly string _delimiter;
 
