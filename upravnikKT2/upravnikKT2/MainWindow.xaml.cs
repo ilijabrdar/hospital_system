@@ -1,4 +1,9 @@
-﻿using System.Windows;
+﻿using System.Collections;
+using System.IO;
+using System.Reflection.Emit;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace upravnikKT2
 {
@@ -17,19 +22,45 @@ namespace upravnikKT2
         {
             if (TxtBoxKorisnickoIme.Text.Equals("") || lozinka.Password.Equals(""))
             {
-                string messageBoxText = "Unesite korisnicko ime i lozinku!";
-                string caption = "Greska";
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Error;
+                labelError.Content = "Unesite korisnicko ime i lozinku!";
+                labelError.Visibility = Visibility.Visible;
+                //stackPanel.Children.Add(box);
 
-                MessageBox.Show(messageBoxText, caption, button, icon);
+                //string messageBoxText = "Unesite korisnicko ime i lozinku!";
+                //string caption = "Greska";
+                //MessageBoxButton button = MessageBoxButton.OK;
+                //MessageBoxImage icon = MessageBoxImage.Error;
+
+                //MessageBox.Show(messageBoxText, caption, button, icon);
             }
-            else
+            else if (TxtBoxKorisnickoIme.Text.Equals("marko") || lozinka.Password.Equals("marko"))
             {
+                bool selected = (bool)stayLoggedIn.IsChecked;
+                if (selected)
+                {
+                    //delete false and write true
+                    string path = @"C:\Users\david\Desktop\cc\hospital_system\upravnikKT2\upravnikKT2\Resources\Data\config.txt";
+                    //File.Delete(path);
+
+                    File.WriteAllText(path, "true");
+                }
+                else
+                {
+                    //delete true and write false
+                    string path = @"C:\Users\david\Desktop\cc\hospital_system\upravnikKT2\upravnikKT2\Resources\Data\config.txt";
+
+                    File.WriteAllText(path, "false");
+                }
+
                 DashboardWindow dashBoard = new DashboardWindow();
                 dashBoard.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 dashBoard.Show();
                 this.Close();
+            }
+            else
+            {
+                labelError.Content = "Neispravno korisnicko ime/lozinka!";
+                labelError.Visibility = Visibility.Visible;
             }
 
             
@@ -39,11 +70,8 @@ namespace upravnikKT2
         {
             if (e.Key == System.Windows.Input.Key.Enter)
             {
-                if (OKBtn.IsEnabled)
-                {
-                    button_Click(sender, e);
-                    e.Handled = true;
-                }
+                button_Click(sender, e);
+                e.Handled = true;
             }
         }
     }

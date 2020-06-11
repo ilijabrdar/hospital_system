@@ -110,5 +110,16 @@ namespace upravnikKT2
             StateService stateService = new StateService(stateRepository);
             StateController = new StateController(stateService);
         }
+
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            string text = System.IO.File.ReadAllText(@"C:\Users\david\Desktop\cc\hospital_system\upravnikKT2\upravnikKT2\Resources\Data\config.txt");
+
+            if (text.Equals("false"))
+                StartupUri = new Uri("MainWindow.xaml", UriKind.Relative);
+            else
+                StartupUri = new Uri("DashboardWindow.xaml", UriKind.Relative);
+
+        }
     }
 }

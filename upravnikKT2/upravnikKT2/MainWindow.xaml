@@ -15,29 +15,32 @@
          TextOptions.TextRenderingMode="Auto"
          Background="{DynamicResource MaterialDesignPaper}"
          FontFamily="{DynamicResource MaterialDesignFont}"
+        PreviewKeyDown="Window_PreviewKeyDown"
         >
     <Grid VerticalAlignment="Center" >
         <StackPanel HorizontalAlignment="Center">
-            <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Vertical" x:Name="stackPanel" Width="230" Height="317">
                 <DockPanel Margin="10,10,10,10" >
                     <materialDesign:PackIcon Kind="AccountBox" />
-                    <TextBox x:Name="TxtBoxKorisnickoIme" Width="105" materialDesign:HintAssist.Hint="Korisnicko ime"  materialDesign:HintAssist.Foreground="Green"
-  materialDesign:TextFieldAssist.UnderlineBrush="Green" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left"></TextBox>
+                    <TextBox x:Name="TxtBoxKorisnickoIme" Width="105" materialDesign:HintAssist.Hint="Korisnicko ime" HorizontalAlignment="Center" materialDesign:HintAssist.Foreground="Green"
+  materialDesign:TextFieldAssist.UnderlineBrush="Green" Style="{StaticResource MaterialDesignFloatingHintTextBox}" ></TextBox>
                 </DockPanel>
 
                 <DockPanel Margin="10,10,10,10" >
                     <materialDesign:PackIcon Kind="LockQuestion" />
                     <PasswordBox x:Name="lozinka" Width="105" materialDesign:HintAssist.Hint="Lozinka"  materialDesign:HintAssist.Foreground="Green"
-  materialDesign:TextFieldAssist.UnderlineBrush="Green"   Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" HorizontalAlignment="Left"></PasswordBox>
+  materialDesign:TextFieldAssist.UnderlineBrush="Green"   Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" HorizontalAlignment="Center"></PasswordBox>
                 </DockPanel>
 
                 <DockPanel Margin="10,20,10,10" >
-                    <CheckBox Style="{StaticResource MaterialDesignLightCheckBox}">ostani ulogovan</CheckBox>
+                    <CheckBox Style="{StaticResource MaterialDesignLightCheckBox}" HorizontalAlignment="Center" x:Name="stayLoggedIn">ostani ulogovan</CheckBox>
                 </DockPanel>
 
 
 
                 <Button x:Name="OKBtn" Margin="0,50,0,0" Width="94" Click="button_Click">Uloguj se</Button>
+
+                <Label HorizontalAlignment="Center" Foreground="Red" Margin="0,20,0,0" x:Name="labelError" Visibility="Hidden"></Label>
             </StackPanel>
         </StackPanel>
         
