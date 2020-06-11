@@ -600,7 +600,7 @@
                             <DataGrid Margin="10" x:Name="DataGridRenovation" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Sifra prostorije" Binding="{Binding Room.RoomCode}" Width="*"/>
-                                    <DataGridTextColumn Header="Tip prostorije" Binding="{Binding Room.RoomType.Name}" Width="*"/>
+                                    <!--<DataGridTextColumn Header="Tip prostorije" Binding="{Binding Room.RoomType.Name}" Width="*"/>-->
                                     <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="*"/>
                                     <DataGridTextColumn Header="Datum pocetka" Binding="{Binding Period.StartDate.Date, StringFormat=\{0:dd.MM.yyyy.\}}" Width="*"/>
                                     <DataGridTextColumn Header="Datum kraja" Binding="{Binding Period.EndDate, StringFormat=\{0:dd.MM.yy\}}" Width="*"/>

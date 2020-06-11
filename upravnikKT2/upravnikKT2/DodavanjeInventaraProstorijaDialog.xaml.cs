@@ -67,7 +67,9 @@ namespace upravnikKT2
 
         private void Button_Click_OK(object sender, RoutedEventArgs e)
         {
-            if (_selectedRoomEquipmentEdit == null)
+            bool ret = check_valid_amount();
+            if (!ret) return;
+            if (_selectedRoomEquipmentEdit == null )
             {
 
 
@@ -92,7 +94,7 @@ namespace upravnikKT2
                 room.Equipment_inventory.Add(_selectedEquipment, _amount);
                 _roomController.Edit(room);
             }
-            else
+            else  //edit case
             {
                 Room final_room = (Room)comboRoomCode.SelectedItem;
 
@@ -150,6 +152,35 @@ namespace upravnikKT2
             this.Close();
                 
         }
+
+        private bool check_valid_amount()
+        {
+            List<Room> rooms = _roomController.GetRoomsContainingEquipment(_selectedEquipment).ToList();
+            int result = 0;
+
+            foreach (Room room in rooms)
+            {
+                foreach (KeyValuePair<Equipment, int> pair in room.Equipment_inventory)
+                {
+                    if (pair.Key.Id == _selectedEquipment.Id)
+                    {
+                        result+= pair.Value;
+                    }
+                }
+            }
+            if (result+Amount > _selectedEquipment.Amount)
+            {
+                string messageBoxText = "Uneli ste vecu kolicinu opreme od one na raspolaganju";
+                string caption = "Greska";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Error;
+
+                MessageBox.Show(messageBoxText, caption, button, icon);
+                return false;
+            }
+            return true;
+        }
+
         private void Button_Click_Cancel(object sender, RoutedEventArgs e)
         {
             this.Close();

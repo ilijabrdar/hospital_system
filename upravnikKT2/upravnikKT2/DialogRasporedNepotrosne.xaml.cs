@@ -46,6 +46,7 @@ namespace upravnikKT2
 
             List<Room> rooms = _roomController.GetRoomsContainingEquipment(_selectedEquipment).ToList();
             List<RoomEquipment> result = new List<RoomEquipment>();
+            int rasporedjeno = 0;
 
             foreach (Room room in rooms)
             {
@@ -54,11 +55,12 @@ namespace upravnikKT2
                     if (pair.Key.Id == _selectedEquipment.Id)
                     {
                         result.Add(new RoomEquipment(room.Id ,room.RoomCode, pair.Value, _selectedEquipment.Name));
+                        rasporedjeno += pair.Value;
                     }
                 }
             }
 
-
+            txtNerasporedjeno.Text = "" + (_selectedEquipment.Amount - rasporedjeno);
             ObservableCollection<RoomEquipment> data_rooms = new ObservableCollection<RoomEquipment>(result);
 
             this.DataGridRasporedOpremePoProstorijama.ItemsSource = data_rooms;
@@ -77,6 +79,7 @@ namespace upravnikKT2
 
                 List<Room> rooms = _roomController.GetRoomsContainingEquipment(_selectedEquipment).ToList();
                 List<RoomEquipment> result = new List<RoomEquipment>();
+                int rasporedjeno = 0;
 
                 foreach (Room room in rooms)
                 {
@@ -85,12 +88,15 @@ namespace upravnikKT2
                         if (pair.Key.Id == _selectedEquipment.Id)
                         {
                             result.Add(new RoomEquipment(room.Id, room.RoomCode, pair.Value, _selectedEquipment.Name));
+                            rasporedjeno += pair.Value;
+
                         }
                     }
                 }
 
 
                 ObservableCollection<RoomEquipment> data_rooms = new ObservableCollection<RoomEquipment>(result);
+                txtNerasporedjeno.Text = "" + (_selectedEquipment.Amount - rasporedjeno);
 
                 this.DataGridRasporedOpremePoProstorijama.ItemsSource = data_rooms;
             }
@@ -138,6 +144,8 @@ namespace upravnikKT2
 
                     List<Room> rooms = _roomController.GetRoomsContainingEquipment(_selectedEquipment).ToList();
                     List<RoomEquipment> result = new List<RoomEquipment>();
+                    int rasporedjeno = 0;
+
 
                     foreach (Room room in rooms)
                     {
@@ -146,12 +154,14 @@ namespace upravnikKT2
                             if (pair.Key.Id == _selectedEquipment.Id)
                             {
                                 result.Add(new RoomEquipment(room.Id, room.RoomCode, pair.Value, _selectedEquipment.Name));
+                                rasporedjeno += pair.Value;
                             }
                         }
                     }
 
 
                     ObservableCollection<RoomEquipment> data_rooms = new ObservableCollection<RoomEquipment>(result);
+                    txtNerasporedjeno.Text = "" + (_selectedEquipment.Amount - rasporedjeno);
 
                     this.DataGridRasporedOpremePoProstorijama.ItemsSource = data_rooms;
                 }
@@ -171,6 +181,7 @@ namespace upravnikKT2
         {
             List<Room> rooms = _roomController.GetRoomsContainingEquipment(_selectedEquipment).ToList();
             List<RoomEquipment> result = new List<RoomEquipment>();
+            int rasporedjeno = 0;
 
             foreach (Room room in rooms)
             {
@@ -179,9 +190,13 @@ namespace upravnikKT2
                     if (pair.Key.Id == _selectedEquipment.Id)
                     {
                         result.Add(new RoomEquipment(room.Id, room.RoomCode, pair.Value, _selectedEquipment.Name));
+                        rasporedjeno += pair.Value;
                     }
                 }
             }
+
+            txtNerasporedjeno.Text = "" + (_selectedEquipment.Amount - rasporedjeno);
+                
 
 
             ObservableCollection<RoomEquipment> data_rooms = new ObservableCollection<RoomEquipment>(result);

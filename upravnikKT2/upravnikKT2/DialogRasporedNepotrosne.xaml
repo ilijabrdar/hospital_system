@@ -54,7 +54,7 @@
         </DataGrid>
 
         <Label Grid.Row="2" HorizontalAlignment="Left" VerticalContentAlignment="Center" Margin="42,6,0,10">Nerasporedjeno</Label>
-        <TextBox IsReadOnly="True" Grid.Row="2" HorizontalAlignment="Center" Width="50" Height="30"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="0.48,0.211">3</TextBox>
+        <TextBox x:Name="txtNerasporedjeno" IsReadOnly="True" Grid.Row="2" HorizontalAlignment="Center" Width="50" Height="30"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="0.48,0.211"></TextBox>
 
     </Grid>
 </Window>

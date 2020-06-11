@@ -1,4 +1,6 @@
-﻿using System;
+﻿using bolnica.Controller;
+using Controller;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -20,9 +22,15 @@ namespace upravnikKT2
     /// </summary>
     public partial class GenerateReportDialog : Window
     {
+        private readonly IRoomController roomController;
         public GenerateReportDialog()
         {
             InitializeComponent();
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            this.DataContext = this;
+
+            var app = Application.Current as App;
+            roomController = app.RoomController;
         }
 
         private void Button_Click_Cancel(object sender, RoutedEventArgs e)
@@ -49,14 +57,18 @@ namespace upravnikKT2
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            ObservableCollection<RoomMockup> DataGridRooms = new ObservableCollection<RoomMockup>();
-            DataGridRooms.Add(new RoomMockup { Sifra = "1243"});
-            DataGridRooms.Add(new RoomMockup { Sifra = "6475"});
-            DataGridRooms.Add(new RoomMockup { Sifra = "9876"});
-            DataGridRooms.Add(new RoomMockup { Sifra = "8674"});
-            DataGridRooms.Add(new RoomMockup { Sifra = "5532"});
-            DataGridRooms.Add(new RoomMockup { Sifra = "7684" });
-            this.DataGridProstorije.ItemsSource = DataGridRooms;
+            //ObservableCollection<RoomMockup> DataGridRooms = new ObservableCollection<RoomMockup>();
+            //DataGridRooms.Add(new RoomMockup { Sifra = "1243"});
+            //DataGridRooms.Add(new RoomMockup { Sifra = "6475"});
+            //DataGridRooms.Add(new RoomMockup { Sifra = "9876"});
+            //DataGridRooms.Add(new RoomMockup { Sifra = "8674"});
+            //DataGridRooms.Add(new RoomMockup { Sifra = "5532"});
+            //DataGridRooms.Add(new RoomMockup { Sifra = "7684" });
+            //this.DataGridProstorije.ItemsSource = DataGridRooms;
+
+            comboRooms.ItemsSource = roomController.GetAll().ToList();
+            comboRooms.DisplayMemberPath = "RoomCode";
+            comboRooms.SelectedValuePath = "Id";
         }
 
         private void Window_PreviewKeyDown(object sender, KeyEventArgs e)

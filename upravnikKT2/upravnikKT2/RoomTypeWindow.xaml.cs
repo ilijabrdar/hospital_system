@@ -69,6 +69,9 @@ namespace upravnikKT2
                 AddRoomType dialog = new AddRoomType(listViewRoomTypes, (RoomType)listViewRoomTypes.SelectedItem);
                 dialog.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 dialog.ShowDialog();
+
+                
+                
             }
             else
             {
