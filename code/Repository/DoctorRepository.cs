@@ -13,7 +13,7 @@ namespace Repository
    public class DoctorRepository : CSVRepository<Doctor, long>, IDoctorRepository
    {
         private readonly IArticleRepository articleRepo;
-        private readonly IEagerRepository<BusinessDay,long> businessDayRepo;
+        public IEagerRepository<BusinessDay, long> businessDayRepo { private get;  set; }
         private readonly ISpecialityRepository specialityRepo;
         private readonly IDoctorGradeRepository doctorGradeRepository;
         public DoctorRepository(ICSVStream<Doctor> stream, ISequencer<long> sequencer,
