@@ -134,12 +134,31 @@ namespace upravnikKT2
             }
         }
 
+        private DateTime _birthDate;
+        public DateTime BirthDate
+        {
+            get
+            {
+                return _birthDate;
+            }
+            set
+            {
+                if (value != _birthDate)
+                {
+                    _birthDate = value;
+                    OnPropertyChanged("BirthDate");
+                }
+            }
+        }
+
 
         public DoctorAddWindow()
         {
             InitializeComponent();
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             this.DataContext = this;
+
+            BirthDate = new DateTime(1999, 12, 31);
 
             var app = Application.Current as App;
             _specialityController = app.SpecialityController;
@@ -153,6 +172,8 @@ namespace upravnikKT2
             InitializeComponent();
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             this.DataContext = this;
+
+            BirthDate = selectedDoctor.DateOfBirth;
 
             var app = Application.Current as App;
             _specialityController = app.SpecialityController;
@@ -175,6 +196,7 @@ namespace upravnikKT2
             if (_selectedDoctor == null)
             {
                 //String name, String surname, String jmbg, String email, String phone, DateTime birth, Address adress, String username, String password, Bitmap img, Speciality speciality, List<Article> articles, List<BusinessDay> businessDay, DoctorGrade doctGrade
+                this.birthDatePicker.SelectedDate = this.BirthDate;
                 var datum = birthDatePicker.SelectedDate;
                 var state = StateCombo.SelectedItem as State;
                 var town = TownCombo.SelectedItem as Town;

@@ -38,7 +38,7 @@
             <TextBox.Text>
                 <Binding Path="Ime" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
-                        <val:NotEmptyValidationRule  ValidatesOnTargetUpdated="True"/>
+                        <val:NameValidationRule  ValidatesOnTargetUpdated="True"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
@@ -47,7 +47,7 @@
             <TextBox.Text>
                 <Binding Path="Prezime" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
-                        <val:NotEmptyValidationRule  ValidatesOnTargetUpdated="True"/>
+                        <val:SurnameValidationRule  ValidatesOnTargetUpdated="True"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
@@ -89,7 +89,15 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <DatePicker x:Name="birthDatePicker" Grid.Column="1" Grid.Row="6" HorizontalAlignment="Right" Margin="0,10,10,10" Width="139" Height="33"></DatePicker>
+        <DatePicker x:Name="birthDatePicker" Grid.Column="1" Grid.Row="6" HorizontalAlignment="Right" Margin="0,10,10,10" Width="139" Height="33"  DisplayDateEnd="1999-12-31" DisplayDateStart="1920-06-10">
+            <DatePicker.SelectedDate>
+                <Binding Path="BirthDate" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:BirthDateValidation  ValidatesOnTargetUpdated="True" ValidationStep="ConvertedProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </DatePicker.SelectedDate>
+        </DatePicker>
         <ComboBox x:Name="comboSpeciality" Grid.Column="1" Grid.Row="7" HorizontalAlignment="Right" Margin="0,10,10,10" Width="139" materialDesign:HintAssist.Hint="Pretrazi" IsEditable="True" Height="36" IsTextSearchEnabled="True"></ComboBox>
 
 
@@ -116,7 +124,7 @@
                             <DataTrigger Binding="{Binding Path=(Validation.HasError), ElementName=txtID}" Value="True">
                                 <Setter Property="IsEnabled" Value="False" />
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=SelectedDate, ElementName=birthDatePicker}" Value="{x:Null}">
+                            <DataTrigger Binding="{Binding Path=(Validation.HasError), ElementName=birthDatePicker}" Value="True">
                                 <Setter Property="IsEnabled" Value="False" />
                             </DataTrigger>
                             <DataTrigger Binding="{Binding Path=SelectedItem, ElementName=StateCombo}" Value="{x:Null}">
@@ -131,6 +139,7 @@
                             <DataTrigger Binding="{Binding Path=SelectedItem, ElementName=comboSpeciality}" Value="{x:Null}">
                                 <Setter Property="IsEnabled" Value="False" />
                             </DataTrigger>
+                        
                         </Style.Triggers>
                     </Style>
                 </Button.Style>

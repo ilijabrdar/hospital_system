@@ -42,6 +42,53 @@ namespace upravnikKT2.Validation
 
         }
     }
+
+    public class BirthDateValidation : ValidationRule
+    {
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            try
+            {
+                var s = (DateTime)value;
+                DateTime r;
+                DateTime latest = new DateTime(2000, 01, 01);
+                DateTime earliest = new DateTime(1919, 12, 31);
+                if (DateTime.Compare(s, latest) <0 && DateTime.Compare(s,earliest)>0)
+                {
+                    return new ValidationResult(true, null);
+                }
+                return new ValidationResult(false, "Dozvoljen datum rodjenja je izmedju 2000. i 1920. godine");
+            }
+            catch
+            {
+                return new ValidationResult(false, "Dozvoljen datum rodjenja je izmedju 2000. i 1920. godine");
+            }
+        }
+    }
+
+    public class StartShiftDateValidation : ValidationRule
+    {
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            try
+            {
+                var s = (DateTime)value;
+                DateTime r;
+                DateTime latest = DateTime.Now.AddMonths(1);
+                DateTime earliest = DateTime.Now;
+                if (DateTime.Compare(s, latest) < 0 && DateTime.Compare(s, earliest) > 0)
+                {
+                    return new ValidationResult(true, null);
+                }
+                return new ValidationResult(false, "Raspon pocetka smene je mesec dana");
+            }
+            catch
+            {
+                return new ValidationResult(false, "Raspon pocetka smene je mesec dana");
+            }
+        }
+    }
+
     public class JMBGValidationRule : ValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
@@ -55,11 +102,55 @@ namespace upravnikKT2.Validation
                 {
                     return new ValidationResult(true, null);
                 }
-                return new ValidationResult(false, "Morate uneti 13 brojeva za JMBG.");
+                return new ValidationResult(false, "Morate uneti 13 brojeva za JMBG");
             }
             catch
             {
-                return new ValidationResult(false, "Morate uneti 13 brojeva za JMBG.");
+                return new ValidationResult(false, "Morate uneti 13 brojeva za JMBG");
+            }
+        }
+    }
+
+    public class NameValidationRule : ValidationRule
+    {
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+
+            try
+            {
+                bool isJMBG = Regex.IsMatch(value as string, "^[a-zA-Z]+[\\s|-]?[a-zA-Z]+[\\s|-]?[a-zA-Z]+$", RegexOptions.IgnoreCase);
+
+                if (isJMBG)
+                {
+                    return new ValidationResult(true, null);
+                }
+                return new ValidationResult(false, "Ime mora imati bar 3 slova");
+            }
+            catch
+            {
+                return new ValidationResult(false, "Ime mora imati bar 3 slova");
+            }
+        }
+    }
+
+    public class SurnameValidationRule : ValidationRule
+    {
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+
+            try
+            {
+                bool isJMBG = Regex.IsMatch(value as string, "^[a-zA-Z]+[\\s|-]?[a-zA-Z]+[\\s|-]?[a-zA-Z]+$", RegexOptions.IgnoreCase);
+
+                if (isJMBG)
+                {
+                    return new ValidationResult(true, null);
+                }
+                return new ValidationResult(false, "Prezime mora imati bar 3 slova");
+            }
+            catch
+            {
+                return new ValidationResult(false, "Prezime mora imati bar 3 slova");
             }
         }
     }
@@ -76,12 +167,12 @@ namespace upravnikKT2.Validation
                 if (isEmail)
                     return new ValidationResult(true, null);
 
-                return new ValidationResult(false, "Format email-a xxxx@xx.x");
+                return new ValidationResult(false, "Primer email-a: naziv@domen.com");
 
             }
             catch
             {
-                return new ValidationResult(false, "Format email-a xxxx@xx.x");
+                return new ValidationResult(false, "Primer email-a: naziv@domen.com");
             }
         }
     }
@@ -98,12 +189,12 @@ namespace upravnikKT2.Validation
                 if (isPhone)
                     return new ValidationResult(true, null);
 
-                return new ValidationResult(false, "Format telefona xxx");
+                return new ValidationResult(false, "Telefon mora imati bar 7 cifara");
 
             }
             catch
             {
-                return new ValidationResult(false, "Format telefona xxx");
+                return new ValidationResult(false, "Telefon mora imati bar 7 cifara");
             }
         }
     }
@@ -124,7 +215,7 @@ namespace upravnikKT2.Validation
             }
             catch
             {
-                return new ValidationResult(false, "Unknown error occured.");
+                return new ValidationResult(false, "Unesite pozitivan broj");
             }
         }
     }
