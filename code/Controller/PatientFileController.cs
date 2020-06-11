@@ -1,4 +1,3 @@
-
 using bolnica.Controller;
 using bolnica.Service;
 using Model.Doctor;
@@ -7,7 +6,6 @@ using Model.Users;
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-
 namespace Controller
 {
     public class PatientFileController : IPatientFileController
@@ -15,6 +13,7 @@ namespace Controller
         private readonly IPatientFileService _patientFileService;
 
         public PatientFileController(IPatientFileService patientFileService)
+
         {
             _patientFileService = patientFileService;
         }
@@ -29,10 +28,12 @@ namespace Controller
             return _patientFileService.AddExamination(examination, patientFile);
         }
 
+
         public Hospitalization AddHospitalization(Hospitalization hospitalization, PatientFile patientFile)
         {
             return _patientFileService.AddHospitalization(hospitalization, patientFile);
         }
+
 
         public Operation AddOperation(Operation operations, PatientFile patientFile)
         {

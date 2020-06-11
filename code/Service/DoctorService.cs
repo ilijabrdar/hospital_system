@@ -19,25 +19,29 @@ namespace Service
             _doctorGradeService = doctorGradeService;
         }
 
-   
+        public DoctorService(IDoctorRepository doctorRepository)
+        {
+            _doctorRepository = doctorRepository;
+        }
+
         public void Delete(Doctor entity)
         {
-            throw new NotImplementedException();
+            _doctorRepository.Delete(entity);
         }
 
         public void Edit(Doctor entity)
         {
-            throw new NotImplementedException();
+            _doctorRepository.Edit(entity);
         }
 
         public Doctor Get(long id)
         {
-            throw new NotImplementedException();
+            return _doctorRepository.GetEager(id);
         }
 
         public IEnumerable<Doctor> GetAll()
         {
-            throw new NotImplementedException();
+            return _doctorRepository.GetAllEager();
         }
 
         public List<Doctor> GetDoctorsBySpeciality(Speciality specialty)

@@ -12,7 +12,7 @@ namespace Service
     public class PatientFileService : IPatientFileService
     { 
 
-         private readonly  IHospitalizationService _hospitalizationService;
+        private readonly  IHospitalizationService _hospitalizationService;
         private readonly  IOperationService _operationService;
         private readonly IPatientFileRepository _patientFileRepo;
      

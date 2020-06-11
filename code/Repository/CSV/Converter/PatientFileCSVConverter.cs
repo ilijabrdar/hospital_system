@@ -10,6 +10,7 @@ namespace bolnica.Repository.CSV.Converter
 {
    public class PatientFileCSVConverter : ICSVConverter<PatientFile>
     {
+
         private readonly string _delimiter = ",";
         private readonly string _arrayDelimiter = "|";
 
