@@ -99,6 +99,9 @@
     <Compile Include="MyTabControl.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="OpenAllShiftsWindow.xaml.cs">
+      <DependentUpon>OpenAllShiftsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ReadArticleWindow.xaml.cs">
       <DependentUpon>ReadArticleWindow.xaml</DependentUpon>
     </Compile>
@@ -183,6 +186,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="OpenAllShiftsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ReadArticleWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -236,6 +243,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="Resources\Data\doctors.csv" />
+    <None Include="Resources\Data\businessdays.csv" />
     <None Include="Resources\Data\speciality.csv" />
     <None Include="Resources\Data\drugs.csv" />
     <None Include="Resources\Data\renovations.csv" />

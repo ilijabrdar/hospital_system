@@ -30,6 +30,7 @@ namespace upravnikKT2
         private const string ADDRESS_FILE = "../../Resources/Data/AddressFile.txt";
         private const string TOWN_FILE = "../../Resources/Data/TownFile.txt";
         private const string STATE_FILE = "../../Resources/Data/StateFile.txt";
+        private const string BUSINESSDAY_FILE = "../../Resources/Data/businessdays.csv";
 
         private const string CSV_DELIMITER = ",";
         private const String CSV_ARRAY_DELIMITER = "|";
@@ -49,6 +50,8 @@ namespace upravnikKT2
         public ISpecialityController SpecialityController { get; private set; }
 
         public IStateController StateController { get; private set; }
+
+        public IBusinessDayController BusinessDayController { get; private set; }
 
         public App()
         {
@@ -109,6 +112,14 @@ namespace upravnikKT2
 
             StateService stateService = new StateService(stateRepository);
             StateController = new StateController(stateService);
+
+            var businessDayRepository = new BusinessDayRepository(new CSVStream<BusinessDay>(BUSINESSDAY_FILE, new BusinessDayCSVConverter()), new LongSequencer(), doctorRepository, roomRepository);
+            var businessDayService = new BusinessDayService(businessDayRepository);
+            BusinessDayController = new BusinessDayController(businessDayService);
+
+
+            doctorRepository.businessDayRepo = businessDayRepository;
+
         }
 
         private void Application_Startup(object sender, StartupEventArgs e)

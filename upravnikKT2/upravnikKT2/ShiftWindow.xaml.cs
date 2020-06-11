@@ -1,5 +1,10 @@
-﻿using System;
+﻿using bolnica.Controller;
+using Model.Director;
+using Model.PatientSecretary;
+using Model.Users;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,14 +24,93 @@ namespace upravnikKT2
     /// </summary>
     public partial class ShiftWindow : Window
     {
-        public ShiftWindow()
+        private readonly IDoctorController _doctorController;
+        private readonly IRoomController _roomController;
+        private readonly IBusinessDayController _businessDayController;
+
+        private Doctor selectedDoctor;
+        private BusinessDay selectedBusinessDay;
+
+        public ShiftWindow(Doctor selectedDoctor)
         {
             InitializeComponent();
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            this.DataContext = this;
+
+            var app = Application.Current as App;
+            _doctorController = app.DoctorController;
+            _roomController = app.RoomController;
+            _businessDayController = app.BusinessDayController;
+
+            this.selectedDoctor = selectedDoctor;
+        }
+
+        public ShiftWindow(Doctor selectedDoctor, BusinessDay businessDay)
+        {
+            InitializeComponent();
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            this.DataContext = this;
+
+            var app = Application.Current as App;
+            _doctorController = app.DoctorController;
+            _roomController = app.RoomController;
+            _businessDayController = app.BusinessDayController;
+
+            this.selectedDoctor = selectedDoctor;
+            this.selectedBusinessDay = businessDay;
+
+            startDatePicker.SelectedDate = selectedBusinessDay.Shift.StartDate;
+            endDatePicker.SelectedDate = selectedBusinessDay.Shift.EndDate;
+            startTimePicker.SelectedTime = selectedBusinessDay.Shift.StartDate;
+            endTimePicker.SelectedTime = selectedBusinessDay.Shift.EndDate;
+
+            
         }
 
         private void Button_Click_Ok(object sender, RoutedEventArgs e)
         {
+            if (selectedBusinessDay == null)
+            {
+                DateTime start = (DateTime)startDatePicker.SelectedDate;
+                DateTime timeStart = (DateTime)startTimePicker.SelectedTime;
+                var finalStart = new DateTime(start.Year, start.Month, start.Day, timeStart.Hour, timeStart.Minute, start.Second);
+
+                DateTime end = (DateTime)endDatePicker.SelectedDate;
+                DateTime timeEnd = (DateTime)endTimePicker.SelectedTime;
+                var finalEnd = new DateTime(end.Year, end.Month, end.Day, timeEnd.Hour, timeEnd.Minute, timeEnd.Second);
+
+                Period temp = new Period(finalStart, finalEnd);
+
+                Doctor doctor = selectedDoctor; //(Doctor)comboDoctor.SelectedItem;
+                Room room = (Room)comboRoom.SelectedItem;
+
+                BusinessDay businessDay = new BusinessDay(temp, doctor, room, null);
+
+                BusinessDay saved = _businessDayController.Save(businessDay);
+                selectedDoctor.BusinessDay.Add(saved);
+                _doctorController.Edit(selectedDoctor);
+            }
+            else
+            {
+                DateTime start = (DateTime)startDatePicker.SelectedDate;
+                DateTime timeStart = (DateTime)startTimePicker.SelectedTime;
+                var finalStart = new DateTime(start.Year, start.Month, start.Day, timeStart.Hour, timeStart.Minute, start.Second);
+
+                DateTime end = (DateTime)endDatePicker.SelectedDate;
+                DateTime timeEnd = (DateTime)endTimePicker.SelectedTime;
+                var finalEnd = new DateTime(end.Year, end.Month, end.Day, timeEnd.Hour, timeEnd.Minute, timeEnd.Second);
+
+                Period temp = new Period(finalStart, finalEnd);
+
+                Room room = (Room)comboRoom.SelectedItem;
+
+                selectedBusinessDay.room = room;
+                selectedBusinessDay.Shift = temp;
+
+                _doctorController.Edit(selectedDoctor);
+                _businessDayController.Edit(selectedBusinessDay);
+            }
+
             this.Close();
         }
 
@@ -50,6 +134,24 @@ namespace upravnikKT2
                     e.Handled = true;
                 }
             }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            //comboDoctor.ItemsSource = _doctorController.GetAll().ToList();
+            //comboDoctor.DisplayMemberPath = "Jmbg";
+            //comboDoctor.SelectedValuePath = "Id";
+
+
+            comboRoom.ItemsSource = _roomController.GetAll().ToList();
+            comboRoom.DisplayMemberPath = "RoomCode";
+            comboRoom.SelectedValuePath = "Id";
+
+            if (selectedBusinessDay != null)
+            {
+                comboRoom.SelectedValue = selectedBusinessDay.room.Id;
+            }
+
         }
     }
 }

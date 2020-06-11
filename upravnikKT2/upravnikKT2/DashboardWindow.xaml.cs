@@ -13,6 +13,7 @@ using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -29,6 +30,7 @@ namespace upravnikKT2
         private readonly IRenovationController _renovationController;
         private readonly IDrugController _drugController;
         private readonly IDoctorController _doctorController;
+        private readonly IBusinessDayController _businessDayController;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -141,6 +143,7 @@ namespace upravnikKT2
             _renovationController = app.RenovationController;
             _drugController = app.DrugController;
             _doctorController = app.DoctorController;
+            _businessDayController = app.BusinessDayController;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -178,16 +181,16 @@ namespace upravnikKT2
 
         private void Button_Click_Add_Shift(object sender, RoutedEventArgs e)
         {
-            ShiftWindow window = new ShiftWindow();
-            window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            window.ShowDialog();
+            //ShiftWindow window = new ShiftWindow();
+            //window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            //window.ShowDialog();
         }
 
         private void Button_Click_Edit_Shift(object sender, RoutedEventArgs e)
         {
-            ShiftWindow window = new ShiftWindow();
-            window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            window.ShowDialog();
+            //ShiftWindow window = new ShiftWindow();
+            //window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            //window.ShowDialog();
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -349,6 +352,13 @@ namespace upravnikKT2
             this.DataGridRooms.ItemsSource = DataRooms;
             txtsearchRooms.Clear();
         }
+
+        private void OpenAllShiftsWindow(object sender, RoutedEventArgs e)
+        {
+            OpenAllShiftsWindow window = new OpenAllShiftsWindow((Doctor)dataGridLekari.SelectedItem);
+            window.ShowDialog();
+        }
+
         private void Button_Click_Edit_Room(object sender, RoutedEventArgs e)
         {
             if (DataGridRooms.SelectedItem != null)
@@ -448,21 +458,34 @@ namespace upravnikKT2
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            ObservableCollection<WorkingShift> Smene = new ObservableCollection<WorkingShift>();
-            Smene.Add(new WorkingShift { Ime = "Pera", Prezime = "Peric", ID= "AS3212", Period="18:00-23:00" });
-            Smene.Add(new WorkingShift { Ime = "Marko", Prezime = "Markovic", ID = "ASD12A", Period = "10:00-14:00" });
-            Smene.Add(new WorkingShift { Ime = "Seka", Prezime = "Seka", ID = "ASFE32", Period = "20:00-04:00" });
-            Smene.Add(new WorkingShift { Ime = "Nenad", Prezime = "Nedic", ID = "DAGD32", Period = "10:00-18:00" });
-            Smene.Add(new WorkingShift { Ime = "Sima", Prezime = "Simic", ID = "AS424D", Period = "07:00-14:00" });
-            dataGridSmene.ItemsSource = Smene;
+            //ObservableCollection<WorkingShift> Smene = new ObservableCollection<WorkingShift>();
+            //Smene.Add(new WorkingShift { Ime = "Pera", Prezime = "Peric", ID= "AS3212", Period="18:00-23:00" });
+            //Smene.Add(new WorkingShift { Ime = "Marko", Prezime = "Markovic", ID = "ASD12A", Period = "10:00-14:00" });
+            //Smene.Add(new WorkingShift { Ime = "Seka", Prezime = "Seka", ID = "ASFE32", Period = "20:00-04:00" });
+            //Smene.Add(new WorkingShift { Ime = "Nenad", Prezime = "Nedic", ID = "DAGD32", Period = "10:00-18:00" });
+            //Smene.Add(new WorkingShift { Ime = "Sima", Prezime = "Simic", ID = "AS424D", Period = "07:00-14:00" });
+            //dataGridSmene.ItemsSource = Smene;
 
-            ObservableCollection<Lekar> Lekari = new ObservableCollection<Lekar>();
+            //DataGridTextColumn txtClmn = new DataGridTextColumn();
+            //txtClmn.Header = "Datum neki";
+            //txtClmn.CanUserSort = true;
+            //txtClmn.Binding = new Binding("Shift.StartDate");
+            //dataGridSmene.Columns.Add(txtClmn);
+
+            List<BusinessDay> temp = _businessDayController.GetAll().ToList();
+            //dataGridSmene.ItemsSource = new ObservableCollection<BusinessDay>(temp);
+
+            //dataGridSmene.Columns.Add(new DataGridColumn());
+
+
+
+            //ObservableCollection<Lekar> Lekari = new ObservableCollection<Lekar>();
             //Lekari.Add(new Lekar { Ime="Marko", Prezime="Markovic",ID="ASD12A", JMBG="124534534", Email="marko@gmail.com", Telefon="02131243", Datum_rodjenja="21.4.1983.", Odeljenje="kardiologija",  Ocena="5.00"});
             //Lekari.Add(new Lekar { Ime = "Pera", Prezime = "Peric", ID = "AS3212", JMBG = "234321543", Email = "pera@gmail.com", Telefon = "4253212", Datum_rodjenja = "03.01.1944.", Odeljenje = "opsta praksa",  Ocena = "3.00" });
             //Lekari.Add(new Lekar { Ime = "Seka", Prezime = "Sekic", ID = "ASFE32", JMBG = "315434232", Email = "seka@gmail.com", Telefon = "23421223", Datum_rodjenja = "12.01.1976.", Odeljenje = "opsta praksa", Ocena = "4.00" });
             //Lekari.Add(new Lekar { Ime = "Nenad", Prezime = "Nedic", ID = "DAGD32", JMBG = "1254324", Email = "nenad@gmail.com", Telefon = "12343212", Datum_rodjenja = "01.01.1988.", Odeljenje = "orl", Ocena = "3.94" });
             //Lekari.Add(new Lekar { Ime = "Sima", Prezime = "Simic", ID = "AS424D", JMBG = "133122123", Email = "sima@gmail.com", Telefon = "5438575", Datum_rodjenja = "01.01.1991.", Odeljenje = "ocno", Ocena = "4.85" });
-
+            List<Doctor> sada = _doctorController.GetAll().ToList();
             dataGridLekari.ItemsSource = new ObservableCollection<Doctor>(_doctorController.GetAll());
 
             List<Equipment> consumable_equipment = _equipmentController.getConsumableEquipment().ToList();
@@ -587,18 +610,18 @@ namespace upravnikKT2
 
         private void TabItem_PreviewKeyDown_Shifts(object sender, KeyEventArgs e)
         {
-            if (e.Key == System.Windows.Input.Key.N && Keyboard.Modifiers == ModifierKeys.Control)
-            {
-                addShiftBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
-            }
-            else if (e.Key == System.Windows.Input.Key.E && Keyboard.Modifiers == ModifierKeys.Control)
-            {
-                editShiftBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
-            }
-            else if (e.Key == System.Windows.Input.Key.Delete)
-            {
-                deleteShiftBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
-            }
+            //if (e.Key == System.Windows.Input.Key.N && Keyboard.Modifiers == ModifierKeys.Control)
+            //{
+            //    addShiftBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+            //}
+            //else if (e.Key == System.Windows.Input.Key.E && Keyboard.Modifiers == ModifierKeys.Control)
+            //{
+            //    editShiftBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+            //}
+            //else if (e.Key == System.Windows.Input.Key.Delete)
+            //{
+            //    deleteShiftBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+            //}
         }
 
         private void TabItem_PreviewKeyDown_Equipment_Consumable(object sender, KeyEventArgs e)
@@ -949,7 +972,7 @@ namespace upravnikKT2
             else if (e.Key == Key.Oem3 && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
             {
                 tabControlOprema.SelectedIndex = tabControlOprema.SelectedIndex == 0 ? 1 : 0;
-                tabControlLekari.SelectedIndex = tabControlLekari.SelectedIndex == 0 ? 1 : 0;
+                //tabControlLekari.SelectedIndex = tabControlLekari.SelectedIndex == 0 ? 1 : 0;
                 e.Handled = true;
             }
         }
