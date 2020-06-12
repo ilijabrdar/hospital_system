@@ -23,12 +23,12 @@ namespace Service
 
         public void Edit(Director entity)
         {
-            throw new NotImplementedException();
+            _directorRepository.Edit(entity);
         }
 
         public Director Get(long id)
         {
-            throw new NotImplementedException();
+            return _directorRepository.GetEager(id);
         }
 
         public IEnumerable<Director> GetAll()
