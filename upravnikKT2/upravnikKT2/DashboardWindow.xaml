@@ -12,7 +12,7 @@
     <DockPanel>
         <DockPanel DockPanel.Dock="Left">
             <TabControl x:Name="tabControlMain" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TabStripPlacement="Left" FontSize="18">
-                <TabItem Header="Početak">
+                <TabItem Header="Početak" GotFocus="TabItem_GotFocus">
                     <DockPanel>
                         <DockPanel DockPanel.Dock="Top">
                             <StackPanel Orientation="Vertical">
@@ -26,7 +26,7 @@
                                 <StackPanel Orientation="Horizontal" Margin="10,10,10,10">
                                     <Label Width="200">Doktori</Label>
                                     <Separator Margin="86,0,0,0"></Separator>
-                                    <TextBox Width="38" HorizontalContentAlignment="Center" Text="11" IsReadOnly="True"/>
+                                    <TextBox x:Name="doctorCount" Width="38" HorizontalContentAlignment="Center" IsReadOnly="True" />
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Margin="10,10,10,10">
                                     <Label Width="200">Broj objavljenih clanaka</Label>
@@ -441,7 +441,7 @@
                                     <DataGridTextColumn Header="Naziv"  Binding="{Binding Name}" Width="*"/>
                                     <!-- <DataGridTextColumn Header="Sifra" Binding="{Binding Sifra}"  Width="*"/>-->
                                     <DataGridTextColumn Header="Kolicina"  Binding="{Binding Amount}" Width="*"/>
-                                    <DataGridTextColumn Header="Status"  Binding="{Binding Approved}" Width="*" />
+                                    <DataGridCheckBoxColumn Header="Odobren"  Binding="{Binding Approved}" Width="*" />
                                     <DataGridTemplateColumn Header="Alternativni lekovi" Width="*">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
@@ -618,43 +618,43 @@
                             <StackPanel Orientation="Vertical">
                                 <DockPanel Margin="3">
                                     <Label DockPanel.Dock="Left" Width="150">ime</Label>
-                                        <Label DockPanel.Dock="Left" Width="150" FontWeight="Bold" Margin="500,0,0,0">Marko</Label>
+                                        <Label x:Name="FirstNameDirector" DockPanel.Dock="Left" Width="150" FontWeight="Bold" Margin="500,0,0,0">Marko</Label>
                                     <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                                 </DockPanel>
 
                                 <DockPanel Margin="3">
                                     <Label DockPanel.Dock="Left" Width="150">prezime</Label>
-                                        <Label DockPanel.Dock="Left" Width="150"  FontWeight="Bold" Margin="500,0,0,0" >Markovic</Label>
+                                        <Label x:Name="LastNameDirector" DockPanel.Dock="Left" Width="150"  FontWeight="Bold" Margin="500,0,0,0" >Markovic</Label>
                                     <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                                 </DockPanel>
                                 
                                 <DockPanel Margin="3">
                                     <Label DockPanel.Dock="Left" Width="150">JMBG</Label>
-                                        <Label DockPanel.Dock="Left" Width="150"  FontWeight="Bold" Margin="500,0,0,0">324295934234</Label>
+                                        <Label x:Name="JMBGDirector" DockPanel.Dock="Left" Width="150"  FontWeight="Bold" Margin="500,0,0,0">324295934234</Label>
                                     <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                                 </DockPanel>
                                 
                                 <DockPanel Margin="3">
                                         <Label DockPanel.Dock="Left" Width="150">Adresa</Label>
-                                        <Label DockPanel.Dock="Left" Width="400"  FontWeight="Bold" Margin="500,0,0,0">Cirpanova 1, Novi Sad, Srbija</Label>
+                                        <Label x:Name="AddressDirector" DockPanel.Dock="Left" Width="400"  FontWeight="Bold" Margin="500,0,0,0">Cirpanova 1, Novi Sad, Srbija</Label>
                                     <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                                 </DockPanel>
 
                                 <DockPanel Margin="3">
                                     <Label DockPanel.Dock="Left" Width="150">e-mail</Label>
-                                        <Label DockPanel.Dock="Left" Width="400"  FontWeight="Bold" Margin="500,0,0,0">marko@bolnica.com</Label>
+                                        <Label x:Name="EmailDirector" DockPanel.Dock="Left" Width="400"  FontWeight="Bold" Margin="500,0,0,0">marko@bolnica.com</Label>
                                     <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                                 </DockPanel>
 
                                 <DockPanel Margin="3">
                                     <Label DockPanel.Dock="Left" Width="150">telefon</Label>
-                                        <Label DockPanel.Dock="Left" Width="150"  FontWeight="Bold" Margin="500,0,0,0">02135422</Label>
+                                        <Label x:Name="PhoneDirector" DockPanel.Dock="Left" Width="150"  FontWeight="Bold" Margin="500,0,0,0">02135422</Label>
                                     <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                                 </DockPanel>
 
                                 <DockPanel Margin="3">
                                     <Label DockPanel.Dock="Left" Width="150">datum rodjenja</Label>
-                                        <Label DockPanel.Dock="Left" Width="150" IsManipulationEnabled="False" AllowDrop="False" Content="14/05/1967"  FontWeight="Bold" Margin="500,0,0,0"></Label>
+                                        <Label x:Name="BirthDateDirector" DockPanel.Dock="Left" Width="150" IsManipulationEnabled="False" AllowDrop="False" Content="14/05/1967"  FontWeight="Bold" Margin="500,0,0,0"></Label>
                                     <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                                 </DockPanel>
 
@@ -709,10 +709,13 @@
                                 <DockPanel Margin="3">
                                     <Label DockPanel.Dock="Left" Width="150">Adresa</Label>
                                     <WrapPanel DockPanel.Dock="Left"  Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" Height="40" VerticalAlignment="Bottom" Margin="500,0,0,0">
-                                        <ComboBox Width="80" Margin="0,0,30,0" materialDesign:HintAssist.Hint="Drzava" />
-                                        <ComboBox Width="80" Margin="0,0,30,0" materialDesign:HintAssist.Hint="Grad"/>
-                                        <ComboBox Width="80" Margin="0,0,30,0" materialDesign:HintAssist.Hint="Ulica"/>
-                                    </WrapPanel>
+                                            <ComboBox x:Name="StateCombo" Width="80" Margin="0,0,30,0" materialDesign:HintAssist.Hint="Drzava" DisplayMemberPath="Name" SelectionChanged="UpdateTownAddress" IsTextSearchEnabled="True"
+                                                                IsEditable="True"/>
+                                            <ComboBox x:Name="TownCombo" Width="80" Margin="0,0,30,0" materialDesign:HintAssist.Hint="Grad" DisplayMemberPath="Name" SelectionChanged="UpdateAddress" IsTextSearchEnabled="True"
+                                                                IsEditable="True"/>
+                                            <ComboBox x:Name="AddressCombo" Width="150" materialDesign:HintAssist.Hint="Ulica" DisplayMemberPath="FullAddress" IsTextSearchEnabled="True"
+                                                                IsEditable="True"/>
+                                        </WrapPanel>
                                 </DockPanel>
 
                                 <DockPanel Margin="3">
@@ -749,7 +752,7 @@
                                     <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                                 </DockPanel>
 
-                                <Button HorizontalAlignment="Left"  Padding="5" Width="160" Margin="250,0,0,0" Click="Button_Click_1">Azuriraj podatke
+                                    <Button HorizontalAlignment="Left"  Padding="5" Width="160" Margin="250,0,0,0" Click="UpdateDataBtnClick">Azuriraj podatke
                                     <Button.Style>
                                         <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
                                             <Style.Triggers>
@@ -771,7 +774,16 @@
                                                 <DataTrigger Binding="{Binding Path=SelectedDate, ElementName=birthDatePickerEdit}" Value="{x:Null}">
                                                     <Setter Property="IsEnabled" Value="False" />
                                                 </DataTrigger>
-                                            </Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Path=SelectedItem, ElementName=StateCombo}" Value="{x:Null}">
+                                                        <Setter Property="IsEnabled" Value="False" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Path=SelectedItem, ElementName=TownCombo}" Value="{x:Null}">
+                                                        <Setter Property="IsEnabled" Value="False" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Path=SelectedItem, ElementName=AddressCombo}" Value="{x:Null}">
+                                                        <Setter Property="IsEnabled" Value="False" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
                                         </Style>
                                     </Button.Style>
                                 </Button>

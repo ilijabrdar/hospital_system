@@ -24,6 +24,7 @@ namespace upravnikKT2
     public partial class RoomTypeWindow : Window
     {
         private readonly IRoomTypeController _roomTypeController;
+        private readonly IRoomController _roomController;
 
         public RoomTypeWindow()
         {
@@ -31,6 +32,7 @@ namespace upravnikKT2
 
             var app = Application.Current as App;
             _roomTypeController = app.RoomTypeController;
+            _roomController = app.RoomController;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -90,7 +92,7 @@ namespace upravnikKT2
             {
                 RoomType roomType = (RoomType) listViewRoomTypes.SelectedItem;
 
-                string messageBoxText = "Da li ste sigurni da zelite da obrisete ti prostorije pod nazivom " + roomType.Name + "?";
+                string messageBoxText = "Da li ste sigurni da zelite da obrisete ti prostorije pod nazivom " + roomType.Name + "?\nBrisanje tipa prostorije ce izbrisati i sve prostorije te vrste!";
                 string caption = "Potvrda brisanja";
                 MessageBoxButton button = MessageBoxButton.YesNo;
                 MessageBoxImage icon = MessageBoxImage.Question;
@@ -98,6 +100,12 @@ namespace upravnikKT2
 
                 if (result == MessageBoxResult.Yes)
                 {
+                    List<Room> rooms = _roomController.GetAll().ToList();
+                    foreach(Room room in rooms)
+                    {
+                        if (room.RoomType.Id == roomType.Id)
+                            _roomController.Delete(room);
+                    }
 
                     _roomTypeController.Delete((RoomType)listViewRoomTypes.SelectedItem);
 

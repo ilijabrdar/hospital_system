@@ -20,7 +20,7 @@
 
 
         <Label Grid.Row="0" Grid.Column="0" Width="91" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,0" Height="32">Naziv</Label>
-        <TextBox x:Name="txtName" Grid.Row="0" Grid.Column="1" Width="92" Margin="0,22,10,1" Height="32" HorizontalAlignment="Right">
+        <TextBox x:Name="txtName" Grid.Row="0" Grid.Column="1" Width="130" Margin="0,22,10,1" Height="32" HorizontalAlignment="Right">
             <TextBox.Text>
                 <Binding Path="Eq_Name" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -31,7 +31,7 @@
         </TextBox>
 
         <Label Grid.Row="1" Grid.Column="0" Width="81" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,0" Height="32">Kolicina</Label>
-        <TextBox x:Name="txtAmount" Grid.Row="1" Grid.Column="1" Width="92"  Margin="0,48,10,0" Height="32" HorizontalAlignment="Right">
+        <TextBox x:Name="txtAmount" Grid.Row="1" Grid.Column="1" Width="68"  Margin="0,48,10,0" Height="32" HorizontalAlignment="Right">
             <TextBox.Text>
                 <Binding Path="Amount" StringFormat="{}{0:#.##}" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>

@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using bolnica.Controller;
+using Model.Users;
+using System.Collections;
 using System.IO;
 using System.Reflection.Emit;
 using System.Windows;
@@ -12,10 +14,16 @@ namespace upravnikKT2
     /// </summary>
     public partial class MainWindow : Window
     {
+        private IDirectorController directorController;
+
         public MainWindow()
         {
             InitializeComponent();
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
+
+            var app = Application.Current as App;
+            directorController = app.DirectorController;
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
@@ -38,6 +46,7 @@ namespace upravnikKT2
                 bool selected = (bool)stayLoggedIn.IsChecked;
                 if (selected)
                 {
+                    
                     //delete false and write true
                     string path = @"C:\Users\david\Desktop\cc\hospital_system\upravnikKT2\upravnikKT2\Resources\Data\config.txt";
                     //File.Delete(path);
@@ -51,7 +60,7 @@ namespace upravnikKT2
 
                     File.WriteAllText(path, "false");
                 }
-
+                Director temp = directorController.Get(1);
                 DashboardWindow dashBoard = new DashboardWindow();
                 dashBoard.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 dashBoard.Show();

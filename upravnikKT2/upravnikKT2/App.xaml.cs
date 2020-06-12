@@ -31,6 +31,8 @@ namespace upravnikKT2
         private const string TOWN_FILE = "../../Resources/Data/TownFile.txt";
         private const string STATE_FILE = "../../Resources/Data/StateFile.txt";
         private const string BUSINESSDAY_FILE = "../../Resources/Data/businessdays.csv";
+        private const string DIRECTOR_FILE = "../../Resources/Data/director.csv";
+
 
         private const string CSV_DELIMITER = ",";
         private const String CSV_ARRAY_DELIMITER = "|";
@@ -52,6 +54,8 @@ namespace upravnikKT2
         public IStateController StateController { get; private set; }
 
         public IBusinessDayController BusinessDayController { get; private set; }
+
+        public IDirectorController DirectorController { get; private set; }
 
         public App()
         {
@@ -119,6 +123,10 @@ namespace upravnikKT2
 
 
             doctorRepository.businessDayRepo = businessDayRepository;
+
+            var directorRepository = new DirectorRepository(new CSVStream<Director>(DIRECTOR_FILE, new DirectorCSVConverter(CSV_DELIMITER)), new LongSequencer(), addressRepository, townRepository, stateRepository);
+            var directorService = new DirectorService(directorRepository);
+            DirectorController = new DirectorContoller(directorService); 
 
         }
 

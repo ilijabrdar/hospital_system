@@ -3,6 +3,7 @@ using Controller;
 using Model.Director;
 using Model.PatientSecretary;
 using Model.Users;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -31,6 +32,15 @@ namespace upravnikKT2
         private readonly IDrugController _drugController;
         private readonly IDoctorController _doctorController;
         private readonly IBusinessDayController _businessDayController;
+        private readonly IDirectorController _directorController;
+
+        public Director director;
+
+
+        public List<State> States { get; set; }
+        public List<Town> Towns { get; set; }
+        public List<Address> Addresses { get; set; }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -144,6 +154,25 @@ namespace upravnikKT2
             _drugController = app.DrugController;
             _doctorController = app.DoctorController;
             _businessDayController = app.BusinessDayController;
+            _directorController = app.DirectorController;
+
+            director = _directorController.Get(1);
+
+            setDirectorField();
+        }
+
+        private void setDirectorField()
+        {
+            FirstNameDirector.Content = director.FirstName;
+            LastNameDirector.Content = director.LastName;
+            JMBGDirector.Content = director.Jmbg;
+            EmailDirector.Content = director.Email;
+            PhoneDirector.Content = director.Phone;
+
+            String directorAddress = director.Address.Street + " " + director.Address.Number + "," + " " + director.Address.Town.Name + " " + director.Address.Town.PostalNumber + "," + " " + director.Address.Town.State.Name;
+            AddressDirector.Content = directorAddress;
+
+            BirthDateDirector.Content = director.DateOfBirth.ToString("dd.MM.yyyy.");
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -475,11 +504,12 @@ namespace upravnikKT2
             //txtClmn.Binding = new Binding("Shift.StartDate");
             //dataGridSmene.Columns.Add(txtClmn);
 
-            List<BusinessDay> temp = _businessDayController.GetAll().ToList();
+            //List<BusinessDay> temp = _businessDayController.GetAll().ToList();
             //dataGridSmene.ItemsSource = new ObservableCollection<BusinessDay>(temp);
 
             //dataGridSmene.Columns.Add(new DataGridColumn());
 
+            doctorCount.Text = "" + _doctorController.GetAll().ToList().Count.ToString();
 
 
             //ObservableCollection<Lekar> Lekari = new ObservableCollection<Lekar>();
@@ -517,7 +547,45 @@ namespace upravnikKT2
             List<Room> rooms = _roomController.GetAll().ToList();
             ObservableCollection<Room> DataRooms = new ObservableCollection<Room>(rooms);
             this.DataGridRooms.ItemsSource = DataRooms;
-            
+
+
+
+            StateCombo.DisplayMemberPath = "Name";
+            StateCombo.SelectedValuePath = "Id";
+            App app = Application.Current as App;
+            States = app.StateController.GetAll().ToList();
+            StateCombo.ItemsSource = States;
+
+            TownCombo.DisplayMemberPath = "Name";
+            TownCombo.SelectedValuePath = "Id";
+
+            AddressCombo.DisplayMemberPath = "FullAddress";
+            AddressCombo.SelectedValuePath = "Id";
+
+            StateCombo.SelectedValue = director.Address.Town.State.GetId();
+            TownCombo.SelectedValue = director.Address.Town.GetId();
+            AddressCombo.SelectedValue = director.Address.GetId();
+
+
+
+        }
+
+        private void UpdateTownAddress(object sender, RoutedEventArgs e)
+        {
+            State state = StateCombo.SelectedItem as State;
+            Towns = state.GetTown();
+            TownCombo.ItemsSource = Towns;
+            AddressCombo.ItemsSource = null;
+
+        }
+
+        private void UpdateAddress(object sender, RoutedEventArgs e)
+        {
+            Town town = TownCombo.SelectedItem as Town;
+            if (town == null)
+                return;
+            Addresses = town.GetAddress();
+            AddressCombo.ItemsSource = Addresses;
 
         }
 
@@ -851,6 +919,19 @@ namespace upravnikKT2
                     MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
                     if (result == MessageBoxResult.Yes)
                     {
+                        List<Room> rooms = _roomController.GetRoomsContainingEquipment(eq).ToList();
+                        foreach (Room room in rooms)
+                        {
+                            foreach (Equipment equipment in room.Equipment_inventory.Keys)
+                            {
+                                if (equipment.Id==eq.Id)
+                                {
+                                    room.Equipment_inventory.Remove(equipment);
+                                    _roomController.Edit(room);
+                                    break;
+                                }
+                            }
+                        }
 
                         _equipmentController.Delete((Equipment)DataGridOpremaNepotrosna.SelectedItem);
 
@@ -925,14 +1006,35 @@ namespace upravnikKT2
             }
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void UpdateDataBtnClick(object sender, RoutedEventArgs e)
         {
+
+
+
+            director.FirstName = txtFirstNameEdit.Text;
+            director.LastName = txtLastNameEdit.Text;
+            director.Phone = txtPhoneEdit.Text;
+            director.Email = txtEmailEdit.Text;
+            director.Jmbg = txtJMBGEdit.Text;
+            director.DateOfBirth = (DateTime) birthDatePickerEdit.SelectedDate;
+
+            var state = StateCombo.SelectedItem as State;
+            var town = TownCombo.SelectedItem as Town;
+            var selectedAddress = AddressCombo.SelectedItem as Address;
+            var address = new Address(selectedAddress.GetId(), town.GetId(), state.GetId());
+            director.Address = address;
+
+            _directorController.Edit(director);
+            director = _directorController.Get(1);
+            setDirectorField();
+
             string messageBoxText = "Uspesno izmenjeni podaci!";
             string caption = "Informacija";
             MessageBoxButton button = MessageBoxButton.OK;
             MessageBoxImage icon = MessageBoxImage.Information;
 
             MessageBox.Show(messageBoxText, caption, button, icon);
+
         }
 
         private void searchTxtAppear_Button_Click(object sender, RoutedEventArgs e)
@@ -1164,6 +1266,13 @@ namespace upravnikKT2
                 searchDoctorBtn.Background = Brushes.Gray;
                 txtSearchDoctors.Visibility = Visibility.Visible;
             }
+        }
+
+        
+
+        private void TabItem_GotFocus(object sender, RoutedEventArgs e)
+        {
+            doctorCount.Text = "" + _doctorController.GetAll().ToList().Count.ToString();
         }
     }
 }

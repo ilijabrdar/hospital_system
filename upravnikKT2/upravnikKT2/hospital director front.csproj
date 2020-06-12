@@ -244,6 +244,7 @@
     </None>
     <None Include="Resources\Data\doctors.csv" />
     <None Include="Resources\Data\businessdays.csv" />
+    <None Include="Resources\Data\director.csv" />
     <None Include="Resources\Data\speciality.csv" />
     <None Include="Resources\Data\drugs.csv" />
     <None Include="Resources\Data\renovations.csv" />

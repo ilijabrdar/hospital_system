@@ -314,5 +314,43 @@ namespace upravnikKT2
         {
             listSelectedIngredients.ItemsSource = currentSelected.Where(input => input.Name.Contains(txtsearchSelectedIngredients.Text));
         }
+
+        private void searchOriginalBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (searchOriginalBtn.Background == Brushes.Gray)
+            {
+                searchOriginalBtn.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#FF673AB7");
+                txtsearchOriginalIngredients.Visibility = Visibility.Hidden;
+                //TODO: vrati nazad tabelu
+
+
+                this.listAllIngredients.ItemsSource = currentOriginal;
+                txtsearchOriginalIngredients.Clear();
+            }
+            else
+            {
+                searchOriginalBtn.Background = Brushes.Gray;
+                txtsearchOriginalIngredients.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void searchCustomBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (searchCustomBtn.Background == Brushes.Gray)
+            {
+                searchCustomBtn.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#FF673AB7");
+                txtsearchSelectedIngredients.Visibility = Visibility.Hidden;
+                //TODO: vrati nazad tabelu
+
+
+                this.listSelectedIngredients.ItemsSource = currentSelected;
+                txtsearchSelectedIngredients.Clear();
+            }
+            else
+            {
+                searchCustomBtn.Background = Brushes.Gray;
+                txtsearchSelectedIngredients.Visibility = Visibility.Visible;
+            }
+        }
     }
 }
