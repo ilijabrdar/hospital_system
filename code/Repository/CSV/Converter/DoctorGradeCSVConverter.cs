@@ -55,7 +55,7 @@ namespace bolnica.Repository.CSV.Converter
                 stringBuilder.Append(_delimiterQuestionGrades);
                 stringBuilder.Append(map.Value);
 
-                if(numOfDelimiter<entity.GradesForEachQuestions.Count-1)
+                if(numOfDelimiter < entity.GradesForEachQuestions.Count-1)
                     stringBuilder.Append(_delimiterDictionary);
 
             }

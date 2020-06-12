@@ -44,7 +44,7 @@ namespace Repository
             List<Article> articles = new List<Article>();
             foreach(Article art in doctor.Articles)
             {
-                articles.Add(articleRepo.Get(art.GetId()));
+                articles.Add(articleRepo.GetEager(art.GetId()));
             }
             doctor.Articles = articles;
             List<BusinessDay> businessDays = new List<BusinessDay>();
@@ -54,7 +54,7 @@ namespace Repository
             }
             doctor.BusinessDay = businessDays;
             doctor.Specialty = specialityRepo.Get(doctor.Specialty.GetId());
-            doctor.DoctorGrade = doctorGradeRepository.Get(doctor.DoctorGrade.GetId());
+            //doctor.DoctorGrade = doctorGradeRepository.Get(doctor.DoctorGrade.GetId());
 
             return doctor;
         }

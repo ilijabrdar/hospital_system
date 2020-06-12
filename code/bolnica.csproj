@@ -95,6 +95,7 @@
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controller\abstract\IAddressController.cs" />
     <Compile Include="Controller\abstract\IBusinessDayController.cs" />
     <Compile Include="Controller\abstract\IDiagnosisController.cs" />
     <Compile Include="Controller\abstract\IDirectorController.cs" />
@@ -114,8 +115,11 @@
     <Compile Include="Controller\abstract\IRenovationController.cs" />
     <Compile Include="Controller\abstract\ISecretaryController.cs" />
     <Compile Include="Controller\abstract\ISpecialityController.cs" />
+    <Compile Include="Controller\abstract\IStateController.cs" />
     <Compile Include="Controller\abstract\ISymptomController.cs" />
     <Compile Include="Controller\abstract\ITherapyController.cs" />
+    <Compile Include="Controller\abstract\ITownController.cs" />
+    <Compile Include="Controller\AddressController.cs" />
     <Compile Include="Controller\ArticleController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -192,10 +196,12 @@
     <Compile Include="Controller\SpecialityController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controller\StateController.cs" />
     <Compile Include="Controller\SymptomController.cs" />
     <Compile Include="Controller\TherapyController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controller\TownController.cs" />
     <Compile Include="Controller\UserController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -478,6 +484,7 @@
     <Compile Include="Repository\SymptomRepository.cs" />
     <Compile Include="Repository\TherapyRepository.cs" />
     <Compile Include="Repository\TownRepository.cs" />
+    <Compile Include="Service\abstract\IAddressService.cs" />
     <Compile Include="Service\abstract\IArticleService.cs" />
     <Compile Include="Service\abstract\IBusinessDayService.cs" />
     <Compile Include="Service\abstract\IDiagnosisService.cs" />
@@ -500,8 +507,11 @@
     <Compile Include="Service\abstract\ISearchPeriods.cs" />
     <Compile Include="Service\abstract\ISecretaryService.cs" />
     <Compile Include="Service\abstract\ISpecialityService.cs" />
+    <Compile Include="Service\abstract\IStateService.cs" />
     <Compile Include="Service\abstract\ISymptomService.cs" />
     <Compile Include="Service\abstract\ITherapyService.cs" />
+    <Compile Include="Service\abstract\ITownService.cs" />
+    <Compile Include="Service\AddressService.cs" />
     <Compile Include="Service\abstract\IUserGetterService.cs" />
     <Compile Include="Service\ArticleService.cs">
       <SubType>Code</SubType>
@@ -580,10 +590,12 @@
     <Compile Include="Service\SpecialityService.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Service\StateService.cs" />
     <Compile Include="Service\SymptomService.cs" />
     <Compile Include="Service\TherapyService.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Service\TownService.cs" />
     <Compile Include="Service\UserService.cs">
       <SubType>Code</SubType>
     </Compile>

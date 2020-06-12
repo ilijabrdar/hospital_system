@@ -54,8 +54,9 @@ namespace bolnica.Repository.CSV.Converter
                     sb.Append(period.EndDate);
                     sb.Append("|");
                 }
+                sb.Remove(sb.Length - 1, 1);
             }
-            sb.Remove(sb.Length - 1, 1);
+          
             return sb.ToString();
         }
     }

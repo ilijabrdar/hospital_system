@@ -33,6 +33,10 @@ namespace Model.Users
             this.Id = id;
         }
 
+        public Patient(Boolean guest)
+        {
+            Guest = guest;
+        }
         override
         public long GetId()
         {
