@@ -49,24 +49,24 @@ namespace HCIproject
             }
             else {
                 article = new Article(DateTime.Today, user, Topic, NewArticle);
-                article.Doctor.FirstName = user.FirstName;
-                article.Doctor.LastName = user.LastName;
                 app.ArticleController.Save(article);
 
 
-                SideBar sideBarWin = new SideBar((Doctor)user);
-                this.Visibility = Visibility.Hidden;
-                sideBarWin.MyTabControl.SelectedIndex = 1;
-                sideBarWin.Show();
+                //   SideBar sideBarWin = new SideBar((Doctor)user);
+                //  this.Visibility = Visibility.Hidden;
+                //   sideBarWin.MyTabControl.SelectedIndex = 1;
+                //   sideBarWin.Show();
+                this.Close();
             }
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         { //otkazi
-            SideBar sideBarWin = new SideBar();
-            this.Visibility = Visibility.Hidden;
-            sideBarWin.MyTabControl.SelectedIndex = 1;
-            sideBarWin.Show();
+            //SideBar sideBarWin = new SideBar((Doctor)user);
+            //this.Visibility = Visibility.Hidden;
+            //sideBarWin.MyTabControl.SelectedIndex = 1;
+            //sideBarWin.Show();
+            this.Close();
         }
     }
 }

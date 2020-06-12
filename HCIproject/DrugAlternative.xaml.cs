@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model.Users;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,14 @@ namespace HCIproject
     /// </summary>
     public partial class DrugAlternative : Window
     {
+        public Doctor user;
+
+        public DrugAlternative(Doctor user)
+        {
+            this.user = user;
+            InitializeComponent();
+        }
+
         public DrugAlternative()
         {
             InitializeComponent();
@@ -26,7 +35,7 @@ namespace HCIproject
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {//potvrdi treba da izmeni u bazi i leku doda alternativni
-            SideBar sideBarWin = new SideBar();
+            SideBar sideBarWin = new SideBar((Doctor)user);
             this.Visibility = Visibility.Hidden;
             sideBarWin.MyTabControl.SelectedIndex = 4;
             sideBarWin.Show();
@@ -34,7 +43,7 @@ namespace HCIproject
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         { //otkazi
-            SideBar sideBarWin = new SideBar();
+            SideBar sideBarWin = new SideBar((Doctor)user);
             this.Visibility = Visibility.Hidden;
             sideBarWin.MyTabControl.SelectedIndex = 4;
             sideBarWin.Show();

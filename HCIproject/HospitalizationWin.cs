@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model.Users;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,14 @@ namespace HCIproject
 
     public partial class HospitalizationWin : Window
     {
+        public Doctor user;
+
+        public HospitalizationWin(Doctor user)
+        {
+            this.user = user;
+            InitializeComponent();
+        }
+
         public HospitalizationWin()
         {
             InitializeComponent();
@@ -30,16 +39,18 @@ namespace HCIproject
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         { //potvrdi
-            Examination exam = new Examination();
-            this.Visibility = Visibility.Hidden;
-            exam.Show();
+            //ExaminationWin exam = new ExaminationWin((Doctor)user);
+            //this.Visibility = Visibility.Hidden;
+            //exam.Show();
+            this.Close();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         { //otkazi
-            Examination exam = new Examination();
-            this.Visibility = Visibility.Hidden;
-            exam.Show();
+            //ExaminationWin exam = new ExaminationWin((Doctor)user);
+            //this.Visibility = Visibility.Hidden;
+            //exam.Show();
+            this.Close();
         }
     }
 }

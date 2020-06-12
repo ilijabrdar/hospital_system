@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model.Users;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,14 @@ namespace HCIproject
     /// </summary>
     public partial class DrugValidation : Window
     {
+        public Doctor user;
+
+        public DrugValidation(Doctor user)
+        {
+            this.user = user;
+            InitializeComponent();
+        }
+
         public DrugValidation()
         {
             InitializeComponent();
@@ -26,7 +35,7 @@ namespace HCIproject
 
         private void Button_Click(object sender, RoutedEventArgs e)
         { //otkazi treba samo da se vrati
-            SideBar sideBarWin = new SideBar();
+            SideBar sideBarWin = new SideBar((Doctor)user);
             this.Visibility = Visibility.Hidden;
             sideBarWin.MyTabControl.SelectedIndex = 4;
             sideBarWin.Show();
@@ -34,7 +43,7 @@ namespace HCIproject
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {//Potvrdi treba da potvrdi sastav i ukloni lek sa spiska
-            SideBar sideBarWin = new SideBar();
+            SideBar sideBarWin = new SideBar((Doctor)user);
             this.Visibility = Visibility.Hidden;
             sideBarWin.MyTabControl.SelectedIndex = 4;
             sideBarWin.Show();
@@ -42,7 +51,7 @@ namespace HCIproject
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {//idi na izmenu 
-            EditDrug editDrugWin = new EditDrug();
+            EditDrug editDrugWin = new EditDrug((Doctor)user);
             this.Visibility = Visibility.Hidden;
             editDrugWin.Show();
         }

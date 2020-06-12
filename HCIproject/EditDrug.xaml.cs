@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model.Users;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,14 @@ namespace HCIproject
     /// </summary>
     public partial class EditDrug : Window
     {
+        public Doctor user;
+
+        public EditDrug(Doctor user)
+        {
+            this.user = user;
+            InitializeComponent();
+        }
+
         public EditDrug()
         {
             InitializeComponent();
@@ -27,14 +36,14 @@ namespace HCIproject
         { //otkazi treba samo da se vrati
 
 
-            DrugValidation drugValWin = new DrugValidation();
+            DrugValidation drugValWin = new DrugValidation((Doctor)user);
             this.Visibility = Visibility.Hidden;
             drugValWin.Show();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {//Potvrdi treba da potvrdi i azurira sastav 
-            DrugValidation drugValWin = new DrugValidation();
+            DrugValidation drugValWin = new DrugValidation((Doctor)user);
             this.Visibility = Visibility.Hidden;
             drugValWin.Show();
         }

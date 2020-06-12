@@ -8,7 +8,8 @@
 
          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Log" Height="450" Width="800">
+        Title="Log" Height="450" Width="800"
+                 WindowStartupLocation="CenterScreen">
     <StackPanel  Background="#D0ECE7">
         <Button Content="Povratak" Background="#A2D9CE" Foreground="#2C3E50" FontSize="17" HorizontalAlignment="Left"  Margin="10,10,0,0" VerticalAlignment="Top" Width="159" Click="Button_Click" BorderBrush="#FF1FEECD"/>
         <Label Content="LOG IN" Margin="40" FontSize="40" Foreground="#2C3E50" HorizontalAlignment="Center" Height="73"  VerticalAlignment="Center" Width="174"/>

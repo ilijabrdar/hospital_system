@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HCIproject"
         mc:Ignorable="d"
-        Title="DrugAlternative" Height="450" Width="800">
+        Title="DrugAlternative" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
     <StackPanel Background="#D0ECE7" Orientation="Vertical">
         <Label Content="Izaberite lek kom želite da dodate alternativni" FontSize="16" Margin="10,10,0,0" FontWeight="DemiBold"></Label>
             <Border  BorderBrush="#A2D9CE" BorderThickness="8" CornerRadius="8,8,8,8"  Margin="5">

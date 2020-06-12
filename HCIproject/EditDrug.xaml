@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HCIproject"
         mc:Ignorable="d"
-        Title="EditDrug" Height="450" Width="800">
+        Title="EditDrug" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
     <StackPanel Background="#D0ECE7">
         <Border  BorderBrush="#A2D9CE" BorderThickness="8" CornerRadius="8,8,8,8"  Margin="5">
             <StackPanel x:Name="Info" Background="#D5F5E3" Orientation="Vertical"  VerticalAlignment="Top">

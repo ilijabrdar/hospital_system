@@ -14,7 +14,6 @@ C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\CreateArt
 C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\DrugAlternative.g.cs
 C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\DrugValidation.g.cs
 C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\EditDrug.g.cs
-C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\Examination.g.cs
 C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\HospitalizationWin.g.cs
 C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\Log.g.cs
 C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\OperationWin.g.cs
@@ -34,7 +33,6 @@ C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\CreateArt
 C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\DrugAlternative.baml
 C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\DrugValidation.baml
 C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\EditDrug.baml
-C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\Examination.baml
 C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\HospitalizationWin.baml
 C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\Log.baml
 C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\OperationWin.baml
@@ -51,3 +49,5 @@ C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\HCIprojec
 C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\HCIproject.csproj.CopyComplete
 C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\HCIproject.exe
 C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\HCIproject.pdb
+C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\ExaminationWin.g.cs
+C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\ExaminationWin.baml

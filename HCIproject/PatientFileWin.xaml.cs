@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model.Users;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,14 @@ namespace HCIproject
     /// </summary>
     public partial class PatientFileWin : Window
     {
+        public Doctor user;
+
+        public PatientFileWin(Doctor user)
+        {
+            this.user = user;
+            InitializeComponent();
+        }
+
         public PatientFileWin()
         {
             InitializeComponent();
@@ -26,7 +35,7 @@ namespace HCIproject
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            SideBar sideBarWin = new SideBar();
+            SideBar sideBarWin = new SideBar((Doctor)user);
             this.Visibility = Visibility.Hidden;
             sideBarWin.MyTabControl.SelectedIndex = 3;
             sideBarWin.Show();

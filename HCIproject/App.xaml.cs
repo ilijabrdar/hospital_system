@@ -24,6 +24,8 @@ namespace HCIproject
         public IDoctorController DoctorController { get; private set; }
         public ISpecialityController SpecialityController{ get; private set; }
 
+        public IExaminationController ExaminationController { get; private set; }
+
         public IController<Article, long> ArticleController
         { get; private set; }
 
@@ -45,6 +47,10 @@ namespace HCIproject
         private const String ROOMTYPE_FILE = "C:/Users/Tamara Kovacevic/Desktop/hospital_system/HCIproject/RESOURCES/RoomTypeFile.csv";
         private const String ROOM_FILE = "C:/Users/Tamara Kovacevic/Desktop/hospital_system/HCIproject/RESOURCES/RoomFile.csv";
         private const String EQUIPMENT_FILE = "C:/Users/Tamara Kovacevic/Desktop/hospital_system/HCIproject/RESOURCES/EquipmentFile.csv";
+        private const String EXAM_UPCOMING_FILE = "C:/Users/Tamara Kovacevic/Desktop/hospital_system/HCIproject/RESOURCES/ExaminationUpcoming.csv";
+        private const String EXAM_PREVIOUS_FILE = "C:/Users/Tamara Kovacevic/Desktop/hospital_system/HCIproject/RESOURCES/ExaminationPrevious.csv";
+        private const String PATIENTFILE_FILE = "C:/Users/Tamara Kovacevic/Desktop/hospital_system/HCIproject/RESOURCES/PatientFile.csv";
+        private const String PATIENT_FILE = "C:/Users/Tamara Kovacevic/Desktop/hospital_system/HCIproject/RESOURCES/Patient.csv";
 
 
     
@@ -55,11 +61,12 @@ namespace HCIproject
             SpecialityRepository specialityRepository=new SpecialityRepository(new CSVStream<Speciality>(SPECIALITY_FILE, new SpecialityCSVConverter(CSV_DELIMITER)), new LongSequencer());
             HospitalizationRepository hospitalizationRepository = new HospitalizationRepository(new CSVStream<Hospitalization>(HOSPITALIZATION_FILE, new HospitalizationCSVConverter(CSV_DELIMITER)), new LongSequencer());
             OperationRepository operationRepository = new OperationRepository(new CSVStream<Operation>(OPERATION_FILE, new OperationCSVConverter(CSV_DELIMITER)), new LongSequencer());
-            DiagnosisRepository diagnosisRepository = new DiagnosisRepository(new CSVStream<Diagnosis>(DIAGNOSIS_FILE, new DiagnosisCSVConverter(CSV_DELIMITER, CSV_ARRAY_DELIMITER)), new LongSequencer());
-            PrescriptionRepository prescriptionRepository = new PrescriptionRepository(new CSVStream<Prescription>(PRESCRIPTION_FILE, new PrescriptionCSVConverter(CSV_DELIMITER, CSV_ARRAY_DELIMITER)), new LongSequencer());
-            ReferralRepository referralRepository = new ReferralRepository(new CSVStream<Referral>(REFERRAL_FILE, new ReferralCSVConverter(CSV_DELIMITER)), new LongSequencer());
             SymptomRepository symptomRepository = new SymptomRepository(new CSVStream<Symptom>(SYMPTOM_FILE, new SymptomCSVConverter(CSV_DELIMITER)), new LongSequencer());
-            TherapyRepository therapyRepository = new TherapyRepository(new CSVStream<Therapy>(THERAPY_FILE, new TherapyCSVConverter(CSV_DELIMITER, CSV_ARRAY_DELIMITER)), new LongSequencer());
+            DiagnosisRepository diagnosisRepository = new DiagnosisRepository(new CSVStream<Diagnosis>(DIAGNOSIS_FILE, new DiagnosisCSVConverter(CSV_DELIMITER, CSV_ARRAY_DELIMITER)), new LongSequencer(), symptomRepository);
+            IngredientRepository ingredientRepository = new IngredientRepository(new CSVStream<Ingredient>(ROOMTYPE_FILE, new IngredientsCSVConverter(CSV_DELIMITER)), new LongSequencer());
+            DrugRepository drugRepository = new DrugRepository(new CSVStream<Drug>(ROOMTYPE_FILE, new DrugCSVConverter(CSV_DELIMITER)), new LongSequencer(), ingredientRepository);
+            PrescriptionRepository prescriptionRepository = new PrescriptionRepository(new CSVStream<Prescription>(PRESCRIPTION_FILE, new PrescriptionCSVConverter(CSV_DELIMITER, CSV_ARRAY_DELIMITER)), new LongSequencer(), drugRepository);
+            TherapyRepository therapyRepository = new TherapyRepository(new CSVStream<Therapy>(THERAPY_FILE, new TherapyCSVConverter(CSV_DELIMITER, CSV_ARRAY_DELIMITER)), new LongSequencer(), drugRepository);
             ArticleRepository articleRepository = new ArticleRepository(new CSVStream<Article>(ARTICLE_FILE, new ArticleCSVConverter(CSV_DELIMITER2)), new LongSequencer());
 
 
@@ -73,6 +80,18 @@ namespace HCIproject
                 articleRepository,   businessDayRepository,  specialityRepository, doctorGradeRepository);
 
             businessDayRepository.doctorRepo = doctorRepository;
+            articleRepository._doctorRepository = doctorRepository;
+
+            ReferralRepository referralRepository = new ReferralRepository(new CSVStream<Referral>(REFERRAL_FILE, new ReferralCSVConverter(CSV_DELIMITER)), new LongSequencer(), doctorRepository);
+
+            PatientFileRepository patientFileRepository = new PatientFileRepository(new CSVStream<PatientFile>(PATIENTFILE_FILE, new PatientFileCSVConverter(CSV_DELIMITER, CSV_DELIMITER2)), new LongSequencer());
+
+            PatientRepository patientRepository = new PatientRepository(new CSVStream<Patient>(PATIENT_FILE, new PatientCSVConverter(CSV_DELIMITER)), new LongSequencer(), patientFileRepository);
+
+
+            ExaminationUpcomingRepository examinationUpcomingRepository = new ExaminationUpcomingRepository(new CSVStream<Examination>(EXAM_UPCOMING_FILE, new UpcomingExaminationCSVConverter(CSV_DELIMITER)), new LongSequencer(), doctorRepository, patientRepository);
+           ExaminationPreviousRepository examinationPreviousRepository=new ExaminationPreviousRepository(new CSVStream<Examination>(EXAM_PREVIOUS_FILE, new PreviousExaminationCSVConverter(CSV_DELIMITER, CSV_DELIMITER2)), new LongSequencer(), doctorRepository,patientRepository, diagnosisRepository,prescriptionRepository, therapyRepository, referralRepository);
+
 
             DoctorService doctorService = new DoctorService(doctorRepository);
             DoctorGradeService doctorGradeService = new DoctorGradeService(doctorGradeRepository);
@@ -85,12 +104,16 @@ namespace HCIproject
             SymptomService symptomService = new SymptomService(symptomRepository);
             TherapyService therapyService = new TherapyService(therapyRepository);
             ArticleService articleService = new ArticleService(articleRepository);
-
             UserService userService = new UserService(null, doctorService,null,null);
+            ExaminationService examinationService = new ExaminationService(examinationUpcomingRepository, examinationPreviousRepository);
 
             UserController = new UserController(userService);
             ArticleController = new ArticleController(articleService);
             SpecialityController = new SpecialityController(specialityService);
+            ExaminationController = new ExaminationController(examinationService);
+
+
+
 
       //  ArticleController articleController = new ArticleController(articleService);
             DiagnosisController diagnosisController = new DiagnosisController(diagnosisService);
@@ -124,13 +147,23 @@ namespace HCIproject
             Drug gr1 = new Drug(3);
             d.Add(gr);
             d.Add(gr1);
-            prescriptionController.Save(new Prescription(111,new Period( new DateTime(2016, 10, 10), new DateTime(2016, 10, 15)), "note", d));
+            //prescriptionController.Save(new Prescription(111,new Period( new DateTime(2016, 10, 10), new DateTime(2016, 10, 15)), "note", d));
             //referralController.Save(new Referral(11, new Period(new DateTime(2016, 10, 10), new DateTime(2016, 10, 15)), new Doctor(5)));
             //specialityController.Save(new Speciality("lslsl"));
             // symptomController.Save(new Symptom("ime"));
-            therapyController.Save(new Therapy("note", new Period(new DateTime(2015, 10, 10), new DateTime(2006, 10, 15)), 23,d));
-     //       Article article = new Article(new DateTime(2015, 10, 10), new Doctor(1), "Naslov", "dfcjd");
-     //       articleController.Save(article);
+            //       therapyController.Save(new Therapy("note", new Period(new DateTime(2015, 10, 10), new DateTime(2006, 10, 15)), 23,d));
+            //       Article article = new Article(new DateTime(2015, 10, 10), new Doctor(1), "Naslov", "dfcjd");
+            //       articleController.Save(article);
+            // diagnosisController.GetAll\
+            //Article ar= articleRepository.GetEager(1);
+            // Console.WriteLine(ar.Doctor.FirstName);
+
+            //        public Examination(User user, Users.Doctor doctor, Period period, Diagnosis diagnosis, List<Prescription> prescription, Anemnesis anemnesis, Therapy therapy, Referral refferal)
+            //Prescription pre = new Prescription(111, new Period(new DateTime(2016, 10, 10), new DateTime(2016, 10, 15)), "note", d);
+            //List<Prescription> p = new List<Prescription>();
+           // p.Add(pre);
+           // Patient patient = new Patient(1);
+           // ExaminationController.Save( new Examination((User)patient, new Doctor(2), new Period(new DateTime(2019, 10, 10), new DateTime(2016, 10, 15)), new Diagnosis(2),p ,new Anemnesis("ssssss"), new Therapy(1), new Referral(1)));
             
 
         }
@@ -140,8 +173,8 @@ namespace HCIproject
         public IController<Operation, long> OperationController { get; private set; }
         public IController<Diagnosis, long> DiagnosisController { get; private set; }
         public IController<Prescription, long> PrescriptionController { get; private set; }
-        //public IController<Referral, long> ReferralController { get; private set; } 
-        //public IController<Symptom, long> SymptomController { get; private set; }
-        //public IController<Therapy, long> TherapyController { get; private set; }
+        public IController<Referral, long> ReferralController { get; private set; } 
+        public IController<Symptom, long> SymptomController { get; private set; }
+        public IController<Therapy, long> TherapyController { get; private set; }
     }
 }

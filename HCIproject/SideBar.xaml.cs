@@ -76,21 +76,21 @@ namespace HCIproject
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {//otvara karton
-            PatientFileWin fileWin = new PatientFileWin();
+            PatientFileWin fileWin = new PatientFileWin((Doctor)user);
             this.Visibility = Visibility.Hidden;
             fileWin.Show();
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {//otvara prozor za validaciju sastava leka
-            DrugValidation drugValWind = new DrugValidation();
+            DrugValidation drugValWind = new DrugValidation((Doctor)user);
             this.Visibility = Visibility.Hidden;
             drugValWind.Show();
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {//dodaj alternativni
-            DrugAlternative drugAltWind = new DrugAlternative();
+            DrugAlternative drugAltWind = new DrugAlternative((Doctor)user);
             this.Visibility = Visibility.Hidden;
             drugAltWind.Show();
         }
@@ -220,7 +220,7 @@ namespace HCIproject
 
         private void Button_Click_6(object sender, RoutedEventArgs e)
         {
-            Examination examWin = new Examination();
+            ExaminationWin examWin = new ExaminationWin((Doctor)user);
             this.Visibility = Visibility.Hidden;
             examWin.Show();
         }
@@ -228,8 +228,8 @@ namespace HCIproject
         private void Button_Click_7(object sender, RoutedEventArgs e)
         {//novi clanak
             CreateArticle creWin = new CreateArticle((Doctor)user);
-            this.Visibility = Visibility.Hidden;
-            creWin.Show();
+         //   this.Visibility = Visibility.Hidden;
+            creWin.ShowDialog();
         }
 
         private void setDoctorsData()
@@ -256,8 +256,6 @@ namespace HCIproject
 
             foreach (var article in app.ArticleController.GetAll())
             {
-                var app1 = Application.Current as App;
-
 
                 Border b = new Border();
                 b.BorderThickness = new Thickness(5);
@@ -283,10 +281,9 @@ namespace HCIproject
 
 
                 newTopic.Text = article.Topic;
+                
                 writer.Text =user.FirstName + " " + user.LastName;
                 newText.Text = article.Text;
-
-
 
                 stackPanelArticle.Children.Add(newTopic);
                 stackPanelArticle.Children.Add(writer);
@@ -297,7 +294,6 @@ namespace HCIproject
                 Articles.Children.Add(b);
 
             }
-
         }
 
         private void Button_Click_8(object sender, RoutedEventArgs e)

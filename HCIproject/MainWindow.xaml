@@ -13,7 +13,8 @@
          TextOptions.TextFormattingMode="Ideal"
          TextOptions.TextRenderingMode="Auto"
          Background="{DynamicResource MaterialDesignPaper}"
-         FontFamily="{DynamicResource MaterialDesignFont}">
+         FontFamily="{DynamicResource MaterialDesignFont}"
+                 WindowStartupLocation="CenterScreen">
     <StackPanel x:Name="Resize" Orientation="Vertical" Background="#D0ECE7" >
         <Border  BorderBrush="#A2D9CE" BorderThickness="8" CornerRadius="8,8,8,8"  Margin="5">
             <WrapPanel Height="70">

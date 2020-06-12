@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HCIproject"
         mc:Ignorable="d"
-        Title="CreateArticle" Height="450" Width="800">
+        Title="CreateArticle" Height="400" Width="750" WindowStartupLocation="CenterScreen">
 
     <StackPanel x:Name="ResizePanel" Background="#D0ECE7" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
         <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="50,40,50,10">

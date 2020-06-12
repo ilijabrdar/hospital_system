@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model.Users;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,8 +20,17 @@ namespace HCIproject
     /// </summary>
     public partial class ArticleWin : Window
     {
+        public Doctor user;
+
+        public ArticleWin(Doctor user)
+        {
+            this.user = user;
+            InitializeComponent();
+        }
+
         public ArticleWin()
         {
+            
             InitializeComponent();
         }
 

@@ -8,7 +8,8 @@
         xmlns:val="clr-namespace:HCIproject.Validation"
 
         mc:Ignorable="d"
-        Title="SideBar"  Height="450" Width="800">
+        Title="SideBar"  Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Color x:Key="Color1">#FFA2D9CE</Color>
     </Window.Resources>

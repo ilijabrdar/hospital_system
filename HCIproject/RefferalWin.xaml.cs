@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model.Users;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -22,6 +23,14 @@ namespace HCIproject
     public partial class RefferalWin : Window
     {
         private int colNum = 0;
+        public Doctor user;
+
+        public RefferalWin(Doctor user)
+        {
+            this.user = user;
+            InitializeComponent();
+        }
+
         // public ObservableCollection<Doctor> Doktori{
         //     get;
         //     set;
@@ -39,16 +48,18 @@ namespace HCIproject
         }
         private void Button_Click_1(object sender, RoutedEventArgs e)
         { //potvrdi
-            Examination exam = new Examination();
-            this.Visibility = Visibility.Hidden;
-            exam.Show();
+            //ExaminationWin exam = new ExaminationWin((Doctor)user);
+            //this.Visibility = Visibility.Hidden;
+            //exam.Show();
+            this.Close();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         { //otkazi
-            Examination exam = new Examination();
-            this.Visibility = Visibility.Hidden;
-            exam.Show();
+            //ExaminationWin exam = new ExaminationWin((Doctor)user);
+            //this.Visibility = Visibility.Hidden;
+            //exam.Show();
+            this.Close();
         }
     }
 }

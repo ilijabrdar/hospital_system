@@ -14,6 +14,11 @@ namespace bolnica.Repository.CSV.Converter
         private readonly string _delimiter = ",";
         private readonly string _arrayDelimiter = "|";
 
+        public PatientFileCSVConverter(string delimiter, string arrayDelimiter)
+        {
+            _delimiter = delimiter;
+            _arrayDelimiter = arrayDelimiter;
+        }
 
         public PatientFile ConvertCSVFormatToEntity(string entityCSVFormat)
         { 
