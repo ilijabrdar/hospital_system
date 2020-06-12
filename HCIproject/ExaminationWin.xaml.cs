@@ -1,4 +1,5 @@
-﻿using Model.Users;
+﻿using Model.PatientSecretary;
+using Model.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,10 +19,11 @@ namespace HCIproject
     /// <summary>
     /// Interaction logic for Examination.xaml
     /// </summary>
+    
     public partial class ExaminationWin : Window
     {
         public Doctor user;
-
+        public String Simptom {get; set;}
         public ExaminationWin(Doctor user)
         {
             this.user = user;
@@ -35,19 +37,28 @@ namespace HCIproject
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            SideBar sideBarWin = new SideBar((Doctor)user);
-            this.Visibility = Visibility.Hidden;
-            sideBarWin.MyTabControl.SelectedIndex = 2;
-            sideBarWin.Show();
-        }
+        {//otkazi
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        { //otkazi
             SideBar sideBarWin = new SideBar((Doctor)user);
             this.Visibility = Visibility.Hidden;
             sideBarWin.MyTabControl.SelectedIndex = 2;
             sideBarWin.Show();
+
+        }
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        { //potvrdi
+                var app = Application.Current as App;
+
+           Console.WriteLine( simptomiTxt.Text);
+                app.SymptomController.Save(new Symptom(simptomiTxt.Text));
+
+
+
+                SideBar sideBarWin = new SideBar((Doctor)user);
+                this.Visibility = Visibility.Hidden;
+                sideBarWin.MyTabControl.SelectedIndex = 2;
+                sideBarWin.Show();
+            
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)

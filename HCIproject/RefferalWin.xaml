@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HCIproject"
+       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="Refferal" Height="400" Width="750"
         WindowStartupLocation="CenterScreen">
@@ -11,28 +12,46 @@
         <StackPanel x:Name="PatientInfo" Background="#D5F5E3">
             <Label Content="OPSTE INFO O PACIJENTU"/>
         </StackPanel>
-        <Grid  VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="300"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Label Content="Dijagnoza" Grid.Row="0" Grid.Column="0" FontSize="18" Margin="20"/>
-            <TextBlock Text="OVDE CE SE PRENETI UNETA DIJAGNOZA" Grid.Row="0" Grid.Column="1" Margin="20"/>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Height="290">
+            <StackPanel>
+                <Grid  VerticalAlignment="Center" HorizontalAlignment="Center"  Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="300"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Dijagnoza" Grid.Row="0" Grid.Column="0" FontSize="18" Margin="5"/>
+                    <TextBlock Text="OVDE CE SE PRENETI UNETA DIJAGNOZA" Grid.Row="0" Grid.Column="1" Margin="5"/>
 
-            <Label Content="Anamneza" Grid.Row="1" Grid.Column="0" FontSize="18" Margin="20"/>
-            <TextBlock Text="OVDE CE SE PRENETI UNETA Anamneza" Grid.Row="1" Grid.Column="1" Margin="20"/>
+                    <Label Content="Anamneza" Grid.Row="1" Grid.Column="0" FontSize="18" Margin="5"/>
+                    <TextBlock Text="OVDE CE SE PRENETI UNETA Anamneza" Grid.Row="1" Grid.Column="1" Margin="5"/>
 
-            <Label Content="Napomena" Grid.Row="2" Grid.Column="0" FontSize="18" Margin="20"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Margin="20" AcceptsReturn="True" CaretBrush="#FF1FEECD"/>
-        </Grid>
-        <Label Content="NAPRAVITI TABELU SA IZBOROM DATUM/SALA/VREME" FontWeight="Bold"  FontSize="20"/>
+                    <Label Content="Napomena" Grid.Row="2" Grid.Column="0" FontSize="18" Margin="5"/>
+                    <TextBox Grid.Row="2" Grid.Column="1" Margin="5" AcceptsReturn="True" CaretBrush="#FF1FEECD"/>
+
+                    <Label Content="Odeljenje" Grid.Row="3" Grid.Column="0" FontSize="18" Margin="5"/>
+                    <ComboBox Grid.Row="3"  Grid.Column="1" />
+                </Grid>
+                <Grid>
+                    <DataGrid x:Name="dataGridStudenti" ItemsSource="{Binding Specijaliste}" IsReadOnly="True" 
+                  SelectionMode="Single" AutoGenerateColumns="False"
+                   Margin="172,0,154,-0.2" VerticalAlignment="Top" Width="418" HorizontalAlignment="Center">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Ime" Binding="{Binding FirstName}"/>
+                            <DataGridTextColumn Header="Prezime" Binding="{Binding LastName}" />
+                            <DataGridTextColumn Header="Sala" Binding="{Binding Sala}" />
+                            <DataGridTextColumn Header="Vreme" Binding="{Binding Vreme}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>              
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
 
         <!-- 
         <DataGrid x:Name="doctorSpecialist" ItemsSource="{Binding Path=}" AutoGenerateColumns="True" 
@@ -40,10 +59,8 @@
                   HorizontalAlignment="Center"> 
         </DataGrid>
          -->
-        <WrapPanel FlowDirection="RightToLeft" Background="#D5F5E3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <WrapPanel FlowDirection="RightToLeft" Background="#D5F5E3" HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
             <Button Content="Otkaži" FontSize="18" Height="30" Width="100"  Margin="10,0,10,50" Background="#A2D9CE" Click="Button_Click" BorderBrush="#FF1FEECD" ></Button>
-            <Button Content="Štampaj" FontSize="18" Height="30" Width="100"  Margin="10,0,10,50" Background="#A2D9CE" BorderBrush="#FF1FEECD"  ></Button>
-
             <Button Content="Potvrdi" FontSize="18" Height="30" Width="100"  Margin="10,0,10,50" Background="#A2D9CE" Click="Button_Click_1" BorderBrush="#FF1FEECD" ></Button>
         </WrapPanel>
     </StackPanel>

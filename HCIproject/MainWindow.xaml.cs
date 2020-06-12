@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model.Doctor;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -56,13 +57,25 @@ namespace HCIproject
                 }
                 else
                 {
-                    ArticleWin artWind = new ArticleWin();
-                    this.Visibility = Visibility.Hidden;
-                    artWind.Show();
+                    List<Article> findArticles = searchMyArticles(searchTxt.Text);
+                    ArticleWin artWind = new ArticleWin(findArticles);
+                    artWind.ShowDialog();
                 }
             }
         }
-
+        private List<Article> searchMyArticles(String input)
+        {
+            var app = Application.Current as App;
+            List<Article> articles = new List<Article>();
+            foreach (var article in app.ArticleController.GetAll())
+            {
+                if (article.Topic.Contains(input))
+                {
+                    articles.Add(article);
+                }
+            }
+            return articles;
+        }
         private void setArticle()
         {
             var app = Application.Current as App;
@@ -94,8 +107,8 @@ namespace HCIproject
 
 
                 newTopic.Text = article.Topic;
-                newText.Text = article.Text;
                 writer.Text = article.Doctor.FirstName + " " + article.Doctor.LastName;
+                newText.Text = article.Text;
 
                 stackPanelArticle.Children.Add(newTopic);
                 stackPanelArticle.Children.Add(newText);
@@ -107,6 +120,5 @@ namespace HCIproject
             }
 
         }
-
     }
 }

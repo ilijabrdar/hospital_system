@@ -11,33 +11,36 @@
         <StackPanel x:Name="PatientInfo" Background="#D5F5E3">
             <Label Content="OPSTE INFO O PACIJENTU"/>
         </StackPanel>
-        <Grid  VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="300"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Label Content="Dijagnoza" Grid.Row="0" Grid.Column="0" FontSize="18" Margin="10"/>
-            <TextBlock Text="OVDE CE SE PRENETI UNETA DIJAGNOZA" Grid.Row="0" Grid.Column="1" Margin="10"/>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Height="290">
+            <StackPanel>
+                <Grid  VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="300"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Dijagnoza" Grid.Row="0" Grid.Column="0" FontSize="18" Margin="10"/>
+                    <TextBlock Text="OVDE CE SE PRENETI UNETA DIJAGNOZA" Grid.Row="0" Grid.Column="1" Margin="10"/>
 
-            <Label Content="Lekovi" Grid.Row="1" Grid.Column="0" FontSize="18" Margin="10"/>
-            <ComboBox Grid.Row="1" Grid.Column="1" Margin="10"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Margin="10" AcceptsReturn="True" CaretBrush="#FF1FEECD"/>
+                    <Label Content="Lekovi" Grid.Row="1" Grid.Column="0" FontSize="18" Margin="10"/>
+                    <ComboBox Grid.Row="1" Grid.Column="1" Margin="10"/>
+                    <TextBox Grid.Row="2" Grid.Column="1" Margin="10" AcceptsReturn="True" CaretBrush="#FF1FEECD"/>
 
 
-            <Label Content="Terapija" Grid.Row="3" Grid.Column="0" FontSize="18" Margin="10"/>
-            <TextBox Grid.Row="3" Grid.Column="1" Margin="10" AcceptsReturn="True" CaretBrush="#FF1FEECD"/>
-        </Grid>
-        <WrapPanel FlowDirection="RightToLeft" Background="#D5F5E3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Label Content="Terapija" Grid.Row="3" Grid.Column="0" FontSize="18" Margin="10"/>
+                    <TextBox Grid.Row="3" Grid.Column="1" Margin="10" AcceptsReturn="True" CaretBrush="#FF1FEECD"/>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+        <WrapPanel FlowDirection="RightToLeft" Background="#D5F5E3" HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
             <Button Content="Otkaži" FontSize="18" Height="30" Width="100"  Margin="10,0,10,50" Background="#A2D9CE" Click="Button_Click" BorderBrush="#FF1FEECD" ></Button>
-            <Button Content="Štampaj" FontSize="18" Height="30" Width="100"  Margin="10,0,10,50" Background="#A2D9CE" BorderBrush="#FF1FEECD"  ></Button>
             <Button Content="Potvrdi" FontSize="18" Height="30" Width="100"  Margin="10,0,10,50" Background="#A2D9CE" Click="Button_Click_1" BorderBrush="#FF1FEECD" ></Button>
         </WrapPanel>
     </StackPanel>

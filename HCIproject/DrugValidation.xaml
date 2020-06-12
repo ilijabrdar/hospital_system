@@ -5,29 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HCIproject"
         mc:Ignorable="d"
-        Title="DrugValidation" Height="450" Width="800"
+        Title="DrugValidation" Height="400" Width="750"
         WindowStartupLocation="CenterScreen">
     <StackPanel Background="#D0ECE7">
         <Border  BorderBrush="#A2D9CE" BorderThickness="8" CornerRadius="8,8,8,8"  Margin="5">
             <StackPanel x:Name="Info" Background="#D5F5E3" Orientation="Vertical"  VerticalAlignment="Top">
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Naziv leka:" FontSize="16" Margin="20,0,0,0" VerticalAlignment="Center" Width="Auto" />
-                    <Label Content="Diklofen" FontSize="18" Margin="20,0,20,0" VerticalAlignment="Center" Width="Auto" FontWeight="Bold"/>
+                    <Label Content="Naziv leka:" FontSize="16" Margin="10,0,0,0" VerticalAlignment="Center" Width="Auto" />
+                    <Label Content="Diklofen" FontSize="18" Margin="10,0,20,0" VerticalAlignment="Center" Width="Auto" FontWeight="Bold"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Sifra leka:" FontSize="16" Margin="20,0,20,0" VerticalAlignment="Center"  />
-                    <Label Content="B23E" FontSize="18" Margin="20,0,20,0" VerticalAlignment="Center" FontWeight="Bold"/>
+                    <Label Content="Sifra leka:" FontSize="16" Margin="10,0,0,0" VerticalAlignment="Center"  />
+                    <Label Content="B23E" FontSize="18" Margin="10,0,20,0" VerticalAlignment="Center" FontWeight="Bold"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Kolicina:" FontSize="16" Margin="20,0,20,0" VerticalAlignment="Center"  />
-                    <Label Content="23" FontSize="18" Margin="20,0,20,0" VerticalAlignment="Center"  FontWeight="Bold" />
+                    <Label Content="Kolicina:" FontSize="16" Margin="10,0,0,0"  VerticalAlignment="Center"  />
+                    <Label Content="23" FontSize="18" Margin="10,0,20,0" VerticalAlignment="Center"  FontWeight="Bold" />
                 </StackPanel>
             </StackPanel>
         </Border>
         <Border  BorderBrush="#A2D9CE" BorderThickness="8" CornerRadius="8,8,8,8"  Margin="5">
             <StackPanel x:Name="Structure" Orientation="Vertical">
                 <StackPanel Orientation="Horizontal" Background="#D5F5E3">
-                    <Image Grid.Column="0"  Source="graph.png" ></Image>
+                    <Image Grid.Column="0"  Source="graph.png" Height="172" ></Image>
                     <Grid Margin="40" HorizontalAlignment="Center">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />

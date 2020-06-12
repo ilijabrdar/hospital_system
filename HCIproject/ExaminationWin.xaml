@@ -36,10 +36,10 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Label Content="Anamneza" Grid.Row="0" Grid.Column="0" FontSize="18" VerticalAlignment="Center"/>
-                        <TextBox Grid.Row="0"  Grid.Column="1" Grid.ColumnSpan="4" AcceptsReturn="True" CaretBrush="#FF1FEECD" />
+                        <TextBox x:Name="anamnezaTxt" Text="{Binding Path=Anamneza}" Grid.Row="0"  Grid.Column="1" Grid.ColumnSpan="4" AcceptsReturn="True" CaretBrush="#FF1FEECD" />
 
                         <Label Content="Simptomi" Grid.Row="1" Grid.Column="0" FontSize="18" VerticalAlignment="Center" />
-                        <TextBox Grid.Row="1"  Grid.Column="1" Grid.ColumnSpan="4" AcceptsReturn="True" CaretBrush="#FF1FEECD"/>
+                        <TextBox x:Name="simptomiTxt" Text="{Binding Path=Simptom}" Grid.Row="1"  Grid.Column="1" Grid.ColumnSpan="4" AcceptsReturn="True" CaretBrush="#FF1FEECD"/>
 
                         <Label Content="Dijagnoza" Grid.Row="2" Grid.Column="0" FontSize="18" VerticalAlignment="Center"/>
                         <ComboBox Grid.Row="2"  Grid.Column="1" Grid.ColumnSpan="4" />

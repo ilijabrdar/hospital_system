@@ -1,4 +1,5 @@
-﻿using Model.Users;
+﻿using Controller;
+using Model.Users;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,24 +25,25 @@ namespace HCIproject
     {
         private int colNum = 0;
         public Doctor user;
+        public ObservableCollection<Doctor> Specijaliste { get; set; }
 
         public RefferalWin(Doctor user)
         {
             this.user = user;
             InitializeComponent();
+            this.DataContext = this;
+            Specijaliste = new ObservableCollection<Doctor>();
+            Specijaliste.Add(new Doctor(1) { FirstName = "Jovana", LastName = "Petrovic" });
         }
 
-        // public ObservableCollection<Doctor> Doktori{
-        //     get;
-        //     set;
-        // };
+
+
         public RefferalWin()
         {
             InitializeComponent();
-            this.DataContext = this;
-            // Specijaliste = new ObservableCollection<Doctor>();
-            //Specijaliste.Add( new Doctor(){specijalnost="hirurg", ime="Jovana});
+           
         }
+
         private void generateColumns(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
             colNum++;

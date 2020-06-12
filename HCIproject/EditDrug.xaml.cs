@@ -34,18 +34,19 @@ namespace HCIproject
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         { //otkazi treba samo da se vrati
-
-
-            DrugValidation drugValWin = new DrugValidation((Doctor)user);
-            this.Visibility = Visibility.Hidden;
-            drugValWin.Show();
+            //DrugValidation drugValWin = new DrugValidation((Doctor)user);
+            //this.Visibility = Visibility.Hidden;
+            //drugValWin.Show();
+            this.Close();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {//Potvrdi treba da potvrdi i azurira sastav 
-            DrugValidation drugValWin = new DrugValidation((Doctor)user);
-            this.Visibility = Visibility.Hidden;
-            drugValWin.Show();
+         //DrugValidation drugValWin = new DrugValidation((Doctor)user);
+         //this.Visibility = Visibility.Hidden;
+         //drugValWin.Show();
+            this.Close();
+
         }
     }
 }

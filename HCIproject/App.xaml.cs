@@ -26,6 +26,14 @@ namespace HCIproject
 
         public IExaminationController ExaminationController { get; private set; }
 
+        public IController<Hospitalization, long> HospitalizationController { get; private set; }
+        public IController<Operation, long> OperationController { get; private set; }
+        public IController<Diagnosis, long> DiagnosisController { get; private set; }
+        public IController<Prescription, long> PrescriptionController { get; private set; }
+        public IController<Referral, long> ReferralController { get; private set; }
+        public IController<Symptom, long> SymptomController { get; private set; }
+        public IController<Therapy, long> TherapyController { get; private set; }
+
         public IController<Article, long> ArticleController
         { get; private set; }
 
@@ -111,20 +119,24 @@ namespace HCIproject
             ArticleController = new ArticleController(articleService);
             SpecialityController = new SpecialityController(specialityService);
             ExaminationController = new ExaminationController(examinationService);
-
-
-
+            HospitalizationController = new HospitalizationController(hospitalizationService);
+            OperationController = new OperationController(operationService);
+            //DiagnosisController = new DiagnosisController(diagnosisService);
+            PrescriptionController = new PrescriptionController(prescriptionService);
+            ReferralController = new ReferralController(referralService);
+            ExaminationController = new ExaminationController(examinationService);
+            SymptomController = new SymptomController(symptomService);
 
       //  ArticleController articleController = new ArticleController(articleService);
-            DiagnosisController diagnosisController = new DiagnosisController(diagnosisService);
-            DoctorGradeController doctorGradeController = new DoctorGradeController(doctorGradeService);
-            HospitalizationController hospitalizationController = new HospitalizationController(hospitalizationService);
-            OperationController operationController = new OperationController(operationService);
-            PrescriptionController prescriptionController = new PrescriptionController(prescriptionService);
-            ReferralController referralController = new ReferralController(referralService);
-           // SpecialityController specialityController = new SpecialityController(specialityService);
-            SymptomController symptomController = new SymptomController(symptomService);
-            TherapyController therapyController = new TherapyController(therapyService);
+      // DiagnosisController diagnosisController = new DiagnosisController(diagnosisService);
+      // DoctorGradeController doctorGradeController = new DoctorGradeController(doctorGradeService);
+      // HospitalizationController hospitalizationController = new HospitalizationController(hospitalizationService);
+      // OperationController operationController = new OperationController(operationService);
+      // PrescriptionController prescriptionController = new PrescriptionController(prescriptionService);
+      // ReferralController referralController = new ReferralController(referralService);
+      //// SpecialityController specialityController = new SpecialityController(specialityService);
+      // SymptomController symptomController = new SymptomController(symptomService);
+      // TherapyController therapyController = new TherapyController(therapyService);
 
             //List<Symptom> s = new List<Symptom>();
             //Symptom si = new Symptom(1, "ime");
@@ -142,11 +154,11 @@ namespace HCIproject
             //doctorGradeController.Save(dg);           
             //hospitalizationController.Save( new Hospitalization(11, new Period(new DateTime(2015,10,10), new DateTime(2006,10,15)), new PatientFile(2), new Room(3)));
             // operationController.Save(new Operation(111, new Doctor(5), "naziv", new Period(new DateTime(2015, 10, 10), new DateTime(2006, 10, 15)), new Room(3), new PatientFile(3)));
-            List<Drug> d = new List<Drug>();
-            Drug gr = new Drug(2);
-            Drug gr1 = new Drug(3);
-            d.Add(gr);
-            d.Add(gr1);
+            //List<Drug> d = new List<Drug>();
+            //Drug gr = new Drug(2);
+            //Drug gr1 = new Drug(3);
+            //d.Add(gr);
+            //d.Add(gr1);
             //prescriptionController.Save(new Prescription(111,new Period( new DateTime(2016, 10, 10), new DateTime(2016, 10, 15)), "note", d));
             //referralController.Save(new Referral(11, new Period(new DateTime(2016, 10, 10), new DateTime(2016, 10, 15)), new Doctor(5)));
             //specialityController.Save(new Speciality("lslsl"));
@@ -161,20 +173,14 @@ namespace HCIproject
             //        public Examination(User user, Users.Doctor doctor, Period period, Diagnosis diagnosis, List<Prescription> prescription, Anemnesis anemnesis, Therapy therapy, Referral refferal)
             //Prescription pre = new Prescription(111, new Period(new DateTime(2016, 10, 10), new DateTime(2016, 10, 15)), "note", d);
             //List<Prescription> p = new List<Prescription>();
-           // p.Add(pre);
-           // Patient patient = new Patient(1);
-           // ExaminationController.Save( new Examination((User)patient, new Doctor(2), new Period(new DateTime(2019, 10, 10), new DateTime(2016, 10, 15)), new Diagnosis(2),p ,new Anemnesis("ssssss"), new Therapy(1), new Referral(1)));
-            
+            // p.Add(pre);
+            // Patient patient = new Patient(1);
+            // ExaminationController.Save( new Examination((User)patient, new Doctor(2), new Period(new DateTime(2019, 10, 10), new DateTime(2016, 10, 15)), new Diagnosis(2),p ,new Anemnesis("ssssss"), new Therapy(1), new Referral(1)));
+
 
         }
 
         public IController<DoctorGrade, long> DoctorGradeController { get; private set; }
-        public IController<Hospitalization, long> HospitalizationController { get; private set; }
-        public IController<Operation, long> OperationController { get; private set; }
-        public IController<Diagnosis, long> DiagnosisController { get; private set; }
-        public IController<Prescription, long> PrescriptionController { get; private set; }
-        public IController<Referral, long> ReferralController { get; private set; } 
-        public IController<Symptom, long> SymptomController { get; private set; }
-        public IController<Therapy, long> TherapyController { get; private set; }
+
     }
 }

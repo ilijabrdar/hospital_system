@@ -52,8 +52,8 @@ namespace HCIproject
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {//idi na izmenu 
             EditDrug editDrugWin = new EditDrug((Doctor)user);
-            this.Visibility = Visibility.Hidden;
-            editDrugWin.Show();
+          //  this.Visibility = Visibility.Hidden;
+            editDrugWin.ShowDialog();
         }
     }
 }

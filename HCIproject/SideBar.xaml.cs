@@ -1,5 +1,7 @@
 ﻿using Model.Doctor;
 using Model.Users;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -49,31 +51,6 @@ namespace HCIproject
             mainWin.Show();
         }
 
-        private void search_text_IsKeyboardFocusedChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            if (search_patient.Text == "Unesite parametar pretrage")
-            {
-                search_patient.Text = "";
-            }
-        }
-
-        private void search_text_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                if (search_patient.Text == "")
-                {
-                    return;
-                }
-                else
-                {
-                    ArticleWin artWind = new ArticleWin();
-                    this.Visibility = Visibility.Hidden;
-                    artWind.Show();
-                }
-            }
-        }
-
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {//otvara karton
             PatientFileWin fileWin = new PatientFileWin((Doctor)user);
@@ -84,15 +61,15 @@ namespace HCIproject
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {//otvara prozor za validaciju sastava leka
             DrugValidation drugValWind = new DrugValidation((Doctor)user);
-            this.Visibility = Visibility.Hidden;
-            drugValWind.Show();
+           // this.Visibility = Visibility.Hidden;
+            drugValWind.ShowDialog();
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {//dodaj alternativni
             DrugAlternative drugAltWind = new DrugAlternative((Doctor)user);
-            this.Visibility = Visibility.Hidden;
-            drugAltWind.Show();
+          //  this.Visibility = Visibility.Hidden;
+            drugAltWind.ShowDialog();
         }
 
         private void myGrid_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -300,5 +277,76 @@ namespace HCIproject
         {//posalji utisak
             misljenje.Text = "";
         }
+
+        private void search_article_IsKeyboardFocusedChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (search_article.Text == "Unesite parametar pretrage")
+            {
+                search_article.Text = "";
+            }
+
+        }
+
+        private void search_article_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                if (search_article.Text == "")
+                {
+                    return;
+                }
+                else
+                {
+                    List<Article> findArticles = searchMyArticles(search_article.Text);
+                    var artWind = new ArticleWin(findArticles);
+                    artWind.ShowDialog();
+                }
+            }
+        }
+
+        private List<Article> searchMyArticles(String input)
+        {
+            var app = Application.Current as App;
+            List<Article> articles = new List<Article>();
+            foreach (var article in app.ArticleController.GetAll())
+            {
+                if (article.Topic.Contains(input))
+                {
+                    articles.Add(article);
+                }
+            }
+            return articles;
+        }
+
+        private void search_patient_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                if (search_patient.Text == "")
+                {
+                    return;
+                }
+                else
+                {
+                    //TODO resiti pretragu kartona!!
+                }
+            }
+        }
+
+        private void search_patient_IsKeyboardFocusedChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (search_patient.Text == "Pretraga")
+            {
+                search_patient.Text = "";
+            }
+
+        }
+
+        private void LozTxt_IsKeyboardFocusedChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            obavesti.Text = "";
+        }
+
+
     }
 }
