@@ -1,38 +1,49 @@
 
+using bolnica.Controller;
+using bolnica.Service;
 using Model.Users;
 using System;
+using System.Collections.Generic;
 
 namespace Controller
 {
-   public class DirectorContoller// : IController
-   {
-      public Doctor RegisterDoctor(Doctor doctor)
-      {
-         // TODO: implement
-         return null;
-      }
+    public class DirectorContoller : IDirectorController
+    {
+        private readonly IDirectorService directorService;
 
-        public object Save()
+        public DirectorContoller(IDirectorService directorService)
+        {
+            this.directorService = directorService;
+        }
+
+        public void Delete(Director entity)
         {
             throw new NotImplementedException();
         }
 
-        public object Delete()
+        public void Edit(Director entity)
+        {
+            directorService.Edit(entity);
+        }
+
+        public Director Get(long id)
+        {
+            return directorService.Get(1);
+        }
+
+        public IEnumerable<Director> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public object Edit()
+        public Doctor RegisterDoctor(Doctor doctor)
         {
             throw new NotImplementedException();
         }
 
-        public object GetAll()
+        public Director Save(Director entity)
         {
             throw new NotImplementedException();
         }
-
-        //private Service.IService _service;
-   
-   }
+    }
 }
