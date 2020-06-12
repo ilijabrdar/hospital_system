@@ -54,7 +54,8 @@ namespace bolnica.Repository.CSV.Converter
         {
             StringBuilder sb = new StringBuilder();
            // entity.Image.Save("../../Images/" + entity.Username + "Jpeg", System.Drawing.Imaging.ImageFormat.Jpeg);
-            string generalData = string.Join(_delimiter, entity.Id, entity.FirstName, entity.LastName, entity.Jmbg, entity.Email, entity.Phone, entity.DateOfBirth, entity.Address.GetId(), entity.Address.Town.GetId(), entity.Address.Town.State.GetId(), entity.Username, entity.Password,  entity.Specialty.GetId());
+            string generalData = string.Join(_delimiter, entity.Id, entity.FirstName, entity.LastName, entity.Jmbg, entity.Email, 
+                entity.Phone, entity.DateOfBirth, entity.Address.GetId(), entity.Address.Town.GetId(), entity.Address.Town.State.GetId(), entity.Username, entity.Password,  entity.Specialty.GetId());
 
             var article_count = entity.Articles == null ? 0 : entity.Articles.Count;
 
