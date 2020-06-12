@@ -11,20 +11,27 @@ namespace Repository
 {
     public class ReferralRepository : CSVRepository<Referral, long>, IReferralRepository
     {
-        public ReferralRepository(ICSVStream<Model.Doctor.Referral> stream, ISequencer<long> sequencer)
+        private readonly IDoctorRepository _doctorRepository;
+        public ReferralRepository(ICSVStream<Model.Doctor.Referral> stream, ISequencer<long> sequencer, IDoctorRepository doctorRepository)
           : base(stream, sequencer)
         {
-
+            _doctorRepository = doctorRepository;
         }
 
         public IEnumerable<Referral> GetAllEager()
         {
-            throw new NotImplementedException();
+            List<Referral> referral = new List<Referral>();
+            foreach(Referral r in GetAll().ToList()){
+                referral.Add(GetEager(r.GetId()));
+            }
+            return referral;
         }
 
         public Referral GetEager(long id)
         {
-            throw new NotImplementedException();
+            Referral referral = Get(id);
+            referral.Doctor = _doctorRepository.GetEager(referral.Doctor.GetId());
+            return referral;
         }
     }
 }

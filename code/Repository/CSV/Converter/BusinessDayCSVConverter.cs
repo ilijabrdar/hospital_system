@@ -12,12 +12,6 @@ namespace bolnica.Repository.CSV.Converter
    public class BusinessDayCSVConverter : ICSVConverter<BusinessDay>
     {
         private readonly String _delimiter = ",";
-
-        public BusinessDayCSVConverter(string delimiter)
-        {
-            _delimiter = delimiter;
-        }
-
         public BusinessDay ConvertCSVFormatToEntity(string entityCSVFormat)
         {
             string[] tokens = entityCSVFormat.Split(_delimiter.ToCharArray());
@@ -40,10 +34,11 @@ namespace bolnica.Repository.CSV.Converter
         public string ConvertEntityToCSVFormat(BusinessDay entity)
         {
             StringBuilder sb = new StringBuilder();
-            String basicData = String.Join(_delimiter, entity.Id, entity.Shift.StartDate, entity.Shift.StartDate, entity.doctor.GetId(), entity.room.GetId());
+            String basicData = String.Join(_delimiter, entity.Id, entity.Shift.StartDate, entity.Shift.EndDate, entity.doctor.GetId(), entity.room.GetId());
             sb.Append(basicData);
             sb.Append(_delimiter);
-            if (entity.ScheduledPeriods.Count == 0)
+            var periods_count = entity.ScheduledPeriods == null ? 0 : entity.ScheduledPeriods.Count();
+            if (periods_count == 0)
                 sb.Append("empty");
             else
             {
@@ -56,7 +51,7 @@ namespace bolnica.Repository.CSV.Converter
                 }
                 sb.Remove(sb.Length - 1, 1);
             }
-          
+            
             return sb.ToString();
         }
     }

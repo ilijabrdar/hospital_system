@@ -36,6 +36,18 @@ namespace Model.PatientSecretary
             Refferal = refferal;
         }
 
+        public Examination(User user, Users.Doctor doctor, Period period, Diagnosis diagnosis, List<Prescription> prescription, Anemnesis anemnesis, Therapy therapy, Referral refferal)
+        {
+            User = user;
+            Doctor = doctor;
+            Period = period;
+            Diagnosis = diagnosis;
+            Prescription = prescription;
+            Anemnesis = anemnesis;
+            Therapy = therapy;
+            Refferal = refferal;
+        }
+
         public Examination(long id)
         {
             Id = id;

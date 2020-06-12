@@ -10,7 +10,7 @@ namespace Model.PatientSecretary
       public String Name { get; set; }
       public long Id { get; set; }
       public int Amount { get; set; }
-      public Boolean Approved = false;
+      public Boolean Approved { get; set; }
       
       public List<Ingredient> Ingredients { get; set; }
       public List<Drug> Alternative { get; set; }

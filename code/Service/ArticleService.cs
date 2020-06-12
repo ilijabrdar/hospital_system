@@ -32,7 +32,7 @@ namespace Service
 
         public IEnumerable<Article> GetAll()
         {
-            return _repository.GetAll();
+            return _repository.GetAllEager();
         }
 
         public Article Save(Article entity)

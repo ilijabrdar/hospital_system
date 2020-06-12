@@ -13,7 +13,7 @@ namespace Repository
    public class DoctorRepository : CSVRepository<Doctor, long>, IDoctorRepository
    {
         private readonly IArticleRepository articleRepo;
-        private readonly IEagerRepository<BusinessDay,long> businessDayRepo;
+        public IEagerRepository<BusinessDay, long> businessDayRepo { private get;  set; }
         private readonly ISpecialityRepository specialityRepo;
         private readonly IDoctorGradeRepository doctorGradeRepository;
         public DoctorRepository(ICSVStream<Doctor> stream, ISequencer<long> sequencer,
@@ -44,7 +44,7 @@ namespace Repository
             List<Article> articles = new List<Article>();
             foreach(Article art in doctor.Articles)
             {
-                articles.Add(articleRepo.Get(art.GetId()));
+                articles.Add(articleRepo.GetEager(art.GetId()));
             }
             doctor.Articles = articles;
             List<BusinessDay> businessDays = new List<BusinessDay>();
