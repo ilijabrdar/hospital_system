@@ -10,7 +10,7 @@ using System.Windows.Documents;
 
 namespace bolnica.Repository.CSV.Converter
 {
-    class PreviousExaminationCSVConverter : ICSVConverter<Examination>
+   public class PreviousExaminationCSVConverter : ICSVConverter<Examination>
     {
         private readonly string _delimiter;
         private readonly string _prescriptonDelimiter;
