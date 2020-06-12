@@ -96,6 +96,7 @@
     </Compile>
     <Compile Include="ModelMock\Lekar.cs" />
     <Compile Include="ModelMock\Oprema.cs" />
+    <Compile Include="ModelMock\ShortcutData.cs" />
     <Compile Include="MyTabControl.cs">
       <SubType>Component</SubType>
     </Compile>

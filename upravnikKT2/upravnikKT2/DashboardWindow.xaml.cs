@@ -18,6 +18,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using upravnikKT2.ModelMock;
 
 namespace upravnikKT2
 {
@@ -172,7 +173,7 @@ namespace upravnikKT2
             String directorAddress = director.Address.Street + " " + director.Address.Number + "," + " " + director.Address.Town.Name + " " + director.Address.Town.PostalNumber + "," + " " + director.Address.Town.State.Name;
             AddressDirector.Content = directorAddress;
 
-            BirthDateDirector.Content = director.DateOfBirth.ToString("dd.MM.yyyy.");
+            BirthDateDirector.Content = director.DateOfBirth.ToString("dd/MM/yyyy");
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -567,6 +568,39 @@ namespace upravnikKT2
             AddressCombo.SelectedValue = director.Address.GetId();
 
 
+            //<TextBlock>
+            //                   <Bold>CTRL+TAB</Bold> tab unapred <LineBreak />
+            //                   <Bold>CTRL+SHIFT+TAB</Bold> tab unazad <LineBreak />
+            //                   <Bold>CTRL+`</Bold> tab unapred za Opremu i Lekare <LineBreak/>
+            //                   <Bold>CTRL+SHIFT+`</Bold> tab unazad za Opremu i Lekare <LineBreak/>
+            //                   <Bold>CTRL+N</Bold> unos entiteta u sistem <LineBreak />
+            //                   <Bold>CTRL+E</Bold> izmena entiteta<LineBreak />
+            //                   <Bold>DELETE</Bold> brisanje entiteta<LineBreak />
+            //                   <Bold>CTRL+T</Bold> otvaranje prozora za pregled tipova prostorija <LineBreak/>
+            //                   <Bold>CTRL+I</Bold> generisanje izvestaja prostorija <LineBreak />
+            //                   <Bold>TAB</Bold> kretanje unapred kroz polja za unos<LineBreak />
+            //                   <Bold>SHIFT+TAB</Bold> kretanje unazad kroz polja za unos<LineBreak/>
+            //                   <Bold>ESCAPE</Bold> zatvaranje prozora <LineBreak />
+            //                   <Bold>ENTER</Bold> umesto dugmeta za potvrdu <LineBreak />
+            //                </TextBlock>
+
+            List<ShortcutData> shortcuts = new List<ShortcutData>();
+            shortcuts.Add(new ShortcutData("CTRL + TAB", "tab unapred"));
+            shortcuts.Add(new ShortcutData("CTRL + SHIFT + TAB", "tab unazad"));
+            shortcuts.Add(new ShortcutData("CTRL + ~", "tab unapred za opremu"));
+            shortcuts.Add(new ShortcutData("CTRL + SHIFT + ~", "tab unazad za opremu"));
+            shortcuts.Add(new ShortcutData("CTRL + N", "unos entiteta u sistem"));
+            shortcuts.Add(new ShortcutData("CTRL + E", "izmena entiteta"));
+            shortcuts.Add(new ShortcutData("DELETE", "brisanje entiteta"));
+            shortcuts.Add(new ShortcutData("CTRL + T", "otvaranje prozora za pregled tipova prostorija"));
+            shortcuts.Add(new ShortcutData("CTRL + I", "generisanje izvestaja prostorija"));
+            shortcuts.Add(new ShortcutData("TAB", "kretanje unapred kroz polja za unos"));
+            shortcuts.Add(new ShortcutData("SHIFT + TAB", "kretanje unazad kroz polja za unos"));
+            shortcuts.Add(new ShortcutData("ESCAPE", "zatvaranje prozora"));
+            shortcuts.Add(new ShortcutData("ENTER", "umesto dugmeta za potvrdu"));
+           
+
+            DataGridShortcuts.ItemsSource = shortcuts;
 
         }
 
@@ -1273,6 +1307,22 @@ namespace upravnikKT2
         private void TabItem_GotFocus(object sender, RoutedEventArgs e)
         {
             doctorCount.Text = "" + _doctorController.GetAll().ToList().Count.ToString();
+        }
+
+        private void TabItem_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+                        if (e.Key == System.Windows.Input.Key.N && Keyboard.Modifiers == ModifierKeys.Control)
+            {
+                addDoctorBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+            }
+            else if (e.Key == System.Windows.Input.Key.E && Keyboard.Modifiers == ModifierKeys.Control)
+            {
+                editDoctorBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+            }
+            else if (e.Key == System.Windows.Input.Key.Delete)
+            {
+                deleteDoctorBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+            }
         }
     }
 }

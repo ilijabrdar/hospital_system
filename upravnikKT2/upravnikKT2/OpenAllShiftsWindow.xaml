@@ -46,8 +46,8 @@
 
         <DataGrid x:Name="DataGridShifts" Grid.Row="1" Margin="10,0,10,20" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Datum pocetka smene" Binding="{Binding Shift.StartDate, StringFormat=\{0:dd.MM.yyyy.\}}" Width="*"/>
-                <DataGridTextColumn Header="Datum kraja smene" Binding="{Binding Shift.EndDate, StringFormat=\{0:dd.MM.yyyy.\}}" Width="*"/>
+                <DataGridTextColumn Header="Datum pocetka smene" Binding="{Binding Shift.StartDate, StringFormat=\{0:dd/MM/yyyy\}}" Width="*"/>
+                <DataGridTextColumn Header="Datum kraja smene" Binding="{Binding Shift.EndDate, StringFormat=\{0:dd/MM/yyyy\}}" Width="*"/>
                 <DataGridTextColumn Header="Pocetak radnog vremena" Binding="{Binding Shift.StartDate, StringFormat=\{0:HH:mm\}}" Width="*"/>
                 <DataGridTextColumn Header="Kraj radnog vremena" Binding="{Binding Shift.EndDate, StringFormat=\{0:HH:mm\}}" Width="*"/>
                 <DataGridTextColumn Header="Sifra prostorije" Binding="{Binding room.RoomCode}" Width="*"/>
