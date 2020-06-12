@@ -10,9 +10,6 @@
         Title="Bolnica Zdravo" Height="660" Width="800"
         WindowStartupLocation="CenterScreen"
         Background="#1771F1">
-    <Window.CommandBindings>
-
-    </Window.CommandBindings>
     <DockPanel>
         <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TabStripPlacement="Left">
             <TabItem Header="{Binding Secretary.Username}" Height="40" Background="#D7E1E9">
@@ -50,7 +47,7 @@
                                 <Image Source="{Binding Secretary.Image}">
                                 </Image>
                             </Border>
-                            <Button Content="_Izmeni profil" Margin="10,30,10,10" Click="OpenEditPanel" ToolTip="ctrl + N" GotFocus="DisplayToolTip" LostFocus="RemoveToolTip"/>
+                            <Button Content="_Izmeni profil" Margin="10,30,10,10" Click="OpenEditPanel" ToolTip="Izmena ličnih informacija i lozinke" GotFocus="DisplayToolTip" LostFocus="RemoveToolTip"/>
                         </StackPanel>
                     </Grid>
 
@@ -200,8 +197,8 @@
                                     <Border BorderBrush="Black" BorderThickness="1" Height="220">
                                         <Image/>
                                     </Border>
-                                    <Button Content="Izmeni sliku" Width="Auto" Margin="10 5 10 0"/>
-                                    <Button Content="Potrdi" Width="Auto" Margin="10 5 10 5" Click="Edit">
+                                    <Button Content="_Izmeni sliku" Width="Auto" Margin="10 5 10 0"/>
+                                    <Button Content="_Potrdi" Width="Auto" Margin="10 5 10 5" Click="Edit">
                                         <Button.Style>
                                             <Style TargetType="Button">
                                                 <Setter Property="IsEnabled" Value="False"/>
@@ -223,7 +220,7 @@
                                             </Style>
                                         </Button.Style>
                                     </Button>
-                                    <Button Content="Odustani" Width="Auto" Margin="10 0 10 0" Click="CancelProfileChangeDialog"/>
+                                    <Button Content="_Odustani" Width="Auto" Margin="10 0 10 0" Click="CancelProfileChangeDialog"/>
                                 </StackPanel>
 
                             </Grid>
@@ -239,13 +236,13 @@
                                     <Label Content="Nova lozinka" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top"/>
                                     <Label Content="Potvrda nove" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top"/>
                                     <PasswordBox x:Name="oldPass" HorizontalAlignment="Left" Margin="150,10,0,0" VerticalAlignment="Top" Width="263" LostFocus="CheckPass"/>
-                                    <PasswordBox x:Name="newPass" HorizontalAlignment="Left" Margin="150,40,0,0" VerticalAlignment="Top" Width="263"/>
-                                    <PasswordBox x:Name="confPass" HorizontalAlignment="Left" Margin="150,70,0,0" VerticalAlignment="Top" Width="263" KeyUp="PassValidation"/>
+                                    <PasswordBox x:Name="newPass" HorizontalAlignment="Left" Margin="150,40,0,0" VerticalAlignment="Top" Width="263" LostFocus="ValidatePasswords"/>
+                                    <PasswordBox x:Name="confPass" HorizontalAlignment="Left" Margin="150,70,0,0" VerticalAlignment="Top" Width="263" KeyUp="PassValidation" LostFocus="ValidatePasswords"/>
                                     <TextBlock x:Name="ErrorMessage" HorizontalAlignment="Left" Margin="456,70,-201,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" RenderTransformOrigin="-8.566,1.406" Width="183" Height="18" Visibility="Collapsed" Foreground="red"/>
                                     <TextBlock x:Name="WrongPass" HorizontalAlignment="Left" Margin="441,10,-201,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="198" Visibility="Collapsed" Foreground="red"/>
                                 </Grid>
                                 <StackPanel Grid.Column="1" VerticalAlignment="Bottom">
-                                    <Button x:Name="confirmBtn" Content="Potvrdi" Margin="10, 10, 10, 10" Width="Auto" Click="ChangePass"/>
+                                    <Button x:Name="confirmBtn" Content="Potvrdi _lozinku" Margin="10, 10, 10, 10" Width="Auto" Click="ChangePass" IsEnabled="False"/>
                                     <Button Content="Odustani" Margin="10, 0, 10, 10" Width="Auto"  Click="CancelProfileChangeDialog"/>
                                 </StackPanel>
                             </Grid>
@@ -262,13 +259,13 @@
                     <DockPanel Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                         <TextBlock DockPanel.Dock="Left" Width="400" TextWrapping="Wrap" Text="TextBlock" Margin="10,10,0,10"/>
                         <StackPanel DockPanel.Dock="Right" VerticalAlignment="Bottom" HorizontalAlignment="Right">
-                            <Button Content="_Pretraži" Margin="0,0,10,15" Click="FindAppointment" ToolTip ="Pretraga pregleda po parametrima, ctrl + F" GotFocus="DisplayToolTip" LostFocus="RemoveToolTip"/>
-                            <Button Content="_Izveštaj" Margin="0,0,10,15" Click="GenerateReport" ToolTip ="Izveštaj o zauzetosti lekara, ctrl + I" GotFocus="DisplayToolTip" LostFocus="RemoveToolTip"/>
+                            <Button Content="_Pretraži" Margin="0,0,10,15" Click="FindAppointment" ToolTip ="Pretraga pregleda po parametrima" GotFocus="DisplayToolTip" LostFocus="RemoveToolTip"/>
+                            <Button Content="_Izveštaj" Margin="0,0,10,15" Click="GenerateReport" ToolTip ="Izveštaj o zauzetosti lekara" GotFocus="DisplayToolTip" LostFocus="RemoveToolTip"/>
                         </StackPanel>
 
                     </DockPanel>
                     <DataGrid Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding examinations}" 
-                              IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False" Margin="10, 0, 10, 10">
+                              IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False" Margin="10, 0, 10, 10" SelectedItem="{Binding Path=SelectedExamination}">
                         <DataGrid.Resources>
                             <ContextMenu x:Key="RowMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
                                 <MenuItem Header="Izmeni" InputGestureText="ctrl + E" Click="EditSelectedAppointment"/>
@@ -382,7 +379,7 @@
                         </TextBox>
                         <Label Content="/" HorizontalAlignment="Left" Margin="247,140,0,0" VerticalAlignment="Top"/>
                         <Label Content="/" HorizontalAlignment="Left" Margin="322,140,0,0" VerticalAlignment="Top"/>
-                        <Button x:Name="SearchBtn"  Content="_Pretraži" HorizontalAlignment="Left" Margin="40,260,0,0" VerticalAlignment="Top" Click="FindFreeAppointment" ToolTip ="ctrl + F" GotFocus="DisplayToolTip" LostFocus="RemoveToolTip"/>
+                        <Button x:Name="SearchBtn"  Content="_Pretraži" HorizontalAlignment="Left" Margin="40,260,0,0" VerticalAlignment="Top" Click="FindFreeAppointment" ToolTip ="Pretraga po lekaru i terminu" GotFocus="DisplayToolTip" LostFocus="RemoveToolTip"/>
                     </Grid>
                     <DataGrid Grid.Row="1" HorizontalAlignment="Stretch" Margin="10,10,10,10" VerticalAlignment="Stretch" ItemsSource="{Binding freeSlots}" 
                               IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False">
@@ -393,7 +390,7 @@
                             <DataGridTextColumn Header="Sala" Binding="{Binding room}" Width="*"></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button Grid.Row="2" Content="Zakaži" HorizontalAlignment="Right" Width="200" Height="25" Margin="0 0 10 0" ToolTip ="ctrl + A" GotFocus="DisplayToolTip" LostFocus="RemoveToolTip">
+                    <Button Grid.Row="2" Content="_Zakaži" HorizontalAlignment="Right" Width="200" Height="25" Margin="0 0 10 0" ToolTip ="ctrl + A" GotFocus="DisplayToolTip" LostFocus="RemoveToolTip">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="IsEnabled" Value="False"/>
@@ -418,8 +415,20 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Pomoć" Height="40" Background="#D7E1E9">
-                <Grid>
+                <Grid RenderTransformOrigin="0.44,0.585">
                     <Label Content="Dobro došli u sekciju za pomoć" HorizontalAlignment="Left" Margin="40,40,0,0" VerticalAlignment="Top" Width="522" FontSize="36"/>
+                    <TextBlock Width="400" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Pomoćni tekstovi se javljaju kada se zadržite na određenom dugmetu i tu su da u nekoliko reči opišu njegovu funkcionalnost ili prečicu. Služe isključivo da vam olakšaju upotrebu aplikacije!" Margin="54,198,248,347"/>
+                    <Label Content="Pomoćni tekstovi" HorizontalAlignment="Left" Margin="40,151,0,0" VerticalAlignment="Top" Width="276" FontSize="25"/>
+                    <Button Content="_Uključi pomoćne tekstove" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35" Width="150" Margin="54,267,0,0" Click="ControllToolTips"/>
+                    <TextBlock Width="400" TextWrapping="Wrap" HorizontalAlignment="Left" Text="Prečice Vam pomažu da ubrzate rad i postignete veću efikasnost. Sastoje se on kombinacije nekoliko tastera tastature. Dole je predstavljena lista prečica i uputstava za njihovo korišćenje" Margin="54,360,0,185"/>
+                    <Label Content="Prečice" HorizontalAlignment="Left" Margin="40,312,0,0" VerticalAlignment="Top" Width="276" FontSize="25"/>
+                    <DataGrid HorizontalAlignment="Left" AutoGenerateColumns="False" IsReadOnly="True" Height="180" Margin="54,420,30,0" VerticalAlignment="Top" Width="Auto" RenderTransformOrigin="-0.66,0.335" ItemsSource="{Binding Path=Shortcuts}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Prečica" Width="*" Binding="{Binding ExactShortcut}"/>
+                            <DataGridTextColumn Header="Opis" Width="2*" Binding="{Binding Description}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
                 </Grid>
             </TabItem>
             <TabItem Header="Utisci" Height="40" Background="#D7E1E9">
@@ -430,10 +439,14 @@
                         <RowDefinition Height="0.4*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Label Grid.Row="0" Content="Zanima nas Vaše mišljenje!" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="36"/>
-                    <TextBox Grid.Row="1" HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Stretch" Margin="10, 0, 10, 0" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
-                    <Button Grid.Row="2" HorizontalAlignment="Left" Margin="10,0,0,0" Content="Pošalji"/>
+                    <TextBox x:Name="FeedBack" Grid.Row="1" HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Stretch" Margin="10, 0, 10, 0" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
+                    <Button Grid.Row="2" HorizontalAlignment="Left" Margin="10,0,0,0" Content="Pošalji" Click="SendFeedBack"/>
+                    <TextBox x:Name="ThankYouMsg" HorizontalAlignment="Left" Height="34" Margin="10,187,0,0" TextWrapping="Wrap" Text="Vaš odgovor je sačuvan. Hvala na saradnji!" VerticalAlignment="Top" Width="353" FontSize="18" Foreground="Green" Visibility="Hidden" BorderBrush="White"/>
                 </Grid>
             </TabItem>
+
+
+
         </TabControl>
     </DockPanel>
 </Window>

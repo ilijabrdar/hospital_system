@@ -14,8 +14,8 @@
         <Label Content="Datum" HorizontalAlignment="Left" Margin="40,90,0,0" VerticalAlignment="Top"/>
         <Label Content="Termin" HorizontalAlignment="Left" Margin="40,130,0,0" VerticalAlignment="Top"/>
         <Label Content="Sala" HorizontalAlignment="Left" Margin="40,170,0,0" VerticalAlignment="Top"/>
-        <ComboBox HorizontalAlignment="Left" Margin="130,10,0,0" VerticalAlignment="Top" Width="200"/>
-        <ComboBox HorizontalAlignment="Left" Margin="130,50,0,0" VerticalAlignment="Top" Width="200"/>
+        <ComboBox HorizontalAlignment="Left" Margin="130,10,0,0" VerticalAlignment="Top" Width="200" ItemsSource="{Binding Path=Doctors}" SelectedItem="{Binding Path=SelectedDoctor}"/>
+        <ComboBox HorizontalAlignment="Left" Margin="130,50,0,0" VerticalAlignment="Top" Width="200" ItemsSource="{Binding Path=Patients}" SelectedItem="{Binding Path=SelectedPatient}"/>
         <TextBlock HorizontalAlignment="Left" Margin="140,74,0,0" TextWrapping="Wrap" Text="YYYY" VerticalAlignment="Top" FontWeight="Bold" Foreground="gray" Opacity="50">
             <TextBlock.Style>
                 <Style TargetType="TextBlock">
@@ -131,7 +131,7 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <ComboBox HorizontalAlignment="Left" Margin="130,170,0,0" VerticalAlignment="Top" Width="200"/>
+        <ComboBox HorizontalAlignment="Left" Margin="130,170,0,0" VerticalAlignment="Top" Width="200" ItemsSource="{Binding Path=Rooms}" SelectedItem="{Binding Path=SelectedRoom}"/>
         <Label Content="/" HorizontalAlignment="Left" Margin="185,90,0,0" VerticalAlignment="Top"/>
         <Label Content="/" HorizontalAlignment="Left" Margin="260,90,0,0" VerticalAlignment="Top"/>
         <Label Content=":" HorizontalAlignment="Left" Margin="185,130,0,0" VerticalAlignment="Top"/>

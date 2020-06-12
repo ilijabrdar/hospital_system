@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using bolnica.Controller;
+using Model.Director;
 using Model.Users;
 
 namespace UserInterface
@@ -32,6 +34,7 @@ namespace UserInterface
         public static int ToMinute { get; set; }
 
         public List<Patient> Patients { get; set; }
+        public List<Room> Rooms { get; set; }
 
         public AppointmentFilter(List<Patient> patients)
         {
@@ -43,6 +46,14 @@ namespace UserInterface
             FromHour = ToHour = DateTime.Now.Hour;
             FromMinute = ToMinute = DateTime.Now.Minute;
             Patients = patients;
+            PopulateRoomCombo();
+        }
+
+        private void PopulateRoomCombo()
+        {
+            App app = Application.Current as App;
+            IRoomController roomController = app.RoomController;
+            Rooms = roomController.GetAll().ToList();
         }
 
         private void CloseWindow(object sender, RoutedEventArgs e)

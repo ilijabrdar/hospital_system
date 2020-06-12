@@ -15,6 +15,7 @@ using bolnica.Repository.CSV.Converter;
 using System.Windows.Controls;
 using bolnica.Service;
 using Model.PatientSecretary;
+using Model.Director;
 
 namespace UserInterface
 {
@@ -30,6 +31,10 @@ namespace UserInterface
         private const String TOWN_FILE = "C:/Users/Asus/Desktop/SIMS/hospital_system/UserInterface/UserInterface/Resources/TownFile.txt";
         private const String STATE_FILE = "C:/Users/Asus/Desktop/SIMS/hospital_system/UserInterface/UserInterface/Resources/StateFile.txt";
 
+        private const string ROOMS_FILE = "C:/Users/Asus/Desktop/SIMS/hospital_system/UserInterface/UserInterface/Resources/roomFile.txt";
+        private const string EQUIPMENT_FILE = "C:/Users/Asus/Desktop/SIMS/hospital_system/UserInterface/UserInterface/Resources/equipment.csv";
+        private const string ROOMTYPE_FILE = "C:/Users/Asus/Desktop/SIMS/hospital_system/UserInterface/UserInterface/Resources/roomtypes.csv";
+
         private readonly String _patient_File = "C:/Users/Asus/Desktop/SIMS/hospital_system/UserInterface/UserInterface/Resources/PatientFile.txt";
         private readonly String _patientFile_File = "C:/Users/Asus/Desktop/SIMS/hospital_system/UserInterface/UserInterface/Resources/patientFileFile.txt";
 
@@ -39,6 +44,8 @@ namespace UserInterface
         public IPatientController PatientController { get; private set; }
         public IStateController StateController { get; private set; }
         public ISecretaryController SecretaryController { get;private set; }
+
+        public IRoomController RoomController { get; private set; }
         public App()
         {
             AddressRepository addressRepository = new AddressRepository(new CSVStream<Address>(ADDRESS_FILE, new AddressCSVConverter(CSV_DELIMITER)), new LongSequencer());
@@ -64,6 +71,24 @@ namespace UserInterface
             var patientRepo = new PatientRepository(new CSVStream<Patient>(_patient_File, new PatientCSVConverter()), new LongSequencer(), patientFileRepo);
             var patientService = new PatientService(patientRepo, patientFileService);
             PatientController = new PatientController(patientService);
+
+            var roomTypeRepository = new RoomTypeRepository(
+               new CSVStream<RoomType>(ROOMTYPE_FILE, new RoomTypeCSVConverter(CSV_DELIMITER)),
+               new LongSequencer());
+
+            var equipmentRepository = new EquipmentRepository(
+              new CSVStream<Equipment>(EQUIPMENT_FILE, new EquipmentCSVConverter(CSV_DELIMITER)),
+              new LongSequencer());
+
+
+            var roomRepository = new RoomRepository(
+               new CSVStream<Room>(ROOMS_FILE, new RoomCSVConverter(CSV_DELIMITER)),
+               new LongSequencer(), roomTypeRepository, equipmentRepository);
+
+            var roomService = new RoomService(roomRepository);
+
+            RoomController = new RoomController(roomService);
+
 
 
             //User user = userController.Login("pera", "pera");

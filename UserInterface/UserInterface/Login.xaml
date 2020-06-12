@@ -9,7 +9,7 @@
         Title="Login" Height="450" Width="800"
         WindowStartupLocation="CenterScreen">
     <Window.CommandBindings>
-        <CommandBinding Command="com:RoutedCommands.Login" Executed="Button_Click"/>
+        <CommandBinding Command="com:RoutedCommands.EnterCommand" Executed="Button_Click"/>
     </Window.CommandBindings>
     <StackPanel HorizontalAlignment="Center" Height="308" VerticalAlignment="Center" Width="374" Margin="209,47,209,64">
         <Label Content="Bolnica Zdravo" FontSize="48" HorizontalContentAlignment="Center" Foreground="#1771F1"/>

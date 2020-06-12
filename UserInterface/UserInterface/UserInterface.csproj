@@ -140,6 +140,8 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Resources\equipment.csv" />
+    <None Include="Resources\roomtypes.csv" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -167,6 +169,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\patientFileFile.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\roomFile.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using bolnica.Controller;
 using Controller;
 using Model.Users;
@@ -43,7 +44,7 @@ namespace UserInterface
         public List<Address> Addresses { get; set; }
 
         private ToolTip _toolTip = new ToolTip();
-        private Boolean _isToolTipAvailable = true;
+        private Boolean _isToolTipAvailable = false;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -53,6 +54,10 @@ namespace UserInterface
 
         public String FullDate { get; set; }
 
+        public Examination SelectedExamination {get;set;}
+        private DispatcherTimer dispatcherTimer;
+
+        public List<Shortcut> Shortcuts { get; set; }
         public MainWindow(Secretary secretary)
         {
             InitializeComponent();
@@ -77,19 +82,19 @@ namespace UserInterface
             this.examinations.Add(new Examination(new DateTime(2020, 1, 3, 8, 00, 00), "Nikola Nikolic", "Milan Milanovic", "S12"));
             this.examinations.Add(new Examination(new DateTime(2020, 1, 3, 9, 30, 00), "Nikola Nikolic", "Marko Markovic", "S15"));
             this.examinations.Add(new Examination(new DateTime(2020, 1, 3, 10, 00, 00), "Ivan Ivanovic", "Luka Lukovic", "S12"));
-            this.examinations.Add(new Examination(new DateTime(2020, 1, 3, 10, 15, 00), "Pera Peric", "Milan Milanovic", "S14"));
+            this.examinations.Add(new Examination(new DateTime(2020, 1, 3, 10, 15, 00), "Pera Peric", "Milan Milanovic", "S12"));
             this.examinations.Add(new Examination(new DateTime(2020, 1, 4, 12, 00, 00), "Marko Markovic", "Marko Markovic", "S15"));
             this.examinations.Add(new Examination(new DateTime(2020, 1, 4, 12, 15, 00), "Marko Markovic", "Milan Milanovic", "S15"));
             this.examinations.Add(new Examination(new DateTime(2020, 1, 4, 12, 30, 00), "Nikola Nikolic", "Marko Markovic", "S15"));
-            this.examinations.Add(new Examination(new DateTime(2020, 1, 4, 12, 50, 00), "Marko Markovic", "Milan Milanovic", "S16"));
-            this.examinations.Add(new Examination(new DateTime(2020, 1, 4, 15, 00, 00), "Nikola Nikolic", "Ivan Ivanovic", "S17"));
-            this.examinations.Add(new Examination(new DateTime(2020, 1, 5, 16, 00, 00), "Marko Markovic", "Milan Milanovic", "S16"));
-            this.examinations.Add(new Examination(new DateTime(2020, 1, 5, 17, 00, 00), "Nikola Nikolic", "Petar Petrovic", "S30"));
-            this.examinations.Add(new Examination(new DateTime(2020, 1, 5, 18, 00, 00), "Marko Markovic", "Milan Milanovic", "S55"));
-            this.examinations.Add(new Examination(new DateTime(2020, 1, 5, 18, 30, 00), "Nikola Nikolic", "Ivan Ivanovic", "S25"));
+            this.examinations.Add(new Examination(new DateTime(2020, 1, 4, 12, 50, 00), "Marko Markovic", "Milan Milanovic", "S14"));
+            this.examinations.Add(new Examination(new DateTime(2020, 1, 4, 15, 00, 00), "Nikola Nikolic", "Ivan Ivanovic", "S14"));
+            this.examinations.Add(new Examination(new DateTime(2020, 1, 5, 16, 00, 00), "Marko Markovic", "Milan Milanovic", "S12"));
+            this.examinations.Add(new Examination(new DateTime(2020, 1, 5, 17, 00, 00), "Nikola Nikolic", "Petar Petrovic", "S12"));
+            this.examinations.Add(new Examination(new DateTime(2020, 1, 5, 18, 00, 00), "Marko Markovic", "Milan Milanovic", "S13"));
+            this.examinations.Add(new Examination(new DateTime(2020, 1, 5, 18, 30, 00), "Nikola Nikolic", "Ivan Ivanovic", "S14"));
             this.examinations.Add(new Examination(new DateTime(2020, 1, 5, 18, 55, 00), "Marko Markovic", "Petar Petrovic", "S15"));
-            this.examinations.Add(new Examination(new DateTime(2020, 1, 5, 19, 10, 00), "Nikola Nikolic", "Marko Markovic", "S55"));
-            this.examinations.Add(new Examination(new DateTime(2020, 1, 5, 20, 00, 00), "Marko Markovic", "Milan Milanovic", "S15"));
+            this.examinations.Add(new Examination(new DateTime(2020, 1, 5, 19, 10, 00), "Nikola Nikolic", "Marko Markovic", "S15"));
+            this.examinations.Add(new Examination(new DateTime(2020, 1, 5, 20, 00, 00), "Marko Markovic", "Milan Milanovic", "S12"));
 
             this.freeSlots = new List<Examination>();
             this.freeSlots.Add(new Examination(new DateTime(2020, 1, 2, 12, 00, 00), "Pera Peric", "S12"));
@@ -103,15 +108,22 @@ namespace UserInterface
             this.freeSlots.Add(new Examination(new DateTime(2020, 1, 4, 12, 00, 00), "Marko Markovic", "S15"));
             this.freeSlots.Add(new Examination(new DateTime(2020, 1, 4, 12, 15, 00), "Marko Markovic", "S15"));
             this.freeSlots.Add(new Examination(new DateTime(2020, 1, 4, 12, 30, 00), "Nikola Nikolic", "S15"));
-            this.freeSlots.Add(new Examination(new DateTime(2020, 1, 4, 12, 50, 00), "Marko Markovic", "S16"));
-            this.freeSlots.Add(new Examination(new DateTime(2020, 1, 4, 15, 00, 00), "Nikola Nikolic", "S17"));
-            this.freeSlots.Add(new Examination(new DateTime(2020, 1, 5, 16, 00, 00), "Marko Markovic", "S16"));
-            this.freeSlots.Add(new Examination(new DateTime(2020, 1, 5, 17, 00, 00), "Nikola Nikolic", "S30"));
-            this.freeSlots.Add(new Examination(new DateTime(2020, 1, 5, 18, 00, 00), "Marko Markovic", "S55"));
-            this.freeSlots.Add(new Examination(new DateTime(2020, 1, 5, 18, 30, 00), "Nikola Nikolic", "S25"));
+            this.freeSlots.Add(new Examination(new DateTime(2020, 1, 4, 12, 50, 00), "Marko Markovic", "S14"));
+            this.freeSlots.Add(new Examination(new DateTime(2020, 1, 4, 15, 00, 00), "Nikola Nikolic", "S15"));
+            this.freeSlots.Add(new Examination(new DateTime(2020, 1, 5, 16, 00, 00), "Marko Markovic", "S14"));
+            this.freeSlots.Add(new Examination(new DateTime(2020, 1, 5, 17, 00, 00), "Nikola Nikolic", "S13"));
+            this.freeSlots.Add(new Examination(new DateTime(2020, 1, 5, 18, 00, 00), "Marko Markovic", "S15"));
+            this.freeSlots.Add(new Examination(new DateTime(2020, 1, 5, 18, 30, 00), "Nikola Nikolic", "S15"));
             this.freeSlots.Add(new Examination(new DateTime(2020, 1, 5, 18, 55, 00), "Marko Markovic", "S15"));
-            this.freeSlots.Add(new Examination(new DateTime(2020, 1, 5, 19, 10, 00), "Nikola Nikolic", "S55"));
+            this.freeSlots.Add(new Examination(new DateTime(2020, 1, 5, 19, 10, 00), "Nikola Nikolic", "S13"));
             this.freeSlots.Add(new Examination(new DateTime(2020, 1, 5, 20, 00, 00), "Marko Markovic", "S15"));
+
+            Shortcuts = new List<Shortcut>();
+            CreateShortcuts();
+
+            dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 2);
         }
 
         private void PopulateCombos()
@@ -181,18 +193,21 @@ namespace UserInterface
         private void GenerateReport(object sender, RoutedEventArgs e)
         {
             Report reportWindow = new Report();
+            _toolTip.IsOpen = false;
             reportWindow.Show();
         }
 
         private void FindAppointment(object sender, RoutedEventArgs e)
         {
             AppointmentFilter filterWindow = new AppointmentFilter(Patients);
+            _toolTip.IsOpen = false;
             filterWindow.ShowDialog();
         }
 
         private void FindFreeAppointment(object sender, RoutedEventArgs e)
         {
             AppointmentSearch searchDialog = new AppointmentSearch();
+            _toolTip.IsOpen = false;
             searchDialog.ShowDialog();
         }
 
@@ -216,7 +231,7 @@ namespace UserInterface
 
         private void EditSelectedAppointment(object sender, RoutedEventArgs e)
         {
-            EditAppointment editDialog = new EditAppointment();
+            EditAppointment editDialog = new EditAppointment(SelectedExamination);
             editDialog.ShowDialog();
         }
 
@@ -438,6 +453,7 @@ namespace UserInterface
                 err.Visibility = Visibility.Collapsed;
                 cnf.IsEnabled = true;
             }
+            ValidatePasswords(sender, e);
         }
 
         private void ChangePass(object sender, RoutedEventArgs e)
@@ -449,6 +465,68 @@ namespace UserInterface
             App app = Application.Current as App;
             app.SecretaryController.Edit(Secretary);
             CancelProfileChangeDialog(sender, e);
+        }
+
+        private void ControllToolTips(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+            if(_isToolTipAvailable)
+            {
+                _isToolTipAvailable = false;
+                btn.Content = "Uključi pomoćne tekstove";
+            }
+            else
+            {
+                _isToolTipAvailable = true;
+                btn.Content = "Isključi pomoćne tekstove";
+            }
+        }
+
+        private void SendFeedBack(Object sender, RoutedEventArgs e)
+        {
+            FeedBack.Clear();
+            ThankYouMsg.Visibility = System.Windows.Visibility.Visible;
+            dispatcherTimer.Start();
+
+        }
+
+        private void ValidatePasswords(Object sender, RoutedEventArgs e)
+        {
+            if (oldPass.Password.Trim() == "" || newPass.Password.Trim() == "" || confPass.Password.Trim() == "")
+                confirmBtn.IsEnabled = false;
+            else 
+                confirmBtn.IsEnabled = true;
+        }
+
+        private void CreateShortcuts()
+        {
+            Shortcuts.Add(new Shortcut("ALT", "Prikaz postojećih prečica na svakom prozoru. Kombinacijom ALT + podvučeno slovo, aktivira se željena funkcionalnost."));
+            Shortcuts.Add(new Shortcut("TAB", "Kretanje unapred."));
+            Shortcuts.Add(new Shortcut("SHIFT + TAB", "Kretanje unazad."));
+            Shortcuts.Add(new Shortcut("CTRL + TAB", "Kretanje unapred po tabovima."));
+            Shortcuts.Add(new Shortcut("CTRL + SHIFT + TAB", "Kretanje unazad po tabovima."));
+            Shortcuts.Add(new Shortcut("STRELICA DOLE", "Kretanje unapred u tabeli za ceo red. Kretanje unapred u listi sa više izbora."));
+            Shortcuts.Add(new Shortcut("STRELICA GORE", "Kretanje unazad u tabeli za ceo red. Kretanje unazad u listi sa više izbora."));
+            Shortcuts.Add(new Shortcut("KONTEKSTNO DUGME", "Otvaranje kontekstnog menija u tabeli."));
+        }
+
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            ThankYouMsg.Visibility = System.Windows.Visibility.Hidden;
+
+            dispatcherTimer.IsEnabled = false;
+        }
+    }
+
+    public class Shortcut
+    {
+        public String ExactShortcut { get; set; }
+        public String Description { get; set; }
+
+        public Shortcut(String shortcut, String description)
+        {
+            ExactShortcut = shortcut;
+            Description = description;
         }
     }
 }
