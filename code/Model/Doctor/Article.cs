@@ -7,20 +7,23 @@ namespace Model.Doctor
     {
         public long Id;
         public DateTime DatePublished;
+        public Model.Users.Doctor Doctor;
+
         public String Topic;
         public String Text;
 
-      public Article (long id, DateTime date, String topic, String txt)
-        {
-            this.Id = id;
-            this.DatePublished = date;
-            this.Topic = topic;
-            this.Text = txt;
-        }
-
-        public Article(DateTime datePublished, string topic, string text)
+        public Article(long id, DateTime datePublished, Users.Doctor doctor, string topic, string text) : this(id)
         {
             DatePublished = datePublished;
+            Doctor = doctor;
+            Topic = topic;
+            Text = text;
+        }
+
+        public Article(DateTime datePublished, Users.Doctor doctor, string topic, string text)
+        {
+            DatePublished = datePublished;
+            Doctor = doctor;
             Topic = topic;
             Text = text;
         }

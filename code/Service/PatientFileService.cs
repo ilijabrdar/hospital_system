@@ -5,78 +5,106 @@ using Model.Doctor;
 using Model.PatientSecretary;
 using Model.Users;
 using Repository;
-using System;
 using System.Collections.Generic;
 
 namespace Service
 {
-   public class PatientFileService : IPatientFileService
+    public class PatientFileService : IPatientFileService
     { 
 
-         private readonly  IHospitalizationService _hospitalisationService;
+        private readonly  IHospitalizationService _hospitalizationService;
         private readonly  IOperationService _operationService;
-        private readonly IPatientFileRepository _fileRepo;
+        private readonly IPatientFileRepository _patientFileRepo;
      
-        public PatientFileService(IPatientFileRepository repo) { _fileRepo = repo; }
+        public PatientFileService(IPatientFileRepository repo, IHospitalizationService hospitalizationService, IOperationService operationService) 
+        {
+            _hospitalizationService = hospitalizationService;
+            _operationService = operationService;
+            _patientFileRepo = repo; 
+        }
+
+        public PatientFileService(IPatientFileRepository repo)
+        {
+            _patientFileRepo = repo;
+        }
 
         public Allergy AddAllergy(Allergy allergy, PatientFile patientFile)
         {
-            throw new NotImplementedException();
+            patientFile.Allergy.Add(allergy);
+            Edit(patientFile);
+            return allergy;
+
         }
 
         public Examination AddExamination(Examination examination, PatientFile patientFile)
-        {
-            throw new NotImplementedException();
+        { 
+            //@Tamara :D Obrati paznju ovde moras prvo da napravis examination pa tek onda ga saljes ovde dok za hosp i za
+            //oper samo prosledis, ali ako hoces moze i ovde sa servisom da ne moras da se njakas msm isto je 
+            // mozda da ostanemo konzistentni
+            patientFile.Examination.Add(examination);
+            Edit(patientFile);
+            return examination;
         }
 
         public Hospitalization AddHospitalization(Hospitalization hospitalization, PatientFile patientFile)
         {
-            throw new NotImplementedException();
+            hospitalization = _hospitalizationService.Save(hospitalization);
+            patientFile.Hospitalization.Add(hospitalization);
+            Edit(patientFile);
+            return hospitalization;
         }
 
         public Operation AddOperation(Operation operation, PatientFile patientFile)
         {
-            throw new NotImplementedException();
+            operation = _operationService.Save(operation);
+            patientFile.Operation.Add(operation);
+            Edit(patientFile);
+            return operation;
         }
 
         public void Delete(PatientFile entity)
         {
-            throw new NotImplementedException();
+            _patientFileRepo.Delete(entity);
         }
 
         public bool DeleteAllergy(PatientFile patientFile, Allergy allergy)
         {
-            throw new NotImplementedException();
+            foreach(var help in patientFile.Allergy)
+            {
+                if (help.Name.Equals(allergy.Name))
+                {
+                    patientFile.Allergy.Remove(help);
+                    return true;
+                }
+            }
+            return false;
         }
 
         public void Edit(PatientFile entity)
         {
-            throw new NotImplementedException();
+            _patientFileRepo.Edit(entity);
         }
 
-        public Allergy EditAllergy(PatientFile patientFile, Allergy allergy)
-        {
-            throw new NotImplementedException();
-        }
 
         public PatientFile Get(long id)
         {
-            throw new NotImplementedException();
+           return _patientFileRepo.GetEager(id);
         }
 
         public IEnumerable<PatientFile> GetAll()
         {
-            throw new NotImplementedException();
+            return _patientFileRepo.GetAllEager();
         }
 
         public PatientFile GetPatientFile(Patient patient)
         {
-            throw new NotImplementedException();
+            //TODO : mozda treba?
+           return null;
         }
 
         public PatientFile Save(PatientFile entity)
         {
-            return _fileRepo.Save(entity);
+            return _patientFileRepo.Save(entity);
         }
     }
 }

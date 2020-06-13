@@ -8,30 +8,26 @@ namespace Model.PatientSecretary
    public class Prescription: IIdentifiable<long>
    {
       public long Id;
-      public DateTime DateOfIssue;
-      public DateTime ExpirationDate;
+      public Period Period;
       public String Note;
       public List<Drug> Drug;
-        public Prescription(long id, DateTime dateOfIssue, DateTime expirationDate, string note)
+        public Prescription(long id, Period period, string note)
         {
-            DateOfIssue = dateOfIssue;
-            ExpirationDate = expirationDate;
+            Period = period;
             Note = note;
         }
 
-        public Prescription(long id, DateTime dateOfIssue, DateTime expirationDate, string note, List<Drug> alternative)
+        public Prescription(long id, Period period, string note, List<Drug> alternative)
         {
-            DateOfIssue = dateOfIssue;
-            ExpirationDate = expirationDate;
+            Period = period;
             Note = note;
             Id = id;
             this.Drug = alternative;
         }
 
-        public Prescription(DateTime dateOfIssue, DateTime expirationDate, string note, List<Drug> drug)
+        public Prescription(Period period, string note, List<Drug> drug)
         {
-            DateOfIssue = dateOfIssue;
-            ExpirationDate = expirationDate;
+            Period = period;
             Note = note;
             Drug = drug;
         }

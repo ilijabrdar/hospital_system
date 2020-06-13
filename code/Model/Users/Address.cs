@@ -10,15 +10,18 @@ namespace Model.Users
         public long Id { get; set; }
         public String Street { get; set; }
         public int Number { get; set; }
+
         public String FullAddress { get; set; }
 
         public Town Town { get; set; }
       
+
         public Address(long id, string street, int number, Town town)
         {
             Id = id;
             Street = street;
             Number = number;
+
             Town = town;
             FullAddress = GetFullAddress();
         } 
@@ -39,14 +42,11 @@ namespace Model.Users
             return String.Join(", ", Street, Number);
         }
 
-        /// <pdGenerated>default parent getter</pdGenerated>
         public Town GetTown()
         {
             return Town;
         }
       
-        /// <pdGenerated>default parent setter</pdGenerated>
-        /// <param>newTown</param>
         public void SetTown(Town newTown)
         {
             if (Town != newTown)

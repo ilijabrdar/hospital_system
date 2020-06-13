@@ -7,7 +7,7 @@ using System.Text;
 
 namespace bolnica.Repository.CSV.Converter
 {
-    class UpcomingExaminationCSVConverter : ICSVConverter<Examination>
+   public class UpcomingExaminationCSVConverter : ICSVConverter<Examination>
     {
         private readonly string _delimiter;
 
@@ -27,7 +27,7 @@ namespace bolnica.Repository.CSV.Converter
 
         public string ConvertEntityToCSVFormat(Examination entity)
         {
-            
+
             return string.Join(_delimiter, entity.Id, entity.User.GetId(), entity.Doctor.GetId(), entity.Period.StartDate);
         }
     }

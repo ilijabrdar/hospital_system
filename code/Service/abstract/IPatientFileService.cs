@@ -21,7 +21,6 @@ namespace bolnica.Service
          Operation AddOperation(Operation operation, PatientFile patientFile);
 
         Allergy AddAllergy(Allergy allergy, PatientFile patientFile);
-        Allergy EditAllergy(PatientFile patientFile, Allergy allergy);
         Boolean DeleteAllergy(PatientFile patientFile, Allergy allergy);
 
     }

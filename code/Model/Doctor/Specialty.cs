@@ -20,6 +20,7 @@ namespace Model.Doctor
             this.Name = name;
             this.Id = id;
         }
+
         public Speciality(long id)
         {
             this.Id = id;

@@ -21,10 +21,6 @@ namespace Controller
         {
             _doctorservice = service;
         }
-        public bool ChangeSpeciality(Speciality speciality, Doctor doctor)
-        {
-            throw new NotImplementedException();
-        }
 
         public void Delete(Doctor entity)
         {
