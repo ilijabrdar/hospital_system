@@ -1478,5 +1478,55 @@ namespace upravnikKT2
                 articleSearchBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
             }
         }
+
+       private String _passwordOld;
+        public String PasswordOld
+        {
+            get
+            {
+                return _passwordOld;
+            }
+            set
+            {
+                if (value != _passwordOld)
+                {
+                    _passwordOld = value;
+                    OnPropertyChanged("PasswordOld");
+                }
+            }
+        }
+        private String _passwordNewCheck;
+        public String PasswordNewCheck
+        {
+            get
+            {
+                return _passwordNewCheck;
+            }
+            set
+            {
+                if (value != _passwordNewCheck)
+                {
+                    _passwordNewCheck = value;
+                    OnPropertyChanged("PasswordNewCheck");
+                }
+            }
+        }
+
+        private String _passwordNew;
+        public String PasswordNew
+        {
+            get
+            {
+                return _passwordNew;
+            }
+            set
+            {
+                if (value != _passwordNew)
+                {
+                    _passwordNew = value;
+                    OnPropertyChanged("PasswordNew");
+                }
+            }
+        }
     }
 }

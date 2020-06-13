@@ -765,22 +765,62 @@
                                 <StackPanel Orientation="Vertical">
                                     <DockPanel Margin="3">
                                         <Label DockPanel.Dock="Left" Width="150">stara lozinka</Label>
-                                        <PasswordBox DockPanel.Dock="Left" Width="170" Margin="500,0,0,0"></PasswordBox>
+                                        <TextBox x:Name="txtOldPassword" DockPanel.Dock="Left" Width="170" FontFamily="Password" Margin="500,0,0,0">
+                                            <TextBox.Text>
+                                                <Binding Path="PasswordOld" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                                    <Binding.ValidationRules>
+                                                        <val:NotEmptyValidationRule ValidatesOnTargetUpdated="True"/>
+                                                    </Binding.ValidationRules>
+                                                </Binding>
+                                            </TextBox.Text>
+                                        </TextBox>
                                         <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                                     </DockPanel>
 
                                     <DockPanel Margin="3">
                                         <Label DockPanel.Dock="Left" Width="150">nova lozinka</Label>
-                                        <PasswordBox DockPanel.Dock="Left" Width="170" Margin="500,0,0,0"></PasswordBox>
+                                        <TextBox x:Name="txtNewPassword" DockPanel.Dock="Left" Width="170" FontFamily="Password" Margin="500,0,0,0">
+                                            <TextBox.Text>
+                                                <Binding Path="PasswordNew" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                                    <Binding.ValidationRules>
+                                                        <val:NotEmptyValidationRule ValidatesOnTargetUpdated="True"/>
+                                                    </Binding.ValidationRules>
+                                                </Binding>
+                                            </TextBox.Text>
+                                        </TextBox>
                                         <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                                     </DockPanel>
 
                                     <DockPanel Margin="3">
                                         <Label DockPanel.Dock="Left" Width="200">potvrdite novu lozinku</Label>
-                                        <PasswordBox DockPanel.Dock="Left" Width="170" Margin="450,0,0,0"></PasswordBox>
+                                        <TextBox x:Name="txtNewPasswordCheck" DockPanel.Dock="Left" Width="170" FontFamily="Password" Margin="450,0,0,0">
+                                            <TextBox.Text>
+                                                <Binding Path="PasswordNewCheck" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                                    <Binding.ValidationRules>
+                                                        <val:NotEmptyValidationRule ValidatesOnTargetUpdated="True"/>
+                                                    </Binding.ValidationRules>
+                                                </Binding>
+                                            </TextBox.Text>
+                                        </TextBox>
                                         <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                                     </DockPanel>
-                                    <Button HorizontalAlignment="Left" Margin="250,0,0,0" Padding="5" Width="160" Content="Azuriraj lozinku"/>
+                                    <Button HorizontalAlignment="Left" Margin="250,0,0,0" Padding="5" Width="160" Content="Azuriraj lozinku">
+                                        <Button.Style>
+                                            <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                                                <Style.Triggers>
+                                                    <DataTrigger  Binding="{Binding Path=(Validation.HasError), ElementName=txtOldPassword}"  Value="true">
+                                                        <Setter Property="IsEnabled" Value="False" />
+                                                    </DataTrigger>
+                                                    <DataTrigger  Binding="{Binding Path=(Validation.HasError), ElementName=txtNewPassword}"  Value="true">
+                                                        <Setter Property="IsEnabled" Value="False" />
+                                                    </DataTrigger>
+                                                    <DataTrigger  Binding="{Binding Path=(Validation.HasError), ElementName=txtNewPasswordCheck}"  Value="true">
+                                                        <Setter Property="IsEnabled" Value="False" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
                                 </StackPanel>
 
                             </GroupBox>

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Mail;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Windows.Controls;
 
 namespace upravnikKT2.Validation
@@ -219,7 +220,100 @@ namespace upravnikKT2.Validation
             }
         }
     }
-    
 
+    public class PasswordValidation : ValidationRule
+    {
+        public static String password1 = "";
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            try
+            {
+                password1 = value as string;
+                PasswordValidation2.password2 = password1;
+                /*  if (pw = Regex.IsMatch(s, @"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{1,4}$", RegexOptions.IgnoreCase)){
+                      return new ValidationResult(false, "Password is weak.");
+                  }
+                  else if(pw = Regex.IsMatch(s, @"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{4,}$", RegexOptions.IgnoreCase))
+                  {
+                      return new ValidationResult(true, "Password is medium.");
+                  }*/
+                if (password1 == null)
+                {
+                    return new ValidationResult(false, "!");
+                }
+                if (password1.Equals("") || password1 == null)
+                {
+
+                    password1 = "";
+                    return new ValidationResult(false, "Lozinka ne sme ostati prazna!");
+
+                }
+                else
+                {
+
+                    password1 = "";
+                    return new ValidationResult(true, null);
+                }
+
+
+
+            }
+            catch
+            {
+                return new ValidationResult(false, "Password is weak.");
+            }
+        }
     }
+
+    public class PasswordValidation2 : ValidationRule
+    {
+        public static String password1;
+        public static String password2;
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            try
+            {
+                password1 = value as string;
+                Console.WriteLine(password2);
+                /*  if (pw = Regex.IsMatch(s, @"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{1,4}$", RegexOptions.IgnoreCase)){
+                      return new ValidationResult(false, "Password is weak.");
+                  }
+                  else if(pw = Regex.IsMatch(s, @"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{4,}$", RegexOptions.IgnoreCase))
+                  {
+                      return new ValidationResult(true, "Password is medium.");
+                  }*/
+                if (password1 == null)
+                {
+                    return new ValidationResult(false, "!");
+                }
+                if (password1.Equals("") || password1 == null)
+                {
+
+                    return new ValidationResult(false, "Lozinka ne sme ostati prazna!");
+
+                }
+                else if (!password1.Equals(password2))
+                {
+
+
+                    return new ValidationResult(false, "Lozinke se ne poklapaju!");
+                }
+                else
+                {
+
+                    return new ValidationResult(true, null);
+                }
+
+
+
+            }
+            catch
+            {
+                return new ValidationResult(false, "Password is weak.");
+            }
+        }
+    }
+
+
+}
 
