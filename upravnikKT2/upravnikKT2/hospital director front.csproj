@@ -243,6 +243,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Resources\Data\articles.csv" />
     <None Include="Resources\Data\doctors.csv" />
     <None Include="Resources\Data\businessdays.csv" />
     <None Include="Resources\Data\director.csv" />

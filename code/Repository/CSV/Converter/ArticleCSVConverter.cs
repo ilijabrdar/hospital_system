@@ -15,7 +15,7 @@ namespace bolnica.Repository.CSV.Converter
 
         public ArticleCSVConverter(string delimiter)
         {
-            _delimiter = delimiter;
+            _delimiter = "|";
         }
 
         public Article ConvertCSVFormatToEntity(string entityCSVFormat)

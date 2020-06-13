@@ -36,7 +36,7 @@
                             </StackPanel>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Bottom">
-                            <GroupBox x:Name="groupBox" Header="Obaveštenja" Margin="10" BorderBrush="Yellow" materialDesign:ShadowAssist.ShadowDepth="Depth1" materialDesign:ColorZoneAssist.Mode="Light">
+                            <!--<GroupBox x:Name="groupBox" Header="Obaveštenja" Margin="10" BorderBrush="Yellow" materialDesign:ShadowAssist.ShadowDepth="Depth1" materialDesign:ColorZoneAssist.Mode="Light">
                                 <StackPanel Orientation="Vertical" Margin="10">
                                     <Grid Height="62">
                                         <Grid.RowDefinitions>
@@ -87,7 +87,7 @@
                                         </TextBlock>
                                     </Grid>
                                 </StackPanel>
-                            </GroupBox>
+                            </GroupBox>-->
                         </DockPanel>
                     </DockPanel>
 
@@ -184,79 +184,49 @@
                 <TabItem Header="Clanci">
                     <DockPanel>
                         <DockPanel DockPanel.Dock="Top">
-                            <Button DockPanel.Dock="Right" Margin="10,10,20,10"
+                            <Button DockPanel.Dock="Right" Margin="10,10,20,10" x:Name="articleSearchBtn"
                                   Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
                                   HorizontalAlignment="Left"
-                                  ToolTip="Pretraži">
+                                  ToolTip="Pretraži" Click="articleSearchBtn_Click" PreviewMouseDown="articleSearchBtn_PreviewMouseDown">
                                 <materialDesign:PackIcon
                                     Kind="Search"
                                     Height="24"
                                     Width="24" />
                             </Button>
-                            <TextBox  DockPanel.Dock="Right" HorizontalAlignment="Right" MinWidth="100" Margin="10"/>
+                            <TextBox x:Name="txtSearchArticles" materialDesign:HintAssist.Hint="Pretrazi"  DockPanel.Dock="Right" HorizontalAlignment="Right" MinWidth="100" Margin="10" KeyUp="txtSearchArticles_KeyUp" PreviewKeyUp="txtSearchArticles_PreviewKeyUp" PreviewKeyDown="txtSearchArticles_PreviewKeyDown"/>
 
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Bottom">
                             <ScrollViewer >
                                 <materialDesign:Card Margin="10"
   Background="{DynamicResource MaterialDesignBackground}">
-                                    <StackPanel>
-                                        <Expander
-      HorizontalAlignment="Stretch"
-      Header="Expander Example 2a">
-                                            <StackPanel
-        Orientation="Vertical"
-        TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
-        Margin="24,8,24,16">
-                                                <TextBlock
-          Text="Your Content" />
-                                                <TextBlock
-          Opacity=".68"
-          Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-          TextWrapping="Wrap" />
+                                    <VirtualizingStackPanel x:Name="StackArticles">
+                                        <!--<Expander HorizontalAlignment="Stretch" Header="Expander Example 2a">
+                                            <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
+                                                <TextBlock Text="Your Content" />
+                                                <TextBlock Opacity=".68" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                                                        TextWrapping="Wrap" />
                                             </StackPanel>
                                         </Expander>
-                                        <Border
-      Background="{DynamicResource MaterialDesignDivider}"
-      Height="1"
-      HorizontalAlignment="Stretch"
-      SnapsToDevicePixels="True" />
-                                        <Expander
-      HorizontalAlignment="Stretch"
-      Header="Expander Example 2b">
-                                            <StackPanel
-        Orientation="Vertical"
-        TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
-        Margin="24,8,24,16">
-                                                <TextBlock
-          Text="Your Content" />
-                                                <TextBlock
-          Opacity=".68"
-          Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-          TextWrapping="Wrap" />
+                                        <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch"  SnapsToDevicePixels="True" />
+                                        <Expander HorizontalAlignment="Stretch" Header="Expander Example 2b">
+                                            <StackPanel  Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
+                                                <TextBlock  Text="Your Content" />
+                                                <TextBlock Opacity=".68"
+                                                            Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                                                        TextWrapping="Wrap" />
                                             </StackPanel>
                                         </Expander>
-                                        <Border
-      Background="{DynamicResource MaterialDesignDivider}"
-      Height="1"
-      HorizontalAlignment="Stretch"
-      SnapsToDevicePixels="True" />
-                                        <Expander
-      HorizontalAlignment="Stretch"
-      Header="Expander Example 2c">
-                                            <StackPanel
-        Orientation="Vertical"
-        TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
-        Margin="24,8,24,16">
-                                                <TextBlock
-          Text="Your Content" />
-                                                <TextBlock
-          Opacity=".68"
-          Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-          TextWrapping="Wrap" />
+                                        <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
+                                        <Expander HorizontalAlignment="Stretch" Header="Expander Example 2c">
+                                            <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}"  Margin="24,8,24,16">
+                                                <TextBlock Text="Your Content" />
+                                                <TextBlock Opacity=".68"
+                                                      Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                                                      TextWrapping="Wrap" />
                                             </StackPanel>
-                                        </Expander>
-                                    </StackPanel>
+                                        </Expander> -->
+                                    </VirtualizingStackPanel>
                                 </materialDesign:Card>
                             </ScrollViewer>
 

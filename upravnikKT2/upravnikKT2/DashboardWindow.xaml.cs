@@ -1,8 +1,10 @@
 ﻿using bolnica.Controller;
 using Controller;
 using Model.Director;
+using Model.Doctor;
 using Model.PatientSecretary;
 using Model.Users;
+using Service;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -34,6 +36,7 @@ namespace upravnikKT2
         private readonly IDoctorController _doctorController;
         private readonly IBusinessDayController _businessDayController;
         private readonly IDirectorController _directorController;
+        private readonly IArticleController _articleController;
 
         public Director director;
 
@@ -41,6 +44,8 @@ namespace upravnikKT2
         public List<State> States { get; set; }
         public List<Town> Towns { get; set; }
         public List<Address> Addresses { get; set; }
+
+        public List<Article> articles = new List<Article>();
 
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -156,6 +161,7 @@ namespace upravnikKT2
             _doctorController = app.DoctorController;
             _businessDayController = app.BusinessDayController;
             _directorController = app.DirectorController;
+            _articleController = app.ArticleController;
 
             director = _directorController.Get(1);
 
@@ -408,6 +414,9 @@ namespace upravnikKT2
 
                 this.DataGridRenovation.ItemsSource = null;
                 this.DataGridRenovation.ItemsSource = new ObservableCollection<Renovation>(_renovationController.GetAll());
+
+                this.dataGridLekari.ItemsSource = null;
+                this.dataGridLekari.ItemsSource = new ObservableCollection<Doctor>(_doctorController.GetAll());
             }
             else
             {
@@ -510,6 +519,9 @@ namespace upravnikKT2
 
             //dataGridSmene.Columns.Add(new DataGridColumn());
 
+            articles = _articleController.GetAll().ToList();
+            setArticles();
+
             doctorCount.Text = "" + _doctorController.GetAll().ToList().Count.ToString();
 
 
@@ -602,6 +614,44 @@ namespace upravnikKT2
 
             DataGridShortcuts.ItemsSource = shortcuts;
 
+        }
+
+        private void setArticles()
+        {
+            foreach (Article article in articles)
+            {
+                //TextBlock textBlockTitle = new TextBlock();
+                //textBlockTitle.Text = article.Topic;
+                //textBlockTitle.Opacity = 0.68;
+
+                TextBlock textContent = new TextBlock();
+                textContent.Text = article.Text;
+                textContent.TextWrapping = TextWrapping.Wrap;
+                textContent.Opacity = 0.68;
+
+                StackPanel WrapArticle = new StackPanel();
+                WrapArticle.Orientation = Orientation.Vertical;
+                WrapArticle.Margin = new Thickness(24, 8, 24, 16);
+
+                Expander expander = new Expander();
+                expander.HorizontalAlignment = HorizontalAlignment.Stretch;
+                expander.Header = article.Topic;
+
+                //WrapArticle.Children.Add(textBlockTitle);
+                WrapArticle.Children.Add(textContent);
+
+                expander.Content = WrapArticle;
+                StackArticles.Children.Add(expander);
+
+                Border border = new Border();
+                border.Height = 1;
+                border.HorizontalAlignment = HorizontalAlignment.Stretch;
+                border.SnapsToDevicePixels = true;
+                border.Background = Brushes.Gray;
+
+                StackArticles.Children.Add(border);
+
+            }
         }
 
         private void UpdateTownAddress(object sender, RoutedEventArgs e)
@@ -1322,6 +1372,110 @@ namespace upravnikKT2
             else if (e.Key == System.Windows.Input.Key.Delete)
             {
                 deleteDoctorBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+            }
+        }
+
+        private void txtSearchArticles_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (txtSearchArticles.Text.Equals(""))
+            {
+                foreach (Article article in articles)
+                {
+                    //TextBlock textBlockTitle = new TextBlock();
+                    //textBlockTitle.Text = article.Topic;
+                    //textBlockTitle.Opacity = 0.68;
+                    if (article.Topic.Contains(txtSearchArticles.Text))
+                    {
+
+                        TextBlock textContent = new TextBlock();
+                        textContent.Text = article.Text;
+                        textContent.TextWrapping = TextWrapping.Wrap;
+                        textContent.Opacity = 0.68;
+
+                        StackPanel WrapArticle = new StackPanel();
+                        WrapArticle.Orientation = Orientation.Vertical;
+                        WrapArticle.Margin = new Thickness(24, 8, 24, 16);
+
+                        Expander expander = new Expander();
+                        expander.HorizontalAlignment = HorizontalAlignment.Stretch;
+                        expander.Header = article.Topic;
+
+                        //WrapArticle.Children.Add(textBlockTitle);
+                        WrapArticle.Children.Add(textContent);
+
+                        expander.Content = WrapArticle;
+                        StackArticles.Children.Add(expander);
+
+                        Border border = new Border();
+                        border.Height = 1;
+                        border.HorizontalAlignment = HorizontalAlignment.Stretch;
+                        border.SnapsToDevicePixels = true;
+                        border.Background = Brushes.Gray;
+
+                        StackArticles.Children.Add(border);
+                    }
+
+                }
+            }
+        }
+
+        private void txtSearchArticles_PreviewKeyUp(object sender, KeyEventArgs e)
+        {
+            //StackArticles.Children.Clear();
+        }
+
+        private void articleSearchBtn_Click(object sender, RoutedEventArgs e)
+        {
+            StackArticles.Children.Clear();
+            foreach (Article article in articles)
+            {
+                //TextBlock textBlockTitle = new TextBlock();
+                //textBlockTitle.Text = article.Topic;
+                //textBlockTitle.Opacity = 0.68;
+                if (article.Topic.Contains(txtSearchArticles.Text))
+                {
+
+                    TextBlock textContent = new TextBlock();
+                    textContent.Text = article.Text;
+                    textContent.TextWrapping = TextWrapping.Wrap;
+                    textContent.Opacity = 0.68;
+
+                    StackPanel WrapArticle = new StackPanel();
+                    WrapArticle.Orientation = Orientation.Vertical;
+                    WrapArticle.Margin = new Thickness(24, 8, 24, 16);
+
+                    Expander expander = new Expander();
+                    expander.HorizontalAlignment = HorizontalAlignment.Stretch;
+                    expander.Header = article.Topic;
+
+                    //WrapArticle.Children.Add(textBlockTitle);
+                    WrapArticle.Children.Add(textContent);
+
+                    expander.Content = WrapArticle;
+                    StackArticles.Children.Add(expander);
+
+                    Border border = new Border();
+                    border.Height = 1;
+                    border.HorizontalAlignment = HorizontalAlignment.Stretch;
+                    border.SnapsToDevicePixels = true;
+                    border.Background = Brushes.Gray;
+
+                    StackArticles.Children.Add(border);
+                }
+
+            }
+        }
+
+        private void articleSearchBtn_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            //StackArticles.Children.Clear();
+        }
+
+        private void txtSearchArticles_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                articleSearchBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
             }
         }
     }

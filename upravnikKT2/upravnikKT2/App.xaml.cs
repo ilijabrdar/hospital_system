@@ -11,6 +11,7 @@ using Repository;
 using Service;
 using System;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace upravnikKT2
 {
@@ -32,6 +33,7 @@ namespace upravnikKT2
         private const string STATE_FILE = "../../Resources/Data/StateFile.txt";
         private const string BUSINESSDAY_FILE = "../../Resources/Data/businessdays.csv";
         private const string DIRECTOR_FILE = "../../Resources/Data/director.csv";
+        private const string ARTICLES_FILE = "../../Resources/Data/articles.csv";
 
 
         private const string CSV_DELIMITER = ",";
@@ -56,6 +58,9 @@ namespace upravnikKT2
         public IBusinessDayController BusinessDayController { get; private set; }
 
         public IDirectorController DirectorController { get; private set; }
+
+        public IArticleController ArticleController { get; private set; }
+
 
         public App()
         {
@@ -117,7 +122,8 @@ namespace upravnikKT2
             StateService stateService = new StateService(stateRepository);
             StateController = new StateController(stateService);
 
-            var businessDayRepository = new BusinessDayRepository(new CSVStream<BusinessDay>(BUSINESSDAY_FILE, new BusinessDayCSVConverter()), new LongSequencer(), doctorRepository, roomRepository);
+            var businessDayRepository = new BusinessDayRepository(new CSVStream<BusinessDay>(BUSINESSDAY_FILE, new BusinessDayCSVConverter()), new LongSequencer(), roomRepository);
+            businessDayRepository.doctorRepo = doctorRepository;
             var businessDayService = new BusinessDayService(businessDayRepository);
             BusinessDayController = new BusinessDayController(businessDayService);
 
@@ -126,8 +132,12 @@ namespace upravnikKT2
 
             var directorRepository = new DirectorRepository(new CSVStream<Director>(DIRECTOR_FILE, new DirectorCSVConverter(CSV_DELIMITER)), new LongSequencer(), addressRepository, townRepository, stateRepository);
             var directorService = new DirectorService(directorRepository);
-            DirectorController = new DirectorContoller(directorService); 
+            DirectorController = new DirectorContoller(directorService);
 
+            ArticleRepository articleRepository = new ArticleRepository(new CSVStream<Article>(ARTICLES_FILE, new ArticleCSVConverter(CSV_DELIMITER)), new LongSequencer());
+            articleRepository._doctorRepository = doctorRepository;
+            ArticleService articleService = new ArticleService(articleRepository);
+            ArticleController = new ArticleController(articleService);
         }
 
         private void Application_Startup(object sender, StartupEventArgs e)
