@@ -80,6 +80,8 @@ namespace PacijentBolnicaZdravo.Properties
             currentWindow.GradeADoctor.Text = MyProject.Language.Resources.GradeADoctor;
             currentWindow.ChooseDoctorForGrade.Text = MyProject.Language.Resources.ChooseDoctor;
             currentWindow.GradeADoctorButton.Content = MyProject.Language.Resources.Send;
+            currentWindow.ErrorSchedule.Text = MyProject.Language.Resources.ErrorSchedule;
+            currentWindow.SuccessUpdateData.Text = MyProject.Language.Resources.SuccessUpdateData;
         }   
 
         public void ChangeLogInWindow(WindowLogIn currentWindow)

@@ -196,6 +196,15 @@ namespace MyProject.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You already have 3 appointments.
+        /// </summary>
+        public static string ErrorSchedule {
+            get {
+                return ResourceManager.GetString("ErrorSchedule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You currently do not have any examnations.
         /// </summary>
         public static string ExaminationHardCore {

@@ -28,9 +28,15 @@ namespace PacijentBolnicaZdravo
           public static int j = 0;
         private readonly String _patient_File = "../../ResourcesFiles/patient.csv";
         private readonly String _patientFile_File = "../../ResourcesFiles/patientFile.csv";
+        private readonly String _article_File = "../../ResourcesFiles/article.csv";
+        private readonly String _doctor_File = "../../ResourcesFiles/doctor.csv";
 
-        public IUserController userController;
-      
+        public IUserController userController { get; set; }
+        public IController<Article, long> ArticleController
+        { get; private set; }
+
+
+
         App()
         {
         //    var doctorGradeRepo = new DoctorGradeRepository(new CSVStream<DoctorGrade>("", new DoctorGradeCSVConverter(",", "|", "*")), new LongSequencer());
@@ -41,6 +47,13 @@ namespace PacijentBolnicaZdravo
             var patientService = new PatientService(patientRepo, patientFileService);
             var userService = new UserService(patientService);
             userController = new UserController(userService);
+            var articleRepo = new ArticleRepository(new CSVStream<Article>(_article_File, new ArticleCSVConverter("|")), new LongSequencer());
+            DoctorRepository doctorRepository = new DoctorRepository(new CSVStream<Doctor>(_doctor_File, new DoctorCSVConverter(",")), new LongSequencer(),
+              null, null, null, null);
+            articleRepo._doctorRepository = doctorRepository;
+            var articleService = new ArticleService(articleRepo);
+            ArticleController = new ArticleController(articleService);
+            
            
         }
 

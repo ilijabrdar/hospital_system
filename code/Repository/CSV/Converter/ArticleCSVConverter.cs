@@ -2,6 +2,7 @@
 using Model.Users;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
@@ -21,9 +22,12 @@ namespace bolnica.Repository.CSV.Converter
         public Article ConvertCSVFormatToEntity(string entityCSVFormat)
         {
             string[] tokens = entityCSVFormat.Split(_delimiter.ToCharArray());
+  /*          var formats = (from CultureInfo ct in CultureInfo.GetCultures(CultureTypes.AllCultures)
+                           select ct.DateTimeFormat.GetAllDateTimePatterns()).SelectMany((x) => x).ToArray();
+*/
             return new Article(
                 long.Parse(tokens[0]),
-               (DateTime)DateTime.Parse(tokens[1]), new Doctor(long.Parse(tokens[2])), tokens[3], tokens[4]);
+             new DateTime(1999,12,12), new Doctor(long.Parse(tokens[2])), tokens[3], tokens[4]);
             
         }
 

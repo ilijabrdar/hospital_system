@@ -10,6 +10,12 @@
          Title="{x:Static p:Resources.Title}"  Height="600" Width="850">
     <mah:MetroWindow.Resources>
         <DatePickerFormat x:Key="DatePickerFormat1">Short</DatePickerFormat>
+        <Storyboard x:Key="sbHideAnimation" >
+            <DoubleAnimation Storyboard.TargetProperty="Opacity"  From="1" To="1" Duration="0:0:3" />
+            <!--label shows for 3 sec-->
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" BeginTime="0:0:3" From="1" To="0" DecelerationRatio=".5" Duration="0:0:2" />
+            <!--Fade out the label after 3 sec-->
+        </Storyboard>
     </mah:MetroWindow.Resources>
     <DockPanel>
         <DockPanel DockPanel.Dock="Top" Height="35">
@@ -56,11 +62,8 @@
                     </StackPanel>
 
                     <ScrollViewer VerticalScrollBarVisibility="auto">
-                        <StackPanel x:Name="ArticlesPanel" Orientation="Vertical">
-                            <Border BorderThickness="1" BorderBrush="Black" Height="200" CornerRadius="3">
-                                <TextBox TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="auto"  FontSize="14" TextAlignment="Left" >Šta je piramida ishrane?
-Piramida ishrane je vizuelni prikaz namirnica koje treba da budu zastupljenje u svakodnevnoj ishrani. Količine namirnica koje uzimate su individualne i zavise od Vašeg organizma- da li ste zdravi, u fazi rasta i razvijanja, da li imate dijabetes, da li imate svakodnevne fizičke i mentalne napore, neku hroničnu bolest koja zahteva specijalan režim ishrane, ili jednostavno želite da se zdravo hranite.</TextBox>
-                            </Border>
+                        <StackPanel Name="ArticlesPanel" Orientation="Vertical">
+                          
                         </StackPanel>
                     </ScrollViewer>
                 </DockPanel>
@@ -69,14 +72,14 @@ Piramida ishrane je vizuelni prikaz namirnica koje treba da budu zastupljenje u 
                 <StackPanel  Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Name="ChooseDoctor" Text="{x:Static p:Resources.ChooseDoctor}" FontSize="19"  Margin="20" Width="150"/>
-                        <ComboBox HorizontalAlignment="Left" Margin="20"  Width="250">
-                            <ComboBoxItem Content="dr Jovan Jovanović"></ComboBoxItem>
+                        <ComboBox HorizontalAlignment="Left" Margin="20"  Width="250"  Name="DoctorsForExaminations" ItemsSource ="{Binding Path=listOfDoctors}">
                         </ComboBox>
                     </StackPanel>
                     <StackPanel x:Name="DatePicker" Orientation="Horizontal">
                         <TextBlock Name="ChooseDate" Text="{x:Static p:Resources.ChooseDate}" FontSize="19" Margin="20" Width="150"/>
-                        <DatePicker Name="Picker" Margin="20" Width="200" FirstDayOfWeek="Monday" CalendarClosed="CalendarClosedDate"/>
+                        <DatePicker Name="Picker" Margin="20" Width="200" FirstDayOfWeek="Monday" SelectedDateChanged="CalendarDateChanged"/>
                     </StackPanel>
+
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"></RowDefinition>
@@ -84,8 +87,9 @@ Piramida ishrane je vizuelni prikaz namirnica koje treba da budu zastupljenje u 
                             <RowDefinition Height="auto"></RowDefinition>
                             <RowDefinition Height="auto"></RowDefinition>
                         </Grid.RowDefinitions>
-                      
-                        <DataGrid Margin="15" FontSize="14" BorderThickness="1" x:Name="scheduleExaminationsGrid" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" ItemsSource ="{Binding Path=upcomingExaminations}" >
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" >
+                            <Border Height="300">
+                            <DataGrid Margin="15" FontSize="14" BorderThickness="1" x:Name="scheduleExaminationsGrid" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" ItemsSource ="{Binding Path=upcomingExaminations}" >
                             <DataGrid.CellStyle>
                                 <Style TargetType="DataGridCell">
                                     <Setter Property="Margin" Value="0"/>
@@ -95,14 +99,18 @@ Piramida ishrane je vizuelni prikaz namirnica koje treba da budu zastupljenje u 
                             </DataGrid.CellStyle>
 
                             <DataGrid.Columns>
-                                <DataGridTextColumn  x:Name="ColumnDoctorForSchedule" Header="{x:Static p:Resources.Doctor}" Binding="{Binding doctor.FirstName}" Width="*"></DataGridTextColumn>
-                                <DataGridTextColumn x:Name="ColumnDateForSchedule" Header="{x:Static p:Resources.Date}" Binding="{Binding period.StartDate.Date }" Width="*"></DataGridTextColumn>
-                                <DataGridTextColumn x:Name="ColumnTimeForSchedule" Header="{x:Static p:Resources.Time}" Binding="{Binding period.StartDate.TimeOfDay}" Width="*"></DataGridTextColumn>
-                                <DataGridTextColumn x:Name="ColumnOrdinationForSchedule" Header="{x:Static p:Resources.Ordination}" Binding="{Binding room.RoomCode }" Width="*"></DataGridTextColumn>
+                                <DataGridTextColumn  x:Name="ColumnDoctorForSchedule" Header="{x:Static p:Resources.Doctor}" Binding="{Binding Doctor.FullName}" Width="*"></DataGridTextColumn>
+                                <DataGridTextColumn x:Name="ColumnDateForSchedule" Header="{x:Static p:Resources.Date}" Binding="{Binding Period.StartDate.Date }" Width="*"></DataGridTextColumn>
+                                <DataGridTextColumn x:Name="ColumnTimeForSchedule" Header="{x:Static p:Resources.Time}" Binding="{Binding Period.StartDate.TimeOfDay}" Width="*"></DataGridTextColumn>
+                                <DataGridTextColumn x:Name="ColumnOrdinationForSchedule" Header="{x:Static p:Resources.Ordination}" Binding="{Binding Room.RoomCode }" Width="*"></DataGridTextColumn>
                                 
                             </DataGrid.Columns>
                         </DataGrid>
+                            </Border>
+                        </ScrollViewer>
                     </Grid>
+                    <TextBlock Name="ErrorSchedule" Text="{x:Static p:Resources.ErrorSchedule}" Opacity="0" FontSize="15" HorizontalAlignment="Right"  Margin="0,0,10,-5" Foreground="#FFE01F0C"></TextBlock>
+
                     <Button Name="Schedule" Content="{x:Static p:Resources.Schedule}" HorizontalAlignment="Right" Margin="15"  Width="76" Click="Zakazi" >
                         <Button.ToolTip>
                             <ToolTip x:Name="ToolTipSchedule"  Content = "{x:Static p:Resources.ToolTipSchedule}" Background="#FFA0A0A0"/>
@@ -123,14 +131,14 @@ Piramida ishrane je vizuelni prikaz namirnica koje treba da budu zastupljenje u 
                         <DataGrid FontSize="14" Margin="15" BorderThickness="1" x:Name="scheduledExaminationsGrid" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" ItemsSource ="{Binding Path=scheduledExaminations}" >
 
                             <DataGrid.Columns>
-                                <DataGridTextColumn x:Name="ColumnDoctor" Header="{x:Static p:Resources.Doctor}" Binding="{Binding doctor.FirstName}" Width="*"></DataGridTextColumn>
-                                <DataGridTextColumn x:Name="ColumnDate" Header="{x:Static p:Resources.Date}" Binding="{Binding period.StartDate.Date }" Width="*"></DataGridTextColumn>
-                                <DataGridTextColumn x:Name="ColumnTime" Header="{x:Static p:Resources.Time}" Binding="{Binding period.StartDate.TimeOfDay}" Width="*"></DataGridTextColumn>
-                                <DataGridTextColumn x:Name="ColumnOrdination" Header="{x:Static p:Resources.Ordination}" Binding="{Binding room.RoomCode }" Width="*"></DataGridTextColumn>
+                                <DataGridTextColumn x:Name="ColumnDoctor" Header="{x:Static p:Resources.Doctor}" Binding="{Binding Doctor.FullName}" Width="*"></DataGridTextColumn>
+                                <DataGridTextColumn x:Name="ColumnDate" Header="{x:Static p:Resources.Date}" Binding="{Binding Period.StartDate.Date }" Width="*"></DataGridTextColumn>
+                                <DataGridTextColumn x:Name="ColumnTime" Header="{x:Static p:Resources.Time}" Binding="{Binding Period.StartDate.TimeOfDay}" Width="*"></DataGridTextColumn>
+                                <DataGridTextColumn x:Name="ColumnOrdination" Header="{x:Static p:Resources.Ordination}" Binding="{Binding Room.RoomCode }" Width="*"></DataGridTextColumn>
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>
-                    
+
                     <Button Name="Cancel" ToolTip="{x:Static p:Resources.ToolTipCancel}" Content="{x:Static p:Resources.Cancel}" HorizontalAlignment="Right" Margin="15" Width="74" Click="Otkazi"/>
                 </StackPanel>
             </TabItem>
@@ -217,11 +225,12 @@ Piramida ishrane je vizuelni prikaz namirnica koje treba da budu zastupljenje u 
                                 <TextBlock Name="PhoneLabel" Margin="15" FontSize="15"  Text="{x:Static p:Resources.NumberPhone}" />
 
                             </StackPanel>
+
                             <StackPanel Orientation="Vertical">
-                                <TextBlock Margin="13" FontSize="15" Width="220" FontWeight="Bold" Opacity="0.6"></TextBlock>
-                                <TextBox TextAlignment="Left" BorderThickness="1.5" BorderBrush="LightBlue" Name="Name" Margin="10" FontSize="15" Width="220">
+                                <TextBlock Margin="13" Name="UsernameConst" FontSize="15" Width="220" FontWeight="Bold" Opacity="0.6"></TextBlock>
+                                <TextBox  TextAlignment="Left" BorderThickness="1.5" BorderBrush="LightBlue" Name="Name" Margin="10" FontSize="15" Width="220">
                                     <TextBox.Text>
-                                        <Binding Path="Ime" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding Path="Ime"  ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                                             <Binding.ValidationRules>
                                                 <local:ValidationRules />
                                             </Binding.ValidationRules>
@@ -282,8 +291,42 @@ Piramida ishrane je vizuelni prikaz namirnica koje treba da budu zastupljenje u 
                                         </Binding>
                                     </TextBox.Text>
                                 </TextBox>
-                                <TextBlock Name="SuccessUpdateData" Text="{x:Static p:Resources.SuccessUpdateData}" Visibility="Hidden" FontSize="15" HorizontalAlignment="Right"  Margin="0,0,10,-5" Foreground="#FF16D900"></TextBlock>
-                                <Button  Content="{x:Static p:Resources.UpdateData}" Name="UpdateData" Width="120" HorizontalAlignment="Right" Margin="10" Click="UpdateInfo"></Button>
+                                
+                                <TextBlock Name="SuccessUpdateData" Text="{x:Static p:Resources.SuccessUpdateData}" Opacity="0" FontSize="15" HorizontalAlignment="Right"  Margin="0,0,10,-5" Foreground="#FF16D900"></TextBlock>
+                                <Button  Content="{x:Static p:Resources.UpdateData}" Name="UpdateData" Width="120" HorizontalAlignment="Right" Margin="10" Click="UpdateInfo">
+                                    <Button.Style>
+                                        <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Path=(Validation.HasError), ElementName=Name}" Value="True">
+                                                    <Setter Property="IsEnabled" Value="False" />
+                                                </DataTrigger>
+                                                <DataTrigger  Binding="{Binding Path=(Validation.HasError), ElementName=Surname}"  Value="true">
+                                                    <Setter Property="IsEnabled" Value="False" />
+                                                </DataTrigger>
+                                                <DataTrigger  Binding="{Binding Path=(Validation.HasError), ElementName=Username}"  Value="true">
+                                                    <Setter Property="IsEnabled" Value="False" />
+                                                </DataTrigger>
+                                                <DataTrigger  Binding="{Binding Path=(Validation.HasError), ElementName=ID}"  Value="true">
+                                                    <Setter Property="IsEnabled" Value="False" />
+                                                </DataTrigger>
+                                                <DataTrigger  Binding="{Binding Path=(Validation.HasError), ElementName=DateBirthPicker}"  Value="true">
+                                                    <Setter Property="IsEnabled" Value="False" />
+                                                </DataTrigger>
+                                                <DataTrigger  Binding="{Binding Path=(Validation.HasError), ElementName=Email}"  Value="true">
+                                                    <Setter Property="IsEnabled" Value="False" />
+                                                </DataTrigger>
+
+                                                <DataTrigger  Binding="{Binding Path=(Validation.HasError), ElementName=Adress}"  Value="true">
+                                                    <Setter Property="IsEnabled" Value="False" />
+                                                </DataTrigger>
+                                                <DataTrigger  Binding="{Binding Path=(Validation.HasError), ElementName=PhoneNumber}"  Value="true">
+                                                    <Setter Property="IsEnabled" Value="False" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+
+                                </Button>
                             </StackPanel>
                             <StackPanel Orientation="Vertical">
                                 <StackPanel Orientation="Vertical">
@@ -298,18 +341,58 @@ Piramida ishrane je vizuelni prikaz namirnica koje treba da budu zastupljenje u 
                             <TextBlock Name="PwLabel"  Margin="10,10,0,0" FontSize="18" Text="{x:Static p:Resources.ChangePw}" />
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock  Name="CurrentPw" Margin="10,10,43,10" FontSize="15" Text="{x:Static p:Resources.CurrentPw}"/>
-                                <PasswordBox BorderThickness="1.5" BorderBrush="LightBlue"  FontSize="15" Name="CurrentPassword"  Margin="10" Width="220"></PasswordBox>
+                                <TextBox BorderThickness="1.5" BorderBrush="LightBlue" FontFamily="Password" GotFocus="Password" LostFocus="Password" GotKeyboardFocus="Password" FontSize="15" Name="CurrentPassword"  Margin="10" Width="220">
+                                    <TextBox.Text>
+                                        <Binding Path="Password1" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <local:PasswordValidation2/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Name="NewPw" Margin="10,10,66,10" FontSize="15" Text="{x:Static p:Resources.NewPw}"/>
-                                <PasswordBox BorderThickness="1.5" BorderBrush="LightBlue"  FontSize="15" Name="NewPassword" Margin="10"  Width="220"></PasswordBox>
+                                <TextBox BorderThickness="1.5" BorderBrush="LightBlue" FontFamily="Password" GotFocus="PasswordCheck" GotKeyboardFocus="PasswordCheck" LostFocus="PasswordCheck"  FontSize="15" Name="NewPassword" Margin="10"  Width="220">
+                                    <TextBox.Text>
+                                        <Binding Path="Password1" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <local:PasswordValidation/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Name="ConfirmPw" Margin="10,10,50,10" FontSize="15"  Text="{x:Static p:Resources.ConfirmPw}"/>
-                                <PasswordBox BorderThickness="1.5" BorderBrush="LightBlue"  FontSize="15" Name="CheckPassword" Margin="10" Width="220"></PasswordBox>
+                                <TextBox BorderThickness="1.5" BorderBrush="LightBlue" FontFamily="Password" GotKeyboardFocus="PasswordCheck" GotFocus="PasswordCheck" LostFocus="PasswordCheck"  FontSize="15" Name="CheckPassword" Margin="10" Width="220">
+                                    <TextBox.Text>
+                                        <Binding Path="Password3" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <local:PasswordValidation2/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
                             </StackPanel>
-                            <TextBlock Name="SuccessUpdatePw" Text="{x:Static p:Resources.SuccessUpdatePw}" Visibility="Hidden" FontSize="15" HorizontalAlignment="Right"  Margin="0,0,10,-5" Foreground="#FF16D900"></TextBlock>
-                            <Button Content="{x:Static p:Resources.UpdatePw}" Name="UpdatePwButton" Margin="10"  Height="25" Width="110" Click="UpdatePw"></Button>
+                            <TextBlock Name="SuccessUpdatePw" Text="{x:Static p:Resources.SuccessUpdatePw}" Opacity="0" FontSize="15" HorizontalAlignment="Right"  Margin="0,0,10,-5" Foreground="#FF16D900"></TextBlock>
+                            <Button Content="{x:Static p:Resources.UpdatePw}" Name="UpdatePwButton" Margin="10"  Height="25" Width="110" Click="UpdatePw">
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                                    <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=(Validation.HasError), ElementName=CurrentPassword}" Value="True">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                                            <DataTrigger  Binding="{Binding Path=(Validation.HasError), ElementName=NewPassword}"  Value="true">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                                            <DataTrigger  Binding="{Binding Path=(Validation.HasError), ElementName=CheckPassword}"  Value="true">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                                </Button.Style>
+                            </Button>
                         </StackPanel>
                     </StackPanel>
                 </ScrollViewer>
@@ -323,12 +406,14 @@ Piramida ishrane je vizuelni prikaz namirnica koje treba da budu zastupljenje u 
 
                     <TextBox BorderThickness="1.5" Name="FeedBack" BorderBrush="LightBlue" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="auto" Height="100" TextAlignment="Left" FontSize="14"></TextBox>
 
-                    <Button Name="FeedBackButton" Content="{x:Static p:Resources.Send}"  Width="60" Margin="10,10,20,10" HorizontalAlignment="Right" Click="Feedback"></Button>
+                        <TextBlock Name="FeedbackText" Width="350" Opacity="0" FontSize="15" HorizontalAlignment="Right"  Margin="0,0,10,0" Foreground="#FF0AD908"></TextBlock>
+
+                        <Button Name="FeedBackButton" Content="{x:Static p:Resources.Send}"  Width="60" Margin="10,10,20,10" HorizontalAlignment="Right" Click="Feedback"></Button>
                     <Border BorderThickness="0.5" BorderBrush="LightBlue"></Border>
                     <TextBlock x:Name="GradeADoctor" Text="{x:Static p:Resources.GradeADoctor}" FontSize="16" HorizontalAlignment="Center" Margin="5" FontWeight="Bold"></TextBlock>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Margin="10,5,5,5" Name="ChooseDoctorForGrade" FontSize="16" Text="{x:Static p:Resources.ChooseDoctor}"/>
-                        <ComboBox Margin="10,5,5,5" Width="150"></ComboBox>
+                            <ComboBox Margin="10,5,5,5" Name="DoctorsForFeedback" Width="250" ItemsSource ="{Binding Path=listOfDoctors}"></ComboBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                
@@ -340,12 +425,13 @@ Piramida ishrane je vizuelni prikaz namirnica koje treba da budu zastupljenje u 
                                 <TextBlock Margin="6,6,6,50"  Height="24" FontSize="14">Pitanje broj jedan</TextBlock>
                         </StackPanel>
                         <StackPanel Orientation="Vertical">
-                            <Slider Style="{StaticResource SliderGrade}" Minimum="1" Maximum="5" TickFrequency="1" Width="100"  Margin="10,14,5,5" Name="Slider1"></Slider>
+                            <Slider Style="{StaticResource SliderGrade}" Minimum="1" Maximum="5" TickFrequency="1" Width="150"   Margin="10,14,5,5" Name="Slider1"></Slider>
                             <Slider Style="{StaticResource SliderGrade}" Minimum="1" Maximum="5" TickFrequency="1" Margin="10,10,5,5" Name="Slider2"></Slider>
                             <Slider Style="{StaticResource SliderGrade}" Minimum="1" Maximum="5" TickFrequency="1" Margin="10,7,5,5" Name="Slider3"></Slider>
                             <Slider Style="{StaticResource SliderGrade}" Minimum="1" Maximum="5" TickFrequency="1" Margin="10,7,5,5" Name="Slider4"></Slider>
                             <Slider Style="{StaticResource SliderGrade}" Minimum="1" Maximum="5" TickFrequency="1" Margin="10,7,5,5" Name="Slider5"></Slider>
-                                <Button x:Name="GradeADoctorButton" Content="{x:Static p:Resources.Send}" HorizontalAlignment="Right" Width="60" Margin="10"></Button>
+                                <TextBlock Name="FeedbackDOctor" Width="150" Opacity="0" FontSize="15" TextWrapping="WrapWithOverflow" HorizontalAlignment="Right"  Margin="0,0,10,-10" Foreground="#FF0AD908"></TextBlock>
+                                <Button x:Name="GradeADoctorButton" Content="{x:Static p:Resources.Send}" HorizontalAlignment="Right" Width="60" Margin="10" Click="GradeADoctorButton_Click"></Button>
                         </StackPanel>
                     </StackPanel>
                     

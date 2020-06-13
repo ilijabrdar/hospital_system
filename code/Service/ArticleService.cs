@@ -27,12 +27,12 @@ namespace Service
 
         public Article Get(long id)
         {
-            return _repository.Get(id);
+            return _repository.GetEager(id);
         }
 
         public IEnumerable<Article> GetAll()
         {
-            return _repository.GetAll();
+            return _repository.GetAllEager();
         }
 
         public Article Save(Article entity)

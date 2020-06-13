@@ -162,6 +162,9 @@
   <data name="Email" xml:space="preserve">
     <value>Email:</value>
   </data>
+  <data name="ErrorSchedule" xml:space="preserve">
+    <value>You already have 3 appointments</value>
+  </data>
   <data name="ExaminationHardCore" xml:space="preserve">
     <value>You currently do not have any examnations</value>
   </data>

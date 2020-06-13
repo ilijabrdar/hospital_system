@@ -146,6 +146,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DeleteExamination.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DeleteExamination.Designer.cs">
+      <DependentUpon>DeleteExamination.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -204,6 +210,8 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="ResourcesFiles\article.csv" />
+    <None Include="ResourcesFiles\doctor.csv" />
     <None Include="ResourcesFiles\patient.csv" />
     <None Include="ResourcesFiles\patientFile.csv" />
   </ItemGroup>
@@ -236,6 +244,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="DeleteExamination.resx">
+      <DependentUpon>DeleteExamination.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.en-GB.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.en-GB.Designer.cs</LastGenOutput>

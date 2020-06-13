@@ -21,6 +21,11 @@ namespace Service
             _patientRepository = _patientRepo;
             _patientFileService = _servicePatientFile;
         }
+        public PatientService(IPatientRepository _patientRepo, IPatientFileService _servicePatientFile)
+        {
+            _patientRepository = _patientRepo;
+            _patientFileService = _servicePatientFile;
+        }
 
         public Patient Save(Patient entity)
         {

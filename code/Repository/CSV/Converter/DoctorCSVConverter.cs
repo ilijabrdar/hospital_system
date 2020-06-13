@@ -3,6 +3,7 @@ using Model.Users;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
@@ -20,8 +21,9 @@ namespace bolnica.Repository.CSV.Converter
         public Doctor ConvertCSVFormatToEntity(string entityCSVFormat)
         {         
            string[] tokens = entityCSVFormat.Split(_delimiter.ToCharArray());
-
-            Doctor doct = new Doctor(long.Parse(tokens[0]), tokens[1], tokens[2], tokens[3], tokens[4], tokens[5], DateTime.Parse(tokens[6]), new Address(long.Parse(tokens[7]),long.Parse(tokens[8]),long.Parse(tokens[9])), tokens[10], tokens[11],null, new Speciality(long.Parse(tokens[12]))); //(Bitmap)Bitmap.FromFile("../../Images/"+tokens[8]+".Jpeg")
+            var formats = (from CultureInfo ct in CultureInfo.GetCultures(CultureTypes.AllCultures)
+                           select ct.DateTimeFormat.GetAllDateTimePatterns()).SelectMany((x) => x).ToArray();
+            Doctor doct = new Doctor(long.Parse(tokens[0]), tokens[1], tokens[2], tokens[3], tokens[4], tokens[5], DateTime.ParseExact(tokens[6], formats, CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal), new Address(long.Parse(tokens[7]), long.Parse(tokens[8]), long.Parse(tokens[9])), tokens[10], tokens[11], null, new Speciality(long.Parse(tokens[12]))); //(Bitmap)Bitmap.FromFile("../../Images/"+tokens[8]+".Jpeg")
 
             if (!tokens[13].Equals("empty"))
             {

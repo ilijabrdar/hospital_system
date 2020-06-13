@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using MahApps.Metro;
 using Model.Users;
+using Model.Doctor;
 
 namespace PacijentBolnicaZdravo
 {
@@ -24,12 +25,15 @@ namespace PacijentBolnicaZdravo
     public partial class WindowLogIn : MetroWindow
     {
         public ChangeLanguage cl = new ChangeLanguage();
-
+        private List<Article> articles = new List<Article>();
         public WindowLogIn()
         {
             Thread.CurrentThread.CurrentCulture = MainWindow.culture;
             Thread.CurrentThread.CurrentUICulture = MainWindow.culture;
             InitializeComponent();
+
+            setArticle();
+
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             if (Thread.CurrentThread.CurrentCulture.Equals(new CultureInfo("sr")))
                 Language.SelectedItem = Language.Items[0];
@@ -57,6 +61,49 @@ namespace PacijentBolnicaZdravo
 
         }
 
+        private void setArticle()
+        {
+            var app = Application.Current as App;
+            articles = app.ArticleController.GetAll().ToList();
+            foreach (var article in app.ArticleController.GetAll())
+            {
+                Border b = new Border();
+                b.BorderThickness = new Thickness(2);
+                b.CornerRadius = new CornerRadius(3);
+                b.BorderBrush = Brushes.LightBlue;
+                b.Margin = new Thickness(10, 10, 10, 10);
+
+                StackPanel stackPanelArticle = new StackPanel();
+                TextBlock newTopic = new TextBlock();
+                TextBlock newText = new TextBlock();
+                TextBlock writer = new TextBlock();
+
+                newTopic.TextWrapping = TextWrapping.Wrap;
+                newTopic.FontSize = 15;
+                newTopic.FontWeight = FontWeights.Bold;
+                newTopic.MaxWidth = 700;
+                newTopic.HorizontalAlignment = HorizontalAlignment.Center;
+                newText.TextWrapping = TextWrapping.Wrap;
+                newText.FontSize = 13;
+                newText.MaxWidth = 700;
+                writer.FontSize = 12;
+                writer.HorizontalAlignment = HorizontalAlignment.Right;
+
+
+                newTopic.Text = article.Topic;
+                writer.Text = article.Doctor.FirstName + " " + article.Doctor.LastName;
+                newText.Text = article.Text;
+
+                stackPanelArticle.Children.Add(newTopic);
+                stackPanelArticle.Children.Add(newText);
+                stackPanelArticle.Children.Add(writer);
+
+                b.Child = stackPanelArticle;
+
+                ArticlesPanel.Children.Add(b);
+            }
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             String username = UsernameLogIn.Text.ToString();
@@ -67,7 +114,7 @@ namespace PacijentBolnicaZdravo
             if (temp != null) {
                 
                 App.j = 0;
-                MainWindow mw = new MainWindow((Patient)temp);
+                MainWindow mw = new MainWindow((Patient)temp, articles);
                 mw.Show();
                 //TODO : provera za ako ne nadje
 

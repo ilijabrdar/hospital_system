@@ -162,6 +162,9 @@
   <data name="Email" xml:space="preserve">
     <value>Email:</value>
   </data>
+  <data name="ErrorSchedule" xml:space="preserve">
+    <value>Imate 3 zakazana termina</value>
+  </data>
   <data name="ExaminationHardCore" xml:space="preserve">
     <value>Trenutno nemate ni jedan pregled u Vašem kartonu</value>
   </data>

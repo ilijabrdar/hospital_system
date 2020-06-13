@@ -42,6 +42,7 @@ namespace Repository
         {
             Doctor doctor = Get(id);
             List<Article> articles = new List<Article>();
+
             foreach(Article art in doctor.Articles)
             {
                 articles.Add(articleRepo.Get(art.GetId()));

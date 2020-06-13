@@ -18,6 +18,10 @@ namespace PacijentBolnicaZdravo
         }
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
+            if(value == null)
+            {
+                return new ValidationResult(false, "Polje za unos mora biti popunjeno.");
+            }
             if (value.ToString() == "" || value == null)
             {
                 if (Thread.CurrentThread.CurrentCulture.Equals(new CultureInfo("sr")))
@@ -68,6 +72,7 @@ namespace PacijentBolnicaZdravo
                         return new ValidationResult(true, null);
 
                 }
+
                 if (!Thread.CurrentThread.CurrentCulture.Equals(new CultureInfo("sr")))
                 {
                     return new ValidationResult(false, "You must enter 13 numbers for the ID.");
@@ -130,25 +135,103 @@ namespace PacijentBolnicaZdravo
 
     public class PasswordValidation : ValidationRule
     {
+        public static String password1 = "";
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
             try
             {
-                var s = value as string;
-                bool pw;
-                if (pw = Regex.IsMatch(s, @"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{1,4}$", RegexOptions.IgnoreCase)){
-                    return new ValidationResult(false, "Password is weak.");
-                }
-                else if(pw = Regex.IsMatch(s, @"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{4,}$", RegexOptions.IgnoreCase))
+                password1 = value as string;
+                PasswordValidation2.password2 = password1;
+                /*  if (pw = Regex.IsMatch(s, @"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{1,4}$", RegexOptions.IgnoreCase)){
+                      return new ValidationResult(false, "Password is weak.");
+                  }
+                  else if(pw = Regex.IsMatch(s, @"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{4,}$", RegexOptions.IgnoreCase))
+                  {
+                      return new ValidationResult(true, "Password is medium.");
+                  }*/
+                if (password1 == null)
                 {
-                    return new ValidationResult(true, "Password is medium.");
+                    return new ValidationResult(false, "!");
+                }
+                if (password1.Equals("") || password1 == null)
+                {
+
+                    if (!Thread.CurrentThread.CurrentCulture.Equals(new CultureInfo("sr")))
+                    {
+                        
+                        password1 = "";
+                        return new ValidationResult(false, "Password can not be empty!");
+                    }
+                    password1 = "";
+                    return new ValidationResult(false, "Lozinka ne sme ostati prazna!");
+
                 }
                 else
                 {
+                    
+                    password1 = "";
                     return new ValidationResult(true, null);
                 }
 
                 
+
+            }
+            catch
+            {
+                return new ValidationResult(false, "Password is weak.");
+            }
+        }
+    }
+
+    public class PasswordValidation2 : ValidationRule
+    {
+        public static String password1;
+        public static String password2;
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            try
+            {
+                password1 = value as string;
+                Console.WriteLine(password2);
+                /*  if (pw = Regex.IsMatch(s, @"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{1,4}$", RegexOptions.IgnoreCase)){
+                      return new ValidationResult(false, "Password is weak.");
+                  }
+                  else if(pw = Regex.IsMatch(s, @"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{4,}$", RegexOptions.IgnoreCase))
+                  {
+                      return new ValidationResult(true, "Password is medium.");
+                  }*/
+                  if(password1 == null)
+                {
+                    return new ValidationResult(false, "!");
+                }
+                if (password1.Equals("") || password1 == null)
+                {
+
+                    if (!Thread.CurrentThread.CurrentCulture.Equals(new CultureInfo("sr")))
+                    {
+                        return new ValidationResult(false, "Password can not be empty!");
+                    }
+
+                    return new ValidationResult(false, "Lozinka ne sme ostati prazna!");
+
+                }
+                else if (!password1.Equals(password2))
+                {
+                    if (!Thread.CurrentThread.CurrentCulture.Equals(new CultureInfo("sr")))
+                    {
+
+                        return new ValidationResult(false, "Password did not matched!");
+                    }
+
+                    return new ValidationResult(false, "Lozinke se ne poklapaju!");
+                }
+                else
+                {
+
+                    return new ValidationResult(true, null);
+                }
+
+
 
             }
             catch

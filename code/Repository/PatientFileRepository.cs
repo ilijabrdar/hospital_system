@@ -36,21 +36,30 @@ namespace Repository
         {
             PatientFile patientFile = Get(id);
             List<Hospitalization> hospitalizatonCollection = new List<Hospitalization>();
-            foreach (Hospitalization hospitalization in patientFile.Hospitalization)
+            if (patientFile.Hospitalization != null)
             {
-                hospitalizatonCollection.Add(_hospitalizationRepository.GetEager(hospitalization.GetId()));
+                foreach (Hospitalization hospitalization in patientFile.Hospitalization)
+                {
+                    hospitalizatonCollection.Add(_hospitalizationRepository.GetEager(hospitalization.GetId()));
+                }
             }
             patientFile.Hospitalization = hospitalizatonCollection;
             List<Operation> operationCollection = new List<Operation>();
-            foreach (Operation operation in patientFile.Operation)
+            if (patientFile.Operation != null)
             {
-                operationCollection.Add(_operationRepository.GetEager(operation.GetId()));
+                foreach (Operation operation in patientFile.Operation)
+                {
+                    operationCollection.Add(_operationRepository.GetEager(operation.GetId()));
+                }
             }
             patientFile.Operation = operationCollection;
             List<Examination> examinationCollection = new List<Examination>();
-            foreach (Examination examination in patientFile.Examination)
+            if (patientFile.Examination != null)
             {
-                examinationCollection.Add(_examinationPreviousRepository.GetEager(examination.GetId()));
+                foreach (Examination examination in patientFile.Examination)
+                {
+                    examinationCollection.Add(_examinationPreviousRepository.GetEager(examination.GetId()));
+                }
             }
             patientFile.Examination = examinationCollection;
             return patientFile;

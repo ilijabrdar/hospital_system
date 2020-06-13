@@ -1,6 +1,9 @@
 
 
+using Model.Director;
+using Model.PatientSecretary;
 using System;
+using Model.Users;
 
 
 namespace Model.Dto
@@ -13,6 +16,11 @@ namespace Model.Dto
       public Model.PatientSecretary.Period Period { get; set; }
 
         public ExaminationDTO() { }
-   
+        public ExaminationDTO(Model.Users.Doctor doctor, Room room, Period period)
+        {
+            Doctor = doctor;
+            Room = room;
+            Period = period;
+        }
    }
 }

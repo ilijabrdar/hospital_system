@@ -127,20 +127,57 @@ namespace PacijentBolnicaZdravo
 
             App.j++;
         }
-        public ValidationResult ConfirmPassword()
+        private void PasswordCheck(object sender, RoutedEventArgs e)
         {
-            if(CheckPassword.Password != NewPassword.Password)
-            {
-                if (Thread.CurrentThread.CurrentCulture.Equals(new CultureInfo("sr")))
-                    return new ValidationResult(false, "Lozinke se ne poklapaju!");
-                return new ValidationResult(false, "Passwords are not the same!");
-            }
-            return ValidationResult.ValidResult;
-        }
 
+            Check.GetBindingExpression(System.Windows.Controls.TextBox.TextProperty).UpdateSource();
+
+        }
         private void UpdateInfo(object sender, RoutedEventArgs e)
         {
 
+            if (Name.Text.ToString().Equals(""))
+            {
+                Name.GetBindingExpression(System.Windows.Controls.TextBox.TextProperty).UpdateSource();
+                return;
+            }
+            if (Surname.Text.ToString().Equals(""))
+            {
+                Surname.GetBindingExpression(System.Windows.Controls.TextBox.TextProperty).UpdateSource();
+                return;
+            }
+            if (Username.Text.ToString().Equals(""))
+            {
+                Username.GetBindingExpression(System.Windows.Controls.TextBox.TextProperty).UpdateSource();
+                return;
+            }
+            if (ID.Text.ToString().Equals(""))
+            {
+                ID.GetBindingExpression(System.Windows.Controls.TextBox.TextProperty).UpdateSource();
+                return;
+            }
+            if (Email.Text.ToString().Equals(""))
+            {
+                Email.GetBindingExpression(System.Windows.Controls.TextBox.TextProperty).UpdateSource();
+                return;
+            }
+            if (Adress.Text.ToString().Equals(""))
+            {
+                Adress.GetBindingExpression(System.Windows.Controls.TextBox.TextProperty).UpdateSource();
+                return;
+            }
+            if (PhoneNumber.Text.ToString().Equals(""))
+            {
+                PhoneNumber.GetBindingExpression(System.Windows.Controls.TextBox.TextProperty).UpdateSource();
+                return;
+            }
+            if (NewPassword.Text.ToString().Equals(""))
+            {
+                NewPassword.GetBindingExpression(System.Windows.Controls.TextBox.TextProperty).UpdateSource();
+                return;
+            }         
+
+            return;
             String username = Username.Text.ToString();
             String name = Name.Text.ToString();
             String surname = Surname.Text.ToString();
@@ -149,7 +186,7 @@ namespace PacijentBolnicaZdravo
             String email = Email.Text.ToString();
             String address = Adress.Text.ToString();
             String phone = PhoneNumber.Text.ToString();
-            String passw = NewPassword.Password.ToString();
+            String passw = NewPassword.Text.ToString();
             
             Patient patient = new Patient(-1, name, surname, Id, email, phone, date, null, username, passw, null);
             var app = Application.Current as App;
@@ -313,6 +350,39 @@ namespace PacijentBolnicaZdravo
                 }
             }
         }
+        private String _password2;
+        public String Password2
+        {
+            get
+            {
+                return _password2;
+            }
+            set
+            {
+                if (value != _password2)
+                {
+                    _password2 = value;
+                    OnPropertyChanged("Pw");
+                }
+            }
+        }
+        private String _password1;
+        public String Password1
+        {
+            get
+            {
+                return _password1;
+            }
+            set
+            {
+                if (value != _password1)
+                {
+                    _password1 = value;
+                    OnPropertyChanged("Pw");
+                }
+            }
+        }
+
 
     }
 }

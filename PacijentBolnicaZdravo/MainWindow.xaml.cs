@@ -33,6 +33,8 @@ using Model.Director;
 using ControlzEx.Standard;
 using System.Windows.Threading;
 using System.Windows.Media.Animation;
+using System.Windows.Forms;
+using Model.Doctor;
 
 namespace PacijentBolnicaZdravo
 {
@@ -43,22 +45,33 @@ namespace PacijentBolnicaZdravo
         public static CultureInfo culture = new CultureInfo("sr");
         public List<ExaminationDTO> scheduledExaminations { get; set; }
         public List<ExaminationDTO> upcomingExaminations { get; set; }
+        public List<Doctor> listOfDoctors { get; set; }
+        public List<Article> ListOfArticles { get; set; }
         public Patient _patient { get; set; }
         public static int Theme = 0;
 
-        public MainWindow(Patient patient)
+        public MainWindow(Patient patient, List<Article> articles)
         {
             Thread.CurrentThread.CurrentCulture = culture;
             Thread.CurrentThread.CurrentUICulture = culture;
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            _patient = patient;     
-
+            _patient = patient;
+            ListOfArticles = articles;
             scheduledExaminations = getScheduledExaminations();
-            
+            Doctor dr = new Doctor(1, "Pera", "Perić", "213123123123", "sadsds@sadsa.com", "2312312312", new DateTime(), null, "DDD", "ddd", null, null);
+            Doctor dr1 = new Doctor(1, "Jovan", "Jovanović", "213123123123", "sadsds@sadsa.com", "2312312312", new DateTime(), null, "DDD", "ddd", null, null);
+            listOfDoctors = new List<Doctor>();
+            listOfDoctors.Add(dr);
+            listOfDoctors.Add(dr1);
+            upcomingExaminations = new List<ExaminationDTO>();
+    
             InitializeComponent();
+            setArticle();
 
+            PasswordValidation2.password2 = _patient.Password;
             FillAccountData(_patient);
-
+            DoctorsForFeedback.DisplayMemberPath = "FullName";
+            DoctorsForExaminations.DisplayMemberPath = "FullName";
             this.DataContext = this;
             if (Thread.CurrentThread.CurrentCulture.Equals(new CultureInfo("sr")))
                 Language.SelectedItem = Language.Items[0];
@@ -81,6 +94,46 @@ namespace PacijentBolnicaZdravo
 
         }
 
+        private void setArticle()
+        {
+            foreach (var article in ListOfArticles)
+            {
+                Border b = new Border();
+                b.BorderThickness = new Thickness(2);
+                b.CornerRadius = new CornerRadius(3);
+                b.BorderBrush = Brushes.LightBlue;
+                b.Margin = new Thickness(10, 10, 10, 10);
+
+                StackPanel stackPanelArticle = new StackPanel();
+                TextBlock newTopic = new TextBlock();
+                TextBlock newText = new TextBlock();
+                TextBlock writer = new TextBlock();
+
+                newTopic.TextWrapping = TextWrapping.Wrap;
+                newTopic.FontSize = 15;
+                newTopic.FontWeight = FontWeights.Bold;
+                newTopic.MaxWidth = 700;
+                //newTopic.HorizontalAlignment = HorizontalAlignment.Center;
+                newText.TextWrapping = TextWrapping.Wrap;
+                newText.FontSize = 13;
+                newText.MaxWidth = 700;
+                writer.FontSize = 12;
+               // writer.HorizontalAlignment = HorizontalAlignment.Right;
+
+
+                newTopic.Text = article.Topic;
+                writer.Text = article.Doctor.FirstName + " " + article.Doctor.LastName;
+                newText.Text = article.Text;
+
+                stackPanelArticle.Children.Add(newTopic);
+                stackPanelArticle.Children.Add(newText);
+                stackPanelArticle.Children.Add(writer);
+
+                b.Child = stackPanelArticle;
+
+                ArticlesPanel.Children.Add(b);
+            }
+        }
         private void FillAccountData(Patient patient)
         {
             Username2.Text = _patient.Username;
@@ -91,6 +144,7 @@ namespace PacijentBolnicaZdravo
             DateBirthTextBlock.Text = _patient.DateOfBirth.Date.ToString();
             Email2.Text = _patient.Email;
             PhoneNumber2.Text = _patient.Phone;
+            UsernameConst.Text = _patient.Username;
         }
 
 
@@ -107,16 +161,24 @@ namespace PacijentBolnicaZdravo
         private List<ExaminationDTO> getScheduledExaminations()
         {
             List<ExaminationDTO> retVal = new List<ExaminationDTO>();
-            Doctor dr = new Doctor(1, "Pera", "Peric", "213123123123", "sadsds@sadsa.com", "2312312312", new DateTime(), null, "DDD", "ddd", null, null);
+            Doctor dr = new Doctor(1, "Pera", "Perić", "213123123123", "sadsds@sadsa.com", "2312312312", new DateTime(), null, "DDD", "ddd", null, null);
             Period period = new Period(new DateTime(2020, 7, 7, 12, 20, 0), new DateTime(2020, 7, 7, 12, 40, 0));
-           
-            Room room = new Room(213, null, null, null);
+            Console.WriteLine(period.StartDate.Date);
+            Room room = new Room("213", null, null);
             ExaminationDTO examination = new ExaminationDTO();
             examination.Doctor = dr;
             examination.Period = period;
             examination.Room = room;
             examination.Patient = null;
             retVal.Add(examination);
+            ExaminationDTO examination1 = new ExaminationDTO();
+            Doctor dr1 = new Doctor(1, "Jovan", "Jovanović", "213123123123", "sadsds@sadsa.com", "2312312312", new DateTime(), null, "DDD", "ddd", null, null);
+            Period period1 = new Period(new DateTime(2020, 10, 7, 9, 20, 0), new DateTime(2020, 10, 7, 12, 40, 0));
+            Room room1 = new Room("101", null, null);
+            examination1.Room = room1;
+            examination1.Period = period1;
+            examination1.Doctor = dr1;
+            retVal.Add(examination1);
             return retVal;
         }
 
@@ -127,9 +189,14 @@ namespace PacijentBolnicaZdravo
 
         private void LogOut(object sender, RoutedEventArgs e)
         {
-            if (System.Threading.Thread.CurrentThread.CurrentCulture.Equals("sr"))
+            DeleteExamination delete;
+            DialogResult result;
+            if (System.Threading.Thread.CurrentThread.CurrentCulture.Equals(new CultureInfo("sr")))
             {
-                if (MessageBox.Show("Da li ste sigurni da želite da se odjavite?", "Odjava", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                delete = new DeleteExamination("Da li ste sigurni da želite da se odjavite?", "Da", "Ne", "Odjava", MainWindow.Theme);
+                result = delete.ShowDialog();
+            
+            if (result == System.Windows.Forms.DialogResult.OK)
                 {
                     App.j = 0;
                     WindowLogIn wl = new WindowLogIn();
@@ -138,7 +205,9 @@ namespace PacijentBolnicaZdravo
                 }
             } else
             {
-                if (MessageBox.Show("Are you sure you want to log out?", "Log out", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                delete = new DeleteExamination("Are you sure you want to log out?", "Yes", "No", "Log out", MainWindow.Theme);
+                result = delete.ShowDialog();
+                if (result == System.Windows.Forms.DialogResult.OK)
                 {
                     App.j = 0;
                     WindowLogIn wl = new WindowLogIn();
@@ -199,7 +268,41 @@ namespace PacijentBolnicaZdravo
 
         private void Zakazi(object sender, RoutedEventArgs e)
         {
-            
+            var selectedItem = scheduleExaminationsGrid.SelectedItem;
+            if(selectedItem == null)
+            {
+                return;
+            }
+            if(scheduledExaminations.Count == 3)
+            {
+                Storyboard sb = Resources["sbHideAnimation"] as Storyboard;
+                sb.Begin(ErrorSchedule);
+                return;
+            }
+
+            DeleteExamination delete;
+            ExaminationDTO deleteExam = (ExaminationDTO)selectedItem;
+            if (Thread.CurrentThread.CurrentCulture.Equals(new CultureInfo("sr")))
+            {
+                delete = new DeleteExamination("Zakažite termin kod lekara  " +
+                                                                         deleteExam.Doctor.FirstName + " " + deleteExam.Doctor.LastName + "?", "Da", "Ne", "Zakaži pregled", MainWindow.Theme);
+
+            }
+            else
+            {
+                delete = new DeleteExamination("Schedule examination at the doctor  " +
+                                                                        deleteExam.Doctor.FirstName + " " + deleteExam.Doctor.LastName + "?", "Yes", "No", "Schedule examination", MainWindow.Theme);
+
+            }
+            DialogResult result = delete.ShowDialog();
+            if (result == System.Windows.Forms.DialogResult.OK)
+            {
+                upcomingExaminations.Remove((ExaminationDTO)selectedItem);
+                scheduledExaminations.Add((ExaminationDTO)selectedItem);
+                scheduledExaminationsGrid.Items.Refresh();
+                scheduleExaminationsGrid.Items.Refresh();
+            }
+
         }
 
         private void Otkazi(object sender, RoutedEventArgs e)
@@ -209,10 +312,29 @@ namespace PacijentBolnicaZdravo
             {
                 return;
             }
-            
-            scheduledExaminations.Remove((ExaminationDTO)selectedItem);
 
-            scheduledExaminationsGrid.Items.Refresh();
+            DeleteExamination delete;
+            ExaminationDTO deleteExam = (ExaminationDTO)selectedItem;
+            if (Thread.CurrentThread.CurrentCulture.Equals(new CultureInfo("sr")))
+            {
+               delete = new DeleteExamination("Da li ste sigurni da zelite da otkažete pregled kod lekara " +
+                                                                        deleteExam.Doctor.FirstName + " " + deleteExam.Doctor.LastName + "?", "Da", "Ne", "Obriši pregled", MainWindow.Theme);
+
+            }
+            else
+            {
+                delete = new DeleteExamination("Are you sure you want to cancel the examination at the doctor  " +
+                                                                        deleteExam.Doctor.FirstName + " " + deleteExam.Doctor.LastName + "?", "Yes", "No", "Delete examination", MainWindow.Theme);
+
+            }
+            DialogResult result = delete.ShowDialog();
+            if (result == System.Windows.Forms.DialogResult.OK)
+            {
+                upcomingExaminations.Add((ExaminationDTO)selectedItem);
+                scheduledExaminations.Remove((ExaminationDTO)selectedItem);
+                scheduledExaminationsGrid.Items.Refresh();
+                scheduleExaminationsGrid.Items.Refresh();
+            }
         }
 
         private void ChoosePhoto(object sender, RoutedEventArgs e)
@@ -229,37 +351,32 @@ namespace PacijentBolnicaZdravo
             {
                 prom++;
                 _patient.FirstName = Name.Text.ToString();
-                Name.Undo();
             }
             if (!Surname.Text.ToString().Equals(""))
             {
                 prom++;
                 _patient.LastName = Surname.Text.ToString();
-                Surname.Clear();
             }
             if (!ID.Text.ToString().Equals(""))
             {
                 prom++;
                 _patient.Jmbg = ID.Text.ToString();
-                ID.Clear();
             }
             if (!Adress.Text.ToString().Equals(""))
             {
                 prom++;
                 _patient.Address = null; //TODO : ne zaboravi
-                Adress.Clear();
             }
             if (!PhoneNumber.Text.ToString().Equals(""))
             {
                 prom++;
                 _patient.Phone = PhoneNumber.Text.ToString();
-                PhoneNumber.Clear();
             }
             if (!Email.Text.ToString().Equals(""))
             {
                 prom++;
                 _patient.Email = Email.Text.ToString();
-                Email.Clear();
+                
             }
             if (!DateBirthPicker.Text.ToString().Equals(""))
             {
@@ -271,16 +388,32 @@ namespace PacijentBolnicaZdravo
             {
                 //userService.Edit(_patient);
                 FillAccountData(_patient);
+                Storyboard sb = Resources["sbHideAnimation"] as Storyboard;
+                sb.Begin(SuccessUpdateData);
+//SuccessUpdateData.Visibility = Visibility.Visible;
                 //TODO : Ispisi poruku za uspesan tok
             }
       
 
         }
 
+        private void Password(object sender, RoutedEventArgs e)
+        {
+            PasswordValidation2.password2 = _patient.Password;
+            CurrentPassword.GetBindingExpression(System.Windows.Controls.TextBox.TextProperty).UpdateSource();
+        }
 
+
+        private void PasswordCheck(object sender, RoutedEventArgs e)
+        {
+
+            CheckPassword.GetBindingExpression(System.Windows.Controls.TextBox.TextProperty).UpdateSource();
+
+        }
 
         private void UpdatePw(object sender, RoutedEventArgs e)
         {
+
         }
 
         private void Search(object sender, RoutedEventArgs e)
@@ -304,26 +437,137 @@ namespace PacijentBolnicaZdravo
 
         private void CurrentTherapy(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                Process process = new System.Diagnostics.Process();
+                String file = "C:\\Users\\jovan\\Desktop\\Faks\\HCI\\SrpskiIzvestaj.pdf";
+                process.StartInfo.FileName = file;
+                process.Start();
+                process.WaitForExit();
+            }
+            catch
+            {
+                System.Windows.MessageBox.Show("Could not open the file.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
         private void Feedback(object sender, RoutedEventArgs e)
         {
+            
             if(FeedBack.Text.Length != 0)
             {
 
                 FeedBack.Clear();
-                MessageBox.Show("Hvala Vam na odgovoru!", "Komentar", MessageBoxButton.OK, MessageBoxImage.None);
+                if (Thread.CurrentThread.CurrentCulture.Equals(new CultureInfo("sr")))
+                {
+                    FeedbackText.Text = "Hvala Vam što ste podelili sa nama Vaše mišljenje! " ;
+                }
+                else
+                {
+                    FeedbackText.Text = "Thank you for sharing with us your opinion! ";
 
+                }
+                Storyboard sb = Resources["sbHideAnimation"] as Storyboard;
+                sb.Begin(FeedbackText);
             }
 
         }
 
-        private void CalendarClosedDate(object sender, RoutedEventArgs e)
+        private void CalendarDateChanged(object sender, RoutedEventArgs e)
         {
-           
+            upcomingExaminations.Clear();
+            Doctor dr = new Doctor(1, "Pera", "Perić", "213123123123", "sadsds@sadsa.com", "2312312312", new DateTime(), null, "DDD", "ddd", null, null);
+            Doctor dr1 = new Doctor(1, "Jovan", "Jovanović", "213123123123", "sadsds@sadsa.com", "2312312312", new DateTime(), null, "DDD", "ddd", null, null);
+            Room room1 = new Room("101", null,null);
+            Room room3 = new Room("113", null,null);
+            Room room4 = new Room("103", null,null);
+            Room room6 = new Room("100", null,null);
+            Room room7 = new Room("201", null,null);
+            Period period1 = new Period(new DateTime(2020, 6, 20, 9, 20, 0));
+            Period period2 = new Period(new DateTime(2020, 6, 20, 9, 40, 0));
+            Period period3 = new Period(new DateTime(2020, 6, 20, 10, 20, 0));
+            Period period4 = new Period(new DateTime(2020, 6, 20, 10, 0, 0));
+            Period period5 = new Period(new DateTime(2020, 6, 19, 14, 20, 0));
+            Period period6 = new Period(new DateTime(2020, 7, 19, 15, 20, 0));
+            Period period7 = new Period(new DateTime(2020, 7, 19, 16, 40, 0));
+            Period period8 = new Period(new DateTime(2020, 7, 19, 17, 20, 0));
+            Period period9 = new Period(new DateTime(2020, 7, 19, 18, 0, 0));
+            ExaminationDTO exam1 = new ExaminationDTO(dr, room1, period1);
+            ExaminationDTO exam2 = new ExaminationDTO(dr, room1, period2);
+            ExaminationDTO exam3 = new ExaminationDTO(dr, room3, period3);
+            ExaminationDTO exam4 = new ExaminationDTO(dr, room1, period4);
+            ExaminationDTO exam5 = new ExaminationDTO(dr1, room4, period5);
+            ExaminationDTO exam6 = new ExaminationDTO(dr1, room4, period6);
+            ExaminationDTO exam7 = new ExaminationDTO(dr1, room6, period7);
+            ExaminationDTO exam8 = new ExaminationDTO(dr1, room7, period8);
+
+            Doctor doctorica = (Doctor) DoctorsForExaminations.SelectedItem;
+            if (doctorica != null && doctorica.FirstName.Equals("Pera"))
+            {
+                upcomingExaminations.Add(exam1);
+                upcomingExaminations.Add(exam2);
+                upcomingExaminations.Add(exam3);
+                upcomingExaminations.Add(exam4);
+            }
+            else if(doctorica != null)
+            {
+                upcomingExaminations.Add(exam5);
+                upcomingExaminations.Add(exam6);
+                upcomingExaminations.Add(exam7);
+                upcomingExaminations.Add(exam8);
+            }
+            scheduleExaminationsGrid.Items.Refresh();
+
 
         }
+
+
+        private void GradeADoctorButton_Click(object sender, RoutedEventArgs e)
+        {
+            double grade = 0;
+            grade += Slider1.Value;
+            grade += Slider2.Value;
+            grade += Slider3.Value;
+            grade += Slider4.Value;
+            grade += Slider5.Value;
+            grade /= 5;
+            var doctor = (Doctor)DoctorsForFeedback.SelectedItem;
+            if (doctor == null)
+            {
+                FeedbackDOctor.Foreground = Brushes.Red;
+                if (Thread.CurrentThread.CurrentCulture.Equals(new CultureInfo("sr")))
+                {
+
+                    FeedbackDOctor.Text = "Morate izabrati lekara!";
+                }
+                else
+                {
+                    FeedbackDOctor.Text = "You have to pik doctor!";
+
+                }
+                Storyboard ssb = Resources["sbHideAnimation"] as Storyboard;
+                ssb.Begin(FeedbackDOctor);
+                return;
+            }
+
+            FeedbackDOctor.Foreground = Brushes.Green;
+            if (Thread.CurrentThread.CurrentCulture.Equals(new CultureInfo("sr")))
+                {
+                    FeedbackDOctor.Text = "Prosečna ocena " + grade;
+                }
+            else
+                {
+                    FeedbackDOctor.Text = "Average rating" + grade;
+
+                }
+            Storyboard sb = Resources["sbHideAnimation"] as Storyboard;
+            sb.Begin(FeedbackDOctor);
+        }
+
+
+
+
+
 
         private String _ime;
         public String Ime
@@ -341,6 +585,55 @@ namespace PacijentBolnicaZdravo
                 }
             }
         }
+        private String _password;
+        public String Password1
+        {
+            get
+            {
+                return _password;
+            }
+            set
+            {
+                if (value != _password)
+                {
+                    _password = value;
+                    OnPropertyChanged("Password");
+                }
+            }
+        }
+        private String _password2;
+        public String Password2
+        {
+            get
+            {
+                return _password2;
+            }
+            set
+            {
+                if (value != _password2)
+                {
+                    _password2 = value;
+                    OnPropertyChanged("Password");
+                }
+            }
+        }
+        private String _password3;
+        public String Password3
+        {
+            get
+            {
+                return _password3;
+            }
+            set
+            {
+                if (value != _password3)
+                {
+                    _password3 = value;
+                    OnPropertyChanged("Password");
+                }
+            }
+        }
+
 
 
         private DateTime _dateTime = DateTime.Today;
@@ -459,5 +752,6 @@ namespace PacijentBolnicaZdravo
                 }
             }
         }
+
     }
 }

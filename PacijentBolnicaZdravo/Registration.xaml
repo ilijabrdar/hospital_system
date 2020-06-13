@@ -129,12 +129,66 @@
                                     </Binding>
                                 </TextBox.Text>
                             </TextBox>
-                            <PasswordBox Margin="0,12,10,10" BorderThickness="3" BorderBrush="LightBlue" FontSize="15" Name="NewPassword"  Width="220">
-
-                            </PasswordBox>
-                            <PasswordBox Margin="0,12,10,10" BorderThickness="3" BorderBrush="LightBlue" FontSize="15" Name="CheckPassword"  Width="220"></PasswordBox>
+                            <TextBox BorderThickness="1.5" BorderBrush="LightBlue" FontFamily="Password" GotFocus="PasswordCheck" GotKeyboardFocus="PasswordCheck" LostFocus="PasswordCheck"  FontSize="15" Name="NewPassword" Margin="0,12,10,10"  Width="220">
+                                <TextBox.Text>
+                                    <Binding Path="Password1" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <local:PasswordValidation/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBox BorderThickness="1.5" BorderBrush="LightBlue" FontFamily="Password" GotFocus="PasswordCheck" GotKeyboardFocus="PasswordCheck" LostFocus="PasswordCheck"  FontSize="15" Name="Check" Margin="0,12,10, 10"  Width="220">
+                                <TextBox.Text>
+                                    <Binding Path="Password1" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <local:PasswordValidation2/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                       
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                <Button  Content="{x:Static p:Resources.Register}" Name="Register"  Margin="10" Click="UpdateInfo"></Button>
+                                <Button  Content="{x:Static p:Resources.Register}" Name="Register"  Margin="10" Click="UpdateInfo">
+                                    <Button.Style>
+                                        <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Path=(Validation.HasError), ElementName=Name}" Value="True">
+                                                    <Setter Property="IsEnabled" Value="False" />
+                                                </DataTrigger>
+                                                <DataTrigger  Binding="{Binding Path=(Validation.HasError), ElementName=Surname}"  Value="true">
+                                                    <Setter Property="IsEnabled" Value="False" />
+                                                </DataTrigger>
+                                                <DataTrigger  Binding="{Binding Path=(Validation.HasError), ElementName=Username}"  Value="true">
+                                                    <Setter Property="IsEnabled" Value="False" />
+                                                </DataTrigger>
+                                                <DataTrigger  Binding="{Binding Path=(Validation.HasError), ElementName=ID}"  Value="true">
+                                                    <Setter Property="IsEnabled" Value="False" />
+                                                </DataTrigger>
+                                                <DataTrigger  Binding="{Binding Path=(Validation.HasError), ElementName=DateBirth}"  Value="true">
+                                                    <Setter Property="IsEnabled" Value="False" />
+                                                </DataTrigger>
+                                                <DataTrigger  Binding="{Binding Path=(Validation.HasError), ElementName=Email}"  Value="true">
+                                                    <Setter Property="IsEnabled" Value="False" />
+                                                </DataTrigger>
+
+                                                <DataTrigger  Binding="{Binding Path=(Validation.HasError), ElementName=Adress}"  Value="true">
+                                                    <Setter Property="IsEnabled" Value="False" />
+                                                </DataTrigger>
+                                                <DataTrigger  Binding="{Binding Path=(Validation.HasError), ElementName=PhoneNumber}"  Value="true">
+                                                    <Setter Property="IsEnabled" Value="False" />
+                                                </DataTrigger>
+                                                <DataTrigger  Binding="{Binding Path=(Validation.HasError), ElementName=NewPassword}"  Value="true">
+                                                    <Setter Property="IsEnabled" Value="False" />
+                                                </DataTrigger>
+                                                <DataTrigger  Binding="{Binding Path=(Validation.HasError), ElementName=Check}"  Value="true">
+                                                    <Setter Property="IsEnabled" Value="False" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+
+                                </Button>
                                 <Button x:Name="CancelRegistration" Content="{x:Static p:Resources.Cancel}" Margin="10"  Click="LogInPage"/>
                             </StackPanel>
                         </WrapPanel>
