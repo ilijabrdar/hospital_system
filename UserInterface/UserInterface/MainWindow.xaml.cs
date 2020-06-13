@@ -502,9 +502,15 @@ namespace UserInterface
         {
             Shortcuts.Add(new Shortcut("ALT", "Prikaz postojećih prečica na svakom prozoru. Kombinacijom ALT + podvučeno slovo, aktivira se željena funkcionalnost."));
             Shortcuts.Add(new Shortcut("TAB", "Kretanje unapred."));
+            Shortcuts.Add(new Shortcut("ESC", "Izaz iz tabele."));
             Shortcuts.Add(new Shortcut("SHIFT + TAB", "Kretanje unazad."));
             Shortcuts.Add(new Shortcut("CTRL + TAB", "Kretanje unapred po tabovima."));
             Shortcuts.Add(new Shortcut("CTRL + SHIFT + TAB", "Kretanje unazad po tabovima."));
+            Shortcuts.Add(new Shortcut("CTRL + P", "Otvaranje profila."));
+            Shortcuts.Add(new Shortcut("CTRL + E", "Otvaranje evidencije pregleda."));
+            Shortcuts.Add(new Shortcut("CTRL + N", "Otvaranje unosa novog pacijenta."));
+            Shortcuts.Add(new Shortcut("CTRL + H, F1", "Pomoć."));
+            Shortcuts.Add(new Shortcut("CTRL + U", "Utisci o aplikaciji."));
             Shortcuts.Add(new Shortcut("STRELICA DOLE", "Kretanje unapred u tabeli za ceo red. Kretanje unapred u listi sa više izbora."));
             Shortcuts.Add(new Shortcut("STRELICA GORE", "Kretanje unazad u tabeli za ceo red. Kretanje unazad u listi sa više izbora."));
             Shortcuts.Add(new Shortcut("KONTEKSTNO DUGME", "Otvaranje kontekstnog menija u tabeli."));
@@ -515,6 +521,46 @@ namespace UserInterface
             ThankYouMsg.Visibility = System.Windows.Visibility.Hidden;
 
             dispatcherTimer.IsEnabled = false;
+        }
+
+        private void EscapeTable(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (ScheduledExaminations.SelectedItem != null)
+                SearchButton.Focus();
+
+            if (EmptyExaminations.SelectedItem != null)
+                if (ScheduleBtn.IsEnabled)
+                    ScheduleBtn.Focus();
+                else
+                    SearchBtn.Focus();
+
+            if (Shorts.SelectedItem != null)
+                ToolTipCtrl.Focus();
+        }
+
+        private void OpenProfileTab(object sender, ExecutedRoutedEventArgs e)
+        {
+            ProfileTab.IsSelected = true;
+        }
+
+        private void OpenExaminationTab(object sender, ExecutedRoutedEventArgs e)
+        {
+            ExaminationTab.IsSelected = true;
+        }
+
+        private void OpenNewPatientTab(object sender, ExecutedRoutedEventArgs e)
+        {
+            NewPatientTab.IsSelected = true;
+        }
+
+        private void OpenHelpTab(object sender, ExecutedRoutedEventArgs e)
+        {
+            HelpTab.IsSelected = true;
+        }
+
+        private void OpenFeedbackTab(object sender, ExecutedRoutedEventArgs e)
+        {
+            FeedbackTab.IsSelected = true;
         }
     }
 

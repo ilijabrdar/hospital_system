@@ -16,6 +16,7 @@ using System.Windows.Controls;
 using bolnica.Service;
 using Model.PatientSecretary;
 using Model.Director;
+using Model.Doctor;
 
 namespace UserInterface
 {
@@ -35,6 +36,8 @@ namespace UserInterface
         private const string EQUIPMENT_FILE = "C:/Users/Asus/Desktop/SIMS/hospital_system/UserInterface/UserInterface/Resources/equipment.csv";
         private const string ROOMTYPE_FILE = "C:/Users/Asus/Desktop/SIMS/hospital_system/UserInterface/UserInterface/Resources/roomtypes.csv";
 
+        private const String ARTICLE_FILE = "C:/Users/Asus/Desktop/SIMS/hospital_system/UserInterface/UserInterface/Resources/articleFile.csv";
+
         private readonly String _patient_File = "C:/Users/Asus/Desktop/SIMS/hospital_system/UserInterface/UserInterface/Resources/PatientFile.txt";
         private readonly String _patientFile_File = "C:/Users/Asus/Desktop/SIMS/hospital_system/UserInterface/UserInterface/Resources/patientFileFile.txt";
 
@@ -46,6 +49,9 @@ namespace UserInterface
         public ISecretaryController SecretaryController { get;private set; }
 
         public IRoomController RoomController { get; private set; }
+
+        public IArticleController ArticleController { get; private set; }
+
         public App()
         {
             AddressRepository addressRepository = new AddressRepository(new CSVStream<Address>(ADDRESS_FILE, new AddressCSVConverter(CSV_DELIMITER)), new LongSequencer());
@@ -89,7 +95,9 @@ namespace UserInterface
 
             RoomController = new RoomController(roomService);
 
-
+            ArticleRepository articleRepository = new ArticleRepository(new CSVStream<Article>(ARTICLE_FILE, new ArticleCSVConverter(CSV_ARRAY_DELIMITER)), new LongSequencer());
+            ArticleService articleService = new ArticleService(articleRepository);
+            ArticleController = new ArticleController(articleService);
 
             //User user = userController.Login("pera", "pera");
             //Secretary secretary = (Secretary)user;

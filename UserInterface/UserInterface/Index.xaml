@@ -17,26 +17,7 @@
             <Button Content="Prijavi se" DockPanel.Dock="Right" Width="150" Height="30" HorizontalAlignment="Right" Margin="20" Click="OpenLoginDialog"/>
         </DockPanel>
         <ScrollViewer Margin="10">
-            <StackPanel>
-                <Border BorderBrush="Black" BorderThickness="1" Height="100">
-                    <TextBlock Text="{StaticResource ResourceKey=strTextBinding}" TextWrapping="Wrap"></TextBlock>
-                </Border>
-                <Border BorderBrush="Black" BorderThickness="1" Height="100">
-                    <TextBlock Text="{StaticResource ResourceKey=strTextBinding}" TextWrapping="Wrap"></TextBlock>
-                </Border>
-                <Border BorderBrush="Black" BorderThickness="1" Height="100">
-                    <TextBlock Text="{StaticResource ResourceKey=strTextBinding}" TextWrapping="Wrap"></TextBlock>
-                </Border>
-                <Border BorderBrush="Black" BorderThickness="1" Height="100">
-                    <TextBlock Text="{StaticResource ResourceKey=strTextBinding}" TextWrapping="Wrap"></TextBlock>
-                </Border>
-                <Border BorderBrush="Black" BorderThickness="1" Height="100">
-                    <TextBlock Text="{StaticResource ResourceKey=strTextBinding}" TextWrapping="Wrap"></TextBlock>
-                </Border>
-                <Border BorderBrush="Black" BorderThickness="1" Height="100">
-                    <TextBlock Text="{StaticResource ResourceKey=strTextBinding}" TextWrapping="Wrap"></TextBlock>
-                </Border>
-            </StackPanel>
+            <StackPanel x:Name="Articles"/>
         </ScrollViewer>
     </DockPanel>
 </Window>

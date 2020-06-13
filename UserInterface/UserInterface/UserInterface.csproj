@@ -173,5 +173,8 @@
   <ItemGroup>
     <Resource Include="Resources\roomFile.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\articleFIle.csv" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

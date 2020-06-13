@@ -2,6 +2,7 @@
 using Model.Users;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
@@ -23,7 +24,7 @@ namespace bolnica.Repository.CSV.Converter
             string[] tokens = entityCSVFormat.Split(_delimiter.ToCharArray());
             return new Article(
                 long.Parse(tokens[0]),
-               (DateTime)DateTime.Parse(tokens[1]), new Doctor(long.Parse(tokens[2])), tokens[3], tokens[4]);
+               /*(DateTime)DateTime.Parse(tokens[1])*/ DateTime.ParseExact(tokens[1], "dd.MM.yyyy", CultureInfo.InvariantCulture), new Doctor(long.Parse(tokens[2])), tokens[3], tokens[4]);
             
         }
 

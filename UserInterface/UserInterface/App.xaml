@@ -9,6 +9,16 @@
             <Setter Property="Width" Value="200"></Setter>
         </Style>
 
+        <!--
+        <Style TargetType="{x:Type ComboBox}">
+            <Style.Triggers>
+                <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                    <Setter Property="IsDropDownOpen" Value="true" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        -->
+
         <Style TargetType="TextBox">
             <Style.Triggers>
                 <Trigger Property="Validation.HasError" Value="True">
