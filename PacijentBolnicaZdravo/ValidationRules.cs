@@ -133,6 +133,50 @@ namespace PacijentBolnicaZdravo
         }
     }
 
+
+    public class LogInValidation : ValidationRule
+    {
+        public static String badUserString = "";
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            try
+            {
+                var badUser = value as string;
+                if(badUser == null)
+                {
+
+                    if (!Thread.CurrentThread.CurrentCulture.Equals(new CultureInfo("sr")))
+                    {
+                        return new ValidationResult(false, "Login required!");
+                    }
+                    return new ValidationResult(false, "Potrebno je uneti podatka za logovanje!");
+                }
+                if (badUserString.Equals("badUserString"))
+                {
+                    if (!Thread.CurrentThread.CurrentCulture.Equals(new CultureInfo("sr")))
+                    {
+                        badUserString = "";
+                        return new ValidationResult(false, "Wrong username or password!");
+                    }
+                    badUserString = "";
+                    return new ValidationResult(false, "Pogrešno uneto korisničko ime ili lozinka!");
+                }
+                if(badUser == "")
+                {
+                    return new ValidationResult(true, null);
+                }
+                return new ValidationResult(true, null);
+                
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+                return null;
+            }
+        }
+    }
+
+
     public class PasswordValidation : ValidationRule
     {
         public static String password1 = "";

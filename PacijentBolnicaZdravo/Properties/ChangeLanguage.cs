@@ -77,6 +77,8 @@ namespace PacijentBolnicaZdravo.Properties
             currentWindow.Schedule.ToolTip = MyProject.Language.Resources.ToolTipSchedule;
             currentWindow.Cancel.ToolTip = MyProject.Language.Resources.ToolTipCancel;
             currentWindow.ToolTipSchedule.Content = MyProject.Language.Resources.ToolTipSearch;
+            currentWindow.ToolTipCancel.Content = MyProject.Language.Resources.ToolTipCancel;
+
             currentWindow.GradeADoctor.Text = MyProject.Language.Resources.GradeADoctor;
             currentWindow.ChooseDoctorForGrade.Text = MyProject.Language.Resources.ChooseDoctor;
             currentWindow.GradeADoctorButton.Content = MyProject.Language.Resources.Send;

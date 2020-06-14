@@ -18,11 +18,12 @@ using MahApps.Metro.Controls;
 using MahApps.Metro;
 using Model.Users;
 using Model.Doctor;
+using System.ComponentModel;
 
 namespace PacijentBolnicaZdravo
 {
 
-    public partial class WindowLogIn : MetroWindow
+    public partial class WindowLogIn : MetroWindow, INotifyPropertyChanged
     {
         public ChangeLanguage cl = new ChangeLanguage();
         private List<Article> articles = new List<Article>();
@@ -56,11 +57,19 @@ namespace PacijentBolnicaZdravo
                 DarkMode.Value = DarkMode.Minimum;
             }
 
-
+            this.DataContext = this;
 
 
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
         private void setArticle()
         {
             var app = Application.Current as App;
@@ -104,6 +113,23 @@ namespace PacijentBolnicaZdravo
             }
         }
 
+        private String _username;
+        public String USERNAME
+        {
+            get
+            {
+                return _username;
+            }
+            set
+            {
+                if (value != _username)
+                {
+                    _username = value;
+                    OnPropertyChanged("USERNAME");
+                }
+            }
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             String username = UsernameLogIn.Text.ToString();
@@ -121,6 +147,8 @@ namespace PacijentBolnicaZdravo
                 this.Close();
                 return;
             }
+            LogInValidation.badUserString = "badUserString";
+            UsernameLogIn.GetBindingExpression(System.Windows.Controls.TextBox.TextProperty).UpdateSource();
             return;
             /*if (UsernameLogIn.Text != "admin")
             {
@@ -160,7 +188,7 @@ namespace PacijentBolnicaZdravo
             App.j = 0;
             Registration lg = new Registration();
             lg.Show();
-            this.Close();
+            this.Visibility = Visibility.Hidden;
         }
 
         private void Language_SelectionChanged(object sender, SelectionChangedEventArgs e)

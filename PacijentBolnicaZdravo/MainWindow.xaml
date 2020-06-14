@@ -113,7 +113,7 @@
 
                     <Button Name="Schedule" Content="{x:Static p:Resources.Schedule}" HorizontalAlignment="Right" Margin="15"  Width="76" Click="Zakazi" >
                         <Button.ToolTip>
-                            <ToolTip x:Name="ToolTipSchedule"  Content = "{x:Static p:Resources.ToolTipSchedule}" Background="#FFA0A0A0"/>
+                            <ToolTip x:Name="ToolTipSchedule"  Content = "{x:Static p:Resources.ToolTipSchedule}" BorderThickness="2" BorderBrush="Gray"/>
                         </Button.ToolTip>
                     </Button>
                 </StackPanel>
@@ -139,22 +139,27 @@
                         </DataGrid>
                     </Grid>
 
-                    <Button Name="Cancel" ToolTip="{x:Static p:Resources.ToolTipCancel}" Content="{x:Static p:Resources.Cancel}" HorizontalAlignment="Right" Margin="15" Width="74" Click="Otkazi"/>
+                    <Button Name="Cancel"  Content="{x:Static p:Resources.Cancel}" HorizontalAlignment="Right" Margin="15" Width="74" Click="Otkazi">
+                        <Button.ToolTip>
+                            <ToolTip x:Name="ToolTipCancel"  Content = "{x:Static p:Resources.ToolTipCancel}" BorderThickness="2" BorderBrush="Gray"/>
+                        </Button.ToolTip>
+                    </Button>
                 </StackPanel>
             </TabItem>
             <TabItem Header="{x:Static p:Resources.TabFile}" Name="TabFile">
                 <TabControl BorderBrush="LightBlue" BorderThickness="1" x:Name="TabControl2" TabStripPlacement="Top" Margin="0.3">
                     <TabItem Header="{x:Static p:Resources.Examinations}" Name="Examinations">
                         <DockPanel>
-                            <Button DockPanel.Dock="Top" HorizontalAlignment="Left" x:Name="GetTherapy"  Width="150" Height="27" Margin="30,15,10,10" Background="#FFF2EDED" Click="CurrentTherapy" >
+                            <Border DockPanel.Dock="Top" BorderBrush="LightBlue" BorderThickness="1">
+                            <Button  HorizontalAlignment="Left" x:Name="GetTherapy"  Width="150" Height="27" Margin="30,15,10,10" Background="#FFF2EDED" Click="CurrentTherapy" >
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Name="CurrentTherapyLabel" Text="{x:Static p:Resources.CurrentTherapy}" Margin="-1" FontSize="12" Foreground="Black"></TextBlock>
                                     <Image Margin="3,-5,0,0"  Height="23" Width="20" Source="/PacijentBolnicaZdravo;component/Images/PDF1.png"></Image>
-                                </StackPanel>
+                                </StackPanel>   
                             </Button>
+                            </Border>
                             <ScrollViewer VerticalScrollBarVisibility="auto">
-                                <StackPanel x:Name="Exeminations" Orientation="Vertical">
-                                    <TextBlock Margin="70,100,70,10" TextDecorations="{x:Null}" Opacity="0.4" FontSize="20" Text="{x:Static p:Resources.ExaminationHardCore}" Name="ExaminationHardCore" FontWeight="Bold"/>
+                                <StackPanel Name="Exeminations" Orientation="Vertical">
                                 </StackPanel>
                             </ScrollViewer>
                         </DockPanel>
@@ -162,7 +167,7 @@
                     <TabItem Header="{x:Static p:Resources.Hospitalizations}" Name="Hospitalizations">
                         <DockPanel>
                             <TextBlock>
-
+                                      <TextBlock Margin="70,100,70,10" TextDecorations="{x:Null}" Opacity="0.4" FontSize="20" Text="{x:Static p:Resources.ExaminationHardCore}" Name="ExaminationHardCore" FontWeight="Bold"/>
                             </TextBlock>
                         </DockPanel>
                     </TabItem>
@@ -425,12 +430,12 @@
                                 <TextBlock Margin="6,6,6,50"  Height="24" FontSize="14">Pitanje broj jedan</TextBlock>
                         </StackPanel>
                         <StackPanel Orientation="Vertical">
-                            <Slider Style="{StaticResource SliderGrade}" Minimum="1" Maximum="5" TickFrequency="1" Width="150"   Margin="10,14,5,5" Name="Slider1"></Slider>
+                            <Slider Style="{StaticResource SliderGrade}" Minimum="1" Maximum="5" TickFrequency="1" Width="200"   Margin="10,14,5,5" Name="Slider1"></Slider>
                             <Slider Style="{StaticResource SliderGrade}" Minimum="1" Maximum="5" TickFrequency="1" Margin="10,10,5,5" Name="Slider2"></Slider>
                             <Slider Style="{StaticResource SliderGrade}" Minimum="1" Maximum="5" TickFrequency="1" Margin="10,7,5,5" Name="Slider3"></Slider>
                             <Slider Style="{StaticResource SliderGrade}" Minimum="1" Maximum="5" TickFrequency="1" Margin="10,7,5,5" Name="Slider4"></Slider>
                             <Slider Style="{StaticResource SliderGrade}" Minimum="1" Maximum="5" TickFrequency="1" Margin="10,7,5,5" Name="Slider5"></Slider>
-                                <TextBlock Name="FeedbackDOctor" Width="150" Opacity="0" FontSize="15" TextWrapping="WrapWithOverflow" HorizontalAlignment="Right"  Margin="0,0,10,-10" Foreground="#FF0AD908"></TextBlock>
+                                <TextBlock Name="FeedbackDOctor" Width="200" Opacity="0" FontSize="12" TextWrapping="WrapWithOverflow" HorizontalAlignment="Right"  Margin="0,0,10,-10" Foreground="#FF0AD908"></TextBlock>
                                 <Button x:Name="GradeADoctorButton" Content="{x:Static p:Resources.Send}" HorizontalAlignment="Right" Width="60" Margin="10" Click="GradeADoctorButton_Click"></Button>
                         </StackPanel>
                     </StackPanel>

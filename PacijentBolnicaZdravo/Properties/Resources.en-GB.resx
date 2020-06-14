@@ -166,7 +166,7 @@
     <value>You already have 3 appointments</value>
   </data>
   <data name="ExaminationHardCore" xml:space="preserve">
-    <value>You currently do not have any examnations</value>
+    <value>You currently do not have any hospitalization</value>
   </data>
   <data name="Examinations" xml:space="preserve">
     <value>Examinations</value>

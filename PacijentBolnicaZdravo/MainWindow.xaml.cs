@@ -35,18 +35,21 @@ using System.Windows.Threading;
 using System.Windows.Media.Animation;
 using System.Windows.Forms;
 using Model.Doctor;
+using System.Collections;
 
 namespace PacijentBolnicaZdravo
 {
 
     public partial class MainWindow : MetroWindow, INotifyPropertyChanged
     {
+
         public ChangeLanguage cl = new ChangeLanguage();
         public static CultureInfo culture = new CultureInfo("sr");
         public List<ExaminationDTO> scheduledExaminations { get; set; }
         public List<ExaminationDTO> upcomingExaminations { get; set; }
         public List<Doctor> listOfDoctors { get; set; }
         public List<Article> ListOfArticles { get; set; }
+        public List<Examination> examinations { get; set; }
         public Patient _patient { get; set; }
         public static int Theme = 0;
 
@@ -57,6 +60,7 @@ namespace PacijentBolnicaZdravo
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             _patient = patient;
             ListOfArticles = articles;
+            
             scheduledExaminations = getScheduledExaminations();
             Doctor dr = new Doctor(1, "Pera", "Perić", "213123123123", "sadsds@sadsa.com", "2312312312", new DateTime(), null, "DDD", "ddd", null, null);
             Doctor dr1 = new Doctor(1, "Jovan", "Jovanović", "213123123123", "sadsds@sadsa.com", "2312312312", new DateTime(), null, "DDD", "ddd", null, null);
@@ -64,15 +68,21 @@ namespace PacijentBolnicaZdravo
             listOfDoctors.Add(dr);
             listOfDoctors.Add(dr1);
             upcomingExaminations = new List<ExaminationDTO>();
-    
+            examinations = uploadExaminations();
+
             InitializeComponent();
             setArticle();
+            setExaminations();
+            FillAccountData(_patient);
 
             PasswordValidation2.password2 = _patient.Password;
-            FillAccountData(_patient);
+           
             DoctorsForFeedback.DisplayMemberPath = "FullName";
             DoctorsForExaminations.DisplayMemberPath = "FullName";
+           
             this.DataContext = this;
+            
+
             if (Thread.CurrentThread.CurrentCulture.Equals(new CultureInfo("sr")))
                 Language.SelectedItem = Language.Items[0];
             else
@@ -92,6 +102,126 @@ namespace PacijentBolnicaZdravo
                 DarkMode.Value = DarkMode.Minimum;
             }
 
+        }
+
+        public List<Examination> uploadExaminations()
+        {
+            List<Examination> retVal = new List<Examination>();
+            Examination examination1 = new Examination(1);
+            examination1.Doctor =  new Doctor(1, "Pera", "Perić", "213123123123", "sadsds@sadsa.com", "2312312312", new DateTime(), null, "DDD", "ddd", null, null);
+            examination1.Period = new Period(new DateTime(2020, 06, 12,12,40,0));
+            examination1.Therapy = new Therapy(0, null, 0, "Mazati tanak sloj kreme preko upaljenog dela.", null);
+            List<Drug> drugs = new List<Drug>();
+            Drug dr1 = new Drug("Klindamicin krema",0,true,null,null);
+            drugs.Add(dr1);
+            List<Prescription> pr = new List<Prescription>();
+            pr.Add(new Prescription(new Period(new DateTime(2020, 06, 12), new DateTime(2020, 06, 17)), "Mazati tanak sloj kreme preko upaljenog dela!", drugs));
+            examination1.Prescription = pr;
+            examination1.Refferal = null;
+            examination1.User = this._patient;
+            examination1.Anemnesis = new Anemnesis("Svrab i crvenilo oko oka, često jaki bolovi i konstantne suze. Pacijent se takodje zali na bolove u glavi i kako kaže da mu sve dolazi od oka.");
+            examination1.Diagnosis = new Diagnosis(0, "Konjuktavitis praćen teškom upalom.");
+            Examination examination2 = new Examination(2);
+            examination2.Doctor = new Doctor(1, "Pera", "Perić", "213123123123", "sadsds@sadsa.com", "2312312312", new DateTime(), null, "DDD", "ddd", null, null);
+            examination2.Period = new Period(new DateTime(2020, 06, 15, 09, 20, 0));
+            List<Drug> drugs1 = new List<Drug>();
+            Drug dr2 = new Drug("Kardiopirin", 0, true, null, null);
+            drugs1.Add(dr2);
+            List<Prescription> pr1 = new List<Prescription>();
+            pr1.Add(new Prescription(new Period(new DateTime(2020, 06, 12), new DateTime(2020, 06, 17)), "Mazati tanak sloj kreme preko upaljenog dela!", drugs1));
+            examination2.Prescription = pr1;
+            examination2.Refferal = new Referral(2,new Period(new DateTime(2020, 06, 25, 09, 40, 0)), new Doctor(1, "Đorđe", "Cvijić", "213123123123", "sadsds@sadsa.com", "2312312312", new DateTime(), null, "DDD", "ddd", null, null));
+            examination2.User = this._patient;
+            examination2.Anemnesis = new Anemnesis("Pacijent se žali na brzo zamaranje i ubrzan rad srca, tvrdi da mu je " +
+                                                                            "teško da se " +
+                                                      "puno kreće i da često mora da sedne da odmori. Takodje govori da " +
+                                                        "često oseti preskakanja srca i da nakon toga ne može da se smiri.");
+            examination2.Diagnosis = new Diagnosis(0, "Srčana aritmija");
+            examination2.Therapy = new Therapy(0, null, 0, "Lek uzimati svaki drugi dan 3 puta dnevno", null);
+            retVal.Add(examination1);
+            retVal.Add(examination2);
+            return retVal;
+        }
+
+        private void setExaminations()
+        {
+            foreach(var examination in examinations)
+            {
+                Border b = new Border();
+                b.BorderThickness = new Thickness(2);
+                b.CornerRadius = new CornerRadius(3);
+                b.BorderBrush = Brushes.LightBlue;
+                b.Margin = new Thickness(10, 10, 10, 10);
+
+                StackPanel stackPanelExamination = new StackPanel();
+                TextBlock doctor = new TextBlock();
+                TextBlock period = new TextBlock();
+                TextBlock prescription = new TextBlock();
+                TextBlock refferal = new TextBlock();
+                TextBlock Anamnesis = new TextBlock();
+                TextBlock Diagnosis = new TextBlock();
+                TextBlock therapy = new TextBlock();
+
+                doctor.FontSize = 15;
+                doctor.Inlines.Add(new Run("Doktor:  ") { FontWeight = FontWeights.Bold });
+                doctor.Inlines.Add( examination.Doctor.FullName);
+                doctor.Margin = new Thickness(10, 10, 10, 10);
+                stackPanelExamination.Children.Add(doctor);
+                //
+                period.Inlines.Add(new Run("Datum:  ") { FontWeight = FontWeights.Bold });
+                period.FontSize = 15;
+                period.Inlines.Add( examination.Period.StartDate.ToString());
+                period.Margin = new Thickness(10, 10, 10, 10);
+                stackPanelExamination.Children.Add(period);
+
+                //
+                Anamnesis.FontSize = 15;
+                Anamnesis.Inlines.Add(new Run("Anamnesis:  ") { FontWeight = FontWeights.Bold });
+                Anamnesis.TextWrapping = TextWrapping.Wrap;
+                Anamnesis.Margin = new Thickness(10, 10, 10, 10);
+                Anamnesis.Inlines.Add( examination.Anemnesis.Text);
+                stackPanelExamination.Children.Add(Anamnesis);
+
+                //
+                Diagnosis.FontSize = 15;
+                Diagnosis.TextWrapping = TextWrapping.Wrap;
+                Diagnosis.Inlines.Add(new Run("Diagnoza:  ") { FontWeight = FontWeights.Bold });
+                Diagnosis.Margin = new Thickness(10, 10, 10, 10);
+                Diagnosis.Inlines.Add( examination.Diagnosis.Name);
+                stackPanelExamination.Children.Add(Diagnosis);
+
+                //
+
+                prescription.FontSize = 15;
+                prescription.TextWrapping = TextWrapping.Wrap;
+                prescription.Margin = new Thickness(10, 10, 10, 10);
+                prescription.Inlines.Add(new Run("Recept: ") { FontWeight = FontWeights.Bold });
+                foreach(Prescription pr in examination.Prescription)
+                {
+                    foreach (Drug dr in pr.Drug)
+                        prescription.Inlines.Add( dr.Name);
+                }
+                stackPanelExamination.Children.Add(prescription);
+
+                therapy.FontSize = 15;
+                therapy.TextWrapping = TextWrapping.Wrap;
+                therapy.Margin = new Thickness(10, 10, 10, 10);
+                therapy.Inlines.Add(new Run("Terapija:  ") { FontWeight = FontWeights.Bold });
+                therapy.Inlines.Add(examination.Therapy.Note);
+                stackPanelExamination.Children.Add(therapy);
+                if (examination.Refferal != null)
+                {
+                    refferal.FontSize = 15;
+                    refferal.Margin = new Thickness(10, 10, 10, 10);
+                    refferal.Inlines.Add(new Run("Uput:  ") { FontWeight = FontWeights.Bold });
+                    refferal.Inlines.Add("pacijent se upućuje na dateljniji pregled kod lekara " + examination.Refferal.Doctor.FullName + " datuma " + examination.Refferal.Period.StartDate.ToString());
+                    stackPanelExamination.Children.Add(refferal);
+                }
+
+                    b.Child = stackPanelExamination;
+
+                Exeminations.Children.Add(b);
+            }
         }
 
         private void setArticle()
@@ -269,6 +399,7 @@ namespace PacijentBolnicaZdravo
         private void Zakazi(object sender, RoutedEventArgs e)
         {
             var selectedItem = scheduleExaminationsGrid.SelectedItem;
+           
             if(selectedItem == null)
             {
                 return;
@@ -330,10 +461,9 @@ namespace PacijentBolnicaZdravo
             DialogResult result = delete.ShowDialog();
             if (result == System.Windows.Forms.DialogResult.OK)
             {
-                upcomingExaminations.Add((ExaminationDTO)selectedItem);
                 scheduledExaminations.Remove((ExaminationDTO)selectedItem);
                 scheduledExaminationsGrid.Items.Refresh();
-                scheduleExaminationsGrid.Items.Refresh();
+
             }
         }
 
@@ -378,7 +508,7 @@ namespace PacijentBolnicaZdravo
                 _patient.Email = Email.Text.ToString();
                 
             }
-            if (!DateBirthPicker.Text.ToString().Equals(""))
+            if (!DateBirthPicker.Text.ToString().Equals("") && DateBirthPicker.SelectedDate != DateTime.Today)
             {
                 prom++;
                 _patient.DateOfBirth = DateTime.Parse(DateBirthPicker.Text);
@@ -413,7 +543,12 @@ namespace PacijentBolnicaZdravo
 
         private void UpdatePw(object sender, RoutedEventArgs e)
         {
-
+            if(CurrentPassword.Text != "" && NewPassword.Text != "")
+            {
+                _patient.Password = NewPassword.Text;
+                Storyboard sb = Resources["sbHideAnimation"] as Storyboard;
+                sb.Begin(SuccessUpdatePw);
+            }
         }
 
         private void Search(object sender, RoutedEventArgs e)
@@ -553,11 +688,11 @@ namespace PacijentBolnicaZdravo
             FeedbackDOctor.Foreground = Brushes.Green;
             if (Thread.CurrentThread.CurrentCulture.Equals(new CultureInfo("sr")))
                 {
-                    FeedbackDOctor.Text = "Prosečna ocena " + grade;
+                    FeedbackDOctor.Text = "Uspešno ste ocenili lekara!";
                 }
             else
                 {
-                    FeedbackDOctor.Text = "Average rating" + grade;
+                    FeedbackDOctor.Text = "You have successfully graded the doctor!";
 
                 }
             Storyboard sb = Resources["sbHideAnimation"] as Storyboard;

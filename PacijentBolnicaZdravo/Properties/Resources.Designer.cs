@@ -205,7 +205,7 @@ namespace MyProject.Language {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You currently do not have any examnations.
+        ///   Looks up a localized string similar to You currently do not have any hospitalization.
         /// </summary>
         public static string ExaminationHardCore {
             get {

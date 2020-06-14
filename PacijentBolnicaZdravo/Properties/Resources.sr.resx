@@ -166,7 +166,7 @@
     <value>Imate 3 zakazana termina</value>
   </data>
   <data name="ExaminationHardCore" xml:space="preserve">
-    <value>Trenutno nemate ni jedan pregled u Vašem kartonu</value>
+    <value>Trenutno nemate ni jednu hospitalizaciju u Vašem kartonu</value>
   </data>
   <data name="Examinations" xml:space="preserve">
     <value>Pregledi</value>
