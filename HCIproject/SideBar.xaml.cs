@@ -1,4 +1,5 @@
 ﻿using Model.Doctor;
+using Model.PatientSecretary;
 using Model.Users;
 using System;
 using System.Collections.Generic;
@@ -14,14 +15,12 @@ namespace HCIproject
     {
         public Doctor user;
         public string Naslov { get; set; }
-
-
         public SideBar()
         {
             InitializeComponent();
             this.DataContext = this;
             setArticle();
-
+            setDrug();
         }
         public SideBar(Doctor _user)
         {
@@ -30,7 +29,8 @@ namespace HCIproject
             user = _user;
             setArticle();
             setDoctorsData();
-        }
+            setDrug();
+    }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -58,12 +58,6 @@ namespace HCIproject
             fileWin.Show();
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {//otvara prozor za validaciju sastava leka
-            DrugValidation drugValWind = new DrugValidation((Doctor)user);
-           // this.Visibility = Visibility.Hidden;
-            drugValWind.ShowDialog();
-        }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {//dodaj alternativni
@@ -347,6 +341,67 @@ namespace HCIproject
             obavesti.Text = "";
         }
 
+
+
+        private void setDrug()
+        {
+            var app = Application.Current as App;
+
+
+            foreach (var drug in app.DrugController.GetNotApprovedDrugs())
+            {
+                Grid myGrid = new Grid();
+                myGrid.Width = 250;
+             //   myGrid.Height = 100;
+                myGrid.HorizontalAlignment = HorizontalAlignment.Center;
+                myGrid.VerticalAlignment = VerticalAlignment.Center;
+
+                ColumnDefinition colDef1 = new ColumnDefinition();
+                ColumnDefinition colDef2 = new ColumnDefinition();
+                myGrid.ColumnDefinitions.Add(colDef1);
+                myGrid.ColumnDefinitions.Add(colDef2);
+
+                RowDefinition rowDef1 = new RowDefinition();
+                myGrid.RowDefinitions.Add(rowDef1);
+
+                TextBlock newDrug = new TextBlock();
+                newDrug.TextWrapping = TextWrapping.Wrap;
+                newDrug.FontSize = 16;
+                newDrug.FontWeight = FontWeights.Bold;
+                newDrug.HorizontalAlignment = HorizontalAlignment.Left;
+                newDrug.VerticalAlignment = VerticalAlignment.Center;
+                newDrug.Margin = new Thickness(20, 10, 10, 10);
+                newDrug.Foreground = new SolidColorBrush(Color.FromRgb(84, 96, 89));
+                newDrug.Text = drug.Name;
+                Grid.SetRow(newDrug, 0);
+                Grid.SetColumn(newDrug, 0);
+
+                var myButton = new Button();
+                myButton.Content = "Validiraj";
+                myButton.Width = 100;
+                myButton.Height = 30;
+                myButton.Background = new SolidColorBrush(Color.FromRgb(162, 217, 206));
+                Grid.SetColumn(myButton, 1);
+                Grid.SetRow(myButton, 0);
+                myButton.Tag = drug.Id;
+                myButton.Click += new RoutedEventHandler(ClickValidation);
+
+                myGrid.Children.Add(myButton);
+                myGrid.Children.Add(newDrug);
+
+
+                DrugValidationPanel.Children.Add(myGrid);
+
+
+            }
+        }
+        private void ClickValidation(object sender, RoutedEventArgs e)
+        {//posalji utisak
+            var DrugId = ((Button)sender).Tag;
+            DrugValidation drugValWind = new DrugValidation((Doctor)user, (long)DrugId);
+            // this.Visibility = Visibility.Hidden;
+            drugValWind.ShowDialog();
+        }
 
     }
 }

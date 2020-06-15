@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HCIproject"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="DrugAlternative" Height="400" Width="750"
         WindowStartupLocation="CenterScreen">
@@ -14,16 +15,15 @@
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Izberite lek" FontSize="16"   Margin="8,8,0,0"></Label>
-                            <ComboBox  Width="200"  Margin="8,8,0,0" FontWeight="Bold" FontSize="18">
-                                <ComboBoxItem Content="Bromazepam"/>
-                                <ComboBoxItem Content="Nimulid" IsSelected="True"/>
-                                <ComboBoxItem Content="Diklofen"/>
-                            </ComboBox>
+                            <ComboBox x:Name="cBox" Width="200"  Margin="8,8,0,0" FontWeight="Bold" FontSize="16"  Background="#A2D9CE" SelectionChanged="cBox_SelectionChanged">
+                    <!--                          <ComboBox x:Name="cBox"  materialDesign:HintAssist.Hint="Kretanjem na strelice izaberite neki od ponudjenih lekova" Margin="8,8,0,0"  IsEditable="False">
 
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
+                            -->
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
                             <Label Content="Sifra leka: "  FontSize="16"  Margin="8,8,0,0"></Label>
-                            <Label Content="B23E "  Margin="8,8,0,0"  FontSize="18" FontWeight="Bold"></Label>
+                            <Label x:Name="drugKey"  Margin="8,8,0,0"  FontSize="16" FontWeight="Bold"></Label>
                         </StackPanel>
                     </StackPanel>
                 </Border>
@@ -32,19 +32,17 @@
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Izberite alternativni lek" FontSize="16"    Margin="8,8,0,0"></Label>
-                            <ComboBox  Width="200"  Margin="8,8,0,0" FontWeight="Bold" FontSize="18">
-                                <ComboBoxItem Content="Bromazepam"/>
-                                <ComboBoxItem Content="Nimulid"/>
-                                <ComboBoxItem Content="Diklofen"  IsSelected="True"/>
-                            </ComboBox>
+                    <ComboBox x:Name="cBox1" Width="200"  Margin="8,8,0,0" FontWeight="Bold" FontSize="16"  Background="#A2D9CE" SelectionChanged="cBox_SelectionChanged">
+                    </ComboBox>
 
-                        </StackPanel>
+                </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Sifra leka: "  FontSize="16"  Margin="8,8,0,0"></Label>
-                            <Label Content="B23E "  Margin="8,8,0,0" FontSize="18" FontWeight="Bold"></Label>
+                    <Label x:Name="drugKey1"  Margin="8,8,0,0" FontSize="16" FontWeight="Bold"></Label>
                         </StackPanel>
                     </StackPanel>
                 </Border>
+        <Label x:Name="obavestenje" ></Label>
         <WrapPanel FlowDirection="RightToLeft">
             <Button Content="Otkaži" FontSize="18" Height="30" Width="100"  Margin="10,10,10,50" Background="#A2D9CE"   Click="Button_Click_1" BorderBrush="#FF1FEECD"></Button>
             <Button Content="Potvrdi" FontSize="18" Height="30" Width="100"  Margin="10,10,10,50" Background="#A2D9CE" Click="Button_Click" BorderBrush="#FF1FEECD" ></Button>

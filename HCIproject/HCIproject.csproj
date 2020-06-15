@@ -233,10 +233,12 @@
     <None Include="RESOURCES\DoctorGradeFile.csv" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="RESOURCES\DrugFile.csv" />
     <None Include="RESOURCES\ExaminationPrevious.csv" />
     <None Include="RESOURCES\HospitalizationFile.csv" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="RESOURCES\IngredientsFile.csv" />
     <None Include="RESOURCES\PatientFile.csv" />
     <None Include="RESOURCES\PrescriptionFile.csv" />
   </ItemGroup>

@@ -172,7 +172,16 @@
             <TabItem Header="Evidencija lekova" FontSize="19"  Background="#A2D9CE">
                 <StackPanel  x:Name="evidencijaGrid" Background="#D5F5E3" Orientation="Vertical" >
                     <Label Content="Validacija sastava leka" FontSize="17" FontWeight="Bold"/>
-                    <Border  BorderBrush="#FFA2D9CE" BorderThickness="8" CornerRadius="8,8,8,8"  Margin="5">
+                    <Border  BorderBrush="#A2D9CE" BorderThickness="5" CornerRadius="8,8,8,8"  Margin="5">
+
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" Height="180">
+                            <StackPanel x:Name="DrugValidationPanel" Orientation="Vertical" >
+                                <Border  >
+                                </Border>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </Border>
+                    <!--       <Border  BorderBrush="#FFA2D9CE" BorderThickness="8" CornerRadius="8,8,8,8"  Margin="5">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
@@ -190,15 +199,19 @@
                             <Label Content="Naziv leka" Grid.Row="0" Grid.Column="0" Margin="10" FontSize="14" FontWeight="UltraLight"/>
                             <Label Content="Klikom na dugme validirajte sastav leka" Margin="10" HorizontalContentAlignment="Center" Grid.Row="0" Grid.Column="1" FontSize="14" FontWeight="UltraLight" />
 
-                            <Label Content="Nimulid" Grid.Row="1" FontSize="17"  Margin="10" Grid.Column="0" FontWeight="Bold"/>
+                            <Label Content="Aerius" Grid.Row="1" FontSize="17"  Margin="10" Grid.Column="0" FontWeight="Bold"/>
                             <Button Content="Validiraj" HorizontalAlignment="Center" FontWeight="Bold" Grid.Row="1" FontSize="15" Margin="95.2,10,68,10" Grid.Column="1" Background="#A2D9CE" Foreground="#FF63788C"  Click="Button_Click_2" Width="96" BorderBrush="#FF1FEECD"/>
 
-                            <Label Content="Bromazepam" FontSize="17"  Grid.Row="2" Margin="10" Grid.Column="0" FontWeight="Bold" />
+                            <Label Content="Paracetamol" FontSize="17"  Grid.Row="2" Margin="10" Grid.Column="0" FontWeight="Bold" />
+                            <Button Content="Validiraj" HorizontalAlignment="Center" Grid.Row="2"  Margin="95.2,10,68,10" Grid.Column="1" FontSize="15" FontWeight="Bold" Background="#A2D9CE" Foreground="#FF63788C" Click="Button_Click_2" Width="95" BorderBrush="#FF1FEECD"/> 
+                            
+                            <Label Content="Paracetamol" FontSize="17"  Grid.Row="2" Margin="10" Grid.Column="0" FontWeight="Bold" />
                             <Button Content="Validiraj" HorizontalAlignment="Center" Grid.Row="2"  Margin="95.2,10,68,10" Grid.Column="1" FontSize="15" FontWeight="Bold" Background="#A2D9CE" Foreground="#FF63788C" Click="Button_Click_2" Width="95" BorderBrush="#FF1FEECD"/>
                         </Grid>
                     </Border>
-                    <Label Content="Alternativni lekovi" FontSize="17" FontWeight="Bold"/>
-                    <Border  BorderBrush="#A2D9CE" BorderThickness="8" CornerRadius="8,8,8,8"  Margin="5">
+     -->
+                    <Label Content="Alternativni lekovi" FontSize="17" FontWeight="Bold" />
+                    <Border  BorderBrush="#A2D9CE" BorderThickness="5" CornerRadius="8,8,8,8"  Margin="5">
                         <StackPanel Orientation="Vertical">
 
                             <Button Content="Dodaj alternativni" Margin="20" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#FF63788C" Background="#A2D9CE" Click="Button_Click_3" BorderBrush="#FF1FEECD"/>
