@@ -406,28 +406,41 @@ namespace PacijentBolnicaZdravo
             }
             if(scheduledExaminations.Count == 3)
             {
+                ErrorSchedule.Foreground = Brushes.Red;
+                if (Thread.CurrentThread.CurrentCulture.Equals(new CultureInfo("sr")))
+                {
+                    ErrorSchedule.Text = "Imate zakazan maksimalan broj termina!";
+                }
+                else
+                {
+                    ErrorSchedule.Text = "You have a maximum number of appointments scheduled!";
+                }
+
                 Storyboard sb = Resources["sbHideAnimation"] as Storyboard;
                 sb.Begin(ErrorSchedule);
                 return;
             }
 
+            ErrorSchedule.Foreground = Brushes.Green;
             DeleteExamination delete;
             ExaminationDTO deleteExam = (ExaminationDTO)selectedItem;
             if (Thread.CurrentThread.CurrentCulture.Equals(new CultureInfo("sr")))
             {
                 delete = new DeleteExamination("Zakažite termin kod lekara  " +
                                                                          deleteExam.Doctor.FirstName + " " + deleteExam.Doctor.LastName + "?", "Da", "Ne", "Zakaži pregled", MainWindow.Theme);
-
+                ErrorSchedule.Text = "Uspešno ste zakazali pregled!";
             }
             else
             {
                 delete = new DeleteExamination("Schedule examination at the doctor  " +
                                                                         deleteExam.Doctor.FirstName + " " + deleteExam.Doctor.LastName + "?", "Yes", "No", "Schedule examination", MainWindow.Theme);
-
+                ErrorSchedule.Text = "You have successfully scheduled an examination!";
             }
             DialogResult result = delete.ShowDialog();
             if (result == System.Windows.Forms.DialogResult.OK)
             {
+                Storyboard sb = Resources["sbHideAnimation"] as Storyboard;
+                sb.Begin(ErrorSchedule);
                 upcomingExaminations.Remove((ExaminationDTO)selectedItem);
                 scheduledExaminations.Add((ExaminationDTO)selectedItem);
                 scheduledExaminationsGrid.Items.Refresh();
@@ -443,24 +456,26 @@ namespace PacijentBolnicaZdravo
             {
                 return;
             }
-
+            ErrorCancel.Foreground = Brushes.Green;
             DeleteExamination delete;
             ExaminationDTO deleteExam = (ExaminationDTO)selectedItem;
             if (Thread.CurrentThread.CurrentCulture.Equals(new CultureInfo("sr")))
             {
                delete = new DeleteExamination("Da li ste sigurni da zelite da otkažete pregled kod lekara " +
                                                                         deleteExam.Doctor.FirstName + " " + deleteExam.Doctor.LastName + "?", "Da", "Ne", "Obriši pregled", MainWindow.Theme);
-
+                ErrorCancel.Text = "Uspešno ste otkazali termina!";
             }
             else
             {
                 delete = new DeleteExamination("Are you sure you want to cancel the examination at the doctor  " +
                                                                         deleteExam.Doctor.FirstName + " " + deleteExam.Doctor.LastName + "?", "Yes", "No", "Delete examination", MainWindow.Theme);
-
+                ErrorCancel.Text = "You have successfully canceled the appointment!";
             }
             DialogResult result = delete.ShowDialog();
             if (result == System.Windows.Forms.DialogResult.OK)
             {
+                Storyboard sb = Resources["sbHideAnimation"] as Storyboard;
+                sb.Begin(ErrorCancel);
                 scheduledExaminations.Remove((ExaminationDTO)selectedItem);
                 scheduledExaminationsGrid.Items.Refresh();
 

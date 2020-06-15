@@ -304,6 +304,15 @@ namespace MyProject.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Note : You can have a maximum of 3 appointments scheduled at the moment..
+        /// </summary>
+        public static string NoteForExamination {
+            get {
+                return ResourceManager.GetString("NoteForExamination", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Telephone number:.
         /// </summary>
         public static string NumberPhone {

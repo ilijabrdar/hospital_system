@@ -20,6 +20,7 @@ namespace PacijentBolnicaZdravo.Properties
 
             Console.WriteLine("Ovdesam");
             Console.WriteLine(currentWindow);
+            currentWindow.Note.Text = MyProject.Language.Resources.NoteForExamination;
                 currentWindow.DarkModeLabel.Text = MyProject.Language.Resources.DarkMode;
                 currentWindow.LogOutButton.Content = MyProject.Language.Resources.LogOut;
                 currentWindow.Articles.Header = MyProject.Language.Resources.TabArticles;

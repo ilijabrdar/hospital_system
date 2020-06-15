@@ -70,6 +70,7 @@
             </TabItem>
             <TabItem Header="{x:Static p:Resources.TabExemination}" Name="TabExamination">
                 <StackPanel  Orientation="Vertical">
+                    <TextBlock Name="Note" Margin="10,10,10,1" FontSize="15" Text="{x:Static p:Resources.NoteForExamination}"></TextBlock>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Name="ChooseDoctor" Text="{x:Static p:Resources.ChooseDoctor}" FontSize="19"  Margin="20" Width="150"/>
                         <ComboBox HorizontalAlignment="Left" Margin="20"  Width="250"  Name="DoctorsForExaminations" ItemsSource ="{Binding Path=listOfDoctors}">
@@ -88,7 +89,7 @@
                             <RowDefinition Height="auto"></RowDefinition>
                         </Grid.RowDefinitions>
                         <ScrollViewer VerticalScrollBarVisibility="Auto" >
-                            <Border Height="300">
+                            <Border Height="250">
                             <DataGrid Margin="15" FontSize="14" BorderThickness="1" x:Name="scheduleExaminationsGrid" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" ItemsSource ="{Binding Path=upcomingExaminations}" >
                             <DataGrid.CellStyle>
                                 <Style TargetType="DataGridCell">
@@ -109,7 +110,7 @@
                             </Border>
                         </ScrollViewer>
                     </Grid>
-                    <TextBlock Name="ErrorSchedule" Text="{x:Static p:Resources.ErrorSchedule}" Opacity="0" FontSize="15" HorizontalAlignment="Right"  Margin="0,0,10,-5" Foreground="#FFE01F0C"></TextBlock>
+                    <TextBlock Name="ErrorSchedule"  Opacity="0" FontSize="15" HorizontalAlignment="Right"  Margin="0,0,10,-5" Foreground="#FFE01F0C"></TextBlock>
 
                     <Button Name="Schedule" Content="{x:Static p:Resources.Schedule}" HorizontalAlignment="Right" Margin="15"  Width="76" Click="Zakazi" >
                         <Button.ToolTip>
@@ -138,6 +139,7 @@
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>
+                    <TextBlock Name="ErrorCancel"  Opacity="0" FontSize="15" HorizontalAlignment="Right"  Margin="0,0,10,-5" Foreground="#FFE01F0C"></TextBlock>
 
                     <Button Name="Cancel"  Content="{x:Static p:Resources.Cancel}" HorizontalAlignment="Right" Margin="15" Width="74" Click="Otkazi">
                         <Button.ToolTip>

@@ -198,6 +198,9 @@
   <data name="NewPw" xml:space="preserve">
     <value>Nova lozinka:</value>
   </data>
+  <data name="NoteForExamination" xml:space="preserve">
+    <value>Napomena : Možete da imate maksimalno 3 zakazana termina.</value>
+  </data>
   <data name="NumberPhone" xml:space="preserve">
     <value>Broj telefona:</value>
   </data>

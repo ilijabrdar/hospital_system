@@ -198,6 +198,9 @@
   <data name="NewPw" xml:space="preserve">
     <value>New password:</value>
   </data>
+  <data name="NoteForExamination" xml:space="preserve">
+    <value>Note : You can have a maximum of 3 appointments scheduled at the moment.</value>
+  </data>
   <data name="NumberPhone" xml:space="preserve">
     <value>Telephone number:</value>
   </data>

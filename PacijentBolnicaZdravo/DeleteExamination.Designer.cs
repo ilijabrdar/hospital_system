@@ -75,9 +75,9 @@
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Controls.Add(this.label1);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(77, 52);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(66, 52);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(467, 84);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(491, 84);
             this.flowLayoutPanel1.TabIndex = 3;
             // 
             // DeleteExamination
