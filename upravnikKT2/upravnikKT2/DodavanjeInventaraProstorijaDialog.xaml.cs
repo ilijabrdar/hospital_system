@@ -157,6 +157,7 @@ namespace upravnikKT2
         {
             List<Room> rooms = _roomController.GetRoomsContainingEquipment(_selectedEquipment).ToList();
             int result = 0;
+            Room final_room = (Room)comboRoomCode.SelectedItem;
 
             foreach (Room room in rooms)
             {
@@ -168,6 +169,8 @@ namespace upravnikKT2
                     }
                 }
             }
+            if (_selectedRoomEquipmentEdit != null && final_room.RoomCode.Equals(_selectedRoomEquipmentEdit.RoomCode))
+                result -= _selectedRoomEquipmentEdit.Equipment_Amount;
             if (result+Amount > _selectedEquipment.Amount)
             {
                 string messageBoxText = "Uneli ste vecu kolicinu opreme od one na raspolaganju";

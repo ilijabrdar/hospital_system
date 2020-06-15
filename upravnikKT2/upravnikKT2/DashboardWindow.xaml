@@ -848,7 +848,7 @@
                         </TextBlock>
 
                         <TextBlock Grid.Row="1" Grid.Column="0" TextWrapping="Wrap" FontSize="14" Margin="10" HorizontalAlignment="Left">
-                            Kako bi aplikaciju ucinili pogodnijom za vas...
+                            Kako bi aplikaciju ucinili pogodnijom za Vas...
                         </TextBlock>
 
                         <DockPanel Grid.Row="2"  >
