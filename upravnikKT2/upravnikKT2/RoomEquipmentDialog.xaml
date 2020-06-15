@@ -12,7 +12,7 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Naziv" Width="150" DisplayMemberBinding="{Binding EquipmentName}"/>
-                    <GridViewColumn Header="Kolicina" Width="150" DisplayMemberBinding="{Binding Equipment_Amount}"/>
+                    <GridViewColumn Header="Količina" Width="150" DisplayMemberBinding="{Binding Equipment_Amount}"/>
                 </GridView>
             </ListView.View>
         </ListView>

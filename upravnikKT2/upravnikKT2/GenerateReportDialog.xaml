@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:upravnikKT2"
         mc:Ignorable="d"
         FontSize="18"
-        Title="GenerateReportDialog" Height="450" Width="800" Loaded="Window_Loaded" PreviewKeyDown="Window_PreviewKeyDown">
+        Title="Generisanje izveštaja" Height="450" Width="800" Loaded="Window_Loaded" PreviewKeyDown="Window_PreviewKeyDown">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="156" />
@@ -25,7 +25,7 @@
 
         </ComboBox>
 
-        <Label Grid.Row="1" Grid.Column="0" FontSize="20" VerticalAlignment="Center"  Height="36" Margin="20,36,0,13">Izaberite pocetni datum</Label>
+        <Label Grid.Row="1" Grid.Column="0" FontSize="20" VerticalAlignment="Center"  Height="36" Margin="20,36,0,13">Izaberite poetni datum</Label>
         <DatePicker x:Name="startDatePicker" Grid.Row="1" Grid.Column="1" FontSize="20" Margin="193,36,20,13" Focusable="False" Height="36"></DatePicker>
 
         <Label Grid.Row="2" Grid.Column="0" FontSize="20" VerticalAlignment="Center"  Height="38" Margin="20,27,0,20">Izaberite krajnji datum</Label>

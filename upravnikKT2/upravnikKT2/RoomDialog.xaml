@@ -8,7 +8,7 @@
         xmlns:local="clr-namespace:upravnikKT2" xmlns:val="clr-namespace:upravnikKT2.Validation"
         mc:Ignorable="d"
         FontSize="18"
-        Title="Manipulacija prostorija" Height="300" Width="400.5" Loaded="Window_Loaded" PreviewKeyDown="Window_PreviewKeyDown">
+        Title="Dodavanje prostorija" Height="300" Width="400.5" Loaded="Window_Loaded" PreviewKeyDown="Window_PreviewKeyDown">
     <Grid Margin="21,21,21,3">
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
@@ -21,7 +21,7 @@
         </Grid.ColumnDefinitions>
 
 
-        <Label Grid.Row="0" Grid.Column="0" Width="152" HorizontalAlignment="Left" Margin="10,10,0,120" Content="Sifra prostorije" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+        <Label Grid.Row="0" Grid.Column="0" Width="152" HorizontalAlignment="Left" Margin="10,10,0,120" Content="Šifra prostorije" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
         <TextBox x:Name="txtRoomCode" Grid.Row="0" Grid.Column="1" Width="141" Margin="0,10,10,0" HorizontalAlignment="Right">
             <TextBox.Text>
                 <Binding Path="RoomCode" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
@@ -33,7 +33,7 @@
         </TextBox>
 
         <Label Grid.Row="1" Grid.Column="0" Width="81" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,44" Content="Tip"/>
-        <ComboBox x:Name="comboRoomTypes" Grid.Row="1" Grid.Column="1" Width="141"  Margin="0,41,10,44" HorizontalAlignment="Right" VerticalContentAlignment="Top" Height="45" materialDesign:HintAssist.Hint="Pretrazi" IsTextSearchEnabled="True"
+        <ComboBox x:Name="comboRoomTypes" Grid.Row="1" Grid.Column="1" Width="141"  Margin="0,41,10,44" HorizontalAlignment="Right" VerticalContentAlignment="Top" Height="45" materialDesign:HintAssist.Hint="Pretraži" IsTextSearchEnabled="True"
                    IsEditable="True"></ComboBox>
 
         <WrapPanel  Grid.Column="1" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10">

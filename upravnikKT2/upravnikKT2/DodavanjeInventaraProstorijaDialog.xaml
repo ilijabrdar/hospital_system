@@ -8,7 +8,7 @@
         xmlns:local="clr-namespace:upravnikKT2" xmlns:val="clr-namespace:upravnikKT2.Validation"
         mc:Ignorable="d"
         FontSize="18"
-        Title="DodavanjeInventaraProstorijaDialog" Height="350" Width="350" Loaded="Window_Loaded" PreviewKeyDown="Window_PreviewKeyDown">
+        Title="Dodavanje inventara prostorijama" Height="350" Width="350" Loaded="Window_Loaded" PreviewKeyDown="Window_PreviewKeyDown">
     <Grid Margin="21,21,21,3">
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
@@ -21,10 +21,10 @@
         </Grid.ColumnDefinitions>
 
 
-        <Label Grid.Row="0" Grid.Column="0" Width="133" HorizontalAlignment="Left" Margin="10,10,0,30" Grid.ColumnSpan="2" Grid.RowSpan="2">Sifra prostorije</Label>
-        <ComboBox x:Name="comboRoomCode" Grid.Row="0" Grid.Column="1" Width="92" Margin="0,10,10,0" HorizontalAlignment="Right" materialDesign:HintAssist.Hint="Pretrazi" IsEditable="True" IsTextSearchEnabled="True" FontSize="14"></ComboBox>
+        <Label Grid.Row="0" Grid.Column="0" Width="133" HorizontalAlignment="Left" Margin="10,10,0,30" Grid.ColumnSpan="2" Grid.RowSpan="2">Šifra prostorije</Label>
+        <ComboBox x:Name="comboRoomCode" Grid.Row="0" Grid.Column="1" Width="92" Margin="0,10,10,0" HorizontalAlignment="Right" materialDesign:HintAssist.Hint="Pretraži" IsEditable="True" IsTextSearchEnabled="True" FontSize="14"></ComboBox>
 
-        <Label Grid.Row="1" Grid.Column="0" Width="102" HorizontalAlignment="Left" Margin="10,10,0,0">Kolicina</Label>
+        <Label Grid.Row="1" Grid.Column="0" Width="102" HorizontalAlignment="Left" Margin="10,10,0,0">Količina</Label>
         <TextBox x:Name="txtAmount" Grid.Row="1" Grid.Column="1" Width="92"  Margin="0,10,10,0" HorizontalAlignment="Right">
             <TextBox.Text>
                 <Binding Path="Amount" StringFormat="{}{0:#.##}" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">

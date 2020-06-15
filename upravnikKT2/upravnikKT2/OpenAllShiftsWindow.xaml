@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:upravnikKT2"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="OpenAllShiftsWindow" Height="450" Width="800" Loaded="Window_Loaded" PreviewKeyDown="Window_PreviewKeyDown">
+        Title="Pregled smena lekara" Height="450" Width="800" Loaded="Window_Loaded" PreviewKeyDown="Window_PreviewKeyDown">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60" />
@@ -37,7 +37,7 @@
 
  
         <Button x:Name="deletShiftBtn" HorizontalAlignment="Left" Margin="157,10,0,10"  Style="{StaticResource MaterialDesignFloatingActionMiniButton}" Click="DeleteShiftBtnClick"
-                 ToolTip="Izbrisi smenu" RenderTransformOrigin="1.775,0.6">
+                 ToolTip="Izbriši smenu" RenderTransformOrigin="1.775,0.6">
             <materialDesign:PackIcon
                                     Kind="DeleteForever"
                                     Height="24"
@@ -46,11 +46,11 @@
 
         <DataGrid x:Name="DataGridShifts" Grid.Row="1" Margin="10,0,10,20" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Datum pocetka smene" Binding="{Binding Shift.StartDate, StringFormat=\{0:dd/MM/yyyy\}}" Width="*"/>
+                <DataGridTextColumn Header="Datum početka smene" Binding="{Binding Shift.StartDate, StringFormat=\{0:dd/MM/yyyy\}}" Width="*"/>
                 <DataGridTextColumn Header="Datum kraja smene" Binding="{Binding Shift.EndDate, StringFormat=\{0:dd/MM/yyyy\}}" Width="*"/>
-                <DataGridTextColumn Header="Pocetak radnog vremena" Binding="{Binding Shift.StartDate, StringFormat=\{0:HH:mm\}}" Width="*"/>
+                <DataGridTextColumn Header="Početak radnog vremena" Binding="{Binding Shift.StartDate, StringFormat=\{0:HH:mm\}}" Width="*"/>
                 <DataGridTextColumn Header="Kraj radnog vremena" Binding="{Binding Shift.EndDate, StringFormat=\{0:HH:mm\}}" Width="*"/>
-                <DataGridTextColumn Header="Sifra prostorije" Binding="{Binding room.RoomCode}" Width="*"/>
+                <DataGridTextColumn Header="Šifra prostorije" Binding="{Binding room.RoomCode}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
 

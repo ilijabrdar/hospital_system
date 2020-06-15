@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:upravnikKT2" xmlns:val="clr-namespace:upravnikKT2.Validation"
         mc:Ignorable="d"
         FontSize="18"
-        Title="Manipulacija lekova" Height="650" Width="650" PreviewKeyDown="Window_PreviewKeyDown" Loaded="Window_Loaded">
+        Title="Dodavanje lekova" Height="650" Width="650" PreviewKeyDown="Window_PreviewKeyDown" Loaded="Window_Loaded">
     <Window.Resources>
         <Style TargetType="Button" x:Key="MyButton2">
             <Setter Property="OverridesDefaultStyle" Value="True" />
@@ -72,7 +72,7 @@
             </TextBox.Text>
         </TextBox> -->
 
-        <Label Grid.Row="2" Grid.Column="0" Width="91" HorizontalAlignment="Left" Height="30" Margin="10,10,0,0" Content="Kolicina"/>
+        <Label Grid.Row="2" Grid.Column="0" Width="91" HorizontalAlignment="Left" Height="30" Margin="10,10,0,0" Content="Količina"/>
         <TextBox x:Name="txtAmount" Grid.Row="2" Grid.Column="2" Width="134"  Margin="0,10,35,22" HorizontalAlignment="Right">
             <TextBox.Text>
                 <Binding Path="Amount" StringFormat="{}{0:#.##}" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
@@ -87,7 +87,7 @@
             <WrapPanel DockPanel.Dock="Top" Margin="0,5,0,0" >
 
                 <Separator Margin="120,0,0,0"></Separator>
-                <TextBox x:Name="txtsearchOriginalIngredients" materialDesign:HintAssist.Hint="Pretrazi" HorizontalAlignment="Right" Width="73" Height="40" KeyUp="searchOriginalIngredientsKeyUp" Visibility="Hidden"/>
+                <TextBox x:Name="txtsearchOriginalIngredients" materialDesign:HintAssist.Hint="Pretraži" HorizontalAlignment="Right" Width="73" Height="40" KeyUp="searchOriginalIngredientsKeyUp" Visibility="Hidden"/>
                 <Button x:Name="searchOriginalBtn" DockPanel.Dock="Right" Margin="10,10,20,10"  HorizontalAlignment="Right"
                                   Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
                                   
@@ -129,7 +129,7 @@
         <!--<TextBox Grid.Row="3" Grid.Column="1" Width="159"  Margin="0,10,10,7" HorizontalAlignment="Right" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" TextWrapping="Wrap" BorderThickness="1"/>-->
         <WrapPanel DockPanel.Dock="Top" Grid.Column="2" Grid.Row="3" VerticalAlignment="Top"   Height="69" Margin="0,5,0,0" >
             <Separator Margin="130,0,0,0"></Separator>
-            <TextBox materialDesign:HintAssist.Hint="Pretrazi" x:Name="txtsearchSelectedIngredients" HorizontalAlignment="Right" Width="73" KeyUp="searchSelectedIngredientsKeyUp" Height="40" Visibility="Hidden"/>
+            <TextBox materialDesign:HintAssist.Hint="Pretraži" x:Name="txtsearchSelectedIngredients" HorizontalAlignment="Right" Width="73" KeyUp="searchSelectedIngredientsKeyUp" Height="40" Visibility="Hidden"/>
             <Button  x:Name="searchCustomBtn" DockPanel.Dock="Right" Margin="10,10,20,10"  HorizontalAlignment="Right"
                                   Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
                                   

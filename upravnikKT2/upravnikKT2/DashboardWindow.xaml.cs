@@ -929,14 +929,14 @@ namespace upravnikKT2
             List<Room> rooms = _roomController.GetAll().ToList();
             ObservableCollection<Room> DataRooms = new ObservableCollection<Room>(rooms);
 
-            this.DataGridRooms.ItemsSource = DataRooms.Where(input => input.RoomCode.Contains(txtsearchRooms.Text));
+            this.DataGridRooms.ItemsSource = DataRooms.Where(input => input.RoomCode.ToUpper().Contains(txtsearchRooms.Text.ToUpper()));
         }
 
         private void searchDrugsKeyUp(object sender, KeyEventArgs e)
         {
             ObservableCollection<Drug> data_drug = new ObservableCollection<Drug>(_drugController.GetAll());
 
-            this.DataGridLekovi.ItemsSource = data_drug.Where(input => input.Name.Contains(txtsearchDrug.Text));
+            this.DataGridLekovi.ItemsSource = data_drug.Where(input => input.Name.ToUpper().Contains(txtsearchDrug.Text.ToUpper()));
         }
 
 
@@ -944,14 +944,14 @@ namespace upravnikKT2
         {
             ObservableCollection<Renovation> data_renovation = new ObservableCollection<Renovation>(_renovationController.GetAll());
 
-            this.DataGridRenovation.ItemsSource = data_renovation.Where(input => input.Room.RoomCode.Contains(txtSearchRenovations.Text));
+            this.DataGridRenovation.ItemsSource = data_renovation.Where(input => input.Room.RoomCode.ToUpper().Contains(txtSearchRenovations.Text.ToUpper()));
         }
 
         private void searchDoctorsKeyUp(object sender, KeyEventArgs e)
         {
             ObservableCollection<Doctor> data_doctor = new ObservableCollection<Doctor>(_doctorController.GetAll());
 
-            this.dataGridLekari.ItemsSource = data_doctor.Where(input => input.FirstName.Contains(txtSearchDoctors.Text));
+            this.dataGridLekari.ItemsSource = data_doctor.Where(input => input.FirstName.ToUpper().Contains(txtSearchDoctors.Text.ToUpper()));
         }
 
         private void deleteEquipment_Btn_Click(object sender, RoutedEventArgs e)
@@ -1045,14 +1045,14 @@ namespace upravnikKT2
                 List<Equipment> equipment = _equipmentController.getConsumableEquipment().ToList();
                 ObservableCollection<Equipment> data = new ObservableCollection<Equipment>(equipment);
 
-                this.DataGridOpremaPotrosna.ItemsSource = data.Where(input => input.Name.Contains(txtsearcConsumable.Text));
+                this.DataGridOpremaPotrosna.ItemsSource = data.Where(input => input.Name.ToUpper().Contains(txtsearcConsumable.Text.ToUpper()));
             }
             else
             {
                 List<Equipment> equipment = _equipmentController.getInconsumableEquipment().ToList();
                 ObservableCollection<Equipment> data = new ObservableCollection<Equipment>(equipment);
 
-                this.DataGridOpremaNepotrosna.ItemsSource = data.Where(input => input.Name.Contains(txtsearchInconsumable.Text));
+                this.DataGridOpremaNepotrosna.ItemsSource = data.Where(input => input.Name.ToUpper().Contains(txtsearchInconsumable.Text.ToUpper()));
             }
         }
 
@@ -1384,7 +1384,7 @@ namespace upravnikKT2
                     //TextBlock textBlockTitle = new TextBlock();
                     //textBlockTitle.Text = article.Topic;
                     //textBlockTitle.Opacity = 0.68;
-                    if (article.Topic.Contains(txtSearchArticles.Text))
+                    if (article.Topic.ToUpper().Contains(txtSearchArticles.Text.ToUpper()))
                     {
 
                         TextBlock textContent = new TextBlock();
@@ -1432,7 +1432,7 @@ namespace upravnikKT2
                 //TextBlock textBlockTitle = new TextBlock();
                 //textBlockTitle.Text = article.Topic;
                 //textBlockTitle.Opacity = 0.68;
-                if (article.Topic.Contains(txtSearchArticles.Text))
+                if (article.Topic.ToUpper().Contains(txtSearchArticles.Text.ToUpper()))
                 {
 
                     TextBlock textContent = new TextBlock();

@@ -24,12 +24,12 @@
                                     <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White"  Margin="0"/>
                                 </DockPanel>
                                 <StackPanel Orientation="Horizontal" Margin="10,10,10,10">
-                                    <Label Width="200">Doktori</Label>
+                                    <Label Width="200">Broj doktora</Label>
                                     <Separator Margin="86,0,0,0"></Separator>
                                     <TextBox x:Name="doctorCount" Width="38" HorizontalContentAlignment="Center" IsReadOnly="True" />
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Margin="10,10,10,10">
-                                    <Label Width="200">Broj objavljenih clanaka</Label>
+                                    <Label Width="200">Broj objavljenih članaka</Label>
                                     <Separator Margin="86,0,0,0"></Separator>
                                     <TextBox Width="38" HorizontalContentAlignment="Center" IsReadOnly="True">81</TextBox>
                                 </StackPanel>
@@ -135,7 +135,7 @@
                                     Height="24"
                                     Width="24" />
                                 </Button>
-                                <TextBox DockPanel.Dock="Right" Margin="10" TextChanged="TextBox_TextChanged" MinWidth="100" materialDesign:HintAssist.Hint="Pretrazi" KeyUp="searchDoctorsKeyUp" x:Name="txtSearchDoctors" Visibility="Hidden"/>
+                                <TextBox DockPanel.Dock="Right" Margin="10" TextChanged="TextBox_TextChanged" MinWidth="100" materialDesign:HintAssist.Hint="Pretraži" KeyUp="searchDoctorsKeyUp" x:Name="txtSearchDoctors" Visibility="Hidden"/>
                                 <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                             </DockPanel>
                             <DockPanel DockPanel.Dock="Bottom">
@@ -147,7 +147,7 @@
                                         <DataGridTextColumn Header="JMBG" Binding="{Binding Jmbg}" Width="*"/>
                                         <DataGridTextColumn Header="e-mail" Binding="{Binding Email}" Width="*"/>
                                         <DataGridTextColumn Header="Telefon" Binding="{Binding Phone}" Width="*" />
-                                        <DataGridTextColumn Header="Datum rodjenja" Binding="{Binding DateOfBirth, StringFormat=\{0:dd/MM/yyyy\}}" Width="*"/>
+                                        <DataGridTextColumn Header="Datum rođenja" Binding="{Binding DateOfBirth, StringFormat=\{0:dd/MM/yyyy\}}" Width="*"/>
                                         <DataGridTextColumn Header="Odeljenje" Binding="{Binding Specialty.Name}" Width="*"/>
                                         <!-- <DataGridTextColumn Header="Ocena" Binding="{Binding Ocena}" Width="*"/> -->
                                         <DataGridTemplateColumn Header="Ocena" Width="*">
@@ -181,7 +181,7 @@
                     </Grid>
                 </TabItem>
 
-                <TabItem Header="Clanci">
+                <TabItem Header="Članci">
                     <DockPanel>
                         <DockPanel DockPanel.Dock="Top">
                             <Button DockPanel.Dock="Right" Margin="10,10,20,10" x:Name="articleSearchBtn"
@@ -193,7 +193,7 @@
                                     Height="24"
                                     Width="24" />
                             </Button>
-                            <TextBox x:Name="txtSearchArticles" materialDesign:HintAssist.Hint="Pretrazi"  DockPanel.Dock="Right" HorizontalAlignment="Right" MinWidth="100" Margin="10" KeyUp="txtSearchArticles_KeyUp" PreviewKeyUp="txtSearchArticles_PreviewKeyUp" PreviewKeyDown="txtSearchArticles_PreviewKeyDown"/>
+                            <TextBox x:Name="txtSearchArticles" materialDesign:HintAssist.Hint="Pretraži"  DockPanel.Dock="Right" HorizontalAlignment="Right" MinWidth="100" Margin="10" KeyUp="txtSearchArticles_KeyUp" PreviewKeyUp="txtSearchArticles_PreviewKeyUp" PreviewKeyDown="txtSearchArticles_PreviewKeyDown"/>
 
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Bottom">
@@ -285,7 +285,7 @@
                                         <DataGrid Margin="10" x:Name="DataGridOpremaPotrosna" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
                                             <DataGrid.Columns>
                                                 <DataGridTextColumn Header="Naziv" Binding="{Binding Name}" Width="*"/>
-                                                <DataGridTextColumn Header="Kolicina" Binding="{Binding Amount}" Width="*"/>
+                                                <DataGridTextColumn Header="Količina" Binding="{Binding Amount}" Width="*"/>
                                             </DataGrid.Columns>
                                         </DataGrid>
                                     </DockPanel>
@@ -332,14 +332,14 @@
                                     Height="24"
                                     Width="24" />
                                         </Button>
-                                        <TextBox x:Name="txtsearchInconsumable" DockPanel.Dock="Right" Margin="10"  MinWidth="100" materialDesign:HintAssist.Hint="Pretrazi" KeyUp="TextBox_KeyUp" Visibility="Hidden"/>
+                                        <TextBox x:Name="txtsearchInconsumable" DockPanel.Dock="Right" Margin="10"  MinWidth="100" materialDesign:HintAssist.Hint="Pretraži" KeyUp="TextBox_KeyUp" Visibility="Hidden"/>
                                         <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                                     </DockPanel>
                                     <DockPanel DockPanel.Dock="Bottom">
                                         <DataGrid Margin="10" x:Name="DataGridOpremaNepotrosna" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
                                             <DataGrid.Columns>
                                                 <DataGridTextColumn Header="Naziv" Binding="{Binding Name}" Width="*"/>
-                                                <DataGridTextColumn Header="Kolicina" Binding="{Binding Amount}" Width="*"/>
+                                                <DataGridTextColumn Header="Količina" Binding="{Binding Amount}" Width="*"/>
                                                 <DataGridTemplateColumn Header="Raspored po prostorijama" Width="*">
                                                     <DataGridTemplateColumn.CellTemplate>
                                                         <DataTemplate>
@@ -402,7 +402,7 @@
                                     Height="24"
                                     Width="24" />
                             </Button>
-                            <TextBox x:Name="txtsearchDrug" DockPanel.Dock="Right" Margin="10" TextChanged="TextBox_TextChanged" MinWidth="100" Visibility="Hidden" KeyUp="searchDrugsKeyUp" materialDesign:HintAssist.Hint="Pretrazi"/>
+                            <TextBox x:Name="txtsearchDrug" DockPanel.Dock="Right" Margin="10" TextChanged="TextBox_TextChanged" MinWidth="100" Visibility="Hidden" KeyUp="searchDrugsKeyUp" materialDesign:HintAssist.Hint="Pretraži"/>
                             <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Bottom">
@@ -410,7 +410,7 @@
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Naziv"  Binding="{Binding Name}" Width="*"/>
                                     <!-- <DataGridTextColumn Header="Sifra" Binding="{Binding Sifra}"  Width="*"/>-->
-                                    <DataGridTextColumn Header="Kolicina"  Binding="{Binding Amount}" Width="*"/>
+                                    <DataGridTextColumn Header="Količina"  Binding="{Binding Amount}" Width="*"/>
                                     <DataGridCheckBoxColumn Header="Odobren"  Binding="{Binding Approved}" Width="*" />
                                     <DataGridTemplateColumn Header="Alternativni lekovi" Width="*">
                                         <DataGridTemplateColumn.CellTemplate>
@@ -497,14 +497,14 @@
                                     Height="24"
                                     Width="24" />
                             </Button>
-                            <TextBox x:Name="txtsearchRooms" DockPanel.Dock="Right" Margin="10" TextChanged="TextBox_TextChanged" MinWidth="100" materialDesign:HintAssist.Hint="Pretrazi" 
+                            <TextBox x:Name="txtsearchRooms" DockPanel.Dock="Right" Margin="10" TextChanged="TextBox_TextChanged" MinWidth="100" materialDesign:HintAssist.Hint="Pretraži" 
                                      KeyUp="searchRooms_KeyUp" Visibility="Hidden"/>
                             <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Bottom">
                             <DataGrid Margin="10" x:Name="DataGridRooms" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" >
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Sifra" Binding="{Binding RoomCode}" Width="*"/>
+                                    <DataGridTextColumn Header="Šifra" Binding="{Binding RoomCode}" Width="*"/>
                                     <DataGridTextColumn Header="Tip" Binding="{Binding RoomType.Name}"  Width="*"/>
                                     <DataGridTemplateColumn Header="Spisak opreme" Width="*">
                                         <DataGridTemplateColumn.CellTemplate>
@@ -563,16 +563,16 @@
                                     Height="24"
                                     Width="24" />
                             </Button>
-                            <TextBox x:Name="txtSearchRenovations" DockPanel.Dock="Right" Margin="10"  MinWidth="100" materialDesign:HintAssist.Hint="Pretrazi" Visibility="Hidden" KeyUp="searchRenovations_KeyUp" />
+                            <TextBox x:Name="txtSearchRenovations" DockPanel.Dock="Right" Margin="10"  MinWidth="100" materialDesign:HintAssist.Hint="Pretraži" Visibility="Hidden" KeyUp="searchRenovations_KeyUp" />
                             <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Bottom">
                             <DataGrid Margin="10" x:Name="DataGridRenovation" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Sifra prostorije" Binding="{Binding Room.RoomCode}" Width="*"/>
+                                    <DataGridTextColumn Header="Šifra prostorije" Binding="{Binding Room.RoomCode}" Width="*"/>
                                     <!--<DataGridTextColumn Header="Tip prostorije" Binding="{Binding Room.RoomType.Name}" Width="*"/>-->
                                     <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="*"/>
-                                    <DataGridTextColumn Header="Datum pocetka" Binding="{Binding Period.StartDate.Date, StringFormat=\{0:dd/MM/yyyy\}}" Width="*"/>
+                                    <DataGridTextColumn Header="Datum početka" Binding="{Binding Period.StartDate.Date, StringFormat=\{0:dd/MM/yyyy\}}" Width="*"/>
                                     <DataGridTextColumn Header="Datum kraja" Binding="{Binding Period.EndDate, StringFormat=\{0:dd/MM/yyyy\}}" Width="*"/>
                                     <DataGridTextColumn Header="Opis" Binding="{Binding Description}" Width="*"/>
                                 </DataGrid.Columns>
@@ -623,7 +623,7 @@
                                     </DockPanel>
 
                                     <DockPanel Margin="3">
-                                        <Label DockPanel.Dock="Left" Width="150">datum rodjenja</Label>
+                                        <Label DockPanel.Dock="Left" Width="150">datum rođenja</Label>
                                         <Label x:Name="BirthDateDirector" DockPanel.Dock="Left" Width="150" IsManipulationEnabled="False" AllowDrop="False" Content="14/05/1967"  FontWeight="Bold" Margin="500,0,0,0"></Label>
                                         <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                                     </DockPanel>
@@ -717,7 +717,7 @@
                                     </DockPanel>
 
                                     <DockPanel Margin="3">
-                                        <Label DockPanel.Dock="Left" Width="150">datum rodjenja</Label>
+                                        <Label DockPanel.Dock="Left" Width="150">datum rođenja</Label>
                                         <DatePicker x:Name="birthDatePickerEdit" DockPanel.Dock="Left" Width="170" DisplayDate="1967-05-14" Text="14/05/1967" Margin="500,0,0,0"></DatePicker>
                                         <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                                     </DockPanel>
@@ -829,7 +829,7 @@
                     </ScrollViewer>
                 </TabItem>
 
-                <TabItem Header="Vaš utisak" PreviewKeyDown="TabItem_PreviewKeyDown_Feedback">
+                <!--<TabItem Header="Vaš utisak" PreviewKeyDown="TabItem_PreviewKeyDown_Feedback">
                     <Grid Background="White" Margin="10">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="100"/>
@@ -863,28 +863,41 @@
 
 
                     </Grid>
-                </TabItem>
-                <TabItem Header="Pomoć">
+                </TabItem> -->
+                <TabItem Header="Pomoć i Utisak">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="191*" />
-                            <RowDefinition Height="58*" />
+                            <RowDefinition Height="319*" />
+                            <RowDefinition Height="179*" />
                         </Grid.RowDefinitions>
 
-                        <GroupBox Grid.Row="0" Grid.Column="0" Header="Precice" Margin="20" materialDesign:ShadowAssist.ShadowDepth="Depth1" materialDesign:ColorZoneAssist.Mode="Light">
+                        <GroupBox Grid.Row="0" Grid.Column="0" Header="Prečice" Margin="20" materialDesign:ShadowAssist.ShadowDepth="Depth1" materialDesign:ColorZoneAssist.Mode="Light">
                             <DataGrid x:Name="DataGridShortcuts" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Precica" Binding="{Binding Shortcut}" Width="*"/>
+                                    <DataGridTextColumn Header="Prečica" Binding="{Binding Shortcut}" Width="*"/>
                                     <DataGridTextColumn Header="Opis" Binding="{Binding Description}" Width="*" />
                                 </DataGrid.Columns>
                             </DataGrid>
                         </GroupBox>
-                        <Button Grid.Column="1" Grid.Row="0" Content="Snimak" Height="Auto" MaxHeight="50" MaxWidth="100">
-                        </Button>
+                        
+
+                        <StackPanel Grid.Row="0" Grid.Column="1" Margin="10">
+                            <TextBlock Grid.Row="1" Grid.Column="0" TextWrapping="Wrap" FontSize="27" Margin="10" HorizontalAlignment="Left">
+                            ZANIMA NAS VAŠE MIŠLJENJE
+                            </TextBlock>
+                            <TextBlock Grid.Row="1" Grid.Column="0" TextWrapping="Wrap" FontSize="14" Margin="10" HorizontalAlignment="Left">
+                            Podelite svoje iskustvo korišćenja aplikacije sa nama kako bismo mogli da ga unapredimo u budućnosti!
+                            </TextBlock>
+                            <TextBox x:Name="asd2" DockPanel.Dock="Top" Grid.Row="2" Grid.Column="0" Margin="10" 
+                                 HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" TextWrapping="Wrap" Width="Auto" HorizontalAlignment="Stretch" BorderThickness="1" Height="340" />
+                            <Button x:Name="asd3" Grid.Row="3" Margin="10" Height="30" Width="90" HorizontalAlignment="Right" Click="send_feedback">Pošalji</Button>
+                        </StackPanel>
+
+
 
                     </Grid>
                 </TabItem>
