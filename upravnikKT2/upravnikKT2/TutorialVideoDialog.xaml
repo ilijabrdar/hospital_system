@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:upravnikKT2"
         mc:Ignorable="d"
-        Title="TutorialVideoDialog" Height="450" Width="800">
+        Title="TutorialVideoDialog">
     <Grid>
         <Grid Margin="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <MediaElement Source="C:\Users\david\Desktop\tutorial.webm" LoadedBehavior="Manual" Name="mePlayer" />
+            <MediaElement Source="C:\Users\david\Desktop\cc\hospital_system\upravnikKT2\tutorijal - david drvar.mp4" LoadedBehavior="Manual" Name="mePlayer" />
             <StackPanel Grid.Row="1">
                 <Label Name="lblStatus" Content="Not playing..." HorizontalContentAlignment="Center" Margin="5" />
                 <WrapPanel HorizontalAlignment="Center">

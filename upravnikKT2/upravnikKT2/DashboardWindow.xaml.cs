@@ -519,8 +519,8 @@ namespace upravnikKT2
 
             //dataGridSmene.Columns.Add(new DataGridColumn());
 
-            articles = _articleController.GetAll().ToList();
-            setArticles();
+            //articles = _articleController.GetAll().ToList();
+            //setArticles();
 
             doctorCount.Text = "" + _doctorController.GetAll().ToList().Count.ToString();
 

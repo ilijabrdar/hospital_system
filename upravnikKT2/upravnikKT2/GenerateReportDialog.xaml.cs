@@ -15,6 +15,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+using System.IO;
+using iTextSharp;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+
 namespace upravnikKT2
 {
     /// <summary>
@@ -39,20 +44,35 @@ namespace upravnikKT2
         }
         private void Button_Click_OK(object sender, RoutedEventArgs e)
         {
-            Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
-            dlg.FileName = "Izvestaj"; // Default file name
-            dlg.DefaultExt = ".txt"; // Default file extension
-            dlg.Filter = "Text documents (.txt)|*.txt"; // Filter files by extension
+            //Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
+            //dlg.FileName = "Izvestaj"; // Default file name
+            //dlg.DefaultExt = ".txt"; // Default file extension
+            //dlg.Filter = "Text documents (.txt)|*.txt"; // Filter files by extension
 
-            // Show save file dialog box
-            Nullable<bool> result = dlg.ShowDialog();
+            //// Show save file dialog box
+            //Nullable<bool> result = dlg.ShowDialog();
 
-            // Process save file dialog box results
-            if (result == true)
-            {
-                // Save document
-                string filename = dlg.FileName;
-            }
+            //// Process save file dialog box results
+            //if (result == true)
+            //{
+            //    // Save document
+            //    string filename = dlg.FileName;
+            //    Document doc = new Document(iTextSharp.text.PageSize.LETTER, 10, 10, 42, 35);
+            //    PdfWriter writer = PdfWriter.GetInstance(doc, new FileStream("Test.pdf", FileMode.Create));
+            //    doc.Open();
+
+            //    iTextSharp.text.Paragraph paragraph = new iTextSharp.text.Paragraph("This is my first line using Paragraph");
+            //    doc.Add(paragraph);
+            //    doc.Close();
+            //}
+
+            Document doc = new Document(iTextSharp.text.PageSize.LETTER, 10, 10, 42, 35);
+            PdfWriter writer = PdfWriter.GetInstance(doc, new FileStream("Test1.pdf", FileMode.Create));
+            doc.Open();
+
+            iTextSharp.text.Paragraph paragraph = new iTextSharp.text.Paragraph("This is my first line using Paragraph");
+            doc.Add(paragraph);
+            doc.Close();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

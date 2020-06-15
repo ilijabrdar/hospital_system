@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -67,6 +68,8 @@ namespace upravnikKT2
 
             DrugName = _selectedDrug.Name;
             Amount = _selectedDrug.Amount;
+
+            tutorialBtn.Visibility = Visibility.Hidden;
         }
 
         private void TextBox_Scroll(object sender, System.Windows.Controls.Primitives.ScrollEventArgs e)
@@ -178,6 +181,19 @@ namespace upravnikKT2
             else if (e.Key == Key.Left && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
             {
                 RemoveIngredient_Btn_Click(sender, e);
+                e.Handled = true;
+            }
+
+            else if (e.Key == Key.S && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
+            {
+                searchOriginalBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                txtsearchOriginalIngredients.Focus();
+                e.Handled = true;
+            }
+            else if (e.Key == Key.A && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
+            {
+                searchCustomBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                txtsearchSelectedIngredients.Focus();
                 e.Handled = true;
             }
 
