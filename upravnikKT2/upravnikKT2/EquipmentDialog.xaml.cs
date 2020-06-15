@@ -68,10 +68,23 @@ namespace upravnikKT2
         {
             if (_selectedEquipment == null)
             {
-                _equipmentController.Save(new Model.Director.Equipment(
-                    isConsumable ? Model.Director.EquipmentType.Consumable : Model.Director.EquipmentType.Inconsumable,
-                    txtName.Text,
-                    Amount));
+                if (checkEquipmentExists())
+                {
+                    _equipmentController.Save(new Model.Director.Equipment(
+                        isConsumable ? Model.Director.EquipmentType.Consumable : Model.Director.EquipmentType.Inconsumable,
+                        txtName.Text,
+                        Amount));
+                }
+                else
+                {
+                    string messageBoxText = "Oprema sa nazivom " + Eq_Name + " vec postoji";
+                    string caption = "Greska";
+                    MessageBoxButton button = MessageBoxButton.OK;
+                    MessageBoxImage icon = MessageBoxImage.Error;
+
+                    MessageBox.Show(messageBoxText, caption, button, icon);
+                    return;
+                }
             }
             else
             {
@@ -81,6 +94,18 @@ namespace upravnikKT2
             }
 
             this.Close();
+        }
+
+        private bool checkEquipmentExists()
+        {
+            List<Equipment> equipments = _equipmentController.GetAll().ToList();
+            foreach (Equipment equipment in equipments)
+            {
+                if (equipment.Name.Equals(Eq_Name))
+                    return false;
+            }
+
+            return true;
         }
 
         private void Button_Click_Cancel_Equipment(object sender, RoutedEventArgs e)

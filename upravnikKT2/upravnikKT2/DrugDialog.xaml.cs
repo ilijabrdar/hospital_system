@@ -85,15 +85,40 @@ namespace upravnikKT2
             {
                 if (_selectedDrug == null)
                 {
+                    if (checkDrugExists())
                     _drugController.Save(new Drug(txtName.Text, Amount, false, selectedIngredients.ToList(), null));
+                    else
+                    {
+                        string messageBoxText = "Lek sa nazivom " + DrugName + " vec postoji";
+                        string caption = "Greska";
+                        MessageBoxButton button = MessageBoxButton.OK;
+                        MessageBoxImage icon = MessageBoxImage.Error;
+
+                        MessageBox.Show(messageBoxText, caption, button, icon);
+                        return;
+                    }
 
                 }
                 else
                 {
-                    _selectedDrug.Name = DrugName;
-                    _selectedDrug.Amount = Amount;
-                    _selectedDrug.Ingredients = selectedIngredients.ToList();
-                    _drugController.Edit(_selectedDrug);
+                    if (!_selectedDrug.Name.Equals(DrugName) && checkDrugExists()==false)
+                    {
+                        string messageBoxText = "Lek sa nazivom " + DrugName + " vec postoji";
+                        string caption = "Greska";
+                        MessageBoxButton button = MessageBoxButton.OK;
+                        MessageBoxImage icon = MessageBoxImage.Error;
+
+                        MessageBox.Show(messageBoxText, caption, button, icon);
+                        return;
+                    }
+                    else
+                    {
+                        _selectedDrug.Name = DrugName;
+                        _selectedDrug.Amount = Amount;
+                        _selectedDrug.Ingredients = selectedIngredients.ToList();
+                        _drugController.Edit(_selectedDrug);
+                    }
+
                 }
                 this.Close();
             }
@@ -106,6 +131,16 @@ namespace upravnikKT2
 
                 MessageBox.Show(messageBoxText, caption, button, icon);
             }
+        }
+
+        private bool checkDrugExists()
+        {
+            List<Drug> drugs = _drugController.GetAll().ToList();
+            foreach (Drug drug in drugs)
+                if (drug.Name.Equals(DrugName))
+                    return false;
+
+            return true;
         }
 
         private void Button_Click_Cancel_Drug(object sender, RoutedEventArgs e)

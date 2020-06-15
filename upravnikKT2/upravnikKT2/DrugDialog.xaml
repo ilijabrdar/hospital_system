@@ -150,7 +150,7 @@
         </ListView>
 
         <Button x:Name="tutorialBtn" Grid.Column="0" Grid.Row="4"  HorizontalAlignment="Left"  Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
-                 ToolTip="Pomoc - pogledaj uputstvo" Margin="10,114,0,10" MaxHeight="40" MaxWidth="40" Click="tutorialBtn_Click" Height="Auto" >
+                 ToolTip="Pokreni tutorijal" Margin="10,114,0,10" MaxHeight="40" MaxWidth="40" Click="tutorialBtn_Click" Height="Auto" >
             <materialDesign:PackIcon
                                     Kind="Help"
                                     Height="24"
@@ -171,9 +171,9 @@
                             <DataTrigger Binding="{Binding Path=(Validation.HasError), ElementName=txtAmount}" Value="True">
                                 <Setter Property="IsEnabled" Value="False" />
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=SelectedItem, ElementName=listSelectedIngredients}" Value="{x:Null}">
+                            <!--<DataTrigger Binding="{Binding Path=SelectedItem, ElementName=listSelectedIngredients}" Value="{x:Null}">
                                 <Setter Property="IsEnabled" Value="False" />
-                            </DataTrigger>
+                            </DataTrigger> -->
                         </Style.Triggers>
                     </Style>
                 </Button.Style>

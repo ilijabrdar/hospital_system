@@ -70,16 +70,54 @@ namespace upravnikKT2
         {
             if (_selectedRoom == null)
             {
-                _roomController.Save(new Room(RoomCode, (RoomType)comboRoomTypes.SelectedItem, null));
+                if (checkRoomExists())
+                {
+                    _roomController.Save(new Room(RoomCode, (RoomType)comboRoomTypes.SelectedItem, null));
+                }
+                else
+                {
+                    string messageBoxText = "Prostorija sa sifrom " + RoomCode + " vec postoji";
+                    string caption = "Greska";
+                    MessageBoxButton button = MessageBoxButton.OK;
+                    MessageBoxImage icon = MessageBoxImage.Error;
+
+                    MessageBox.Show(messageBoxText, caption, button, icon);
+                    return;
+                }
             }
             else
             {
-                _selectedRoom.RoomCode = RoomCode;
-                _selectedRoom.RoomType = (RoomType) comboRoomTypes.SelectedItem;
-                _roomController.Edit(_selectedRoom);
+                if (!_selectedRoom.RoomCode.Equals(RoomCode) && checkRoomExists() == false)
+                {
+                    string messageBoxText = "Prostorija sa sifrom " + RoomCode + " vec postoji";
+                    string caption = "Greska";
+                    MessageBoxButton button = MessageBoxButton.OK;
+                    MessageBoxImage icon = MessageBoxImage.Error;
+
+                    MessageBox.Show(messageBoxText, caption, button, icon);
+                    return;
+                }
+                else
+                {
+                    _selectedRoom.RoomCode = RoomCode;
+                    _selectedRoom.RoomType = (RoomType)comboRoomTypes.SelectedItem;
+                    _roomController.Edit(_selectedRoom);
+                }
             }
 
             this.Close();
+        }
+
+        private bool checkRoomExists()
+        {
+            List<Room> rooms = _roomController.GetAll().ToList();
+            foreach (Room room in rooms)
+            {
+                if (room.RoomCode.Equals(RoomCode))
+                    return false;
+            }
+
+            return true;
         }
 
         private void Button_Click_Cancel_Room(object sender, RoutedEventArgs e)

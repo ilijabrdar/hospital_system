@@ -2,6 +2,7 @@
 using Controller;
 using Model.Director;
 using Model.PatientSecretary;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -84,40 +85,77 @@ namespace upravnikKT2
         {
             if (roomTypeForEdit == null)
             {
-                _roomTypeController.Save(new RoomType(Ime));
+                if (checkRoomTypeExists())
+                {
+                    _roomTypeController.Save(new RoomType(Ime));
 
-                list.ItemsSource = null;
+                    list.ItemsSource = null;
 
-                List<RoomType> roomTypes = new List<RoomType>();
-                roomTypes = _roomTypeController.GetAll().ToList();
+                    List<RoomType> roomTypes = new List<RoomType>();
+                    roomTypes = _roomTypeController.GetAll().ToList();
 
-                ObservableCollection<RoomType> temp = new ObservableCollection<RoomType>(roomTypes);
+                    ObservableCollection<RoomType> temp = new ObservableCollection<RoomType>(roomTypes);
 
-                list.ItemsSource = temp;
-                list.DisplayMemberPath = "Name";
-                list.SelectedValuePath = "Id";
-                list.SelectedValue = "2";
+                    list.ItemsSource = temp;
+                    list.DisplayMemberPath = "Name";
+                    list.SelectedValuePath = "Id";
+                    list.SelectedValue = "2";
+                }
+                else
+                {
+                    string messageBoxText = "Tip prostorije sa nazivom " + Ime + " vec postoji";
+                    string caption = "Greska";
+                    MessageBoxButton button = MessageBoxButton.OK;
+                    MessageBoxImage icon = MessageBoxImage.Error;
+
+                    MessageBox.Show(messageBoxText, caption, button, icon);
+                    return;
+                }
             }
             else
             {
-                roomTypeForEdit.Name = Ime;
-                _roomTypeController.Edit(roomTypeForEdit);
+                if (!roomTypeForEdit.Name.Equals(Ime) && checkRoomTypeExists() == false)
+                {
+                    string messageBoxText = "Tip prostorije sa nazivom " + Ime + " vec postoji";
+                    string caption = "Greska";
+                    MessageBoxButton button = MessageBoxButton.OK;
+                    MessageBoxImage icon = MessageBoxImage.Error;
+
+                    MessageBox.Show(messageBoxText, caption, button, icon);
+                    return;
+                }
+                else
+                {
+                    roomTypeForEdit.Name = Ime;
+                    _roomTypeController.Edit(roomTypeForEdit);
 
 
-                list.ItemsSource = null;
+                    list.ItemsSource = null;
 
-                List<RoomType> roomTypes = new List<RoomType>();
-                roomTypes = _roomTypeController.GetAll().ToList();
+                    List<RoomType> roomTypes = new List<RoomType>();
+                    roomTypes = _roomTypeController.GetAll().ToList();
 
-                ObservableCollection<RoomType> temp = new ObservableCollection<RoomType>(roomTypes);
+                    ObservableCollection<RoomType> temp = new ObservableCollection<RoomType>(roomTypes);
 
-                list.ItemsSource = temp;
-                list.DisplayMemberPath = "Name";
-                list.SelectedValuePath = "Id";
-                list.SelectedValue = "2";
+                    list.ItemsSource = temp;
+                    list.DisplayMemberPath = "Name";
+                    list.SelectedValuePath = "Id";
+                    list.SelectedValue = "2";
+                }
             }
 
             this.Close();
+        }
+
+        private bool checkRoomTypeExists()
+        {
+            foreach (RoomType type in _roomTypeController.GetAll().ToList())
+            {
+                if (type.Name.Equals(Ime))
+                    return false;
+            }
+
+            return true;
         }
 
         private void Button_Click_Cancel(object sender, RoutedEventArgs e)

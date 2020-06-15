@@ -203,31 +203,74 @@ namespace upravnikKT2
                 var selectedAddress = AddressCombo.SelectedItem as Address;
                 var address = new Address(selectedAddress.GetId(), town.GetId(), state.GetId());
 
+                
+                if (checkDoctorJMBGExists())
+                {
+                    //JMBG for password and username
+                    var doctor = new Doctor(Ime, Prezime, JMBG, EMAIL, Phone, (DateTime)datum, address, JMBG, JMBG, null, (Speciality)comboSpeciality.SelectedItem, null, null, null);
+                    _doctorController.Save(doctor);
+                }
+                else
+                {
+                    string messageBoxText = "Doktor sa JMBG " + JMBG + " vec postoji";
+                    string caption = "Greska";
+                    MessageBoxButton button = MessageBoxButton.OK;
+                    MessageBoxImage icon = MessageBoxImage.Error;
 
-                //JMBG for password and username
-                var doctor = new Doctor(Ime, Prezime, JMBG, EMAIL, Phone, (DateTime)datum, address, JMBG, JMBG, null, (Speciality)comboSpeciality.SelectedItem, null, null, null);
-                _doctorController.Save(doctor);
+                    MessageBox.Show(messageBoxText, caption, button, icon);
+                    return;
+                }
+
+                
             }
             else
             {
-                _selectedDoctor.FirstName = Ime;
-                _selectedDoctor.LastName = Prezime;
-                _selectedDoctor.Jmbg = JMBG;
-                _selectedDoctor.Email = EMAIL;
-                _selectedDoctor.DateOfBirth = (DateTime)birthDatePicker.SelectedDate;
-                _selectedDoctor.Specialty = (Speciality)comboSpeciality.SelectedItem;
-                _selectedDoctor.Phone = Phone;
+                if (!_selectedDoctor.Jmbg.Equals(JMBG) && checkDoctorJMBGExists()==false)
+                {
+                    string messageBoxText = "Doktor sa JMBG " + JMBG + " vec postoji";
+                    string caption = "Greska";
+                    MessageBoxButton button = MessageBoxButton.OK;
+                    MessageBoxImage icon = MessageBoxImage.Error;
 
-                var state = StateCombo.SelectedItem as State;
-                var town = TownCombo.SelectedItem as Town;
-                var selectedAddress = AddressCombo.SelectedItem as Address;
-                var address = new Address(selectedAddress.GetId(), town.GetId(), state.GetId());
-                _selectedDoctor.Address = address;
+                    MessageBox.Show(messageBoxText, caption, button, icon);
+                    return;
+                }
+                else
+                {
+                    _selectedDoctor.FirstName = Ime;
+                    _selectedDoctor.LastName = Prezime;
+                    _selectedDoctor.Jmbg = JMBG;
+                    _selectedDoctor.Email = EMAIL;
+                    _selectedDoctor.DateOfBirth = (DateTime)birthDatePicker.SelectedDate;
+                    _selectedDoctor.Specialty = (Speciality)comboSpeciality.SelectedItem;
+                    _selectedDoctor.Phone = Phone;
 
-                _doctorController.Edit(_selectedDoctor);
+                    var state = StateCombo.SelectedItem as State;
+                    var town = TownCombo.SelectedItem as Town;
+                    var selectedAddress = AddressCombo.SelectedItem as Address;
+                    var address = new Address(selectedAddress.GetId(), town.GetId(), state.GetId());
+                    _selectedDoctor.Address = address;
+
+                    _doctorController.Edit(_selectedDoctor);
+                }
+
 
             }
             this.Close();
+        }
+
+        private bool checkDoctorJMBGExists()
+        {
+            List<Doctor> doctors = _doctorController.GetAll().ToList();
+            foreach (Doctor doctor in doctors)
+            {
+                if(doctor.Jmbg.Equals(JMBG))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         private void Button_Click__Cancel(object sender, RoutedEventArgs e)
