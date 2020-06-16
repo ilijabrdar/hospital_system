@@ -54,3 +54,5 @@ C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\HCIprojec
 C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\HCIproject.csproj.CopyComplete
 C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\HCIproject.exe
 C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\HCIproject.pdb
+C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\FindFileWindow.g.cs
+C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\FindFileWindow.baml

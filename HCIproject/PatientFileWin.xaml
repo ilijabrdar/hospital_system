@@ -9,27 +9,134 @@
         WindowStartupLocation="CenterScreen">
     <StackPanel x:Name="ResizePanel" Background="#D0ECE7" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
         <StackPanel x:Name="PatientInfo" Background="#D5F5E3">
-            <Label Content="OPSTE INFO O PACIJENTU"/>
+            <WrapPanel>
+                <Label Content="Ime i prezime pacijenta:" Margin="10" FontSize="13"/>
+                <Label Content="Pera Peric" Margin="10,10,100,10" FontSize="15" FontWeight="SemiBold" />
+                <Label Content="Godine:" Margin="10" FontSize="13"/>
+                <Label Content="25" Margin="10,10,100,10" FontSize="14" FontWeight="SemiBold"/>
+                <Label Content="Alergija:" Margin="10" FontSize="13"/>
+                <Label Content="Penicilin, polen" Margin="10" FontSize="14" FontWeight="SemiBold"/>
+            </WrapPanel>
+
         </StackPanel>
         <Border  BorderBrush="#A2D9CE" BorderThickness="5" CornerRadius="8,8,8,8"  Margin="5">
-                <WrapPanel>
-                    <Label Content="Pretraga kartona po lekaru ili po dijagnozi" Margin="10" FontSize="16"/>
-                    <TextBox x:Name="search_files" HorizontalAlignment="Center"  Text="Pretraga" Margin="10" Background="#EBF5FB" FontSize="16" Foreground="#AAB7B8" Width="127" CaretBrush="#FF1FEECD" />
-                </WrapPanel>
-          </Border>
-            <ScrollViewer CanContentScroll="True" VerticalScrollBarVisibility="Visible">
-                    <StackPanel x:Name="Examinations">
-                <Border  BorderBrush="#A2D9CE" BorderThickness="5" CornerRadius="8,8,8,8"  Margin="5">
-                    <StackPanel x:Name="Examination1">
+            <WrapPanel>
+                <Label Content="Pretraga kartona po lekaru ili po dijagnozi" Margin="10" FontSize="16"/>
+                <TextBox x:Name="search_files" HorizontalAlignment="Center"  Text="Unesite parametar pretrage" Margin="10" Background="#EBF5FB" FontSize="16" Foreground="#AAB7B8" Width="222" CaretBrush="#FF1FEECD" IsKeyboardFocusedChanged="search_files_IsKeyboardFocusedChanged" KeyDown="search_files_KeyDown" />
+                <Button Content="Povratak" Margin="5"  Background="#FFA2D9CE" Height="23" BorderBrush="#FF1FEECD" Click="Button_Click_1"/>
+
+            </WrapPanel>
+        </Border>
+        <ScrollViewer x:Name="patientFileScrool" SizeChanged="patientFileScrool_SizeChanged" >
+            <StackPanel x:Name="Examinations" HorizontalAlignment="Stretch">
+                <Border x:Name="Examination1" BorderBrush="#A2D9CE" BorderThickness="5" CornerRadius="8,8,8,8"  Margin="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <StackPanel >
                         <WrapPanel>
-                            <Label Content="Lekar:" FontWeight="Bold" FontSize="16" Margin="5"/>
-                            <TextBlock Text="IME LEKARA" FontSize="16" Margin="5" VerticalAlignment="Center"/>
+                            <Label Content="Lekar:" FontWeight="SemiBold" FontSize="14" Margin="5"/>
+                            <TextBlock x:Name="lekar1" Text="Pavle Markovic" FontSize="14" Margin="5" FontWeight="SemiBold" FontStyle="Italic" VerticalAlignment="Center"/>
 
-                            <Label Content="Dijagnoza:" FontWeight="Bold" FontSize="16" Margin="120,5,5,5"/>
-                            <TextBlock Text="DIJAGNOZA" FontSize="16" Margin="5" VerticalAlignment="Center"/>
+                            <Label Content="Dijagnoza:" FontWeight="SemiBold" FontSize="14" Margin="120,5,5,5"/>
+                            <TextBlock Text="MKB-10" FontSize="14" FontWeight="SemiBold" FontStyle="Italic"  Margin="5" VerticalAlignment="Center"/>
 
-                            <Label Content="Datum:" FontWeight="Bold" FontSize="16" Margin="120,5,5,5"/>
-                            <TextBlock Text="DATUM" FontSize="16" Margin="5" VerticalAlignment="Center"/>
+                            <Label Content="Datum:" FontWeight="SemiBold" FontSize="14" Margin="110,5,5,5"/>
+                            <TextBlock x:Name="datum1Txt" Text="11.5.2020" FontSize="14" FontWeight="SemiBold" FontStyle="Italic" Margin="5" VerticalAlignment="Center"/>
+                        </WrapPanel>
+                        <Grid  HorizontalAlignment="Center" Height="Auto" Width="Auto">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="350"/>
+                                <ColumnDefinition Width="300"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Anamneza:" HorizontalAlignment="Left" FontSize="13" FontWeight="SemiBold" Grid.Row="0" Grid.Column="0"/>
+                            <TextBlock Grid.Row="0" Grid.Column="1" FontSize="13" TextWrapping="Wrap"  Margin="0,3,0,0" Text="Pacijent se javlja sa bolom u grlu. Konstantan bol nedelju dana. Temperatura 39.2. Konstantne glavobolje i mucnine. Ceste nesvestice,malaksalost" Grid.ColumnSpan="2"/>
+
+                            <Label Content="Simpotmi:"  FontWeight="SemiBold" FontSize="13" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="1"/>
+                            <TextBlock Grid.Row="1"  Grid.Column="1"  FontSize="13" TextWrapping="Wrap"  Margin="0,3,0,0" Text="Glavobolja, mucnina, bol u grlu, nesvestica, malaksalost, zapusen nos." Grid.ColumnSpan="2"/>
+
+                            <Label Content="Dijagnoza:"  FontSize="13" FontWeight="SemiBold" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="0"/>
+                            <TextBlock Grid.Row="2"  FontSize="13" Grid.Column="1" TextWrapping="Wrap"  Margin="0,3,0,0" FontWeight="SemiBold"  Text="MKB-10 J11 Grip, virus nedokazan" />
+
+                            <Label Content="Terpija:" FontSize="13" FontWeight="SemiBold" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="0" />
+                            <TextBlock Grid.Row="3" FontSize="13" Grid.Column="1" TextWrapping="Wrap"  Margin="0,3,0,0"  Text="Diklofen 200mg na svakih 6h. Piti dovoljno tecnosti, cejevi, vocni sveze cedjeni sokovi." Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+
+                            <WrapPanel x:Name="Izvestaj"  Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch">
+                                <Label Content="Izveštaj anamneza i recept" FontWeight="SemiBold"  Margin="5" />
+                                <Button Content="Štampaj" Margin="5"  Background="#FFA2D9CE" Height="23" BorderBrush="#FF1FEECD"/>
+                            </WrapPanel>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+                <Border x:Name="Examination2"  BorderBrush="#A2D9CE" BorderThickness="5" CornerRadius="8,8,8,8"  Margin="5" VerticalAlignment="Stretch">
+                    <StackPanel>
+                        <WrapPanel>
+                            <Label Content="Lekar:" FontWeight="SemiBold" FontSize="14" Margin="5" HorizontalAlignment="Center"/>
+                            <TextBlock x:Name="lekar2" Text="Snezana Bulajic" FontSize="14" Margin="5" FontWeight="SemiBold" FontStyle="Italic" VerticalAlignment="Center"  HorizontalAlignment="Center"/>
+
+                            <Label Content="Dijagnoza:" FontWeight="SemiBold" FontSize="14" Margin="120,5,5,5" HorizontalAlignment="Center"/>
+                            <TextBlock Text="RAJ-15" FontSize="14" FontWeight="SemiBold" FontStyle="Italic"  Margin="5" VerticalAlignment="Center"  HorizontalAlignment="Center"/>
+
+                            <Label Content="Datum:" FontWeight="SemiBold" FontSize="14" Margin="110,5,5,5"  HorizontalAlignment="Center"/>
+                            <TextBlock x:Name="datum2Txt"  Text="3.3.2020" FontSize="14" FontWeight="SemiBold" FontStyle="Italic" Margin="5" VerticalAlignment="Center"/>
+                        </WrapPanel>
+                        <Grid  HorizontalAlignment="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="350"/>
+                                <ColumnDefinition Width="300"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Anamneza:" HorizontalAlignment="Left" FontSize="13" FontWeight="SemiBold" Grid.Row="0" Grid.Column="0"/>
+                            <TextBlock Grid.Row="0" Margin="0,3,0,0" Grid.Column="1" FontSize="13" TextWrapping="Wrap"  Grid.ColumnSpan="2" Text="Konstantan bol u grlu unazad nedelju dana. Oslabljen sluh. Zapusen nos, koristio Orasol za prociscavanje nosne duplje. Temperatura poslednja 72h do 39.2."/>
+
+                            <Label Content="Simpotmi:"  FontWeight="SemiBold" FontSize="13" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="1"/>
+                            <TextBlock Grid.Row="1"  Grid.Column="1" Margin="0,3,0,0"  FontSize="13" TextWrapping="Wrap"  Text="Bol u grlu, nesvestica, malaksalost, zapusen nos, glavobolja." Grid.ColumnSpan="2"/>
+
+                            <Label Content="Dijagnoza:"  FontSize="13" FontWeight="SemiBold" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="0"/>
+                            <TextBlock Grid.Row="2"  FontSize="13" Grid.Column="1" TextWrapping="Wrap"  Margin="0,3,0,0" FontWeight="SemiBold"  Text="RAJ-15, Upala sinusa" />
+
+                            <Label Content="Terpija:" FontSize="13" FontWeight="SemiBold" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="0" />
+                            <TextBlock Grid.Row="3" FontSize="13" Grid.Column="1" TextWrapping="Wrap"   Margin="0,3,0,0" Text="Grupa prirodnih lekova koja smanjuje inflamaciju, smanjuju otok sluznice i time olakšavaju disanje. Paracetmol 300 na svakih 6h posle obroka." Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+
+                            <Label Content="Uput:" FontSize="13" FontWeight="SemiBold" HorizontalAlignment="Left" Grid.Row="4" Grid.Column="0" Margin="8" />
+                            <TextBlock Grid.Row="4" FontSize="13" Grid.Column="1" TextWrapping="Wrap"  Margin="0,13,0,0"  Text="Pacijent se upucuje na specijalisticki pregled kod lekara: ORL, Dr Marija Tomas, zakazan pregled 25.8.2020 u 18h" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+
+                            
+                            <WrapPanel x:Name="Izvestaj1"  Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3">
+                                <Label Content="Izveštaj anamneza i recept" FontWeight="SemiBold"  Margin="5" />
+                                <Button Content="Štampaj" Margin="5"  Background="#FFA2D9CE" Height="23" BorderBrush="#FF1FEECD"/>
+                            </WrapPanel>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+                <Border x:Name="Examination3" BorderBrush="#A2D9CE" BorderThickness="5" CornerRadius="8,8,8,8"  Margin="5" VerticalAlignment="Stretch">
+                    <StackPanel >
+                        <WrapPanel>
+                            <Label Content="Lekar:" FontWeight="SemiBold" FontSize="14" Margin="5" HorizontalAlignment="Center"/>
+                            <TextBlock x:Name="lekar3" Text="Marko Miokovic" FontSize="14" Margin="5" FontWeight="SemiBold" FontStyle="Italic" VerticalAlignment="Center"  HorizontalAlignment="Center"/>
+
+                            <Label Content="Dijagnoza:" FontWeight="SemiBold" FontSize="14" Margin="120,5,5,5" HorizontalAlignment="Center"/>
+                            <TextBlock Text="MAZ-15" FontSize="14" FontWeight="SemiBold" FontStyle="Italic"  Margin="5" VerticalAlignment="Center"  HorizontalAlignment="Center"/>
+
+                            <Label Content="Datum:" FontWeight="SemiBold" FontSize="14" Margin="110,5,5,5"  HorizontalAlignment="Center"/>
+                            <TextBlock x:Name="datum3Txt"  Text="13.8.2019" FontSize="14" FontWeight="SemiBold" FontStyle="Italic" Margin="5" VerticalAlignment="Center"/>
                         </WrapPanel>
                         <Grid  HorizontalAlignment="Center">
                             <Grid.RowDefinitions>
@@ -43,24 +150,22 @@
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="350"/>
+                                <ColumnDefinition Width="300"/>
                             </Grid.ColumnDefinitions>
-                            <Label Content="Anamneza:" HorizontalAlignment="Left" FontWeight="SemiBold" Grid.Row="0" Grid.Column="0"/>
-                            <TextBlock Grid.Row="0" Margin="5" Grid.Column="1" Text="tekst preuzet iz textboxa pregleda namenzaaa bl abla bala naojofajfeojfjeijfjreo"/>
+                            <Label Content="Anamneza:" HorizontalAlignment="Left" FontSize="13" FontWeight="SemiBold" Grid.Row="0" Grid.Column="0"/>
+                            <TextBlock Grid.Row="0" Grid.Column="1" FontSize="13" TextWrapping="Wrap"  Margin="0,3,0,0" Grid.ColumnSpan="2" Text="Bol u stomaku, povracanje,poslednjih 10 dana, konstantne mucnine."/>
 
-                            <Label Content="Simpotmi:"  FontWeight="SemiBold" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="0"/>
-                            <TextBlock Grid.Row="1" Margin="5" Grid.Column="1"  Text="tekst preuzet iz textboxa pregleda simptomi bl abla bala naojofajfeojfjeijfjreo"/>
+                            <Label Content="Simpotmi:"  FontWeight="SemiBold" FontSize="13" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="1"/>
+                            <TextBlock Grid.Row="1"  Grid.Column="1"  FontSize="13" TextWrapping="Wrap"  Margin="0,3,0,0" Text="Mlaksalost, mucnine, povracanje." Grid.ColumnSpan="2"/>
 
-                            <Label Content="Terpija:"  FontWeight="SemiBold" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="0"/>
-                            <TextBlock Grid.Row="2" Margin="5" Grid.Column="1"  Text="tekst preuzet iz textboxa pregleda terpija bl abla bala naojofajfeojfjeijfjreo"/>
-                            <WrapPanel Grid.Row="3" Grid.Column="1">
-                                <Label Content="Štampaj recept" Margin="5" HorizontalAlignment="Left" />
-                                <Button Content="Štampaj" Margin="5" Background="#FFA2D9CE" Height="25" BorderBrush="#FF1FEECD" />
+                            <Label Content="Dijagnoza:"  FontSize="13" FontWeight="SemiBold" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="0"/>
+                            <TextBlock Grid.Row="2"  FontSize="13" Grid.Column="1" TextWrapping="Wrap"  Margin="0,3,0,0" FontWeight="SemiBold"  Text="MAZ-15, Stomacni virus " />
 
-                            </WrapPanel>
-                            <Label Grid.Row="4" Margin="5" Grid.Column="0"  Grid.ColumnSpan="2" FontWeight="Bold" Content="UKOLIKO JE BILA HOSPITALIZACIJA, KONTROLA, UPUT, ILI NESTO OD TOGA OVDE SE POJAVI" />
+                            <Label Content="Terpija:" FontSize="13" FontWeight="SemiBold" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="0" />
+                            <TextBlock Grid.Row="3" FontSize="13" Grid.Column="1" TextWrapping="Wrap"  Margin="0,3,0,0"  Text="Topli napitci, Dulcolax 2x2 na dan." Grid.ColumnSpan="2" Grid.RowSpan="2"/>
 
-                            <WrapPanel x:Name="Izvestaj"  Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2">
+                            <WrapPanel x:Name="Izvestaj3"  Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3">
                                 <Label Content="Izveštaj anamneza i recept" FontWeight="SemiBold"  Margin="5" />
                                 <Button Content="Štampaj" Margin="5"  Background="#FFA2D9CE" Height="23" BorderBrush="#FF1FEECD"/>
                             </WrapPanel>
@@ -68,9 +173,9 @@
                     </StackPanel>
                 </Border>
             </StackPanel>
-             </ScrollViewer>
+        </ScrollViewer>
         <WrapPanel FlowDirection="RightToLeft" Background="#D5F5E3" VerticalAlignment="Bottom" >
-            <Button Content="Povratak" FontSize="18" Height="30" Width="100"  Margin="10,10,10,10" Background="#A2D9CE" Click="Button_Click" BorderBrush="#FF1FEECD"   />
+            <Button Content="Povratak" FontSize="18" Height="30" Width="100"  Margin="10" Background="#A2D9CE" Click="Button_Click" BorderBrush="#FF1FEECD" />
         </WrapPanel>
     </StackPanel>
 </Window>

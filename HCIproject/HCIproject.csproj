@@ -73,6 +73,9 @@
     <Compile Include="DrugValidations.xaml.cs">
       <DependentUpon>DrugValidations.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FindFileWindow.xaml.cs">
+      <DependentUpon>FindFileWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="NewIngredient.xaml.cs">
       <DependentUpon>NewIngredient.xaml</DependentUpon>
     </Compile>
@@ -98,6 +101,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ExaminationWin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FindFileWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

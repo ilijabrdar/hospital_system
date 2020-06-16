@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 
 namespace HCIproject
@@ -18,6 +19,8 @@ namespace HCIproject
         public Doctor user;
         public string Naslov { get; set; }
          public List<ExaminationDTO> upcomingExaminations { get; set; }
+        private int num = 0;
+        private int num1 = 0;
         public SideBar()
         {
             InitializeComponent();
@@ -59,14 +62,6 @@ namespace HCIproject
             this.Visibility = Visibility.Hidden;
             mainWin.Show();
         }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {//otvara karton
-            PatientFileWin fileWin = new PatientFileWin((Doctor)user);
-            this.Visibility = Visibility.Hidden;
-            fileWin.Show();
-        }
-
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {//dodaj alternativni
@@ -325,9 +320,34 @@ namespace HCIproject
                 }
                 else
                 {
-                    //TODO resiti pretragu kartona!!
+                    List<ExaminationDTO> findFile = searchMyFiles(search_patient.Text);
+                    if (findFile.Count == 0)
+                    {
+                        string messageBoxText = "Ne postoje pacijenti sa zadatim parametrima.";
+                        string caption = "Pretraga";
+                        MessageBoxButton button = MessageBoxButton.OK;
+                        MessageBoxImage icon = MessageBoxImage.Warning;
+                        MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+                    }
+                    else
+                    {
+                        var winFind = new FindFileWindow((Doctor)user,findFile);
+                        winFind.ShowDialog();
+                    }
                 }
             }
+        }
+        private List<ExaminationDTO> searchMyFiles(string search)
+        {
+            List<ExaminationDTO> lista = new List<ExaminationDTO>();
+            foreach (var exam in upcomingExaminations)
+            {
+                if ((exam.Patient.FirstName).Equals(search) || (exam.Patient.LastName).Equals(search) || (exam.Patient.FirstName+" " +exam.Patient.LastName).Equals(search))
+                {
+                    lista.Add(exam);
+                }
+            }
+            return lista;
         }
 
         private void search_patient_IsKeyboardFocusedChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -470,79 +490,110 @@ namespace HCIproject
             upcomingExaminations.Add(exam6);
             upcomingExaminations.Add(exam7);
             upcomingExaminations.Add(exam8);
-            setView();
+            setViewUpcExam();
+            setViewPatientFiles();
         }
 
-        public void setView() { 
+        public void setViewUpcExam() { 
+            foreach (var exam in upcomingExaminations) 
+            { 
+                StackPanel stack = new StackPanel();
+                DockPanel dock = new DockPanel();
+                Label lbl = new Label();
+                Button btn1 = new Button();
+                Button btn2 = new Button();
+
+                stack.Children.Add(dock);
+                dock.Children.Add(lbl);
+                dock.Children.Add(btn2);
+                dock.Children.Add(btn1);
+
+
+                #region DockPanel Content Properties
+                lbl.Content = exam.Patient.FirstName + " " + exam.Patient.LastName;
+                lbl.Height = 32;
+                lbl.Width = 180;
+                lbl.FontSize = 15;
+                lbl.FontWeight = FontWeights.Bold;
+                lbl.SetValue(DockPanel.DockProperty, Dock.Left);
+                lbl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+
+                btn1.Content = "Započni";
+                btn1.Height = 32;
+                btn1.Width = 100;
+                btn1.FontSize = 12;
+                btn1.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
+                btn1.SetValue(DockPanel.DockProperty, Dock.Right);
+                btn1.Tag = exam.Patient.Id;
+                btn1.Click += new RoutedEventHandler(ClickStartExamination);
+                btn1.Margin = new Thickness(10, 10, 15, 0);
+                btn1.Background = new SolidColorBrush(Color.FromRgb(162, 217, 206));
+
+
+                btn2.Content = "Otkaži";
+                btn2.Height = 32;
+                btn2.Width = 100;
+                btn2.FontSize = 12;
+                btn2.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
+                btn2.SetValue(DockPanel.DockProperty, Dock.Right);
+                btn2.Margin = new Thickness(10, 10, 15, 0);
+                btn2.Background = new SolidColorBrush(Color.FromRgb(162, 217, 206));
+                    //    btn2.Click += new RoutedEventHandler(btn2_Click);
+                    #endregion
+
+                    Grid_Grid.RowDefinitions.Add(new RowDefinition());
+                Grid_Grid.RowDefinitions[num].Height = new GridLength(66, GridUnitType.Pixel);
+                Grid_Grid.Children.Add(stack);
+                stack.SetValue(Grid.RowProperty, num);
+                num++;
+            }
+
+        }
+        private void setViewPatientFiles()
+        {
             foreach (var exam in upcomingExaminations)
             {
-                Grid myGrid = new Grid();
-              //  myGrid.Width =500 ;
-               // myGrid.Height = 100;
-                myGrid.HorizontalAlignment = HorizontalAlignment.Left;
-                myGrid.VerticalAlignment = VerticalAlignment.Center;
+                    StackPanel stack = new StackPanel();
+                    DockPanel dock = new DockPanel();
+                    Label lbl = new Label();
+                    Button btn1 = new Button();
 
-                ColumnDefinition colDef1 = new ColumnDefinition();
-                ColumnDefinition colDef2 = new ColumnDefinition();
-                ColumnDefinition colDef3 = new ColumnDefinition();
-              //  ColumnDefinition colDef4 = new ColumnDefinition();
-                colDef1.Width = new GridLength(20, GridUnitType.Star);
-                colDef2.Width = new GridLength(20, GridUnitType.Star);
-                colDef3.Width = new GridLength(20, GridUnitType.Star);
-                myGrid.ColumnDefinitions.Add(colDef1);
-                myGrid.ColumnDefinitions.Add(colDef2);
-                myGrid.ColumnDefinitions.Add(colDef3);
-             //   myGrid.ColumnDefinitions.Add(colDef4);
-
-                RowDefinition rowDef1 = new RowDefinition();
-                myGrid.RowDefinitions.Add(rowDef1);
-
-                TextBlock newPatient = new TextBlock();
-               // newPatient.TextWrapping = TextWrapping.Wrap;
-                newPatient.FontSize = 15;
-                newPatient.FontWeight = FontWeights.Bold;
-                newPatient.HorizontalAlignment = HorizontalAlignment.Left;
-                newPatient.VerticalAlignment = VerticalAlignment.Center;
-                newPatient.Margin = new Thickness(10,10,10, 0); 
-                newPatient.Foreground = new SolidColorBrush(Color.FromRgb(84, 96, 89));
-                newPatient.Text = exam.Patient.FirstName+" "+exam.Patient.LastName;
-                Grid.SetRow(newPatient, 0);
-                Grid.SetColumn(newPatient, 0);
-
-                var myButton = new Button();
-                myButton.Content = "Zapocni";
-                myButton.Width = 100;
-                myButton.Height = 30;
-                myButton.Background = new SolidColorBrush(Color.FromRgb(162, 217, 206));
-                myButton.Margin = new Thickness(10, 10, 15, 0);
-   
-
-                Grid.SetColumn(myButton, 1);
-                Grid.SetRow(myButton, 0);
-                myButton.Tag = exam.Patient.Id;
-                myButton.Click += new RoutedEventHandler(ClickStartExamination);
-
-                var myButton1 = new Button();
-                myButton1.Content = "Otkazi";
-                myButton1.Width = 100;
-                myButton1.Height = 30;
-                myButton1.Background = new SolidColorBrush(Color.FromRgb(162, 217, 206));
-                myButton1.Margin = new Thickness(10, 10, 15, 0);
-
-                Grid.SetColumn(myButton1, 2);
-                Grid.SetRow(myButton1, 0);
-                //    myButton.Tag = exam.Id;
-
-                myGrid.Children.Add(newPatient);
-                myGrid.Children.Add(myButton);
-                myGrid.Children.Add(myButton1);
+                    stack.Children.Add(dock);
+                    dock.Children.Add(lbl);
+                    dock.Children.Add(btn1);
 
 
+                    #region DockPanel Content Properties
+                    lbl.Content = exam.Patient.FirstName + " " + exam.Patient.LastName;
+                    lbl.Height = 32;
+                    lbl.Width = 180;
+                    lbl.FontSize = 15;
+                    lbl.FontWeight = FontWeights.Bold;
+                    lbl.SetValue(DockPanel.DockProperty, Dock.Left);
+                    lbl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
 
-                Examinations.Children.Add(myGrid);
+                    btn1.Content = "Otvori";
+                    btn1.Height = 32;
+                    btn1.Width = 100;
+                    btn1.FontSize = 12;
+                    btn1.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
+                    btn1.SetValue(DockPanel.DockProperty, Dock.Right);
+                    btn1.Tag = exam.Patient.Id;
+                    btn1.Click += new RoutedEventHandler(ClickOpenPatientFile);
+                    btn1.Margin = new Thickness(10, 10, 15, 0);
+                    btn1.Background = new SolidColorBrush(Color.FromRgb(162, 217, 206));
+                    #endregion
+
+                    Grid_Grid1.RowDefinitions.Add(new RowDefinition());
+                    Grid_Grid1.RowDefinitions[num1].Height = new GridLength(66, GridUnitType.Pixel);
+                    Grid_Grid1.Children.Add(stack);
+                    stack.SetValue(Grid.RowProperty, num1);
+                    num1++;
+                
             }
 
-            }
+        }
+
 
         private void ClickStartExamination(object sender, RoutedEventArgs e)
         {//posalji utisak
@@ -550,6 +601,14 @@ namespace HCIproject
             ExaminationWin examWinn = new ExaminationWin((Doctor)user, (long)PatientId);
              this.Visibility = Visibility.Hidden;
             examWinn.Show();
+        }  
+        
+        private void ClickOpenPatientFile(object sender, RoutedEventArgs e)
+        {//posalji utisak
+            var PatientId = ((Button)sender).Tag;
+            PatientFileWin patientWin = new PatientFileWin((Doctor)user, (long)PatientId);
+             this.Visibility = Visibility.Hidden;
+            patientWin.Show();
         }
 
 

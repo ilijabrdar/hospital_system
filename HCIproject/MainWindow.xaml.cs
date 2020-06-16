@@ -84,7 +84,7 @@ namespace HCIproject
             foreach (var article in app.ArticleController.GetAll())
             {
                 Border b = new Border();
-                b.BorderThickness = new Thickness(5);
+                b.BorderThickness = new Thickness(4);
                 b.CornerRadius = new CornerRadius(5);
                 b.BorderBrush = new SolidColorBrush(Color.FromRgb(162, 217, 206));
                 b.Margin = new Thickness(10, 10, 10, 10);
@@ -120,5 +120,6 @@ namespace HCIproject
             }
 
         }
+
     }
 }

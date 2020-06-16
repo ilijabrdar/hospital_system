@@ -16,7 +16,7 @@
          FontFamily="{DynamicResource MaterialDesignFont}"
                  WindowStartupLocation="CenterScreen">
     <StackPanel x:Name="Resize" Orientation="Vertical" Background="#D0ECE7" >
-        <Border  BorderBrush="#A2D9CE" BorderThickness="8" CornerRadius="8,8,8,8"  Margin="5">
+        <Border  BorderBrush="#A2D9CE" BorderThickness="4" CornerRadius="8,8,8,8"  Margin="5">
             <WrapPanel Height="70">
                 <Label Content="Prijavljivanje" Foreground="#2C3E50" FontSize="17" Margin="20" Height="53" HorizontalAlignment="Left" />
                 <Button x:Name="logBtn"
@@ -25,13 +25,13 @@
 
             </WrapPanel>
         </Border>
-        <Border  BorderBrush="#A2D9CE" BorderThickness="8" CornerRadius="8,8,8,8" Margin="5">
+        <Border  BorderBrush="#A2D9CE" BorderThickness="4" CornerRadius="8,8,8,8" Margin="5">
             <WrapPanel Height="70">
                 <Label Content="Pretraga clanaka" Margin="20" VerticalAlignment="Center" Foreground="#2C3E50" FontSize="17" Height="30"/>
                 <TextBox x:Name="searchTxt" Text="Unesite parametar pretrage" Height="30" Width="203" Background="#EBF5FB" FontSize="16" Foreground="#AAB7B8" Focusable="True" Margin="20" IsKeyboardFocusedChanged="search_text_IsKeyboardFocusedChanged" KeyDown="search_text_KeyDown" CaretBrush="#FF1FEECD"/>
             </WrapPanel>
         </Border>
-        <ScrollViewer VerticalScrollBarVisibility="Auto" Height="300">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Height="300" Focusable="True">
             <StackPanel x:Name="Articles" Orientation="Vertical" >
                 <Border >
                 </Border>

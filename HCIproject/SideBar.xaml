@@ -84,7 +84,7 @@
                         <TextBox x:Name="search_article" Text="Unesite parametar pretrage"  HorizontalAlignment="Left" Margin="5" Background="#EBF5FB" FontSize="16" Foreground="#AAB7B8" Width="127" Height="30" CaretBrush="#FF1FEECD" IsKeyboardFocusedChanged="search_article_IsKeyboardFocusedChanged" KeyDown="search_article_KeyDown" />
                         <Button Content="Novi članak" Margin="10" HorizontalAlignment="Right" Background="#A2D9CE" Click="Button_Click_7" BorderBrush="#FF1FEECD"/>
                     </Grid>
-                    <ScrollViewer VerticalScrollBarVisibility="Auto" Height="300">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" Height="300" Focusable="True" >
                         <StackPanel x:Name="Articles" Orientation="Vertical" >
                             <Border  >
                             </Border>
@@ -93,17 +93,16 @@
                 </StackPanel>
             </TabItem>
             <TabItem Header="Pregled" FontSize="19" Background="#A2D9CE"  >
-                <StackPanel x:Name="upcomingExam" Background="#D5F5E3"  Orientation="Vertical">
+                <StackPanel x:Name="upcomingExam" Background="#D5F5E3"  Orientation="Vertical" Height="300" >
                     <Grid>
                         <Border BorderBrush="#A2D9CE" BorderThickness="0,0,0,5" />
                         <Label Content="Zakazani termini" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold"/>
                     </Grid>
-                    <ScrollViewer VerticalScrollBarVisibility="Auto" Height="300">
-                        <StackPanel x:Name="Examinations" Orientation="Vertical" >
-                            <Border  >
-                            </Border>
-                        </StackPanel>
-                    </ScrollViewer>
+                    <Grid>
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" Height="300" >
+                            <Grid x:Name="Grid_Grid" Margin="0,0,0,32"/>
+                        </ScrollViewer>
+                    </Grid>
                 </StackPanel>
             </TabItem>
             <TabItem Header="Kartoni" FontSize="19" Background="#A2D9CE" Height="28" >
@@ -115,38 +114,11 @@
                                 <TextBox x:Name="search_patient" HorizontalAlignment="Center"  Text="Pretraga" Margin="5" Background="#EBF5FB" FontSize="16" Foreground="#AAB7B8" Width="127" CaretBrush="#FF1FEECD" KeyDown="search_patient_KeyDown" IsKeyboardFocusedChanged="search_patient_IsKeyboardFocusedChanged" />
                             </StackPanel>
                         </Border>
-                        <StackPanel>
-                            <ScrollViewer Height="180">
-                                <Grid  HorizontalAlignment="Center">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition />
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="300"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Label Grid.Row="0" Grid.Column="0" Content="Milan Jovanovic" FontSize="16" />
-                                    <Label Grid.Row="1" Grid.Column="0" Content="Zorana Markovic" FontSize="16" />
-                                    <Label Grid.Row="2" Grid.Column="0" Content="Filip Jovic" FontSize="16" />
-                                    <Label Grid.Row="3" Grid.Column="0" Content="Milan Zoric" FontSize="16" />
-                                    <Label Grid.Row="4" Grid.Column="0" Content="Sinisa Pavlovic" FontSize="16" />
-                                    <Label Grid.Row="5" Grid.Column="0" Content="Anja Stramic" FontSize="16" />
-
-                                    <Button Grid.Row="0" Grid.Column="1" Content="otvori" FontSize="15" Margin="4,0,-20,4" Foreground="#DDFFFFFF" Background="#A2D9CE" Click="Button_Click_1"  VerticalAlignment="Bottom" BorderBrush="#FF1FEECD" />
-                                    <Button Grid.Row="1" Grid.Column="1" Content="otvori" Margin="4,4,-20,4" FontSize="14" Foreground="#DDFFFFFF" Background="#A2D9CE" BorderBrush="#FF1FEECD" />
-                                    <Button Grid.Row="2" Grid.Column="1" Content="otvori"  FontSize="15" Margin="4,4,-20,4" Foreground="#DDFFFFFF" Background="#A2D9CE" BorderBrush="#FF1FEECD" />
-                                    <Button Grid.Row="3" Grid.Column="1" Content="otvori"  FontSize="15" Margin="4,4,-20,4" Foreground="#DDFFFFFF" Background="#A2D9CE" BorderBrush="#FF1FEECD" />
-                                    <Button Grid.Row="4" Grid.Column="1" Content="otvori"  FontSize="15" Margin="4,4,-20,4" Foreground="#DDFFFFFF" Background="#A2D9CE" BorderBrush="#FF1FEECD" />
-                                    <Button Grid.Row="5" Grid.Column="1" Content="otvori"  FontSize="15" Margin="4,4,-20,4" Background="#A2D9CE" BorderBrush="#FF1FEECD"/>
-                                </Grid>
+                        <Grid>
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" Height="300"  >
+                                <Grid x:Name="Grid_Grid1" Margin="0,0,0,32"/>
                             </ScrollViewer>
-                        </StackPanel>
+                        </Grid>
                     </StackPanel>
 
                 </StackPanel>
@@ -401,7 +373,7 @@
             <TabItem Header="Utisak o aplikaciji" FontSize="19" Background="#A2D9CE">
                 <StackPanel x:Name="utisakGrid" Orientation="Vertical" Background="#D5F5E3" SizeChanged="myGrid_SizeChanged">
                     <Label Content="Ostavite vaše mišljenje!" HorizontalAlignment="Center" FontSize="25"  Foreground="#2C3E50"  Margin="20"/>
-                    <TextBox x:Name="misljenje" FontSize="14" Background="#EAFAF1" CaretBrush="#FF1FEECD" />
+                    <TextBox x:Name="misljenje" FontSize="14" Background="#EAFAF1" CaretBrush="#FF1FEECD" AcceptsReturn="True" />
                     <Button Content="Pošalji" FontSize="17" HorizontalAlignment="Right" Margin="0,20,19.6,20" Background="#A2D9CE" Foreground="#2C3E50" BorderBrush="#FF1FEECD" Click="Button_Click_8" />
                 </StackPanel>
             </TabItem>
