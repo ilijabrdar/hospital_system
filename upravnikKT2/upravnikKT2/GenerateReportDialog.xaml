@@ -21,11 +21,11 @@
         </Grid.ColumnDefinitions>
 
         <Label Grid.Row="0" Grid.Column="0" FontSize="20" VerticalAlignment="Center" Margin="20,66,20,54" Height="36">Izaberite prostorije</Label>
-        <ComboBox Grid.Row="0" Grid.Column="1" Margin="193,66,20,54" x:Name="comboRooms" materialDesign:HintAssist.Hint="Pretrazi" IsTextSearchEnabled="True" IsEditable="True" Height="36">
+        <ComboBox Grid.Row="0" Grid.Column="1" Margin="193,66,20,54" x:Name="comboRooms" materialDesign:HintAssist.Hint="Pretraži" IsTextSearchEnabled="True" IsEditable="True" Height="36">
 
         </ComboBox>
 
-        <Label Grid.Row="1" Grid.Column="0" FontSize="20" VerticalAlignment="Center"  Height="36" Margin="20,36,0,13">Izaberite poetni datum</Label>
+        <Label Grid.Row="1" Grid.Column="0" FontSize="20" VerticalAlignment="Center"  Height="36" Margin="20,36,0,13">Izaberite početni datum</Label>
         <DatePicker x:Name="startDatePicker" Grid.Row="1" Grid.Column="1" FontSize="20" Margin="193,36,20,13" Focusable="False" Height="36"></DatePicker>
 
         <Label Grid.Row="2" Grid.Column="0" FontSize="20" VerticalAlignment="Center"  Height="38" Margin="20,27,0,20">Izaberite krajnji datum</Label>

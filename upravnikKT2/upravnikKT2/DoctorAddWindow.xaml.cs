@@ -310,6 +310,7 @@ namespace upravnikKT2
         {
             List<Speciality> list_speciality = new List<Speciality>();
             list_speciality = _specialityController.GetAll().ToList();
+            list_speciality.Sort((x, y) => x.Name.CompareTo(y.Name));
 
             comboSpeciality.ItemsSource = list_speciality;
             comboSpeciality.DisplayMemberPath = "Name";
@@ -320,6 +321,7 @@ namespace upravnikKT2
             StateCombo.SelectedValuePath = "Id";
             App app = Application.Current as App;
             States = app.StateController.GetAll().ToList();
+            States.Sort((x, y) => x.Name.CompareTo(y.Name));
             StateCombo.ItemsSource = States;
 
             TownCombo.DisplayMemberPath = "Name";
@@ -349,6 +351,7 @@ namespace upravnikKT2
         {
             State state = StateCombo.SelectedItem as State;
             Towns = state.GetTown();
+            Towns.Sort((x, y) => x.Name.CompareTo(y.Name));
             TownCombo.ItemsSource = Towns;
             AddressCombo.ItemsSource = null;
 
@@ -360,6 +363,7 @@ namespace upravnikKT2
             if (town == null)
                 return;
             Addresses = town.GetAddress();
+            Addresses.Sort((x, y) => x.FullAddress.CompareTo(y.FullAddress));
             AddressCombo.ItemsSource = Addresses;
 
         }

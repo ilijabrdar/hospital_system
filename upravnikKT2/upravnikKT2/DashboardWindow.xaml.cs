@@ -189,7 +189,17 @@ namespace upravnikKT2
             window.ShowDialog();
 
             dataGridLekari.ItemsSource = null;
-            dataGridLekari.ItemsSource = new ObservableCollection<Doctor>(_doctorController.GetAll());
+            List<Doctor> sada = _doctorController.GetAll().ToList();
+            var app = Application.Current as App;
+            AddressController addressController = app.AddressController;
+            List<Address> adrese = addressController.GetAll().ToList();
+
+            foreach (Doctor doctor in sada)
+            {
+                doctor.Address.FullAddress = adrese.Find(x => doctor.Address.Id == x.Id).FullAddress;
+            }
+            dataGridLekari.ItemsSource = new ObservableCollection<Doctor>(sada);
+            //dataGridLekari.ItemsSource = new ObservableCollection<Doctor>(_doctorController.GetAll());
         }
 
         private void editDoctor(object sender, RoutedEventArgs e)
@@ -201,7 +211,17 @@ namespace upravnikKT2
                 window.ShowDialog();
 
                 dataGridLekari.ItemsSource = null;
-                dataGridLekari.ItemsSource = new ObservableCollection<Doctor>(_doctorController.GetAll());
+                List<Doctor> sada = _doctorController.GetAll().ToList();
+                var app = Application.Current as App;
+                AddressController addressController = app.AddressController;
+                List<Address> adrese = addressController.GetAll().ToList();
+
+                foreach (Doctor doctor in sada)
+                {
+                    doctor.Address.FullAddress = adrese.Find(x => doctor.Address.Id == x.Id).FullAddress;
+                }
+                dataGridLekari.ItemsSource = new ObservableCollection<Doctor>(sada);
+                //dataGridLekari.ItemsSource = new ObservableCollection<Doctor>(_doctorController.GetAll());
             }
             else
             {
@@ -532,7 +552,15 @@ namespace upravnikKT2
             //Lekari.Add(new Lekar { Ime = "Nenad", Prezime = "Nedic", ID = "DAGD32", JMBG = "1254324", Email = "nenad@gmail.com", Telefon = "12343212", Datum_rodjenja = "01.01.1988.", Odeljenje = "orl", Ocena = "3.94" });
             //Lekari.Add(new Lekar { Ime = "Sima", Prezime = "Simic", ID = "AS424D", JMBG = "133122123", Email = "sima@gmail.com", Telefon = "5438575", Datum_rodjenja = "01.01.1991.", Odeljenje = "ocno", Ocena = "4.85" });
             List<Doctor> sada = _doctorController.GetAll().ToList();
-            dataGridLekari.ItemsSource = new ObservableCollection<Doctor>(_doctorController.GetAll());
+            var app = Application.Current as App;
+            AddressController addressController = app.AddressController;
+            List<Address> adrese = addressController.GetAll().ToList();
+            
+            foreach (Doctor doctor in sada)
+            {
+                doctor.Address.FullAddress = adrese.Find(x => doctor.Address.Id == x.Id).FullAddress;
+            }
+            dataGridLekari.ItemsSource = new ObservableCollection<Doctor>(sada);
 
             List<Equipment> consumable_equipment = _equipmentController.getConsumableEquipment().ToList();
             ObservableCollection<Equipment> data_consumable = new ObservableCollection<Equipment>(consumable_equipment);
@@ -565,8 +593,9 @@ namespace upravnikKT2
 
             StateCombo.DisplayMemberPath = "Name";
             StateCombo.SelectedValuePath = "Id";
-            App app = Application.Current as App;
+            //App app = Application.Current as App;
             States = app.StateController.GetAll().ToList();
+            States.Sort((x, y) => x.Name.CompareTo(y.Name));
             StateCombo.ItemsSource = States;
 
             TownCombo.DisplayMemberPath = "Name";
@@ -605,12 +634,16 @@ namespace upravnikKT2
             shortcuts.Add(new ShortcutData("CTRL + E", "izmena entiteta"));
             shortcuts.Add(new ShortcutData("DELETE", "brisanje entiteta"));
             shortcuts.Add(new ShortcutData("CTRL + T", "otvaranje prozora za pregled tipova prostorija"));
-            shortcuts.Add(new ShortcutData("CTRL + I", "generisanje izvestaja prostorija"));
+            shortcuts.Add(new ShortcutData("CTRL + I", "generisanje izveštaja prostorija"));
             shortcuts.Add(new ShortcutData("TAB", "kretanje unapred kroz polja za unos"));
             shortcuts.Add(new ShortcutData("SHIFT + TAB", "kretanje unazad kroz polja za unos"));
             shortcuts.Add(new ShortcutData("ESCAPE", "zatvaranje prozora"));
             shortcuts.Add(new ShortcutData("ENTER", "umesto dugmeta za potvrdu"));
-           
+            shortcuts.Add(new ShortcutData("CTRL + →", "prenos sastojaka iz leve tabele u desnu"));
+            shortcuts.Add(new ShortcutData("CTRL + ←", "prenos sastojaka iz desne tabele u levu"));
+            shortcuts.Add(new ShortcutData("CTRL + A", "aktiviranje pretrage desne tabele sastojaka"));
+            shortcuts.Add(new ShortcutData("CTRL + S", "aktiviranje pretrage leve tabele sastojaka"));
+            shortcuts.Add(new ShortcutData("ALT + F4", "zatvaranje aplikacije"));
 
             DataGridShortcuts.ItemsSource = shortcuts;
 
@@ -658,6 +691,7 @@ namespace upravnikKT2
         {
             State state = StateCombo.SelectedItem as State;
             Towns = state.GetTown();
+            Towns.Sort((x, y) => x.Name.CompareTo(y.Name));
             TownCombo.ItemsSource = Towns;
             AddressCombo.ItemsSource = null;
 
@@ -669,6 +703,7 @@ namespace upravnikKT2
             if (town == null)
                 return;
             Addresses = town.GetAddress();
+            Addresses.Sort((x, y) => x.FullAddress.CompareTo(y.FullAddress));
             AddressCombo.ItemsSource = Addresses;
 
         }

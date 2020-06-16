@@ -80,7 +80,7 @@ namespace upravnikKT2
                 {
                     if (pair.Key.Id == _selectedEquipment.Id)
                     {
-                        string messageBoxText = "Prostorija vec sadrzi selektovanu opremu!";
+                        string messageBoxText = "Prostorija " + room.RoomCode + " vec sadrzi selektovanu opremu!";
                         string caption = "Greska";
                         MessageBoxButton button = MessageBoxButton.OK;
                         MessageBoxImage icon = MessageBoxImage.Error;
@@ -121,7 +121,7 @@ namespace upravnikKT2
                     {
                         if (pair.Key.Id == _selectedEquipment.Id)
                         {
-                            string messageBoxText = "Prostorija vec sadrzi selektovanu opremu!";
+                            string messageBoxText = "Prostorija " + final_room.RoomCode + " vec sadrzi selektovanu opremu!";
                             string caption = "Greska";
                             MessageBoxButton button = MessageBoxButton.OK;
                             MessageBoxImage icon = MessageBoxImage.Error;
@@ -173,7 +173,7 @@ namespace upravnikKT2
                 result -= _selectedRoomEquipmentEdit.Equipment_Amount;
             if (result+Amount > _selectedEquipment.Amount)
             {
-                string messageBoxText = "Uneli ste vecu kolicinu opreme od one na raspolaganju";
+                string messageBoxText = "Uneli ste vecu kolicinu opreme " + _selectedEquipment.Name + " od one na raspolaganju";
                 string caption = "Greska";
                 MessageBoxButton button = MessageBoxButton.OK;
                 MessageBoxImage icon = MessageBoxImage.Error;

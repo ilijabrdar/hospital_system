@@ -61,6 +61,8 @@ namespace upravnikKT2
 
         public IArticleController ArticleController { get; private set; }
 
+        public AddressController AddressController { get; private set; }
+
 
         public App()
         {
@@ -118,6 +120,9 @@ namespace upravnikKT2
             AddressRepository addressRepository = new AddressRepository(new CSVStream<Address>(ADDRESS_FILE, new AddressCSVConverter(CSV_DELIMITER)), new LongSequencer());
             TownRepository townRepository = new TownRepository(new CSVStream<Town>(TOWN_FILE, new TownCSVConverter(CSV_DELIMITER, CSV_ARRAY_DELIMITER)), new LongSequencer(), addressRepository);
             StateRepository stateRepository = new StateRepository(new CSVStream<State>(STATE_FILE, new StateCSVConverter(CSV_DELIMITER, CSV_ARRAY_DELIMITER)), new LongSequencer(), townRepository);
+
+            AddressService addressService = new AddressService(addressRepository);
+            AddressController = new AddressController(addressService);
 
             StateService stateService = new StateService(stateRepository);
             StateController = new StateController(stateService);

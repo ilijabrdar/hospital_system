@@ -147,6 +147,7 @@ namespace upravnikKT2
         {
             List<RoomType> list_room_types = new List<RoomType>();
             list_room_types = _roomTypeController.GetAll().ToList();
+            list_room_types.Sort((x,y) => x.Name.CompareTo(y.Name));
 
             comboRoomTypes.ItemsSource = list_room_types;
             comboRoomTypes.DisplayMemberPath = "Name";
