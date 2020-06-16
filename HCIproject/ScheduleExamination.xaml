@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HCIproject"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+
         mc:Ignorable="d"
         Title="ScheduleExamination" Height="400" Width="750"
         WindowStartupLocation="CenterScreen">
@@ -13,12 +15,22 @@
         </StackPanel>
         <StackPanel>
             <Label Content="Izaberite datum i vreme:" FontWeight="DemiBold" FontSize="20" Margin="10"/>
-            <Label Content="NAPRAVITI TABELU SA IZBOROM DATUM/VREME/ORDINACIJA" FontWeight="Bold"  FontSize="20"/>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" >
+                <Border Height="170" Width="500" HorizontalAlignment="Center">
+                    <DataGrid x:Name="specialistGrid" FontSize="14" BorderThickness="1"  AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" ItemsSource ="{Binding specialistExamination}"  materialDesign:DataGridAssist.CellPadding="4 2 2 2" materialDesign:DataGridAssist.ColumnHeaderPadding="4 2 2 2" Background="#FFC4F3EA" Width="378" HorizontalAlignment="Center"  >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Datum" Binding="{Binding Period.StartDate.Date }" Width="80"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Vreme" Binding="{Binding Period.StartDate.TimeOfDay}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn  Header="Sala" Binding="{Binding Room.RoomCode }" Width="*"></DataGridTextColumn>
+
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Border>
+            </ScrollViewer>
 
         </StackPanel>
-        <WrapPanel FlowDirection="RightToLeft" Background="#D5F5E3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <WrapPanel FlowDirection="RightToLeft" Background="#D5F5E3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20">
             <Button Content="Otkaži" FontSize="18" Height="30" Width="100"  Margin="10,0,10,50" Background="#A2D9CE" Click="Button_Click" BorderBrush="#FF1FEECD"  ></Button>
-            <Button Content="Štampaj" FontSize="18" Height="30" Width="100"  Margin="10,0,10,50" Background="#A2D9CE" BorderBrush="#FF1FEECD"  ></Button>
             <Button Content="Potvrdi" FontSize="18" Height="30" Width="100"  Margin="10,0,10,50" Background="#A2D9CE" Click="Button_Click_1" BorderBrush="#FF1FEECD"  ></Button>
         </WrapPanel>
     </StackPanel>

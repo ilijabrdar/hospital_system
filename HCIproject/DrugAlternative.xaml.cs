@@ -1,4 +1,5 @@
-﻿using Model.Users;
+﻿using Model.PatientSecretary;
+using Model.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,11 +23,9 @@ namespace HCIproject
     public partial class DrugAlternative : Window
     {
         public Doctor user;
-        private List<String> lekovi;
-        public DrugAlternative(Doctor user)
+       public DrugAlternative(Doctor user)
         {
             this.user = user;
-            lekovi = new List<string> { "Nimulid", "Bromazepam", "Brufen", "Diklofen", "Aspirin" };
             InitializeComponent();
             initializeComboBox();
         }
@@ -38,13 +37,30 @@ namespace HCIproject
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {//potvrdi
-            if (cBox.SelectedItem.ToString() == cBox1.SelectedItem.ToString())
+            if(cBox.SelectedItem.ToString()==null || cBox1.SelectedItem.ToString() == null)
             {
-                Console.WriteLine(cBox.SelectedItem.ToString());
-                obavestenje.Content = "Lek ne moze biti sam sebi alternativni, molimo proverite unos";
+                string messageBoxText = "Morate odabrati oba leka ukoliko želite da odaberete alternativu.";
+                string caption = "Greska prilikom odabira alternativnih lekova!";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+
+            }
+            else if (cBox.SelectedItem.ToString() == cBox1.SelectedItem.ToString())
+            {
+                string messageBoxText = "Lek ne moze biti sam sebi alternativni, molimo proverite Vas unos.";
+                string caption = "Greska prilikom odabira alternativnih lekova!";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
             }
             else
             {
+                string messageBoxText = "Uspesno ste dodali alternativni lek " + cBox1.SelectedItem.ToString() + " za lek " + cBox.SelectedItem.ToString()+"!";
+                string caption = "Potvrda dodavanja alternativnog leka!";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Information;
+                MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
                 this.Close();
             }
         }
@@ -55,10 +71,12 @@ namespace HCIproject
 
         private void initializeComboBox()
         {// cBox drugPass
-            foreach (String s in lekovi)
+            var app = Application.Current as App;
+            foreach (Drug drug in app.DrugController.GetAll())
             {
-                cBox.Items.Add(s);
-                cBox1.Items.Add(s);
+                cBox.Items.Add(drug.Name);
+                cBox1.Items.Add(drug.Name);
+                
             }
         }
 
@@ -66,54 +84,35 @@ namespace HCIproject
 
         private void cBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            var app = Application.Current as App;
+
             obavestenje.Content = "";
             String lek = cBox.SelectedItem.ToString();
-            if (lek == "Bromazepam")
+
+            foreach (Drug drug in app.DrugController.GetAll())
             {
-                drugKey.Content = "B23E";
-            }
-            else if (lek.Equals("Nimulid"))
-            {
-                drugKey.Content = "N34D";
-            }
-            else if (lek.Equals("Diklofen"))
-            {
-                drugKey.Content = "D12F";
-            }
-            else if (lek.Equals("Brufen"))
-            {
-                drugKey.Content = "B32N";
-            }
-            else if (lek.Equals("Aspirin"))
-            {
-                drugKey.Content = "A14S";
+                if (lek.Equals(drug.Name))
+                {
+                    drugKey.Content = drug.Id;
+                }
             }
         }
 
         private void cBox1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            var app = Application.Current as App;
+
             obavestenje.Content = "";
             String lek = cBox1.SelectedItem.ToString();
-            if (lek == "Bromazepam")
+
+            foreach (Drug drug in app.DrugController.GetAll())
             {
-                drugKey1.Content = "B23E";
+                if (lek.Equals(drug.Name))
+                {
+                    drugKey1.Content = drug.Id;
+                }
             }
-            else if (lek.Equals("Nimulid"))
-            {
-                drugKey1.Content = "N34D";
-            }
-            else if (lek.Equals("Diklofen"))
-            {
-                drugKey1.Content = "D12F";
-            }
-            else if (lek.Equals("Brufen"))
-            {
-                drugKey1.Content = "B32N";
-            }
-            else if (lek.Equals("Aspirin"))
-            {
-                drugKey1.Content = "A14S";
-            }
+
         }
     }
 }

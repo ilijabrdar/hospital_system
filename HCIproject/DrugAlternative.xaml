@@ -32,7 +32,7 @@
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Izberite alternativni lek" FontSize="16"    Margin="8,8,0,0"></Label>
-                    <ComboBox x:Name="cBox1" Width="200"  Margin="8,8,0,0" FontWeight="Bold" FontSize="16"  Background="#A2D9CE" SelectionChanged="cBox_SelectionChanged">
+                    <ComboBox x:Name="cBox1" Width="200"  Margin="8,8,0,0" FontWeight="Bold" FontSize="16"  Background="#A2D9CE" SelectionChanged="cBox1_SelectionChanged">
                     </ComboBox>
 
                 </StackPanel>

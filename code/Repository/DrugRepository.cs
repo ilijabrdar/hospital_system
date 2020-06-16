@@ -66,12 +66,12 @@ namespace Repository
         public Drug GetEager(long id)
         {
             Drug drug = base.Get(id);
-           // foreach (Ingredient ingredient in drug.Ingredients)
-          //  {
-         //       Ingredient temp = _ingredientRepository.Get(ingredient.Id);
-        //        ingredient.Name = temp.Name;
-       //         ingredient.Quantity = temp.Quantity;
-      //      }
+            foreach (Ingredient ingredient in drug.Ingredients)
+            {
+                 Ingredient temp = _ingredientRepository.Get(ingredient.Id);
+                ingredient.Name = temp.Name;
+                ingredient.Quantity = temp.Quantity;
+            }
 
             foreach (Drug alternativeDrug in drug.Alternative)
             {

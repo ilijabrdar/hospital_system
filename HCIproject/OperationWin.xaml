@@ -8,13 +8,13 @@
         mc:Ignorable="d"
         Title="Operation" Height="400" Width="750"
         WindowStartupLocation="CenterScreen">
-        <StackPanel x:Name="ResizePanel" Background="#D0ECE7" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-            <StackPanel x:Name="PatientInfo" Background="#D5F5E3">
-                <Label Content="OPSTE INFO O PACIJENTU"/>
-            </StackPanel>
+    <StackPanel x:Name="ResizePanel" Background="#D0ECE7" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+        <StackPanel x:Name="PatientInfo" Background="#D5F5E3">
+            <Label Content="OPSTE INFO O PACIJENTU"/>
+        </StackPanel>
         <ScrollViewer VerticalScrollBarVisibility="Auto" Height="290">
             <StackPanel>
-                <Grid  VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">
+                <Grid  VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -29,22 +29,37 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <Label Content="Lekar" Grid.Row="0" Grid.Column="0" FontSize="18" Margin="10"/>
-                    <TextBlock Text="OVDE CE SE PRENETI IME LEKARA" Grid.Row="1" Grid.Column="1" Margin="10"/>
+                    <Label Content="Lekar" Grid.Row="0" Grid.Column="0" FontSize="16" Margin="3"/>
+                    <TextBlock x:Name="lekarTxt" Grid.Row="0" Grid.Column="1"  FontSize="16"  Margin="3"/>
 
-                    <Label Content="Dijagnoza" Grid.Row="1" Grid.Column="0" FontSize="18" Margin="10"/>
-                    <TextBlock Text="OVDE CE SE PRENETI UNETA DIJAGNOZA" Grid.Row="0" Grid.Column="1" Margin="10"/>
+                    <Label Content="Dijagnoza" Grid.Row="1" Grid.Column="0" FontSize="16" Margin="3"/>
+                    <TextBlock x:Name="dijagnozaTxt" Grid.Row="1" Grid.Column="1"  FontSize="16"  Margin="3"/>
 
-                    <Label Content="Naziv operacije" Grid.Row="2" Grid.Column="0" FontSize="18" Margin="10"/>
-                    <TextBox Grid.Row="2 " Grid.Column="1" FontSize="18" Margin="10" CaretBrush="#FF1FEECD"/>
 
-                    <Label Content="Procena trajanja operacije" Grid.Row="3" Grid.Column="0" FontSize="18" Margin="10"/>
-                    <TextBox Grid.Row="3 " Grid.Column="1" FontSize="18" Margin="10" CaretBrush="#FF1FEECD"/>
+                    <Label Content="Naziv operacije" Grid.Row="2" Grid.Column="0" FontSize="16" Margin="3"/>
+                    <TextBox x:Name="naziv" Grid.Row="2 " Grid.Column="1"  FontSize="16" Margin="3" CaretBrush="#FF1FEECD"/>
 
-                    <Label Content="Napomena" Grid.Row="4" Grid.Column="0" FontSize="18" Margin="10"/>
-                    <TextBox Grid.Row="4" Grid.Column="1" Margin="10" AcceptsReturn="True" CaretBrush="#FF1FEECD"/>
+                    <Label Content="Procena trajanja operacije" Grid.Row="3" Grid.Column="0" FontSize="16" Margin="3"/>
+                    <TextBox x:Name="vreme" Grid.Row="3 " Grid.Column="1"  FontSize="16" Margin="3" CaretBrush="#FF1FEECD"/>
+
+                    <Label Content="Napomena" Grid.Row="4" Grid.Column="0" FontSize="16" Margin="3"/>
+                    <TextBox Grid.Row="4" Grid.Column="1" Margin="3" AcceptsReturn="True"  FontSize="16" CaretBrush="#FF1FEECD"/>
                 </Grid>
-                <Label Content="NAPRAVITI TABELU SA IZBOROM DATUM/SALA/VREME" FontWeight="Bold"  FontSize="20"/>
+                <Label Content="Navigiranjem sa Tab dugmetom pozicionirajte se na tebelu i izaberite podatke koje vam odgovaraju." HorizontalAlignment="Center" FontSize="10"></Label>
+                <Label Content="Nakon pozicioniranja na zeljene podatka komandom CTRL+Tab zavrsite pretragu." HorizontalAlignment="Center" FontSize="10"></Label>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" >
+                    <Border Height="170" Width="500" HorizontalAlignment="Center">
+                        <DataGrid x:Name="specialistGrid" FontSize="14" BorderThickness="1"  AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" ItemsSource ="{Binding specialistExamination}"  materialDesign:DataGridAssist.CellPadding="4 2 2 2" materialDesign:DataGridAssist.ColumnHeaderPadding="4 2 2 2" Background="#FFC4F3EA" Width="378" HorizontalAlignment="Center"  >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Datum" Binding="{Binding Period.StartDate.Date }" Width="80"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Vreme" Binding="{Binding Period.StartDate.TimeOfDay}" Width="*"></DataGridTextColumn>
+                                <DataGridTextColumn  Header="Sala" Binding="{Binding Room.RoomCode }" Width="*"></DataGridTextColumn>
+
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Border>
+                </ScrollViewer>
+
             </StackPanel>
         </ScrollViewer>
         <WrapPanel FlowDirection="RightToLeft" Background="#D5F5E3" VerticalAlignment="Bottom" >

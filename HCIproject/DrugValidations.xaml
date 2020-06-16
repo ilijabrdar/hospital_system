@@ -1,0 +1,84 @@
+﻿<Window x:Class="HCIproject.DrugValidations"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+           xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:syncfusion="clr-namespace:Syncfusion.UI.Xaml.Charts;assembly=Syncfusion.SfChart.WPF"
+        xmlns:local="clr-namespace:HCIproject"
+        mc:Ignorable="d"
+        Title="DrugValidation" Height="400" Width="750"
+        WindowStartupLocation="CenterScreen">
+    <StackPanel Background="#D0ECE7">
+        <Border  BorderBrush="#A2D9CE" BorderThickness="5" CornerRadius="8,8,8,8"  Margin="10">
+            <StackPanel x:Name="Info" Background="#D5F5E3" Orientation="Vertical"  VerticalAlignment="Top">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Ime leka:" FontSize="16" Margin="10,0,0,0" VerticalAlignment="Center" Width="Auto" />
+                    <Label x:Name="imeLeka"  FontSize="18" Margin="10,0,20,0" VerticalAlignment="Center" Width="Auto" FontWeight="Bold"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Sifra leka:" FontSize="16" Margin="10,0,0,0" VerticalAlignment="Center"  />
+                    <Label x:Name="sifraLeka" FontSize="18" Margin="10,0,20,0" VerticalAlignment="Center" FontWeight="Bold"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Kolicina:" FontSize="16" Margin="10,0,0,0"  VerticalAlignment="Center"  />
+                    <Label x:Name="kolicina" FontSize="18" Margin="10,0,20,0" VerticalAlignment="Center"  FontWeight="Bold" />
+                </StackPanel>
+            </StackPanel>
+        </Border>
+        <Border  BorderBrush="#A2D9CE" BorderThickness="5" CornerRadius="8,8,8,8"  Margin="10">
+            <StackPanel Orientation="Horizontal" Background="#D5F5E3">
+                <!-- <Image Grid.Column="0"  Source="graph.png" Height="172" ></Image>
+        ==-->
+
+                <Grid>
+
+                    <syncfusion:SfChart Header="Chart" Height="200" Width="200">
+                        <!--Initialize the horizontal axis for SfChart-->
+                        <syncfusion:SfChart.PrimaryAxis>
+                            <syncfusion:CategoryAxis Header="Sastojak" FontSize="14"/>
+                        </syncfusion:SfChart.PrimaryAxis>
+
+                        <!--Initialize the vertical axis for SfChart-->
+                        <syncfusion:SfChart.SecondaryAxis>
+                            <syncfusion:NumericalAxis Header="Kolicina [mg]" FontSize="14"/>
+                        </syncfusion:SfChart.SecondaryAxis>
+
+                        <!--Adding Legend to the SfChart-->
+                        <syncfusion:SfChart.Legend>
+                            <syncfusion:ChartLegend/>
+                        </syncfusion:SfChart.Legend>
+
+                        <!--Initialize the series for SfChart-->
+                        <syncfusion:ColumnSeries Label="sastojak" ItemsSource="{Binding sastojci}" XBindingPath="Name" YBindingPath="Quantity" ShowTooltip="True" >
+                            <syncfusion:ColumnSeries.AdornmentsInfo>
+                                <syncfusion:ChartAdornmentInfo ShowLabel="True" >
+                                </syncfusion:ChartAdornmentInfo>
+                            </syncfusion:ColumnSeries.AdornmentsInfo>
+                        </syncfusion:ColumnSeries>
+
+                    </syncfusion:SfChart>
+
+                </Grid>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" >
+                    <Border Height="150" Width="325">
+                        <DataGrid Margin="50,0,70,0.4" FontSize="14" BorderThickness="1" x:Name="ingrediantsGrid" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" ItemsSource ="{Binding ingredients}"  materialDesign:DataGridAssist.CellPadding="4 2 2 2" materialDesign:DataGridAssist.ColumnHeaderPadding="4 2 2 2" Background="#FFC4F3EA" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn  Header="Sastojak" Binding="{Binding Name}" Width="*" ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"  EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+                                <DataGridTextColumn  Header="Kolicina" Binding="{Binding Quantity}" Width="*" ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"  EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Border>
+                </ScrollViewer>
+                <StackPanel Orientation="Vertical">
+                    <Button Margin="10,20,10,10" Content="Dodaj novi sastojak" Background="#A2D9CE" Click="Button_Click_2" ></Button>
+                    <Button Margin="10" Content="Obrisi sastojak" Background="#A2D9CE" Click="Button_Click_3" ></Button>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+        <WrapPanel FlowDirection="RightToLeft">
+            <Button Content="Otkaži validaciju" FontSize="18" Height="30" Width="170"  Margin="10,0,10,50" Background="#A2D9CE" Click="Button_Click" BorderBrush="#FF1FEECD" ></Button>
+            <Button Content="Potvrdi sastav" FontSize="18" Height="30" Width="150"  Margin="10,0,10,50" Background="#A2D9CE" Click="Button_Click_1" BorderBrush="#FF1FEECD" ></Button>
+        </WrapPanel>
+    </StackPanel>
+</Window>

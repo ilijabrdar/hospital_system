@@ -2,6 +2,7 @@
 using Model.Users;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,18 +24,32 @@ namespace HCIproject
     public partial class ExaminationWin : Window
     {
         public Doctor user;
+        public long patientId;
         public String Simptom {get; set;}
-        public ExaminationWin(Doctor user)
+
+        private String anamneza;
+        private String dijagnoza;
+        private Symptom simptom;
+
+
+        public ExaminationWin(Doctor user, long _patientId)
         {
             this.user = user;
+            this.patientId = _patientId;
             InitializeComponent();
+            setDiagnosisCombo();
         }
 
-        public ExaminationWin()
+        private void setDiagnosisCombo()
         {
-            InitializeComponent();
 
+            var app = Application.Current as App;
+            foreach (Diagnosis diag in app.DiagnosisController.GetAll())
+            {
+                diagnosisCombo.Items.Add(diag.Name);
+            }
         }
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {//otkazi
@@ -49,11 +64,6 @@ namespace HCIproject
         { //potvrdi
                 var app = Application.Current as App;
 
-           Console.WriteLine( simptomiTxt.Text);
-                app.SymptomController.Save(new Symptom(simptomiTxt.Text));
-
-
-
                 SideBar sideBarWin = new SideBar((Doctor)user);
                 this.Visibility = Visibility.Hidden;
                 sideBarWin.MyTabControl.SelectedIndex = 2;
@@ -63,23 +73,63 @@ namespace HCIproject
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         { //recept
-            PrescriptionWin presWin = new PrescriptionWin((Doctor)user);
-            //this.Visibility = Visibility.Hidden;
-            presWin.ShowDialog();
+
+            if (diagnosisCombo.SelectedItem == null)
+            {
+                string messageBoxText = "Kako biste nastavili izvrsavanje pregleda morate popuniti polje za dijagnozu.";
+                string caption = "Molimo popunite podatke.";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+            }
+            else
+            {
+                dijagnoza = diagnosisCombo.SelectedItem.ToString();
+                PrescriptionWin presWin = new PrescriptionWin((Doctor)user, patientId,dijagnoza);
+                //this.Visibility = Visibility.Hidden;
+                presWin.ShowDialog();
+            }
+            
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {//uput
-            RefferalWin refWin = new RefferalWin((Doctor)user);
-           // this.Visibility = Visibility.Hidden;
-            refWin.ShowDialog();
+            if (diagnosisCombo.SelectedItem == null)
+            {
+                string messageBoxText = "Kako biste nastavili izvrsavanje pregleda morate popuniti polje za dijagnozu.";
+                string caption = "Molimo popunite podatke.";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+            }
+            else
+            {
+                dijagnoza = diagnosisCombo.SelectedItem.ToString();
+                RefferalWin refWin = new RefferalWin((Doctor)user, patientId, dijagnoza);
+
+                refWin.ShowDialog();
+            }
         }
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
         { //hospitalizacija
-            HospitalizationWin hosWin = new HospitalizationWin((Doctor)user);
-           // this.Visibility = Visibility.Hidden;
-            hosWin.ShowDialog();
+
+            if (diagnosisCombo.SelectedItem == null)
+            {
+                string messageBoxText = "Kako biste nastavili izvrsavanje pregleda morate popuniti polje za dijagnozu.";
+                string caption = "Molimo popunite podatke.";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+            }
+            else
+            {
+                dijagnoza = diagnosisCombo.SelectedItem.ToString();
+                HospitalizationWin hosWin = new HospitalizationWin((Doctor)user, patientId, dijagnoza);
+                // this.Visibility = Visibility.Hidden;
+                hosWin.ShowDialog();
+
+            }
 
         }
 
@@ -92,9 +142,24 @@ namespace HCIproject
 
         private void Button_Click_6(object sender, RoutedEventArgs e)
         {
-            OperationWin opeWin = new OperationWin((Doctor)user);
-           // this.Visibility = Visibility.Hidden;
-            opeWin.ShowDialog();
+            if (diagnosisCombo.SelectedItem == null)
+            {
+                string messageBoxText = "Kako biste nastavili izvrsavanje pregleda morate popuniti polje za dijagnozu.";
+                string caption = "Molimo popunite podatke.";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+            }
+            else
+            {
+                dijagnoza = diagnosisCombo.SelectedItem.ToString();
+
+                OperationWin opeWin = new OperationWin((Doctor)user, patientId, dijagnoza);
+                // this.Visibility = Visibility.Hidden;
+                opeWin.ShowDialog();
+
+            }
+
         }
 
         private void examScrool_SizeChanged(object sender, SizeChangedEventArgs e)

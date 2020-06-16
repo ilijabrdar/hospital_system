@@ -21,12 +21,23 @@ namespace HCIproject
 
     public partial class HospitalizationWin : Window
     {
-        public Doctor user;
+        private Doctor user;
+        public String dijagnoza;
+        private long patientId;
 
-        public HospitalizationWin(Doctor user)
+        public HospitalizationWin(Doctor _user, long _patientId, String _dijagnoza)
         {
-            this.user = user;
+            Console.WriteLine( "***********" + _dijagnoza + "\n");
+
+            this.user = _user;
+            this.dijagnoza = _dijagnoza;
+            this.patientId = _patientId;
+
+
             InitializeComponent();
+            dijagnozaTxt.Text = dijagnoza;
+            Console.WriteLine(dijagnozaTxt.Text + "***********" + dijagnoza+"\n");
+            setSpecialityCombo();
         }
 
         public HospitalizationWin()
@@ -37,12 +48,40 @@ namespace HCIproject
 
         }
 
+        private void setSpecialityCombo()
+        {
+            var app = Application.Current as App;
+            foreach(var spec in app.SpecialityController.GetAll())
+            {
+                specialitiCMB.Items.Add(spec.Name);
+            }
+
+
+            Random rand = new Random();
+            int randInt = rand.Next(0, 200);
+            sobaTxt.Text = randInt.ToString();
+        }
         private void Button_Click_1(object sender, RoutedEventArgs e)
         { //potvrdi
-            //ExaminationWin exam = new ExaminationWin((Doctor)user);
-            //this.Visibility = Visibility.Hidden;
-            //exam.Show();
-            this.Close();
+            if (specialitiCMB.SelectedItem != null)
+            {
+                string messageBoxText = "Uspesno ste izvrsili hospitalizaciju pacijenta!";
+                string caption = "Hospitalizacija";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Information;
+                MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+
+                this.Close();
+
+            }
+            else
+            {
+                string messageBoxText = "Morate izabrati odeljenje kako biste izvrsili hospitalizaciju!";
+                string caption = "Hospitalizacija";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Information;
+                MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

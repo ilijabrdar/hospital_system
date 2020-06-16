@@ -21,31 +21,56 @@ namespace HCIproject
     public partial class PrescriptionWin : Window
     {
         public Doctor user;
-
-        public PrescriptionWin(Doctor user)
+        public long patientId;
+        public String dijagnoza;
+        public PrescriptionWin(Doctor user, long _patientId, String _dijagnoza)
         {
             this.user = user;
+            this.patientId = _patientId;
+            this.dijagnoza = _dijagnoza;
+
             InitializeComponent();
+            dijagnozaTxt.Text = dijagnoza;
+            setDrugCombo();
         }
 
-        public PrescriptionWin()
+        private void setDrugCombo()
         {
-            InitializeComponent();
+            var app = Application.Current as App;
+            foreach(var lek in app.DrugController.GetAll())
+            {
+                lekovi.Items.Add(lek.Name);
+            }
         }
+
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         { //potvrdi
           //    Examination exam = new Examination();
           //this.Visibility = Visibility.Hidden;
           // exam.Show();
-            this.Close();
+            if (lekovi.SelectedItem != null)
+            {
+                string messageBoxText = "Uspesno ste prepisali lek:" + lekovi.SelectedItem.ToString();
+                string caption = "Recept";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Information;
+                MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+                this.Close();
+
+            }
+            else{
+                string messageBoxText = "Morate izabrati neki lek kako biste pacijentu izdali recept";
+                string caption = "Recept";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Information;
+                MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         { //otkazi
-            ExaminationWin exam = new ExaminationWin((Doctor)user);
-            this.Visibility = Visibility.Hidden;
-            exam.Show();
+            this.Close();
         }
     }
 }

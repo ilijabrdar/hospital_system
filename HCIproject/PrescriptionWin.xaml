@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HCIproject"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="Prescription" Height="400" Width="750"
         WindowStartupLocation="CenterScreen">
@@ -27,15 +28,14 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Label Content="Dijagnoza" Grid.Row="0" Grid.Column="0" FontSize="18" Margin="10"/>
-                    <TextBlock Text="OVDE CE SE PRENETI UNETA DIJAGNOZA" Grid.Row="0" Grid.Column="1" Margin="10"/>
+                    <TextBlock x:Name="dijagnozaTxt" Grid.Row="0" Grid.Column="1" Margin="10" FontSize="18" FontWeight="SemiBold"/>
 
                     <Label Content="Lekovi" Grid.Row="1" Grid.Column="0" FontSize="18" Margin="10"/>
-                    <ComboBox Grid.Row="1" Grid.Column="1" Margin="10"/>
-                    <TextBox Grid.Row="2" Grid.Column="1" Margin="10" AcceptsReturn="True" CaretBrush="#FF1FEECD"/>
+                    <ComboBox x:Name="lekovi" Grid.Row="1" Grid.Column="1" Margin="10"/>
 
 
                     <Label Content="Terapija" Grid.Row="3" Grid.Column="0" FontSize="18" Margin="10"/>
-                    <TextBox Grid.Row="3" Grid.Column="1" Margin="10" AcceptsReturn="True" CaretBrush="#FF1FEECD"/>
+                    <TextBox Grid.Row="3" Grid.Column="1" Margin="10"  CaretBrush="#FF1FEECD" AcceptsReturn="True" />
                 </Grid>
             </StackPanel>
         </ScrollViewer>

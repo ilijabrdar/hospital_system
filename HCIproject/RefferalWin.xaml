@@ -14,42 +14,47 @@
         </StackPanel>
         <ScrollViewer VerticalScrollBarVisibility="Auto" Height="290">
             <StackPanel>
-                <Grid  VerticalAlignment="Center" HorizontalAlignment="Center"  Margin="10">
+                <Grid  VerticalAlignment="Center" HorizontalAlignment="Center"  Margin="10" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
-                        <RowDefinition />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="300"/>
+                        <ColumnDefinition Width="400"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="Dijagnoza" Grid.Row="0" Grid.Column="0" FontSize="18" Margin="5"/>
-                    <TextBlock Text="OVDE CE SE PRENETI UNETA DIJAGNOZA" Grid.Row="0" Grid.Column="1" Margin="5"/>
+                    <Label Content="Dijagnoza" Grid.Row="0" Grid.Column="0" FontSize="16" Margin="5,5,4.6,4.6"/>
+                    <TextBlock x:Name="dijagnozaTxt" Grid.Row="0" Grid.Column="1" FontSize="16" Margin="5.4,5,4.6,4.6"/>
 
-                    <Label Content="Anamneza" Grid.Row="1" Grid.Column="0" FontSize="18" Margin="5"/>
-                    <TextBlock Text="OVDE CE SE PRENETI UNETA Anamneza" Grid.Row="1" Grid.Column="1" Margin="5"/>
+                    <Label Content="Napomena" Grid.Row="1" Grid.Column="0" FontSize="16" Margin="5,5.4,4.6,5.2"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Margin="5.4,5.4,4.6,4.2" AcceptsReturn="True" FontSize="16" CaretBrush="#FF1FEECD"/>
 
-                    <Label Content="Napomena" Grid.Row="2" Grid.Column="0" FontSize="18" Margin="5"/>
-                    <TextBox Grid.Row="2" Grid.Column="1" Margin="5" AcceptsReturn="True" CaretBrush="#FF1FEECD"/>
+                    <Label Content="Odeljenje" Grid.Row="2" Grid.Column="0" FontSize="16" Margin="5,4.8,4.6,4.8"  />
+                    <ComboBox x:Name="odeljenjeCMB" Grid.Row="2"  Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2" />
 
-                    <Label Content="Odeljenje" Grid.Row="3" Grid.Column="0" FontSize="18" Margin="5"/>
-                    <ComboBox Grid.Row="3"  Grid.Column="1" />
                 </Grid>
-                <Grid>
-                    <DataGrid x:Name="dataGridStudenti" ItemsSource="{Binding Specijaliste}" IsReadOnly="True" 
-                  SelectionMode="Single" AutoGenerateColumns="False"
-                   Margin="172,0,154,-0.2" VerticalAlignment="Top" Width="418" HorizontalAlignment="Center">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Ime" Binding="{Binding FirstName}"/>
-                            <DataGridTextColumn Header="Prezime" Binding="{Binding LastName}" />
-                            <DataGridTextColumn Header="Sala" Binding="{Binding Sala}" />
-                            <DataGridTextColumn Header="Vreme" Binding="{Binding Vreme}"/>
-                        </DataGrid.Columns>
-                    </DataGrid>              
-                </Grid>
+                <TextBlock Text="Kretanjem sa Tab dugmetom pozicionirajte se na tabelu i krecite kroz nju." HorizontalAlignment="Center" FontSize="10"/>
+                <TextBlock Text="Kada se pozicionirate na zeljene podatke sa Ctrl+Tab napustite tabelu." HorizontalAlignment="Center" FontSize="10"/>
+
+                <ScrollViewer VerticalScrollBarVisibility="Auto" >
+                    <Border Height="170" Width="500" HorizontalAlignment="Center">
+                        <DataGrid x:Name="specialistGrid" FontSize="14" BorderThickness="1"  AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" ItemsSource ="{Binding specialistExamination}"  materialDesign:DataGridAssist.CellPadding="4 2 2 2" materialDesign:DataGridAssist.ColumnHeaderPadding="4 2 2 2" Background="#FFC4F3EA" Width="500" HorizontalAlignment="Center" Margin="0,0,0,63.6" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Ime" Binding="{Binding Doctor.FirstName}" Width="*"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Prezime" Binding="{Binding Doctor.LastName}" Width="*"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Datum" Binding="{Binding Period.StartDate.Date }" Width="80"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Vreme" Binding="{Binding Period.StartDate.TimeOfDay}" Width="*"></DataGridTextColumn>
+                                <DataGridTextColumn  Header="Ordinacija" Binding="{Binding Room.RoomCode }" Width="*"></DataGridTextColumn>
+
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Border>
+                </ScrollViewer>
             </StackPanel>
         </ScrollViewer>
 
@@ -60,8 +65,8 @@
         </DataGrid>
          -->
         <WrapPanel FlowDirection="RightToLeft" Background="#D5F5E3" HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
-            <Button Content="Otkaži" FontSize="18" Height="30" Width="100"  Margin="10,0,10,50" Background="#A2D9CE" Click="Button_Click" BorderBrush="#FF1FEECD" ></Button>
-            <Button Content="Potvrdi" FontSize="18" Height="30" Width="100"  Margin="10,0,10,50" Background="#A2D9CE" Click="Button_Click_1" BorderBrush="#FF1FEECD" ></Button>
+            <Button Content="Otkaži" FontSize="18" Height="30" Width="100"  Margin="10,0,10,10" Background="#A2D9CE" Click="Button_Click" BorderBrush="#FF1FEECD" ></Button>
+            <Button Content="Potvrdi" FontSize="18" Height="30" Width="100"  Margin="10,0,10,10" Background="#A2D9CE" Click="Button_Click_1" BorderBrush="#FF1FEECD" ></Button>
         </WrapPanel>
     </StackPanel>
 </Window>

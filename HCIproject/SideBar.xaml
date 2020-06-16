@@ -93,35 +93,17 @@
                 </StackPanel>
             </TabItem>
             <TabItem Header="Pregled" FontSize="19" Background="#A2D9CE"  >
-                <StackPanel x:Name="pregledGrid" Background="#D5F5E3" SizeChanged="myGrid_SizeChanged" Orientation="Vertical">
-                    <Border  BorderBrush="#A2D9CE" BorderThickness="8" CornerRadius="8,8,8,8"  Margin="5">
+                <StackPanel x:Name="upcomingExam" Background="#D5F5E3"  Orientation="Vertical">
+                    <Grid>
+                        <Border BorderBrush="#A2D9CE" BorderThickness="0,0,0,5" />
                         <Label Content="Zakazani termini" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold"/>
-                    </Border>
-                    <Grid HorizontalAlignment="Center">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="0*" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="127.2"/>
-                            <ColumnDefinition Width="10.4"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Label Content="Jovana Makaric" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="30,0,0,0.2"/>
-                        <Label Content="16/10/1995" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="30,0,100.4,0.2" Grid.ColumnSpan="3"/>
-                        <Button Content="Započni"  Grid.Row="0" Grid.Column="3" Margin="10,10,0,10" FontSize="16" Background="#A2D9CE" Click="Button_Click_6" BorderBrush="#FF1FEECD" />
-                        <Button Content="Otkaži" Grid.Row="0" Grid.Column="5" Margin="30,10,70,10" FontSize="16" Background="#A2D9CE" BorderBrush="#FF1FEECD" />
-
-                        <Label Content="Zorana Jović" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="30,0,0,0.2"/>
-                        <Label Content="10/10/1995" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="30,0,100.4,0.2" Grid.ColumnSpan="3"/>
-                        <Button Content="Započni" Grid.Row="1" Grid.Column="3" Margin="10,10,0,10" FontSize="16" Background="#A2D9CE" BorderBrush="#FF1FEECD" />
-                        <Button Content="Otkaži" Grid.Row="1" Grid.Column="5" Margin="30,10,70,10" FontSize="16" Background="#A2D9CE" BorderBrush="#FF1FEECD" />
                     </Grid>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" Height="300">
+                        <StackPanel x:Name="Examinations" Orientation="Vertical" >
+                            <Border  >
+                            </Border>
+                        </StackPanel>
+                    </ScrollViewer>
                 </StackPanel>
             </TabItem>
             <TabItem Header="Kartoni" FontSize="19" Background="#A2D9CE" Height="28" >
@@ -171,12 +153,12 @@
             </TabItem>
             <TabItem Header="Evidencija lekova" FontSize="19"  Background="#A2D9CE">
                 <StackPanel  x:Name="evidencijaGrid" Background="#D5F5E3" Orientation="Vertical" >
-                    <Label Content="Validacija sastava leka" FontSize="17" FontWeight="Bold"/>
+                    <Label x:Name="validacijaLeka" Content="Validacija sastava leka" FontSize="17" FontWeight="Bold"/>
                     <Border  BorderBrush="#A2D9CE" BorderThickness="5" CornerRadius="8,8,8,8"  Margin="5">
-
                         <ScrollViewer VerticalScrollBarVisibility="Auto" Height="180">
                             <StackPanel x:Name="DrugValidationPanel" Orientation="Vertical" >
-                                <Border  >
+                                <Border>
+
                                 </Border>
                             </StackPanel>
                         </ScrollViewer>

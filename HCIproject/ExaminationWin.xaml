@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:HCIproject"
+                xmlns:val="clr-namespace:HCIproject.Validation"
         mc:Ignorable="d"
         Title="Examination" Height="450" Width="800"
         WindowStartupLocation="CenterScreen">
@@ -31,19 +32,18 @@
                             <ColumnDefinition Width="220"/>
                             <ColumnDefinition Width="145"/>
                             <ColumnDefinition Width="120"/>
-                            <ColumnDefinition Width="130"/>
+                            <ColumnDefinition Width="120"/>
                             <ColumnDefinition Width="120"/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Label Content="Anamneza" Grid.Row="0" Grid.Column="0" FontSize="18" VerticalAlignment="Center"/>
-                        <TextBox x:Name="anamnezaTxt" Text="{Binding Path=Anamneza}" Grid.Row="0"  Grid.Column="1" Grid.ColumnSpan="4" AcceptsReturn="True" CaretBrush="#FF1FEECD" />
+                        <TextBox x:Name="anamnezaTxt" Grid.Row="0"  Grid.Column="1" Grid.ColumnSpan="4" AcceptsReturn="True" CaretBrush="#FF1FEECD" />
 
                         <Label Content="Simptomi" Grid.Row="1" Grid.Column="0" FontSize="18" VerticalAlignment="Center" />
                         <TextBox x:Name="simptomiTxt" Text="{Binding Path=Simptom}" Grid.Row="1"  Grid.Column="1" Grid.ColumnSpan="4" AcceptsReturn="True" CaretBrush="#FF1FEECD"/>
 
                         <Label Content="Dijagnoza" Grid.Row="2" Grid.Column="0" FontSize="18" VerticalAlignment="Center"/>
-                        <ComboBox Grid.Row="2"  Grid.Column="1" Grid.ColumnSpan="4" />
-                        <TextBox Grid.Row="3"  Grid.Column="1" Grid.ColumnSpan="4" AcceptsReturn="True" CaretBrush="#FF1FEECD"/>
+                        <ComboBox x:Name="diagnosisCombo"  Grid.Row="2"  Grid.Column="1" Grid.ColumnSpan="4"  />
 
 
                         <Label Content="Recept" Grid.Row="4" Grid.Column="0" FontSize="18" VerticalAlignment="Center"/>

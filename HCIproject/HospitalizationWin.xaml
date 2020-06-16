@@ -28,27 +28,24 @@
                 <ColumnDefinition Width="300"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Label Content="Dijagnoza" Grid.Row="0" Grid.Column="0" FontSize="18" Margin="10"/>
-            <TextBlock Text="OVDE CE SE PRENETI UNETA DIJAGNOZA" Grid.Row="0" Grid.Column="1" Margin="10"/>
+              <Label Content="Dijagnoza" Grid.Row="0" Grid.Column="0" FontSize="16" Margin="10"/>
+             <TextBlock x:Name="dijagnozaTxt" Grid.Row="0" Grid.Column="1" Margin="10" FontSize="16" FontWeight="SemiBold"/>
 
-            <Label Content="Terapija" Grid.Row="1" Grid.Column="0" FontSize="18" Margin="10"/>
-            <TextBlock Text="OVDE CE SE PRENETI UNETA TERAPIJA" Grid.Row="1" Grid.Column="1" Margin="10"/>
+             <Label Content="Odeljenje" Grid.Row="1" Grid.Column="0" FontSize="16" Margin="10"/>
+            <ComboBox x:Name="specialitiCMB" Grid.Row="1" Grid.Column="1" Margin="10"/>
 
-            <Label Content="Odeljenje" Grid.Row="2" Grid.Column="0" FontSize="18" Margin="10"/>
-            <ComboBox Grid.Row="2" Grid.Column="1" Margin="10"/>
-
-            <Label Content="Soba" Grid.Row="3" Grid.Column="0" FontSize="18" Margin="10"/>
-            <TextBlock Text="OVDE CE SE PRENETI Generisana soba" Grid.Row="3" Grid.Column="1" Margin="10"/>
-            <WrapPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
-                <Label Content="Vremenski period" FontSize="18" Margin="10" />
+                    <Label Content="Soba" Grid.Row="2" Grid.Column="0" FontSize="16" Margin="10"/>
+            <TextBlock x:Name="sobaTxt" Grid.Row="2" Grid.Column="1" Margin="10"/>
+            <WrapPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+                        <Label Content="Vremenski period" FontSize="16" Margin="10" />
                 <Label Content="od" FontSize="18" Margin="10"/>
                 <DatePicker x:Name="StartDate" Margin="10" />
                 <Label Content="do" FontSize="18" Margin="10"/>
                 <DatePicker x:Name="EndDate" Margin="10" />
             </WrapPanel>
 
-            <Label Content="Napomena" Grid.Row="5" Grid.Column="0" FontSize="18" Margin="10"/>
-            <TextBox Grid.Row="5" Grid.Column="1" Margin="10" AcceptsReturn="True" CaretBrush="#FF1FEECD" BorderBrush="#FF1FEECD"/>
+                    <Label Content="Napomena" Grid.Row="4" Grid.Column="0" FontSize="16" Margin="10"/>
+            <TextBox   Grid.Row="4" Grid.Column="1" Margin="10" AcceptsReturn="True" CaretBrush="#FF1FEECD" BorderBrush="#FF1FEECD"/>
         </Grid>
             </StackPanel>
         </ScrollViewer>

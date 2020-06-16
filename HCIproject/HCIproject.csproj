@@ -43,8 +43,15 @@
     <Reference Include="MaterialDesignThemes.Wpf, Version=3.1.3.1513, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\MaterialDesignThemes.3.1.3\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="Syncfusion.Licensing, Version=18.1460.0.56, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.Licensing.18.1.0.56\lib\net46\Syncfusion.Licensing.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.SfChart.WPF, Version=18.1460.0.56, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.SfChart.WPF.18.1.0.56\lib\net46\Syncfusion.SfChart.WPF.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -63,8 +70,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DrugValidations.xaml.cs">
+      <DependentUpon>DrugValidations.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NewIngredient.xaml.cs">
+      <DependentUpon>NewIngredient.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VALIDATION\EmailValidationRule.cs" />
     <Compile Include="VALIDATION\JMBGValidationRule.cs" />
+    <Compile Include="VALIDATION\NecessaryValidationRule.cs" />
     <Compile Include="VALIDATION\TelephoneNumberValidationRule.cs" />
     <Compile Include="VALIDATION\StringValidationRule.cs" />
     <Page Include="ArticleWin.xaml">
@@ -79,11 +93,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DrugValidation.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="EditDrug.xaml">
+    <Page Include="DrugValidations.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -96,6 +106,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Log.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NewIngredient.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -139,12 +153,6 @@
     </Compile>
     <Compile Include="DrugAlternative.xaml.cs">
       <DependentUpon>DrugAlternative.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="DrugValidation.xaml.cs">
-      <DependentUpon>DrugValidation.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="EditDrug.xaml.cs">
-      <DependentUpon>EditDrug.xaml</DependentUpon>
     </Compile>
     <Compile Include="ExaminationWin.xaml.cs">
       <DependentUpon>ExaminationWin.xaml</DependentUpon>

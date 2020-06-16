@@ -47,7 +47,7 @@ namespace bolnica.Repository
             List<Examination> examinations = GetAllEager().ToList();
             foreach(Examination examination in examinations)
             {
-                if (examination.User == user)
+                if (examination.Doctor == user)
                 {
                     examinations.Add(examination);
                 }
