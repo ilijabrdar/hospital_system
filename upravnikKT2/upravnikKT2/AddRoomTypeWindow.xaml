@@ -6,7 +6,7 @@
         xmlns:val="clr-namespace:upravnikKT2.Validation"
         mc:Ignorable="d"
         FontSize="18"
-        Title="Tip prostorije" Height="213.448" Width="437.931" PreviewKeyDown="Window_PreviewKeyDown">
+        Title="Tip prostorije" Height="213.448" Width="437.931" PreviewKeyDown="Window_PreviewKeyDown" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="90" />

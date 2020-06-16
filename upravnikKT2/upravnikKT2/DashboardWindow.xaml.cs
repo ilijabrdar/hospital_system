@@ -91,6 +91,23 @@ namespace upravnikKT2
             }
         }
 
+        private string _feedback;
+        public string Feedback
+        {
+            get
+            {
+                return _feedback;
+            }
+            set
+            {
+                if (value != _feedback)
+                {
+                    _feedback = value;
+                    OnPropertyChanged("Feedback");
+                }
+            }
+        }
+
         private string _jmbg;
         public string JMBG
         {

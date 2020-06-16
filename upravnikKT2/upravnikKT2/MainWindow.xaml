@@ -16,6 +16,7 @@
          Background="{DynamicResource MaterialDesignPaper}"
          FontFamily="{DynamicResource MaterialDesignFont}"
         PreviewKeyDown="Window_PreviewKeyDown"
+        ResizeMode="NoResize"
         >
     <Grid VerticalAlignment="Center" >
         <StackPanel HorizontalAlignment="Center">

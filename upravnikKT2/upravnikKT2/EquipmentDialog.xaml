@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:upravnikKT2" xmlns:val="clr-namespace:upravnikKT2.Validation"
         mc:Ignorable="d"
         FontSize="18"
-       Title="Dodavanje opreme" Height="300" Width="400.5" PreviewKeyDown="Window_PreviewKeyDown">
+       Title="Dodavanje opreme" Height="300" Width="400.5" PreviewKeyDown="Window_PreviewKeyDown" ResizeMode="NoResize">
     <Grid Margin="21,21,21,3">
         <Grid.RowDefinitions>
             <RowDefinition Height="55" />

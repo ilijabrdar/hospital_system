@@ -8,7 +8,7 @@
         xmlns:local="clr-namespace:upravnikKT2" xmlns:val="clr-namespace:upravnikKT2.Validation"
         mc:Ignorable="d"
         FontSize="18"
-        Title="Dodavanje prostorija" Height="300" Width="400.5" Loaded="Window_Loaded" PreviewKeyDown="Window_PreviewKeyDown">
+        Title="Dodavanje prostorija" Height="300" Width="400.5" Loaded="Window_Loaded" PreviewKeyDown="Window_PreviewKeyDown" ResizeMode="NoResize">
     <Grid Margin="21,21,21,3">
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />

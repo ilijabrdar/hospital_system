@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="clr-namespace:upravnikKT2.Validation" xmlns:val="clr-namespace:upravnikKT2.Validation"
         mc:Ignorable="d"
         FontSize="18"
-        Title="Dodavanje lekara" Height="588" Width="700.5" PreviewKeyDown="Window_PreviewKeyDown" Loaded="Window_Loaded">
+        Title="Dodavanje lekara" Height="588" Width="700.5" PreviewKeyDown="Window_PreviewKeyDown" Loaded="Window_Loaded" ResizeMode="NoResize">
     <Grid Margin="30">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" MinHeight="26" />

@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:upravnikKT2"
         mc:Ignorable="d"
-        Title="Pregled tipova prostorija" Height="400" Width="450" Loaded="Window_Loaded" PreviewKeyDown="Window_PreviewKeyDown" >
+        Title="Pregled tipova prostorija" Height="400" Width="450" Loaded="Window_Loaded" PreviewKeyDown="Window_PreviewKeyDown" ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="297*"/>

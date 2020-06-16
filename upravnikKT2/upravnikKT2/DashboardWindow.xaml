@@ -894,8 +894,27 @@
                             Podelite svoje iskustvo korišćenja aplikacije sa nama kako bismo mogli da ga unapredimo u budućnosti!
                             </TextBlock>
                             <TextBox x:Name="mojTextBox" DockPanel.Dock="Top" Grid.Row="2" Grid.Column="0" Margin="10" 
-                                 HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" TextWrapping="Wrap" Width="Auto" HorizontalAlignment="Stretch" BorderThickness="1" Height="340" />
-                            <Button x:Name="sendFeedbackBtn" Grid.Row="3" Margin="10" Height="30" Width="90" HorizontalAlignment="Right" Click="send_feedback">Pošalji</Button>
+                                 HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" TextWrapping="Wrap" Width="Auto" HorizontalAlignment="Stretch" BorderThickness="1" Height="340">
+                                <TextBox.Text>
+                                    <Binding Path="Feedback" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <val:NotEmptyValidationRule  ValidatesOnTargetUpdated="True"/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <Button x:Name="sendFeedbackBtn" Grid.Row="3" Margin="10" Height="30" Width="90" HorizontalAlignment="Right" Click="send_feedback">Pošalji
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=(Validation.HasError), ElementName=mojTextBox}" Value="True">
+                                                <Setter Property="IsEnabled" Value="False" />
+                                            </DataTrigger>
+
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
                         </StackPanel>
 
 
