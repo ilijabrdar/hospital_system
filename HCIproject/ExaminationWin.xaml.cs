@@ -3,6 +3,7 @@ using Model.Users;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -165,6 +166,27 @@ namespace HCIproject
         private void examScrool_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             examScrool.Height = this.ActualHeight - 150;
+        }
+
+        private void Button_Click_7(object sender, RoutedEventArgs e)
+        {
+            PatientFileWin pfWin = new PatientFileWin();
+            pfWin.ShowDialog();
+        }
+        private void izvestajPdf(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Process process = new System.Diagnostics.Process();
+                String file = "C:\\Users\\Tamara Kovacevic\\Desktop\\IZVESTAJ.pdf";
+                process.StartInfo.FileName = file;
+                process.Start();
+                process.WaitForExit();
+            }
+            catch
+            {
+                System.Windows.MessageBox.Show("Could not open the file.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
     }
 }

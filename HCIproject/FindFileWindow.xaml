@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:HCIproject"
                 xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="FindFileWindow" Height="400" Width="700">
+        Title="FindFileWindow" Height="400" Width="700"
+        WindowStartupLocation="CenterScreen">
     <StackPanel x:Name="Resize" Orientation="Vertical" Background="#D0ECE7" >
         <StackPanel>
             <Grid>

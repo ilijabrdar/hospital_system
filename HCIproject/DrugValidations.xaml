@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
            xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:syncfusion="clr-namespace:Syncfusion.UI.Xaml.Charts;assembly=Syncfusion.SfChart.WPF"
         xmlns:local="clr-namespace:HCIproject"
         mc:Ignorable="d"
         Title="DrugValidation" Height="400" Width="750"
@@ -28,38 +27,6 @@
         </Border>
         <Border  BorderBrush="#A2D9CE" BorderThickness="5" CornerRadius="8,8,8,8"  Margin="10">
             <StackPanel Orientation="Horizontal" Background="#D5F5E3">
-                <!-- <Image Grid.Column="0"  Source="graph.png" Height="172" ></Image>
-        ==-->
-
-                <Grid>
-
-                    <syncfusion:SfChart Header="Chart" Height="200" Width="200">
-                        <!--Initialize the horizontal axis for SfChart-->
-                        <syncfusion:SfChart.PrimaryAxis>
-                            <syncfusion:CategoryAxis Header="Sastojak" FontSize="14"/>
-                        </syncfusion:SfChart.PrimaryAxis>
-
-                        <!--Initialize the vertical axis for SfChart-->
-                        <syncfusion:SfChart.SecondaryAxis>
-                            <syncfusion:NumericalAxis Header="Kolicina [mg]" FontSize="14"/>
-                        </syncfusion:SfChart.SecondaryAxis>
-
-                        <!--Adding Legend to the SfChart-->
-                        <syncfusion:SfChart.Legend>
-                            <syncfusion:ChartLegend/>
-                        </syncfusion:SfChart.Legend>
-
-                        <!--Initialize the series for SfChart-->
-                        <syncfusion:ColumnSeries Label="sastojak" ItemsSource="{Binding sastojci}" XBindingPath="Name" YBindingPath="Quantity" ShowTooltip="True" >
-                            <syncfusion:ColumnSeries.AdornmentsInfo>
-                                <syncfusion:ChartAdornmentInfo ShowLabel="True" >
-                                </syncfusion:ChartAdornmentInfo>
-                            </syncfusion:ColumnSeries.AdornmentsInfo>
-                        </syncfusion:ColumnSeries>
-
-                    </syncfusion:SfChart>
-
-                </Grid>
                 <ScrollViewer VerticalScrollBarVisibility="Auto" >
                     <Border Height="150" Width="325">
                         <DataGrid Margin="50,0,70,0.4" FontSize="14" BorderThickness="1" x:Name="ingrediantsGrid" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" ItemsSource ="{Binding ingredients}"  materialDesign:DataGridAssist.CellPadding="4 2 2 2" materialDesign:DataGridAssist.ColumnHeaderPadding="4 2 2 2" Background="#FFC4F3EA" >

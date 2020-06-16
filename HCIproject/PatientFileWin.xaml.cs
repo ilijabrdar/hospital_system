@@ -3,6 +3,7 @@ using Model.PatientSecretary;
 using Model.Users;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -112,6 +113,22 @@ namespace HCIproject
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             searchMyExam(" ");
+        }
+
+        private void izvestajPdf(object sender, RoutedEventArgs e)
+        {
+            try
+            { 
+                Process process = new System.Diagnostics.Process();
+                String file = "C:\\Users\\Tamara Kovacevic\\Desktop\\IZVESTAJ.pdf";
+                process.StartInfo.FileName = file;
+                process.Start();
+                process.WaitForExit();
+            }
+            catch
+            {
+                System.Windows.MessageBox.Show("Could not open the file.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
     }
 }

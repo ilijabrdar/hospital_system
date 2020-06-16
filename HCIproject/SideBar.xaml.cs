@@ -608,7 +608,7 @@ namespace HCIproject
             var PatientId = ((Button)sender).Tag;
             PatientFileWin patientWin = new PatientFileWin((Doctor)user, (long)PatientId);
              this.Visibility = Visibility.Hidden;
-            patientWin.Show();
+            patientWin.ShowDialog ();
         }
 
 

@@ -12,7 +12,7 @@
     <StackPanel Background="#D0ECE7" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
         <WrapPanel Height="45" Margin="0,0,-0.4,0" Background="#D5F5E3" >
             <Label Content="Pregled kartona" FontSize="16" Margin="10" Height="34"></Label>
-            <Button Content="Pregledaj" Margin="5"  FontSize="16" Background="#A2D9CE" BorderBrush="#FF1FEECD"  />
+            <Button Content="Pregledaj" Margin="5"  FontSize="16" Background="#A2D9CE" BorderBrush="#FF1FEECD" Click="Button_Click_7"  />
         </WrapPanel>
         <StackPanel>
             <ScrollViewer x:Name="examScrool" SizeChanged="examScrool_SizeChanged">
@@ -81,7 +81,7 @@
                         </Grid>
                         <Label Content="Izveštaj anamneza i recept" Grid.Row="7" Grid.Column="0" FontSize="18" VerticalAlignment="Center"/>
                         <Grid Width="124" Grid.Column="1" Grid.Row="7" >
-                            <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Margin="10,10,10,9.6" Background="#A2D9CE" Height="Auto" materialDesign:ButtonAssist.CornerRadius="25" ToolTip="MaterialDesignRaisedDarkButton with Round Corners" Click="Button_Click_2" >
+                            <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Margin="10,10,10,9.6" Background="#A2D9CE" Height="Auto" materialDesign:ButtonAssist.CornerRadius="25" ToolTip="MaterialDesignRaisedDarkButton with Round Corners" Click="izvestajPdf" >
                                 <TextBlock  Text="Štampaj" />
                             </Button>
                         </Grid>

@@ -70,7 +70,7 @@
 
                             <WrapPanel x:Name="Izvestaj"  Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch">
                                 <Label Content="Izveštaj anamneza i recept" FontWeight="SemiBold"  Margin="5" />
-                                <Button Content="Štampaj" Margin="5"  Background="#FFA2D9CE" Height="23" BorderBrush="#FF1FEECD"/>
+                                <Button Content="Štampaj" Margin="5"  Background="#FFA2D9CE" Height="23" BorderBrush="#FF1FEECD" Click="izvestajPdf"/>
                             </WrapPanel>
                         </Grid>
                     </StackPanel>
@@ -121,7 +121,7 @@
                             
                             <WrapPanel x:Name="Izvestaj1"  Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3">
                                 <Label Content="Izveštaj anamneza i recept" FontWeight="SemiBold"  Margin="5" />
-                                <Button Content="Štampaj" Margin="5"  Background="#FFA2D9CE" Height="23" BorderBrush="#FF1FEECD"/>
+                                <Button Content="Štampaj" Margin="5"  Background="#FFA2D9CE" Height="23" BorderBrush="#FF1FEECD" Click="izvestajPdf" />
                             </WrapPanel>
                         </Grid>
                     </StackPanel>
@@ -167,7 +167,7 @@
 
                             <WrapPanel x:Name="Izvestaj3"  Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3">
                                 <Label Content="Izveštaj anamneza i recept" FontWeight="SemiBold"  Margin="5" />
-                                <Button Content="Štampaj" Margin="5"  Background="#FFA2D9CE" Height="23" BorderBrush="#FF1FEECD"/>
+                                <Button Content="Štampaj" Margin="5"  Background="#FFA2D9CE" Height="23" BorderBrush="#FF1FEECD" Click="izvestajPdf"/>
                             </WrapPanel>
                         </Grid>
                     </StackPanel>
