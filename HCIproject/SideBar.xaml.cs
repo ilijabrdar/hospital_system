@@ -25,6 +25,7 @@ namespace HCIproject
         private int num = 0;
         private int num1 = 0;
         public string fileName { get; set; }
+        private Speciality spec=new Speciality();
         public SideBar()
         {
             InitializeComponent();
@@ -40,6 +41,7 @@ namespace HCIproject
             user = _user;
             setArticle();
             setDoctorsData();
+            setSpec();
             setDrug();
             upcomingExaminations = new List<ExaminationDTO>();
 
@@ -92,7 +94,7 @@ namespace HCIproject
             string messageBoxText = "Hvala Vam što ste sa nama podelili vaše utiske o apliakciji!";
             string caption = "Hvala!";
             MessageBoxButton button = MessageBoxButton.OK;
-            MessageBoxImage icon = MessageBoxImage.Warning;
+            MessageBoxImage icon = MessageBoxImage.Information;
             MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
 
             misljenje.Text = "";
@@ -105,64 +107,33 @@ namespace HCIproject
             var app = Application.Current as App;
 
             ImePrzSet.Text = user.FirstName + " " + user.LastName;
-            Speciality spec = app.SpecialityController.Get(user.Specialty.Id);
-            SpecSet.Text = spec.Name;
+            //Speciality spec = app.SpecialityController.Get(user.Specialty.Id);
+            SpecSet.Text = user.Specialty.Name;
             DatSet.Text = user.DateOfBirth.ToString();
             JmbgSet.Text = user.Jmbg.ToString();
             EmailSet.Text = user.Email;
             TelSet.Text = user.Phone;
             AdrSet.Text = user.Address.GetFullAddress();
 
+            TestSpec= user.Specialty.Name;
+            TestImePrezime= user.FirstName + " " + user.LastName;
+            TestEmail= user.Email;
+            TestJMBG = user.Jmbg.ToString();
+            TestPhoneNumber= user.Phone;
         }
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {//izmena naloga potvrda
             var app = Application.Current as App;
-            bool flag  = false;
-
-            if (izImePrzTxt.Text != "")
+            bool flag = false;
+            if (TestImePrezime == "" || TestSpec == "" || TestEmail == "" || TestEmail == "" || TestJMBG == "" || TestPhoneNumber == "")
             {
-                String[] imePrz2 = izImePrzTxt.Text.Split(" ".ToCharArray());
-                String ime = imePrz2[0];
-                String prezime = imePrz2[1];
-                user.FirstName = ime;
-                user.LastName = prezime;
+                string messageBoxText = "Polje ne sme biti prazno.Molim unesite podatke pre izmene!";
+                string caption = "Izmena.";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Information;
+                MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
                 flag = true;
-            }
-            else if (izSpecTxt.Text != "")
-            {
-                user.Specialty.Name = izSpecTxt.Text;
-                app.UserController.Edit((Doctor)user);
-                flag = true;
-
-            }
-            else if (izJmbgTxt.Text != "")
-            {
-                user.Jmbg = izJmbgTxt.Text;
-                app.UserController.Edit((Doctor)user);
-                flag = true;
-
-            }
-            else if (izEmailTxt.Text != "")
-            {
-                user.Email = izEmailTxt.Text;
-                app.UserController.Edit((Doctor)user);
-                flag = true;
-
-            }
-            else if (izTelTxt.Text != "")
-            {
-                user.Phone = izTelTxt.Text;
-                app.UserController.Edit((Doctor)user);
-                flag = true;
-
-            }
-            else if (izAdresaTxt.Text != "")
-            {
-                user.Address.FullAddress = izAdresaTxt.Text;
-                app.UserController.Edit((Doctor)user);
-                flag = true;
-
             }
             else if (LocaleDatePicker.SelectedDate != null)
             {
@@ -176,35 +147,62 @@ namespace HCIproject
                     string messageBoxText1 = "Molimo proverite uneseni datum rođenja. Doktor mora da ima najmanje 21 godinu.";
                     string caption1 = "Datum rođenja.";
                     MessageBoxButton button1 = MessageBoxButton.OK;
-                    MessageBoxImage icon1 = MessageBoxImage.Warning;
+                    MessageBoxImage icon1 = MessageBoxImage.Information;
                     MessageBoxResult result1 = MessageBox.Show(messageBoxText1, caption1, button1, icon1);
+                    flag = true;
                 }
                 else
                 {
                     user.DateOfBirth = startDate;
-                    app.UserController.Edit((Doctor)user);
-                    flag = true;
-
                 }
             }
-            string messageBoxText = "";
             if (!flag)
             {
-                 messageBoxText = "Niste izmenili ni jedan podatak!";
+                String[] imePrz2 = TestImePrezime.Split(" ".ToCharArray());
+                String ime = imePrz2[0];
+                String prezime = imePrz2[1];
+                user.FirstName = ime;
+                user.LastName = prezime;
+                
+                user.Specialty = spec;
+                user.Jmbg = TestJMBG;
+                user.Phone = TestPhoneNumber;
+                user.Email = TestEmail;
+
+                app.UserController.Edit((Doctor)user);
+
+                string messageBoxText1 = "Uspesno ste promenili podatke!";
+                string caption1 = "Izmena naloga.";
+                MessageBoxButton button1 = MessageBoxButton.OK;
+                MessageBoxImage icon1 = MessageBoxImage.Information;
+                MessageBoxResult result1 = MessageBox.Show(messageBoxText1, caption1, button1, icon1);
+                setDoctorsData();
+
             }
-            else
-            {
-                messageBoxText = "Uspesno ste izmenili podatke!";
-            }
-                string caption = "Izmena.";
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Warning;
-                MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
-               setDoctorsData();
 
         }
+        private void setSpec()
+        {
+            var app = Application.Current as App;
+            foreach(Speciality spec in app.SpecialityController.GetAll())
+            {
+                specName.Items.Add(spec.Name);
+            }
+        }
+        private void specName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            spec.Name = specName.SelectedItem.ToString();
+            var app = Application.Current as App;
+            foreach (Speciality speci in app.SpecialityController.GetAll())
+            {
+                if (spec.Name == speci.Name)
+                {
+                    spec.Id = speci.Id;
+                }
+            }
 
-
+           
+        }
         private string _testImePrz;
         private string _testSpec;
         private string _testEmail;
@@ -303,8 +301,13 @@ namespace HCIproject
             else
             {
                 obavesti.Foreground = new SolidColorBrush(Color.FromRgb(64, 85, 81));
-
-                obavesti.Text = "Uspešno ste promenili lozinku.";
+                string messageBoxText1 = "Uspesno ste promenili lozinku!";
+                string caption1 = "Izmena lozinke.";
+                MessageBoxButton button1 = MessageBoxButton.OK;
+                MessageBoxImage icon1 = MessageBoxImage.Information;
+                MessageBoxResult result1 = MessageBox.Show(messageBoxText1, caption1, button1, icon1);
+                setDoctorsData();
+                obavesti.Text = "";
                 NovaLozTxt.Password = "";
                 PotvNovaLozTxt.Password = "";
             }
@@ -420,7 +423,7 @@ namespace HCIproject
                         string messageBoxText = "Ne postoje pacijenti sa zadatim parametrima.";
                         string caption = "Pretraga";
                         MessageBoxButton button = MessageBoxButton.OK;
-                        MessageBoxImage icon = MessageBoxImage.Warning;
+                        MessageBoxImage icon = MessageBoxImage.Information;
                         MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
                     }
                     else
@@ -723,5 +726,7 @@ namespace HCIproject
                 pic.Source = new BitmapImage(new Uri(fileName));
             }
         }
+
+
     }
 }

@@ -45,17 +45,22 @@ namespace HCIproject
             var app = Application.Current as App;
             if (Topic ==null || NewArticle == null)
             {
-                Obavesti.Content = "Da bi ste sačuvali članak neophodno je da uneste njegov naslov i sadržaj.";
+                string messageBoxText1 = "Da biste uneli članak neophodno je da unesete naslov i tekst!";
+                string caption1 ="Unos novog članka";
+                MessageBoxButton button1 = MessageBoxButton.OK;
+                MessageBoxImage icon1 = MessageBoxImage.Warning;
+                MessageBoxResult result1 = MessageBox.Show(messageBoxText1, caption1, button1, icon1);
             }
             else {
                 article = new Article(DateTime.Today, user, Topic, NewArticle);
                 app.ArticleController.Save(article);
 
+                string messageBoxText1 = "Uspesno ste uneli članak!";
+                string caption1 = "Unos novog članka";
+                MessageBoxButton button1 = MessageBoxButton.OK;
+                MessageBoxImage icon1 = MessageBoxImage.Warning;
+                MessageBoxResult result1 = MessageBox.Show(messageBoxText1, caption1, button1, icon1);
 
-                //   SideBar sideBarWin = new SideBar((Doctor)user);
-                //  this.Visibility = Visibility.Hidden;
-                //   sideBarWin.MyTabControl.SelectedIndex = 1;
-                //   sideBarWin.Show();
                 this.Close();
             }
         }

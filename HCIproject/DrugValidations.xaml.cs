@@ -27,10 +27,13 @@ namespace HCIproject
 
         public Doctor user;
         public long drugId;
-        private Ingredient obrisani;
+
+        private List<Ingredient> obrisiDodato = new List<Ingredient>();
+        private List<Ingredient> vratiObrisano = new List<Ingredient>();
 
         private List<string> customLabels = new List<string>();
         private DoubleCollection data = new DoubleCollection();
+        bool flag = false;
 
         public DrugValidations(Doctor user, long id)
         {
@@ -101,12 +104,40 @@ namespace HCIproject
             var app = Application.Current as App;
             Drug drug = app.DrugController.Get(drugId);
 
-            if (obrisani != null)
+            foreach(Ingredient ing in vratiObrisano)
             {
-                drug.Ingredients.Add(obrisani);
-                app.DrugController.Edit(drug);
+                drug.Ingredients.Add(ing);
             }
+            app.DrugController.Edit(drug);
+
             bool flag = false;
+            //u obrisi dodato se nalaze samo oni na pocetku koji su bili tu
+            foreach (Ingredient ing in drug.Ingredients.ToList())
+            {
+                flag = false;
+                foreach (Ingredient i in obrisiDodato)
+                {
+                    if (i.Id == ing.Id)
+                    {
+                        flag = true;
+                        break;
+                    }
+                }
+                if (!flag)
+                {
+                    drug.Ingredients.Remove(ing);
+                }
+            }
+            app.DrugController.Edit(drug);
+
+
+
+            //  if (obrisani != null)
+            //  {
+            //       drug.Ingredients.Add(obrisani);
+            //        app.DrugController.Edit(drug);
+            //   }
+            ///bool flag = false;
 
             //foreach (Ingredient ing in drug.Ingredients)
             //{
@@ -166,6 +197,15 @@ namespace HCIproject
             List<Ingredient> drugIngr = app.DrugController.Get(drugId).Ingredients;
 
             ingrediantsGrid.ItemsSource = app.DrugController.Get(drugId).Ingredients;
+
+            if (!flag)
+            {
+                flag = true;
+                foreach (Ingredient ing in app.DrugController.Get(drugId).Ingredients)
+                {
+                    obrisiDodato.Add(ing);
+                }
+            }
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
@@ -184,7 +224,6 @@ namespace HCIproject
             if (ingrediantsGrid.SelectedItem != null)
             {
                 Ingredient ingredient = (Ingredient)ingrediantsGrid.SelectedItem;
-                obrisani = ingredient;
                 var app = Application.Current as App;
                 Drug drug = app.DrugController.Get(drugId);
 
@@ -193,6 +232,7 @@ namespace HCIproject
                     if (ing.Id == ingredient.Id)
                     {
                         drug.Ingredients.Remove(ing);
+                        vratiObrisano.Add(ing);
                         break;
                     }
                 }

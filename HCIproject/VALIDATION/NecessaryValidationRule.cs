@@ -13,7 +13,6 @@ namespace HCIproject.Validation
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
             String val = (String)value;
-
             if (String.IsNullOrEmpty(val)) return new ValidationResult(false, "Neophodno je popuniti ovo polje.");
             return new ValidationResult(true, null);
         }

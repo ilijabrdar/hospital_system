@@ -182,8 +182,8 @@
                         <StackPanel Background="#D5F5E3" Orientation="Vertical">
                             <StackPanel  Orientation="Horizontal">
                                 <StackPanel Orientation="Vertical">
-                                    <Image x:Name="pic" HorizontalAlignment="Left" Height="150" Margin="36,45,8,0" VerticalAlignment="Top" Width="100" Source="user.png"/>
-                                    <Button Content="Promeni sliku" Width="100" Margin="36,10,80,0"  FontSize="11" Foreground="#2C3E50"  BorderBrush="#FF1FEECD" Height="26" Click="Button_Click_1" >
+                                    <Image x:Name="pic" HorizontalAlignment="Left" Height="150" Margin="10,45,8,0" VerticalAlignment="Top" Width="100" Source="user.png"/>
+                                    <Button Content="Promeni sliku" Width="100" Margin="10,10,40,0"  FontSize="11" Foreground="#2C3E50"  BorderBrush="#FF1FEECD" Height="26" Click="Button_Click_1" >
                                         <Button.Background>
                                             <SolidColorBrush Color="{DynamicResource Color1}"/>
                                         </Button.Background>
@@ -216,7 +216,7 @@
                                         <TextBox.Text>
                                             <Binding Path="TestImePrezime" UpdateSourceTrigger="PropertyChanged">
                                                 <Binding.ValidationRules>
-                                                    <val:StringValidationRule ValidationStep="RawProposedValue"/>
+                                                    <val:StringValidationRule  ValidationStep="RawProposedValue" />
 
                                                 </Binding.ValidationRules>
                                             </Binding>
@@ -233,41 +233,14 @@
                                                     </Grid.ColumnDefinitions>
 
                                                     <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
-                                                    <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                                                    <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding [0].ErrorContent}" FontSize="10" Foreground="Red"/>
                                                 </Grid>
                                             </ControlTemplate>
                                         </Validation.ErrorTemplate>
                                     </TextBox>
 
-
-                                    <TextBox x:Name="izSpecTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="1"  Margin="5" HorizontalAlignment="Right" FontSize="12" CaretBrush="#FF1FEECD">
-                                        <TextBox.Text>
-                                            <Binding Path="TestSpec" UpdateSourceTrigger="PropertyChanged">
-                                                <Binding.ValidationRules>
-                                                    <val:StringValidationRule ValidationStep="RawProposedValue"/>
-
-                                                </Binding.ValidationRules>
-                                            </Binding>
-                                        </TextBox.Text>
-                                        <Validation.ErrorTemplate>
-                                            <ControlTemplate>
-                                                <Grid>
-                                                    <Grid.RowDefinitions>
-                                                        <RowDefinition />
-                                                    </Grid.RowDefinitions>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition />
-                                                        <ColumnDefinition Width="Auto" />
-                                                    </Grid.ColumnDefinitions>
-
-                                                    <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
-                                                    <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
-                                                </Grid>
-                                            </ControlTemplate>
-                                        </Validation.ErrorTemplate>
-                                    </TextBox>
-                                    <!--                                <TextBox x:Name="izDatTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="2"  Margin="5" HorizontalAlignment="Right" FontSize="12" CaretBrush="#FF1FEECD" />
--->
+                                    <ComboBox x:Name="specName" Width="200"  Margin="8,8,0,0" FontWeight="Bold" FontSize="16"  Grid.Column="1" Grid.Row="1"  Visibility="Visible" SelectionChanged="specName_SelectionChanged"></ComboBox>
+                                    
                                     <DatePicker Name="LocaleDatePicker" Width="200" Grid.Column="1" Grid.Row="2"   materialDesign:HintAssist.Hint="Unesite datum u formatu dd.mm.gggg" FontSize="10" Margin="4.4,0,5.2,0" VerticalAlignment="Bottom" />
                                     <TextBox x:Name="izJmbgTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="3"  Margin="5" HorizontalAlignment="Right" FontSize="12"  CaretBrush="#FF1FEECD" >
                                         <TextBox.Text>
@@ -289,7 +262,7 @@
                                                     </Grid.ColumnDefinitions>
 
                                                     <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
-                                                    <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                                                    <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding [0].ErrorContent}" FontSize="10"  Foreground="Red"/>
                                                 </Grid>
                                             </ControlTemplate>
                                         </Validation.ErrorTemplate>
@@ -316,7 +289,7 @@
                                                     </Grid.ColumnDefinitions>
 
                                                     <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
-                                                    <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                                                    <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding [0].ErrorContent}" FontSize="10"  Foreground="Red"/>
                                                 </Grid>
                                             </ControlTemplate>
                                         </Validation.ErrorTemplate>
@@ -342,7 +315,7 @@
                                                     </Grid.ColumnDefinitions>
 
                                                     <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
-                                                    <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                                                    <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding [0].ErrorContent}" FontSize="10"  Foreground="Red"/>
                                                 </Grid>
                                             </ControlTemplate>
                                         </Validation.ErrorTemplate>
