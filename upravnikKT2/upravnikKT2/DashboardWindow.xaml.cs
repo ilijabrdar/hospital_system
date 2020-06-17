@@ -1,5 +1,6 @@
 ﻿using bolnica.Controller;
 using Controller;
+using Microsoft.Win32;
 using Model.Director;
 using Model.Doctor;
 using Model.PatientSecretary;
@@ -18,8 +19,10 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms.VisualStyles;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using upravnikKT2.ModelMock;
 
 namespace upravnikKT2
@@ -46,6 +49,8 @@ namespace upravnikKT2
         public List<Address> Addresses { get; set; }
 
         public List<Article> articles = new List<Article>();
+
+        public string fileName { get; set; }
 
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -189,6 +194,7 @@ namespace upravnikKT2
 
         private void setDirectorField()
         {
+            //welcomeLabel.Content = "DOBRODOŠLI " + director.FirstName.ToUpper() + "!";
             FirstNameDirector.Content = director.FirstName;
             LastNameDirector.Content = director.LastName;
             JMBGDirector.Content = director.Jmbg;
@@ -1645,6 +1651,18 @@ namespace upravnikKT2
                     e.Handled = true;
                 }
 
+            }
+        }
+
+        private void changePicBtn_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog op = new OpenFileDialog();
+            op.Title = "Select a picture";
+            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|Portable Network Graphic (*.png)|*.png";
+            if (op.ShowDialog() ==true)
+            {
+                fileName = op.FileName;
+                UserImage.Source = new BitmapImage(new Uri(fileName));
             }
         }
     }
