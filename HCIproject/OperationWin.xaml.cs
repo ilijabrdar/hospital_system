@@ -111,5 +111,10 @@ namespace HCIproject
           //  exam.Show();
             this.Close();
         }
+
+        private void scrol_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            scrol.Height = this.ActualHeight - 200;
+        }
     }
 }

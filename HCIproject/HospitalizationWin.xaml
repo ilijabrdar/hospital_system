@@ -20,8 +20,8 @@
                 <Label Content="Penicilin, polen" Margin="10" FontSize="14" FontWeight="SemiBold"/>
             </WrapPanel>      
         </StackPanel>
-        <ScrollViewer VerticalScrollBarVisibility="Auto" Height="290">
-            <StackPanel>
+        <ScrollViewer x:Name="scrol" VerticalScrollBarVisibility="Auto">
+            <StackPanel SizeChanged="StackPanel_SizeChanged">
             <Grid  VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />

@@ -72,7 +72,7 @@ namespace HCIproject
             series.PieType = PieType.Pie2D;
             series.InnerLabel = customLabels;
             series.OuterLabel = customLabels;
-            series.LabelForeground = Brushes.White;
+            series.LabelForeground = Brushes.Black;
             series.OuterLabelOffset = 30;
 
             series.Fills.Add(Brushes.LightGreen);

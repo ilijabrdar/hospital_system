@@ -41,7 +41,6 @@ namespace HCIproject
             user = _user;
             setArticle();
             setDoctorsData();
-            setSpec();
             setDrug();
             upcomingExaminations = new List<ExaminationDTO>();
 
@@ -164,7 +163,6 @@ namespace HCIproject
                 user.FirstName = ime;
                 user.LastName = prezime;
                 
-                user.Specialty = spec;
                 user.Jmbg = TestJMBG;
                 user.Phone = TestPhoneNumber;
                 user.Email = TestEmail;
@@ -181,28 +179,7 @@ namespace HCIproject
             }
 
         }
-        private void setSpec()
-        {
-            var app = Application.Current as App;
-            foreach(Speciality spec in app.SpecialityController.GetAll())
-            {
-                specName.Items.Add(spec.Name);
-            }
-        }
-        private void specName_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            spec.Name = specName.SelectedItem.ToString();
-            var app = Application.Current as App;
-            foreach (Speciality speci in app.SpecialityController.GetAll())
-            {
-                if (spec.Name == speci.Name)
-                {
-                    spec.Id = speci.Id;
-                }
-            }
-
-           
-        }
+     
         private string _testImePrz;
         private string _testSpec;
         private string _testEmail;
@@ -713,7 +690,7 @@ namespace HCIproject
             scrool.Height = this.ActualHeight - 120;
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void changePhoto(object sender, RoutedEventArgs e)
         {//promeni sliku
             OpenFileDialog op = new OpenFileDialog();
             op.Title = "Select a picture";
@@ -726,7 +703,6 @@ namespace HCIproject
                 pic.Source = new BitmapImage(new Uri(fileName));
             }
         }
-
 
     }
 }

@@ -60,7 +60,27 @@ namespace HCIproject
         }
         private void Button_Click_1(object sender, RoutedEventArgs e)
         { //potvrdi
-            if (specialitiCMB.SelectedItem != null)
+
+            if (StartDate.SelectedDate > EndDate.SelectedDate || StartDate.SelectedDate < DateTime.Now || specialitiCMB.SelectedItem == null)
+            {
+                if (specialitiCMB.SelectedItem == null)
+                {
+                    string messageBoxText1 = "Morate izabrati odeljenje kako biste izvrsili hospitalizaciju!";
+                    string caption1 = "Hospitalizacija";
+                    MessageBoxButton button1 = MessageBoxButton.OK;
+                    MessageBoxImage icon1 = MessageBoxImage.Information;
+                    MessageBoxResult result1 = MessageBox.Show(messageBoxText1, caption1, button1, icon1);
+                }
+                else
+                {
+                    string messageBoxText = "Nevalidan unos datuma. Datum početka operacije mora biti u budućnosti, pre završetka iste.";
+                    string caption = "Hospitalizacija";
+                    MessageBoxButton button = MessageBoxButton.OK;
+                    MessageBoxImage icon = MessageBoxImage.Information;
+                    MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+
+                }
+            }else
             {
                 string messageBoxText = "Uspesno ste izvrsili hospitalizaciju pacijenta!";
                 string caption = "Hospitalizacija";
@@ -69,23 +89,6 @@ namespace HCIproject
                 MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
 
                 this.Close();
-
-            }
-            else if (StartDate.SelectedDate > EndDate.SelectedDate || StartDate.SelectedDate < DateTime.Now)
-            {
-                string messageBoxText = "Nevalidan unos datuma. Datum početka operacije mora biti u budućnosti, pre završetka iste.";
-                string caption = "Hospitalizacija";
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Information;
-                MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
-            }
-            else
-            {
-                string messageBoxText = "Morate izabrati odeljenje kako biste izvrsili hospitalizaciju!";
-                string caption = "Hospitalizacija";
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Information;
-                MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
             }
         }
 
@@ -96,6 +99,11 @@ namespace HCIproject
             //this.Visibility = Visibility.Hidden;
             //exam.Show();
             this.Close();
+        }
+
+        private void StackPanel_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            scrol.Height = this.ActualHeight - 200;
         }
     }
 }

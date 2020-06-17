@@ -21,8 +21,8 @@
         </StackPanel>
         <Border  BorderBrush="#A2D9CE" BorderThickness="5" CornerRadius="8,8,8,8"  Margin="5">
             <WrapPanel>
-                <Label Content="Pretraga kartona po lekaru ili po dijagnozi" Margin="10" FontSize="16"/>
-                <TextBox x:Name="search_files" HorizontalAlignment="Center"  Text="Unesite parametar pretrage" Margin="10" Background="#EBF5FB" FontSize="16" Foreground="#AAB7B8" Width="222" CaretBrush="#FF1FEECD" IsKeyboardFocusedChanged="search_files_IsKeyboardFocusedChanged" KeyDown="search_files_KeyDown" />
+                <Label Content="Pretraga kartona po lekaru ili po datumu" Margin="10" FontSize="14"/>
+                <TextBox x:Name="search_files" HorizontalAlignment="Center"  Text="Unesite parametar pretrage" Margin="10" Background="#EBF5FB" FontSize="16" Foreground="#AAB7B8" Width="222" CaretBrush="#FF1FEECD" IsKeyboardFocusedChanged="search_files_IsKeyboardFocusedChanged" KeyDown="search_files_KeyDown"  />
                 <Button Content="Povratak" Margin="5"  Background="#FFA2D9CE" Height="23" BorderBrush="#FF1FEECD" Click="Button_Click_1"/>
 
             </WrapPanel>
