@@ -26,6 +26,12 @@ namespace HCIproject
         private int num1 = 0;
         public string fileName { get; set; }
         private Speciality spec=new Speciality();
+
+        public List<State> States { get; set; }
+        public List<Town> Towns { get; set; }
+        public List<Address> Addresses { get; set; }
+
+
         public SideBar()
         {
             InitializeComponent();
@@ -112,9 +118,11 @@ namespace HCIproject
             JmbgSet.Text = user.Jmbg.ToString();
             EmailSet.Text = user.Email;
             TelSet.Text = user.Phone;
-            AdrSet.Text = user.Address.GetFullAddress();
+            //  String doctorAddress = user.Address.Street + " " + user.Address.Number + "," + " " + user.Address.Town.Name + " " + user.Address.Town.PostalNumber + "," + " " + user.Address.Town.State.Name;
 
-            TestSpec= user.Specialty.Name;
+            izAdresaTxt.Text= TestAdresa.Text;
+            // Console.WriteLine(doctorAddress);
+            TestSpec = user.Specialty.Name;
             TestImePrezime= user.FirstName + " " + user.LastName;
             TestEmail= user.Email;
             TestJMBG = user.Jmbg.ToString();
@@ -166,7 +174,7 @@ namespace HCIproject
                 user.Jmbg = TestJMBG;
                 user.Phone = TestPhoneNumber;
                 user.Email = TestEmail;
-
+                TestAdresa.Text=izAdresaTxt.Text;
                 app.UserController.Edit((Doctor)user);
 
                 string messageBoxText1 = "Uspesno ste promenili podatke!";

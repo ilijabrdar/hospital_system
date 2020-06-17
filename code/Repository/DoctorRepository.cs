@@ -16,6 +16,7 @@ namespace Repository
         private readonly IEagerRepository<BusinessDay,long> businessDayRepo;
         private readonly ISpecialityRepository specialityRepo;
         private readonly IDoctorGradeRepository doctorGradeRepository;
+
         public DoctorRepository(ICSVStream<Doctor> stream, ISequencer<long> sequencer,
             IArticleRepository article, IEagerRepository<BusinessDay,long> businessDay, ISpecialityRepository speciality,
             IDoctorGradeRepository doctorGrade) 

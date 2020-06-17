@@ -35,6 +35,7 @@ namespace HCIproject
         private DoubleCollection data = new DoubleCollection();
         bool flag = false;
 
+
         public DrugValidations(Doctor user, long id)
         {
             InitializeComponent();
@@ -64,16 +65,17 @@ namespace HCIproject
             }
 
             pieChart.TitleVisibility = Visibility.Collapsed;
-            pieChart.Width = 290;
-            pieChart.Height = 290;
+            pieChart.Width = 300;
+            pieChart.Height = 250;
             PieSeries series = new PieSeries();
             series.Effect = new DropShadowEffect() { Opacity = 0.5, ShadowDepth = 3, };
             series.Data = data;
             series.PieType = PieType.Pie2D;
             series.InnerLabel = customLabels;
             series.OuterLabel = customLabels;
-            series.LabelForeground = Brushes.Black;
-            series.OuterLabelOffset = 30;
+            series.LabelForeground = Brushes.DarkOliveGreen;
+            series.OuterLabelOffset = 20;
+            series.OuterLabelType = LabelType.CustomText;
 
             series.Fills.Add(Brushes.LightGreen);
             series.Fills.Add(Brushes.DodgerBlue);
@@ -94,43 +96,69 @@ namespace HCIproject
             series.Strokes.Add(Brushes.OrangeRed);
             series.Fills.Add(Brushes.Violet);
             series.Strokes.Add(Brushes.BlueViolet);
+         //   pieChart.Legends.Add(GetSeriesLegend());
+         
+
             pieChart.Series.Clear();
             pieChart.Series.Add(series);
             pieChart.PlotAreaMargin = new Thickness(40, 20, 40, 20);
         }
 
+        private SeriesLegend GetSeriesLegend()
+        {
+            SeriesLegend seriesLegend = new SeriesLegend();
+            seriesLegend.BorderBrush = Brushes.Silver;
+            seriesLegend.BorderThickness = new Thickness(0);
+            seriesLegend.Background = new SolidColorBrush(Color.FromRgb(240, 240, 240));
+            seriesLegend.Foreground = Brushes.Black;
+            seriesLegend.Padding = new Thickness(2);
+            seriesLegend.Margin = new Thickness(0, 0, 0, 0);
+            seriesLegend.LabelsSource = customLabels;
+            seriesLegend.VerticalAlignment = VerticalAlignment.Bottom;
+            seriesLegend.SnapsToDevicePixels = true;
+
+            return seriesLegend;
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {//otkazi
-            var app = Application.Current as App;
-            Drug drug = app.DrugController.Get(drugId);
-
-            foreach(Ingredient ing in vratiObrisano)
+            string messageBoxText = "Da li ste sigurni da želite da otkažete validaciju datog leka?";
+            string caption = "Otkazivanje";
+            MessageBoxButton button = MessageBoxButton.YesNo;
+            MessageBoxImage icon = MessageBoxImage.Information;
+            MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+            if (result == MessageBoxResult.Yes)
             {
-                drug.Ingredients.Add(ing);
-            }
-            app.DrugController.Edit(drug);
+                var app = Application.Current as App;
+                Drug drug = app.DrugController.Get(drugId);
 
-            bool flag = false;
-            //u obrisi dodato se nalaze samo oni na pocetku koji su bili tu
-            foreach (Ingredient ing in drug.Ingredients.ToList())
-            {
-                flag = false;
-                foreach (Ingredient i in obrisiDodato)
+                foreach (Ingredient ing in vratiObrisano)
                 {
-                    if (i.Id == ing.Id)
+                    drug.Ingredients.Add(ing);
+                }
+                app.DrugController.Edit(drug);
+
+                bool flag = false;
+                //u obrisi dodato se nalaze samo oni na pocetku koji su bili tu
+                foreach (Ingredient ing in drug.Ingredients.ToList())
+                {
+                    flag = false;
+                    foreach (Ingredient i in obrisiDodato)
                     {
-                        flag = true;
-                        break;
+                        if (i.Id == ing.Id)
+                        {
+                            flag = true;
+                            break;
+                        }
+                    }
+                    if (!flag)
+                    {
+                        drug.Ingredients.Remove(ing);
                     }
                 }
-                if (!flag)
-                {
-                    drug.Ingredients.Remove(ing);
-                }
+                app.DrugController.Edit(drug);
+
             }
-            app.DrugController.Edit(drug);
-
-
 
             //  if (obrisani != null)
             //  {

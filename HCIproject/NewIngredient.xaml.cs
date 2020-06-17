@@ -87,9 +87,9 @@ namespace HCIproject
                 try
                 {
                     noviLek.Quantity = int.Parse(kolicinaTxt.Text);
-                    if (noviLek.Quantity == 0)
+                    if (noviLek.Quantity<=0)
                     {
-                        string messageBoxText1 = "Molimo Vas količinu sastojka unesite isključivo kao broj različit od nule";
+                        string messageBoxText1 = "Molimo Vas količinu sastojka unesite isključivo kao pozitivan broj različit od nule";
                         string caption1 = "Dodavanje sastojka.";
                         MessageBoxButton button1 = MessageBoxButton.OK;
                         MessageBoxImage icon1 = MessageBoxImage.Information;

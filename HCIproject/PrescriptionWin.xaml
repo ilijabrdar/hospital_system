@@ -19,7 +19,7 @@
                 <Label Content="Penicilin, polen" Margin="10" FontSize="14" FontWeight="SemiBold"/>
             </WrapPanel>
         </StackPanel>
-        <ScrollViewer VerticalScrollBarVisibility="Auto" Height="290">
+        <ScrollViewer  x:Name="scrol" VerticalScrollBarVisibility="Auto" SizeChanged="scrol_SizeChanged" >
             <StackPanel>
                 <Grid  VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">
                     <Grid.RowDefinitions>
@@ -38,7 +38,7 @@
                     <TextBlock x:Name="dijagnozaTxt" Grid.Row="0" Grid.Column="1" Margin="10" FontSize="18" FontWeight="SemiBold"/>
 
                     <Label Content="Lekovi" Grid.Row="1" Grid.Column="0" FontSize="18" Margin="10"/>
-                    <ComboBox x:Name="lekovi" Grid.Row="1" Grid.Column="1" Margin="10"/>
+                    <ComboBox x:Name="lekovi" Text="Izaberite lekove. Kretanje strelice, izbor tab+ctrl" IsEditable="True" IsReadOnly="True" Grid.Row="1" Grid.Column="1" Margin="10"/>
 
 
                     <Label Content="Terapija" Grid.Row="3" Grid.Column="0" FontSize="18" Margin="10"/>

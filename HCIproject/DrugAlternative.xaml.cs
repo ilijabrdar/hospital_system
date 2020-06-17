@@ -42,7 +42,7 @@ namespace HCIproject
                 string messageBoxText = "Morate odabrati oba leka ukoliko želite da odaberete alternativu.";
                 string caption = "Greska prilikom odabira alternativnih lekova!";
                 MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBoxImage icon = MessageBoxImage.Information;
                 MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
 
             }
@@ -51,7 +51,7 @@ namespace HCIproject
                 string messageBoxText = "Lek ne moze biti sam sebi alternativni, molimo proverite Vas unos.";
                 string caption = "Greska prilikom odabira alternativnih lekova!";
                 MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBoxImage icon = MessageBoxImage.Information;
                 MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
             }
             else

@@ -21,7 +21,7 @@
                     <StackPanel Background="#D5F5E3"  Orientation="Horizontal">
                         <StackPanel Orientation="Vertical">
                             <Image x:Name="pic" HorizontalAlignment="Left" Margin="30,30,80,10" Height="114"  VerticalAlignment="Top" Width="130" Source="user.png"/>
-                            <Button Content="Promeni sliku" Width="90" Margin="-60,0,0,0" FontSize="9" Foreground="#2C3E50"  BorderBrush="#FF1FEECD" Height="22" Click="changePhoto" RenderTransformOrigin="-0.331,0.273" >
+                            <Button Content="Promeni sliku" Width="90" Margin="-60,0,0,0" FontSize="9" Foreground="#2C3E50"  BorderBrush="#FF1FEECD" Height="22" Click="changePhoto" >
                                 <Button.Background>
                                     <SolidColorBrush Color="{DynamicResource Color1}"/>
                                 </Button.Background>
@@ -60,7 +60,7 @@
                                 <TextBlock x:Name="TelSet" Margin="5"  Grid.Column="1" Grid.Row="6" HorizontalAlignment="Right" FontSize="14" />
 
                                 <Label Grid.Column="0" Grid.Row="7" Content="Adresa" FontWeight="SemiBold" FontSize="14" />
-                                <TextBlock x:Name="AdrSet" Margin="5"  Text="Vuka Karadzica 23" Grid.Column="1" Grid.Row="7" HorizontalAlignment="Right" FontSize="14" />
+                                <TextBlock x:Name="TestAdresa" Margin="5"  Text="Vuka Karadzica 23" Grid.Column="1" Grid.Row="7" HorizontalAlignment="Right" FontSize="14" />
 
                             </Grid>
                         </Border>

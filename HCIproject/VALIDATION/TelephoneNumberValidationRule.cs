@@ -18,7 +18,7 @@ namespace HCIproject.Validation
             String val = (String)value;
 
             if (String.IsNullOrEmpty(val)) return new ValidationResult(false, "Neophodno je popuniti ovo polje.");
-            if (!_regex.Match(val).Success) return new ValidationResult(false, "Unos broja je dozvoljen u formatu +3810640324532 ili 0640324532");
+            if (!_regex.Match(val).Success) return new ValidationResult(false, "Dozvoljeni formati +3810640324532 i 0640324532");
             return new ValidationResult(true, null);
         }
     }

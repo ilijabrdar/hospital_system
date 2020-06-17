@@ -55,9 +55,9 @@ namespace HCIproject
         private void Button_Click(object sender, RoutedEventArgs e)
         {//otkazi
             string messageBoxText = "Da li ste sigurni da želite da otkažete pregled?.";
-            string caption = "Molimo popunite podatke.";
+            string caption = "Otkazivanje";
             MessageBoxButton button = MessageBoxButton.YesNo;
-            MessageBoxImage icon = MessageBoxImage.Warning;
+            MessageBoxImage icon = MessageBoxImage.Information;
             MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
             if (result == MessageBoxResult.Yes)
             {
@@ -75,7 +75,7 @@ namespace HCIproject
                 string messageBoxText = "Kako biste zavrsili pregled morate popuniti polje za dijagnozu.";
                 string caption = "Molimo popunite podatke.";
                 MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBoxImage icon = MessageBoxImage.Information;
                 MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
             }
             else
@@ -103,7 +103,7 @@ namespace HCIproject
                 string messageBoxText = "Kako biste nastavili izvrsavanje pregleda morate popuniti polje za dijagnozu.";
                 string caption = "Molimo popunite podatke.";
                 MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBoxImage icon = MessageBoxImage.Information;
                 MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
             }
             else
@@ -123,7 +123,7 @@ namespace HCIproject
                 string messageBoxText = "Kako biste nastavili izvrsavanje pregleda morate popuniti polje za dijagnozu.";
                 string caption = "Molimo popunite podatke.";
                 MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBoxImage icon = MessageBoxImage.Information;
                 MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
             }
             else
@@ -143,7 +143,7 @@ namespace HCIproject
                 string messageBoxText = "Kako biste nastavili izvrsavanje pregleda morate popuniti polje za dijagnozu.";
                 string caption = "Molimo popunite podatke.";
                 MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBoxImage icon = MessageBoxImage.Information;
                 MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
             }
             else
@@ -171,7 +171,7 @@ namespace HCIproject
                 string messageBoxText = "Kako biste nastavili izvrsavanje pregleda morate popuniti polje za dijagnozu.";
                 string caption = "Molimo popunite podatke.";
                 MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBoxImage icon = MessageBoxImage.Information;
                 MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
             }
             else
@@ -208,7 +208,7 @@ namespace HCIproject
             }
             catch
             {
-                System.Windows.MessageBox.Show("Could not open the file.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                System.Windows.MessageBox.Show("Could not open the file.", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
     }

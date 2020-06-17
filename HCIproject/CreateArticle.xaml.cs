@@ -48,7 +48,7 @@ namespace HCIproject
                 string messageBoxText1 = "Da biste uneli članak neophodno je da unesete naslov i tekst!";
                 string caption1 ="Unos novog članka";
                 MessageBoxButton button1 = MessageBoxButton.OK;
-                MessageBoxImage icon1 = MessageBoxImage.Warning;
+                MessageBoxImage icon1 = MessageBoxImage.Information;
                 MessageBoxResult result1 = MessageBox.Show(messageBoxText1, caption1, button1, icon1);
             }
             else {
@@ -58,7 +58,7 @@ namespace HCIproject
                 string messageBoxText1 = "Uspesno ste uneli članak!";
                 string caption1 = "Unos novog članka";
                 MessageBoxButton button1 = MessageBoxButton.OK;
-                MessageBoxImage icon1 = MessageBoxImage.Warning;
+                MessageBoxImage icon1 = MessageBoxImage.Information;
                 MessageBoxResult result1 = MessageBox.Show(messageBoxText1, caption1, button1, icon1);
 
                 this.Close();

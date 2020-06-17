@@ -232,6 +232,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="RESOURCES\AddressFile.csv" />
+    <None Include="RESOURCES\StateFile.csv" />
+    <None Include="RESOURCES\TownFile.csv" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -1,6 +1,7 @@
 ﻿using bolnica.Controller;
 using bolnica.Repository;
 using bolnica.Repository.CSV.Converter;
+using bolnica.Service;
 using Controller;
 using Model.Director;
 using Model.Doctor;
@@ -34,6 +35,9 @@ namespace HCIproject
         public ITherapyController TherapyController { get; private set; }
         public IArticleController ArticleController  { get; private set; }
         public IIngredientController IngredientController  { get; private set; }
+        public IAddressController AddressController  { get; private set; }
+        public IStateController StateController  { get; private set; }
+        public ITownController TownController  { get; private set; }
 
         private const String CSV_DELIMITER = ",";
         private const String CSV_DELIMITER2 = "|";
@@ -59,6 +63,9 @@ namespace HCIproject
         private const String PATIENT_FILE = "C:/Users/Tamara Kovacevic/Desktop/hospital_system/HCIproject/RESOURCES/Patient.csv";
         private const String DRUG_FILE = "C:/Users/Tamara Kovacevic/Desktop/hospital_system/HCIproject/RESOURCES/DrugFile.csv";
         private const String INGREDIENT_FILE = "C:/Users/Tamara Kovacevic/Desktop/hospital_system/HCIproject/RESOURCES/IngredientsFile.csv";
+        private const String ADDRESS_FILE = "C:/Users/Tamara Kovacevic/Desktop/hospital_system/HCIproject/RESOURCES/AddressFile.csv";
+        private const String TOWN_FILE = "C:/Users/Tamara Kovacevic/Desktop/hospital_system/HCIproject/RESOURCES/TownFile.csv";
+        private const String STATE_FILE = "C:/Users/Tamara Kovacevic/Desktop/hospital_system/HCIproject/RESOURCES/StateFile.csv";
 
 
     
@@ -80,16 +87,27 @@ namespace HCIproject
             EquipmentRepository equipmentRepository=new EquipmentRepository(new CSVStream<Equipment>(EQUIPMENT_FILE, new EquipmentCSVConverter(CSV_DELIMITER)), new LongSequencer());
             RoomRepository roomRepository=new RoomRepository(new CSVStream<Room>(ROOM_FILE, new RoomCSVConverter(CSV_DELIMITER)), new LongSequencer(), roomTypeRepository, equipmentRepository);
             BusinessDayRepository businessDayRepository = new BusinessDayRepository(new CSVStream<BusinessDay>(ROOM_FILE, new BusinessDayCSVConverter(CSV_DELIMITER)), new LongSequencer(), roomRepository);
-            DoctorRepository doctorRepository = new DoctorRepository(new CSVStream<Doctor>(DOCTOR_FILE, new DoctorCSVConverter(CSV_DELIMITER)), new LongSequencer(), articleRepository,   businessDayRepository,  specialityRepository, doctorGradeRepository);
+
+            //AddressRepository addressRepository = new AddressRepository(new CSVStream<Address>(ADDRESS_FILE, new AddressCSVConverter(CSV_DELIMITER)), new LongSequencer());
+            // TownRepository townRepository = new TownRepository(new CSVStream<Town>(TOWN_FILE, new TownCSVConverter(CSV_DELIMITER, CSV_DELIMITER2)), new LongSequencer(), addressRepository);
+            //  StateRepository stateRepository = new StateRepository(new CSVStream<State>(STATE_FILE, new StateCSVConverter(CSV_DELIMITER, CSV_ARRAY_DELIMITER)), new LongSequencer(), townRepository);
+
+
+            DoctorRepository doctorRepository = new DoctorRepository(new CSVStream<Doctor>(DOCTOR_FILE, new DoctorCSVConverter(CSV_DELIMITER)), new LongSequencer(), articleRepository, businessDayRepository, specialityRepository, doctorGradeRepository);//, addressRepository,townRepository,stateRepository);
 
             businessDayRepository.doctorRepo = doctorRepository;
             articleRepository._doctorRepository = doctorRepository;
 
             ReferralRepository referralRepository = new ReferralRepository(new CSVStream<Referral>(REFERRAL_FILE, new ReferralCSVConverter(CSV_DELIMITER)), new LongSequencer(), doctorRepository);
-           // PatientFileRepository patientFileRepository = new PatientFileRepository(new CSVStream<PatientFile>(PATIENTFILE_FILE, new PatientFileCSVConverter(CSV_DELIMITER, CSV_DELIMITER2)), new LongSequencer());
-           // PatientRepository patientRepository = new PatientRepository(new CSVStream<Patient>(PATIENT_FILE, new PatientCSVConverter(CSV_DELIMITER)), new LongSequencer(), patientFileRepository);
- //           ExaminationUpcomingRepository examinationUpcomingRepository = new ExaminationUpcomingRepository(new CSVStream<Examination>(EXAM_UPCOMING_FILE, new UpcomingExaminationCSVConverter(CSV_DELIMITER)), new LongSequencer(), doctorRepository, patientRepository);
- //           ExaminationPreviousRepository examinationPreviousRepository=new ExaminationPreviousRepository(new CSVStream<Examination>(EXAM_PREVIOUS_FILE, new PreviousExaminationCSVConverter(CSV_DELIMITER, CSV_DELIMITER2)), new LongSequencer(), doctorRepository,patientRepository, diagnosisRepository,prescriptionRepository, therapyRepository, referralRepository);
+            // PatientFileRepository patientFileRepository = new PatientFileRepository(new CSVStream<PatientFile>(PATIENTFILE_FILE, new PatientFileCSVConverter(CSV_DELIMITER, CSV_DELIMITER2)), new LongSequencer());
+            // PatientRepository patientRepository = new PatientRepository(new CSVStream<Patient>(PATIENT_FILE, new PatientCSVConverter(CSV_DELIMITER)), new LongSequencer(), patientFileRepository);
+            //           ExaminationUpcomingRepository examinationUpcomingRepository = new ExaminationUpcomingRepository(new CSVStream<Examination>(EXAM_UPCOMING_FILE, new UpcomingExaminationCSVConverter(CSV_DELIMITER)), new LongSequencer(), doctorRepository, patientRepository);
+            //           ExaminationPreviousRepository examinationPreviousRepository=new ExaminationPreviousRepository(new CSVStream<Examination>(EXAM_PREVIOUS_FILE, new PreviousExaminationCSVConverter(CSV_DELIMITER, CSV_DELIMITER2)), new LongSequencer(), doctorRepository,patientRepository, diagnosisRepository,prescriptionRepository, therapyRepository, referralRepository);
+         
+          //  AddressService addressService = new AddressService(addressRepository);
+         //   StateService stateService = new StateService(stateRepository);
+         //   TownService townService = new TownService(townRepository);
+
 
 
             DoctorService doctorService = new DoctorService(doctorRepository);
@@ -108,6 +126,8 @@ namespace HCIproject
             DrugService drugService = new DrugService(drugRepository);
             IngredientService ingredientService = new IngredientService(ingredientRepository);
 
+
+
             UserController = new UserController(userService);
             ArticleController = new ArticleController(articleService);
             SpecialityController = new SpecialityController(specialityService);
@@ -122,8 +142,12 @@ namespace HCIproject
             DrugController = new DrugController(drugService);
             IngredientController = new IngredientController(ingredientService);
 
+
+            //StateController = new StateController(stateService);
+            //AddressController = new AddressController(addressService);
+            //TownController = new TownController(townService);
             //  ArticleController articleController = new ArticleController(articleService);
-             DiagnosisController diagnosisController = new DiagnosisController(diagnosisService);
+            DiagnosisController diagnosisController = new DiagnosisController(diagnosisService);
             // DoctorGradeController doctorGradeController = new DoctorGradeController(doctorGradeService);
             // HospitalizationController hospitalizationController = new HospitalizationController(hospitalizationService);
             // OperationController operationController = new OperationController(operationService);
