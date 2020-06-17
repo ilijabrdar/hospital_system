@@ -6,11 +6,18 @@
         xmlns:local="clr-namespace:HCIproject"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Prescription" Height="400" Width="750"
+        Title="Recept" Height="400" Width="750"
         WindowStartupLocation="CenterScreen">
     <StackPanel x:Name="ResizePanel" Background="#D0ECE7" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
         <StackPanel x:Name="PatientInfo" Background="#D5F5E3">
-            <Label Content="OPSTE INFO O PACIJENTU"/>
+            <WrapPanel>
+                <Label Content="Ime i prezime pacijenta:" Margin="10" FontSize="13"/>
+                <Label Content="Pera Peric" Margin="10,10,60,10" FontSize="15" FontWeight="SemiBold" />
+                <Label Content="Godine:" Margin="10" FontSize="13"/>
+                <Label Content="25" Margin="10,10,60,10" FontSize="14" FontWeight="SemiBold"/>
+                <Label Content="Alergija:" Margin="10" FontSize="13"/>
+                <Label Content="Penicilin, polen" Margin="10" FontSize="14" FontWeight="SemiBold"/>
+            </WrapPanel>
         </StackPanel>
         <ScrollViewer VerticalScrollBarVisibility="Auto" Height="290">
             <StackPanel>

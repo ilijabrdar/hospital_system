@@ -1,4 +1,6 @@
-﻿using Model.Director;
+﻿using Microsoft.Win32;
+using MindFusion.Charting.Wpf;
+using Model.Director;
 using Model.Doctor;
 using Model.Dto;
 using Model.PatientSecretary;
@@ -11,6 +13,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace HCIproject
 {
@@ -18,9 +21,10 @@ namespace HCIproject
     {
         public Doctor user;
         public string Naslov { get; set; }
-         public List<ExaminationDTO> upcomingExaminations { get; set; }
+        public List<ExaminationDTO> upcomingExaminations { get; set; }
         private int num = 0;
         private int num1 = 0;
+        public string fileName { get; set; }
         public SideBar()
         {
             InitializeComponent();
@@ -53,23 +57,22 @@ namespace HCIproject
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
         }
-        //pocetna stranica binduj imena
 
 
         private void Button_Click(object sender, RoutedEventArgs e)
-        {
+        { //odjavi se
             MainWindow mainWin = new MainWindow();
             this.Visibility = Visibility.Hidden;
             mainWin.Show();
         }
-
+//Lekovi
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {//dodaj alternativni
             DrugAlternative drugAltWind = new DrugAlternative((Doctor)user);
           //  this.Visibility = Visibility.Hidden;
             drugAltWind.ShowDialog();
         }
-
+//utisak
         private void myGrid_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             //MyTabControl.Height = this.ActualHeight - 100;
@@ -84,6 +87,123 @@ namespace HCIproject
             //clanciGrid.Height = this.ActualHeight - 40;
             //pocetnaGrid.Height = this.ActualHeight - 40;
         }
+        private void Button_Click_8(object sender, RoutedEventArgs e)
+        {//posalji utisak
+            string messageBoxText = "Hvala Vam što ste sa nama podelili vaše utiske o apliakciji!";
+            string caption = "Hvala!";
+            MessageBoxButton button = MessageBoxButton.OK;
+            MessageBoxImage icon = MessageBoxImage.Warning;
+            MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+
+            misljenje.Text = "";
+        }
+
+//izmena naloga
+        private void setDoctorsData()
+        {
+
+            var app = Application.Current as App;
+
+            ImePrzSet.Text = user.FirstName + " " + user.LastName;
+            Speciality spec = app.SpecialityController.Get(user.Specialty.Id);
+            SpecSet.Text = spec.Name;
+            DatSet.Text = user.DateOfBirth.ToString();
+            JmbgSet.Text = user.Jmbg.ToString();
+            EmailSet.Text = user.Email;
+            TelSet.Text = user.Phone;
+            AdrSet.Text = user.Address.GetFullAddress();
+
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {//izmena naloga potvrda
+            var app = Application.Current as App;
+            bool flag  = false;
+
+            if (izImePrzTxt.Text != "")
+            {
+                String[] imePrz2 = izImePrzTxt.Text.Split(" ".ToCharArray());
+                String ime = imePrz2[0];
+                String prezime = imePrz2[1];
+                user.FirstName = ime;
+                user.LastName = prezime;
+                flag = true;
+            }
+            else if (izSpecTxt.Text != "")
+            {
+                user.Specialty.Name = izSpecTxt.Text;
+                app.UserController.Edit((Doctor)user);
+                flag = true;
+
+            }
+            else if (izJmbgTxt.Text != "")
+            {
+                user.Jmbg = izJmbgTxt.Text;
+                app.UserController.Edit((Doctor)user);
+                flag = true;
+
+            }
+            else if (izEmailTxt.Text != "")
+            {
+                user.Email = izEmailTxt.Text;
+                app.UserController.Edit((Doctor)user);
+                flag = true;
+
+            }
+            else if (izTelTxt.Text != "")
+            {
+                user.Phone = izTelTxt.Text;
+                app.UserController.Edit((Doctor)user);
+                flag = true;
+
+            }
+            else if (izAdresaTxt.Text != "")
+            {
+                user.Address.FullAddress = izAdresaTxt.Text;
+                app.UserController.Edit((Doctor)user);
+                flag = true;
+
+            }
+            else if (LocaleDatePicker.SelectedDate != null)
+            {
+                DateTime startDate = (DateTime)LocaleDatePicker.SelectedDate;
+                DateTime dateNow = DateTime.Now;
+
+                TimeSpan timeSpan = dateNow - startDate;
+
+                if (timeSpan.TotalDays < 21 * 365)
+                {
+                    string messageBoxText1 = "Molimo proverite uneseni datum rođenja. Doktor mora da ima najmanje 21 godinu.";
+                    string caption1 = "Datum rođenja.";
+                    MessageBoxButton button1 = MessageBoxButton.OK;
+                    MessageBoxImage icon1 = MessageBoxImage.Warning;
+                    MessageBoxResult result1 = MessageBox.Show(messageBoxText1, caption1, button1, icon1);
+                }
+                else
+                {
+                    user.DateOfBirth = startDate;
+                    app.UserController.Edit((Doctor)user);
+                    flag = true;
+
+                }
+            }
+            string messageBoxText = "";
+            if (!flag)
+            {
+                 messageBoxText = "Niste izmenili ni jedan podatak!";
+            }
+            else
+            {
+                messageBoxText = "Uspesno ste izmenili podatke!";
+            }
+                string caption = "Izmena.";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+               setDoctorsData();
+
+        }
+
 
         private string _testImePrz;
         private string _testSpec;
@@ -170,10 +290,7 @@ namespace HCIproject
             }
         }
 
-        private void Button_Click_4(object sender, RoutedEventArgs e)
-        {//posalji izmene
 
-        }
 
         private void Button_Click_5(object sender, RoutedEventArgs e)
         {//sacuvaj lozinku
@@ -193,31 +310,14 @@ namespace HCIproject
             }
         }
 
-
+//clanci
         private void Button_Click_7(object sender, RoutedEventArgs e)
         {//novi clanak
             CreateArticle creWin = new CreateArticle((Doctor)user);
          //   this.Visibility = Visibility.Hidden;
             creWin.ShowDialog();
+            setArticle();
         }
-
-        private void setDoctorsData()
-        {
-
-            var app = Application.Current as App;
-
-            ImePrzSet.Text = user.FirstName + " " + user.LastName;
-            Speciality spec= app.SpecialityController.Get(user.Specialty.Id);
-            SpecSet.Text = spec.Name;
-            DatSet.Text = user.DateOfBirth.ToString();
-            JmbgSet.Text = user.Jmbg.ToString();
-            EmailSet.Text = user.Email;
-            TelSet.Text = user.Phone;
-            AdrSet.Text = user.Address.GetFullAddress();
-
-        }
-
-        //clanci
         private void setArticle()
         {
             var app = Application.Current as App;
@@ -264,12 +364,6 @@ namespace HCIproject
 
             }
         }
-
-        private void Button_Click_8(object sender, RoutedEventArgs e)
-        {//posalji utisak
-            misljenje.Text = "";
-        }
-
         private void search_article_IsKeyboardFocusedChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (search_article.Text == "Unesite parametar pretrage")
@@ -309,7 +403,7 @@ namespace HCIproject
             }
             return articles;
         }
-
+//KARTON PREGLED    
         private void search_patient_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -365,7 +459,7 @@ namespace HCIproject
         }
 
 
-
+//lekovi
         private void setDrug()
         {
             var app = Application.Current as App;
@@ -600,17 +694,34 @@ namespace HCIproject
             var PatientId = ((Button)sender).Tag;
             ExaminationWin examWinn = new ExaminationWin((Doctor)user, (long)PatientId);
              this.Visibility = Visibility.Hidden;
-            examWinn.Show();
+            examWinn.ShowDialog();
         }  
         
         private void ClickOpenPatientFile(object sender, RoutedEventArgs e)
         {//posalji utisak
             var PatientId = ((Button)sender).Tag;
             PatientFileWin patientWin = new PatientFileWin((Doctor)user, (long)PatientId);
-             this.Visibility = Visibility.Hidden;
+            // this.Visibility = Visibility.Hidden;
             patientWin.ShowDialog ();
         }
 
+        private void ScrollViewer_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            scrool.Height = this.ActualHeight - 120;
+        }
 
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {//promeni sliku
+            OpenFileDialog op = new OpenFileDialog();
+            op.Title = "Select a picture";
+            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+              "Portable Network Graphic (*.png)|*.png";
+            if (op.ShowDialog() == true)
+            {
+                fileName = op.FileName;
+                pic.Source = new BitmapImage(new Uri(fileName));
+            }
+        }
     }
 }

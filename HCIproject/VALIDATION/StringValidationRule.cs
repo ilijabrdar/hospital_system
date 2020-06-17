@@ -11,7 +11,7 @@ namespace HCIproject.Validation
 {
     public class StringValidationRule : ValidationRule
     {
-        private Regex _regex = new Regex("^[A-Za-zŠĐŽĆČšđžćč]+$");
+        private Regex _regex = new Regex("^[A-Za-zŠĐŽĆČšđžćč]+[ ]*[A-Za-zŠĐŽĆČšđžćč]*$");
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
             String val = (String)value;

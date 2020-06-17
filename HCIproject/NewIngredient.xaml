@@ -6,17 +6,21 @@
         xmlns:local="clr-namespace:HCIproject"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="NewIngredient" Height="350" Width="700"
+        Title="Dodavanje sastojaka" Height="350" Width="700"  ResizeMode="NoResize"
             WindowStartupLocation="CenterScreen">
     <StackPanel Background="#D0ECE7">
-        <StackPanel Margin="100,80,100,100">
-          <Label x:Name="popuni" Content="Izaberite sastojak koji zelite da dodate" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="SemiBold"/>
-         <ComboBox x:Name="cBox1" Width="200"  Margin="8,8,0,0" FontWeight="Bold" FontSize="16"  Visibility="Visible" Background="#A2D9CE" SelectionChanged="cBox1_SelectionChanged">
-         </ComboBox>
+        <StackPanel Margin="0,40,0,40">
+            <Label x:Name="popuni" Content="Izaberite sastojak koji zelite da dodate" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="SemiBold"/>
+            <TextBlock x:Name="kolicina12"  Text="Tab-om se pozicionirajte na polje za izbor. Strelicama se krećite kroz ponuđene sastojke. Nakon što izaberete sastojak pozicionirajte se na njega i sa Tab+Ctrl napustite polje za izbor"  HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="9" Margin="56,0,32.6,0" Width="405"/>
+            <ComboBox x:Name="cBox1" Width="200"  Margin="8,8,0,0" FontWeight="Bold" FontSize="16"  Visibility="Visible" Background="#A2D9CE" SelectionChanged="cBox1_SelectionChanged"></ComboBox>
+            <Label x:Name="kolicina" Content="Unesite količinu sastojka u leku" Margin="10,10,10,0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="SemiBold"/>
+            <Label x:Name="kolicina1" Content="Količina predstavlja brojnu vrednost merenu u mg." HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="9"/>
+            <TextBox x:Name="kolicinaTxt" Width="88" Height="30" HorizontalAlignment="Center" Background="#A2D9CE" VerticalAlignment="Center" FontSize="16" FontWeight="SemiBold" Margin="208,0,197.6,0"/>
+
         </StackPanel>
         <WrapPanel FlowDirection="RightToLeft" VerticalAlignment="Bottom">
-            <Button Content="Otkaži" FontSize="18" Height="30" Width="170"  Margin="10,0,10,50" Background="#A2D9CE" BorderBrush="#FF1FEECD" Click="Button_Click_1" ></Button>
-            <Button Content="Potvrdi" FontSize="18" Height="30" Width="150"  Margin="10,0,10,50" Background="#A2D9CE" BorderBrush="#FF1FEECD" Click="Button_Click" ></Button>
+            <Button Content="Otkaži" FontSize="18" Height="30" Width="90"  Margin="10,0,10,100" Background="#A2D9CE" BorderBrush="#FF1FEECD" Click="Button_Click_1" ></Button>
+            <Button Content="Potvrdi" FontSize="18" Height="30" Width="90"  Margin="10,0,10,100" Background="#A2D9CE" BorderBrush="#FF1FEECD" Click="Button_Click" ></Button>
         </WrapPanel>
     </StackPanel>
 </Window>

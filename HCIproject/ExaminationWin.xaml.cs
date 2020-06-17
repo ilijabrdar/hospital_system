@@ -54,21 +54,44 @@ namespace HCIproject
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {//otkazi
-
-            SideBar sideBarWin = new SideBar((Doctor)user);
-            this.Visibility = Visibility.Hidden;
-            sideBarWin.MyTabControl.SelectedIndex = 2;
-            sideBarWin.Show();
+            string messageBoxText = "Da li ste sigurni da želite da otkažete pregled?.";
+            string caption = "Molimo popunite podatke.";
+            MessageBoxButton button = MessageBoxButton.YesNo;
+            MessageBoxImage icon = MessageBoxImage.Warning;
+            MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+            if (result == MessageBoxResult.Yes)
+            {
+                SideBar sideBarWin = new SideBar((Doctor)user);
+                this.Visibility = Visibility.Hidden;
+                sideBarWin.MyTabControl.SelectedIndex = 2;
+                sideBarWin.Show();
+            }
 
         }
         private void Button_Click_1(object sender, RoutedEventArgs e)
         { //potvrdi
+            if (diagnosisCombo.SelectedItem == null)
+            {
+                string messageBoxText = "Kako biste zavrsili pregled morate popuniti polje za dijagnozu.";
+                string caption = "Molimo popunite podatke.";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+            }
+            else
+            {
+                string messageBoxText = "Pregled uspesno zavrsen";
+                string caption = "Pregled gotov";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Information;
+                MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
                 var app = Application.Current as App;
 
                 SideBar sideBarWin = new SideBar((Doctor)user);
                 this.Visibility = Visibility.Hidden;
                 sideBarWin.MyTabControl.SelectedIndex = 2;
                 sideBarWin.Show();
+            }
             
         }
 

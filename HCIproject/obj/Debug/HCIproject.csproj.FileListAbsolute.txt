@@ -56,3 +56,10 @@ C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\HCIprojec
 C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\HCIproject.pdb
 C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\FindFileWindow.g.cs
 C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\FindFileWindow.baml
+C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\bin\Debug\MindFusion.Charting.Wpf.dll
+C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\bin\Debug\MindFusion.Gauges.Wpf.dll
+C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\bin\Debug\MindFusion.Licensing.dll
+C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\bin\Debug\MindFusion.Charting.Wpf.xml
+C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\bin\Debug\MindFusion.Gauges.Wpf.xml
+C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\chart.g.cs
+C:\Users\Tamara Kovacevic\Desktop\hospital_system\HCIproject\obj\Debug\chart.baml

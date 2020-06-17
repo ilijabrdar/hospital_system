@@ -21,6 +21,7 @@ namespace HCIproject
     /// <summary>
     /// Interaction logic for PatientFile.xaml
     /// </summary>
+   
     public partial class PatientFileWin : Window
     {
         public Doctor user;
@@ -41,13 +42,11 @@ namespace HCIproject
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            // SideBar sideBarWin = new SideBar((Doctor)user);
-            //  this.Visibility = Visibility.Hidden;
-            //  sideBarWin.MyTabControl.SelectedIndex = 3;
-            //  sideBarWin.Show();
+           // SideBar sideBarWin = new SideBar((Doctor)user);
             this.Close();
+          //  sideBarWin.MyTabControl.SelectedIndex = 3;
+          // sideBarWin.Show();
         }
-
         private void patientFileScrool_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             patientFileScrool.Height = this.ActualHeight - 200;

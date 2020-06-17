@@ -5,21 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HCIproject"
         mc:Ignorable="d"
-        Title="CreateArticle" Height="400" Width="750" WindowStartupLocation="CenterScreen">
+        Title="Novi članak" Height="400" Width="750" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
 
     <StackPanel x:Name="ResizePanel" Background="#D0ECE7" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-        <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="50,40,50,10">
-            <Label Content="Unesite naslov članka:" FontWeight="SemiBold" FontSize="18"></Label>
-            <TextBox Text="{Binding Topic}" FontSize="16" Height="30" Width="300" AcceptsReturn="True" CaretBrush="#FF10652D" SelectionBrush="#FF090C0E"/>
-        </WrapPanel>
-        <Label Content="Unesite željeni tekst članka" FontWeight="SemiBold" FontSize="18" Margin="30,0,0,0" />
-        <Border  BorderBrush="#A2D9CE" BorderThickness="4" CornerRadius="8,8,8,8"  Margin="30,0,29.6,0" >
-            <TextBox Margin="30,0,29.6,0" Height="220" Text="{Binding NewArticle}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AcceptsReturn="True" CaretBrush="#FF10652D" SelectionBrush="#FF021714" Foreground="#FF011815" BorderBrush="#FF1FEECD"/>
-        </Border>
-        <Label x:Name="Obavesti"></Label>
-        <WrapPanel FlowDirection="RightToLeft" Background="#D5F5E3" >
-            <Button Content="Otkaži" FontSize="18" Height="30" Width="100"  Margin="10,20,10,50" Background="#A2D9CE" Click="Button_Click_1" BorderBrush="#FF1FEECD" ></Button>
-            <Button Content="Potvrdi" FontSize="18" Height="30" Width="100"  Margin="10,20,10,50" Background="#A2D9CE" Click="Button_Click" BorderBrush="#FF1FEECD" ></Button>
-        </WrapPanel>
+        <ScrollViewer x:Name="scrol" VerticalScrollBarVisibility="Auto" Height="350" Focusable="True" >
+            <StackPanel x:Name="Articles" Orientation="Vertical" >
+                <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="50,40,50,10">
+                    <Label Content="Unesite naslov članka:" FontWeight="SemiBold" FontSize="18"></Label>
+                    <TextBox Text="{Binding Topic}" FontSize="16" Height="30" Width="300" AcceptsReturn="True" CaretBrush="#FF10652D" SelectionBrush="#FF090C0E"/>
+                </WrapPanel>
+                <Label Content="Unesite željeni tekst članka" FontWeight="SemiBold" FontSize="18" Margin="30,0,0,0" />
+                <Border  BorderBrush="#A2D9CE" BorderThickness="4" CornerRadius="8,8,8,8"  Margin="30,0,29.6,0" >
+                    <TextBox Margin="30,0,29.6,0" Height="130" Text="{Binding NewArticle}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AcceptsReturn="True" CaretBrush="#FF10652D" SelectionBrush="#FF021714" Foreground="#FF011815" BorderBrush="#FF1FEECD"/>
+                </Border>
+                <Label x:Name="Obavesti"></Label>
+                <WrapPanel FlowDirection="RightToLeft" Background="#D5F5E3" >
+                    <Button Content="Otkaži" FontSize="18" Height="30" Width="100"  Margin="10,20,10,20" Background="#A2D9CE" Click="Button_Click_1" BorderBrush="#FF1FEECD" ></Button>
+                    <Button Content="Potvrdi" FontSize="18" Height="30" Width="100"  Margin="10,20,10,20" Background="#A2D9CE" Click="Button_Click" BorderBrush="#FF1FEECD" ></Button>
+                </WrapPanel>
+            </StackPanel>
+        </ScrollViewer>
     </StackPanel>
 </Window>

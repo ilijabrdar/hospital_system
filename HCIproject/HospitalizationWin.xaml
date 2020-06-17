@@ -4,12 +4,21 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HCIproject"
+                xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+
         mc:Ignorable="d"
-        Title="Hospitalization" Height="400" Width="750"
+        Title="Zakazivanje hospitalizacije" Height="400" Width="750"
         WindowStartupLocation="CenterScreen">
     <StackPanel x:Name="ResizePanel" Background="#D0ECE7" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
         <StackPanel x:Name="PatientInfo" Background="#D5F5E3">
-            <Label Content="OPSTE INFO O PACIJENTU"/>
+            <WrapPanel>
+                <Label Content="Ime i prezime pacijenta:" Margin="10" FontSize="13"/>
+                <Label Content="Pera Peric" Margin="10,10,60,10" FontSize="15" FontWeight="SemiBold" />
+                <Label Content="Godine:" Margin="10" FontSize="13"/>
+                <Label Content="25" Margin="10,10,60,10" FontSize="14" FontWeight="SemiBold"/>
+                <Label Content="Alergija:" Margin="10" FontSize="13"/>
+                <Label Content="Penicilin, polen" Margin="10" FontSize="14" FontWeight="SemiBold"/>
+            </WrapPanel>      
         </StackPanel>
         <ScrollViewer VerticalScrollBarVisibility="Auto" Height="290">
             <StackPanel>
@@ -39,10 +48,10 @@
             <WrapPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
                         <Label Content="Vremenski period" FontSize="16" Margin="10" />
                 <Label Content="od" FontSize="18" Margin="10"/>
-                <DatePicker x:Name="StartDate" Margin="10" />
-                <Label Content="do" FontSize="18" Margin="10"/>
-                <DatePicker x:Name="EndDate" Margin="10" />
-            </WrapPanel>
+                        <DatePicker Name="StartDate" Width="200" Grid.Column="1" Grid.Row="2"   materialDesign:HintAssist.Hint="Unesite datum u formatu dd.mm.gggg" FontSize="10" Margin="10" VerticalAlignment="Bottom" />
+                        <Label Content="do" FontSize="18" Margin="10"/>
+                        <DatePicker Name="EndDate" Width="200" Grid.Column="1" Grid.Row="2"   materialDesign:HintAssist.Hint="Unesite datum u formatu dd.mm.gggg" FontSize="10" Margin="10" VerticalAlignment="Bottom" />
+                    </WrapPanel>
 
                     <Label Content="Napomena" Grid.Row="4" Grid.Column="0" FontSize="16" Margin="10"/>
             <TextBox   Grid.Row="4" Grid.Column="1" Margin="10" AcceptsReturn="True" CaretBrush="#FF1FEECD" BorderBrush="#FF1FEECD"/>

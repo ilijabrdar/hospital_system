@@ -24,11 +24,9 @@ namespace HCIproject
         private Doctor user;
         public String dijagnoza;
         private long patientId;
-
+       
         public HospitalizationWin(Doctor _user, long _patientId, String _dijagnoza)
         {
-            Console.WriteLine( "***********" + _dijagnoza + "\n");
-
             this.user = _user;
             this.dijagnoza = _dijagnoza;
             this.patientId = _patientId;
@@ -36,7 +34,6 @@ namespace HCIproject
 
             InitializeComponent();
             dijagnozaTxt.Text = dijagnoza;
-            Console.WriteLine(dijagnozaTxt.Text + "***********" + dijagnoza+"\n");
             setSpecialityCombo();
         }
 
@@ -74,6 +71,14 @@ namespace HCIproject
                 this.Close();
 
             }
+            else if (StartDate.SelectedDate > EndDate.SelectedDate || StartDate.SelectedDate < DateTime.Now)
+            {
+                string messageBoxText = "Nevalidan unos datuma. Datum početka operacije mora biti u budućnosti, pre završetka iste.";
+                string caption = "Hospitalizacija";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Information;
+                MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+            }
             else
             {
                 string messageBoxText = "Morate izabrati odeljenje kako biste izvrsili hospitalizaciju!";
@@ -83,6 +88,7 @@ namespace HCIproject
                 MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
             }
         }
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         { //otkazi

@@ -1,5 +1,6 @@
 ﻿using bolnica.Controller;
 using Controller;
+using MindFusion.Charting.Wpf;
 using Model.PatientSecretary;
 using Model.Users;
 using System;
@@ -15,23 +16,22 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 namespace HCIproject
-{
-    /// <summary>
-    /// Interaction logic for DrugValidation.xaml
-    /// </summary>
+{ 
     public partial class DrugValidations : Window
     {
 
         public Doctor user;
         public long drugId;
-
         private Ingredient obrisani;
-        private static List<Ingredient> sastojci { get; set; }
-        public double Quantity { get; set; }
+
+        private List<string> customLabels = new List<string>();
+        private DoubleCollection data = new DoubleCollection();
+
         public DrugValidations(Doctor user, long id)
         {
             InitializeComponent();
@@ -40,18 +40,60 @@ namespace HCIproject
             this.drugId = id;
             dataInitialize();
             fillTable();
-
-            sastojci = new List<Ingredient>()
-            {
-                new Ingredient{Name="bla1", Quantity=15},
-                new Ingredient{Name="bla2", Quantity=46}
-            };
+            fillGraph();
             this.DataContext = this;
+
+
         }
 
-        public DrugValidations()
+        private void fillGraph()
         {
-            InitializeComponent();
+            pieChart.Series.Clear();
+            customLabels.Clear();
+            data.Clear();
+            var app = Application.Current as App;
+            Drug drug = app.DrugController.Get(drugId);
+
+            foreach (Ingredient ing in drug.Ingredients)
+            {
+                customLabels.Add(ing.Name);
+                data.Add(ing.Quantity);
+            }
+
+            pieChart.TitleVisibility = Visibility.Collapsed;
+            pieChart.Width = 290;
+            pieChart.Height = 290;
+            PieSeries series = new PieSeries();
+            series.Effect = new DropShadowEffect() { Opacity = 0.5, ShadowDepth = 3, };
+            series.Data = data;
+            series.PieType = PieType.Pie2D;
+            series.InnerLabel = customLabels;
+            series.OuterLabel = customLabels;
+            series.LabelForeground = Brushes.White;
+            series.OuterLabelOffset = 30;
+
+            series.Fills.Add(Brushes.LightGreen);
+            series.Fills.Add(Brushes.DodgerBlue);
+            series.Fills.Add(Brushes.Violet);
+            series.Fills.Add(Brushes.Yellow);
+            series.Fills.Add(Brushes.PowderBlue);
+            series.Fills.Add(Brushes.BurlyWood);
+            series.Fills.Add(Brushes.Tomato);
+            series.Fills.Add(Brushes.Orange);
+
+            series.Strokes.Add(Brushes.Green);
+            series.Strokes.Add(Brushes.Blue);
+            series.Strokes.Add(Brushes.BlueViolet);
+            series.Strokes.Add(Brushes.Orange);
+            series.Strokes.Add(Brushes.CadetBlue);
+            series.Strokes.Add(Brushes.Brown);
+            series.Strokes.Add(Brushes.Red);
+            series.Strokes.Add(Brushes.OrangeRed);
+            series.Fills.Add(Brushes.Violet);
+            series.Strokes.Add(Brushes.BlueViolet);
+            pieChart.Series.Clear();
+            pieChart.Series.Add(series);
+            pieChart.PlotAreaMargin = new Thickness(40, 20, 40, 20);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -124,8 +166,6 @@ namespace HCIproject
             List<Ingredient> drugIngr = app.DrugController.Get(drugId).Ingredients;
 
             ingrediantsGrid.ItemsSource = app.DrugController.Get(drugId).Ingredients;
-
-            //   ingredients = app.DrugController.Get(drugId).Ingredients;
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
@@ -136,6 +176,7 @@ namespace HCIproject
             var app = Application.Current as App;
             ingrediantsGrid.ItemsSource = null;
             ingrediantsGrid.ItemsSource = app.DrugController.Get(drugId).Ingredients;
+            fillGraph();
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
@@ -157,9 +198,23 @@ namespace HCIproject
                 }
                 app.DrugController.Edit(drug);
 
+                string messageBoxText = "Uspesno ste obrisali sastojak " + ingredient.Name+ "!";
+                string caption = "Potvrda brisanja sastojka!";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Information;
+                MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+
                 ingrediantsGrid.ItemsSource = null;
                 ingrediantsGrid.ItemsSource = app.DrugController.Get(drugId).Ingredients;
+                fillGraph();
             }
         }
+
+        private void ScrollViewer_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            scroll.Height  = this.ActualHeight - 200;
+        }
+
+
     }
 }

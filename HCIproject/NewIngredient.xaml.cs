@@ -80,15 +80,55 @@ namespace HCIproject
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {//[potvrdi
+            bool flag = false;
+            var app = Application.Current as App;
+            if (kolicinaTxt.Text != "")
+            {
+                try
+                {
+                    noviLek.Quantity = int.Parse(kolicinaTxt.Text);
+                    app.IngredientController.Edit(noviLek);
+
+                }
+                catch
+                {
+                    kolicinaTxt.Text = "";
+                    string messageBoxText1 = "Molimo Vas količinu sastojka unesite isključivo kao broj";
+                    string caption1 = "Dodavanje sastojka.";
+                    MessageBoxButton button1 = MessageBoxButton.OK;
+                    MessageBoxImage icon1 = MessageBoxImage.Information;
+                    MessageBoxResult result1 = MessageBox.Show(messageBoxText1, caption1, button1, icon1);
+                    flag = true;
+                }
+            }
             if (cBox1.Visibility != Visibility.Hidden)
             {
-                var app = Application.Current as App;
-                Drug drug = app.DrugController.Get(drugId);
-                drug.Ingredients.Add(noviLek);
-                app.DrugController.Edit(drug);
-            }
-            this.Close();
+                if (cBox1.SelectedItem.ToString() != null && kolicinaTxt.Text!="") {
+                    string messageBoxText = "Uspešno ste dodali novi sastojak "+noviLek.Name+"!";
+                    string caption = "Dodavanje leka.";
+                    MessageBoxButton button = MessageBoxButton.OK;
+                    MessageBoxImage icon = MessageBoxImage.Information;
+                    MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
 
+  
+                    Drug drug = app.DrugController.Get(drugId);
+                    drug.Ingredients.Add(noviLek);
+                    app.DrugController.Edit(drug);
+                    this.Close();
+
+                }
+                else
+                {
+                    if (!flag)
+                    {
+                        string messageBoxText = "Morate izabrati sastojak i kolicinu da biste potvrdili izbor!";
+                        string caption = "Dodavanje sastojka.";
+                        MessageBoxButton button = MessageBoxButton.OK;
+                        MessageBoxImage icon = MessageBoxImage.Information;
+                        MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+                    }
+                }
+            }
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

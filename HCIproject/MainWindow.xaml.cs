@@ -121,5 +121,9 @@ namespace HCIproject
 
         }
 
+        private void ScrollViewer_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            scrol.Height = this.ActualHeight - 200;
+        }
     }
 }

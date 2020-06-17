@@ -3,49 +3,54 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-           xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:local="clr-namespace:HCIproject"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+       xmlns:my="clr-namespace:MindFusion.Charting.Wpf;assembly=MindFusion.Charting.Wpf"
+    xmlns:local="clr-namespace:HCIproject"
         mc:Ignorable="d"
-        Title="DrugValidation" Height="400" Width="750"
+        Title="Validacija leka" Height="400" Width="770"  ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
     <StackPanel Background="#D0ECE7">
-        <Border  BorderBrush="#A2D9CE" BorderThickness="5" CornerRadius="8,8,8,8"  Margin="10">
+        <Border  BorderBrush="#A2D9CE" BorderThickness="3" CornerRadius="8,8,8,8"  Margin="5">
             <StackPanel x:Name="Info" Background="#D5F5E3" Orientation="Vertical"  VerticalAlignment="Top">
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Ime leka:" FontSize="16" Margin="10,0,0,0" VerticalAlignment="Center" Width="Auto" />
-                    <Label x:Name="imeLeka"  FontSize="18" Margin="10,0,20,0" VerticalAlignment="Center" Width="Auto" FontWeight="Bold"/>
+                    <Label Content="Ime leka:" FontSize="12" Margin="10,0,0,0" VerticalAlignment="Center" Width="Auto" />
+                    <Label x:Name="imeLeka"  FontSize="12" Margin="10,0,20,0" VerticalAlignment="Center" Width="Auto" FontWeight="Bold"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Sifra leka:" FontSize="16" Margin="10,0,0,0" VerticalAlignment="Center"  />
-                    <Label x:Name="sifraLeka" FontSize="18" Margin="10,0,20,0" VerticalAlignment="Center" FontWeight="Bold"/>
+                    <Label Content="Sifra leka:" FontSize="12" Margin="10,0,0,0" VerticalAlignment="Center"  />
+                    <Label x:Name="sifraLeka" FontSize="12" Margin="10,0,20,0" VerticalAlignment="Center" FontWeight="Bold"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Kolicina:" FontSize="16" Margin="10,0,0,0"  VerticalAlignment="Center"  />
-                    <Label x:Name="kolicina" FontSize="18" Margin="10,0,20,0" VerticalAlignment="Center"  FontWeight="Bold" />
+                    <Label Content="Kolicina:" FontSize="12" Margin="10,0,0,0"  VerticalAlignment="Center"  />
+                    <Label x:Name="kolicina" FontSize="12" Margin="10,0,20,0" VerticalAlignment="Center"  FontWeight="Bold" />
                 </StackPanel>
             </StackPanel>
         </Border>
-        <Border  BorderBrush="#A2D9CE" BorderThickness="5" CornerRadius="8,8,8,8"  Margin="10">
-            <StackPanel Orientation="Horizontal" Background="#D5F5E3">
-                <ScrollViewer VerticalScrollBarVisibility="Auto" >
-                    <Border Height="150" Width="325">
-                        <DataGrid Margin="50,0,70,0.4" FontSize="14" BorderThickness="1" x:Name="ingrediantsGrid" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" ItemsSource ="{Binding ingredients}"  materialDesign:DataGridAssist.CellPadding="4 2 2 2" materialDesign:DataGridAssist.ColumnHeaderPadding="4 2 2 2" Background="#FFC4F3EA" >
+        <Border  BorderBrush="#A2D9CE" BorderThickness="3" CornerRadius="8,8,8,8" Margin="5">
+            <ScrollViewer x:Name="scroll" VerticalScrollBarVisibility="Auto" SizeChanged="ScrollViewer_SizeChanged">
+                <StackPanel Orientation="Horizontal" Background="#D5F5E3">
+                    <Grid x:Name="myGrid" Height="220" Focusable="False">
+                        <my:PieChart x:Name="pieChart" Focusable="False" Margin="10" ClipToBounds="True" Grid.Row="2"  CornerRadius="0"   Background="#A2D9CE"  BorderThickness="0"  BorderBrush="Transparent"  ></my:PieChart>
+                    </Grid>
+                    <Border x:Name="border"   Width="200"  Height="150" Margin="20"  >
+                        <DataGrid  FontSize="14" BorderThickness="1" x:Name="ingrediantsGrid" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" ItemsSource ="{Binding ingredients}"  materialDesign:DataGridAssist.CellPadding="4 2 2 2" materialDesign:DataGridAssist.ColumnHeaderPadding="4 2 2 2" Background="#FFC4F3EA" >
                             <DataGrid.Columns>
                                 <DataGridTextColumn  Header="Sastojak" Binding="{Binding Name}" Width="*" ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"  EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
                                 <DataGridTextColumn  Header="Kolicina" Binding="{Binding Quantity}" Width="*" ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"  EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
                             </DataGrid.Columns>
                         </DataGrid>
                     </Border>
-                </ScrollViewer>
-                <StackPanel Orientation="Vertical">
-                    <Button Margin="10,20,10,10" Content="Dodaj novi sastojak" Background="#A2D9CE" Click="Button_Click_2" ></Button>
-                    <Button Margin="10" Content="Obrisi sastojak" Background="#A2D9CE" Click="Button_Click_3" ></Button>
+                    <StackPanel Orientation="Vertical"  Width="250"  Height="150" Margin="10">
+                    <Button Margin="10,20,100,10" Content="Dodaj novi sastojak" FontSize="12" Background="#A2D9CE" Click="Button_Click_2" ></Button>
+                        <Button Margin="10,20,100,10" Content="Obrisi sastojak" FontSize="12" Background="#A2D9CE" Click="Button_Click_3" ></Button>
                 </StackPanel>
             </StackPanel>
+            </ScrollViewer>
+
         </Border>
-        <WrapPanel FlowDirection="RightToLeft">
-            <Button Content="Otkaži validaciju" FontSize="18" Height="30" Width="170"  Margin="10,0,10,50" Background="#A2D9CE" Click="Button_Click" BorderBrush="#FF1FEECD" ></Button>
-            <Button Content="Potvrdi sastav" FontSize="18" Height="30" Width="150"  Margin="10,0,10,50" Background="#A2D9CE" Click="Button_Click_1" BorderBrush="#FF1FEECD" ></Button>
+        <WrapPanel FlowDirection="RightToLeft" >
+            <Button Content="Otkaži validaciju" FontSize="16"  Width="150"  Margin="10,0,10,50" Background="#A2D9CE" Click="Button_Click" BorderBrush="#FF1FEECD" VerticalAlignment="Bottom"></Button>
+            <Button Content="Potvrdi sastav" FontSize="16" Width="130"  Margin="10,0,10,50" Background="#A2D9CE" Click="Button_Click_1" BorderBrush="#FF1FEECD" ></Button>
         </WrapPanel>
     </StackPanel>
 </Window>

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:HCIproject"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="DrugAlternative" Height="400" Width="750"
+        Title="Alternativni lekovi" Height="400" Width="750"  ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
     <StackPanel Background="#D0ECE7" Orientation="Vertical">
 
