@@ -782,7 +782,7 @@
                                 <StackPanel Orientation="Vertical">
                                     <DockPanel Margin="3">
                                         <Label DockPanel.Dock="Left" Width="150">stara lozinka</Label>
-                                        <TextBox x:Name="txtOldPassword" DockPanel.Dock="Left" Width="170" FontFamily="Password" Margin="500,0,0,0">
+                                        <TextBox x:Name="txtOldPassword" DockPanel.Dock="Left" Width="170" FontFamily="Password" Margin="500,0,0,0" KeyUp="mojTextBox_KeyUp">
                                             <TextBox.Text>
                                                 <Binding Path="PasswordOld" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                                                     <Binding.ValidationRules>
@@ -796,7 +796,7 @@
 
                                     <DockPanel Margin="3">
                                         <Label DockPanel.Dock="Left" Width="150">nova lozinka</Label>
-                                        <TextBox x:Name="txtNewPassword" DockPanel.Dock="Left" Width="170" FontFamily="Password" Margin="500,0,0,0">
+                                        <TextBox x:Name="txtNewPassword" DockPanel.Dock="Left" Width="170" FontFamily="Password" Margin="500,0,0,0" KeyUp="mojTextBox_KeyUp">
                                             <TextBox.Text>
                                                 <Binding Path="PasswordNew" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                                                     <Binding.ValidationRules>
@@ -810,7 +810,7 @@
 
                                     <DockPanel Margin="3">
                                         <Label DockPanel.Dock="Left" Width="200">potvrdite novu lozinku</Label>
-                                        <TextBox x:Name="txtNewPasswordCheck" DockPanel.Dock="Left" Width="170" FontFamily="Password" Margin="450,0,0,0">
+                                        <TextBox x:Name="txtNewPasswordCheck" DockPanel.Dock="Left" Width="170" FontFamily="Password" Margin="450,0,0,0" KeyUp="mojTextBox_KeyUp">
                                             <TextBox.Text>
                                                 <Binding Path="PasswordNewCheck" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                                                     <Binding.ValidationRules>
@@ -821,7 +821,7 @@
                                         </TextBox>
                                         <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                                     </DockPanel>
-                                    <Button HorizontalAlignment="Left" Margin="250,0,0,0" Padding="5" Width="160" Content="Azuriraj lozinku">
+                                    <Button x:Name="editPasswordBtn" HorizontalAlignment="Left" Margin="250,0,0,0" Padding="5" Width="160" Content="Azuriraj lozinku" Click="editPasswordBtn_Click">
                                         <Button.Style>
                                             <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
                                                 <Style.Triggers>
@@ -838,6 +838,7 @@
                                             </Style>
                                         </Button.Style>
                                     </Button>
+                                    <Label x:Name="passwordInfo" Margin="0,10,0,0" Foreground="Red" Visibility="Hidden">Ne valja</Label>
                                 </StackPanel>
 
                             </GroupBox>
@@ -910,7 +911,7 @@
                             Podelite svoje iskustvo korišćenja aplikacije sa nama kako bismo mogli da ga unapredimo u budućnosti!
                             </TextBlock>
                             <TextBox x:Name="mojTextBox" DockPanel.Dock="Top" Grid.Row="2" Grid.Column="0" Margin="10" 
-                                 HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" TextWrapping="Wrap" Width="Auto" HorizontalAlignment="Stretch" BorderThickness="1" Height="340">
+                                 HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" TextWrapping="Wrap" Width="Auto" HorizontalAlignment="Stretch" BorderThickness="1" Height="340" KeyUp="mojTextBox_KeyUp">
                                 <TextBox.Text>
                                     <Binding Path="Feedback" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                                         <Binding.ValidationRules>
@@ -931,6 +932,8 @@
                                     </Style>
                                 </Button.Style>
                             </Button>
+
+                            <Label x:Name="feedbackInfo" Margin="0,10,0,0" Visibility="Hidden">Ne valja</Label>
                         </StackPanel>
 
 

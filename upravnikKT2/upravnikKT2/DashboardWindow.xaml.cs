@@ -530,15 +530,18 @@ namespace upravnikKT2
             }
             else
             {
-            string messageBoxText = "Vase misljenje je uspesno prosledjeno sistemu. Hvala Vam na izdvojenom vremenu!";
-                        string caption = "Vas utisak";
-                        MessageBoxButton button = MessageBoxButton.OK;
-                        MessageBoxImage icon = MessageBoxImage.Information;
+                //string messageBoxText = "Vase misljenje je uspesno prosledjeno sistemu. Hvala Vam na izdvojenom vremenu!";
+                //            string caption = "Vas utisak";
+                //            MessageBoxButton button = MessageBoxButton.OK;
+                //            MessageBoxImage icon = MessageBoxImage.Information;
 
-                        MessageBox.Show(messageBoxText, caption, button, icon);
+                //            MessageBox.Show(messageBoxText, caption, button, icon);
 
-
-                        mojTextBox.Clear();
+                feedbackInfo.Content = "Vase misljenje je uspesno prosledjeno sistemu. Hvala Vam na izdvojenom vremenu!";
+                feedbackInfo.Foreground = Brushes.Green;
+                feedbackInfo.Visibility = Visibility.Visible;
+               
+                mojTextBox.Clear();
             }
             
         }
@@ -1664,6 +1667,64 @@ namespace upravnikKT2
                 fileName = op.FileName;
                 UserImage.Source = new BitmapImage(new Uri(fileName));
             }
+        }
+
+        private void editPasswordBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (!txtOldPassword.Text.Equals(director.Password))
+            {
+                //string messageBoxText = "Pogresno ste uneli trenutnu lozinku!";
+                //string caption = "Greska";
+                //MessageBoxButton button = MessageBoxButton.OK;
+                //MessageBoxImage icon = MessageBoxImage.Error;
+
+                //MessageBox.Show(messageBoxText, caption, button, icon);
+                //return;
+
+                passwordInfo.Content = "Pogresno ste uneli trenutnu lozinku!";
+                passwordInfo.Visibility = Visibility.Visible;
+                passwordInfo.Foreground = Brushes.Red;
+                return;
+            }
+            else if (txtOldPassword.Text.Equals(director.Password) && !txtNewPassword.Text.Equals(txtNewPasswordCheck.Text))
+            {
+                //string messageBoxText = "Potvrda nove lozinke se ne poklapa!";
+                //string caption = "Greska";
+                //MessageBoxButton button = MessageBoxButton.OK;
+                //MessageBoxImage icon = MessageBoxImage.Error;
+
+                //MessageBox.Show(messageBoxText, caption, button, icon);
+                //return;
+
+                passwordInfo.Content = "Potvrda nove lozinke se ne poklapa!";
+                passwordInfo.Visibility = Visibility.Visible;
+                passwordInfo.Foreground = Brushes.Red;
+                return;
+            }
+            else if (txtOldPassword.Text.Equals(director.Password) && txtNewPassword.Text.Equals(txtNewPasswordCheck.Text))
+            {
+                //string messageBoxText = "Uspesno izmenjeni podaci!";
+                //string caption = "Informacija";
+                //MessageBoxButton button = MessageBoxButton.OK;
+                //MessageBoxImage icon = MessageBoxImage.Information;
+
+                //MessageBox.Show(messageBoxText, caption, button, icon);
+
+                passwordInfo.Content = "Uspesno izmenjeni podaci!";
+                passwordInfo.Visibility = Visibility.Visible;
+                passwordInfo.Foreground = Brushes.Green;
+
+                txtOldPassword.Clear();
+                txtNewPassword.Clear();
+                txtNewPasswordCheck.Clear();
+                return;
+            }
+        }
+
+        private void mojTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            feedbackInfo.Visibility = Visibility.Hidden;
+            passwordInfo.Visibility = Visibility.Hidden;
         }
     }
 }
