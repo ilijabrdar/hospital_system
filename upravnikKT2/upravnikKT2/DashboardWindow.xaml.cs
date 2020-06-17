@@ -723,6 +723,8 @@ namespace upravnikKT2
             TownCombo.ItemsSource = Towns;
             AddressCombo.ItemsSource = null;
 
+            editAccountInfo.Visibility = Visibility.Hidden;
+
         }
 
         private void UpdateAddress(object sender, RoutedEventArgs e)
@@ -733,6 +735,8 @@ namespace upravnikKT2
             Addresses = town.GetAddress();
             Addresses.Sort((x, y) => x.FullAddress.CompareTo(y.FullAddress));
             AddressCombo.ItemsSource = Addresses;
+
+            editAccountInfo.Visibility = Visibility.Hidden;
 
         }
 
@@ -1187,12 +1191,18 @@ namespace upravnikKT2
             director = _directorController.Get(1);
             setDirectorField();
 
-            string messageBoxText = "Uspesno izmenjeni podaci!";
-            string caption = "Informacija";
-            MessageBoxButton button = MessageBoxButton.OK;
-            MessageBoxImage icon = MessageBoxImage.Information;
+            //string messageBoxText = "Uspesno izmenjeni podaci!";
+            //string caption = "Informacija";
+            //MessageBoxButton button = MessageBoxButton.OK;
+            //MessageBoxImage icon = MessageBoxImage.Information;
 
-            MessageBox.Show(messageBoxText, caption, button, icon);
+            //MessageBox.Show(messageBoxText, caption, button, icon);
+
+
+            editAccountInfo.Content = "Uspesno izmenjeni podaci!";
+            editAccountInfo.Visibility = Visibility.Visible;
+            editAccountInfo.Foreground = Brushes.Green;
+
 
         }
 
@@ -1725,6 +1735,17 @@ namespace upravnikKT2
         {
             feedbackInfo.Visibility = Visibility.Hidden;
             passwordInfo.Visibility = Visibility.Hidden;
+            editAccountInfo.Visibility = Visibility.Hidden;
+        }
+
+        private void AddressCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            editAccountInfo.Visibility = Visibility.Hidden;
+        }
+
+        private void birthDatePickerEdit_CalendarOpened(object sender, RoutedEventArgs e)
+        {
+            editAccountInfo.Visibility = Visibility.Hidden;
         }
     }
 }

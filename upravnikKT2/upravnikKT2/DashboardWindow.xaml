@@ -653,7 +653,7 @@
                                 <StackPanel Orientation="Vertical">
                                     <DockPanel Margin="3">
                                         <Label DockPanel.Dock="Left" Width="150">ime</Label>
-                                        <TextBox x:Name="txtFirstNameEdit" DockPanel.Dock="Left" Width="170" Margin="500,0,0,0">
+                                        <TextBox x:Name="txtFirstNameEdit" DockPanel.Dock="Left" Width="170" Margin="500,0,0,0" KeyUp="mojTextBox_KeyUp">
                                             <TextBox.Text>
                                                 <Binding Path="FirstName" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                                                     <Binding.ValidationRules>
@@ -667,7 +667,7 @@
 
                                     <DockPanel Margin="3">
                                         <Label DockPanel.Dock="Left" Width="150">prezime</Label>
-                                        <TextBox  x:Name="txtLastNameEdit" DockPanel.Dock="Left" Width="170" Margin="500,0,0,0">
+                                        <TextBox  x:Name="txtLastNameEdit" DockPanel.Dock="Left" Width="170" Margin="500,0,0,0" KeyUp="mojTextBox_KeyUp">
                                             <TextBox.Text>
                                                 <Binding Path="LastName" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                                                     <Binding.ValidationRules>
@@ -681,7 +681,7 @@
 
                                     <DockPanel Margin="3">
                                         <Label DockPanel.Dock="Left" Width="150">JMBG</Label>
-                                        <TextBox x:Name="txtJMBGEdit" DockPanel.Dock="Left" Width="170" Margin="500,0,0,0">
+                                        <TextBox x:Name="txtJMBGEdit" DockPanel.Dock="Left" Width="170" Margin="500,0,0,0" KeyUp="mojTextBox_KeyUp">
                                             <TextBox.Text>
                                                 <Binding Path="JMBG" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                                                     <Binding.ValidationRules>
@@ -700,14 +700,14 @@
                                                                 IsEditable="True"/>
                                             <ComboBox x:Name="TownCombo" Width="150" Margin="0,0,30,0" materialDesign:HintAssist.Hint="Grad" DisplayMemberPath="Name" SelectionChanged="UpdateAddress" IsTextSearchEnabled="True"
                                                                 IsEditable="True"/>
-                                            <ComboBox x:Name="AddressCombo" Width="200" materialDesign:HintAssist.Hint="Ulica" DisplayMemberPath="FullAddress" IsTextSearchEnabled="True"
+                                            <ComboBox x:Name="AddressCombo" Width="200" materialDesign:HintAssist.Hint="Ulica" DisplayMemberPath="FullAddress" IsTextSearchEnabled="True" SelectionChanged="AddressCombo_SelectionChanged"
                                                                 IsEditable="True"/>
                                         </WrapPanel>
                                     </DockPanel>
 
                                     <DockPanel Margin="3">
                                         <Label DockPanel.Dock="Left" Width="150">e-mail</Label>
-                                        <TextBox x:Name="txtEmailEdit" DockPanel.Dock="Left" Width="170" Margin="500,0,0,0">
+                                        <TextBox x:Name="txtEmailEdit" DockPanel.Dock="Left" Width="170" Margin="500,0,0,0" KeyUp="mojTextBox_KeyUp">
                                             <TextBox.Text>
                                                 <Binding Path="EMAIL" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                                                     <Binding.ValidationRules>
@@ -721,7 +721,7 @@
 
                                     <DockPanel Margin="3">
                                         <Label DockPanel.Dock="Left" Width="150">telefon</Label>
-                                        <TextBox x:Name="txtPhoneEdit" DockPanel.Dock="Left" Width="170" Margin="500,0,0,0">
+                                        <TextBox x:Name="txtPhoneEdit" DockPanel.Dock="Left" Width="170" Margin="500,0,0,0" KeyUp="mojTextBox_KeyUp">
                                             <TextBox.Text>
                                                 <Binding Path="Phone" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                                                     <Binding.ValidationRules>
@@ -735,7 +735,8 @@
 
                                     <DockPanel Margin="3">
                                         <Label DockPanel.Dock="Left" Width="150">datum rođenja</Label>
-                                        <DatePicker x:Name="birthDatePickerEdit" DockPanel.Dock="Left" Width="170" DisplayDate="1967-05-14" Text="14/05/1967" Margin="500,0,0,0" Focusable="False" DisplayDateEnd="1999-12-31" DisplayDateStart="1920-06-10"></DatePicker>
+                                        <DatePicker x:Name="birthDatePickerEdit" DockPanel.Dock="Left" Width="170" DisplayDate="1967-05-14" Text="14/05/1967" Margin="500,0,0,0" Focusable="False" 
+                                                    DisplayDateEnd="1999-12-31" DisplayDateStart="1920-06-10" CalendarOpened="birthDatePickerEdit_CalendarOpened"></DatePicker>
                                         <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                                     </DockPanel>
 
@@ -774,6 +775,7 @@
                                             </Style>
                                         </Button.Style>
                                     </Button>
+                                    <Label x:Name="editAccountInfo" Margin="0,10,0,0" Foreground="Red" Visibility="Hidden">Ne valja</Label>
                                 </StackPanel>
 
                             </GroupBox>
