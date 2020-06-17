@@ -81,19 +81,19 @@
                                     
                                     <Label DockPanel.Dock="Left" Width="200">Ukupan broj pacijenata</Label>
                                     <Separator Margin="86,0,0,0"></Separator>
-                                    <TextBox DockPanel.Dock="Left" Width="38" HorizontalContentAlignment="Center" Text="31" IsReadOnly="True"/>
-                                    
-                                    <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White"  Margin="0"/>
+                                    <Label DockPanel.Dock="Left" Width="38" HorizontalContentAlignment="Center" Content="31"  IsHitTestVisible="False" FontWeight="Bold"/>
+
+                                    <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White"  Margin="0" FontWeight="Bold"/>
                                 </DockPanel>
                                 <StackPanel Orientation="Horizontal" Margin="20,10,10,10">
                                     <Label Width="200">Broj doktora</Label>
                                     <Separator Margin="86,0,0,0"></Separator>
-                                    <TextBox x:Name="doctorCount" Width="38" HorizontalContentAlignment="Center" IsReadOnly="True" />
+                                    <Label x:Name="doctorCount" Width="38" HorizontalContentAlignment="Center" FontWeight="Bold"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Margin="20,10,10,10">
                                     <Label Width="200">Broj objavljenih članaka</Label>
                                     <Separator Margin="86,0,0,0"></Separator>
-                                    <TextBox Width="38" HorizontalContentAlignment="Center" IsReadOnly="True">81</TextBox>
+                                    <Label Width="38" HorizontalContentAlignment="Center" FontWeight="Bold">81</Label>
                                 </StackPanel>
                                 
                             </StackPanel>
@@ -653,7 +653,7 @@
                                 <StackPanel Orientation="Vertical">
                                     <DockPanel Margin="3">
                                         <Label DockPanel.Dock="Left" Width="150">ime</Label>
-                                        <TextBox x:Name="txtFirstNameEdit" DockPanel.Dock="Left" Width="170" Margin="500,0,0,0" KeyUp="mojTextBox_KeyUp">
+                                        <TextBox x:Name="txtFirstNameEdit" DockPanel.Dock="Left" Width="170" Margin="500,0,0,0" KeyUp="mojTextBox_KeyUp" PreviewKeyDown="txtFirstNameEdit_PreviewKeyDown">
                                             <TextBox.Text>
                                                 <Binding Path="FirstName" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                                                     <Binding.ValidationRules>
@@ -667,7 +667,7 @@
 
                                     <DockPanel Margin="3">
                                         <Label DockPanel.Dock="Left" Width="150">prezime</Label>
-                                        <TextBox  x:Name="txtLastNameEdit" DockPanel.Dock="Left" Width="170" Margin="500,0,0,0" KeyUp="mojTextBox_KeyUp">
+                                        <TextBox  x:Name="txtLastNameEdit" DockPanel.Dock="Left" Width="170" Margin="500,0,0,0" KeyUp="mojTextBox_KeyUp" PreviewKeyDown="txtFirstNameEdit_PreviewKeyDown">
                                             <TextBox.Text>
                                                 <Binding Path="LastName" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                                                     <Binding.ValidationRules>
@@ -681,7 +681,7 @@
 
                                     <DockPanel Margin="3">
                                         <Label DockPanel.Dock="Left" Width="150">JMBG</Label>
-                                        <TextBox x:Name="txtJMBGEdit" DockPanel.Dock="Left" Width="170" Margin="500,0,0,0" KeyUp="mojTextBox_KeyUp">
+                                        <TextBox x:Name="txtJMBGEdit" DockPanel.Dock="Left" Width="170" Margin="500,0,0,0" KeyUp="mojTextBox_KeyUp" PreviewKeyDown="txtFirstNameEdit_PreviewKeyDown">
                                             <TextBox.Text>
                                                 <Binding Path="JMBG" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                                                     <Binding.ValidationRules>
@@ -707,7 +707,7 @@
 
                                     <DockPanel Margin="3">
                                         <Label DockPanel.Dock="Left" Width="150">e-mail</Label>
-                                        <TextBox x:Name="txtEmailEdit" DockPanel.Dock="Left" Width="170" Margin="500,0,0,0" KeyUp="mojTextBox_KeyUp">
+                                        <TextBox x:Name="txtEmailEdit" DockPanel.Dock="Left" Width="170" Margin="500,0,0,0" KeyUp="mojTextBox_KeyUp" PreviewKeyDown="txtFirstNameEdit_PreviewKeyDown">
                                             <TextBox.Text>
                                                 <Binding Path="EMAIL" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                                                     <Binding.ValidationRules>
@@ -721,7 +721,7 @@
 
                                     <DockPanel Margin="3">
                                         <Label DockPanel.Dock="Left" Width="150">telefon</Label>
-                                        <TextBox x:Name="txtPhoneEdit" DockPanel.Dock="Left" Width="170" Margin="500,0,0,0" KeyUp="mojTextBox_KeyUp">
+                                        <TextBox x:Name="txtPhoneEdit" DockPanel.Dock="Left" Width="170" Margin="500,0,0,0" KeyUp="mojTextBox_KeyUp" PreviewKeyDown="txtFirstNameEdit_PreviewKeyDown">
                                             <TextBox.Text>
                                                 <Binding Path="Phone" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                                                     <Binding.ValidationRules>
@@ -740,7 +740,7 @@
                                         <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                                     </DockPanel>
 
-                                    <Button HorizontalAlignment="Left"  Padding="5" Width="160" Margin="250,0,0,0" Click="UpdateDataBtnClick">Azuriraj podatke
+                                    <Button x:Name="confirmEditAccountBtn" HorizontalAlignment="Left"  Padding="5" Width="160" Margin="250,0,0,0" Click="UpdateDataBtnClick">Azuriraj podatke
                                         <Button.Style>
                                             <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
                                                 <Style.Triggers>

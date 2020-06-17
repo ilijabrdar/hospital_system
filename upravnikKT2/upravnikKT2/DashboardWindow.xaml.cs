@@ -570,7 +570,7 @@ namespace upravnikKT2
             articles = _articleController.GetAll().ToList();
             setArticles();
 
-            doctorCount.Text = "" + _doctorController.GetAll().ToList().Count.ToString();
+            doctorCount.Content = "" + _doctorController.GetAll().ToList().Count.ToString();
 
 
             //ObservableCollection<Lekar> Lekari = new ObservableCollection<Lekar>();
@@ -1441,7 +1441,7 @@ namespace upravnikKT2
 
         private void TabItem_GotFocus(object sender, RoutedEventArgs e)
         {
-            doctorCount.Text = "" + _doctorController.GetAll().ToList().Count.ToString();
+            doctorCount.Content = "" + _doctorController.GetAll().ToList().Count.ToString();
         }
 
         private void TabItem_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -1746,6 +1746,18 @@ namespace upravnikKT2
         private void birthDatePickerEdit_CalendarOpened(object sender, RoutedEventArgs e)
         {
             editAccountInfo.Visibility = Visibility.Hidden;
+        }
+
+        private void txtFirstNameEdit_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            //if (e.Key == System.Windows.Input.Key.Enter)
+            //{
+            //    if (confirmEditAccountBtn.IsEnabled)
+            //    {
+            //        UpdateDataBtnClick(sender, e);
+            //        e.Handled = true;
+            //    }
+            //}
         }
     }
 }

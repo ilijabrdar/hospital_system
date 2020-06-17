@@ -358,12 +358,12 @@ namespace upravnikKT2
 
         private void searchOriginalIngredientsKeyUp(object sender, KeyEventArgs e)
         {
-            listAllIngredients.ItemsSource = currentOriginal.Where(input => input.Name.Contains(txtsearchOriginalIngredients.Text));
+            listAllIngredients.ItemsSource = currentOriginal.Where(input => input.Name.ToUpper().Contains(txtsearchOriginalIngredients.Text.ToUpper()));
         }
 
         private void searchSelectedIngredientsKeyUp(object sender, KeyEventArgs e)
         {
-            listSelectedIngredients.ItemsSource = currentSelected.Where(input => input.Name.Contains(txtsearchSelectedIngredients.Text));
+            listSelectedIngredients.ItemsSource = currentSelected.Where(input => input.Name.ToUpper().Contains(txtsearchSelectedIngredients.Text.ToUpper()));
         }
 
         private void searchOriginalBtn_Click(object sender, RoutedEventArgs e)

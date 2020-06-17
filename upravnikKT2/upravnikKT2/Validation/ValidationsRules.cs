@@ -51,7 +51,6 @@ namespace upravnikKT2.Validation
             try
             {
                 var s = (DateTime)value;
-                DateTime r;
                 DateTime latest = new DateTime(2000, 01, 01);
                 DateTime earliest = new DateTime(1919, 12, 31);
                 if (DateTime.Compare(s, latest) <0 && DateTime.Compare(s,earliest)>0)
@@ -74,7 +73,6 @@ namespace upravnikKT2.Validation
             try
             {
                 var s = (DateTime)value;
-                DateTime r;
                 DateTime latest = DateTime.Now.AddMonths(1);
                 DateTime earliest = DateTime.Now;
                 if (DateTime.Compare(s, latest) < 0 && DateTime.Compare(s, earliest) > 0)
