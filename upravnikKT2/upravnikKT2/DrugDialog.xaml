@@ -105,7 +105,7 @@
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Naziv" Width="130" DisplayMemberBinding="{Binding Name}"/>
-                        <!--<GridViewColumn Header="Kolicina" Width="100" DisplayMemberBinding="{Binding Quantity}"/> -->
+                        <GridViewColumn Header="Kolicina" Width="100" DisplayMemberBinding="{Binding Quantity}"/>
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -144,7 +144,7 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Naziv" Width="130" DisplayMemberBinding="{Binding Name}"/>
-                    <!--<GridViewColumn Header="Kolicina" Width="100" DisplayMemberBinding="{Binding Quantity}"/>-->
+                    <GridViewColumn Header="Kolicina" Width="100" DisplayMemberBinding="{Binding Quantity}"/>
                 </GridView>
             </ListView.View>
         </ListView>

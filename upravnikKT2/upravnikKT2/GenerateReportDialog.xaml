@@ -29,7 +29,7 @@
         <DatePicker x:Name="startDatePicker" Grid.Row="1" Grid.Column="1" FontSize="20" Margin="193,36,20,13" Focusable="False" Height="36"></DatePicker>
 
         <Label Grid.Row="2" Grid.Column="0" FontSize="20" VerticalAlignment="Center"  Height="38" Margin="20,27,0,20">Izaberite krajnji datum</Label>
-        <DatePicker x:Name="endDatePicker" Grid.Row="2" Grid.Column="1" FontSize="20" Margin="193,27,20,22" Height="36"></DatePicker>
+        <DatePicker x:Name="endDatePicker" Grid.Row="2" Grid.Column="1" FontSize="20" Margin="193,27,20,22" Height="36" Focusable="False"></DatePicker>
 
         <WrapPanel  Grid.Column="1" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,20,0" Height="54" Width="302">
             <Button x:Name="OKBtn" Height="34" Width="146" Click="Button_Click_OK" Margin="0,0,0,20" Content="Sacuvaj kao PDF">

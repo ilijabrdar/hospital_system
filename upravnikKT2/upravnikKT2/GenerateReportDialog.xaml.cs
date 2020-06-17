@@ -47,6 +47,16 @@ namespace upravnikKT2
         }
         private void Button_Click_OK(object sender, RoutedEventArgs e)
         {
+            if (DateTime.Compare((DateTime)startDatePicker.SelectedDate, (DateTime)endDatePicker.SelectedDate) > 0)
+            {
+                string messageBoxText = "Ne moze datum pocetka izvestaja biti posle datuma kraja izvestaja!";
+                string caption = "Greska";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Error;
+
+                MessageBox.Show(messageBoxText, caption, button, icon);
+                return;
+            }
             Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
             dlg.FileName = "Izvestaj"; // Default file name
             //dlg.DefaultExt = ".txt"; // Default file extension
@@ -169,6 +179,14 @@ namespace upravnikKT2
                 doc.Add(equipment_inventory);
                 doc.Add(renovation_paragraph);
                 doc.Close();
+
+
+                string messageBoxText = "Uspesno kreiran izvestaj!";
+                string caption = "Informacija";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Information;
+
+                MessageBox.Show(messageBoxText, caption, button, icon);
             }
 
             //Document doc = new Document(iTextSharp.text.PageSize.A4, 20f, 20f, 30f, 30f);
@@ -237,6 +255,12 @@ namespace upravnikKT2
             comboRooms.ItemsSource = roomController.GetAll().ToList();
             comboRooms.DisplayMemberPath = "RoomCode";
             comboRooms.SelectedValuePath = "Id";
+
+            startDatePicker.DisplayDateStart = new DateTime(DateTime.Now.Year, 1, 1);
+            startDatePicker.DisplayDateEnd = DateTime.Now;
+
+            endDatePicker.DisplayDateStart = new DateTime(DateTime.Now.Year, 1, 1);
+            endDatePicker.DisplayDateEnd = DateTime.Now;
         }
 
         private void Window_PreviewKeyDown(object sender, KeyEventArgs e)

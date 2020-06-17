@@ -164,11 +164,7 @@ namespace upravnikKT2
             InitializeComponent();
             this.DataContext = this;
 
-            FirstName = "Marko";
-            LastName = "Markovic";
-            EMAIL = "marko@bolnica.com";
-            Phone = "12312333";
-            JMBG = "1122334455645";
+
 
             var app = Application.Current as App;
             _roomController = app.RoomController;
@@ -181,6 +177,12 @@ namespace upravnikKT2
             _articleController = app.ArticleController;
 
             director = _directorController.Get(1);
+
+            FirstName = director.FirstName;
+            LastName = director.LastName;
+            EMAIL = director.Email;
+            Phone = director.Phone;
+            JMBG = director.Jmbg;
 
             setDirectorField();
         }
@@ -775,6 +777,12 @@ namespace upravnikKT2
             {
                 deleteDrugBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
             }
+            else if (e.Key == System.Windows.Input.Key.S && Keyboard.Modifiers == ModifierKeys.Control)
+            {
+                searchDrugBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                txtsearchDrug.Focus();
+                e.Handled = true;
+            }
         }
 
         private void TabItem_PreviewKeyDown_Rooms(object sender, KeyEventArgs e)
@@ -790,6 +798,12 @@ namespace upravnikKT2
             else if (e.Key == System.Windows.Input.Key.I && Keyboard.Modifiers == ModifierKeys.Control)
             {
                 generateRoomReportBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+            }
+            else if (e.Key == System.Windows.Input.Key.S && Keyboard.Modifiers == ModifierKeys.Control)
+            {
+                searchRoomBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                txtsearchRooms.Focus();
+                e.Handled = true;
             }
             else if (e.Key == System.Windows.Input.Key.Delete)
             {
@@ -1578,6 +1592,59 @@ namespace upravnikKT2
                     _passwordNew = value;
                     OnPropertyChanged("PasswordNew");
                 }
+            }
+        }
+
+        private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.S && Keyboard.Modifiers == ModifierKeys.Control)
+            {
+                if (tabControlMain.SelectedIndex == 1)
+                {
+                    searchDoctorBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                    txtSearchDoctors.Focus();
+                    e.Handled = true;
+                }
+                else if (tabControlMain.SelectedIndex == 2)
+                {
+                    //searchRoomBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                    //txtsearchRooms.Focus();
+                    //e.Handled = true;
+                }
+                else if (tabControlMain.SelectedIndex == 3)
+                {
+                    if (tabControlOprema.SelectedIndex == 0)
+                    {
+                        searchConsumableEquipmentBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                        txtsearcConsumable.Focus();
+                        e.Handled = true;
+                    }
+                    else if (tabControlOprema.SelectedIndex == 1)
+                    {
+                        searchInconsumableEquipmentBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                        txtsearchInconsumable.Focus();
+                        e.Handled = true;
+                    }
+                }
+                else if (tabControlMain.SelectedIndex == 4)
+                {
+                    searchDrugBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                    txtsearchDrug.Focus();
+                    e.Handled = true;
+                }
+                else if (tabControlMain.SelectedIndex == 5)
+                {
+                    searchRoomBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                    txtsearchRooms.Focus();
+                    e.Handled = true;
+                }
+                else if (tabControlMain.SelectedIndex == 6)
+                {
+                    searchRenovationsBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                    txtSearchRenovations.Focus();
+                    e.Handled = true;
+                }
+
             }
         }
     }

@@ -69,6 +69,16 @@ namespace upravnikKT2
 
         private void Button_Click_Ok(object sender, RoutedEventArgs e)
         {
+            if (DateTime.Compare((DateTime)startDatePicker.SelectedDate, (DateTime)endDatePicker.SelectedDate) > 0)
+            {
+                string messageBoxText = "Ne moze datum pocetka smene biti posle datuma kraja smene!";
+                string caption = "Greska";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Error;
+
+                MessageBox.Show(messageBoxText, caption, button, icon);
+                return;
+            }
             if (selectedBusinessDay == null)
             {
                 DateTime start = (DateTime)startDatePicker.SelectedDate;
@@ -151,6 +161,12 @@ namespace upravnikKT2
             {
                 comboRoom.SelectedValue = selectedBusinessDay.room.Id;
             }
+
+            startDatePicker.DisplayDateStart = DateTime.Now;
+            startDatePicker.DisplayDateEnd = DateTime.Now.AddMonths(6);
+
+            endDatePicker.DisplayDateStart = DateTime.Now;
+            endDatePicker.DisplayDateEnd = DateTime.Now.AddMonths(6);
 
         }
     }

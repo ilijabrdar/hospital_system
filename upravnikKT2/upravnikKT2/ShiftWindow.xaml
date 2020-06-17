@@ -38,8 +38,8 @@
             
         </ComboBox>
 
-        <DatePicker x:Name="startDatePicker" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Right" Margin="0,10,10,10" Width="139" Height="33"></DatePicker>
-        <DatePicker x:Name="endDatePicker" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Right" Margin="0,10,10,10" Width="139" Height="33"></DatePicker>
+        <DatePicker x:Name="startDatePicker" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Right" Margin="0,10,10,10" Width="139" Height="33" Focusable="False"></DatePicker>
+        <DatePicker x:Name="endDatePicker" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Right" Margin="0,10,10,10" Width="139" Height="33" Focusable="False"></DatePicker>
         <materialDesign:TimePicker x:Name="startTimePicker" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Right" Margin="0,0,10,10" Width="139" Style="{StaticResource MaterialDesignFloatingHintTimePicker}"
                                    materialDesign:HintAssist.Hint="" Height="45"></materialDesign:TimePicker>
         <materialDesign:TimePicker x:Name="endTimePicker" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Right" Margin="0,0,10,10" Width="139" Style="{StaticResource MaterialDesignFloatingHintTimePicker}"

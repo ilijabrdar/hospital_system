@@ -8,7 +8,7 @@
         xmlns:local="clr-namespace:upravnikKT2" xmlns:val="clr-namespace:upravnikKT2.Validation"
         mc:Ignorable="d"
         Title="Bolnica" WindowState="Maximized" Loaded="Window_Loaded"
-        Icon="AppIcon.ico">
+        Icon="AppIcon.ico" PreviewKeyDown="Window_PreviewKeyDown">
     <DockPanel>
         <DockPanel DockPanel.Dock="Left">
             <TabControl x:Name="tabControlMain" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TabStripPlacement="Left" FontSize="18">
@@ -719,7 +719,7 @@
 
                                     <DockPanel Margin="3">
                                         <Label DockPanel.Dock="Left" Width="150">datum rođenja</Label>
-                                        <DatePicker x:Name="birthDatePickerEdit" DockPanel.Dock="Left" Width="170" DisplayDate="1967-05-14" Text="14/05/1967" Margin="500,0,0,0"></DatePicker>
+                                        <DatePicker x:Name="birthDatePickerEdit" DockPanel.Dock="Left" Width="170" DisplayDate="1967-05-14" Text="14/05/1967" Margin="500,0,0,0" Focusable="False" DisplayDateEnd="1999-12-31" DisplayDateStart="1920-06-10"></DatePicker>
                                         <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White" Margin="0"/>
                                     </DockPanel>
 
@@ -921,6 +921,7 @@
 
                     </Grid>
                 </TabItem>
+                
 
             </TabControl>
 

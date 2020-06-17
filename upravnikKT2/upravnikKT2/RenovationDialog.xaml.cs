@@ -52,10 +52,22 @@ namespace upravnikKT2
             var app = Application.Current as App;
             _renovationController = app.RenovationController;
             _roomController = app.RoomController;
+            
         }
 
         private void Button_Click_OK_Renovation(object sender, RoutedEventArgs e)
         {
+
+            if (DateTime.Compare((DateTime) startDatePicker.SelectedDate, (DateTime)endDatePicker.SelectedDate)>0)
+            {
+                string messageBoxText = "Ne moze datum pocetka renoviranja biti posle datuma kraja renoviranja!";
+                string caption = "Greska";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Error;
+
+                MessageBox.Show(messageBoxText, caption, button, icon);
+                return;
+            }
 
             if (selectedItem == null)
             {
@@ -97,6 +109,12 @@ namespace upravnikKT2
             comboRoomCode.DisplayMemberPath = "RoomCode";
             comboRoomCode.SelectedValuePath = "Id";
             comboRoomCode.SelectedValue = "2";
+
+            startDatePicker.DisplayDateStart = new DateTime(DateTime.Now.Year,1,1);
+            startDatePicker.DisplayDateEnd = DateTime.Now.AddYears(2);
+
+            endDatePicker.DisplayDateStart = new DateTime(DateTime.Now.Year, 1, 1);
+            endDatePicker.DisplayDateEnd = DateTime.Now.AddYears(2);
 
             if(selectedItem != null) //this is for edit
                 comboRoomCode.SelectedValue = selectedItem.Room.GetId();

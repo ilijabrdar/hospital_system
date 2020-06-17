@@ -101,7 +101,7 @@ namespace upravnikKT2
             RoomController = new RoomController(roomService);
 
 
-            var renovationRepository = new RenovationRepository(new CSVStream<Renovation>(RENOVATIONS_FILE, new RenovationCSVConverter(CSV_DELIMITER)), new LongSequencer(),roomRepository);
+            var renovationRepository = new RenovationRepository(new CSVStream<Renovation>(RENOVATIONS_FILE, new RenovationCSVConverter("|")), new LongSequencer(),roomRepository);
             var renovationService = new RenovationService(renovationRepository);
             RenovationController = new RenovationController(renovationService);
 
