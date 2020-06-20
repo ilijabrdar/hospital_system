@@ -49,12 +49,12 @@ namespace UserInterface
                 newTopic.TextWrapping = TextWrapping.Wrap;
                 newTopic.FontSize = 20;
                 newTopic.FontWeight = FontWeights.Bold;
-                newTopic.MaxWidth = 700;
                 newTopic.HorizontalAlignment = HorizontalAlignment.Center;
                 newTopic.Foreground = Brushes.LightSteelBlue;
                 newText.TextWrapping = TextWrapping.Wrap;
+                newText.HorizontalAlignment = HorizontalAlignment.Stretch;
+                newText.Margin = new Thickness(10);
                 newText.FontSize = 15;
-                newText.MaxWidth = 700;
                 writer.FontSize = 10;
                 writer.HorizontalAlignment = HorizontalAlignment.Right;
 

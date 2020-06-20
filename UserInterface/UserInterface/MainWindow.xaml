@@ -17,9 +17,11 @@
         <CommandBinding Command="cmd:RoutedCommands.NewPatientTab" Executed="OpenNewPatientTab"/>
         <CommandBinding Command="cmd:RoutedCommands.HelpTab" Executed="OpenHelpTab"/>
         <CommandBinding Command="cmd:RoutedCommands.FeedbackTab" Executed="OpenFeedbackTab"/>
+        <CommandBinding Command="cmd:RoutedCommands.EditExamination" Executed="EditSelectedAppointment" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding Command="cmd:RoutedCommands.DeleteExamination" Executed="FreeSelectedAppointment" CanExecute="CommandBinding_CanExecute"/>
     </Window.CommandBindings>
     <DockPanel>
-        <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TabStripPlacement="Left">
+        <TabControl x:Name="tabs" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TabStripPlacement="Left">
             <TabItem x:Name="ProfileTab" Header="{Binding Secretary.Username}" Height="40" Background="#D7E1E9">
                 <Grid>
                     <Grid x:Name="profile"  >
@@ -29,7 +31,7 @@
                             <ColumnDefinition Width="2*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0">
-                            <Label Content="Ime" Margin="10 10 10 0" FontWeight="Bold" FontSize="14"/>
+                            <Label Content="Ime" Margin="10 50 10 0" FontWeight="Bold" FontSize="14"/>
                             <Label Content="Prezime" Margin="10 10 10 0" FontWeight="Bold" FontSize="14"/>
                             <Label Content="JMBG" Margin="10 10 10 0" FontWeight="Bold" FontSize="14"/>
                             <Label Content="E-mail" Margin="10 10 10 0" FontWeight="Bold" FontSize="14"/>
@@ -40,7 +42,7 @@
                             <Label Content="Adresa" Margin="10 10 10 0" FontWeight="Bold" FontSize="14"/>
                         </StackPanel>
                         <StackPanel Grid.Column="1">
-                            <TextBlock Margin="10 13 10 0" Height="29" Text="{Binding Secretary.FirstName}" FontSize="14"/>
+                            <TextBlock Margin="10 53 10 0" Height="29" Text="{Binding Secretary.FirstName}" FontSize="14"/>
                             <TextBlock Margin="10 10 10 0" Height="29" Text="{Binding Secretary.LastName}" FontSize="14"/>
                             <TextBlock Margin="10 10 10 0" Height="29" Text="{Binding Secretary.Jmbg}" FontSize="14"/>
                             <TextBlock Margin="10 10 10 0" Height="29" Text="{Binding Secretary.Email}" FontSize="14"/>
@@ -51,11 +53,10 @@
                             <TextBlock x:Name="txtAddress" Margin="10 10 10 0" Height="29" Text="{Binding Path=Secretary.Address.FullAddress}" FontSize="14"/>
                         </StackPanel>
                         <StackPanel Grid.Column="2">
-                            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Stretch" Height="350" Margin="10 10 10 10">
-                                <Image Source="{Binding Secretary.Image}">
-                                </Image>
-                            </Border>
+                            <Image x:Name="ProfilePic" Height="350" Margin="10 10 10 10"/>
+
                             <Button Content="_Izmeni profil" Margin="10,30,10,10" Click="OpenEditPanel" ToolTip="Izmena ličnih informacija i lozinke" GotFocus="DisplayToolTip" LostFocus="RemoveToolTip"/>
+                            <Button Content="_Odjavi se" Margin="10,10,10,10" Click="Logout" ToolTip="Odjava sa profila" GotFocus="DisplayToolTip" LostFocus="RemoveToolTip"/>
                         </StackPanel>
                     </Grid>
 
@@ -202,10 +203,10 @@
 
                                 </Grid>
                                 <StackPanel Grid.Column="1" VerticalAlignment="Bottom" Height="372" Margin="0,0,0,10">
-                                    <Border BorderBrush="Black" BorderThickness="1" Height="220">
-                                        <Image/>
-                                    </Border>
-                                    <Button Content="_Izmeni sliku" Width="Auto" Margin="10 5 10 0"/>
+
+                                    <Image x:Name="ChProfilePic" Height="250"/>
+
+                                    <Button Content="_Izmeni sliku" Width="Auto" Margin="10 5 10 0" Click="ChangePic"/>
                                     <Button Content="_Potrdi" Width="Auto" Margin="10 5 10 5" Click="Edit">
                                         <Button.Style>
                                             <Style TargetType="Button">
@@ -244,10 +245,10 @@
                                     <Label Content="Nova lozinka" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top"/>
                                     <Label Content="Potvrda nove" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top"/>
                                     <PasswordBox x:Name="oldPass" HorizontalAlignment="Left" Margin="150,10,0,0" VerticalAlignment="Top" Width="263" LostFocus="CheckPass"/>
-                                    <PasswordBox x:Name="newPass" HorizontalAlignment="Left" Margin="150,40,0,0" VerticalAlignment="Top" Width="263" LostFocus="ValidatePasswords"/>
+                                    <PasswordBox x:Name="newPass" HorizontalAlignment="Left" Margin="150,40,0,0" VerticalAlignment="Top" Width="263" GotKeyboardFocus="ValidatePasswords"/>
                                     <PasswordBox x:Name="confPass" HorizontalAlignment="Left" Margin="150,70,0,0" VerticalAlignment="Top" Width="263" KeyUp="PassValidation" GotKeyboardFocus="ValidatePasswords"/>
                                     <TextBlock x:Name="ErrorMessage" HorizontalAlignment="Left" Margin="456,70,-201,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" RenderTransformOrigin="-8.566,1.406" Width="183" Height="18" Visibility="Collapsed" Foreground="red"/>
-                                    <TextBlock x:Name="WrongPass" HorizontalAlignment="Left" Margin="441,10,-201,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="198" Visibility="Collapsed" Foreground="red"/>
+                                    <TextBlock x:Name="WrongPass" HorizontalAlignment="Left" Margin="456,10,-201,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="198" Visibility="Collapsed" Foreground="red"/>
                                 </Grid>
                                 <StackPanel Grid.Column="1" VerticalAlignment="Bottom">
                                     <Button x:Name="confirmBtn" Content="Potvrdi _lozinku" Margin="10, 10, 10, 10" Width="Auto" Click="ChangePass" IsEnabled="False"/>
@@ -258,17 +259,23 @@
                     </Grid>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="ExaminationTab" Header="Evidencija pregleda" Height="40" Background="#D7E1E9">
+            <TabItem x:Name="ExaminationTab" Header="Evidencija pregleda" Height="40" Background="#D7E1E9" Margin="-2,0,0,0" VerticalAlignment="Top">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"></RowDefinition>
                         <RowDefinition Height="2*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <DockPanel Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                        <TextBlock DockPanel.Dock="Left" Width="400" TextWrapping="Wrap" Text="TextBlock" Margin="10,10,0,10"/>
+                        <Grid DockPanel.Dock="Left">
+                            <TextBlock x:Name="FilterInfo"  Width="400" TextWrapping="Wrap" Margin="10,10,0,47"/>
+                            <Button HorizontalAlignment="Left" Margin="10,166,0,0" VerticalAlignment="Top" Width="30" Background="Transparent" BorderBrush="Transparent" Click="SwapLists" RenderTransformOrigin="0.511,0.12">
+                                <Image Source="blue_arrow.png"/>
+                            </Button>
+
+                        </Grid>
                         <StackPanel DockPanel.Dock="Right" VerticalAlignment="Bottom" HorizontalAlignment="Right">
                             <Button x:Name="SearchButton" Content="_Pretraži" Margin="0,0,10,15" Click="FindAppointment" ToolTip ="Pretraga pregleda po parametrima" GotFocus="DisplayToolTip" LostFocus="RemoveToolTip"/>
-                            <Button Content="_Izveštaj" Margin="0,0,10,15" Click="GenerateReport" ToolTip ="Izveštaj o zauzetosti lekara" GotFocus="DisplayToolTip" LostFocus="RemoveToolTip"/>
+                            <Button Content="PDF _Izveštaj" Margin="0,0,10,15" Click="GenerateReport" ToolTip ="Izveštaj o zauzetosti lekara" GotFocus="DisplayToolTip" LostFocus="RemoveToolTip"/>
                         </StackPanel>
 
                     </DockPanel>
@@ -276,7 +283,7 @@
                               IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False" Margin="10, 0, 10, 10" SelectedItem="{Binding Path=SelectedExamination}">
                         <DataGrid.Resources>
                             <ContextMenu x:Key="RowMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
-                                <MenuItem Header="Izmeni" InputGestureText="ctrl + E" Click="EditSelectedAppointment"/>
+                                <MenuItem Header="Izmeni" InputGestureText="ctrl + I" Click="EditSelectedAppointment"/>
                                 <MenuItem Header="Oslobodi" InputGestureText="ctrl + D" Click="FreeSelectedAppointment"/>
                             </ContextMenu>
                         </DataGrid.Resources>
@@ -289,11 +296,13 @@
                             <DataGridTextColumn Header="Datum" Binding="{Binding onlyDate}" Width="*"></DataGridTextColumn>
                             <DataGridTextColumn Header="Vreme" Binding="{Binding dateTime.TimeOfDay}" Width="*"></DataGridTextColumn>
                             <DataGridTextColumn Header="Pacijent" Binding="{Binding patient}" Width="*"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Doktor" Binding="{Binding doctor}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Lekar" Binding="{Binding doctor}" Width="*"></DataGridTextColumn>
                             <DataGridTextColumn Header="Sala" Binding="{Binding room}" Width="*"></DataGridTextColumn>
 
                         </DataGrid.Columns>
                     </DataGrid>
+                    <Label Content="Za izlazak iz tabele pritisnite ESC taster" HorizontalAlignment="Left" Margin="65,177,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.737,-3.731" Width="326" Foreground="Gray" FontStyle="Italic"/>
+                    <Label x:Name="SuccessMsg" HorizontalAlignment="Left" Margin="65,151,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.737,-3.731" Width="326" Foreground="Green" FontStyle="Italic" Visibility="Collapsed"/>
                 </Grid>
             </TabItem>
             <TabItem x:Name="NewPatientTab" Header="Novi pacijent" Height="40" Background="#D7E1E9">
@@ -310,7 +319,7 @@
                         <Label Content="Datum rodjenja" HorizontalAlignment="Left" Margin="40,140,0,0" VerticalAlignment="Top"/>
                         <Label Content="Telefon" HorizontalAlignment="Left" Margin="40,180,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.579,0.5"/>
                         <Label Content="E-mail" HorizontalAlignment="Left" Margin="40,220,0,0" VerticalAlignment="Top"/>
-                        <TextBox x:Name="IGuestJMBG" HorizontalAlignment="Left" Height="23" Margin="192,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" LostFocus="FindGuest">
+                        <TextBox x:Name="IGuestJMBG" HorizontalAlignment="Left" Height="23" Margin="192,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" LostFocus="FindGuest" KeyUp="RequiredFieldError">
                             <TextBox.Text>
                                 <Binding Path="GuestPatient.Jmbg" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
                                     <Binding.ValidationRules>
@@ -319,7 +328,7 @@
                                 </Binding>
                             </TextBox.Text>
                         </TextBox>
-                        <TextBox x:Name="IGuestFirstName" HorizontalAlignment="Left" Height="23" Margin="192,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" LostFocus="RequiredFieldError">
+                        <TextBox x:Name="IGuestFirstName" HorizontalAlignment="Left" Height="23" Margin="192,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" KeyUp="RequiredFieldError">
                             <TextBox.Text>
                                 <Binding Path="GuestPatient.FirstName" UpdateSourceTrigger="PropertyChanged">
                                     <Binding.ValidationRules>
@@ -328,7 +337,7 @@
                                 </Binding>
                             </TextBox.Text>
                         </TextBox>
-                        <TextBox x:Name="IGuestLastName" HorizontalAlignment="Left" Height="23" Margin="192,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" LostFocus="RequiredFieldError">
+                        <TextBox x:Name="IGuestLastName" HorizontalAlignment="Left" Height="23" Margin="192,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" KeyUp="RequiredFieldError">
                             <TextBox.Text>
                                 <Binding Path="GuestPatient.LastName" UpdateSourceTrigger="PropertyChanged">
                                     <Binding.ValidationRules>
@@ -337,7 +346,21 @@
                                 </Binding>
                             </TextBox.Text>
                         </TextBox>
-                        <TextBox x:Name="IGuestYear" HorizontalAlignment="Left" Height="23" Margin="192,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" KeyUp="YearPlaceHolderDisappear" LostFocus="RequiredFieldError">
+                        <TextBlock x:Name="YearPlaceHolder" Text="YYYY" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="203,123,0,0" Height="23" Width="30" FontWeight="Bold" Foreground="Gray" Opacity="50">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IGuestYear}" Value="True"/>
+                                            </MultiDataTrigger.Conditions>
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </MultiDataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                        <TextBox x:Name="IGuestYear" HorizontalAlignment="Left" Height="23" Margin="192,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" KeyUp="RequiredFieldError">
                             <TextBox.Text>
                                 <Binding Path="NewYear" UpdateSourceTrigger="PropertyChanged">
                                     <Binding.ValidationRules>
@@ -346,8 +369,8 @@
                                 </Binding>
                             </TextBox.Text>
                         </TextBox>
-                        <TextBlock x:Name="YearPlaceHolder" Text="YYYY" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="200,143,0,0" Height="23" Width="30" FontWeight="Bold" Foreground="Gray" Opacity="50"/>
-                        <TextBox x:Name="IGuestMonth" HorizontalAlignment="Left" Height="23" Margin="267,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" KeyUp="MonthPlaceHolderDisappear" LostFocus="RequiredFieldError">
+
+                        <TextBox x:Name="IGuestMonth" HorizontalAlignment="Left" Height="23" Margin="267,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" KeyUp="RequiredFieldError">
                             <TextBox.Text>
                                 <Binding Path="NewMonth" UpdateSourceTrigger="PropertyChanged">
                                     <Binding.ValidationRules>
@@ -356,8 +379,21 @@
                                 </Binding>
                             </TextBox.Text>
                         </TextBox>
-                        <TextBlock x:Name="MonthPlaceHolder" Text="MM" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="280,143,0,0" Height="23" Width="30" FontWeight="Bold" Foreground="Gray" Opacity="50"/>
-                        <TextBox x:Name="IGuestDay" HorizontalAlignment="Left" Height="23" Margin="342,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" KeyUp="DayPlaceHolderDisappear" LostFocus="RequiredFieldError">
+                        <TextBlock x:Name="MonthPlaceHolder" Text="MM" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="281,123,0,0" Height="23" Width="30" FontWeight="Bold" Foreground="Gray" Opacity="50">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IGuestMonth}" Value="True"/>
+                                            </MultiDataTrigger.Conditions>
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </MultiDataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                        <TextBox x:Name="IGuestDay" HorizontalAlignment="Left" Height="23" Margin="342,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" KeyUp="RequiredFieldError">
                             <TextBox.Text>
                                 <Binding Path="NewDay" UpdateSourceTrigger="PropertyChanged">
                                     <Binding.ValidationRules>
@@ -366,7 +402,20 @@
                                 </Binding>
                             </TextBox.Text>
                         </TextBox>
-                        <TextBlock x:Name="DayPlaceHolder" Text="DD" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="355,143,0,0" Height="23" Width="30" FontWeight="Bold" Foreground="Gray" Opacity="50"/>
+                        <TextBlock x:Name="DayPlaceHolder" Text="DD" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="356,123,0,0" Height="23" Width="30" FontWeight="Bold" Foreground="Gray" Opacity="50">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IGuestDay}" Value="True"/>
+                                            </MultiDataTrigger.Conditions>
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </MultiDataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
                         <TextBox x:Name="IGuestPhone" HorizontalAlignment="Left" Height="23" Margin="192,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240">
                             <TextBox.Text>
                                 <Binding Path="GuestPatient.Phone" UpdateSourceTrigger="PropertyChanged">
@@ -387,7 +436,10 @@
                         </TextBox>
                         <Label Content="/" HorizontalAlignment="Left" Margin="247,140,0,0" VerticalAlignment="Top"/>
                         <Label Content="/" HorizontalAlignment="Left" Margin="322,140,0,0" VerticalAlignment="Top"/>
-                        <Button x:Name="SearchBtn"  Content="_Pretraži" HorizontalAlignment="Left" Margin="40,260,0,0" VerticalAlignment="Top" Click="FindFreeAppointment" ToolTip ="Pretraga po lekaru i terminu" GotFocus="DisplayToolTip" LostFocus="RemoveToolTip"/>
+                        <Button x:Name="SearchBtn"  Content="_Pretraži" HorizontalAlignment="Left" Margin="232,260,0,0" VerticalAlignment="Top" Click="FindFreeAppointment" ToolTip ="Pretraga po lekaru i terminu" GotFocus="DisplayToolTip" LostFocus="RemoveToolTip"/>
+                        <Button HorizontalAlignment="Left" Margin="10,260,0,0" VerticalAlignment="Top" Width="30" Background="Transparent" BorderBrush="Transparent" Click="SwapFreeLists" RenderTransformOrigin="0.511,0.12">
+                            <Image Source="blue_arrow.png" RenderTransformOrigin="0.571,0.571"/>
+                        </Button>
                     </Grid>
                     <DataGrid x:Name="EmptyExaminations" Grid.Row="1" HorizontalAlignment="Stretch" Margin="10,10,10,10" VerticalAlignment="Stretch" ItemsSource="{Binding freeSlots}" 
                               IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False">
@@ -398,7 +450,8 @@
                             <DataGridTextColumn Header="Sala" Binding="{Binding room}" Width="*"></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button x:Name="ScheduleBtn" Grid.Row="2" Content="_Zakaži" HorizontalAlignment="Right" Width="200" Height="25" Margin="0 0 10 0" ToolTip ="ctrl + A" GotFocus="DisplayToolTip" LostFocus="RemoveToolTip">
+                    <Label x:Name="SuccessLabel" Visibility="Collapsed" Content="Pregled uspešno zakazan." Margin="273,12,215,10" Grid.Row="2" FontStyle="Italic" Foreground="Green"/>
+                    <Button x:Name="ScheduleBtn" Grid.Row="2" Content="_Zakaži" HorizontalAlignment="Right" Width="200" Height="25" Margin="0 0 10 0" ToolTip ="Zakaži novi preged" GotFocus="DisplayToolTip" LostFocus="RemoveToolTip" Click="Schedule" IsEnabled="False">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="IsEnabled" Value="False"/>
@@ -424,7 +477,7 @@
             </TabItem>
             <TabItem x:Name="HelpTab" Header="Pomoć" Height="40" Background="#D7E1E9">
                 <Grid RenderTransformOrigin="0.44,0.585">
-                    <Label Content="Dobro došli u sekciju za pomoć" HorizontalAlignment="Left" Margin="40,40,0,0" VerticalAlignment="Top" Width="522" FontSize="36"/>
+                    <Label Content="Dobro došli u sekciju za pomoć" HorizontalAlignment="Left" Margin="40,38,0,0" VerticalAlignment="Top" Width="522" FontSize="36"/>
                     <TextBlock Width="400" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Pomoćni tekstovi se javljaju kada se zadržite na određenom dugmetu i tu su da u nekoliko reči opišu njegovu funkcionalnost ili prečicu. Služe isključivo da vam olakšaju upotrebu aplikacije!" Margin="54,198,248,347"/>
                     <Label Content="Pomoćni tekstovi" HorizontalAlignment="Left" Margin="40,151,0,0" VerticalAlignment="Top" Width="276" FontSize="25"/>
                     <Button x:Name="ToolTipCtrl" Content="_Uključi pomoćne tekstove" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35" Width="150" Margin="54,267,0,0" Click="ControllToolTips"/>
@@ -446,12 +499,15 @@
                         <RowDefinition Height="3*"></RowDefinition>
                         <RowDefinition Height="0.4*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Label Grid.Row="0" Content="Zanima nas Vaše mišljenje!" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="36"/>
+                    <Label Grid.Row="0" Content="Zanima nas Vaše mišljenje!" HorizontalAlignment="Left" Margin="25,38,0,0" VerticalAlignment="Top" FontSize="36"/>
+                    <TextBlock TextWrapping="Wrap" Text="Naš tim posvećeno radi na poboljšavanju korisničkog iskustva i svaki utisci o aplikaciji su dobrodošli!" FontSize="15" Margin="25,116,10,44"/>
                     <TextBox x:Name="FeedBack" Grid.Row="1" HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Stretch" Margin="10, 0, 10, 0" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
                     <Button Grid.Row="2" HorizontalAlignment="Left" Margin="10,0,0,0" Content="Pošalji" Click="SendFeedBack"/>
                     <TextBox x:Name="ThankYouMsg" HorizontalAlignment="Left" Height="34" Margin="10,187,0,0" TextWrapping="Wrap" Text="Vaš odgovor je sačuvan. Hvala na saradnji!" VerticalAlignment="Top" Width="353" FontSize="18" Foreground="Green" Visibility="Hidden" BorderBrush="White"/>
                 </Grid>
             </TabItem>
+
+
 
 
 

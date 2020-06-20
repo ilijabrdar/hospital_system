@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,6 +18,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using bolnica.Controller;
 using Controller;
+using Microsoft.Win32;
 using Model.Users;
 
 namespace UserInterface
@@ -36,8 +39,12 @@ namespace UserInterface
         public static int Year { get; set; }
         public static String NewYear { get; set; }
         public BitmapSource Image { get; set; }
-        public List<Examination> examinations { get; set; }
-        public List<Examination> freeSlots { get; set; }
+        public static List<Examination> examinations { get; set; }
+        public static List<Examination> Examinations { get; set; }
+        public static List<Examination> freeSlots { get; set; }
+        public static List<Examination> FreeSlots { get; set; }
+
+        private String fileName;
 
         public List<State> States { get; set; }
         public List<Town> Towns { get; set; }
@@ -55,14 +62,18 @@ namespace UserInterface
         public String FullDate { get; set; }
 
         public Examination SelectedExamination {get;set;}
-        private DispatcherTimer dispatcherTimer;
+        private static DispatcherTimer dispatcherTimer;
 
         public List<Shortcut> Shortcuts { get; set; }
+
+        static DataGrid se;
+        static DataGrid ee;
+        static TextBlock tb;
+        static Label msg;
         public MainWindow(Secretary secretary)
         {
             InitializeComponent();
             this.DataContext = this;
-            
             GuestPatient = new Patient(true);
             Patients = new List<Patient>();
             Secretary = secretary;
@@ -73,53 +84,70 @@ namespace UserInterface
             PopulateCombos();
             PopulatePatients();
 
-            //Image = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(Secretary.Image, Int)
-            this.examinations = new List<Examination>();
-            this.examinations.Add(new Examination(new DateTime(2020, 1, 2, 12, 00, 00), "Pera Peric", "Petar Petrovic", "S12"));
-            this.examinations.Add(new Examination(new DateTime(2020, 1, 2, 15, 00, 00), "Pera Peric", "Milan Milanovic", "S12"));
-            this.examinations.Add(new Examination(new DateTime(2020, 1, 2, 16, 30, 00), "Marko Markovic", "Ivan Ivanovic", "S12"));
-            this.examinations.Add(new Examination(new DateTime(2020, 1, 2, 17, 15, 00), "Pera Peric", "Luka Lukovic", "S13"));
-            this.examinations.Add(new Examination(new DateTime(2020, 1, 3, 8, 00, 00), "Nikola Nikolic", "Milan Milanovic", "S12"));
-            this.examinations.Add(new Examination(new DateTime(2020, 1, 3, 9, 30, 00), "Nikola Nikolic", "Marko Markovic", "S15"));
-            this.examinations.Add(new Examination(new DateTime(2020, 1, 3, 10, 00, 00), "Ivan Ivanovic", "Luka Lukovic", "S12"));
-            this.examinations.Add(new Examination(new DateTime(2020, 1, 3, 10, 15, 00), "Pera Peric", "Milan Milanovic", "S12"));
-            this.examinations.Add(new Examination(new DateTime(2020, 1, 4, 12, 00, 00), "Marko Markovic", "Marko Markovic", "S15"));
-            this.examinations.Add(new Examination(new DateTime(2020, 1, 4, 12, 15, 00), "Marko Markovic", "Milan Milanovic", "S15"));
-            this.examinations.Add(new Examination(new DateTime(2020, 1, 4, 12, 30, 00), "Nikola Nikolic", "Marko Markovic", "S15"));
-            this.examinations.Add(new Examination(new DateTime(2020, 1, 4, 12, 50, 00), "Marko Markovic", "Milan Milanovic", "S14"));
-            this.examinations.Add(new Examination(new DateTime(2020, 1, 4, 15, 00, 00), "Nikola Nikolic", "Ivan Ivanovic", "S14"));
-            this.examinations.Add(new Examination(new DateTime(2020, 1, 5, 16, 00, 00), "Marko Markovic", "Milan Milanovic", "S12"));
-            this.examinations.Add(new Examination(new DateTime(2020, 1, 5, 17, 00, 00), "Nikola Nikolic", "Petar Petrovic", "S12"));
-            this.examinations.Add(new Examination(new DateTime(2020, 1, 5, 18, 00, 00), "Marko Markovic", "Milan Milanovic", "S13"));
-            this.examinations.Add(new Examination(new DateTime(2020, 1, 5, 18, 30, 00), "Nikola Nikolic", "Ivan Ivanovic", "S14"));
-            this.examinations.Add(new Examination(new DateTime(2020, 1, 5, 18, 55, 00), "Marko Markovic", "Petar Petrovic", "S15"));
-            this.examinations.Add(new Examination(new DateTime(2020, 1, 5, 19, 10, 00), "Nikola Nikolic", "Marko Markovic", "S15"));
-            this.examinations.Add(new Examination(new DateTime(2020, 1, 5, 20, 00, 00), "Marko Markovic", "Milan Milanovic", "S12"));
+            fileName = "C:/Users/Asus/Desktop/SIMS/hospital_system/UserInterface/UserInterface/Resources/Images/Pera.Jpeg";
 
-            this.freeSlots = new List<Examination>();
-            this.freeSlots.Add(new Examination(new DateTime(2020, 1, 2, 12, 00, 00), "Pera Peric", "S12"));
-            this.freeSlots.Add(new Examination(new DateTime(2020, 1, 2, 15, 00, 00), "Pera Peric", "S12"));
-            this.freeSlots.Add(new Examination(new DateTime(2020, 1, 2, 16, 30, 00), "Marko Markovic", "S12"));
-            this.freeSlots.Add(new Examination(new DateTime(2020, 1, 2, 17, 15, 00), "Pera Peric", "S13"));
-            this.freeSlots.Add(new Examination(new DateTime(2020, 1, 3, 8, 00, 00), "Nikola Nikolic", "S12"));
-            this.freeSlots.Add(new Examination(new DateTime(2020, 1, 3, 9, 30, 00), "Nikola Nikolic", "S15"));
-            this.freeSlots.Add(new Examination(new DateTime(2020, 1, 3, 10, 00, 00), "Ivan Ivanovic", "S12"));
-            this.freeSlots.Add(new Examination(new DateTime(2020, 1, 3, 10, 15, 00), "Pera Peric", "S14"));
-            this.freeSlots.Add(new Examination(new DateTime(2020, 1, 4, 12, 00, 00), "Marko Markovic", "S15"));
-            this.freeSlots.Add(new Examination(new DateTime(2020, 1, 4, 12, 15, 00), "Marko Markovic", "S15"));
-            this.freeSlots.Add(new Examination(new DateTime(2020, 1, 4, 12, 30, 00), "Nikola Nikolic", "S15"));
-            this.freeSlots.Add(new Examination(new DateTime(2020, 1, 4, 12, 50, 00), "Marko Markovic", "S14"));
-            this.freeSlots.Add(new Examination(new DateTime(2020, 1, 4, 15, 00, 00), "Nikola Nikolic", "S15"));
-            this.freeSlots.Add(new Examination(new DateTime(2020, 1, 5, 16, 00, 00), "Marko Markovic", "S14"));
-            this.freeSlots.Add(new Examination(new DateTime(2020, 1, 5, 17, 00, 00), "Nikola Nikolic", "S13"));
-            this.freeSlots.Add(new Examination(new DateTime(2020, 1, 5, 18, 00, 00), "Marko Markovic", "S15"));
-            this.freeSlots.Add(new Examination(new DateTime(2020, 1, 5, 18, 30, 00), "Nikola Nikolic", "S15"));
-            this.freeSlots.Add(new Examination(new DateTime(2020, 1, 5, 18, 55, 00), "Marko Markovic", "S15"));
-            this.freeSlots.Add(new Examination(new DateTime(2020, 1, 5, 19, 10, 00), "Nikola Nikolic", "S13"));
-            this.freeSlots.Add(new Examination(new DateTime(2020, 1, 5, 20, 00, 00), "Marko Markovic", "S15"));
+            ProfilePic.Source = new BitmapImage(new Uri(fileName));
+            ChProfilePic.Source = new BitmapImage(new Uri(fileName));
+
+            //Image = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(Secretary.Image, Int)
+
+            examinations = new List<Examination>();
+            Examinations = new List<Examination>();
+            Examinations.Add(new Examination(new DateTime(2020, 1, 2, 12, 00, 00), "Pera Peric", "Petar Petrovic", "S12"));
+            Examinations.Add(new Examination(new DateTime(2020, 1, 2, 15, 00, 00), "Pera Peric", "Milan Milanovic", "S12"));
+            Examinations.Add(new Examination(new DateTime(2020, 1, 2, 16, 30, 00), "Marko Markovic", "Ivan Ivanovic", "S12"));
+            Examinations.Add(new Examination(new DateTime(2020, 1, 2, 17, 15, 00), "Pera Peric", "Luka Lukovic", "S13"));
+            Examinations.Add(new Examination(new DateTime(2020, 1, 3, 8, 00, 00), "Nikola Nikolic", "Milan Milanovic", "S12"));
+            Examinations.Add(new Examination(new DateTime(2020, 1, 3, 9, 30, 00), "Nikola Nikolic", "Marko Markovic", "S15"));
+            Examinations.Add(new Examination(new DateTime(2020, 1, 3, 10, 00, 00), "Ivan Ivanovic", "Pera Peric", "S12"));
+            Examinations.Add(new Examination(new DateTime(2020, 1, 3, 10, 15, 00), "Pera Peric", "Milan Milanovic", "S12"));
+            Examinations.Add(new Examination(new DateTime(2020, 1, 4, 12, 00, 00), "Marko Markovic", "Marko Markovic", "S15"));
+            Examinations.Add(new Examination(new DateTime(2020, 1, 4, 12, 15, 00), "Marko Markovic", "Milan Milanovic", "S15"));
+            Examinations.Add(new Examination(new DateTime(2020, 1, 4, 12, 30, 00), "Nikola Nikolic", "Marko Markovic", "S15"));
+            Examinations.Add(new Examination(new DateTime(2020, 1, 4, 12, 50, 00), "Marko Markovic", "Milan Milanovic", "S14"));
+            Examinations.Add(new Examination(new DateTime(2020, 1, 4, 15, 00, 00), "Nikola Nikolic", "Ivan Ivanovic", "S14"));
+            Examinations.Add(new Examination(new DateTime(2020, 1, 5, 16, 00, 00), "Marko Markovic", "Pera Peric", "S12"));
+            Examinations.Add(new Examination(new DateTime(2020, 1, 5, 17, 00, 00), "Nikola Nikolic", "Petar Petrovic", "S12"));
+            Examinations.Add(new Examination(new DateTime(2020, 1, 5, 18, 00, 00), "Marko Markovic", "Pera Peric", "S13"));
+            Examinations.Add(new Examination(new DateTime(2020, 1, 5, 18, 30, 00), "Nikola Nikolic", "Ivan Ivanovic", "S14"));
+            Examinations.Add(new Examination(new DateTime(2020, 1, 5, 18, 55, 00), "Marko Markovic", "Petar Petrovic", "S15"));
+            Examinations.Add(new Examination(new DateTime(2020, 1, 5, 19, 10, 00), "Nikola Nikolic", "Marko Markovic", "S15"));
+            Examinations.Add(new Examination(new DateTime(2020, 1, 5, 20, 00, 00), "Marko Markovic", "Pera Peric", "S12"));
+
+            examinations = new List<Examination>(Examinations);
+
+            FreeSlots = new List<Examination>();
+            
+            FreeSlots.Add(new Examination(new DateTime(2020, 1, 2, 12, 00, 00), "Pera Peric", "S12"));
+            FreeSlots.Add(new Examination(new DateTime(2020, 1, 2, 15, 00, 00), "Pera Peric", "S12"));
+            FreeSlots.Add(new Examination(new DateTime(2020, 1, 2, 16, 30, 00), "Marko Markovic", "S12"));
+            FreeSlots.Add(new Examination(new DateTime(2020, 1, 2, 17, 15, 00), "Pera Peric", "S13"));
+            FreeSlots.Add(new Examination(new DateTime(2020, 1, 3, 8, 00, 00), "Nikola Nikolic", "S12"));
+            FreeSlots.Add(new Examination(new DateTime(2020, 1, 3, 9, 30, 00), "Nikola Nikolic", "S15"));
+            FreeSlots.Add(new Examination(new DateTime(2020, 1, 3, 10, 00, 00), "Ivan Ivanovic", "S12"));
+            FreeSlots.Add(new Examination(new DateTime(2020, 1, 3, 10, 15, 00), "Pera Peric", "S14"));
+            FreeSlots.Add(new Examination(new DateTime(2020, 1, 4, 12, 00, 00), "Marko Markovic", "S15"));
+            FreeSlots.Add(new Examination(new DateTime(2020, 1, 4, 12, 15, 00), "Marko Markovic", "S15"));
+            FreeSlots.Add(new Examination(new DateTime(2020, 1, 4, 12, 30, 00), "Nikola Nikolic", "S15"));
+            FreeSlots.Add(new Examination(new DateTime(2020, 1, 4, 12, 50, 00), "Marko Markovic", "S14"));
+            FreeSlots.Add(new Examination(new DateTime(2020, 1, 4, 15, 00, 00), "Nikola Nikolic", "S15"));
+            FreeSlots.Add(new Examination(new DateTime(2020, 1, 5, 16, 00, 00), "Marko Markovic", "S14"));
+            FreeSlots.Add(new Examination(new DateTime(2020, 1, 5, 17, 00, 00), "Nikola Nikolic", "S13"));
+            FreeSlots.Add(new Examination(new DateTime(2020, 1, 5, 18, 00, 00), "Marko Markovic", "S15"));
+            FreeSlots.Add(new Examination(new DateTime(2020, 1, 5, 18, 30, 00), "Nikola Nikolic", "S15"));
+            FreeSlots.Add(new Examination(new DateTime(2020, 1, 5, 18, 55, 00), "Marko Markovic", "S15"));
+            FreeSlots.Add(new Examination(new DateTime(2020, 1, 5, 19, 10, 00), "Nikola Nikolic", "S13"));
+            FreeSlots.Add(new Examination(new DateTime(2020, 1, 5, 20, 00, 00), "Marko Markovic", "S15"));
+
+            freeSlots = new List<Examination>(FreeSlots);
 
             Shortcuts = new List<Shortcut>();
             CreateShortcuts();
+
+            se = ScheduledExaminations;
+            ee = EmptyExaminations;
+            tb = FilterInfo;
+            msg = SuccessMsg;
 
             dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
@@ -187,6 +215,8 @@ namespace UserInterface
             address.Text = SelectedAddress.FullAddress;
 
             app.SecretaryController.Edit(Secretary);
+
+            ProfilePic.Source = new BitmapImage(new Uri(fileName)); // URADITI I SA FAJLOM
             CancelProfileChangeDialog(sender, e);
         }
 
@@ -194,14 +224,23 @@ namespace UserInterface
         {
             Report reportWindow = new Report();
             _toolTip.IsOpen = false;
-            reportWindow.Show();
+            reportWindow.ShowDialog();
         }
 
-        private void FindAppointment(object sender, RoutedEventArgs e)
+        private void Logout(object sender, RoutedEventArgs e)
+        {
+            Index index = new Index();
+            index.Show();
+            this.Close();
+        }
+
+            private void FindAppointment(object sender, RoutedEventArgs e)
         {
             AppointmentFilter filterWindow = new AppointmentFilter(Patients);
             _toolTip.IsOpen = false;
             filterWindow.ShowDialog();
+
+
         }
 
         private void FindFreeAppointment(object sender, RoutedEventArgs e)
@@ -227,6 +266,8 @@ namespace UserInterface
             var profilePanel = this.FindName("profile") as Grid;
             changeProfilePanel.Visibility = Visibility.Collapsed;
             profilePanel.Visibility = Visibility.Visible;
+            fileName = "C:/Users/Asus/Desktop/SIMS/hospital_system/UserInterface/UserInterface/Resources/Images/Pera.Jpeg";
+            ChProfilePic.Source = new BitmapImage(new Uri(fileName));
         }
 
         private void EditSelectedAppointment(object sender, RoutedEventArgs e)
@@ -237,7 +278,18 @@ namespace UserInterface
 
         private void FreeSelectedAppointment(object sender, RoutedEventArgs e)
         {
+            MessageBoxResult result = MessageBox.Show("Da li ste sigurni da želite da otkažete pregled?", "Otkazivanje pregleda", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
+            if (result == MessageBoxResult.No) return; 
+
+            Examination examination = ScheduledExaminations.SelectedItem as Examination;
+            Examinations.Remove(examination);
+            examinations.Remove(examination);
+            se.ItemsSource = null;
+            se.ItemsSource = examinations;
+            msg.Content = "Pregled upsešno otkazan.";
+            msg.Visibility = Visibility.Visible;
+            dispatcherTimer.Start();
         }
 
         private void DisplayToolTip(object sender, RoutedEventArgs e)
@@ -259,40 +311,13 @@ namespace UserInterface
             _toolTip.IsOpen = false;
         }
 
-        private void RequiredFieldError(object sender, RoutedEventArgs e)
+        private void RequiredFieldError(object sender, KeyEventArgs e)
         {
             TextBox textField = sender as TextBox;
             textField.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-        }
-
-        private void DayPlaceHolderDisappear(object sender, RoutedEventArgs e)
-        {
-            TextBox textBox = sender as TextBox;
-            TextBlock placeHolder = (TextBlock)FindName("DayPlaceHolder");
-            if(String.IsNullOrEmpty(textBox.Text))
-                placeHolder.Visibility = Visibility.Visible;
-            else
-                placeHolder.Visibility = Visibility.Collapsed;
-        }
-
-        private void MonthPlaceHolderDisappear(object sender, RoutedEventArgs e)
-        {
-            TextBox textBox = sender as TextBox;
-            TextBlock placeHolder = (TextBlock)FindName("MonthPlaceHolder");
-            if (String.IsNullOrEmpty(textBox.Text))
-                placeHolder.Visibility = Visibility.Visible;
-            else
-                placeHolder.Visibility = Visibility.Collapsed;
-        }
-
-        private void YearPlaceHolderDisappear(object sender, RoutedEventArgs e)
-        {
-            TextBox textBox = sender as TextBox;
-            TextBlock placeHolder = (TextBlock)FindName("YearPlaceHolder");
-            if (String.IsNullOrEmpty(textBox.Text))
-                placeHolder.Visibility = Visibility.Visible;
-            else
-                placeHolder.Visibility = Visibility.Collapsed;
+            ScheduleBtn.IsEnabled = false;
+            if (IGuestJMBG.Text != "" && IGuestFirstName.Text != "" && IGuestLastName.Text != "" && IGuestYear.Text != "" && IGuestMonth.Text != "" && IGuestDay.Text != "")
+                ScheduleBtn.IsEnabled = true;
         }
 
         private void UpdateTownAddress(object sender, RoutedEventArgs e)
@@ -344,10 +369,6 @@ namespace UserInterface
             TextBlock monthPlaceholder = FindName("MonthPlaceHolder") as TextBlock;
             TextBlock dayPlaceholder = FindName("DayPlaceHolder") as TextBlock;
 
-            yearPlaceholder.Visibility = Visibility.Visible;
-            monthPlaceholder.Visibility = Visibility.Visible;
-            dayPlaceholder.Visibility = Visibility.Visible;
-
             txtJmbg.IsEnabled = true;
             txtFirstName.IsEnabled = true;
             txtLastName.IsEnabled = true;
@@ -360,7 +381,6 @@ namespace UserInterface
             String jmbg = txtJmbg.Text;
             if (jmbg.Trim() == "")
             {
-                RequiredFieldError(sender, e);
                 return;
             }
             
@@ -385,17 +405,14 @@ namespace UserInterface
                 txtEmail.IsEnabled = false;
 
                 NewDay = "" + guest.DateOfBirth.Day;
-                dayPlaceholder.Visibility = Visibility.Collapsed;
                 txtDay.Text = NewDay;
                 txtDay.IsEnabled = false;
 
                 NewMonth = "" + guest.DateOfBirth.Month;
-                monthPlaceholder.Visibility = Visibility.Collapsed;
                 txtMonth.Text = NewMonth;
                 txtMonth.IsEnabled = false;
 
                 NewYear = "" + guest.DateOfBirth.Year;
-                yearPlaceholder.Visibility = Visibility.Collapsed;
                 txtYear.Text = NewYear;
                 txtYear.IsEnabled = false;
 
@@ -404,17 +421,17 @@ namespace UserInterface
             }
             else
             {
-                txtFirstName.Clear();
-                txtLastName.Clear();
-                txtPhone.Clear();
-                txtEmail.Clear();
-                txtYear.Clear();
-                txtMonth.Clear();
-                txtDay.Clear();
                 txtFirstName.Focus();
+            //    txtFirstName.Clear();
+            //    txtLastName.Clear();
+            //    txtPhone.Clear();
+            //    txtEmail.Clear();
+            //    txtYear.Clear();
+            //    txtMonth.Clear();
+            //    txtDay.Clear();
+            //    txtFirstName.Focus();
             }
 
-            RequiredFieldError(sender, e);
         }
 
         private void PassValidation(object sender, KeyEventArgs e)
@@ -433,7 +450,10 @@ namespace UserInterface
             else
             {
                 err.Visibility = Visibility.Collapsed;
-                cnf.IsEnabled = true;
+                if (oldPass.Password.Trim() == "" || newPass.Password.Trim() == "" || confPass.Password.Trim() == "")
+                    confirmBtn.IsEnabled = false;
+                else
+                    confirmBtn.IsEnabled = true;
             }
         }
 
@@ -451,9 +471,11 @@ namespace UserInterface
             else
             {
                 err.Visibility = Visibility.Collapsed;
-                cnf.IsEnabled = true;
+                if (oldPass.Password.Trim() == "" || newPass.Password.Trim() == "" || confPass.Password.Trim() == "")
+                    confirmBtn.IsEnabled = false;
+                else
+                    confirmBtn.IsEnabled = true;
             }
-            ValidatePasswords(sender, e);
         }
 
         private void ChangePass(object sender, RoutedEventArgs e)
@@ -519,6 +541,8 @@ namespace UserInterface
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
             ThankYouMsg.Visibility = System.Windows.Visibility.Hidden;
+            SuccessLabel.Visibility = Visibility.Collapsed;
+            msg.Visibility = Visibility.Collapsed;
 
             dispatcherTimer.IsEnabled = false;
         }
@@ -561,6 +585,143 @@ namespace UserInterface
         private void OpenFeedbackTab(object sender, ExecutedRoutedEventArgs e)
         {
             FeedbackTab.IsSelected = true;
+        }
+
+        private void ChangePic(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog op = new OpenFileDialog();
+            op.Title = "Select a picture";
+            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+              "Portable Network Graphic (*.png)|*.png";
+            if (op.ShowDialog() == true)
+            {
+                fileName = op.FileName;
+                ChProfilePic.Source = new BitmapImage(new Uri(fileName));
+            }
+
+            
+        }
+
+        private void SwapLists(object sender, RoutedEventArgs e)
+        {
+            examinations = new List<Examination>(Examinations);
+            se.ItemsSource = null;
+            se.ItemsSource = examinations;
+            tb.Text = "";
+        }
+
+        private void SwapFreeLists(object sender, RoutedEventArgs e)
+        {
+            freeSlots = new List<Examination>(FreeSlots);
+            ee.ItemsSource = null;
+            ee.ItemsSource = freeSlots;
+        }
+
+        public static void FilterExaminations(ExaminationDTO examinationFilter)
+        {
+            examinations = new List<Examination>(Examinations);
+            for (int i = 0; i < Examinations.Count; i++)
+            {
+                if (!String.IsNullOrEmpty(examinationFilter.Doctor) && Examinations[i].doctor != examinationFilter.Doctor) 
+                {
+                    examinations.Remove(Examinations[i]);
+                    continue;
+                }
+                if(!String.IsNullOrEmpty(examinationFilter.Patient) && Examinations[i].patient != examinationFilter.Patient)
+                {
+                    examinations.Remove(Examinations[i]);
+                    continue;
+                }
+                if (!String.IsNullOrEmpty(examinationFilter.Room) && Examinations[i].room != examinationFilter.Room)
+                {
+                    examinations.Remove(Examinations[i]);
+                    continue;
+                }
+                if(Examinations[i].dateTime < examinationFilter.FromDate || Examinations[i].dateTime > examinationFilter.ToDate)
+                {
+                    examinations.Remove(Examinations[i]);
+                    continue;
+                }
+            }
+            tb.Text = "Lekar:\t\t" + examinationFilter.Doctor + "\n\nPacijent:\t\t" + examinationFilter.Patient + "\n\nOd:\t\t" + examinationFilter.FromDate + "\nDo:\t\t" + examinationFilter.ToDate + "\n\nSala:\t\t" + examinationFilter.Room;
+            tb.FontSize = 13;
+            se.ItemsSource = null;
+            se.ItemsSource = examinations;
+        }
+
+        public static void EditExamination(Examination oldExamination, Examination newExamination)
+        {
+            int index = Examinations.IndexOf(oldExamination);
+            Examinations.RemoveAt(index);
+            Examinations.Insert(index, newExamination);
+            index = examinations.IndexOf(oldExamination);
+            examinations.RemoveAt(index);
+            examinations.Insert(index, newExamination);
+            se.ItemsSource = null;
+            se.ItemsSource = examinations;
+            msg.Content = "Pregled upsešno izmenjen.";
+            msg.Visibility = Visibility.Visible;
+            dispatcherTimer.Start();
+        }
+
+        private void CommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (ScheduledExaminations.SelectedItem == null)
+            {
+                e.CanExecute = false;
+                MessageBox.Show("Prvo selektujte red u tabeli.", "Oops", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
+            else if (tabs.SelectedIndex != 1)
+                e.CanExecute = false;
+            else
+                e.CanExecute = true;
+        }
+
+        public static void FilterFreeSlots(ExaminationDTO examinationFilter, bool doctorPriority)
+        {
+            freeSlots = new List<Examination>(FreeSlots);
+            for(int i = 0; i < FreeSlots.Count; i++)
+            {
+                if (!String.IsNullOrEmpty(examinationFilter.Doctor) && FreeSlots[i].doctor != examinationFilter.Doctor)
+                {
+                    if (doctorPriority)
+                    {
+                        freeSlots.Remove(FreeSlots[i]);
+                        continue;
+                    }
+                }
+
+                if (FreeSlots[i].dateTime != examinationFilter.FromDate)
+                {
+                    if (!doctorPriority)
+                    {
+                        if (Math.Abs(FreeSlots[i].dateTime.Day - examinationFilter.FromDate.Day) > 2)
+                        {
+                            freeSlots.Remove(FreeSlots[i]);
+                            continue;
+                        }
+                    }
+                }
+            }
+            ee.ItemsSource = null;
+            ee.ItemsSource = freeSlots;
+        }
+
+        Examination SelectedFreeSlot;
+        private void Schedule(object sender, RoutedEventArgs e)
+        {
+            SelectedFreeSlot = ee.SelectedItem as Examination;
+            if (SelectedFreeSlot == null)
+            {
+                MessageBox.Show("Selektujte pregled pre zakazivanja.", "Oops", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            Examination newExamination = new Examination(SelectedFreeSlot.dateTime, SelectedFreeSlot.doctor, GuestPatient.FirstName + " " + GuestPatient.LastName, SelectedFreeSlot.room);
+            Examinations.Add(newExamination);
+            SwapLists(sender, e);
+            SuccessLabel.Visibility = Visibility.Visible;
+            dispatcherTimer.Start();
         }
     }
 

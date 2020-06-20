@@ -11,7 +11,7 @@ namespace UserInterface.Validation
 {
     public class OnlyStringValidationRule : ValidationRule
     {
-        private readonly Regex _regEx = new Regex(@"^[A-Za-zČĆŽĐŠ]+$");
+        private readonly Regex _regEx = new Regex(@"^[A-Za-zČĆŽĐŠčćžđš]+$");
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
             String val = value as String;
@@ -21,6 +21,14 @@ namespace UserInterface.Validation
             if (_regEx.Match(val).Success)
                 return new ValidationResult(true, null);
             return new ValidationResult(false, "Uneta vrednost mora sadržati isključivo karaktere.");
+        }
+    }
+
+    public class NotEmptyValidationRule : ValidationRule
+    {
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            return string.IsNullOrWhiteSpace((value ?? "").ToString()) ? new ValidationResult(false, "Ovo polje je obavezno.") : ValidationResult.ValidResult;
         }
     }
 }

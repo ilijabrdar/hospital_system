@@ -33,6 +33,7 @@ namespace UserInterface
             var app = Application.Current as App;
 
             var userController = app.UserController;
+            var SecretaryController = app.SecretaryController;
             PasswordBox passwordBox = FindName("password") as PasswordBox;
             try
             {
@@ -40,6 +41,13 @@ namespace UserInterface
                 MainWindow mainWindow = new MainWindow(user);
                 mainWindow.Show();
                 this.Close();
+                if (!user.Loged)
+                {
+                    user.Loged = true;
+                    SecretaryController.Edit(user);
+                    IntroductionWizard wizard = new IntroductionWizard();
+                    wizard.ShowDialog();
+                }
             }
             catch(Exception exception)
             {

@@ -101,5 +101,12 @@ namespace UserInterface
         {
             this.Close();
         }
+
+        private void Edit(object sender, RoutedEventArgs e)
+        {
+            Examination examination = new Examination(new DateTime(Year, Month, Day, Hour, Minute, 0), SelectedDoctor, SelectedPatient, SelectedRoom);
+            MainWindow.EditExamination(SelectedExamination, examination);
+            this.Close();
+        }
     }
 }

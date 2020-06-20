@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:UserInterface"
         xmlns:val="clr-namespace:UserInterface.Validation"
         mc:Ignorable="d"
-        Title="Izmena pregleda" Height="280" Width="400"
+        Title="Izmena pregleda" Height="300" Width="400"
         ResizeMode="NoResize">
     <Grid>
         <Label Content="Lekar" HorizontalAlignment="Left" Margin="40,10,0,0" VerticalAlignment="Top"/>
@@ -135,7 +135,7 @@
         <Label Content="/" HorizontalAlignment="Left" Margin="185,90,0,0" VerticalAlignment="Top"/>
         <Label Content="/" HorizontalAlignment="Left" Margin="260,90,0,0" VerticalAlignment="Top"/>
         <Label Content=":" HorizontalAlignment="Left" Margin="185,130,0,0" VerticalAlignment="Top"/>
-        <Button Content="Pretraži" HorizontalAlignment="Left" Margin="175,216,0,0" VerticalAlignment="Top" Width="75" Height="25">
+        <Button Content="_Izmeni" HorizontalAlignment="Left" Margin="175,216,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="Edit">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="IsEnabled" Value="False"/>
@@ -154,7 +154,7 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Button Content="Odustani" HorizontalAlignment="Left" Margin="255,216,0,0" VerticalAlignment="Top" Width="75" Click="CloseDialog"/>
+        <Button Content="_Odustani" HorizontalAlignment="Left" Margin="255,216,0,0" VerticalAlignment="Top" Width="75" Click="CloseDialog"/>
         
     </Grid>
 </Window>

@@ -29,5 +29,17 @@ namespace UserInterface.Commands
 
         public static readonly RoutedUICommand FeedbackTab = new RoutedUICommand(
     "Give feedback", "Feedback", typeof(RoutedCommand), new InputGestureCollection() { new KeyGesture(Key.U, ModifierKeys.Control) });
+
+        public static readonly RoutedUICommand MoveForward = new RoutedUICommand(
+    "Move Forward", "Move Forward", typeof(RoutedCommand), new InputGestureCollection() { new KeyGesture(Key.Right) });
+
+        public static readonly RoutedUICommand MoveBackward = new RoutedUICommand(
+    "Move Backward", "Move Backward", typeof(RoutedCommand), new InputGestureCollection() { new KeyGesture(Key.Left) });
+
+        public static readonly RoutedUICommand EditExamination = new RoutedUICommand(
+"Edit examination", "Edit examination", typeof(RoutedCommand), new InputGestureCollection() { new KeyGesture(Key.I, ModifierKeys.Control) });
+
+        public static readonly RoutedUICommand DeleteExamination = new RoutedUICommand(
+"Delete examination", "Delete examination", typeof(RoutedCommand), new InputGestureCollection() { new KeyGesture(Key.D, ModifierKeys.Control) });
     }
 }

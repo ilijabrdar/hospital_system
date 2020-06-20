@@ -1,0 +1,31 @@
+﻿<Window x:Class="UserInterface.IntroductionWizard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UserInterface"
+        xmlns:cmd="clr-namespace:UserInterface.Commands"
+        mc:Ignorable="d"
+        Title="Prozor za upoznavanje" Height="550" Width="800"
+        ResizeMode="NoResize">
+    <Window.CommandBindings>
+        <CommandBinding Command="cmd:RoutedCommands.MoveForward" Executed="NextPage"/>
+        <CommandBinding Command="cmd:RoutedCommands.MoveBackward" Executed="PreviousPage"/>
+        <CommandBinding Command="cmd:RoutedCommands.EscCommand" Executed="Close"/>
+    </Window.CommandBindings>
+    <Grid>
+        <Image x:Name="Img" HorizontalAlignment="Left" Height="419" Margin="87,92,0,0" VerticalAlignment="Top" Width="618"/>
+        <Button x:Name="Previous" HorizontalAlignment="Left" Height="83" Margin="10,211,0,0" VerticalAlignment="Top" Width="77" Background="White" BorderBrush="Transparent" Click="PreviousPage">
+            <Image Source="arrow-left.png"/>
+        </Button>
+        <Button x:Name="Next" HorizontalAlignment="Left" Height="83" Margin="705,211,0,0" VerticalAlignment="Top" Width="77" Background="White" BorderBrush="White" Click="NextPage">
+            <Image Source="arrow-right.png"/>
+        </Button>
+
+        <Ellipse x:Name="One" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="20" Margin="330,480,0,0" Stroke="Black" VerticalAlignment="Top" Width="20"/>
+        <Ellipse x:Name="Two" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="20" Margin="360,480,0,0" Stroke="Black" VerticalAlignment="Top" Width="20" RenderTransformOrigin="-1.35,0.517"/>
+        <Ellipse x:Name="Three" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="20" Margin="390,480,0,0" Stroke="Black" VerticalAlignment="Top" Width="20"/>
+        <Ellipse x:Name="Four" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="20" Margin="420,480,0,0" Stroke="Black" VerticalAlignment="Top" Width="20"/>
+        <Ellipse x:Name="Five" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="20" Margin="450,480,0,0" Stroke="Black" VerticalAlignment="Top" Width="20"/>
+    </Grid>
+</Window>

@@ -25,6 +25,9 @@ namespace UserInterface
         public int Hour  { get; set; }
         public int Minute { get; set; }
 
+        public List<String> Doctors { get; set; }
+        public String SelectedDoctor { get; set; }
+
         public AppointmentSearch()
         {
             InitializeComponent();
@@ -34,10 +37,29 @@ namespace UserInterface
             Year = DateTime.Now.Year;
             Hour = DateTime.Now.Hour;
             Minute = DateTime.Now.Minute;
+
+            Doctors = new List<string>();
+            Doctors.Add("");
+            Doctors.Add("Pera Peric");
+            Doctors.Add("Nikola Nikolic");
+            Doctors.Add("Marko Markovic");
+            Doctors.Add("Ivan Ivanovic");
+            SelectedDoctor = Doctors[0];
+            DoctorFirst.IsChecked = true;
         }
 
         private void CencelDialog(object sender, RoutedEventArgs e)
         {
+            this.Close();
+        }
+
+        private void FilterExaminations(object sender, RoutedEventArgs e)
+        {
+            ExaminationDTO examinationFilter = new ExaminationDTO(SelectedDoctor, "", "", new DateTime(Year, Month, Day, Hour, Minute, 0), new DateTime());
+            if ((bool)DoctorFirst.IsChecked)
+                MainWindow.FilterFreeSlots(examinationFilter, true);
+            else if((bool)PeriodFirst.IsChecked)
+                MainWindow.FilterFreeSlots(examinationFilter, false);
             this.Close();
         }
     }

@@ -12,7 +12,7 @@
         <Label Content="Lekar" HorizontalAlignment="Left" Margin="40,10,0,0" VerticalAlignment="Top"/>
         <Label Content="Datum" HorizontalAlignment="Left" Margin="40,50,0,0" VerticalAlignment="Top"/>
         <Label Content="Termin" HorizontalAlignment="Left" Margin="40,90,0,0" VerticalAlignment="Top"/>
-        <ComboBox HorizontalAlignment="Left" Margin="130,10,0,0" VerticalAlignment="Top" Width="200"/>
+        <ComboBox HorizontalAlignment="Left" Margin="130,10,0,0" VerticalAlignment="Top" Width="200" ItemsSource="{Binding Path=Doctors}" SelectedItem="{Binding Path=SelectedDoctor}"/>
         <TextBlock HorizontalAlignment="Left" Margin="140,35,0,0" Text="YYYY" VerticalAlignment="Top" Height="15" FontWeight="Bold" Foreground="gray" Opacity="50">
             <TextBlock.Style>
                 <Style TargetType="TextBlock">
@@ -128,10 +128,12 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
+        <RadioButton x:Name="PeriodFirst" Content="Prioritet termin" HorizontalAlignment="Left" Margin="40,130,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="DoctorFirst" Content="Prioritet lekar" HorizontalAlignment="Left" Margin="40,150,0,0" VerticalAlignment="Top"/>
         <Label Content="/" HorizontalAlignment="Left" Margin="185,50,0,0" VerticalAlignment="Top"/>
         <Label Content="/" HorizontalAlignment="Left" Margin="260,50,0,0" VerticalAlignment="Top"/>
         <Label Content=":" HorizontalAlignment="Left" Margin="185,90,0,0" VerticalAlignment="Top"/>
-        <Button Content="Pretraži" HorizontalAlignment="Left" Margin="175,177,0,0" VerticalAlignment="Top" Width="75" Height="25">
+        <Button Content="_Pretraži" HorizontalAlignment="Left" Margin="175,177,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="FilterExaminations">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="IsEnabled" Value="False"/>
@@ -150,9 +152,8 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Button Content="Odustani" HorizontalAlignment="Left" Margin="255,177,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="CencelDialog"/>
-        <RadioButton Content="Prioritet termin" HorizontalAlignment="Left" Margin="40,130,0,0" VerticalAlignment="Top"/>
-        <RadioButton Content="Prioritet lekar" HorizontalAlignment="Left" Margin="40,150,0,0" VerticalAlignment="Top"/>
+        <Button Content="_Odustani" HorizontalAlignment="Left" Margin="255,177,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="CencelDialog"/>
+        
         
     </Grid>
 </Window>

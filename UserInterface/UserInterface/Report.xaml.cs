@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using Model.Users;
 
 namespace UserInterface
 {
@@ -30,6 +34,13 @@ namespace UserInterface
         public static int FromMinute { get; set; }
         public static int ToMinute { get; set; }
 
+        private DateTime FromFullDate { get; set; }
+        private DateTime ToFullDate { get; set; }
+
+        public List<Doctor> Doctors { get; set; }
+        public Doctor SelectedDoctor { get; set; }
+
+        private List<Examination> reportList;
 
         public Report()
         {
@@ -40,6 +51,10 @@ namespace UserInterface
             FromYear = ToYear = DateTime.Now.Year;
             FromHour = ToHour = DateTime.Now.Hour;
             FromMinute = ToMinute = DateTime.Now.Minute;
+
+            App app = Application.Current as App;
+            Doctors = app.DoctorController.GetAll().ToList();
+            SelectedDoctor = Doctors[0];
         }
 
         private void CloseWindow(object sender, RoutedEventArgs e)
@@ -51,6 +66,53 @@ namespace UserInterface
         {
             TextBox textField = sender as TextBox;
             textField.SelectAll();
+        }
+
+        private void ReportToPDF(object sender, RoutedEventArgs e)
+        {
+            FromFullDate = new DateTime(FromYear, FromMonth, FromDay, FromHour, FromMinute, 0);
+            ToFullDate = new DateTime(ToYear, ToMonth, ToDay, ToHour, ToMinute, 0);
+            //Document doc = new Document(PageSize.A4, 15, 15, 30, 30);
+            //PdfWriter wri = PdfWriter.GetInstance(doc, new FileStream("C:/Users/Asus/Desktop/hospital_system/UserInterface/UserInterface/Resources/Report.pdf", FileMode.Create));
+            //doc.Open();
+            //Header header = new Header("IZVEŠTAJ ZAUZETOSTI LEKARA", "IZVEŠTAJ ZAUZETOSTI LEKARA");
+            //iTextSharp.text.Paragraph paragraph = new iTextSharp.text.Paragraph("Lekar:\t" + SelectedDoctor + "\nOd:\t" + FromFullDate + "\nDo:\t" + ToFullDate);
+            //doc.Add(header);
+            //doc.Add(paragraph);
+            //doc.Close();
+
+            String html = "<html><head><style>table {border-collapse: collapse; width: 100%;} table, th, td {border: 1px solid black;}</style></head><body><h1 style=\"text - align:center\">IZVEŠTAJ O ZAUZETOSTI LEKARA</h1>" +
+                "<p><br><br>Lekar:  Pera Perić<br>Od:  18/6/2020 00:00:00<br>Do:  19/6/2020 17:00:00<br><br></p>" +
+                "<table><tr style=\"text-align: center;\"><th>Datum</th><th>Vreme</th><th>Pacijent</th><th>Sala</th></tr>" +
+                "<tr><td>18/6/2020</td><td>1:45:00</td><td>Petar Petrovic</td><td>S12</td></tr>" +
+                "<tr><td>18/6/2020</td><td>17:40:00</td><td>Marko Petrovic</td><td>S12</td></tr>" +
+                "<tr><td>19/6/2020</td><td>2:45:00</td><td>Dusan Markovic</td><td>S12</td></tr>" +
+                "</table>" +
+                "<p>Ukupna zauzetost: 30% radnog vremena</p>" +
+                "</body></html>";
+            try
+            {
+                Byte[] res = null;
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    var PDF = TheArtOfDev.HtmlRenderer.PdfSharp.PdfGenerator.GeneratePdf(html, PdfSharp.PageSize.A4);
+                    PDF.Save(ms);
+                    res = ms.ToArray();
+                }
+                File.WriteAllBytes("C:/Users/Asus/Desktop/hospital_system/UserInterface/UserInterface/Resources/Report1.pdf", res);
+                this.Close();
+
+                System.Diagnostics.Process process = new System.Diagnostics.Process();
+                Uri pdf = new Uri("C:/Users/Asus/Desktop/hospital_system/UserInterface/UserInterface/Resources/Report.pdf");
+                process.StartInfo.FileName = new Uri("C:/Users/Asus/Desktop/hospital_system/UserInterface/UserInterface/Resources/Report1.pdf").ToString();
+                process.Start();
+                process.WaitForExit();
+
+            }
+            catch
+            {
+                MessageBox.Show("Greška pri generisanju izveštaja.", "Oops", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }
