@@ -28,10 +28,28 @@ namespace HCIproject
             this.user = user;
             this.patientId = _patientId;
             this.dijagnoza = _dijagnoza;
-
             InitializeComponent();
+
+
+
+            setPatientInfo();
+
             dijagnozaTxt.Text = dijagnoza;
             setDrugCombo();
+        }
+
+        private void setPatientInfo()
+        {
+            var app = Application.Current as App;
+            Patient patient = app.PatientController.Get(patientId);
+            String imePrez = patient.FirstName + " " + patient.LastName;
+            imePacijenta.Content = imePrez;
+
+            int godine=DateTime.Now.Year - patient.DateOfBirth.Year;
+            godinePacijenta.Content = godine.ToString();
+
+            //alergijePacijenta.Content = patient.patientFile.Allergy.ToString();
+
         }
 
         private void setDrugCombo()

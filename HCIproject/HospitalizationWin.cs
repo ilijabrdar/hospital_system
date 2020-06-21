@@ -33,6 +33,7 @@ namespace HCIproject
 
 
             InitializeComponent();
+            setPatientInfo();
             dijagnozaTxt.Text = dijagnoza;
             setSpecialityCombo();
         }
@@ -42,6 +43,19 @@ namespace HCIproject
             InitializeComponent();
             StartDate.SelectedDate = DateTime.Today;
             EndDate.SelectedDate = DateTime.Today;
+
+        }
+        private void setPatientInfo()
+        {
+            var app = Application.Current as App;
+            Patient patient = app.PatientController.Get(patientId);
+            String imePrez = patient.FirstName + " " + patient.LastName;
+            imePacijenta.Content = imePrez;
+
+            int godine = DateTime.Now.Year - patient.DateOfBirth.Year;
+            godinePacijenta.Content = godine.ToString();
+
+            //alergijePacijenta.Content = patient.patientFile.Allergy.ToString();
 
         }
 

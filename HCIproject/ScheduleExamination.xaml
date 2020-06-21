@@ -13,11 +13,11 @@
         <StackPanel x:Name="PatientInfo" Background="#D5F5E3">
             <WrapPanel>
                 <Label Content="Ime i prezime pacijenta:" Margin="10" FontSize="13"/>
-                <Label Content="Pera Peric" Margin="10,10,60,10" FontSize="15" FontWeight="SemiBold" />
+                <Label x:Name="imePacijenta" Margin="10,10,60,10" FontSize="15" FontWeight="SemiBold" />
                 <Label Content="Godine:" Margin="10" FontSize="13"/>
-                <Label Content="25" Margin="10,10,60,10" FontSize="14" FontWeight="SemiBold"/>
+                <Label x:Name="godinePacijenta" Margin="10,10,60,10" FontSize="14" FontWeight="SemiBold"/>
                 <Label Content="Alergija:" Margin="10" FontSize="13"/>
-                <Label Content="Penicilin, polen" Margin="10" FontSize="14" FontWeight="SemiBold"/>
+                <Label x:Name="alergijePacijenta" Margin="10" FontSize="14" FontWeight="SemiBold"/>
             </WrapPanel>
         </StackPanel>
         <StackPanel>

@@ -12,11 +12,11 @@
         <StackPanel x:Name="PatientInfo" Background="#D5F5E3">
             <WrapPanel>
                 <Label Content="Ime i prezime pacijenta:" Margin="10" FontSize="13"/>
-                <Label Content="Pera Peric" Margin="10,10,60,10" FontSize="15" FontWeight="SemiBold" />
+                <Label x:Name="imePacijenta" Margin="10,10,60,10" FontSize="15" FontWeight="SemiBold" />
                 <Label Content="Godine:" Margin="10" FontSize="13"/>
-                <Label Content="25" Margin="10,10,60,10" FontSize="14" FontWeight="SemiBold"/>
+                <Label x:Name="godinePacijenta" Margin="10,10,60,10" FontSize="14" FontWeight="SemiBold"/>
                 <Label Content="Alergija:" Margin="10" FontSize="13"/>
-                <Label Content="Penicilin, polen" Margin="10" FontSize="14" FontWeight="SemiBold"/>
+                <Label x:Name="alergijePacijenta" Margin="10" FontSize="14" FontWeight="SemiBold"/>
             </WrapPanel>
         </StackPanel>
         <ScrollViewer  x:Name="scrol" VerticalScrollBarVisibility="Auto" SizeChanged="scrol_SizeChanged" >
@@ -34,15 +34,24 @@
                         <ColumnDefinition Width="300"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="Dijagnoza" Grid.Row="0" Grid.Column="0" FontSize="18" Margin="10"/>
-                    <TextBlock x:Name="dijagnozaTxt" Grid.Row="0" Grid.Column="1" Margin="10" FontSize="18" FontWeight="SemiBold"/>
+                    <Label Content="Dijagnoza" Grid.Row="0" Grid.Column="0" FontSize="18" Margin="5"/>
+                    <TextBlock x:Name="dijagnozaTxt" Grid.Row="0" Grid.Column="1" Margin="5" FontSize="18" FontWeight="SemiBold"/>
 
-                    <Label Content="Lekovi" Grid.Row="1" Grid.Column="0" FontSize="18" Margin="10"/>
-                    <ComboBox x:Name="lekovi" Text="Izaberite lekove. Kretanje strelice, izbor tab+ctrl" IsEditable="True" IsReadOnly="True" Grid.Row="1" Grid.Column="1" Margin="10"/>
+                    <Label Content="Lekovi" Grid.Row="1" Grid.Column="0" FontSize="18" Margin="5"/>
+                    <ListBox x:Name="lekovi" Grid.Row="1" Grid.Column="1" Margin="5" SelectionMode="Multiple"/>
+                    <TextBox x:Name="dodatniLekovi" Grid.Row="2" Grid.Column="1"></TextBox>
 
+                    <Label Content="Terapija" Grid.Row="3" Grid.Column="0" FontSize="18" Margin="5"/>
+                    <TextBox x:Name="terapija"   Grid.Row="3" Grid.Column="1" Margin="5"  CaretBrush="#FF1FEECD" AcceptsReturn="True" />
 
-                    <Label Content="Terapija" Grid.Row="3" Grid.Column="0" FontSize="18" Margin="10"/>
-                    <TextBox Grid.Row="3" Grid.Column="1" Margin="10"  CaretBrush="#FF1FEECD" AcceptsReturn="True" />
+                    <WrapPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
+                        <Label Content="Vremenski period" FontSize="16" Margin="10" />
+                        <Label Content="od" FontSize="18" Margin="10"/>
+                        <DatePicker Name="StartDate" Width="200" Grid.Column="1" Grid.Row="2"   materialDesign:HintAssist.Hint="Unesite datum u formatu dd.mm.gggg" FontSize="10" Margin="10" VerticalAlignment="Bottom" />
+                        <Label Content="do" FontSize="18" Margin="10"/>
+                        <DatePicker Name="EndDate" Width="200" Grid.Column="1" Grid.Row="2"   materialDesign:HintAssist.Hint="Unesite datum u formatu dd.mm.gggg" FontSize="10" Margin="10" VerticalAlignment="Bottom" />
+                    </WrapPanel>
+
                 </Grid>
             </StackPanel>
         </ScrollViewer>

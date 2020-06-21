@@ -26,8 +26,7 @@ namespace HCIproject
     {
         public Doctor user;
         public long patientId;
-        public String Simptom {get; set;}
-
+        
         private String anamneza;
         private String dijagnoza;
         private Symptom simptom;
@@ -37,6 +36,9 @@ namespace HCIproject
         {
             this.user = user;
             this.patientId = _patientId;
+
+            
+
             InitializeComponent();
             setDiagnosisCombo();
         }
@@ -159,7 +161,7 @@ namespace HCIproject
 
         private void Button_Click_5(object sender, RoutedEventArgs e)
         {//kontrola
-            ScheduleExamination exaWin = new ScheduleExamination((Doctor)user);
+            ScheduleExamination exaWin = new ScheduleExamination((Doctor)user, patientId);
           //  this.Visibility = Visibility.Hidden;
             exaWin.ShowDialog();
         }

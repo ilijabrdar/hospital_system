@@ -24,18 +24,35 @@ namespace HCIproject
     public partial class ScheduleExamination : Window
     {
         public Doctor user;
+        private long id;
         public List<ExaminationDTO> specialistExaminations { get; set; }
 
-        public ScheduleExamination(Doctor user)
+        public ScheduleExamination(Doctor user, long patientId)
         {
             this.user = user;
+            this.id = patientId;
             InitializeComponent();
 
             specialistExaminations = new List<ExaminationDTO>();
             setTableData();
+            setPatientInfo();
             this.DataContext = this;
 
         }
+        private void setPatientInfo()
+        {
+            var app = Application.Current as App;
+            Patient patient = app.PatientController.Get(id);
+            String imePrez = patient.FirstName + " " + patient.LastName;
+            imePacijenta.Content = imePrez;
+
+            int godine = DateTime.Now.Year - patient.DateOfBirth.Year;
+            godinePacijenta.Content = godine.ToString();
+
+            //alergijePacijenta.Content = patient.patientFile.Allergy.ToString();
+
+        }
+
 
         private void setTableData()
         {

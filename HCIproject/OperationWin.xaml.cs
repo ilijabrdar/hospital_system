@@ -35,11 +35,25 @@ namespace HCIproject
 
             dijagnoza = _dijagnoza;
 
+            setPatientInfo();
             dijagnozaTxt.Text = dijagnoza;
             lekarTxt.Text = user.FirstName + " " + user.LastName;
             specialistExaminations = new List<ExaminationDTO>();
             setTableData();
             this.DataContext = this;
+
+        }
+        private void setPatientInfo()
+        {
+            var app = Application.Current as App;
+            Patient patient = app.PatientController.Get(id);
+            String imePrez = patient.FirstName + " " + patient.LastName;
+            imePacijenta.Content = imePrez;
+
+            int godine = DateTime.Now.Year - patient.DateOfBirth.Year;
+            godinePacijenta.Content = godine.ToString();
+
+            //alergijePacijenta.Content = patient.patientFile.Allergy.ToString();
 
         }
 
