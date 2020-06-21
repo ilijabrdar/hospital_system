@@ -48,13 +48,15 @@ namespace Repository
 
             foreach (Prescription pres in exam.Prescription)
             {
-                Prescription temp = prescriptionRepository.Get(pres.Id);
+                Prescription temp = prescriptionRepository.GetEager(pres.Id);
                 pres.Period = temp.Period;
                 pres.Note = temp.Note;
+                List<Drug> drugs = new List<Drug>();
                 foreach (Drug drug in temp.Drug)
                 {
-                    pres.Drug.Add(drug);
+                    drugs.Add(drug);
                 }
+                pres.Drug = drugs;
             }
 
             return exam;
