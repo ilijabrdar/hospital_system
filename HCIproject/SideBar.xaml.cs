@@ -576,8 +576,10 @@ namespace HCIproject
             setViewPatientFiles();
         }
 
-        public void setViewUpcExam() { 
-            foreach (var exam in upcomingExaminations) 
+        public void setViewUpcExam() {
+            var app = Application.Current as App;
+
+            foreach (var exam in app.ExaminationController.GetUpcomingExaminationsByUser(user)) 
             { 
                 StackPanel stack = new StackPanel();
                 DockPanel dock = new DockPanel();
@@ -592,7 +594,7 @@ namespace HCIproject
 
 
                 #region DockPanel Content Properties
-                lbl.Content = exam.Patient.FirstName + " " + exam.Patient.LastName;
+                lbl.Content = exam.User.FirstName+ " " + exam.User.LastName;
                 lbl.Height = 32;
                 lbl.Width = 180;
                 lbl.FontSize = 15;
@@ -606,7 +608,7 @@ namespace HCIproject
                 btn1.FontSize = 12;
                 btn1.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
                 btn1.SetValue(DockPanel.DockProperty, Dock.Right);
-                btn1.Tag = exam.Patient.Id;
+                btn1.Tag = exam.User.Id;
                 btn1.Click += new RoutedEventHandler(ClickStartExamination);
                 btn1.Margin = new Thickness(10, 10, 15, 0);
                 btn1.Background = new SolidColorBrush(Color.FromRgb(162, 217, 206));

@@ -37,22 +37,23 @@ namespace bolnica.Repository
         public Examination GetEager(long id)
         {
             Examination exam = base.Get(id);
-            exam.Doctor = doctorRepository.Get(exam.Doctor.GetId());
-            exam.User =patientRepository.Get(exam.User.GetId());
+            exam.Doctor = doctorRepository.GetEager(exam.Doctor.GetId());
+            exam.User =patientRepository.GetEager(exam.User.GetId());
             return exam;
         }
 
         public  List<Examination> GetUpcomingExaminationsByUser(User user)
         {
             List<Examination> examinations = GetAllEager().ToList();
+            List<Examination> findExamination = new List<Examination>();
             foreach(Examination examination in examinations)
             {
-                if (examination.Doctor == user)
+                if (examination.Doctor.Id == user.Id)
                 {
-                    examinations.Add(examination);
+                    findExamination.Add(examination);
                 }
             }
-            return examinations;
+            return findExamination;
         }
 
         public Examination StartUpcomingExamination(Examination examination)

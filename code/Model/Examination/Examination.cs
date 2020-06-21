@@ -25,8 +25,9 @@ namespace Model.PatientSecretary
             Doctor = doctor;
             Period = period;
         }
-        public Examination(long id, Users.Doctor doctor, Period period, Diagnosis diagnosis, Anemnesis anemnesis, Therapy therapy, Referral refferal)
+        public Examination(long id, User user, Users.Doctor doctor, Period period, Diagnosis diagnosis, Anemnesis anemnesis, Therapy therapy, Referral refferal)
         {
+            User = user;
             Id = id;
             Doctor = doctor;
             Period = period;
@@ -36,7 +37,7 @@ namespace Model.PatientSecretary
             Refferal = refferal;
         }
 
-        public Examination(User user, Users.Doctor doctor, Period period, Diagnosis diagnosis, List<Prescription> prescription, Anemnesis anemnesis, Therapy therapy, Referral refferal)
+        public Examination(long id, User user,Users.Doctor doctor, Period period, Diagnosis diagnosis, Anemnesis anemnesis, Therapy therapy, Referral refferal, List<Prescription> prescription)
         {
             User = user;
             Doctor = doctor;

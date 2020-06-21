@@ -2,25 +2,40 @@ using bolnica.Repository;
 using Model.Doctor;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Repository
 {
    public class OperationRepository : CSVRepository<Operation,long>, IOperationRepository
    {
-        public OperationRepository(ICSVStream<Operation> stream, ISequencer<long> sequencer)
+        private readonly IRoomRepository _roomRepository;
+        private readonly IPatientFileRepository _patientFileRepository;
+        private readonly IDoctorRepository _doctorRepository;
+        public OperationRepository(ICSVStream<Operation> stream, ISequencer<long> sequencer, IRoomRepository roomRepository, IPatientFileRepository patientFileRepository, IDoctorRepository doctorRepository)
           : base(stream, sequencer)
         {
-  
+            _roomRepository = roomRepository;
+            _patientFileRepository = patientFileRepository;
+            _doctorRepository = doctorRepository;
         }
 
         public IEnumerable<Operation> GetAllEager()
         {
-            throw new NotImplementedException();
+            List<Operation> operations = new List<Operation>();
+            foreach (Operation operation in GetAll().ToList())
+            {
+                operations.Add(GetEager(operation.GetId()));
+            }
+            return operations;
         }
 
         public Operation GetEager(long id)
         {
-            throw new NotImplementedException();
+            Operation operation = Get(id);
+            operation.Room = _roomRepository.GetEager(operation.Room.GetId());
+            operation.PatientFile = _patientFileRepository.Get(operation.PatientFile.GetId());
+            operation.Doctor = _doctorRepository.GetEager(operation.Doctor.GetId());
+            return operation;
         }
     }
 }

@@ -1,6 +1,5 @@
 using bolnica.Repository;
 using Model.Doctor;
-using Model.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +17,7 @@ namespace Repository
         public IEnumerable<Article> GetAllEager()
         {
             List<Article> articles = new List<Article>();
-            foreach(Article article in GetAll().ToList())
+            foreach (Article article in GetAll().ToList())
             {
                 articles.Add(GetEager(article.GetId()));
             }
@@ -28,9 +27,10 @@ namespace Repository
         public Article GetEager(long id)
         {
             Article article = Get(id);
-            article.Doctor = _doctorRepository.GetEager(article.Doctor.GetId());
+            article.Doctor = _doctorRepository.Get(article.Doctor.GetId());
 
             return article;
         }
     }
+
 }

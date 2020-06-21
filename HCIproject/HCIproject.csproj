@@ -233,6 +233,9 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="RESOURCES\AddressFile.csv" />
+    <None Include="RESOURCES\BussinesDayFile.csv" />
+    <None Include="RESOURCES\PatientFile.csv" />
+    <None Include="RESOURCES\RoomTypeFile.csv" />
     <None Include="RESOURCES\StateFile.csv" />
     <None Include="RESOURCES\TownFile.csv" />
   </ItemGroup>
@@ -273,7 +276,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="RESOURCES\IngredientsFile.csv" />
-    <None Include="RESOURCES\PatientFile.csv" />
     <None Include="RESOURCES\PrescriptionFile.csv" />
   </ItemGroup>
   <ItemGroup>
@@ -299,9 +301,6 @@
       <Project>{687C36BC-852F-46BE-9095-77CC66EFE752}</Project>
       <Name>bolnica</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="RESOURCES\RoomTypeFile.csv" />
   </ItemGroup>
   <ItemGroup>
     <None Include="RESOURCES\RoomFile.csv" />
