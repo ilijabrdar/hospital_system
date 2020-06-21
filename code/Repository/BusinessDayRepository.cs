@@ -12,11 +12,11 @@ namespace Repository
    {
 
       private String FilePath;
-        private readonly IDoctorRepository doctorRepo;
+        public  IDoctorRepository doctorRepo;
         private readonly IRoomRepository roomRepo;
         public BusinessDayRepository(ICSVStream<BusinessDay> stream, ISequencer<long> sequencer, IRoomRepository room)
            : base(stream, sequencer)
-        {
+        { 
             roomRepo = room;
         }
 

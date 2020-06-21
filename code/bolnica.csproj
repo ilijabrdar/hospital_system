@@ -334,6 +334,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Repository\CSV\Converter\AddressCSVConverter.cs" />
+    <Compile Include="Repository\CSV\Converter\DirectorCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\ReferralCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\SymptomCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\TherapyCSVConverter.cs" />

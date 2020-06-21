@@ -22,9 +22,14 @@ namespace Service
         public ISearchPeriods _searchPeriods { get; set; }
         public static double durationOfExamination = 20;
 
+        public BusinessDayService(IBusinessDayRepository businessDayRepository)
+        {
+            _businessDayRepository = businessDayRepository;
+        }
+
         public void Delete(BusinessDay entity)
         {
-            throw new NotImplementedException();
+            _businessDayRepository.Delete(entity);
         }
 
         public bool DeletePreviousBusinessDay()
@@ -34,7 +39,7 @@ namespace Service
 
         public void Edit(BusinessDay entity)
         {
-            throw new NotImplementedException();
+            _businessDayRepository.Edit(entity);
         }
 
         public BusinessDay GetExactDay(Doctor doctor, DateTime date)
@@ -63,7 +68,7 @@ namespace Service
 
         public IEnumerable<BusinessDay> GetAll()
         {
-            return _businessDayRepository.GetAllEager().ToList();
+            return _businessDayRepository.GetAllEager();
         }
 
         public List<BusinessDay> GetBusinessDaysByDoctor(Doctor doctor)
@@ -83,7 +88,7 @@ namespace Service
 
         public BusinessDay Save(BusinessDay entity)
         {
-            throw new NotImplementedException();
+            return _businessDayRepository.Save(entity);
         }
 
         public bool SetRoomForBusinessDay(BusinessDay businessDay, Room room)
