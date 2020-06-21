@@ -43,6 +43,7 @@ namespace UserInterface
         private const String SPECIALITY_FILE = "C:/Users/Asus/Desktop/SIMS/hospital_system/UserInterface/UserInterface/Resources/SpecialityFile.csv";
         private const String DOCTOR_GRADE_FILE = "C:/Users/Asus/Desktop/SIMS/hospital_system/UserInterface/UserInterface/Resources/DoctorGradeFile.csv";
 
+        private const string BUSINESSDAY_FILE = "../../Resources/Data/businessDayFile.csv";
         private const String ARTICLE_FILE = "C:/Users/Asus/Desktop/SIMS/hospital_system/UserInterface/UserInterface/Resources/articleFile.csv";
 
         private readonly String _patient_File = "C:/Users/Asus/Desktop/SIMS/hospital_system/UserInterface/UserInterface/Resources/PatientFile.txt";
@@ -60,6 +61,9 @@ namespace UserInterface
         public IArticleController ArticleController { get; private set; }
 
         public IDoctorController DoctorController { get; private set; }
+        public IBusinessDayController BusinessDayController { get; private set; }
+
+
 
         public App()
         {
@@ -81,7 +85,7 @@ namespace UserInterface
             var roomRepository = new RoomRepository(
                new CSVStream<Room>(ROOM_FILE, new RoomCSVConverter(CSV_DELIMITER)),
                new LongSequencer(), roomTypeRepository, equipmentRepository);
-            BusinessDayRepository businessDayRepository = new BusinessDayRepository(new CSVStream<BusinessDay>(ROOM_FILE, new BusinessDayCSVConverter(CSV_DELIMITER)), new LongSequencer(), roomRepository);
+            BusinessDayRepository businessDayRepository = new BusinessDayRepository(new CSVStream<BusinessDay>(BUSINESSDAY_FILE, new BusinessDayCSVConverter()), new LongSequencer(), roomRepository);
 
 
             SecretaryRepository secretaryRepository = new SecretaryRepository(new CSVStream<Secretary>(SECRETARY_FILE, new SecretaryCSVConverter(CSV_DELIMITER)), new LongSequencer(), addressRepository, townRepository, stateRepository);

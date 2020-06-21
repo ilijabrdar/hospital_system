@@ -180,6 +180,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Resources\businessDayFile.csv" />
     <None Include="Resources\DoctorFile.csv" />
     <None Include="Resources\DoctorGradeFile.csv" />
     <None Include="Resources\equipment.csv" />
