@@ -10,6 +10,7 @@ namespace Model.Doctor
         public String Name { get; set; } 
         public long Id { get; set; }
 
+        public Speciality() { }
         public Speciality(string name)
         {
             Name = name;

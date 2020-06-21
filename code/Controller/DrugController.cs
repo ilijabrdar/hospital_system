@@ -59,7 +59,7 @@ namespace Controller
 
         public List<Drug> GetNotApprovedDrugs()
         {
-            throw new NotImplementedException();
+            return _service.GetNotApproved();
         }
 
         public Drug Save(Drug entity)

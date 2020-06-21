@@ -10,6 +10,7 @@ namespace Model.PatientSecretary
       public string Name { get; set; }
       public int Quantity { get; set; }
 
+        public Ingredient() { }
         public Ingredient(long id, string name, int quantity)
         {
             Quantity = quantity;

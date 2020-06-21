@@ -12,9 +12,9 @@ namespace Repository
     public class PatientFileRepository : CSVRepository<PatientFile, long>, IPatientFileRepository
     {
         private String FilePath;
-        private readonly IHospitalizationRepository _hospitalizationRepository;
-        private readonly IOperationRepository _operationRepository;
-        private readonly IExaminationPreviousRepository _examinationPreviousRepository;
+        public IHospitalizationRepository _hospitalizationRepository;
+        public IOperationRepository _operationRepository;
+        public IExaminationPreviousRepository _examinationPreviousRepository;
 
         public PatientFileRepository(ICSVStream<PatientFile> stream, ISequencer<long> sequencer)
                : base(stream, sequencer)

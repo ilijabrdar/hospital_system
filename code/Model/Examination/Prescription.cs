@@ -13,6 +13,7 @@ namespace Model.PatientSecretary
       public List<Drug> Drug;
         public Prescription(long id, Period period, string note)
         {
+            Id = id;
             Period = period;
             Note = note;
         }

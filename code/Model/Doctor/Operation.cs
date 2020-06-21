@@ -9,10 +9,8 @@ namespace Model.Doctor
 {
    public class Operation : IIdentifiable<long>
     {
-      public Model.Users.Doctor Doctor;
-
+        public Model.Users.Doctor Doctor;
         public String Description;
-
         public Period Period;
         public Room Room;
         public PatientFile PatientFile;
