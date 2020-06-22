@@ -16,5 +16,9 @@ namespace bolnica.Service
         List<Room> GetVacantRooms();
         IEnumerable<Room> GetRoomsCointainingEquipment(Equipment equipment);
 
+        void DeleteRoomsByRoomType(RoomType roomType);
+
+        void DeleteEquipmentFromRooms(Equipment equipment);
+
     }
 }
