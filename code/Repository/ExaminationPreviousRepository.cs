@@ -64,15 +64,34 @@ namespace Repository
 
         public List<Examination> GetExaminationsByUser(User user)
         {
-            List<Examination> examinations = GetAllEager().ToList();
-            foreach (Examination examination in examinations)
+            try
             {
-                if (examination.User == user)
+                Doctor doctor = (Doctor)user;
+                List<Examination> examinations = GetAllEager().ToList();
+                List<Examination> findExamination = new List<Examination>();
+                foreach (Examination examination in examinations)
                 {
-                    examinations.Add(examination);
+                    if (examination.Doctor.Id == doctor.Id)
+                    {
+                        findExamination.Add(examination);
+                    }
                 }
+                return findExamination;
             }
-            return examinations;
+            catch (Exception e)
+            {
+                Patient patient = (Patient)user;
+                List<Examination> examinations = GetAllEager().ToList();
+                List<Examination> findExamination = new List<Examination>();
+                foreach (Examination examination in examinations)
+                {
+                    if (examination.Doctor.Id == patient.Id)
+                    {
+                        findExamination.Add(examination);
+                    }
+                }
+                return findExamination;
+            }
         }
 
     }
