@@ -31,7 +31,7 @@ namespace UserInterface
         private const String CSV_COLOMN_DELIMITER = ":";
 
         private const String SECRETARY_FILE = "../../../../code/Resources/Data/SecretaryFile.txt";
-        private const String DOCTOR_FILE = "../../../../code/Resources/Data/DoctorFile.csv";
+        private const String DOCTOR_FILE = "../../../../code/Resources/Data/doctors.csv";
 
         private const String ADDRESS_FILE = "../../../../code/Resources/Data/AddressFile.txt";
         private const String TOWN_FILE = "../../../../code/Resources/Data/TownFile.txt";
@@ -40,16 +40,25 @@ namespace UserInterface
         private const string ROOM_FILE = "../../../../code/Resources/Data/rooms.csv";
         private const string EQUIPMENT_FILE = "../../../../code/Resources/Data/equipment.csv";
         private const string ROOMTYPE_FILE = "../../../../code/Resources/Data/roomtypes.csv";
-        private const String SPECIALITY_FILE = "../../../../code/Resources/Data/SpecialityFile.csv";
+        private const String SPECIALITY_FILE = "../../../../code/Resources/Data/speciality.csv";
         private const String DOCTOR_GRADE_FILE = "../../../../code/Resources/Data/DoctorGradeFile.csv";
+
+        private const String DIAGNOSIS_FILE = "../../../../code/Resources/Data/diagnosisFile.csv";
+        private const String PRESCRIPTION_FILE = "../../../../code/Resources/Data/prescriptionFile.csv";
+        private const String REFERRAL_FILE = "../../../../code/Resources/Data/referralFile.csv";
+        private const String SYMPTOM_FILE = "../../../../code/Resources/Data/symptomFile.csv";
+        private const String THERAPY_FILE = "../../../../code/Resources/Data/therapyFile.csv";
+        private const String DRUG_FILE = "../../../../code/Resources/Data/drugs.csv";
+        private const String INGREDIENT_FILE = "../../../../code/Resources/Data/ingredients.csv";
 
         private const string BUSINESSDAY_FILE = "../../../../code/Resources/Data/businessdays.csv";
         private const String ARTICLE_FILE = "../../../../code/Resources/Data/articles.csv";
 
-        private readonly String _patient_File = "../../../../code/Resources/Data/PatientFile.txt";
-        private readonly String _patientFile_File = "../../../../code/Resources/Data/patientFileFile.txt";
+        private readonly String _patient_File = "../../../../code/Resources/Data/patient.csv";
+        private readonly String _patientFile_File = "../../../../code/Resources/Data/patientFile.csv";
 
         private const String EXAM_UPCOMING_FILE = "../../../../code/Resources/Data/ExaminationUpcoming.csv";
+        private const String EXAM_PREVIOUS_FILE = "../../../../code/Resources/Data/examinationPrevious.csv";
 
         public IUserController UserController { get; private set; }
         public IPatientController PatientController { get; private set; }
@@ -124,9 +133,19 @@ namespace UserInterface
             ArticleService articleService = new ArticleService(articleRepository);
             ArticleController = new ArticleController(articleService);
 
-            ExaminationUpcomingRepository examinationUpcomingRepository = new ExaminationUpcomingRepository(new CSVStream<Model.PatientSecretary.Examination>(EXAM_UPCOMING_FILE, new UpcomingExaminationCSVConverter(CSV_DELIMITER)), new LongSequencer(), doctorRepository, patientRepo);
+            //pizdarije
+            SymptomRepository symptomRepository = new SymptomRepository(new CSVStream<Symptom>(SYMPTOM_FILE, new SymptomCSVConverter(CSV_DELIMITER)), new LongSequencer());
+            DiagnosisRepository diagnosisRepository = new DiagnosisRepository(new CSVStream<Diagnosis>(DIAGNOSIS_FILE, new DiagnosisCSVConverter(CSV_DELIMITER, CSV_ARRAY_DELIMITER)), new LongSequencer(), symptomRepository);
+            IngredientRepository ingredientRepository = new IngredientRepository(new CSVStream<Ingredient>(INGREDIENT_FILE, new IngredientsCSVConverter(CSV_DELIMITER)), new LongSequencer());
+            DrugRepository drugRepository = new DrugRepository(new CSVStream<Drug>(DRUG_FILE, new DrugCSVConverter(CSV_DELIMITER)), new LongSequencer(), ingredientRepository);
+            PrescriptionRepository prescriptionRepository = new PrescriptionRepository(new CSVStream<Prescription>(PRESCRIPTION_FILE, new PrescriptionCSVConverter(CSV_DELIMITER, CSV_COLOMN_DELIMITER)), new LongSequencer(), drugRepository);
+            TherapyRepository therapyRepository = new TherapyRepository(new CSVStream<Therapy>(THERAPY_FILE, new TherapyCSVConverter(CSV_DELIMITER, CSV_COLOMN_DELIMITER)), new LongSequencer(), drugRepository);
+            ReferralRepository referralRepository = new ReferralRepository(new CSVStream<Referral>(REFERRAL_FILE, new ReferralCSVConverter(CSV_DELIMITER)), new LongSequencer(), doctorRepository);
 
-            ExaminationService examinationService = new ExaminationService(examinationUpcomingRepository, null);
+            ExaminationUpcomingRepository examinationUpcomingRepository = new ExaminationUpcomingRepository(new CSVStream<Model.PatientSecretary.Examination>(EXAM_UPCOMING_FILE, new UpcomingExaminationCSVConverter(CSV_DELIMITER)), new LongSequencer(), doctorRepository, patientRepo);
+            ExaminationPreviousRepository examinationPreviousRepository = new ExaminationPreviousRepository(new CSVStream<Examination>(EXAM_PREVIOUS_FILE, new PreviousExaminationCSVConverter(CSV_DELIMITER, CSV_ARRAY_DELIMITER)), new LongSequencer(), doctorRepository, patientRepo, diagnosisRepository, prescriptionRepository, therapyRepository, referralRepository);
+
+            ExaminationService examinationService = new ExaminationService(examinationUpcomingRepository, examinationPreviousRepository);
             ExaminationController = new ExaminationController(examinationService);
         }
 

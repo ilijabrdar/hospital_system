@@ -58,12 +58,15 @@ namespace UserInterface
             App app = Application.Current as App;
 
             Rooms = app.RoomController.GetAll().ToList();
+            Rooms.Insert(0, null);
             SelectedRoom = Rooms[0];
 
             Patients = app.PatientController.GetAll().ToList();
+            Patients.Insert(0, null);
             SelectedPatient = Patients[0];
 
             Doctors = app.DoctorController.GetAll().ToList();
+            Doctors.Insert(0, null);
             SelectedDoctor = Doctors[0];
         }
 
@@ -74,6 +77,7 @@ namespace UserInterface
 
         private void Filter(object sender, RoutedEventArgs e)
         {
+            App app = Application.Current as App;
             ExaminationDTO examinationFilter = new ExaminationDTO(SelectedDoctor, SelectedRoom, new Period(new DateTime(FromYear, FromMonth, FromDay, FromHour, FromMinute, 0), new DateTime(ToYear, ToMonth, ToDay, ToHour, ToMinute, 0)), SelectedPatient);
             MainWindow.FilterExaminations(examinationFilter);
             CloseWindow(sender, e);

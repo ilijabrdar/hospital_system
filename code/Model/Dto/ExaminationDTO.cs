@@ -17,6 +17,7 @@ namespace Model.Dto
         public Model.PatientSecretary.Period Period { get; set; }
 
         public ExaminationDTO() { }
+
         public ExaminationDTO(long id, Model.Users.Doctor doctor, Room room, Period period, Patient patient)
         {
             Id = id;

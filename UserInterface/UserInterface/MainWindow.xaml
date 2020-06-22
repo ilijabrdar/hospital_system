@@ -293,7 +293,7 @@
                             </Style>
                         </DataGrid.RowStyle>
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Datum" Binding="{Binding Period.StartDate.Date, StringFormat=d}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Datum" Binding="{Binding Period.StartDate.Date, StringFormat=\{0:dd/MM/yyy\}}" Width="*"></DataGridTextColumn>
                             <DataGridTextColumn Header="Vreme" Binding="{Binding Period.StartDate.TimeOfDay}" Width="*"></DataGridTextColumn>
                             <DataGridTextColumn Header="Pacijent" Binding="{Binding Patient.FullName}" Width="*"></DataGridTextColumn>
                             <DataGridTextColumn Header="Lekar" Binding="{Binding Doctor.FullName}" Width="*"></DataGridTextColumn>

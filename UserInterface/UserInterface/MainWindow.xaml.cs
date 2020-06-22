@@ -117,21 +117,28 @@ namespace UserInterface
         private void FillExaminationTable()
         {
             App app = Application.Current as App;
-            ExaminationDisplay = new List<ExaminationDTO>();
             Examinations = app.ExaminationController.GetAll().ToList();
-            foreach (Examination examination in Examinations) 
+            ExaminationDisplay = ConvertExaminationToExaminationDTO(Examinations);
+            examinationDisplay = new List<ExaminationDTO>(ExaminationDisplay);
+        }
+
+        private static List<ExaminationDTO> ConvertExaminationToExaminationDTO(List<Examination> examinations)
+        {
+            List<ExaminationDTO> retVal = new List<ExaminationDTO>();
+            foreach (Examination examination in examinations)
             {
                 Room room = null;
-                foreach (BusinessDay businessDay in examination.Doctor.BusinessDay) 
-                    if(businessDay.Shift.StartDate.Date == examination.Period.StartDate.Date)
+                foreach (BusinessDay businessDay in examination.Doctor.BusinessDay)
+                    if (businessDay.Shift.StartDate.Date == examination.Period.StartDate.Date)
                     {
                         room = businessDay.room;
                         break;
                     }
-                ExaminationDisplay.Add(new ExaminationDTO(examination.Id, examination.Doctor, room, examination.Period, (Patient) examination.User));
+                retVal.Add(new ExaminationDTO(examination.Id, examination.Doctor, room, examination.Period, (Patient)examination.User));
             }
-            examinationDisplay = new List<ExaminationDTO>(ExaminationDisplay);
+            return retVal;
         }
+
         private void PopulateCombos()
         {
             ComboBox states = FindName("StateCombo") as ComboBox;
@@ -583,10 +590,9 @@ namespace UserInterface
 
         private void SwapLists(object sender, RoutedEventArgs e)
         {
-            //examinations = new List<Examination>(Examinations);
-            //se.ItemsSource = null;
-            //se.ItemsSource = examinations;
-            //tb.Text = "";
+            examinationDisplay = new List<ExaminationDTO>(ExaminationDisplay);
+            se.ItemsSource = examinationDisplay;
+            tb.Text = "";
         }
 
         private void SwapFreeLists(object sender, RoutedEventArgs e)
@@ -598,34 +604,11 @@ namespace UserInterface
 
         public static void FilterExaminations(ExaminationDTO examinationFilter)
         {
-            //examinationDisplay = new List<ExaminationDTO>(ExaminationDisplay);
-            //for (int i = 0; i < Examinations.Count; i++)
-            //{
-            //    if (examinationFilter.Doctor != null && ExaminationDisplay[i].doctor != examinationFilter.Doctor)
-            //    {
-            //        examinations.Remove(Examinations[i]);
-            //        continue;
-            //    }
-            //    if (!String.IsNullOrEmpty(examinationFilter.Patient) && Examinations[i].patient != examinationFilter.Patient)
-            //    {
-            //        examinations.Remove(Examinations[i]);
-            //        continue;
-            //    }
-            //    if (!String.IsNullOrEmpty(examinationFilter.Room) && Examinations[i].room != examinationFilter.Room)
-            //    {
-            //        examinations.Remove(Examinations[i]);
-            //        continue;
-            //    }
-            //    if (Examinations[i].dateTime < examinationFilter.FromDate || Examinations[i].dateTime > examinationFilter.ToDate)
-            //    {
-            //        examinations.Remove(Examinations[i]);
-            //        continue;
-            //    }
-            //}
-            //tb.Text = "Lekar:\t\t" + examinationFilter.Doctor + "\n\nPacijent:\t\t" + examinationFilter.Patient + "\n\nOd:\t\t" + examinationFilter.FromDate + "\nDo:\t\t" + examinationFilter.ToDate + "\n\nSala:\t\t" + examinationFilter.Room;
-            //tb.FontSize = 13;
-            //se.ItemsSource = null;
-            //se.ItemsSource = examinations;
+            App app = Application.Current as App;
+            examinationDisplay = ConvertExaminationToExaminationDTO(app.ExaminationController.GetExaminationsByFilter(examinationFilter, true));
+            tb.Text = "Lekar:\t\t" + ((examinationFilter.Doctor != null) ? examinationFilter.Doctor.FullName : "") + "\n\nPacijent:\t\t" + ((examinationFilter.Patient != null) ? examinationFilter.Patient.FullName : "") + "\n\nOd:\t\t" + examinationFilter.Period.StartDate + "\nDo:\t\t" + examinationFilter.Period.EndDate + "\n\nSala:\t\t" + ((examinationFilter.Room != null) ? examinationFilter.Room.RoomCode : "");
+            tb.FontSize = 13;
+            se.ItemsSource = examinationDisplay;
         }
 
         public static void EditExamination(Examination oldExamination, Examination newExamination)

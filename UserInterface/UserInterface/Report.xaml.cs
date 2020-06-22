@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
+using Model.Dto;
 using Model.PatientSecretary;
 using Model.Users;
 
@@ -73,14 +74,10 @@ namespace UserInterface
         {
             FromFullDate = new DateTime(FromYear, FromMonth, FromDay, FromHour, FromMinute, 0);
             ToFullDate = new DateTime(ToYear, ToMonth, ToDay, ToHour, ToMinute, 0);
-            //Document doc = new Document(PageSize.A4, 15, 15, 30, 30);
-            //PdfWriter wri = PdfWriter.GetInstance(doc, new FileStream("C:/Users/Asus/Desktop/hospital_system/UserInterface/UserInterface/Resources/Report.pdf", FileMode.Create));
-            //doc.Open();
-            //Header header = new Header("IZVEŠTAJ ZAUZETOSTI LEKARA", "IZVEŠTAJ ZAUZETOSTI LEKARA");
-            //iTextSharp.text.Paragraph paragraph = new iTextSharp.text.Paragraph("Lekar:\t" + SelectedDoctor + "\nOd:\t" + FromFullDate + "\nDo:\t" + ToFullDate);
-            //doc.Add(header);
-            //doc.Add(paragraph);
-            //doc.Close();
+
+            App app = Application.Current as App;
+            ExaminationDTO examinationFilter = new ExaminationDTO(SelectedDoctor, null, new Period(new DateTime(FromYear, FromMonth, FromDay, FromHour, FromMinute, 0), new DateTime(ToYear, ToMonth, ToDay, ToHour, ToMinute, 0)), null);
+            List<Examination> examinations = app.ExaminationController.GetExaminationsByFilter(examinationFilter, false);
 
             String html = "<html><head><style>table {border-collapse: collapse; width: 100%;} table, th, td {border: 1px solid black;}</style></head><body><h1 style=\"text - align:center\">IZVEŠTAJ O ZAUZETOSTI LEKARA</h1>" +
                 "<p><br><br>Lekar:  Pera Perić<br>Od:  18/6/2020 00:00:00<br>Do:  19/6/2020 17:00:00<br><br></p>" +
