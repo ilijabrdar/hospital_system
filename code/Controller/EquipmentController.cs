@@ -46,9 +46,9 @@ namespace Controller
 
         public IEnumerable<Equipment> getInconsumableEquipment() => _service.GetInconsumableEquipment();
 
-        public bool CheckEquipmentNameUnique(Equipment equipment)
+        public bool CheckEquipmentNameUnique(String name)
         {
-            throw new NotImplementedException();
+            return _service.CheckEquipmentNameUnique(name);
         }
     }
 }

@@ -14,5 +14,7 @@ namespace bolnica.Service
 
         void DeleteBusinessDayFromDoctor(BusinessDay businessDay);
 
+        bool CheckJMBGUnique(String JMBG);
+
     }
 }
