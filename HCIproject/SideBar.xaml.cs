@@ -31,6 +31,8 @@ namespace HCIproject
         public List<Town> Towns { get; set; }
         public List<Address> Addresses { get; set; }
 
+        public string TestAdresa { get; set; }
+
 
         public SideBar()
         {
@@ -38,7 +40,6 @@ namespace HCIproject
             this.DataContext = this;
             setArticle();
             setDrug();
-            setUpcomingExam();
         }
         public SideBar(Doctor _user)
         {
@@ -51,8 +52,8 @@ namespace HCIproject
             upcomingExaminations = new List<ExaminationDTO>();
 
 
-            setUpcomingExam();
-
+            setViewUpcExam();
+            setViewPatientFiles();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -118,15 +119,15 @@ namespace HCIproject
             JmbgSet.Text = user.Jmbg.ToString();
             EmailSet.Text = user.Email;
             TelSet.Text = user.Phone;
-            //  String doctorAddress = user.Address.Street + " " + user.Address.Number + "," + " " + user.Address.Town.Name + " " + user.Address.Town.PostalNumber + "," + " " + user.Address.Town.State.Name;
+            String doctorAddress = user.Address.Street + " " + user.Address.Number + "," + " " + user.Address.Town.Name + " " + user.Address.Town.PostalNumber + "," + " " + user.Address.Town.State.Name;
+            AdresaSet.Text = doctorAddress;
 
-            izAdresaTxt.Text= TestAdresa.Text;
-            // Console.WriteLine(doctorAddress);
             TestSpec = user.Specialty.Name;
             TestImePrezime= user.FirstName + " " + user.LastName;
             TestEmail= user.Email;
             TestJMBG = user.Jmbg.ToString();
             TestPhoneNumber= user.Phone;
+            TestAdresa = doctorAddress;
         }
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
@@ -174,7 +175,7 @@ namespace HCIproject
                 user.Jmbg = TestJMBG;
                 user.Phone = TestPhoneNumber;
                 user.Email = TestEmail;
-                TestAdresa.Text=izAdresaTxt.Text;
+         //       user.Address = TestAdresa;
                 app.UserController.Edit((Doctor)user);
 
                 string messageBoxText1 = "Uspesno ste promenili podatke!";
@@ -533,49 +534,6 @@ namespace HCIproject
             setDrug();
         }
 
-        private void setUpcomingExam()
-        {
-            upcomingExaminations.Clear();
-            //long id,String name, String surname, String jmbg, String email, String phone, DateTime birth, Address address, String username, String password, Bitmap img)
-            Patient p1 = new Patient(1, "Pera", "Perić", "213123123123", "sadsds@sadsa.com", "2312312312", new DateTime(), null, "DDD", "ddd", null);
-            Patient p2 = new Patient(2, "Jovan", "Jovanović", "213123123123", "sadsds@sadsa.com", "2312312312", new DateTime(), null, "DDD", "ddd", null);
-            Patient p3 = new Patient(3, "Marko", "Zoric", "213123123123", "sadsds@sadsa.com", "2312312312", new DateTime(), null, "DDD", "ddd", null);
-            Patient p4 = new Patient(4, "Zoran", "Jovov", "213123123123", "sadsds@sadsa.com", "2312312312", new DateTime(), null, "DDD", "ddd", null);
-            Patient p5 = new Patient(5, "Mila", "Mijić", "213123123123", "sadsds@sadsa.com", "2312312312", new DateTime(), null, "DDD", "ddd", null);
-            Patient p6 = new Patient(6, "Jovana", "Zivković", "213123123123", "sadsds@sadsa.com", "2312312312", new DateTime(), null, "DDD", "ddd", null);
-            Patient p7 = new Patient(7, "Bojana", "Blejic", "213123123123", "sadsds@sadsa.com", "2312312312", new DateTime(), null, "DDD", "ddd", null);
-            Patient p8 = new Patient(8, "Strahinja", "Markoović", "213123123123", "sadsds@sadsa.com", "2312312312", new DateTime(), null, "DDD", "ddd", null);
-
-            Period period1 = new Period(new DateTime(2020, 6, 20, 9, 20, 0));
-            Period period2 = new Period(new DateTime(2020, 6, 20, 9, 40, 0));
-            Period period3 = new Period(new DateTime(2020, 6, 20, 10, 20, 0));
-            Period period4 = new Period(new DateTime(2020, 6, 20, 10, 0, 0));
-            Period period5 = new Period(new DateTime(2020, 6, 19, 14, 20, 0));
-            Period period6 = new Period(new DateTime(2020, 7, 19, 15, 20, 0));
-            Period period7 = new Period(new DateTime(2020, 7, 19, 16, 40, 0));
-            Period period8 = new Period(new DateTime(2020, 7, 19, 17, 20, 0));
-            Period period9 = new Period(new DateTime(2020, 7, 19, 18, 0, 0));
-            ExaminationDTO exam1 = new ExaminationDTO(p1, period1);
-            ExaminationDTO exam2 = new ExaminationDTO(p2, period2);
-            ExaminationDTO exam3 = new ExaminationDTO(p3, period3);
-            ExaminationDTO exam4 = new ExaminationDTO(p4, period4);
-            ExaminationDTO exam5 = new ExaminationDTO(p5, period5);
-            ExaminationDTO exam6 = new ExaminationDTO(p6, period6);
-            ExaminationDTO exam7 = new ExaminationDTO(p7, period7);
-            ExaminationDTO exam8 = new ExaminationDTO(p8, period8);
-
-            upcomingExaminations.Add(exam1);
-            upcomingExaminations.Add(exam2);
-            upcomingExaminations.Add(exam3);
-            upcomingExaminations.Add(exam4);
-            upcomingExaminations.Add(exam5);
-            upcomingExaminations.Add(exam6);
-            upcomingExaminations.Add(exam7);
-            upcomingExaminations.Add(exam8);
-            setViewUpcExam();
-            setViewPatientFiles();
-        }
-
         public void setViewUpcExam() {
             var app = Application.Current as App;
 
@@ -635,8 +593,15 @@ namespace HCIproject
         }
         private void setViewPatientFiles()
         {
-            foreach (var exam in upcomingExaminations)
+            var app = Application.Current as App;
+
+            List<long> helpExam = new List<long>();
+            foreach (var exam in app.ExaminationController.GetUpcomingExaminationsByUser(user))
             {
+                if (!helpExam.Contains(exam.User.Id))
+                {
+                    helpExam.Add(exam.User.Id);
+
                     StackPanel stack = new StackPanel();
                     DockPanel dock = new DockPanel();
                     Label lbl = new Label();
@@ -648,7 +613,7 @@ namespace HCIproject
 
 
                     #region DockPanel Content Properties
-                    lbl.Content = exam.Patient.FirstName + " " + exam.Patient.LastName;
+                    lbl.Content = exam.User.FirstName + " " + exam.User.LastName;
                     lbl.Height = 32;
                     lbl.Width = 180;
                     lbl.FontSize = 15;
@@ -662,7 +627,7 @@ namespace HCIproject
                     btn1.FontSize = 12;
                     btn1.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
                     btn1.SetValue(DockPanel.DockProperty, Dock.Right);
-                    btn1.Tag = exam.Patient.Id;
+                    btn1.Tag = exam.User.Id;
                     btn1.Click += new RoutedEventHandler(ClickOpenPatientFile);
                     btn1.Margin = new Thickness(10, 10, 15, 0);
                     btn1.Background = new SolidColorBrush(Color.FromRgb(162, 217, 206));
@@ -673,7 +638,50 @@ namespace HCIproject
                     Grid_Grid1.Children.Add(stack);
                     stack.SetValue(Grid.RowProperty, num1);
                     num1++;
-                
+                }
+            }
+            foreach (var exam in app.ExaminationController.GetFinishedxaminationsByUser(user))
+            {
+                if (!helpExam.Contains(exam.User.Id))
+                {
+                    helpExam.Add(exam.User.Id);
+                    StackPanel stack = new StackPanel();
+                    DockPanel dock = new DockPanel();
+                    Label lbl = new Label();
+                    Button btn1 = new Button();
+
+                    stack.Children.Add(dock);
+                    dock.Children.Add(lbl);
+                    dock.Children.Add(btn1);
+
+
+                    #region DockPanel Content Properties
+                    lbl.Content = exam.User.FirstName + " " + exam.User.LastName;
+                    lbl.Height = 32;
+                    lbl.Width = 180;
+                    lbl.FontSize = 15;
+                    lbl.FontWeight = FontWeights.Bold;
+                    lbl.SetValue(DockPanel.DockProperty, Dock.Left);
+                    lbl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+
+                    btn1.Content = "Otvori";
+                    btn1.Height = 32;
+                    btn1.Width = 100;
+                    btn1.FontSize = 12;
+                    btn1.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
+                    btn1.SetValue(DockPanel.DockProperty, Dock.Right);
+                    btn1.Tag = exam.User.Id;
+                    btn1.Click += new RoutedEventHandler(ClickOpenPatientFile);
+                    btn1.Margin = new Thickness(10, 10, 15, 0);
+                    btn1.Background = new SolidColorBrush(Color.FromRgb(162, 217, 206));
+                    #endregion
+
+                    Grid_Grid1.RowDefinitions.Add(new RowDefinition());
+                    Grid_Grid1.RowDefinitions[num1].Height = new GridLength(66, GridUnitType.Pixel);
+                    Grid_Grid1.Children.Add(stack);
+                    stack.SetValue(Grid.RowProperty, num1);
+                    num1++;
+                }
             }
 
         }
@@ -713,6 +721,8 @@ namespace HCIproject
                 pic.Source = new BitmapImage(new Uri(fileName));
             }
         }
+
+
 
     }
 }

@@ -21,15 +21,18 @@ namespace HCIproject
     /// <summary>
     /// Interaction logic for Examination.xaml
     /// </summary>
-    
+
     public partial class ExaminationWin : Window
     {
         public Doctor user;
         public long patientId;
-        
+
         private String anamneza;
         private String dijagnoza;
         private Symptom simptom;
+
+        public string Simptom{get; set;}
+        public string Anamneza { get; set; }
 
 
         public ExaminationWin(Doctor user, long _patientId)

@@ -33,11 +33,101 @@ namespace HCIproject
             this.user = _user;
             this.id = _patientId;
             InitializeComponent();
+            setExaminations();
         }
 
         public PatientFileWin()
         {
             InitializeComponent();
+        }
+        private void setExaminations()
+        {
+            var app = Application.Current as App;
+            List<Examination> examinations = new List<Examination>();
+
+            Patient _patient = app.PatientController.Get(id);
+            examinations = _patient.patientFile.Examination;
+            if (examinations == null)
+            {
+                return;
+            }
+            foreach (var examination in examinations)
+            {
+                Border b = new Border();
+                b.BorderThickness = new Thickness(2);
+                b.CornerRadius = new CornerRadius(3);
+                b.BorderBrush = Brushes.LightBlue;
+                b.Margin = new Thickness(10, 10, 10, 10);
+
+                StackPanel stackPanelExamination = new StackPanel();
+                TextBlock doctor = new TextBlock();
+                TextBlock period = new TextBlock();
+                TextBlock prescription = new TextBlock();
+                TextBlock refferal = new TextBlock();
+                TextBlock Anamnesis = new TextBlock();
+                TextBlock Diagnosis = new TextBlock();
+                TextBlock therapy = new TextBlock();
+
+                doctor.FontSize = 15;
+                doctor.Inlines.Add(new Run("Doktor:  ") { FontWeight = FontWeights.Bold });
+                doctor.Inlines.Add(examination.Doctor.FullName);
+                doctor.Margin = new Thickness(10, 10, 10, 10);
+                stackPanelExamination.Children.Add(doctor);
+                //
+                period.Inlines.Add(new Run("Datum:  ") { FontWeight = FontWeights.Bold });
+                period.FontSize = 15;
+                period.Inlines.Add(examination.Period.StartDate.ToString());
+                period.Margin = new Thickness(10, 10, 10, 10);
+                stackPanelExamination.Children.Add(period);
+
+                //
+                Anamnesis.FontSize = 15;
+                Anamnesis.Inlines.Add(new Run("Anamnesis:  ") { FontWeight = FontWeights.Bold });
+                Anamnesis.TextWrapping = TextWrapping.Wrap;
+                Anamnesis.Margin = new Thickness(10, 10, 10, 10);
+                Anamnesis.Inlines.Add(examination.Anemnesis.Text);
+                stackPanelExamination.Children.Add(Anamnesis);
+
+                //
+                Diagnosis.FontSize = 15;
+                Diagnosis.TextWrapping = TextWrapping.Wrap;
+                Diagnosis.Inlines.Add(new Run("Diagnoza:  ") { FontWeight = FontWeights.Bold });
+                Diagnosis.Margin = new Thickness(10, 10, 10, 10);
+                Diagnosis.Inlines.Add(examination.Diagnosis.Name);
+                stackPanelExamination.Children.Add(Diagnosis);
+
+                //
+
+                prescription.FontSize = 15;
+                prescription.TextWrapping = TextWrapping.Wrap;
+                prescription.Margin = new Thickness(10, 10, 10, 10);
+                prescription.Inlines.Add(new Run("Recept: ") { FontWeight = FontWeights.Bold });
+                foreach (Prescription pr in examination.Prescription)
+                {
+                    foreach (Drug dr in pr.Drug)
+                        prescription.Inlines.Add(dr.Name);
+                }
+                stackPanelExamination.Children.Add(prescription);
+
+                therapy.FontSize = 15;
+                therapy.TextWrapping = TextWrapping.Wrap;
+                therapy.Margin = new Thickness(10, 10, 10, 10);
+                therapy.Inlines.Add(new Run("Terapija:  ") { FontWeight = FontWeights.Bold });
+                therapy.Inlines.Add(examination.Therapy.Note);
+                stackPanelExamination.Children.Add(therapy);
+                if (examination.Refferal != null)
+                {
+                    refferal.FontSize = 15;
+                    refferal.Margin = new Thickness(10, 10, 10, 10);
+                    refferal.Inlines.Add(new Run("Uput:  ") { FontWeight = FontWeights.Bold });
+                    refferal.Inlines.Add("pacijent se upućuje na dateljniji pregled kod lekara " + examination.Refferal.Doctor.FullName + " datuma " + examination.Refferal.Period.StartDate.ToString());
+                    stackPanelExamination.Children.Add(refferal);
+                }
+
+                b.Child = stackPanelExamination;
+
+                Exeminations.Children.Add(b);
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -81,32 +171,7 @@ namespace HCIproject
 
         private void searchMyExam(String input)
         {
-            if (input.Equals(lekar1.Text) || input.Equals(datum1Txt.Text))
-            {
-                Examination2.Visibility = Visibility.Hidden;
-                Examination3.Visibility = Visibility.Hidden;
-            }
-            else if (input.Equals(lekar2.Text) || input.Equals(datum2Txt.Text))
-            {
-                Examination1.Visibility = Visibility.Hidden;
-                Examination3.Visibility = Visibility.Hidden;
-            } else if (input.Equals(lekar3.Text) || input.Equals(datum3Txt.Text))
-            {
-                Examination1.Visibility = Visibility.Hidden;
-                Examination2.Visibility = Visibility.Hidden;
-            }else if (input.Equals(" "))
-            {
-                Examination1.Visibility = Visibility.Visible;
-                Examination2.Visibility = Visibility.Visible;
-                Examination3.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                Examination1.Visibility = Visibility.Hidden;
-                Examination2.Visibility = Visibility.Hidden;
-                Examination3.Visibility = Visibility.Hidden;
-
-            }
+          
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -129,7 +194,6 @@ namespace HCIproject
                 System.Windows.MessageBox.Show("Could not open the file.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
-
 
     }
 }

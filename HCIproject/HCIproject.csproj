@@ -232,12 +232,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="RESOURCES\AddressFile.csv" />
-    <None Include="RESOURCES\BussinesDayFile.csv" />
-    <None Include="RESOURCES\PatientFile.csv" />
-    <None Include="RESOURCES\RoomTypeFile.csv" />
-    <None Include="RESOURCES\StateFile.csv" />
-    <None Include="RESOURCES\TownFile.csv" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -261,61 +255,13 @@
     <Resource Include="graph.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="RESOURCES\DoctorFile.csv" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="RESOURCES\DiagnosisFile.csv" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="RESOURCES\DoctorGradeFile.csv" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="RESOURCES\DrugFile.csv" />
-    <None Include="RESOURCES\ExaminationPrevious.csv" />
-    <None Include="RESOURCES\HospitalizationFile.csv" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="RESOURCES\IngredientsFile.csv" />
-    <None Include="RESOURCES\PrescriptionFile.csv" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="RESOURCES\OperationFile.csv" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="RESOURCES\ReferralFile.csv" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="RESOURCES\SpecialityFile.csv" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="RESOURCES\SymptomFile.csv" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="RESOURCES\TherapyFile.csv" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="RESOURCES\ArticleFile.csv" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\code\bolnica.csproj">
       <Project>{687C36BC-852F-46BE-9095-77CC66EFE752}</Project>
       <Name>bolnica</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="RESOURCES\RoomFile.csv" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="RESOURCES\EquipmentFile.csv" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Images\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="RESOURCES\ExaminationUpcoming.csv" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="RESOURCES\Patient.csv" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\MaterialDesignThemes.3.1.3\build\MaterialDesignThemes.targets" Condition="Exists('packages\MaterialDesignThemes.3.1.3\build\MaterialDesignThemes.targets')" />

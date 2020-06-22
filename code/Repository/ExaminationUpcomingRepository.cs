@@ -44,16 +44,35 @@ namespace bolnica.Repository
 
         public  List<Examination> GetUpcomingExaminationsByUser(User user)
         {
-            List<Examination> examinations = GetAllEager().ToList();
-            List<Examination> findExamination = new List<Examination>();
-            foreach(Examination examination in examinations)
+            try
             {
-                if (examination.Doctor.Id == user.Id)
+                Doctor doctor = (Doctor)user;
+                List<Examination> examinations = GetAllEager().ToList();
+                List<Examination> findExamination = new List<Examination>();
+                foreach (Examination examination in examinations)
                 {
-                    findExamination.Add(examination);
+                    if (examination.Doctor.Id == doctor.Id)
+                    {
+                        findExamination.Add(examination);
+                    }
                 }
+                return findExamination;
+
+            }catch(Exception e)
+            {
+                Patient patient = (Patient)user;
+                List<Examination> examinations = GetAllEager().ToList();
+                List<Examination> findExamination = new List<Examination>();
+                foreach (Examination examination in examinations)
+                {
+                    if (examination.Doctor.Id == patient.Id)
+                    {
+                        findExamination.Add(examination);
+                    }
+                }
+                return findExamination;
+
             }
-            return findExamination;
         }
 
         public Examination StartUpcomingExamination(Examination examination)

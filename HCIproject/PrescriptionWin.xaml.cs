@@ -1,4 +1,5 @@
-﻿using Model.Users;
+﻿using Model.PatientSecretary;
+using Model.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,25 +16,31 @@ using System.Windows.Shapes;
 
 namespace HCIproject
 {
-    /// <summary>
-    /// Interaction logic for Prescription.xaml
-    /// </summary>
     public partial class PrescriptionWin : Window
     {
         public Doctor user;
         public long patientId;
         public String dijagnoza;
+
+        public static Prescription prescription=new Prescription();
+        public static Therapy terapija = new Therapy();
+
+        public List<Drug> lekoviListBox = new List<Drug>();
+
+        public Period period = new Period();
+
+        public string TerapijaBinding { get; set; }
         public PrescriptionWin(Doctor user, long _patientId, String _dijagnoza)
         {
             this.user = user;
             this.patientId = _patientId;
             this.dijagnoza = _dijagnoza;
             InitializeComponent();
-
+            prescription = null;
+            terapija = null;
 
 
             setPatientInfo();
-
             dijagnozaTxt.Text = dijagnoza;
             setDrugCombo();
         }
@@ -57,19 +64,40 @@ namespace HCIproject
             var app = Application.Current as App;
             foreach(var lek in app.DrugController.GetAll())
             {
-                lekovi.Items.Add(lek.Name);
+                lekovi.Items.Add(lek);
             }
         }
 
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
-        { //potvrdi
-          //    Examination exam = new Examination();
-          //this.Visibility = Visibility.Hidden;
-          // exam.Show();
+        {
+            var app = Application.Current as App;
+
             if (lekovi.SelectedItem != null)
             {
-                string messageBoxText = "Uspesno ste prepisali lek:" + lekovi.SelectedItem.ToString();
+                if (StartDate.SelectedDate != null && EndDate.SelectedDate != null)
+                {
+                    period = new Period(StartDate.SelectedDate, EndDate.SelectedDate);
+                }
+
+                foreach(String drug in lekovi.SelectedItems)
+                {
+                    foreach (Drug lek in app.DrugController.GetAll())
+                    {
+                        if (drug == lek.Name)
+                        {
+                            lekoviListBox.Add(lek);
+                        }
+                    }
+                }
+                if (TerapijaBinding != null)
+                {
+                    terapija.Note = TerapijaBinding;
+                }
+                terapija = new Therapy(TerapijaBinding, period, lekoviListBox);
+                prescription = new Prescription(period,lekoviListBox);
+
+                string messageBoxText = "Uspesno!";
                 string caption = "Recept";
                 MessageBoxButton button = MessageBoxButton.OK;
                 MessageBoxImage icon = MessageBoxImage.Information;

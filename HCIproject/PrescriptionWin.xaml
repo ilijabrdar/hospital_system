@@ -42,7 +42,7 @@
                     <TextBox x:Name="dodatniLekovi" Grid.Row="2" Grid.Column="1"></TextBox>
 
                     <Label Content="Terapija" Grid.Row="3" Grid.Column="0" FontSize="18" Margin="5"/>
-                    <TextBox x:Name="terapija"   Grid.Row="3" Grid.Column="1" Margin="5"  CaretBrush="#FF1FEECD" AcceptsReturn="True" />
+                    <TextBox x:Name="terapija2"  Text="{Binding Path=TerapijaBinding}"  Grid.Row="3" Grid.Column="1" Margin="5"  CaretBrush="#FF1FEECD" AcceptsReturn="True" />
 
                     <WrapPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
                         <Label Content="Vremenski period" FontSize="16" Margin="10" />

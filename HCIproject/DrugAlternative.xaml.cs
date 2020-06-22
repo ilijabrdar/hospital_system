@@ -17,17 +17,18 @@ using System.Windows.Shapes;
 
 namespace HCIproject
 {
-    /// <summary>
-    /// Interaction logic for DrugAlternative.xaml
-    /// </summary>
     public partial class DrugAlternative : Window
     {
         public Doctor user;
+        private Drug drug1;
+        private Drug drug2;
        public DrugAlternative(Doctor user)
         {
             this.user = user;
             InitializeComponent();
             initializeComboBox();
+            drug1 = new Drug();
+            drug2 = new Drug();
         }
 
         public DrugAlternative()
@@ -56,12 +57,67 @@ namespace HCIproject
             }
             else
             {
-                string messageBoxText = "Uspesno ste dodali alternativni lek " + cBox1.SelectedItem.ToString() + " za lek " + cBox.SelectedItem.ToString()+"!";
-                string caption = "Potvrda dodavanja alternativnog leka!";
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Information;
-                MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
-                this.Close();
+                var app = Application.Current as App;
+                foreach (Drug drug in app.DrugController.GetAll())
+                {
+                    if (drug.Name == cBox.SelectedItem.ToString())
+                    {
+                        drug1 = drug;
+                    }
+                    if (drug.Name == cBox1.SelectedItem.ToString())
+                    {
+                        drug2 = drug;
+                    }
+                  }
+
+                bool flag = false;
+                if (drug1.Alternative.Count != 0)
+                {
+                    foreach (Drug dr in drug1.Alternative.ToList())
+                    {
+                        if(dr.Id== drug2.Id)
+                        {
+                            flag = true;
+                        }                      
+                    }
+                    if (!flag)
+                    {
+                        drug1.Alternative.Add(drug2);
+                        drug2.Alternative.Add(drug1);
+                        app.DrugController.Edit(drug1);
+                        app.DrugController.Edit(drug2);
+                        string messageBoxText = "Uspesno ste dodali alternativni lek " + cBox1.SelectedItem.ToString() + " za lek " + cBox.SelectedItem.ToString() + "!";
+                        string caption = "Potvrda dodavanja alternativnog leka!";
+                        MessageBoxButton button = MessageBoxButton.OK;
+                        MessageBoxImage icon = MessageBoxImage.Information;
+                        MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+                        this.Close();
+                    }
+                    else
+                    {
+                        string messageBoxText1 = "Lekovi su vec zavedeni kao alternativni jedan drugom.";
+                        string caption1 = "Alternativni lekovi!";
+                        MessageBoxButton button1 = MessageBoxButton.OK;
+                        MessageBoxImage icon1 = MessageBoxImage.Information;
+                        MessageBoxResult result1 = MessageBox.Show(messageBoxText1, caption1, button1, icon1);
+                    }
+                }
+                else
+                {
+                    drug1.Alternative.Add(drug2);
+                    drug2.Alternative.Add(drug1);
+                    app.DrugController.Edit(drug1);
+                    app.DrugController.Edit(drug2);
+
+                    string messageBoxText = "Uspesno ste dodali alternativni lek " + cBox1.SelectedItem.ToString() + " za lek " + cBox.SelectedItem.ToString() + "!";
+                    string caption = "Potvrda dodavanja alternativnog leka!";
+                    MessageBoxButton button = MessageBoxButton.OK;
+                    MessageBoxImage icon = MessageBoxImage.Information;
+                    MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+                    this.Close();
+                }
+
+
             }
         }
         private void Button_Click_1(object sender, RoutedEventArgs e)

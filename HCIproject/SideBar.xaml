@@ -8,7 +8,7 @@
         xmlns:val="clr-namespace:HCIproject.Validation"
 
         mc:Ignorable="d"
-        Title="Funckionalnosti"  Height="450" Width="800"
+        Title="Funckionalnosti"  Height="450" Width="850"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Color x:Key="Color1">#FFA2D9CE</Color>
@@ -60,7 +60,7 @@
                                 <TextBlock x:Name="TelSet" Margin="5"  Grid.Column="1" Grid.Row="6" HorizontalAlignment="Right" FontSize="14" />
 
                                 <Label Grid.Column="0" Grid.Row="7" Content="Adresa" FontWeight="SemiBold" FontSize="14" />
-                                <TextBlock x:Name="TestAdresa" Margin="5"  Text="Vuka Karadzica 23" Grid.Column="1" Grid.Row="7" HorizontalAlignment="Right" FontSize="14" />
+                                <TextBlock x:Name="AdresaSet" Margin="5"   Grid.Column="1" Grid.Row="7" HorizontalAlignment="Right" FontSize="14" />
 
                             </Grid>
                         </Border>

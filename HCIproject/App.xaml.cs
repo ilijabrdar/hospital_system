@@ -48,33 +48,33 @@ namespace HCIproject
         private const String CSV_DELIMITER2 = "|";
         private const String CSV_DICTIONARY_DELIMITER = ";";
         private const String CSV_ARRAY_DELIMITER = ":";
-        private const String DOCTOR_FILE = "C:/Users/Tamara Kovacevic/Desktop/hospital_system/HCIproject/RESOURCES/DoctorFile.csv";
-        private const String DOCTOR_GRADE_FILE= "C:/Users/Tamara Kovacevic/Desktop/hospital_system/HCIproject/RESOURCES/DoctorGradeFile.csv";
-        private const String SPECIALITY_FILE = "C:/Users/Tamara Kovacevic/Desktop/hospital_system/HCIproject/RESOURCES/SpecialityFile.csv";
-        private const String HOSPITALIZATION_FILE = "C:/Users/Tamara Kovacevic/Desktop/hospital_system/HCIproject/RESOURCES/HospitalizationFile.csv";
-        private const String OPERATION_FILE = "C:/Users/Tamara Kovacevic/Desktop/hospital_system/HCIproject/RESOURCES/OperationFile.csv";
-        private const String DIAGNOSIS_FILE = "C:/Users/Tamara Kovacevic/Desktop/hospital_system/HCIproject/RESOURCES/DiagnosisFile.csv";
-        private const String PRESCRIPTION_FILE = "C:/Users/Tamara Kovacevic/Desktop/hospital_system/HCIproject/RESOURCES/PrescriptionFile.csv";
-        private const String REFERRAL_FILE = "C:/Users/Tamara Kovacevic/Desktop/hospital_system/HCIproject/RESOURCES/ReferralFile.csv";
-        private const String SYMPTOM_FILE = "C:/Users/Tamara Kovacevic/Desktop/hospital_system/HCIproject/RESOURCES/SymptomFile.csv";
-        private const String THERAPY_FILE = "C:/Users/Tamara Kovacevic/Desktop/hospital_system/HCIproject/RESOURCES/TherapyFile.csv";
-        private const String ARTICLE_FILE = "C:/Users/Tamara Kovacevic/Desktop/hospital_system/HCIproject/RESOURCES/ArticleFile.csv";
-        private const String ROOMTYPE_FILE = "C:/Users/Tamara Kovacevic/Desktop/hospital_system/HCIproject/RESOURCES/RoomTypeFile.csv";
-        private const String ROOM_FILE = "C:/Users/Tamara Kovacevic/Desktop/hospital_system/HCIproject/RESOURCES/RoomFile.csv";
-        private const String EQUIPMENT_FILE = "C:/Users/Tamara Kovacevic/Desktop/hospital_system/HCIproject/RESOURCES/EquipmentFile.csv";
-        private const String EXAM_UPCOMING_FILE = "C:/Users/Tamara Kovacevic/Desktop/hospital_system/HCIproject/RESOURCES/ExaminationUpcoming.csv";
-        private const String EXAM_PREVIOUS_FILE = "C:/Users/Tamara Kovacevic/Desktop/hospital_system/HCIproject/RESOURCES/ExaminationPrevious.csv";
-        private const String PATIENTFILE_FILE = "C:/Users/Tamara Kovacevic/Desktop/hospital_system/HCIproject/RESOURCES/PatientFile.csv";
-        private const String PATIENT_FILE = "C:/Users/Tamara Kovacevic/Desktop/hospital_system/HCIproject/RESOURCES/Patient.csv";
-        private const String DRUG_FILE = "C:/Users/Tamara Kovacevic/Desktop/hospital_system/HCIproject/RESOURCES/DrugFile.csv";
-        private const String INGREDIENT_FILE = "C:/Users/Tamara Kovacevic/Desktop/hospital_system/HCIproject/RESOURCES/IngredientsFile.csv";
-        private const String BUSSINESDAY_FILE= "C:/Users/Tamara Kovacevic/Desktop/hospital_system/HCIproject/RESOURCES/BussinesDayFile.csv";
-        private const String ADDRESS_FILE = "C:/Users/Tamara Kovacevic/Desktop/hospital_system/HCIproject/RESOURCES/AddressFile.csv";
-        private const String TOWN_FILE = "C:/Users/Tamara Kovacevic/Desktop/hospital_system/HCIproject/RESOURCES/TownFile.csv";
-        private const String STATE_FILE = "C:/Users/Tamara Kovacevic/Desktop/hospital_system/HCIproject/RESOURCES/StateFile.csv";
+        private const String DOCTOR_FILE = "../../../code/Resources/Data/doctors.csv";
+        private const String DOCTOR_GRADE_FILE= "../../../code/Resources/Data/doctorGradeFile.csv";
+        private const String SPECIALITY_FILE = "../../../code/Resources/Data/speciality.csv";
+        private const String HOSPITALIZATION_FILE = "../../../code/Resources/Data/hospitalizationFile.csv";
+        private const String OPERATION_FILE = "../../../code/Resources/Data/operationFile.csv";
+        private const String DIAGNOSIS_FILE = "../../../code/Resources/Data/diagnosisFile.csv";
+        private const String PRESCRIPTION_FILE = "../../../code/Resources/Data/prescriptionFile.csv";
+        private const String REFERRAL_FILE = "../../../code/Resources/Data/referralFile.csv";
+        private const String SYMPTOM_FILE = "../../../code/Resources/Data/symptomFile.csv";
+        private const String THERAPY_FILE = "../../../code/Resources/Data/therapyFile.csv";
+        private const String ARTICLE_FILE = "../../../code/Resources/Data/articles.csv";
+        private const String ROOMTYPE_FILE = "../../../code/Resources/Data/roomtypes.csv";
+        private const String ROOM_FILE = "../../../code/Resources/Data/rooms.csv";
+        private const String EQUIPMENT_FILE = "../../../code/Resources/Data/equipment.csv";
+        private const String EXAM_UPCOMING_FILE = "../../../code/Resources/Data/examinationUpcoming.csv";
+        private const String EXAM_PREVIOUS_FILE = "../../../code/Resources/Data/examinationPrevious.csv";
+        private const String PATIENTFILE_FILE = "../../../code/Resources/Data/patientFile.csv";
+        private const String PATIENT_FILE = "../../../code/Resources/Data/patient.csv";
+        private const String DRUG_FILE = "../../../code/Resources/Data/drugs.csv";
+        private const String INGREDIENT_FILE = "../../../code/Resources/Data/ingredients.csv";
+        private const String BUSSINESDAY_FILE= "../../../code/Resources/Data/businessdays.csv";
+        private const String ADDRESS_FILE = "../../../code/Resources/Data/AddressFile.txt";
+        private const String TOWN_FILE = "../../../code/Resources/Data/townFile.txt";
+        private const String STATE_FILE = "../../../code/Resources/Data/StateFile.txt";
 
 
-    
+
         public App()
         {
 
@@ -91,12 +91,12 @@ namespace HCIproject
             RoomRepository roomRepository=new RoomRepository(new CSVStream<Room>(ROOM_FILE, new RoomCSVConverter(CSV_DELIMITER)), new LongSequencer(), roomTypeRepository, equipmentRepository);
             BusinessDayRepository businessDayRepository = new BusinessDayRepository(new CSVStream<BusinessDay>(BUSSINESDAY_FILE, new BusinessDayCSVConverter(CSV_DELIMITER)), new LongSequencer(), roomRepository);
 
-            //AddressRepository addressRepository = new AddressRepository(new CSVStream<Address>(ADDRESS_FILE, new AddressCSVConverter(CSV_DELIMITER)), new LongSequencer());
-            // TownRepository townRepository = new TownRepository(new CSVStream<Town>(TOWN_FILE, new TownCSVConverter(CSV_DELIMITER, CSV_DELIMITER2)), new LongSequencer(), addressRepository);
-            //  StateRepository stateRepository = new StateRepository(new CSVStream<State>(STATE_FILE, new StateCSVConverter(CSV_DELIMITER, CSV_ARRAY_DELIMITER)), new LongSequencer(), townRepository);
+            AddressRepository addressRepository = new AddressRepository(new CSVStream<Address>(ADDRESS_FILE, new AddressCSVConverter(CSV_DELIMITER)), new LongSequencer());
+            TownRepository townRepository = new TownRepository(new CSVStream<Town>(TOWN_FILE, new TownCSVConverter(CSV_DELIMITER, CSV_DELIMITER2)), new LongSequencer(), addressRepository);
+            StateRepository stateRepository = new StateRepository(new CSVStream<State>(STATE_FILE, new StateCSVConverter(CSV_DELIMITER, CSV_ARRAY_DELIMITER)), new LongSequencer(), townRepository);
 
 
-            DoctorRepository doctorRepository = new DoctorRepository(new CSVStream<Doctor>(DOCTOR_FILE, new DoctorCSVConverter(CSV_DELIMITER)), new LongSequencer(), businessDayRepository, specialityRepository, doctorGradeRepository);//, addressRepository,townRepository,stateRepository);
+            DoctorRepository doctorRepository = new DoctorRepository(new CSVStream<Doctor>(DOCTOR_FILE, new DoctorCSVConverter(CSV_DELIMITER)), new LongSequencer(), businessDayRepository, specialityRepository, doctorGradeRepository, addressRepository,townRepository,stateRepository);
             ArticleRepository articleRepository = new ArticleRepository(new CSVStream<Article>(ARTICLE_FILE, new ArticleCSVConverter(CSV_DELIMITER2)), new LongSequencer(), doctorRepository);
 
             businessDayRepository.doctorRepo = doctorRepository;
@@ -112,9 +112,9 @@ namespace HCIproject
             patientFileRepository._hospitalizationRepository = hospitalizationRepository;
             patientFileRepository._operationRepository = operationRepository;
             patientFileRepository._examinationPreviousRepository = examinationPreviousRepository;
-            //  AddressService addressService = new AddressService(addressRepository);
-            //   StateService stateService = new StateService(stateRepository);
-            //   TownService townService = new TownService(townRepository);
+            AddressService addressService = new AddressService(addressRepository);
+            StateService stateService = new StateService(stateRepository);
+            TownService townService = new TownService(townRepository);
 
 
 
@@ -157,6 +157,11 @@ namespace HCIproject
             RoomController = new RoomController(roomService);
             RoomTypeController = new RoomTypeController(roomTypeService);
             EquipmentController = new EquipmentController(equipmentService);
+            AddressController = new AddressController(addressService);
+            TownController = new TownController(townService);
+            StateController = new StateController(stateService);
+
+
             //PatientFileController.Save(new PatientFile(0));
             //StateController = new StateController(stateService);
             //AddressController = new AddressController(addressService);

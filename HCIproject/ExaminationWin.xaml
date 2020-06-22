@@ -37,7 +37,7 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Label Content="Anamneza" Grid.Row="0" Grid.Column="0" FontSize="16" VerticalAlignment="Center" FontWeight="SemiBold"/>
-                        <TextBox x:Name="anamnezaTxt" Grid.Row="0"  Grid.Column="1" Grid.ColumnSpan="4" AcceptsReturn="True" CaretBrush="#FF1FEECD" />
+                        <TextBox x:Name="anamnezaTxt" Grid.Row="0" Text="{Binding Path=Anamneza}"  Grid.Column="1" Grid.ColumnSpan="4" AcceptsReturn="True" CaretBrush="#FF1FEECD" />
 
                         <Label Content="Simptomi" Grid.Row="1" Grid.Column="0" FontWeight="SemiBold" FontSize="16" VerticalAlignment="Center" />
                         <TextBox x:Name="simptomiTxt" Text="{Binding Path=Simptom}" Grid.Row="1"  Grid.Column="1" Grid.ColumnSpan="4" AcceptsReturn="True" CaretBrush="#FF1FEECD"/>
