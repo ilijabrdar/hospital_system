@@ -20,7 +20,6 @@ namespace PacijentBolnicaZdravo.Properties
 
             Console.WriteLine("Ovdesam");
             Console.WriteLine(currentWindow);
-            currentWindow.SurgeriesHardCore.Text = MyProject.Language.Resources.SurgeryHardCore;
             currentWindow.Note.Text = MyProject.Language.Resources.NoteForExamination;
             currentWindow.Pitanje1.Text = MyProject.Language.Resources.Question1;
             currentWindow.Pitanje2.Text = MyProject.Language.Resources.Question2;
@@ -80,7 +79,6 @@ namespace PacijentBolnicaZdravo.Properties
             currentWindow.Surgery.Header = MyProject.Language.Resources.Surgeries;
             currentWindow.Hospitalizations.Header = MyProject.Language.Resources.Hospitalizations;
             currentWindow.UsernameLabel.Text = MyProject.Language.Resources.Username;
-            currentWindow.ExaminationHardCore.Text = MyProject.Language.Resources.ExaminationHardCore;
             currentWindow.Schedule.ToolTip = MyProject.Language.Resources.ToolTipSchedule;
             currentWindow.Cancel.ToolTip = MyProject.Language.Resources.ToolTipCancel;
             currentWindow.ToolTipSchedule.Content = MyProject.Language.Resources.ToolTipSearch;

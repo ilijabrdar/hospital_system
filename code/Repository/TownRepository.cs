@@ -24,7 +24,6 @@ namespace bolnica.Repository
             return towns;
         }
 
-
         public Town GetEager(long id)
         {
             Town town = Get(id);

@@ -20,14 +20,13 @@ namespace bolnica.Repository.CSV.Converter
         {
             string[] tokens = entityCSVFormat.Split(_delimiter.ToCharArray());
             Hospitalization hospitalization = new Hospitalization(long.Parse(tokens[0]),
-                                    new Period(DateTime.Parse(tokens[1]), DateTime.Parse(tokens[2])),
-                                    new PatientFile(long.Parse(tokens[3])), new Room(long.Parse(tokens[4])));
+                                    new Period(DateTime.Parse(tokens[1]), DateTime.Parse(tokens[2])), new Room(long.Parse(tokens[3])));
             return hospitalization;
         }
 
         public string ConvertEntityToCSVFormat(Hospitalization entity)
         {
-            return string.Join(_delimiter, entity.Id, entity.Period.StartDate, entity.Period.EndDate, entity.PatientFile.GetId(), entity.Room.GetId());
+            return string.Join(_delimiter, entity.Id, entity.Period.StartDate, entity.Period.EndDate, entity.Room.GetId());
         }
     }
 }

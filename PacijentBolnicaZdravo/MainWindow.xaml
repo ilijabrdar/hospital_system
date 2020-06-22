@@ -169,22 +169,20 @@
                     <TabItem Header="{x:Static p:Resources.Hospitalizations}" Name="Hospitalizations">
                         <DockPanel>
                             <ScrollViewer  VerticalScrollBarVisibility="auto">
-                                <StackPanel  Orientation="Vertical" HorizontalAlignment="Center">
-                               <TextBlock>
-                                   <TextBlock Margin="70,100,70,10"  TextDecorations="{x:Null}" Opacity="0.4" FontSize="20" Text="{x:Static p:Resources.ExaminationHardCore}" Name="ExaminationHardCore" FontWeight="Bold"/>
-                               </TextBlock>
-                            </StackPanel>
+                                <StackPanel  Orientation="Vertical" HorizontalAlignment="Center" Name="Hospit">
+                              
+                                </StackPanel>
                             </ScrollViewer>
                         </DockPanel>
                     </TabItem>
                     <TabItem Header="{x:Static p:Resources.Surgeries}" Name="Surgery">
-                        <ScrollViewer  VerticalScrollBarVisibility="auto">
-                            <StackPanel  Orientation="Vertical" HorizontalAlignment="Center">
-                                <TextBlock>
-                                   <TextBlock Margin="70,100,70,10"  TextDecorations="{x:Null}" Opacity="0.4" FontSize="20" Text="{x:Static p:Resources.SurgeryHardCore}" Name="SurgeriesHardCore" FontWeight="Bold"/>
-                               </TextBlock>
-                            </StackPanel>
-                        </ScrollViewer>
+                        <DockPanel>
+                            <ScrollViewer  VerticalScrollBarVisibility="auto">
+                                <StackPanel  Orientation="Vertical" HorizontalAlignment="Center" Name ="Operations" >
+
+                                </StackPanel>
+                            </ScrollViewer>
+                        </DockPanel>
                     </TabItem>
                 </TabControl>
             </TabItem>

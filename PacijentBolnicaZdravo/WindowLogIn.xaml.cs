@@ -115,11 +115,16 @@ namespace PacijentBolnicaZdravo
             String password = PasswordLogIn.Password.ToString();
             
                 var app = Application.Current as App;
-                var temp = app.UserController.Login(username,password);
+                var temp =(Patient) app.UserController.Login(username,password);
             if (temp != null) {
                 
                 App.j = 0;
+                Patient p = (Patient)temp;
+                Console.WriteLine("*********************************" + p.patientFile.GetId() + "\n");
                 MainWindow mw = new MainWindow((Patient)temp);
+               
+                
+
                 mw.Show();
                 //TODO : provera za ako ne nadje
 

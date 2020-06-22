@@ -36,7 +36,8 @@ namespace PacijentBolnicaZdravo
         {
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             _patient = patient;
-            
+            Console.WriteLine(_patient.patientFile.Examination);
+
             scheduledExaminations = getScheduledExaminations();
             upcomingExaminations = new List<ExaminationDTO>();
 
@@ -71,9 +72,12 @@ namespace PacijentBolnicaZdravo
         {
             var app = Application.Current as App;
             //TODO : Napuniti listu svih doktora opste prakse
+            listOfDoctors = app.DoctorController.GetDoctorsBySpeciality(new Speciality("Opsta praksa"));
             ListOfArticles = app.ArticleController.GetAll().ToList();
             FillAccountData(_patient);
             setExaminations();
+            setOperation();
+            setHospitalizations();
             setArticle(ListOfArticles);
         }
 
@@ -82,11 +86,12 @@ namespace PacijentBolnicaZdravo
         {
             var app = Application.Current as App;
             List<Examination> examinations = new List<Examination>();
+            examinations = _patient.patientFile.Examination;
             if(examinations == null)
             {
                 return;
             }
-            foreach (var examination in examinations) //TODO ubaciti kontroler za stare examinatione
+            foreach (var examination in examinations) 
             {
                 Border b = new Border();
                 b.BorderThickness = new Thickness(2);
@@ -165,6 +170,105 @@ namespace PacijentBolnicaZdravo
             }
         }
 
+        private void setHospitalizations()
+        {
+            var app = Application.Current as App;
+            List<Hospitalization> hospitalizations = new List<Hospitalization>();
+            hospitalizations = _patient.patientFile.Hospitalization;
+            if (hospitalizations == null)
+            {
+                return;
+            }
+            foreach (var hospitalization in hospitalizations)
+            {
+                Border b = new Border();
+                b.BorderThickness = new Thickness(2);
+                b.CornerRadius = new CornerRadius(3);
+                b.BorderBrush = Brushes.LightBlue;
+                b.Margin = new Thickness(10, 10, 10, 10);
+
+                StackPanel stackPanelExamination = new StackPanel();
+                TextBlock period = new TextBlock();
+                TextBlock room = new TextBlock();
+
+                //
+                period.Inlines.Add(new Run("Datum:  ") { FontWeight = FontWeights.Bold });
+                period.FontSize = 15;
+                period.Inlines.Add(hospitalization.Period.StartDate.ToString());
+                period.Margin = new Thickness(10, 10, 10, 10);
+                stackPanelExamination.Children.Add(period);
+
+                //
+                room.Inlines.Add(new Run("Prostorija: ") { FontWeight = FontWeights.Bold });
+                room.FontSize = 15;
+                room.Inlines.Add(hospitalization.Room.RoomCode);
+                room.Margin = new Thickness(10);
+                stackPanelExamination.Children.Add(room);
+
+                b.Child = stackPanelExamination;
+
+                Hospit.Children.Add(b);
+            }
+        }
+
+
+        private void setOperation()
+        {
+            var app = Application.Current as App;
+            List<Operation> operations = new List<Operation>();
+            operations = _patient.patientFile.Operation;
+            if (operations == null)
+            {
+                return;
+            }
+            foreach (var operation in operations)
+            {
+                Border b = new Border();
+                b.BorderThickness = new Thickness(2);
+                b.CornerRadius = new CornerRadius(3);
+                b.BorderBrush = Brushes.LightBlue;
+                b.Margin = new Thickness(10, 10, 10, 10);
+
+                StackPanel stackPanelExamination = new StackPanel();
+                TextBlock doctor = new TextBlock();
+                TextBlock period = new TextBlock();
+                TextBlock room = new TextBlock();
+                TextBlock description = new TextBlock();
+
+                doctor.FontSize = 15;
+                doctor.Inlines.Add(new Run("Doktor:  ") { FontWeight = FontWeights.Bold });
+                doctor.Inlines.Add(operation.Doctor.FullName);
+                doctor.Margin = new Thickness(10, 10, 10, 10);
+                stackPanelExamination.Children.Add(doctor);
+                //
+                period.Inlines.Add(new Run("Datum:  ") { FontWeight = FontWeights.Bold });
+                period.FontSize = 15;
+                period.Inlines.Add(operation.Period.StartDate.ToString());
+                period.Margin = new Thickness(10, 10, 10, 10);
+                stackPanelExamination.Children.Add(period);
+
+                //
+                room.Inlines.Add(new Run("Prostorija: ") { FontWeight = FontWeights.Bold });
+                room.FontSize = 15;
+                room.Inlines.Add(operation.Room.RoomCode);
+                room.Margin = new Thickness(10);
+                stackPanelExamination.Children.Add(room);
+
+                //
+                description.Inlines.Add(new Run("Opis: ") { FontWeight = FontWeights.Bold });
+                description.FontSize = 15;
+                description.Inlines.Add(operation.Description);
+                description.Margin = new Thickness(10);
+                stackPanelExamination.Children.Add(description);
+
+
+
+                b.Child = stackPanelExamination;
+
+                Operations.Children.Add(b);
+            }
+        }
+
         private void setArticle(List<Article> listOfArticles)
         {
             ArticlesPanel.Children.Clear();
@@ -215,6 +319,13 @@ namespace PacijentBolnicaZdravo
             Email2.Text = _patient.Email;
             PhoneNumber2.Text = _patient.Phone;
             UsernameConst.Text = _patient.Username;
+
+            Ime = _patient.FirstName;
+            Prezime = _patient.LastName;
+            JMBG = _patient.Jmbg;
+            EMAIL = _patient.Email;
+            Phone = _patient.Phone;
+           DATETIME =  _patient.DateOfBirth;
         }
 
 
@@ -436,7 +547,9 @@ namespace PacijentBolnicaZdravo
 
 
                 SuccessUpdateData.Text = "You have successfully changed the data!";
-                 // TODO : userService.Edit(_patient);
+                Console.WriteLine(_patient.patientFile.GetId());
+                var app = Application.Current as App;
+                app.UserController.Edit(_patient);
                 FillAccountData(_patient);
                
                 sb.Begin(SuccessUpdateData);
@@ -470,6 +583,8 @@ namespace PacijentBolnicaZdravo
             if(CurrentPassword.Text != "" && NewPassword.Text != "")
             {
                 _patient.Password = NewPassword.Text;
+                var app = Application.Current as App;
+                app.UserController.Edit(_patient);
                 Storyboard sb = Resources["sbHideAnimation"] as Storyboard;
                 sb.Begin(SuccessUpdatePw);
             }
@@ -585,13 +700,13 @@ namespace PacijentBolnicaZdravo
 
         private void GradeADoctorButton_Click(object sender, RoutedEventArgs e)
         {
-            double grade = 0;
-            grade += Slider1.Value;
-            grade += Slider2.Value;
-            grade += Slider3.Value;
-            grade += Slider4.Value;
-            grade += Slider5.Value;
-            grade /= 5;
+            Dictionary<String, double> gradesPerQuestion = new Dictionary<string, double>();
+            gradesPerQuestion["0"] = Slider1.Value;
+            gradesPerQuestion["1"] = Slider2.Value;
+            gradesPerQuestion["2"] = Slider3.Value;
+            gradesPerQuestion["3"] = Slider4.Value;
+            gradesPerQuestion["4"] = Slider5.Value;
+
             var doctor = (Doctor)DoctorsForFeedback.SelectedItem;
             if (doctor == null)
             {
@@ -604,9 +719,13 @@ namespace PacijentBolnicaZdravo
                 return;
             }
 
+            var app = Application.Current as App;
+            app.PatientController.GiveGradeToDoctor(doctor, gradesPerQuestion);
             FeedbackDOctor.Foreground = Brushes.Green;
 
             FeedbackDOctor.Text = "You have successfully graded the doctor!";
+
+
 
             Storyboard sb = Resources["sbHideAnimation"] as Storyboard;
             sb.Begin(FeedbackDOctor);
