@@ -15,6 +15,7 @@ namespace bolnica.Service
         Examination SaveFinishedExamination(Examination examination);
         List<Examination> GetUpcomingExaminationsByUser(User user);
         List<Examination> GetFinishedxaminationsByUser(User user);
-        List<Examination> GetExaminationFilter(ExaminationDTO examinationDTO);
+        List<Examination> GetExaminationsByFilter(ExaminationDTO examinationDTO, Boolean upcomingOnly);
+        IEnumerable<Examination> GetAllPrevious();
     }
 }
