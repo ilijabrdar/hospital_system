@@ -20,20 +20,20 @@ namespace upravnikKT2
     /// </summary>
     public partial class App : Application
     {
-        private const string ROOMTYPE_FILE = "../../Resources/Data/roomtypes.csv";
-        private const string INGREDIENTS_FILE = "../../Resources/Data/ingredients.csv";
-        private const string ROOMS_FILE = "../../Resources/Data/rooms.csv";
-        private const string EQUIPMENT_FILE = "../../Resources/Data/equipment.csv";
-        private const string RENOVATIONS_FILE = "../../Resources/Data/renovations.csv";
-        private const string DRUGS_FILE = "../../Resources/Data/drugs.csv";
-        private const string DOCTORS_FILE = "../../Resources/Data/doctors.csv";
-        private const string SPECIALITY_FILE = "../../Resources/Data/speciality.csv";
-        private const string ADDRESS_FILE = "../../Resources/Data/AddressFile.txt";
-        private const string TOWN_FILE = "../../Resources/Data/TownFile.txt";
-        private const string STATE_FILE = "../../Resources/Data/StateFile.txt";
-        private const string BUSINESSDAY_FILE = "../../Resources/Data/businessdays.csv";
-        private const string DIRECTOR_FILE = "../../Resources/Data/director.csv";
-        private const string ARTICLES_FILE = "../../Resources/Data/articles.csv";
+        private const string ROOMTYPE_FILE = "../../../../code/Resources/Data/roomtypes.csv";
+        private const string INGREDIENTS_FILE = "../../../../code/Resources/Data/ingredients.csv";
+        private const string ROOMS_FILE = "../../../../code/Resources/Data/rooms.csv";
+        private const string EQUIPMENT_FILE = "../../../../code/Resources/Data/equipment.csv";
+        private const string RENOVATIONS_FILE = "../../../../code/Resources/Data/renovations.csv";
+        private const string DRUGS_FILE = "../../../../code/Resources/Data/drugs.csv";
+        private const string DOCTORS_FILE = "../../../../code/Resources/Data/doctors.csv";
+        private const string SPECIALITY_FILE = "../../../../code/Resources/Data/speciality.csv";
+        private const string ADDRESS_FILE = "../../../../code/Resources/Data/AddressFile.txt";
+        private const string TOWN_FILE = "../../../../code/Resources/Data/TownFile.txt";
+        private const string STATE_FILE = "../../../../code/Resources/Data/StateFile.txt";
+        private const string BUSINESSDAY_FILE = "../../../../code/Resources/Data/businessdays.csv";
+        private const string DIRECTOR_FILE = "../../../../code/Resources/Data/director.csv";
+        private const string ARTICLES_FILE = "../../../../code/Resources/Data/articles.csv";
 
 
         private const string CSV_DELIMITER = ",";
@@ -113,7 +113,7 @@ namespace upravnikKT2
             var specialityService = new SpecialityService(specialityRepository);
             SpecialityController = new SpecialityController(specialityService);
 
-            var doctorRepository = new DoctorRepository(new CSVStream<Doctor>(DOCTORS_FILE, new DoctorCSVConverter(CSV_DELIMITER)), new LongSequencer(),null,null,specialityRepository,null);
+            var doctorRepository = new DoctorRepository(new CSVStream<Doctor>(DOCTORS_FILE, new DoctorCSVConverter(CSV_DELIMITER)), new LongSequencer(),null,specialityRepository,null);
             var doctorService = new DoctorService(doctorRepository,null);
             DoctorController = new DoctorController(doctorService);
 
@@ -139,7 +139,7 @@ namespace upravnikKT2
             var directorService = new DirectorService(directorRepository);
             DirectorController = new DirectorContoller(directorService);
 
-            ArticleRepository articleRepository = new ArticleRepository(new CSVStream<Article>(ARTICLES_FILE, new ArticleCSVConverter(CSV_DELIMITER)), new LongSequencer());
+            ArticleRepository articleRepository = new ArticleRepository(new CSVStream<Article>(ARTICLES_FILE, new ArticleCSVConverter(CSV_DELIMITER)), new LongSequencer(),doctorRepository);
             articleRepository._doctorRepository = doctorRepository;
             ArticleService articleService = new ArticleService(articleRepository);
             ArticleController = new ArticleController(articleService);

@@ -10,7 +10,7 @@ namespace Repository
 {
     public class DoctorRepository : CSVRepository<Doctor, long>, IDoctorRepository
     {
-        private readonly IEagerRepository<BusinessDay, long> businessDayRepo;
+        public IEagerRepository<BusinessDay, long> businessDayRepo;
         private readonly ISpecialityRepository specialityRepo;
         private readonly IDoctorGradeRepository doctorGradeRepository;
         public DoctorRepository(ICSVStream<Doctor> stream, ISequencer<long> sequencer, IEagerRepository<BusinessDay, long> businessDay, ISpecialityRepository speciality,

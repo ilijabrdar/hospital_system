@@ -207,7 +207,9 @@ namespace upravnikKT2
                 if (checkDoctorJMBGExists())
                 {
                     //JMBG for password and username
-                    var doctor = new Doctor(Ime, Prezime, JMBG, EMAIL, Phone, (DateTime)datum, address, JMBG, JMBG, null, (Speciality)comboSpeciality.SelectedItem, null, null, null);
+
+                    //String name, String surname, String jmbg, String email, String phone, DateTime birth, Address adress, String username, String password, Bitmap img, Speciality speciality,  List<BusinessDay> businessDay, DoctorGrade doctGrade
+                    var doctor = new Doctor(Ime, Prezime, JMBG, EMAIL, Phone, (DateTime)datum, address, JMBG, JMBG, null, (Speciality)comboSpeciality.SelectedItem, null, null);
                     _doctorController.Save(doctor);
                 }
                 else
