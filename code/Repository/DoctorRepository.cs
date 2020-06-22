@@ -10,16 +10,24 @@ namespace Repository
 {
     public class DoctorRepository : CSVRepository<Doctor, long>, IDoctorRepository
     {
-        private readonly IEagerRepository<BusinessDay, long> businessDayRepo;
-        private readonly ISpecialityRepository specialityRepo;
-        private readonly IDoctorGradeRepository doctorGradeRepository;
+        private readonly IEagerRepository<BusinessDay, long> _businessDayRepo;
+        private readonly ISpecialityRepository _specialityRepo;
+        private readonly IDoctorGradeRepository _doctorGradeRepository;
+        private readonly IEagerRepository<Address, long> _addressRepository;
+        private readonly IEagerRepository<Town, long> _townRepository;
+        private readonly IEagerRepository<State, long> _stateRepository;
+
         public DoctorRepository(ICSVStream<Doctor> stream, ISequencer<long> sequencer, IEagerRepository<BusinessDay, long> businessDay, ISpecialityRepository speciality,
-            IDoctorGradeRepository doctorGrade)
+            IDoctorGradeRepository doctorGrade, IEagerRepository<Address, long> addressRepository,
+            IEagerRepository<Town, long> townRepository, IEagerRepository<State, long> stateRepository)
             : base(stream, sequencer)
         {
-            specialityRepo = speciality;
-            businessDayRepo = businessDay;
-            doctorGradeRepository = doctorGrade;
+            _specialityRepo = speciality;
+            _businessDayRepo = businessDay;
+            _doctorGradeRepository = doctorGrade;
+            _addressRepository = addressRepository;
+            _townRepository = townRepository;
+            _stateRepository = stateRepository;
         }
 
         public IEnumerable<Doctor> GetAllEager()
@@ -42,12 +50,15 @@ namespace Repository
             {
                 foreach (BusinessDay day in doctor.BusinessDay)
                 {
-                    businessDays.Add(businessDayRepo.GetEager(day.GetId()));
+                    businessDays.Add(_businessDayRepo.GetEager(day.GetId()));
                 }
             }
             doctor.BusinessDay = businessDays;
-            doctor.Specialty = specialityRepo.Get(doctor.Specialty.GetId());
-         // doctor.DoctorGrade = doctorGradeRepository.Get(doctor.DoctorGrade.GetId());
+            doctor.Specialty = _specialityRepo.Get(doctor.Specialty.GetId());
+            doctor.Address = _addressRepository.GetEager(doctor.Address.GetId());
+            doctor.Address.Town = _townRepository.GetEager(doctor.Address.Town.GetId());
+            doctor.Address.Town.State = _stateRepository.GetEager(doctor.Address.Town.State.GetId());
+            // doctor.DoctorGrade = doctorGradeRepository.Get(doctor.DoctorGrade.GetId());
 
             return doctor;
         }

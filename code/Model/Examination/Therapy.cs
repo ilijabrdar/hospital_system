@@ -9,32 +9,30 @@ namespace Model.PatientSecretary
         public long Id;
         public String Note;
         public Period Period;
-        public double DrugDosage;
         public List<Drug> Drug;
 
-        public Therapy(long id, Period period, double drugDosage, string note, List<Drug> drug) 
+        public Therapy() { }
+
+        public Therapy(long id, Period period,string note, List<Drug> drug) 
         {
             Id = id;
             Note = note;
             Period =period;
-            DrugDosage = drugDosage;
             Drug = drug;
 
         }
 
-        public Therapy(long id,Period period, double drugDosage, string note)
+        public Therapy(long id,Period period,string note)
         {
             Id = id;
             Note = note;
             Period = period;
-            DrugDosage = drugDosage;
         }
 
-        public Therapy(string note, Period period, double drugDosage, List<Drug> drug)
+        public Therapy(string note, Period period, List<Drug> drug)
         {
             Note = note;
             Period = period;
-            DrugDosage = drugDosage;
             Drug = drug;
         }
 
