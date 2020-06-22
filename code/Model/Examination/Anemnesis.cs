@@ -5,7 +5,7 @@ namespace Model.PatientSecretary
 {
    public class Anemnesis
    {
-      private String Text;
+      public String Text { get; set; }
         public Anemnesis(String text)
         {
             this.Text = text;

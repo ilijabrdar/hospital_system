@@ -41,6 +41,7 @@
     <WarningLevel>4</WarningLevel>
     <DebugType>full</DebugType>
     <ErrorReport>prompt</ErrorReport>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -333,6 +334,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Repository\CSV\Converter\AddressCSVConverter.cs" />
+    <Compile Include="Repository\CSV\Converter\DirectorCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\ReferralCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\SymptomCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\TherapyCSVConverter.cs" />

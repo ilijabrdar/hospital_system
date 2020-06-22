@@ -1,4 +1,3 @@
-// TODO: TAMARA srediti metodeeeeeeeeee
 using bolnica.Repository;
 using bolnica.Service;
 using Model.Dto;
@@ -20,19 +19,26 @@ namespace Service
         private readonly ISymptomService _symptomService;
         private readonly ITherapyService _therapyService;
 
-        public ExaminationService(IExaminationUpcomingRepository upcomingRepository)
+        public ExaminationService(IExaminationUpcomingRepository upcomingRepository, IExaminationPreviousRepository previousRepository, IDiagnosisService diagnosisService, IPrescriptionService prescriptionService, IReferralService referralService, ISymptomService symptomService, ITherapyService therapyService)
         {
             _upcomingRepository = upcomingRepository;
+            _previousRepository = previousRepository;
+            _diagnosisService = diagnosisService;
+            _prescriptionService = prescriptionService;
+            _referralService = referralService;
+            _symptomService = symptomService;
+            _therapyService = therapyService;
         }
 
-        public ExaminationService(IExaminationPreviousRepository previousRepository)
+        public ExaminationService(IExaminationUpcomingRepository upcomingRepository, IExaminationPreviousRepository previousRepository)
         {
+            _upcomingRepository = upcomingRepository;
             _previousRepository = previousRepository;
         }
 
         public void Delete(Examination entity)
         {
-            throw new NotImplementedException();
+            _upcomingRepository.Delete(entity);
         }
 
         public void Edit(Examination entity)
@@ -40,40 +46,38 @@ namespace Service
             _upcomingRepository.Edit(entity);
         }
 
-        public Examination Get(long id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Examination> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-
         public List<Examination> GetFinishedxaminationsByUser(User user)
         {
-            throw new NotImplementedException();
-        }
-
-        public List<Examination> GetUpcomingExaminationsByUser(User user)
-        {
-            throw new NotImplementedException();
+            return _previousRepository.GetExaminationsByUser(user);
         }
 
         public Examination Save(Examination entity)
         {
-            throw new NotImplementedException();
+            return _upcomingRepository.Save(entity);
         }
 
         public Examination SaveFinishedExamination(Examination examination)
         {
-            throw new NotImplementedException();
+            return _previousRepository.Save(examination);
         }
 
         public Examination StartUpcomingExamination(Examination examination)
         {
-            throw new NotImplementedException();
+            return _upcomingRepository.StartUpcomingExamination(examination);
+        }
+        public List<Examination> GetUpcomingExaminationsByUser(User user)
+        {
+            return _upcomingRepository.GetUpcomingExaminationsByUser(user);
+        }
+
+        public Examination Get(long id)
+        {
+            return _upcomingRepository.Get(id);
+        }
+
+        public IEnumerable<Examination> GetAll()
+        {
+            return _upcomingRepository.GetAllEager();
         }
 
         public List<Examination> GetExaminationFilter(ExaminationDTO examinationDTO)

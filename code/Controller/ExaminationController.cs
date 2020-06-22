@@ -10,64 +10,59 @@ namespace Controller
 {
     public class ExaminationController : IExaminationController
     {
-        private readonly IExaminationService _service;
+        private readonly IExaminationService _examinationService;
 
         public ExaminationController(IExaminationService service)
         {
-            _service = service;
+            _examinationService = service;
         }
         public void Delete(Examination entity)
         {
-            _service.Delete(entity); 
+            _examinationService.Delete(entity); 
         }
 
         public void Edit(Examination entity)
         {
-            _service.Edit(entity);
+            _examinationService.Edit(entity);
         }
         public Examination Get(long id)
         {
-            return _service.Get(id);
+            return _examinationService.Get(id);
         }
 
         public IEnumerable<Examination> GetAll()
         {
-            return _service.GetAll();
+            return _examinationService.GetAll();
+        }
+        public Examination Save(Examination entity)
+        {
+            return _examinationService.Save(entity);
         }
 
         public List<Examination> GetExaminationFilter(ExaminationDTO examinationDTO)
         {
-            throw new NotImplementedException();
+            return _examinationService.GetExaminationFilter(examinationDTO);
+
         }
 
-        public Examination Save(Examination entity)
+        public List<Examination> GetFinishedxaminationsByUser(User user)
         {
-            return _service.Save(entity);
+            return _examinationService.GetFinishedxaminationsByUser(user);
         }
 
-        List<Examination> IExaminationController.GetFinishedxaminationsByUser(User user)
+        public List<Examination> GetUpcomingExaminationsByUser(User user)
         {
-            throw new NotImplementedException();
+            return _examinationService.GetUpcomingExaminationsByUser(user);
         }
 
-        List<Examination> IExaminationController.GetUpcomingExaminationsByUser(User user)
+        public Examination SaveFinishedExamination(Examination examination)
         {
-            throw new NotImplementedException();
+            return _examinationService.SaveFinishedExamination(examination);
         }
 
-        Examination IController<Examination, long>.Save(Examination entity)
+        public Examination StartUpcomingExamination(Examination examination)
         {
-            throw new NotImplementedException();
-        }
-
-        Examination IExaminationController.SaveFinishedExamination(Examination examination)
-        {
-            throw new NotImplementedException();
-        }
-
-        Examination IExaminationController.StartUpcomingExamination(Examination examination)
-        {
-            throw new NotImplementedException();
+            return _examinationService.StartUpcomingExamination(examination);
         }
     }
 }

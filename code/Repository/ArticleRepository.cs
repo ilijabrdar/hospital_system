@@ -2,26 +2,36 @@ using bolnica.Repository;
 using Model.Doctor;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Repository
 {
     public class ArticleRepository : CSVRepository<Article, long>, IArticleRepository
     {
-        private String FilePath;
-        public ArticleRepository(ICSVStream<Article> stream, ISequencer<long> sequencer)
+        public IDoctorRepository _doctorRepository;
+        public ArticleRepository(ICSVStream<Article> stream, ISequencer<long> sequencer, IDoctorRepository doctorRepository)
              : base(stream, sequencer)
         {
-            
+            _doctorRepository = doctorRepository;
         }
 
         public IEnumerable<Article> GetAllEager()
         {
-            throw new NotImplementedException();
+            List<Article> articles = new List<Article>();
+            foreach (Article article in GetAll().ToList())
+            {
+                articles.Add(GetEager(article.GetId()));
+            }
+            return articles;
         }
 
         public Article GetEager(long id)
         {
-            throw new NotImplementedException();
+            Article article = Get(id);
+            article.Doctor = _doctorRepository.GetEager(article.Doctor.GetId());
+
+            return article;
         }
     }
+
 }

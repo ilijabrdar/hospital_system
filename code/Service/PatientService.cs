@@ -58,7 +58,7 @@ namespace Service
 
         public Patient Get(long id)
         {
-            throw new NotImplementedException();
+            return _patientRepository.GetEager(id);
         }
 
         public Patient ClaimAccount(String id)

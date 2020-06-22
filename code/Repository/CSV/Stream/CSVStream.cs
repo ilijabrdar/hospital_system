@@ -17,6 +17,7 @@ namespace bolnica.Repository
             _path = path;
             _converter = converter;
         }
+
         public void AppendToFile(E entity)
             => File.AppendAllText(_path,
                _converter.ConvertEntityToCSVFormat(entity) + Environment.NewLine);

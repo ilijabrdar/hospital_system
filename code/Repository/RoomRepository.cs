@@ -1,5 +1,3 @@
-
-
 using bolnica.Repository;
 using Model.Director;
 using System;
@@ -9,9 +7,9 @@ using System.Linq;
 
 namespace Repository
 {
-   public class RoomRepository : CSVRepository<Room,long>, IRoomRepository, IEagerRepository<Room,long>
-   {
-      private String FilePath;
+    public class RoomRepository : CSVRepository<Room, long>, IRoomRepository, IEagerRepository<Room, long>
+    {
+        private String FilePath;
         private readonly IRoomTypeRepository _roomTypeRepository;
         private readonly IEquipmentRepository _equipmentRepository;
 
@@ -39,7 +37,7 @@ namespace Repository
             equipment = equipment.ToList();
             foreach (Room room in rooms)
             {
-                foreach (KeyValuePair<Equipment,int> pair in room.Equipment_inventory)
+                foreach (KeyValuePair<Equipment, int> pair in room.Equipment_inventory)
                 {
                     Equipment temp = equipment.SingleOrDefault(eq => eq.GetId() == pair.Key.GetId());
                     if (temp != default)
@@ -61,9 +59,9 @@ namespace Repository
         public Room GetEager(long id)
         {
             Room room = base.Get(id);
-            room.RoomType = _roomTypeRepository.Get(room.RoomType.Id);
-            
-            foreach (KeyValuePair<Equipment,int> pair in room.Equipment_inventory)
+            room.RoomType = _roomTypeRepository.Get(room.RoomType.GetId());
+
+            foreach (KeyValuePair<Equipment, int> pair in room.Equipment_inventory)
             {
                 Equipment temp = _equipmentRepository.Get(pair.Key.Id);
                 pair.Key.Name = temp.Name;

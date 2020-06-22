@@ -7,7 +7,7 @@ using Model.Users;
 
 namespace bolnica.Controller
 {
-    class AddressController : IAddressController
+   public class AddressController : IAddressController
     {
         IAddressService _service;
 
