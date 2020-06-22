@@ -12,5 +12,9 @@ namespace bolnica.Service
     {
     List<Doctor> GetDoctorsBySpeciality(Speciality specialty);
 
+        void DeleteBusinessDayFromDoctor(BusinessDay businessDay);
+
+        bool CheckJMBGUnique(String JMBG);
+
     }
 }

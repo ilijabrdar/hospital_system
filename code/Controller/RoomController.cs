@@ -60,9 +60,9 @@ namespace Controller
             return _service.GetRoomsCointainingEquipment(equipment);
         }
 
-        public bool CheckRoomNameUnique(Room room)
+        public bool CheckRoomCodeUnique(String name)
         {
-            throw new NotImplementedException();
+            return _service.CheckRoomCodeUnique(name);
         }
     }
 }

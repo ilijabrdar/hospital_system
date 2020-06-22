@@ -13,20 +13,27 @@ namespace Service
    {
         private readonly IRoomTypeRepository _repository;
 
-      //private Repository.IRoomTypeRepository _roomTypeRepository;
+        //private Repository.IRoomTypeRepository _roomTypeRepository;
+        public IRoomService roomService;
         
-        public RoomTypeService(IRoomTypeRepository repository)
+        public RoomTypeService(IRoomTypeRepository repository, IRoomService roomService)
         {
             _repository = repository;
+            this.roomService = roomService;
         }
 
-        public bool CheckRoomTypeUnique(RoomType roomType)
+        public bool CheckRoomTypeUnique(String type)
         {
-            throw new NotImplementedException();
+            foreach (RoomType roomType in GetAll())
+                if (roomType.Name.Equals(type))
+                    return false;
+
+            return true;
         }
 
         public void Delete(RoomType entity)
         {
+            roomService.DeleteRoomsByRoomType(entity);
             _repository.Delete(entity);
         }
 

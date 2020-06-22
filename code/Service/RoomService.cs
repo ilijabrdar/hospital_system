@@ -13,10 +13,14 @@ namespace Service
    public class RoomService : IRoomService
    {
         private readonly IRoomRepository _repository;
+        public IRenovationService renovationService;
+        public IBusinessDayService businessDayService;
 
-        public RoomService(IRoomRepository repository)
+        public RoomService(IRoomRepository repository, IRenovationService renovationService, IBusinessDayService businessDayService)
         {
             _repository = repository;
+            this.renovationService = renovationService;
+            this.businessDayService = businessDayService;
         }
       
       public Boolean AddEquipment(Equipment equipment, Room room)
@@ -50,6 +54,8 @@ namespace Service
 
         public void Delete(Room entity)
         {
+            businessDayService.DeleteBusinessDayByRoom(entity);
+            renovationService.DeleteRenovationByRoom(entity);
             _repository.Delete(entity);
         }
 
@@ -86,9 +92,39 @@ namespace Service
             throw new NotImplementedException();
         }
 
-        public bool CheckRoomNameUnique(Room room)
+        public void DeleteRoomsByRoomType(RoomType roomType)
         {
-            throw new NotImplementedException();
+            foreach (Room room in GetAll())
+            {
+                if (room.RoomType.Id == roomType.Id)
+                    Delete(room);
+            }
+        }
+
+        public void DeleteEquipmentFromRooms(Equipment equipment)
+        {
+
+            foreach (Room room in GetAll())
+            {
+                foreach (Equipment eq in room.Equipment_inventory.Keys)
+                {
+                    if (eq.Id == equipment.Id)
+                    {
+                        room.Equipment_inventory.Remove(eq);
+                        Edit(room);
+                        break;
+                    }
+                }
+            }
+        }
+
+        public bool CheckRoomCodeUnique(string roomCode)
+        {
+            foreach (Room room in GetAll())
+                if (room.RoomCode.Equals(roomCode))
+                    return false;
+
+            return true;
         }
     }
 }

@@ -13,20 +13,23 @@ using System.Threading;
 
 namespace Service
 {
-   public class BusinessDayService : IBusinessDayService
-   {
-    
+    public class BusinessDayService : IBusinessDayService
+    {
+
         private readonly IBusinessDayRepository _businessDayRepository;
         public ISearchPeriods _searchPeriods { get; set; }
         public static double durationOfExamination = 20;
+        public IDoctorService doctorService;
 
-        public BusinessDayService(IBusinessDayRepository businessDayRepository)
+        public BusinessDayService(IBusinessDayRepository businessDayRepository, IDoctorService doctorService)
         {
             _businessDayRepository = businessDayRepository;
+            this.doctorService = doctorService;
         }
 
         public void Delete(BusinessDay entity)
         {
+            doctorService.DeleteBusinessDayFromDoctor(entity);
             _businessDayRepository.Delete(entity);
         }
 
@@ -45,7 +48,7 @@ namespace Service
             foreach (BusinessDay day in _businessDayRepository.GetAllEager())
             {
                 if (day.doctor.Id == doctor.Id && day.Shift.EndDate.Date.Equals(date.Date))
-                   return day;
+                    return day;
             }
             return null;
         }
@@ -77,7 +80,7 @@ namespace Service
 
         public bool MarkAsOccupied(Period period, BusinessDay businessDay)
         {
-            
+
             throw new NotImplementedException();
         }
 
@@ -90,6 +93,18 @@ namespace Service
         public bool SetRoomForBusinessDay(BusinessDay businessDay, Room room)
         {
             throw new NotImplementedException();
+        }
+
+        public void DeleteBusinessDayByRoom(Room room)
+        {
+            foreach (BusinessDay businessDay in GetAll())
+            {
+                if (businessDay.room.Id == room.Id)
+                {
+                    
+                    Delete(businessDay);
+                }
+            }
         }
 
     }

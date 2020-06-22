@@ -14,12 +14,10 @@ namespace Repository
    public class HospitalizationRepository : CSVRepository<Hospitalization, long>, IHospitalizationRepository
     {
         private readonly IRoomRepository _roomRepository;
-        private readonly IPatientFileRepository _patientFileRepository;
-        public HospitalizationRepository(ICSVStream<Hospitalization> stream, ISequencer<long> sequencer, IRoomRepository roomRepository, IPatientFileRepository patientFileRepository)
+        public HospitalizationRepository(ICSVStream<Hospitalization> stream, ISequencer<long> sequencer, IRoomRepository roomRepository)
             : base(stream, sequencer)
         {
             _roomRepository = roomRepository;
-            _patientFileRepository = patientFileRepository;
         }
 
         public IEnumerable<Hospitalization> GetAllEager()
@@ -36,7 +34,6 @@ namespace Repository
         {
             Hospitalization hospitalization = Get(id);
             hospitalization.Room=_roomRepository.GetEager(hospitalization.Room.GetId());
-            hospitalization.PatientFile = _patientFileRepository.Get(hospitalization.PatientFile.GetId());
 
             return hospitalization;
         }

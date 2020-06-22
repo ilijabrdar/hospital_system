@@ -9,5 +9,6 @@ namespace bolnica.Service
 {
     public interface IRenovationService : IService<Renovation,long>
     {
+        void DeleteRenovationByRoom(Room room);
     }
 }

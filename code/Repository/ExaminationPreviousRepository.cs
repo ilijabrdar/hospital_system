@@ -76,7 +76,6 @@ namespace Repository
                     }
                 }
                 return findExamination;
-
             }
             catch (Exception e)
             {
@@ -91,7 +90,6 @@ namespace Repository
                     }
                 }
                 return findExamination;
-
             }
         }
 

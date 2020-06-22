@@ -54,11 +54,12 @@ namespace Repository
                 }
             }
             doctor.BusinessDay = businessDays;
+
             doctor.Specialty = _specialityRepo.Get(doctor.Specialty.GetId());
             doctor.Address = _addressRepository.GetEager(doctor.Address.GetId());
             doctor.Address.Town = _townRepository.GetEager(doctor.Address.Town.GetId());
             doctor.Address.Town.State = _stateRepository.GetEager(doctor.Address.Town.State.GetId());
-            // doctor.DoctorGrade = doctorGradeRepository.Get(doctor.DoctorGrade.GetId());
+            doctor.DoctorGrade = _doctorGradeRepository.Get(doctor.DoctorGrade.GetId());
 
             return doctor;
         }
