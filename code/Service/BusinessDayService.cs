@@ -1,5 +1,3 @@
-
-
 using bolnica.Model.Dto;
 using bolnica.Repository;
 using bolnica.Service;
@@ -83,8 +81,6 @@ namespace Service
             throw new NotImplementedException();
         }
 
-
-        
 
         public BusinessDay Save(BusinessDay entity)
         {
