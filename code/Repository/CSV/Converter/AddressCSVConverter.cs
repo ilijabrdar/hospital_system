@@ -9,7 +9,6 @@ namespace bolnica.Repository.CSV.Converter
     public class AddressCSVConverter : ICSVConverter<Address>
     {
         private readonly string _delimiter;
-
         public AddressCSVConverter(string delimiter)
         {
             _delimiter = delimiter;
