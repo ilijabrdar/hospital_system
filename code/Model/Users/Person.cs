@@ -12,8 +12,6 @@ namespace Model.Users
         public String Email { get; set; }
         public String Phone { get; set; }
 
-        public String FullName { get; set; } 
-
         public DateTime DateOfBirth { get; set; }
         public String FullName
         {

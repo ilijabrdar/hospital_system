@@ -20,6 +20,7 @@ namespace Repository
             roomRepo = room;
         }
 
+
         public IEnumerable<BusinessDay> GetAllEager()
         {
             List<BusinessDay> businessDays = new List<BusinessDay>();

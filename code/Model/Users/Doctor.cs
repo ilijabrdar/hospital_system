@@ -12,7 +12,7 @@ namespace Model.Users
         public Speciality Specialty { get; set; }
         public DoctorGrade DoctorGrade { get; set; }
 
-        public Doctor(long id, String name, String surname, String jmbg, String email, String phone, DateTime birth, Address address, String username, String password, Bitmap img,Speciality spec )
+        public Doctor(long id, String name, String surname, String jmbg, String email, String phone, DateTime birth, Address address, String username, String password, Uri img,Speciality spec )
         {
             this.Id = id;
             this.FirstName = name;
@@ -28,7 +28,7 @@ namespace Model.Users
             this.Specialty = spec;
         }
 
-        public Doctor(long id, String name, String surname, String jmbg, String email, String phone, DateTime birth, Address address, String username, String password, Bitmap img, Speciality speciality, List<BusinessDay> businessDay ,DoctorGrade doctGrade)
+        public Doctor(long id, String name, String surname, String jmbg, String email, String phone, DateTime birth, Address address, String username, String password, Uri img, Speciality speciality, List<Article> articles, List<BusinessDay> businessDay ,DoctorGrade doctGrade)
         {
             this.Id = id;
             this.FirstName = name;
@@ -46,7 +46,7 @@ namespace Model.Users
             this.DoctorGrade = doctGrade;
         }
 
-        public Doctor( String name, String surname, String jmbg, String email, String phone, DateTime birth, Address adress, String username, String password, Bitmap img, Speciality speciality,  List<BusinessDay> businessDay, DoctorGrade doctGrade)
+        public Doctor( String name, String surname, String jmbg, String email, String phone, DateTime birth, Address adress, String username, String password, Uri img, Speciality speciality, List<Article> articles, List<BusinessDay> businessDay, DoctorGrade doctGrade)
         {
             this.FirstName = name;
             this.LastName = surname;
