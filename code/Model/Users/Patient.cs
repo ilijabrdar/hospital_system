@@ -10,7 +10,7 @@ namespace Model.Users
 {
    public class Patient : User
     {
-      public PatientFile patientFile;
+      public PatientFile patientFile { get; set; }
       public Boolean Guest = false;
        
 
@@ -28,6 +28,24 @@ namespace Model.Users
             this.Password = password;
             this.Image = img;
         }
+        public Patient(long id, String name, String surname, String jmbg, String email, String phone, DateTime birth, Address address, String username, String password, Uri img, PatientFile patientFile, Boolean guest)
+        {
+            this.Id = id;
+            this.FirstName = name;
+            this.LastName = surname;
+            this.Jmbg = jmbg;
+            this.Email = email;
+            this.Phone = phone;
+            this.DateOfBirth = birth;
+            this.Address = address;
+            this.Username = username;
+            this.Password = password;
+            this.Image = img;
+            this.patientFile = patientFile;
+            this.Guest = guest;
+        }
+
+
         public Patient(long id)
         {
             this.Id = id;

@@ -10,7 +10,7 @@ namespace Service
    public class DoctorService : IDoctorService
    {
 
-        private readonly IDoctorGradeService _doctorGradeService;
+        public IDoctorGradeService _doctorGradeService { get; set; }
       private readonly IDoctorRepository _doctorRepository;
         public IBusinessDayService businessDayService;
         public IArticleService articleService;
@@ -73,6 +73,13 @@ namespace Service
                 {
                     return null;
                 }
+            Dictionary<string, double> questionsGradesDictionary = new Dictionary<string, double>();
+            questionsGradesDictionary["0"] = 0;
+            questionsGradesDictionary["1"] = 0;
+            questionsGradesDictionary["2"] = 0;
+            questionsGradesDictionary["3"] = 0;
+            questionsGradesDictionary["4"] = 0;
+            entity.DoctorGrade = _doctorGradeService.Save(new DoctorGrade(0, questionsGradesDictionary));
             return _doctorRepository.Save(entity);
         }
 

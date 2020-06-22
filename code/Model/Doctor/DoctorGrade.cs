@@ -12,7 +12,7 @@ namespace Model.Doctor
         public long Id;
 
 
-
+        public DoctorGrade() { }
         public DoctorGrade(long id, int numberOfGrades)
         {
             NumberOfGrades = numberOfGrades;
