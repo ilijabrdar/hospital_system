@@ -58,7 +58,7 @@ namespace Service
 
         public List<Drug> GetNotApproved()
         {
-            throw new NotImplementedException();
+            return _repository.GetNotApprovedDrugs();
         }
 
         public Drug Save(Drug entity)

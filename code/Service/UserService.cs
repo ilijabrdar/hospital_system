@@ -50,9 +50,11 @@ namespace Service
             throw new NotImplementedException();
         }
 
-        public object Edit()
+        public void Edit(User entity)
         {
-            throw new NotImplementedException();
+            Doctor doktor = (Doctor)entity;
+            _doctorService.Edit(doktor);
+
         }
 
         public bool IsPasswordValid(User user, String password)
@@ -104,11 +106,6 @@ namespace Service
         }
 
         public void Delete(User entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Edit(User entity)
         {
             throw new NotImplementedException();
         }

@@ -23,4 +23,5 @@ namespace bolnica.Repository
             return Get(id);
         }
     }
+
 }
