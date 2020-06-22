@@ -26,6 +26,15 @@ namespace Service
             _repository.Delete(entity);
         }
 
+        public void DeleteRenovationByRoom(Room room)
+        {
+            foreach (Renovation renovation in GetAll())
+            {
+                if (renovation.Room.Id == room.Id)
+                    Delete(renovation);
+            }
+        }
+
         public void Edit(Renovation entity)
         {
             _repository.Edit(entity);
