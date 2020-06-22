@@ -333,6 +333,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Repository\CSV\Converter\AddressCSVConverter.cs" />
+    <Compile Include="Repository\CSV\Converter\DirectorCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\ReferralCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\SymptomCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\TherapyCSVConverter.cs" />
@@ -600,7 +601,38 @@
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Resources\Data\AddressFile.txt" />
+    <Content Include="Resources\Data\config.txt" />
+    <Content Include="Resources\Data\StateFile.txt" />
+    <Content Include="Resources\Data\TownFile.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Data\articles.csv" />
+    <None Include="Resources\Data\businessdays.csv" />
+    <None Include="Resources\Data\diagnosisFile.csv" />
+    <None Include="Resources\Data\director.csv" />
+    <None Include="Resources\Data\doctorGradeFile.csv" />
+    <None Include="Resources\Data\doctors.csv" />
+    <None Include="Resources\Data\drugs.csv" />
+    <None Include="Resources\Data\equipment.csv" />
+    <None Include="Resources\Data\examinationPrevious.csv" />
+    <None Include="Resources\Data\examinationUpcoming.csv" />
+    <None Include="Resources\Data\hospitalizationFile.csv" />
+    <None Include="Resources\Data\ingredients.csv" />
+    <None Include="Resources\Data\operationFile.csv" />
+    <None Include="Resources\Data\patient.csv" />
+    <None Include="Resources\Data\patientFile.csv" />
+    <None Include="Resources\Data\prescriptionFile.csv" />
+    <None Include="Resources\Data\referralFile.csv" />
+    <None Include="Resources\Data\renovations.csv" />
+    <None Include="Resources\Data\rooms.csv" />
+    <None Include="Resources\Data\roomtypes.csv" />
+    <None Include="Resources\Data\speciality.csv" />
+    <None Include="Resources\Data\specialityFile.csv" />
+    <None Include="Resources\Data\symptomFile.csv" />
+    <None Include="Resources\Data\therapyFile.csv" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent />

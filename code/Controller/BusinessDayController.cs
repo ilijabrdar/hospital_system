@@ -24,7 +24,7 @@ namespace Controller
         
         public void Delete(BusinessDay entity)
         {
-            throw new NotImplementedException();
+            _businessDayService.Delete(entity);
         }
 
         public bool DeletePreviousBusinessDay()
@@ -34,7 +34,7 @@ namespace Controller
 
         public void Edit(BusinessDay entity)
         {
-            throw new NotImplementedException();
+            _businessDayService.Edit(entity);
         }
 
   /*      public List<Period> GenerateAvailablePeriods(BusinessDay bussinesDay)
@@ -49,7 +49,7 @@ namespace Controller
 
         public IEnumerable<BusinessDay> GetAll()
         {
-            throw new NotImplementedException();
+            return _businessDayService.GetAll();
         }
 
         public List<BusinessDay> GetBusinessDaysByDoctor(Doctor doctor)
@@ -74,7 +74,7 @@ namespace Controller
 */
         public BusinessDay Save(BusinessDay entity)
         {
-            throw new NotImplementedException();
+            return _businessDayService.Save(entity);
         }
 
         public List<ExaminationDTO> Search(BusinessDayDTO businessDayDTO)

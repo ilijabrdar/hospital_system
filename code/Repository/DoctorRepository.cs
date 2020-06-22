@@ -1,4 +1,3 @@
-
 using Model.Doctor;
 using Model.Users;
 using System;
@@ -39,20 +38,23 @@ namespace Repository
             Doctor doctor = Get(id);
 
             List<BusinessDay> businessDays = new List<BusinessDay>();
-            foreach (BusinessDay day in doctor.BusinessDay)
+            if (doctor.BusinessDay != null)
             {
-                businessDays.Add(businessDayRepo.GetEager(day.GetId()));
+                foreach (BusinessDay day in doctor.BusinessDay)
+                {
+                    businessDays.Add(businessDayRepo.GetEager(day.GetId()));
+                }
             }
             doctor.BusinessDay = businessDays;
             doctor.Specialty = specialityRepo.Get(doctor.Specialty.GetId());
-         //   doctor.DoctorGrade = doctorGradeRepository.Get(doctor.DoctorGrade.GetId());
+         // doctor.DoctorGrade = doctorGradeRepository.Get(doctor.DoctorGrade.GetId());
 
             return doctor;
         }
 
         public User GetUserByUsername(string username)
         {
-            IEnumerable<Doctor> entities = this.GetAll();
+            IEnumerable<Doctor> entities = this.GetAllEager().ToList();
             foreach (Doctor entity in entities)
             {
                 if (entity.Username.Equals(username))
@@ -63,11 +65,11 @@ namespace Repository
 
         public List<Doctor> GetDoctorsBySpeciality(Speciality specialty)
         {
-            List<Doctor> doctors = this.GetAll().ToList();
+            List<Doctor> doctors = this.GetAllEager().ToList();
             List<Doctor> retVal = new List<Doctor>();
             foreach (Doctor doct in doctors)
             {
-                if (doct.Specialty.Equals(specialty))
+                if (doct.Specialty.Name.Equals(specialty.Name))
                     retVal.Add(doct);
             }
             return retVal;

@@ -69,6 +69,10 @@ namespace Service
 
         public bool DeleteAllergy(PatientFile patientFile, Allergy allergy)
         {
+            if(patientFile.Allergy == null)
+            {
+                return false;
+            }
             foreach(var help in patientFile.Allergy)
             {
                 if (help.Name.Equals(allergy.Name))

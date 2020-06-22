@@ -21,7 +21,7 @@ namespace bolnica.Repository.CSV.Converter
         }
 
         public PatientFile ConvertCSVFormatToEntity(string entityCSVFormat)
-        { 
+        {
             string[] tokens = entityCSVFormat.Split(_delimiter.ToCharArray());
 
             PatientFile patientFile = new PatientFile(long.Parse(tokens[0]));
@@ -76,7 +76,7 @@ namespace bolnica.Repository.CSV.Converter
             StringBuilder sb = new StringBuilder();;
             sb.Append(entity.GetId());
             sb.Append(_delimiter);
-            if(entity.Allergy.Count == 0)
+            if(entity.Allergy == null)
             {
                 sb.Append("empty");
             }else
@@ -89,7 +89,7 @@ namespace bolnica.Repository.CSV.Converter
                 sb.Remove(sb.Length - 1, 1);
             }
             sb.Append(_delimiter);
-            if(entity.Hospitalization.Count == 0)
+            if(entity.Hospitalization == null)
             {
                 sb.Append("empty");
             }else
@@ -103,7 +103,7 @@ namespace bolnica.Repository.CSV.Converter
 
             }
             sb.Append(_delimiter);
-            if(entity.Operation.Count == 0)
+            if(entity.Operation == null)
             {
                 sb.Append("empty");
             }else
@@ -116,7 +116,7 @@ namespace bolnica.Repository.CSV.Converter
                 sb.Remove(sb.Length - 1, 1);
             }
             sb.Append(_delimiter);
-            if(entity.Examination.Count == 0)
+            if(entity.Examination == null)
             {
                 sb.Append("empty");
             }else
