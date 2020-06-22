@@ -1,42 +1,62 @@
-
-
 using bolnica.Repository;
 using Model.PatientSecretary;
 using Model.Users;
+using Repository;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
-namespace Repository
+namespace bolnica.Repository
 {
    public class ExaminationUpcomingRepository : CSVRepository<Examination, long>, IExaminationUpcomingRepository
     {
-        public ExaminationUpcomingRepository(ICSVStream<Examination> stream, ISequencer<long> sequencer)
+        private readonly IDoctorRepository doctorRepository;
+        private readonly IPatientRepository patientRepository;
+        private LongSequencer longSequencer;
+        private DoctorRepository doctorRepository1;
+        private PatientRepository patientRepository1;
+
+        public ExaminationUpcomingRepository(ICSVStream<Examination> stream, ISequencer<long> sequencer, IDoctorRepository doctorRepository, IPatientRepository patientRepository)
   : base(stream, sequencer)
         {
+            this.doctorRepository = doctorRepository;
+            this.patientRepository = patientRepository;
 
         }
 
         public IEnumerable<Examination> GetAllEager()
         {
-            throw new NotImplementedException();
+            List<Examination> examinations = new List<Examination>();
+            foreach(Examination exam in GetAll().ToList())
+            {
+                examinations.Add(GetEager(exam.GetId()));
+            }
+            return examinations;
         }
 
         public Examination GetEager(long id)
         {
-            throw new NotImplementedException();
+            Examination exam = base.Get(id);
+            exam.Doctor = doctorRepository.GetEager(exam.Doctor.GetId());
+            exam.User =patientRepository.GetEager(exam.User.GetId());
+            return exam;
         }
 
-        List<Examination> IExaminationUpcomingRepository.GetScheduledUserExaminations(User user)
+        public  List<Examination> GetUpcomingExaminationsByUser(User user)
         {
-            throw new NotImplementedException();
+            List<Examination> examinations = GetAllEager().ToList();
+            List<Examination> findExamination = new List<Examination>();
+            foreach(Examination examination in examinations)
+            {
+                if (examination.Doctor.Id == user.Id)
+                {
+                    findExamination.Add(examination);
+                }
+            }
+            return findExamination;
         }
 
-        Examination IRepository<Examination, long>.Save(Examination entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        Examination IExaminationUpcomingRepository.StartUpcomingExamination(Examination examination)
+        public Examination StartUpcomingExamination(Examination examination)
         {
             throw new NotImplementedException();
         }

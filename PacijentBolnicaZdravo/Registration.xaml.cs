@@ -159,7 +159,7 @@ namespace PacijentBolnicaZdravo
 
             Patient patient = new Patient(-1, name, surname, Id, email, phone, date, null, username, passw, null);
             var app = Application.Current as App;
-            var temp = app.userController.Save(patient);
+            var temp = app.UserController.Save(patient);
             if (temp == null)
             {
                 Console.WriteLine("Nije uspeo");

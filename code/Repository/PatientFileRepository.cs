@@ -12,9 +12,9 @@ namespace Repository
     public class PatientFileRepository : CSVRepository<PatientFile, long>, IPatientFileRepository
     {
         private String FilePath;
-        private readonly IHospitalizationRepository _hospitalizationRepository;
-        private readonly IOperationRepository _operationRepository;
-        private readonly IExaminationPreviousRepository _examinationPreviousRepository;
+        public IHospitalizationRepository _hospitalizationRepository;
+        public IOperationRepository _operationRepository;
+        public IExaminationPreviousRepository _examinationPreviousRepository;
 
         public PatientFileRepository(ICSVStream<PatientFile> stream, ISequencer<long> sequencer)
                : base(stream, sequencer)
@@ -36,30 +36,21 @@ namespace Repository
         {
             PatientFile patientFile = Get(id);
             List<Hospitalization> hospitalizatonCollection = new List<Hospitalization>();
-            if (patientFile.Hospitalization != null)
+            foreach (Hospitalization hospitalization in patientFile.Hospitalization)
             {
-                foreach (Hospitalization hospitalization in patientFile.Hospitalization)
-                {
-                    hospitalizatonCollection.Add(_hospitalizationRepository.GetEager(hospitalization.GetId()));
-                }
+                hospitalizatonCollection.Add(_hospitalizationRepository.GetEager(hospitalization.GetId()));
             }
             patientFile.Hospitalization = hospitalizatonCollection;
             List<Operation> operationCollection = new List<Operation>();
-            if (patientFile.Operation != null)
+            foreach (Operation operation in patientFile.Operation)
             {
-                foreach (Operation operation in patientFile.Operation)
-                {
-                    operationCollection.Add(_operationRepository.GetEager(operation.GetId()));
-                }
+                operationCollection.Add(_operationRepository.GetEager(operation.GetId()));
             }
             patientFile.Operation = operationCollection;
             List<Examination> examinationCollection = new List<Examination>();
-            if (patientFile.Examination != null)
+            foreach (Examination examination in patientFile.Examination)
             {
-                foreach (Examination examination in patientFile.Examination)
-                {
-                    examinationCollection.Add(_examinationPreviousRepository.GetEager(examination.GetId()));
-                }
+                examinationCollection.Add(_examinationPreviousRepository.GetEager(examination.GetId()));
             }
             patientFile.Examination = examinationCollection;
             return patientFile;

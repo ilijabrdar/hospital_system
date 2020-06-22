@@ -10,7 +10,7 @@ using System.Windows.Documents;
 
 namespace bolnica.Repository.CSV.Converter
 {
-    class PreviousExaminationCSVConverter : ICSVConverter<Examination>
+   public class PreviousExaminationCSVConverter : ICSVConverter<Examination>
     {
         private readonly string _delimiter;
         private readonly string _prescriptonDelimiter;
@@ -22,9 +22,10 @@ namespace bolnica.Repository.CSV.Converter
         }
 
         public Examination ConvertCSVFormatToEntity(string entityCSVFormat)
-        {
+        {//(long id, User user, Users.Doctor doctor, Period period, Diagnosis diagnosis, Anemnesis anemnesis, Therapy therapy, Referral refferal)
+
             string[] tokens = entityCSVFormat.Split(_delimiter.ToCharArray());
-            Examination examination = new Examination(long.Parse(tokens[0]),
+            Examination examination = new Examination(long.Parse(tokens[0]), (User)new Patient(long.Parse(tokens[1])),
                                                         new Doctor(long.Parse(tokens[2])), new Period(DateTime.Parse(tokens[3])),
                                                         new Diagnosis(long.Parse(tokens[4])),
                                                         new Anemnesis(tokens[5]), new Therapy(long.Parse(tokens[6])), new Referral(long.Parse(tokens[7])));
@@ -46,7 +47,7 @@ namespace bolnica.Repository.CSV.Converter
         {
             StringBuilder stringBuilder = new StringBuilder();
             String format = String.Join(_delimiter, entity.Id, entity.User.GetId(), entity.Doctor.GetId(), entity.Period.StartDate,
-                                entity.Diagnosis.GetId(), entity.Anemnesis, entity.Therapy.GetId(), entity.Refferal.GetId());
+                                entity.Diagnosis.GetId(), entity.Anemnesis.Text , entity.Therapy.GetId(), entity.Refferal.GetId());
 
             stringBuilder.Append(format);
             stringBuilder.Append(_delimiter);
@@ -55,6 +56,8 @@ namespace bolnica.Repository.CSV.Converter
                 stringBuilder.Append(prescription.GetId());
                 stringBuilder.Append(_prescriptonDelimiter);
             }
+            stringBuilder.Remove(stringBuilder.Length - 1, 1);
+
             return stringBuilder.ToString();
                 
            

@@ -115,7 +115,7 @@ namespace PacijentBolnicaZdravo
             String password = PasswordLogIn.Password.ToString();
             
                 var app = Application.Current as App;
-                var temp = app.userController.Login(username,password);
+                var temp = app.UserController.Login(username,password);
             if (temp != null) {
                 
                 App.j = 0;

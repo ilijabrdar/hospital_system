@@ -9,9 +9,10 @@ namespace Repository
     public class ArticleRepository : CSVRepository<Article, long>, IArticleRepository
     {
         public IDoctorRepository _doctorRepository;
-        public ArticleRepository(ICSVStream<Article> stream, ISequencer<long> sequencer)
+        public ArticleRepository(ICSVStream<Article> stream, ISequencer<long> sequencer, IDoctorRepository doctorRepository)
              : base(stream, sequencer)
         {
+            _doctorRepository = doctorRepository;
         }
 
         public IEnumerable<Article> GetAllEager()
@@ -27,7 +28,7 @@ namespace Repository
         public Article GetEager(long id)
         {
             Article article = Get(id);
-            article.Doctor = _doctorRepository.Get(article.Doctor.GetId());
+            article.Doctor = _doctorRepository.GetEager(article.Doctor.GetId());
 
             return article;
         }

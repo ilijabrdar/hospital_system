@@ -27,7 +27,7 @@ namespace Service
 
         public Article Get(long id)
         {
-            return _repository.GetEager(id);
+            return _repository.Get(id);
         }
 
         public IEnumerable<Article> GetAll()

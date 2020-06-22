@@ -7,7 +7,7 @@ using System.Text;
 
 namespace bolnica.Controller
 {
-    interface IArticleController :IController<Article,long>
+    public interface IArticleController :IController<Article,long>
     {
         List<Article> SearchArticle(String criteria);
     }

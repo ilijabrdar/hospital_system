@@ -14,44 +14,60 @@ namespace bolnica.Repository.CSV.Converter
         private readonly string _delimiter = ",";
         private readonly string _arrayDelimiter = "|";
 
+        public PatientFileCSVConverter(string delimiter, string arrayDelimiter)
+        {
+            _delimiter = delimiter;
+            _arrayDelimiter = arrayDelimiter;
+        }
 
         public PatientFile ConvertCSVFormatToEntity(string entityCSVFormat)
         {
             string[] tokens = entityCSVFormat.Split(_delimiter.ToCharArray());
 
             PatientFile patientFile = new PatientFile(long.Parse(tokens[0]));
+            List<Allergy> allergyList = new List<Allergy>();
             if (!tokens[1].Equals("empty"))
             {
                 String[] allergy = tokens[1].Split(_arrayDelimiter.ToCharArray());
                 for(int i = 0; i < allergy.Length; i++)
                 {
-                    patientFile.Allergy.Add(new Allergy(allergy[i]));
+                    allergyList.Add(new Allergy(allergy[i]));
                 }
             }
+            patientFile.Allergy = allergyList;
+
+            List<Hospitalization> hospitalizationList = new List<Hospitalization>();
             if (!tokens[2].Equals("empty"))
             {
                 String[] hospitalization = tokens[2].Split(_arrayDelimiter.ToCharArray());
                 for (int i = 0; i < hospitalization.Length; i++)
                 {
-                    patientFile.Hospitalization.Add(new Hospitalization(long.Parse(hospitalization[i])));
+                    hospitalizationList.Add(new Hospitalization(long.Parse(hospitalization[i])));
                 }
             }
+            patientFile.Hospitalization = hospitalizationList;
+
+            List<Operation> operationList = new List<Operation>();
             if (!tokens[3].Equals("empty"))
             {
                 String[] operation = tokens[3].Split(_arrayDelimiter.ToCharArray());
                 for (int i = 0; i < operation.Length; i++)
                 {
-                    patientFile.Operation.Add(new Operation(long.Parse(operation[i])));
+                    operationList.Add(new Operation(long.Parse(operation[i])));
                 }
             }
+            patientFile.Operation = operationList;
+
+            List<Examination> examinationList = new List<Examination>();
             if (!tokens[4].Equals("empty"))
             {
                 String[] examination = tokens[4].Split(_arrayDelimiter.ToCharArray());
                 for (int i = 0; i < examination.Length; i++)
                 {
-                    patientFile.Examination.Add(new Examination(long.Parse(examination[i])));
+                    examinationList.Add(new Examination(long.Parse(examination[i])));
                 }
             }
+            patientFile.Examination = examinationList;
             return patientFile;
         }
 

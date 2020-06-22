@@ -9,13 +9,12 @@ using System.Text;
 
 namespace bolnica.Controller
 {
-    interface IExaminationController : IController<Examination, long>
+    public interface IExaminationController : IController<Examination, long>
     {
         Examination StartUpcomingExamination(Examination examination);
         Examination SaveFinishedExamination(Examination examination);
         List<Examination> GetUpcomingExaminationsByUser(User user);
         List<Examination> GetFinishedxaminationsByUser(User user);
-
-       List<Examination> GetExaminationFilter(ExaminationDTO examinationDTO);
+        List<Examination> GetExaminationFilter(ExaminationDTO examinationDTO);
     }
 }

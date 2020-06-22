@@ -14,13 +14,17 @@ namespace bolnica.Repository.CSV.Converter
     {
         private readonly string _delimiter = ",";
 
+        public PatientCSVConverter(string delimiter)
+        {
+            _delimiter = delimiter;
+        }
 
         public Patient ConvertCSVFormatToEntity(string entityCSVFormat)
         {
             try
             {
                 string[] tokens = entityCSVFormat.Split(_delimiter.ToCharArray());
-                Patient patient = new Patient(long.Parse(tokens[0]), tokens[1], tokens[2], tokens[3], tokens[4], tokens[5],DateTime.Parse(tokens[6]) , null, tokens[8], tokens[9], null);
+                Patient patient = new Patient(long.Parse(tokens[0]), tokens[1], tokens[2], tokens[3], tokens[4], tokens[5], DateTime.Parse(tokens[6]), null, tokens[8], tokens[9], null);
                 patient.patientFile = new PatientFile(long.Parse(tokens[11]));
                 patient.Guest = Boolean.Parse(tokens[12]);
                 return patient;
@@ -34,6 +38,7 @@ namespace bolnica.Repository.CSV.Converter
         public string ConvertEntityToCSVFormat(Patient entity)
         {
             //  entity.Image.Save("../../Images/" + entity.Username + ".Jpeg", System.Drawing.Imaging.ImageFormat.Jpeg);
+            //String date = entity.DateOfBirth.ToString("MM.dd.yyyy HH:mm:ss");
             return string.Join(_delimiter, entity.Id, entity.FirstName, entity.LastName, entity.Jmbg, entity.Email, entity.Phone, entity.DateOfBirth, null, entity.Username, entity.Password, null,entity.patientFile.GetId(), entity.Guest);
         }
     }

@@ -23,6 +23,7 @@ namespace Service
         }
         public PatientService(IPatientRepository _patientRepo, IPatientFileService _servicePatientFile)
         {
+
             _patientRepository = _patientRepo;
             _patientFileService = _servicePatientFile;
         }
@@ -56,7 +57,7 @@ namespace Service
 
         public Patient Get(long id)
         {
-            throw new NotImplementedException();
+            return _patientRepository.GetEager(id);
         }
 
         public Patient ClaimAccount(String id)

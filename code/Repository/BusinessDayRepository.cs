@@ -1,4 +1,4 @@
-using bolnica.Repository;
+ using bolnica.Repository;
 using Model.Director;
 using Model.Users;
 using Service;
@@ -11,13 +11,12 @@ namespace Repository
    public class BusinessDayRepository : CSVRepository<BusinessDay,long>, IBusinessDayRepository
    {
 
-      private String FilePath;
-        private readonly IDoctorRepository doctorRepo;
+        private String FilePath;
+        public  IDoctorRepository doctorRepo;
         private readonly IRoomRepository roomRepo;
-        public BusinessDayRepository(ICSVStream<BusinessDay> stream, ISequencer<long> sequencer, IDoctorRepository doctor, IRoomRepository room)
+        public BusinessDayRepository(ICSVStream<BusinessDay> stream, ISequencer<long> sequencer, IRoomRepository room)
            : base(stream, sequencer)
-        {
-            doctorRepo = doctor;
+        { 
             roomRepo = room;
         }
 
