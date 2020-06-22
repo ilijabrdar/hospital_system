@@ -86,5 +86,15 @@ namespace Controller
         {
             throw new NotImplementedException();
         }
+
+        public void FreePeriod(BusinessDay businessDay, DateTime period)
+        {
+            _businessDayService.FreePeriod(businessDay, period);
+        }
+
+        public BusinessDay GetExactDay(Doctor doctor, DateTime date)
+        {
+            return _businessDayService.GetExactDay(doctor, date);
+        }
     }
 }
