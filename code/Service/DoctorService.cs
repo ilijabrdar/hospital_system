@@ -12,11 +12,15 @@ namespace Service
 
         private readonly IDoctorGradeService _doctorGradeService;
       private readonly IDoctorRepository _doctorRepository;
+        public IBusinessDayService businessDayService;
+        public IArticleService articleService;
 
-        public DoctorService(IDoctorRepository doctorRepository, IDoctorGradeService doctorGradeService)
+        public DoctorService(IDoctorRepository doctorRepository, IDoctorGradeService doctorGradeService, IBusinessDayService businessDayService, IArticleService articleService)
         {
             _doctorRepository = doctorRepository;
             _doctorGradeService = doctorGradeService;
+            this.businessDayService = businessDayService;
+            this.articleService = articleService;
         }
 
         public DoctorService(IDoctorRepository doctorRepository)
@@ -26,7 +30,15 @@ namespace Service
 
         public void Delete(Doctor entity)
         {
+            DeleteDoctorsBusinessDays(entity);
+            articleService.DeleteArticlesByDoctor(entity);
             _doctorRepository.Delete(entity);
+        }
+
+        private void DeleteDoctorsBusinessDays(Doctor entity)
+        {
+            foreach (BusinessDay businessDay in entity.BusinessDay)
+                businessDayService.Delete(businessDay);
         }
 
         public void Edit(Doctor entity)
@@ -62,6 +74,22 @@ namespace Service
                     return null;
                 }
             return _doctorRepository.Save(entity);
+        }
+
+        public void DeleteBusinessDayFromDoctor(BusinessDay businessDay)
+        {
+            Doctor doctor = Get(businessDay.doctor.Id);
+            foreach (BusinessDay business in doctor.BusinessDay)
+            {
+                if (business.Id == businessDay.Id)
+                {
+                    doctor.BusinessDay.Remove(business);
+                    Edit(doctor);
+                    break;
+                }
+            }
+                
+
         }
     }
 }

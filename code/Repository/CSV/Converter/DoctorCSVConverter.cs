@@ -50,6 +50,9 @@ namespace bolnica.Repository.CSV.Converter
 
             var businessDay_count = entity.BusinessDay == null ? 0 : entity.BusinessDay.Count;
 
+            sb.Append(generalData);
+            sb.Append(_delimiter);
+
             if (businessDay_count != 0)
             {
                 foreach (BusinessDay day in entity.BusinessDay)
