@@ -69,41 +69,40 @@ namespace upravnikKT2
             var roomTypeRepository = new RoomTypeRepository(
                 new CSVStream<RoomType>(ROOMTYPE_FILE, new RoomTypeCSVConverter(CSV_DELIMITER)),
                 new LongSequencer());
-
-            var roomTypeService = new RoomTypeService(roomTypeRepository);
-
+            var roomTypeService = new RoomTypeService(roomTypeRepository,null);
             RoomTypeController = new RoomTypeController(roomTypeService);
 
 
             var ingredientRepository = new IngredientRepository(
                 new CSVStream<Ingredient>(INGREDIENTS_FILE, new IngredientsCSVConverter(CSV_DELIMITER)),
                 new LongSequencer());
-
             var ingredientService = new IngredientService(ingredientRepository);
-
             IngredientController = new IngredientController(ingredientService);
 
 
             var equipmentRepository = new EquipmentRepository(
                new CSVStream<Equipment>(EQUIPMENT_FILE, new EquipmentCSVConverter(CSV_DELIMITER)),
                new LongSequencer());
-
-            var equipmentService = new EquipmentService(equipmentRepository);
-
+            var equipmentService = new EquipmentService(equipmentRepository,null);
             EquipmentController = new EquipmentController(equipmentService);
+
+
+
+
+            var renovationRepository = new RenovationRepository(new CSVStream<Renovation>(RENOVATIONS_FILE, new RenovationCSVConverter("|")), new LongSequencer(),null);
+            var renovationService = new RenovationService(renovationRepository);
+            RenovationController = new RenovationController(renovationService);
 
             var roomRepository = new RoomRepository(
                new CSVStream<Room>(ROOMS_FILE, new RoomCSVConverter(CSV_DELIMITER)),
-               new LongSequencer(), roomTypeRepository,equipmentRepository);
-
-            var roomService = new RoomService(roomRepository);
-
+               new LongSequencer(), roomTypeRepository, equipmentRepository);
+            var roomService = new RoomService(roomRepository, renovationService,null);
             RoomController = new RoomController(roomService);
 
+            equipmentService.roomService = roomService;
 
-            var renovationRepository = new RenovationRepository(new CSVStream<Renovation>(RENOVATIONS_FILE, new RenovationCSVConverter("|")), new LongSequencer(),roomRepository);
-            var renovationService = new RenovationService(renovationRepository);
-            RenovationController = new RenovationController(renovationService);
+            renovationRepository._roomRepository = roomRepository;
+            roomTypeService.roomService = roomService;
 
             var drugRepository = new DrugRepository(new CSVStream<Drug>(DRUGS_FILE, new DrugCSVConverter(CSV_DELIMITER)), new LongSequencer(), ingredientRepository);
             var drugService = new DrugService(drugRepository);
@@ -114,7 +113,7 @@ namespace upravnikKT2
             SpecialityController = new SpecialityController(specialityService);
 
             var doctorRepository = new DoctorRepository(new CSVStream<Doctor>(DOCTORS_FILE, new DoctorCSVConverter(CSV_DELIMITER)), new LongSequencer(),null,specialityRepository,null);
-            var doctorService = new DoctorService(doctorRepository,null);
+            var doctorService = new DoctorService(doctorRepository,null,null,null);
             DoctorController = new DoctorController(doctorService);
 
             AddressRepository addressRepository = new AddressRepository(new CSVStream<Address>(ADDRESS_FILE, new AddressCSVConverter(CSV_DELIMITER)), new LongSequencer());
@@ -129,9 +128,13 @@ namespace upravnikKT2
 
             var businessDayRepository = new BusinessDayRepository(new CSVStream<BusinessDay>(BUSINESSDAY_FILE, new BusinessDayCSVConverter()), new LongSequencer(), roomRepository);
             businessDayRepository.doctorRepo = doctorRepository;
-            var businessDayService = new BusinessDayService(businessDayRepository);
+            var businessDayService = new BusinessDayService(businessDayRepository,doctorService);
             BusinessDayController = new BusinessDayController(businessDayService);
 
+            roomService.businessDayService = businessDayService;
+
+            doctorService.businessDayService = businessDayService;
+            
 
             doctorRepository.businessDayRepo = businessDayRepository;
 
@@ -143,6 +146,8 @@ namespace upravnikKT2
             articleRepository._doctorRepository = doctorRepository;
             ArticleService articleService = new ArticleService(articleRepository);
             ArticleController = new ArticleController(articleService);
+
+            doctorService.articleService = articleService;
         }
 
         private void Application_Startup(object sender, StartupEventArgs e)

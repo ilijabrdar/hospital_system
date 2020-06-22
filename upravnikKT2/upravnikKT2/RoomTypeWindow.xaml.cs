@@ -100,12 +100,12 @@ namespace upravnikKT2
 
                 if (result == MessageBoxResult.Yes)
                 {
-                    List<Room> rooms = _roomController.GetAll().ToList();
-                    foreach(Room room in rooms)
-                    {
-                        if (room.RoomType.Id == roomType.Id)
-                            _roomController.Delete(room);
-                    }
+                    //List<Room> rooms = _roomController.GetAll().ToList();
+                    //foreach(Room room in rooms)
+                    //{
+                    //    if (room.RoomType.Id == roomType.Id)
+                    //        _roomController.Delete(room);
+                    //}
 
                     _roomTypeController.Delete((RoomType)listViewRoomTypes.SelectedItem);
 

@@ -70,8 +70,8 @@ namespace upravnikKT2
                 if (result == MessageBoxResult.Yes)
                 {
                     _businessDayController.Delete(businessDay);
-                    selectedDoctor.BusinessDay.Remove(businessDay);
-                    _doctorController.Edit(selectedDoctor);
+                    //selectedDoctor.BusinessDay.Remove(businessDay);
+                    //_doctorController.Edit(selectedDoctor);
 
                     this.DataGridShifts.ItemsSource = null;
                     List<BusinessDay> days = _doctorController.Get(selectedDoctor.Id).BusinessDay;

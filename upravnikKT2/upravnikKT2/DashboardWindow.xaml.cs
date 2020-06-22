@@ -954,34 +954,35 @@ namespace upravnikKT2
 
                 if (result == MessageBoxResult.Yes)
                 {
-                    List<Renovation> allrenovations = _renovationController.GetAll().ToList();
-                    foreach (Renovation renovation in allrenovations)
-                    {
-                        if (renovation.Room.RoomCode.Equals(room.RoomCode))
-                            _renovationController.Delete(renovation);
+                    //List<Renovation> allrenovations = _renovationController.GetAll().ToList();
+                    //foreach (Renovation renovation in allrenovations)
+                    //{
+                    //    if (renovation.Room.RoomCode.Equals(room.RoomCode))
+                    //        _renovationController.Delete(renovation);
                         
-                    }
+                    //}
+                    DataGridRenovation.ItemsSource = null;
                     DataGridRenovation.ItemsSource = new ObservableCollection<Renovation>(_renovationController.GetAll());
                     
 
-                    List<BusinessDay> allDays = _businessDayController.GetAll().ToList();
-                    foreach (BusinessDay day in allDays)
-                    {
-                        if (day.room.RoomCode.Equals(room.RoomCode))
-                        {
-                            _businessDayController.Delete(day);
-                            List<BusinessDay> temp = day.doctor.BusinessDay;
-                            foreach (BusinessDay bd in temp)
-                            {
-                                if (bd.Id == day.Id)
-                                {
-                                    temp.Remove(bd);
-                                    break;
-                                }
-                            }
-                            _doctorController.Edit(day.doctor);
-                        }
-                    }
+                    //List<BusinessDay> allDays = _businessDayController.GetAll().ToList();
+                    //foreach (BusinessDay day in allDays)
+                    //{
+                    //    if (day.room.RoomCode.Equals(room.RoomCode))
+                    //    {
+                    //        _businessDayController.Delete(day);
+                    //        List<BusinessDay> temp = day.doctor.BusinessDay;
+                    //        foreach (BusinessDay bd in temp)
+                    //        {
+                    //            if (bd.Id == day.Id)
+                    //            {
+                    //                temp.Remove(bd);
+                    //                break;
+                    //            }
+                    //        }
+                    //        _doctorController.Edit(day.doctor);
+                    //    }
+                    //}
 
                     _roomController.Delete((Room)DataGridRooms.SelectedItem);
 
@@ -1082,19 +1083,19 @@ namespace upravnikKT2
                     MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
                     if (result == MessageBoxResult.Yes)
                     {
-                        List<Room> rooms = _roomController.GetRoomsContainingEquipment(eq).ToList();
-                        foreach (Room room in rooms)
-                        {
-                            foreach (Equipment equipment in room.Equipment_inventory.Keys)
-                            {
-                                if (equipment.Id==eq.Id)
-                                {
-                                    room.Equipment_inventory.Remove(equipment);
-                                    _roomController.Edit(room);
-                                    break;
-                                }
-                            }
-                        }
+                        //List<Room> rooms = _roomController.GetRoomsContainingEquipment(eq).ToList();
+                        //foreach (Room room in rooms)
+                        //{
+                        //    foreach (Equipment equipment in room.Equipment_inventory.Keys)
+                        //    {
+                        //        if (equipment.Id==eq.Id)
+                        //        {
+                        //            room.Equipment_inventory.Remove(equipment);
+                        //            _roomController.Edit(room);
+                        //            break;
+                        //        }
+                        //    }
+                        //}
 
                         _equipmentController.Delete((Equipment)DataGridOpremaNepotrosna.SelectedItem);
 
@@ -1397,8 +1398,8 @@ namespace upravnikKT2
 
                 if (result == MessageBoxResult.Yes)
                 {
-                    foreach (BusinessDay businessDay in doctor.BusinessDay)
-                        _businessDayController.Delete(businessDay);
+                    //foreach (BusinessDay businessDay in doctor.BusinessDay)
+                    //    _businessDayController.Delete(businessDay);
                     _doctorController.Delete((Doctor)dataGridLekari.SelectedItem);
 
                     this.DataGridRooms.ItemsSource = null;
