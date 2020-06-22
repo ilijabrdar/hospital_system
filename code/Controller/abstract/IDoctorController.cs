@@ -12,6 +12,8 @@ namespace bolnica.Controller
     {
          List<Doctor> GetDoctorsBySpeciality(Speciality specialty);
 
+        bool CheckJMBGUnique(String JMBG);
+
 
     }
 }

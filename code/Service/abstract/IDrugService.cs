@@ -13,7 +13,7 @@ namespace bolnica.Service
 
         Drug AddAlternativeDrug(Drug originalDrug, Drug alternativeDrug);
 
-        Boolean CheckDrugNameUnique(Drug drug);
+        Boolean CheckDrugNameUnique(String name);
 
         Drug ApproveDrug(Drug drug);
 

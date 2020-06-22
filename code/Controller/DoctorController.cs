@@ -22,6 +22,11 @@ namespace Controller
             _doctorservice = service;
         }
 
+        public bool CheckJMBGUnique(string JMBG)
+        {
+            return _doctorservice.CheckJMBGUnique(JMBG);
+        }
+
         public void Delete(Doctor entity)
         {
             _doctorservice.Delete(entity);

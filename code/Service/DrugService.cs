@@ -66,9 +66,13 @@ namespace Service
             return _repository.Save(entity);
         }
 
-        public bool CheckDrugNameUnique(Drug drug)
+        public bool CheckDrugNameUnique(String name)
         {
-            throw new NotImplementedException();
+            foreach (Drug drug in GetAll())
+                if (drug.Name.Equals(name))
+                    return false;
+
+            return true;
         }
     }
 }
