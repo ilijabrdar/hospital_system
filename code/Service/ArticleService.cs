@@ -1,5 +1,6 @@
 using bolnica.Service;
 using Model.Doctor;
+using Model.Users;
 using Repository;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,13 @@ namespace Service
         public void Delete(Article entity)
         {
             _repository.Delete(entity);
+        }
+
+        public void DeleteArticlesByDoctor(Doctor doctor)
+        {
+            foreach (Article article in GetAll())
+                if (article.Doctor.Id == doctor.Id)
+                    Delete(article);
         }
 
         public void Edit(Article entity)

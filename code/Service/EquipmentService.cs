@@ -10,10 +10,12 @@ namespace Service
    {
 
         private readonly IEquipmentRepository _repository;
+        public IRoomService roomService;
 
-        public EquipmentService(IEquipmentRepository repository)
+        public EquipmentService(IEquipmentRepository repository, IRoomService roomService)
         {
             _repository = repository;
+            this.roomService = roomService;
         }
 
 
@@ -24,6 +26,7 @@ namespace Service
 
         public void Delete(Equipment entity)
         {
+            roomService.DeleteEquipmentFromRooms(entity);
             _repository.Delete(entity);
         }
 

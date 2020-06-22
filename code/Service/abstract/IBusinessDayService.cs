@@ -26,5 +26,8 @@ namespace bolnica.Service
 
         List<BusinessDay> GetBusinessDaysByDoctor(Doctor doctor);
 
+        void DeleteBusinessDayByRoom(Room room);
+
+
     }
 }
