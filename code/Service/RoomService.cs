@@ -92,11 +92,6 @@ namespace Service
             throw new NotImplementedException();
         }
 
-        public bool CheckRoomNameUnique(Room room)
-        {
-            throw new NotImplementedException();
-        }
-
         public void DeleteRoomsByRoomType(RoomType roomType)
         {
             foreach (Room room in GetAll())
@@ -121,6 +116,15 @@ namespace Service
                     }
                 }
             }
+        }
+
+        public bool CheckRoomCodeUnique(string roomCode)
+        {
+            foreach (Room room in GetAll())
+                if (room.RoomCode.Equals(roomCode))
+                    return false;
+
+            return true;
         }
     }
 }

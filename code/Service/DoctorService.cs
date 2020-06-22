@@ -98,5 +98,17 @@ namespace Service
                 
 
         }
+
+        public bool CheckJMBGUnique(string JMBG)
+        {
+            foreach (Doctor doctor in GetAll())
+            {
+                if (doctor.Jmbg.Equals(JMBG))
+                    return false;
+                    
+            }
+
+            return true;
+        }
     }
 }
