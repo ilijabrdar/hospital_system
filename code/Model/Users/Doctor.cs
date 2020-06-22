@@ -8,7 +8,6 @@ namespace Model.Users
 {
    public class Doctor : User
    {
-        public List<Article> Articles { get; set; } 
         public List<BusinessDay> BusinessDay { get; set; }
         public Speciality Specialty { get; set; }
         public DoctorGrade DoctorGrade { get; set; }
@@ -18,7 +17,6 @@ namespace Model.Users
             this.Id = id;
             this.FirstName = name;
             this.LastName = surname;
-            this.FullName = name + " " + surname;
             this.Jmbg = jmbg;
             this.Email = email;
             this.Phone = phone;
@@ -35,7 +33,6 @@ namespace Model.Users
             this.Id = id;
             this.FirstName = name;
             this.LastName = surname;
-            this.FullName = name + " " + surname;
             this.Jmbg = jmbg;
             this.Email = email;
             this.Phone = phone;
@@ -44,7 +41,6 @@ namespace Model.Users
             this.Username = username;
             this.Password = password;
             this.Image = img;
-            this.Articles = articles;
             this.BusinessDay = businessDay;
             this.Specialty = speciality;
             this.DoctorGrade = doctGrade;
@@ -54,7 +50,6 @@ namespace Model.Users
         {
             this.FirstName = name;
             this.LastName = surname;
-            this.FullName = name + " " + surname;
             this.Jmbg = jmbg;
             this.Email = email;
             this.Phone = phone;
@@ -63,7 +58,6 @@ namespace Model.Users
             this.Username = username;
             this.Password = password;
             this.Image = img;
-            this.Articles = articles;
             this.BusinessDay = businessDay;
             this.Specialty = speciality;
             this.DoctorGrade = doctGrade;

@@ -27,7 +27,6 @@ namespace Model.Users
             this.Username = username;
             this.Password = password;
             this.Image = img;
-            this.FullName = FirstName + " " + LastName;
         }
         public Patient(long id)
         {
