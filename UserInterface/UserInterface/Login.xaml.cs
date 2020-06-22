@@ -41,13 +41,13 @@ namespace UserInterface
                 MainWindow mainWindow = new MainWindow(user);
                 mainWindow.Show();
                 this.Close();
-                if (!user.Loged)
-                {
-                    user.Loged = true;
-                    SecretaryController.Edit(user);
-                    IntroductionWizard wizard = new IntroductionWizard();
-                    wizard.ShowDialog();
-                }
+                //if (!user.Loged)
+                //{
+                //    user.Loged = true;
+                //    SecretaryController.Edit(user);
+                //    IntroductionWizard wizard = new IntroductionWizard();
+                //    wizard.ShowDialog();
+                //}
             }
             catch(Exception exception)
             {

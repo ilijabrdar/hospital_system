@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
+using Model.PatientSecretary;
 using Model.Users;
 
 namespace UserInterface

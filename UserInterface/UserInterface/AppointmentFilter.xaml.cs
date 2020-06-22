@@ -36,12 +36,12 @@ namespace UserInterface
         //public List<Patient> Patients { get; set; }
         //public List<Room> Rooms { get; set; }
 
-        public List<String> Patients { get; set; }
-        public String SelectedPatient { get; set; }
-        public List<String> Rooms { get; set; }
-        public String SelectedRoom { get; set; }
-        public List<String> Doctors { get; set; }
-        public String SelectedDoctor { get; set; }
+        public List<Patient> Patients { get; set; }
+        public Patient SelectedPatient { get; set; }
+        public List<Room> Rooms { get; set; }
+        public Room SelectedRoom { get; set; }
+        public List<Doctor> Doctors { get; set; }
+        public Doctor SelectedDoctor { get; set; }
 
         public AppointmentFilter(List<Patient> patients)
         {
@@ -52,43 +52,17 @@ namespace UserInterface
             FromYear = ToYear = DateTime.Now.Year;
             FromHour = ToHour = DateTime.Now.Hour;
             FromMinute = ToMinute = DateTime.Now.Minute;
-            //Patients = patients;
-            //PopulateRoomCombo();
 
-            Rooms = new List<string>();
-            Rooms.Add("");
-            Rooms.Add("S10");
-            Rooms.Add("S11");
-            Rooms.Add("S12");
-            Rooms.Add("S13");
-            Rooms.Add("S14");
-            Rooms.Add("S15");
-            Rooms.Add("S16");
-            Rooms.Add("S17");
+            App app = Application.Current as App;
+
+            Rooms = app.RoomController.GetAll().ToList();
             SelectedRoom = Rooms[0];
 
-            Patients = new List<string>();
-            Patients.Add("");
-            Patients.Add("Pera Peric");
-            Patients.Add("Nikola Nikolic");
-            Patients.Add("Marko Markovic");
-            Patients.Add("Ivan Ivanovic");
+            Patients = app.PatientController.GetAll().ToList();
             SelectedPatient = Patients[0];
 
-            Doctors = new List<string>();
-            Doctors.Add("");
-            Doctors.Add("Pera Peric");
-            Doctors.Add("Nikola Nikolic");
-            Doctors.Add("Marko Markovic");
-            Doctors.Add("Ivan Ivanovic");
+            Doctors = app.DoctorController.GetAll().ToList();
             SelectedDoctor = Doctors[0];
-        }
-
-        private void PopulateRoomCombo()
-        {
-            App app = Application.Current as App;
-            IRoomController roomController = app.RoomController;
-            //Rooms = roomController.GetAll().ToList();
         }
 
         private void CloseWindow(object sender, RoutedEventArgs e)
@@ -98,8 +72,8 @@ namespace UserInterface
 
         private void Filter(object sender, RoutedEventArgs e)
         {
-            ExaminationDTO examinationFilter = new ExaminationDTO(SelectedDoctor, SelectedPatient, SelectedRoom, new DateTime(FromYear, FromMonth, FromDay, FromHour, FromMinute, 0), new DateTime(ToYear, ToMonth, ToDay, ToHour, ToMinute, 0));
-            MainWindow.FilterExaminations(examinationFilter);
+            //ExaminationDTO examinationFilter = new ExaminationDTO(SelectedDoctor, SelectedPatient, SelectedRoom, new DateTime(FromYear, FromMonth, FromDay, FromHour, FromMinute, 0), new DateTime(ToYear, ToMonth, ToDay, ToHour, ToMinute, 0));
+            //MainWindow.FilterExaminations(examinationFilter);
             CloseWindow(sender, e);
         }
     }

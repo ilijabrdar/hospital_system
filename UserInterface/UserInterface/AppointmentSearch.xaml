@@ -12,7 +12,7 @@
         <Label Content="Lekar" HorizontalAlignment="Left" Margin="40,10,0,0" VerticalAlignment="Top"/>
         <Label Content="Datum" HorizontalAlignment="Left" Margin="40,50,0,0" VerticalAlignment="Top"/>
         <Label Content="Termin" HorizontalAlignment="Left" Margin="40,90,0,0" VerticalAlignment="Top"/>
-        <ComboBox HorizontalAlignment="Left" Margin="130,10,0,0" VerticalAlignment="Top" Width="200" ItemsSource="{Binding Path=Doctors}" SelectedItem="{Binding Path=SelectedDoctor}"/>
+        <ComboBox HorizontalAlignment="Left" Margin="130,10,0,0" VerticalAlignment="Top" Width="200" ItemsSource="{Binding Path=Doctors}" DisplayMemberPath="FullName" SelectedItem="{Binding Path=SelectedDoctor}"/>
         <TextBlock HorizontalAlignment="Left" Margin="140,35,0,0" Text="YYYY" VerticalAlignment="Top" Height="15" FontWeight="Bold" Foreground="gray" Opacity="50">
             <TextBlock.Style>
                 <Style TargetType="TextBlock">

@@ -10,14 +10,14 @@ namespace Model.PatientSecretary
    public class Examination : IIdentifiable<long>
    {
         public long Id;
-        public User User;
-        public Model.Users.Doctor Doctor;
-        public Period Period;
-        public Diagnosis Diagnosis;
-        public List<Prescription> Prescription;
-        public Anemnesis Anemnesis;
-        public Therapy Therapy;
-        public Referral Refferal;
+        public User User { get; set; }
+        public Model.Users.Doctor Doctor { get; set; }
+        public Period Period { get; set; }
+        public Diagnosis Diagnosis { get; set; }
+        public List<Prescription> Prescription { get; set; }
+        public Anemnesis Anemnesis { get; set; }
+        public Therapy Therapy { get; set; }
+        public Referral Refferal { get; set; }
 
         public Examination(long id,  Users.Doctor doctor, Period period)
         {

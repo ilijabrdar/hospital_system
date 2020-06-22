@@ -293,10 +293,10 @@
                             </Style>
                         </DataGrid.RowStyle>
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Datum" Binding="{Binding onlyDate}" Width="*"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Vreme" Binding="{Binding dateTime.TimeOfDay}" Width="*"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Pacijent" Binding="{Binding patient}" Width="*"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Lekar" Binding="{Binding doctor}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Datum" Binding="{Binding Period.StartDate.Date}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Vreme" Binding="{Binding Period.StartDate.TimeOfDay}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Pacijent" Binding="{Binding User.FullName}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Lekar" Binding="{Binding Doctor.FullName}" Width="*"></DataGridTextColumn>
                             <DataGridTextColumn Header="Sala" Binding="{Binding room}" Width="*"></DataGridTextColumn>
 
                         </DataGrid.Columns>

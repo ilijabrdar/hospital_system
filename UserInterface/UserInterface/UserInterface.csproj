@@ -184,6 +184,7 @@
     <None Include="Resources\DoctorFile.csv" />
     <None Include="Resources\DoctorGradeFile.csv" />
     <None Include="Resources\equipment.csv" />
+    <None Include="Resources\ExaminationUpcoming.csv" />
     <None Include="Resources\roomtypes.csv" />
     <None Include="Resources\SpecialityFile.csv" />
   </ItemGroup>

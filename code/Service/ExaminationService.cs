@@ -72,12 +72,12 @@ namespace Service
 
         public Examination Get(long id)
         {
-            return _previousRepository.Get(id);
+            return _upcomingRepository.Get(id);
         }
 
         public IEnumerable<Examination> GetAll()
         {
-            return _previousRepository.GetAll();
+            return _upcomingRepository.GetAllEager();
         }
 
         public List<Examination> GetExaminationFilter(ExaminationDTO examinationDTO)

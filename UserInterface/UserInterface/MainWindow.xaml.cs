@@ -20,6 +20,7 @@ using bolnica.Controller;
 using Controller;
 using Microsoft.Win32;
 using Model.Users;
+using Model.PatientSecretary;
 
 namespace UserInterface
 {
@@ -44,8 +45,6 @@ namespace UserInterface
         public static List<Examination> freeSlots { get; set; }
         public static List<Examination> FreeSlots { get; set; }
 
-        private String fileName;
-
         public List<State> States { get; set; }
         public List<Town> Towns { get; set; }
         public List<Address> Addresses { get; set; }
@@ -66,6 +65,8 @@ namespace UserInterface
 
         public List<Shortcut> Shortcuts { get; set; }
 
+        private string _fileName;
+
         static DataGrid se;
         static DataGrid ee;
         static TextBlock tb;
@@ -84,61 +85,13 @@ namespace UserInterface
             PopulateCombos();
             PopulatePatients();
 
-            fileName = "C:/Users/Asus/Desktop/SIMS/hospital_system/UserInterface/UserInterface/Resources/Images/Pera.Jpeg";
+            ProfilePic.Source = new BitmapImage(Secretary.Image);
+            ChProfilePic.Source = new BitmapImage(Secretary.Image);
 
-            ProfilePic.Source = new BitmapImage(new Uri(fileName));
-            ChProfilePic.Source = new BitmapImage(new Uri(fileName));
+            FillExaminationTable();
 
-            //Image = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(Secretary.Image, Int)
-
-            examinations = new List<Examination>();
-            Examinations = new List<Examination>();
-            Examinations.Add(new Examination(new DateTime(2020, 1, 2, 12, 00, 00), "Pera Peric", "Petar Petrovic", "S12"));
-            Examinations.Add(new Examination(new DateTime(2020, 1, 2, 15, 00, 00), "Pera Peric", "Milan Milanovic", "S12"));
-            Examinations.Add(new Examination(new DateTime(2020, 1, 2, 16, 30, 00), "Marko Markovic", "Ivan Ivanovic", "S12"));
-            Examinations.Add(new Examination(new DateTime(2020, 1, 2, 17, 15, 00), "Pera Peric", "Luka Lukovic", "S13"));
-            Examinations.Add(new Examination(new DateTime(2020, 1, 3, 8, 00, 00), "Nikola Nikolic", "Milan Milanovic", "S12"));
-            Examinations.Add(new Examination(new DateTime(2020, 1, 3, 9, 30, 00), "Nikola Nikolic", "Marko Markovic", "S15"));
-            Examinations.Add(new Examination(new DateTime(2020, 1, 3, 10, 00, 00), "Ivan Ivanovic", "Pera Peric", "S12"));
-            Examinations.Add(new Examination(new DateTime(2020, 1, 3, 10, 15, 00), "Pera Peric", "Milan Milanovic", "S12"));
-            Examinations.Add(new Examination(new DateTime(2020, 1, 4, 12, 00, 00), "Marko Markovic", "Marko Markovic", "S15"));
-            Examinations.Add(new Examination(new DateTime(2020, 1, 4, 12, 15, 00), "Marko Markovic", "Milan Milanovic", "S15"));
-            Examinations.Add(new Examination(new DateTime(2020, 1, 4, 12, 30, 00), "Nikola Nikolic", "Marko Markovic", "S15"));
-            Examinations.Add(new Examination(new DateTime(2020, 1, 4, 12, 50, 00), "Marko Markovic", "Milan Milanovic", "S14"));
-            Examinations.Add(new Examination(new DateTime(2020, 1, 4, 15, 00, 00), "Nikola Nikolic", "Ivan Ivanovic", "S14"));
-            Examinations.Add(new Examination(new DateTime(2020, 1, 5, 16, 00, 00), "Marko Markovic", "Pera Peric", "S12"));
-            Examinations.Add(new Examination(new DateTime(2020, 1, 5, 17, 00, 00), "Nikola Nikolic", "Petar Petrovic", "S12"));
-            Examinations.Add(new Examination(new DateTime(2020, 1, 5, 18, 00, 00), "Marko Markovic", "Pera Peric", "S13"));
-            Examinations.Add(new Examination(new DateTime(2020, 1, 5, 18, 30, 00), "Nikola Nikolic", "Ivan Ivanovic", "S14"));
-            Examinations.Add(new Examination(new DateTime(2020, 1, 5, 18, 55, 00), "Marko Markovic", "Petar Petrovic", "S15"));
-            Examinations.Add(new Examination(new DateTime(2020, 1, 5, 19, 10, 00), "Nikola Nikolic", "Marko Markovic", "S15"));
-            Examinations.Add(new Examination(new DateTime(2020, 1, 5, 20, 00, 00), "Marko Markovic", "Pera Peric", "S12"));
-
-            examinations = new List<Examination>(Examinations);
 
             FreeSlots = new List<Examination>();
-            
-            FreeSlots.Add(new Examination(new DateTime(2020, 1, 2, 12, 00, 00), "Pera Peric", "S12"));
-            FreeSlots.Add(new Examination(new DateTime(2020, 1, 2, 15, 00, 00), "Pera Peric", "S12"));
-            FreeSlots.Add(new Examination(new DateTime(2020, 1, 2, 16, 30, 00), "Marko Markovic", "S12"));
-            FreeSlots.Add(new Examination(new DateTime(2020, 1, 2, 17, 15, 00), "Pera Peric", "S13"));
-            FreeSlots.Add(new Examination(new DateTime(2020, 1, 3, 8, 00, 00), "Nikola Nikolic", "S12"));
-            FreeSlots.Add(new Examination(new DateTime(2020, 1, 3, 9, 30, 00), "Nikola Nikolic", "S15"));
-            FreeSlots.Add(new Examination(new DateTime(2020, 1, 3, 10, 00, 00), "Ivan Ivanovic", "S12"));
-            FreeSlots.Add(new Examination(new DateTime(2020, 1, 3, 10, 15, 00), "Pera Peric", "S14"));
-            FreeSlots.Add(new Examination(new DateTime(2020, 1, 4, 12, 00, 00), "Marko Markovic", "S15"));
-            FreeSlots.Add(new Examination(new DateTime(2020, 1, 4, 12, 15, 00), "Marko Markovic", "S15"));
-            FreeSlots.Add(new Examination(new DateTime(2020, 1, 4, 12, 30, 00), "Nikola Nikolic", "S15"));
-            FreeSlots.Add(new Examination(new DateTime(2020, 1, 4, 12, 50, 00), "Marko Markovic", "S14"));
-            FreeSlots.Add(new Examination(new DateTime(2020, 1, 4, 15, 00, 00), "Nikola Nikolic", "S15"));
-            FreeSlots.Add(new Examination(new DateTime(2020, 1, 5, 16, 00, 00), "Marko Markovic", "S14"));
-            FreeSlots.Add(new Examination(new DateTime(2020, 1, 5, 17, 00, 00), "Nikola Nikolic", "S13"));
-            FreeSlots.Add(new Examination(new DateTime(2020, 1, 5, 18, 00, 00), "Marko Markovic", "S15"));
-            FreeSlots.Add(new Examination(new DateTime(2020, 1, 5, 18, 30, 00), "Nikola Nikolic", "S15"));
-            FreeSlots.Add(new Examination(new DateTime(2020, 1, 5, 18, 55, 00), "Marko Markovic", "S15"));
-            FreeSlots.Add(new Examination(new DateTime(2020, 1, 5, 19, 10, 00), "Nikola Nikolic", "S13"));
-            FreeSlots.Add(new Examination(new DateTime(2020, 1, 5, 20, 00, 00), "Marko Markovic", "S15"));
-
             freeSlots = new List<Examination>(FreeSlots);
 
             Shortcuts = new List<Shortcut>();
@@ -153,7 +106,14 @@ namespace UserInterface
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 2);
         }
+        private void FillExaminationTable()
+        {
+            App app = Application.Current as App;
+            examinations = new List<Examination>();
+            Examinations = app.ExaminationController.GetAll().ToList();
 
+            examinations = new List<Examination>(Examinations);
+        }
         private void PopulateCombos()
         {
             ComboBox states = FindName("StateCombo") as ComboBox;
@@ -203,6 +163,7 @@ namespace UserInterface
             Secretary.Address = SelectedAddress;
             Secretary.Address.Town = SelectedTown;
             Secretary.Address.Town.State = SelectedState;
+            Secretary.Image = new Uri(_fileName);
             FullDate = string.Join("/", Day, Month, Year);
 
             TextBlock date = FindName("txtDate") as TextBlock;
@@ -216,7 +177,7 @@ namespace UserInterface
 
             app.SecretaryController.Edit(Secretary);
 
-            ProfilePic.Source = new BitmapImage(new Uri(fileName)); // URADITI I SA FAJLOM
+            ProfilePic.Source = new BitmapImage(Secretary.Image);
             CancelProfileChangeDialog(sender, e);
         }
 
@@ -266,14 +227,13 @@ namespace UserInterface
             var profilePanel = this.FindName("profile") as Grid;
             changeProfilePanel.Visibility = Visibility.Collapsed;
             profilePanel.Visibility = Visibility.Visible;
-            fileName = "C:/Users/Asus/Desktop/SIMS/hospital_system/UserInterface/UserInterface/Resources/Images/Pera.Jpeg";
-            ChProfilePic.Source = new BitmapImage(new Uri(fileName));
+            ChProfilePic.Source = ProfilePic.Source;
         }
 
         private void EditSelectedAppointment(object sender, RoutedEventArgs e)
         {
-            EditAppointment editDialog = new EditAppointment(SelectedExamination);
-            editDialog.ShowDialog();
+            //EditAppointment editDialog = new EditAppointment(SelectedExamination);
+            //editDialog.ShowDialog();
         }
 
         private void FreeSelectedAppointment(object sender, RoutedEventArgs e)
@@ -596,8 +556,8 @@ namespace UserInterface
               "Portable Network Graphic (*.png)|*.png";
             if (op.ShowDialog() == true)
             {
-                fileName = op.FileName;
-                ChProfilePic.Source = new BitmapImage(new Uri(fileName));
+                _fileName = op.FileName;
+                ChProfilePic.Source = new BitmapImage(new Uri(_fileName));
             }
 
             
@@ -620,34 +580,34 @@ namespace UserInterface
 
         public static void FilterExaminations(ExaminationDTO examinationFilter)
         {
-            examinations = new List<Examination>(Examinations);
-            for (int i = 0; i < Examinations.Count; i++)
-            {
-                if (!String.IsNullOrEmpty(examinationFilter.Doctor) && Examinations[i].doctor != examinationFilter.Doctor) 
-                {
-                    examinations.Remove(Examinations[i]);
-                    continue;
-                }
-                if(!String.IsNullOrEmpty(examinationFilter.Patient) && Examinations[i].patient != examinationFilter.Patient)
-                {
-                    examinations.Remove(Examinations[i]);
-                    continue;
-                }
-                if (!String.IsNullOrEmpty(examinationFilter.Room) && Examinations[i].room != examinationFilter.Room)
-                {
-                    examinations.Remove(Examinations[i]);
-                    continue;
-                }
-                if(Examinations[i].dateTime < examinationFilter.FromDate || Examinations[i].dateTime > examinationFilter.ToDate)
-                {
-                    examinations.Remove(Examinations[i]);
-                    continue;
-                }
-            }
-            tb.Text = "Lekar:\t\t" + examinationFilter.Doctor + "\n\nPacijent:\t\t" + examinationFilter.Patient + "\n\nOd:\t\t" + examinationFilter.FromDate + "\nDo:\t\t" + examinationFilter.ToDate + "\n\nSala:\t\t" + examinationFilter.Room;
-            tb.FontSize = 13;
-            se.ItemsSource = null;
-            se.ItemsSource = examinations;
+            //examinations = new List<Examination>(Examinations);
+            //for (int i = 0; i < Examinations.Count; i++)
+            //{
+            //    if (!String.IsNullOrEmpty(examinationFilter.Doctor) && Examinations[i].doctor != examinationFilter.Doctor) 
+            //    {
+            //        examinations.Remove(Examinations[i]);
+            //        continue;
+            //    }
+            //    if(!String.IsNullOrEmpty(examinationFilter.Patient) && Examinations[i].patient != examinationFilter.Patient)
+            //    {
+            //        examinations.Remove(Examinations[i]);
+            //        continue;
+            //    }
+            //    if (!String.IsNullOrEmpty(examinationFilter.Room) && Examinations[i].room != examinationFilter.Room)
+            //    {
+            //        examinations.Remove(Examinations[i]);
+            //        continue;
+            //    }
+            //    if(Examinations[i].dateTime < examinationFilter.FromDate || Examinations[i].dateTime > examinationFilter.ToDate)
+            //    {
+            //        examinations.Remove(Examinations[i]);
+            //        continue;
+            //    }
+            //}
+            //tb.Text = "Lekar:\t\t" + examinationFilter.Doctor + "\n\nPacijent:\t\t" + examinationFilter.Patient + "\n\nOd:\t\t" + examinationFilter.FromDate + "\nDo:\t\t" + examinationFilter.ToDate + "\n\nSala:\t\t" + examinationFilter.Room;
+            //tb.FontSize = 13;
+            //se.ItemsSource = null;
+            //se.ItemsSource = examinations;
         }
 
         public static void EditExamination(Examination oldExamination, Examination newExamination)
@@ -680,48 +640,48 @@ namespace UserInterface
 
         public static void FilterFreeSlots(ExaminationDTO examinationFilter, bool doctorPriority)
         {
-            freeSlots = new List<Examination>(FreeSlots);
-            for(int i = 0; i < FreeSlots.Count; i++)
-            {
-                if (!String.IsNullOrEmpty(examinationFilter.Doctor) && FreeSlots[i].doctor != examinationFilter.Doctor)
-                {
-                    if (doctorPriority)
-                    {
-                        freeSlots.Remove(FreeSlots[i]);
-                        continue;
-                    }
-                }
+            //freeSlots = new List<Examination>(FreeSlots);
+            //for(int i = 0; i < FreeSlots.Count; i++)
+            //{
+            //    if (!String.IsNullOrEmpty(examinationFilter.Doctor) && FreeSlots[i].doctor != examinationFilter.Doctor)
+            //    {
+            //        if (doctorPriority)
+            //        {
+            //            freeSlots.Remove(FreeSlots[i]);
+            //            continue;
+            //        }
+            //    }
 
-                if (FreeSlots[i].dateTime != examinationFilter.FromDate)
-                {
-                    if (!doctorPriority)
-                    {
-                        if (Math.Abs(FreeSlots[i].dateTime.Day - examinationFilter.FromDate.Day) > 2)
-                        {
-                            freeSlots.Remove(FreeSlots[i]);
-                            continue;
-                        }
-                    }
-                }
-            }
-            ee.ItemsSource = null;
-            ee.ItemsSource = freeSlots;
+            //    if (FreeSlots[i].dateTime != examinationFilter.FromDate)
+            //    {
+            //        if (!doctorPriority)
+            //        {
+            //            if (Math.Abs(FreeSlots[i].dateTime.Day - examinationFilter.FromDate.Day) > 2)
+            //            {
+            //                freeSlots.Remove(FreeSlots[i]);
+            //                continue;
+            //            }
+            //        }
+            //    }
+            //}
+            //ee.ItemsSource = null;
+            //ee.ItemsSource = freeSlots;
         }
 
         Examination SelectedFreeSlot;
         private void Schedule(object sender, RoutedEventArgs e)
         {
-            SelectedFreeSlot = ee.SelectedItem as Examination;
-            if (SelectedFreeSlot == null)
-            {
-                MessageBox.Show("Selektujte pregled pre zakazivanja.", "Oops", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            Examination newExamination = new Examination(SelectedFreeSlot.dateTime, SelectedFreeSlot.doctor, GuestPatient.FirstName + " " + GuestPatient.LastName, SelectedFreeSlot.room);
-            Examinations.Add(newExamination);
-            SwapLists(sender, e);
-            SuccessLabel.Visibility = Visibility.Visible;
-            dispatcherTimer.Start();
+            //SelectedFreeSlot = ee.SelectedItem as Examination;
+            //if (SelectedFreeSlot == null)
+            //{
+            //    MessageBox.Show("Selektujte pregled pre zakazivanja.", "Oops", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    return;
+            //}
+            //Examination newExamination = new Examination(SelectedFreeSlot.dateTime, SelectedFreeSlot.doctor, GuestPatient.FirstName + " " + GuestPatient.LastName, SelectedFreeSlot.room);
+            //Examinations.Add(newExamination);
+            //SwapLists(sender, e);
+            //SuccessLabel.Visibility = Visibility.Visible;
+            //dispatcherTimer.Start();
         }
     }
 

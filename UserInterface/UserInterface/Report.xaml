@@ -16,7 +16,7 @@
         <Label Content="Lekar" HorizontalAlignment="Left" Margin="40,10,0,0" VerticalAlignment="Top"/>
         <Label Content="Datum" HorizontalAlignment="Left" Margin="40,50,0,0" VerticalAlignment="Top"/>
         <Label Content="Termin" HorizontalAlignment="Left" Margin="40,90,0,0" VerticalAlignment="Top"/>
-        <ComboBox HorizontalAlignment="Left" Margin="29,10,0,0" VerticalAlignment="Top" Width="425" ItemsSource="{Binding Path=Doctors}" SelectedItem="{Binding Path=SelectedDoctor}" Grid.Column="1"/>
+        <ComboBox HorizontalAlignment="Left" Margin="29,10,0,0" VerticalAlignment="Top" Width="425" ItemsSource="{Binding Path=Doctors}" SelectedItem="{Binding Path=SelectedDoctor}" DisplayMemberPath="FullName" Grid.Column="1"/>
         <TextBlock Text="YYYY" HorizontalAlignment="Left" Height="15" Margin="39,35,0,0" VerticalAlignment="Top" Width="50" FontWeight="Bold" Foreground="gray" Opacity="50" Grid.Column="1">
             <TextBlock.Style>
                 <Style TargetType="TextBlock">
