@@ -15,7 +15,7 @@ namespace Repository
    public class RenovationRepository : CSVRepository<Renovation,long>, IRenovationRepository
    {
       private String FilePath;
-        private readonly IRoomRepository _roomRepository;
+        public IRoomRepository _roomRepository;
 
         public RenovationRepository(ICSVStream<Renovation> stream, ISequencer<long> sequencer,IRoomRepository roomRepository)
      : base(stream, sequencer)

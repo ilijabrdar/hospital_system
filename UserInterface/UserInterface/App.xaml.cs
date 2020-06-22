@@ -126,7 +126,10 @@ namespace UserInterface
             var patientService = new PatientService(patientRepo, patientFileService);
             PatientController = new PatientController(patientService);
 
-            var roomService = new RoomService(roomRepository);
+            var businessDayService = new BusinessDayService(businessDayRepository, doctorService);
+            BusinessDayController = new BusinessDayController(businessDayService);
+
+            var roomService = new RoomService(roomRepository, null, businessDayService);
 
             RoomController = new RoomController(roomService);
 
