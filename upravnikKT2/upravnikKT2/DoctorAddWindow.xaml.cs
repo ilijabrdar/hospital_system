@@ -204,7 +204,7 @@ namespace upravnikKT2
                 var address = new Address(selectedAddress.GetId(), town.GetId(), state.GetId());
 
                 
-                if (checkDoctorJMBGExists())
+                if (_doctorController.CheckJMBGUnique(JMBG))
                 {
                     //JMBG for password and username
 
@@ -227,7 +227,7 @@ namespace upravnikKT2
             }
             else
             {
-                if (!_selectedDoctor.Jmbg.Equals(JMBG) && checkDoctorJMBGExists()==false)
+                if (!_selectedDoctor.Jmbg.Equals(JMBG) && _doctorController.CheckJMBGUnique(JMBG)==false)
                 {
                     string messageBoxText = "Doktor sa JMBG " + JMBG + " vec postoji";
                     string caption = "Greska";
@@ -261,19 +261,19 @@ namespace upravnikKT2
             this.Close();
         }
 
-        private bool checkDoctorJMBGExists()
-        {
-            List<Doctor> doctors = _doctorController.GetAll().ToList();
-            foreach (Doctor doctor in doctors)
-            {
-                if(doctor.Jmbg.Equals(JMBG))
-                {
-                    return false;
-                }
-            }
+        //private bool checkDoctorJMBGExists()
+        //{
+        //    List<Doctor> doctors = _doctorController.GetAll().ToList();
+        //    foreach (Doctor doctor in doctors)
+        //    {
+        //        if(doctor.Jmbg.Equals(JMBG))
+        //        {
+        //            return false;
+        //        }
+        //    }
 
-            return true;
-        }
+        //    return true;
+        //}
 
         private void Button_Click__Cancel(object sender, RoutedEventArgs e)
         {

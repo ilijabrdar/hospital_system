@@ -70,7 +70,7 @@ namespace upravnikKT2
         {
             if (_selectedRoom == null)
             {
-                if (checkRoomExists())
+                if (_roomController.CheckRoomCodeUnique(RoomCode))
                 {
                     _roomController.Save(new Room(RoomCode, (RoomType)comboRoomTypes.SelectedItem, null));
                 }
@@ -87,7 +87,7 @@ namespace upravnikKT2
             }
             else
             {
-                if (!_selectedRoom.RoomCode.Equals(RoomCode) && checkRoomExists() == false)
+                if (!_selectedRoom.RoomCode.Equals(RoomCode) && !_roomController.CheckRoomCodeUnique(RoomCode))
                 {
                     string messageBoxText = "Prostorija sa sifrom " + RoomCode + " vec postoji";
                     string caption = "Greska";
@@ -108,17 +108,17 @@ namespace upravnikKT2
             this.Close();
         }
 
-        private bool checkRoomExists()
-        {
-            List<Room> rooms = _roomController.GetAll().ToList();
-            foreach (Room room in rooms)
-            {
-                if (room.RoomCode.Equals(RoomCode))
-                    return false;
-            }
+        //private bool checkRoomExists()
+        //{
+        //    List<Room> rooms = _roomController.GetAll().ToList();
+        //    foreach (Room room in rooms)
+        //    {
+        //        if (room.RoomCode.Equals(RoomCode))
+        //            return false;
+        //    }
 
-            return true;
-        }
+        //    return true;
+        //}
 
         private void Button_Click_Cancel_Room(object sender, RoutedEventArgs e)
         {

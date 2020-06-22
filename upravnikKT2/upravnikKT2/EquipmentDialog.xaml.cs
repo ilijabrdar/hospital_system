@@ -68,7 +68,7 @@ namespace upravnikKT2
         {
             if (_selectedEquipment == null)
             {
-                if (checkEquipmentExists())
+                if (_equipmentController.CheckEquipmentNameUnique(Eq_Name))
                 {
                     _equipmentController.Save(new Model.Director.Equipment(
                         isConsumable ? Model.Director.EquipmentType.Consumable : Model.Director.EquipmentType.Inconsumable,
@@ -88,6 +88,17 @@ namespace upravnikKT2
             }
             else
             {
+                if (!_selectedEquipment.Name.Equals(Eq_Name) && !_equipmentController.CheckEquipmentNameUnique(Eq_Name))
+                {
+                    string messageBoxText = "Oprema sa nazivom " + Eq_Name + " vec postoji";
+                    string caption = "Greska";
+                    MessageBoxButton button = MessageBoxButton.OK;
+                    MessageBoxImage icon = MessageBoxImage.Error;
+
+                    MessageBox.Show(messageBoxText, caption, button, icon);
+                    return;
+                }
+
                 _selectedEquipment.Amount = Amount;
                 _selectedEquipment.Name = Eq_Name;
                 _equipmentController.Edit(_selectedEquipment);
@@ -96,17 +107,17 @@ namespace upravnikKT2
             this.Close();
         }
 
-        private bool checkEquipmentExists()
-        {
-            List<Equipment> equipments = _equipmentController.GetAll().ToList();
-            foreach (Equipment equipment in equipments)
-            {
-                if (equipment.Name.Equals(Eq_Name))
-                    return false;
-            }
+        //private bool checkEquipmentExists()
+        //{
+        //    List<Equipment> equipments = _equipmentController.GetAll().ToList();
+        //    foreach (Equipment equipment in equipments)
+        //    {
+        //        if (equipment.Name.Equals(Eq_Name))
+        //            return false;
+        //    }
 
-            return true;
-        }
+        //    return true;
+        //}
 
         private void Button_Click_Cancel_Equipment(object sender, RoutedEventArgs e)
         {

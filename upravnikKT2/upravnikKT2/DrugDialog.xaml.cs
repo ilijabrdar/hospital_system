@@ -85,7 +85,7 @@ namespace upravnikKT2
             {
                 if (_selectedDrug == null)
                 {
-                    if (checkDrugExists())
+                    if (_drugController.CheckDrugNameUnique(DrugName))
                     _drugController.Save(new Drug(txtName.Text, Amount, false, selectedIngredients.ToList(), null));
                     else
                     {
@@ -101,7 +101,7 @@ namespace upravnikKT2
                 }
                 else
                 {
-                    if (!_selectedDrug.Name.Equals(DrugName) && checkDrugExists()==false)
+                    if (!_selectedDrug.Name.Equals(DrugName) && !_drugController.CheckDrugNameUnique(DrugName))
                     {
                         string messageBoxText = "Lek sa nazivom " + DrugName + " vec postoji";
                         string caption = "Greska";
@@ -133,15 +133,15 @@ namespace upravnikKT2
             }
         }
 
-        private bool checkDrugExists()
-        {
-            List<Drug> drugs = _drugController.GetAll().ToList();
-            foreach (Drug drug in drugs)
-                if (drug.Name.Equals(DrugName))
-                    return false;
+        //private bool checkDrugExists()
+        //{
+        //    List<Drug> drugs = _drugController.GetAll().ToList();
+        //    foreach (Drug drug in drugs)
+        //        if (drug.Name.Equals(DrugName))
+        //            return false;
 
-            return true;
-        }
+        //    return true;
+        //}
 
         private void Button_Click_Cancel_Drug(object sender, RoutedEventArgs e)
         {

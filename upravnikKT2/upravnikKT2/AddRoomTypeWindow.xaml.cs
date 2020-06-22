@@ -85,7 +85,7 @@ namespace upravnikKT2
         {
             if (roomTypeForEdit == null)
             {
-                if (checkRoomTypeExists())
+                if (_roomTypeController.CheckRoomTypeUnique(Ime))
                 {
                     _roomTypeController.Save(new RoomType(Ime));
 
@@ -114,7 +114,7 @@ namespace upravnikKT2
             }
             else
             {
-                if (!roomTypeForEdit.Name.Equals(Ime) && checkRoomTypeExists() == false)
+                if (!roomTypeForEdit.Name.Equals(Ime) && !_roomTypeController.CheckRoomTypeUnique(Ime))
                 {
                     string messageBoxText = "Tip prostorije sa nazivom " + Ime + " vec postoji";
                     string caption = "Greska";
@@ -147,16 +147,16 @@ namespace upravnikKT2
             this.Close();
         }
 
-        private bool checkRoomTypeExists()
-        {
-            foreach (RoomType type in _roomTypeController.GetAll().ToList())
-            {
-                if (type.Name.Equals(Ime))
-                    return false;
-            }
+        //private bool checkRoomTypeExists()
+        //{
+        //    foreach (RoomType type in _roomTypeController.GetAll().ToList())
+        //    {
+        //        if (type.Name.Equals(Ime))
+        //            return false;
+        //    }
 
-            return true;
-        }
+        //    return true;
+        //}
 
         private void Button_Click_Cancel(object sender, RoutedEventArgs e)
         {
