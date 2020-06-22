@@ -219,6 +219,21 @@
   <data name="Photo" xml:space="preserve">
     <value>Izaberi fotografiju</value>
   </data>
+  <data name="Question1" xml:space="preserve">
+    <value>Ljubaznost lekara</value>
+  </data>
+  <data name="Question2" xml:space="preserve">
+    <value>Profesionalizam lekara</value>
+  </data>
+  <data name="Question3" xml:space="preserve">
+    <value>Komunikacija lekara sa pacijentom</value>
+  </data>
+  <data name="Question4" xml:space="preserve">
+    <value>Posvećenost pacijentu</value>
+  </data>
+  <data name="Question5" xml:space="preserve">
+    <value>Vaše subjektivno mišljenje</value>
+  </data>
   <data name="Register" xml:space="preserve">
     <value>Kreiraj</value>
   </data>
@@ -236,6 +251,9 @@
   </data>
   <data name="Surgeries" xml:space="preserve">
     <value>Operacije</value>
+  </data>
+  <data name="SurgeryHardCore" xml:space="preserve">
+    <value>Trenutno nemate ni jednu operaciju</value>
   </data>
   <data name="Surname" xml:space="preserve">
     <value>Prezime:</value>

@@ -29,21 +29,12 @@ namespace PacijentBolnicaZdravo
 
     public partial class Registration : MetroWindow, INotifyPropertyChanged
     {
-        public ChangeLanguage cl = new ChangeLanguage();
         public Registration()
         {
-   
-
-            Thread.CurrentThread.CurrentCulture = MainWindow.culture;
-            Thread.CurrentThread.CurrentUICulture = MainWindow.culture;
 
             InitializeComponent();
             
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            if (Thread.CurrentThread.CurrentCulture.Equals(new CultureInfo("sr")))
-                Language.SelectedItem = Language.Items[0];
-            else
-                Language.SelectedItem = Language.Items[1];
 
             if (MainWindow.Theme == 1)
             {
@@ -101,32 +92,10 @@ namespace PacijentBolnicaZdravo
 
         private void Language_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Console.WriteLine(Language.SelectedIndex);
-            int selected = (int)Language.SelectedIndex;
 
-            if (App.j != 0)
-            {
-
-                if (selected == 1)
-                {
-                    System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("en-GB");
-                    System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-GB");
-                    MainWindow.culture = new CultureInfo("en-GB");
-                    cl.ChangeRegistrationWindow(this);
-                }
-                else
-                {
-                    System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("sr");
-                    System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo("sr");
-                    MainWindow.culture = new CultureInfo("sr");
-                    cl.ChangeRegistrationWindow(this);
-                }
-            }
-
-            Console.WriteLine("Vrednost od j je :" + App.j);
-
-            App.j++;
         }
+
+
         private void PasswordCheck(object sender, RoutedEventArgs e)
         {
 
@@ -175,9 +144,9 @@ namespace PacijentBolnicaZdravo
             {
                 NewPassword.GetBindingExpression(System.Windows.Controls.TextBox.TextProperty).UpdateSource();
                 return;
-            }         
+            }
 
-            return;
+
             String username = Username.Text.ToString();
             String name = Name.Text.ToString();
             String surname = Surname.Text.ToString();
@@ -187,7 +156,7 @@ namespace PacijentBolnicaZdravo
             String address = Adress.Text.ToString();
             String phone = PhoneNumber.Text.ToString();
             String passw = NewPassword.Text.ToString();
-            
+
             Patient patient = new Patient(-1, name, surname, Id, email, phone, date, null, username, passw, null);
             var app = Application.Current as App;
             var temp = app.userController.Save(patient);

@@ -77,7 +77,7 @@ namespace Repository
             List<Doctor> retVal = new List<Doctor>();
             foreach(Doctor doct in doctors)
             {
-                if (doct.Specialty.Equals(specialty))
+                if (doct.Specialty.Name.Equals(specialty.Name))
                     retVal.Add(doct);
             }
             return retVal;

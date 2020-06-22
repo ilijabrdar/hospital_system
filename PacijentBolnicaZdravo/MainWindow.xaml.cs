@@ -1,41 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
-using MyProject.Language;
-using System.Globalization;
-using System.Configuration;
-using System.Reflection;
-using PacijentBolnicaZdravo.Properties;
-using System.Security.Cryptography.X509Certificates;
 using System.Diagnostics;
-using System.Windows.Markup;
 using System.ComponentModel;
-using System.Runtime.InteropServices;
-using System.Threading;
 using MahApps.Metro.Controls;
 using MahApps.Metro;
 using Model.Dto;
 using Model.Users;
 using Model.PatientSecretary;
 using Model.Director;
-using ControlzEx.Standard;
-using System.Windows.Threading;
 using System.Windows.Media.Animation;
 using System.Windows.Forms;
 using Model.Doctor;
-using System.Collections;
+using Application = System.Windows.Application;
+using System.Linq;
 
 namespace PacijentBolnicaZdravo
 {
@@ -43,37 +25,24 @@ namespace PacijentBolnicaZdravo
     public partial class MainWindow : MetroWindow, INotifyPropertyChanged
     {
 
-        public ChangeLanguage cl = new ChangeLanguage();
-        public static CultureInfo culture = new CultureInfo("sr");
         public List<ExaminationDTO> scheduledExaminations { get; set; }
         public List<ExaminationDTO> upcomingExaminations { get; set; }
         public List<Doctor> listOfDoctors { get; set; }
         public List<Article> ListOfArticles { get; set; }
-        public List<Examination> examinations { get; set; }
         public Patient _patient { get; set; }
         public static int Theme = 0;
 
-        public MainWindow(Patient patient, List<Article> articles)
+        public MainWindow(Patient patient)
         {
-            Thread.CurrentThread.CurrentCulture = culture;
-            Thread.CurrentThread.CurrentUICulture = culture;
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             _patient = patient;
-            ListOfArticles = articles;
             
             scheduledExaminations = getScheduledExaminations();
-            Doctor dr = new Doctor(1, "Pera", "Perić", "213123123123", "sadsds@sadsa.com", "2312312312", new DateTime(), null, "DDD", "ddd", null, null);
-            Doctor dr1 = new Doctor(1, "Jovan", "Jovanović", "213123123123", "sadsds@sadsa.com", "2312312312", new DateTime(), null, "DDD", "ddd", null, null);
-            listOfDoctors = new List<Doctor>();
-            listOfDoctors.Add(dr);
-            listOfDoctors.Add(dr1);
             upcomingExaminations = new List<ExaminationDTO>();
-            examinations = uploadExaminations();
 
             InitializeComponent();
-            setArticle();
-            setExaminations();
-            FillAccountData(_patient);
+
+            fillData();
 
             PasswordValidation2.password2 = _patient.Password;
            
@@ -81,13 +50,7 @@ namespace PacijentBolnicaZdravo
             DoctorsForExaminations.DisplayMemberPath = "FullName";
            
             this.DataContext = this;
-            
-
-            if (Thread.CurrentThread.CurrentCulture.Equals(new CultureInfo("sr")))
-                Language.SelectedItem = Language.Items[0];
-            else
-                Language.SelectedItem = Language.Items[1];
-
+           
             if (Theme == 1)
             {
                 ThemeManager.ChangeAppStyle(this,
@@ -104,48 +67,26 @@ namespace PacijentBolnicaZdravo
 
         }
 
-        public List<Examination> uploadExaminations()
+        private void fillData()
         {
-            List<Examination> retVal = new List<Examination>();
-            Examination examination1 = new Examination(1);
-            examination1.Doctor =  new Doctor(1, "Pera", "Perić", "213123123123", "sadsds@sadsa.com", "2312312312", new DateTime(), null, "DDD", "ddd", null, null);
-            examination1.Period = new Period(new DateTime(2020, 06, 12,12,40,0));
-            examination1.Therapy = new Therapy(0, null, 0, "Mazati tanak sloj kreme preko upaljenog dela.", null);
-            List<Drug> drugs = new List<Drug>();
-            Drug dr1 = new Drug("Klindamicin krema",0,true,null,null);
-            drugs.Add(dr1);
-            List<Prescription> pr = new List<Prescription>();
-            pr.Add(new Prescription(new Period(new DateTime(2020, 06, 12), new DateTime(2020, 06, 17)), "Mazati tanak sloj kreme preko upaljenog dela!", drugs));
-            examination1.Prescription = pr;
-            examination1.Refferal = null;
-            examination1.User = this._patient;
-            examination1.Anemnesis = new Anemnesis("Svrab i crvenilo oko oka, često jaki bolovi i konstantne suze. Pacijent se takodje zali na bolove u glavi i kako kaže da mu sve dolazi od oka.");
-            examination1.Diagnosis = new Diagnosis(0, "Konjuktavitis praćen teškom upalom.");
-            Examination examination2 = new Examination(2);
-            examination2.Doctor = new Doctor(1, "Pera", "Perić", "213123123123", "sadsds@sadsa.com", "2312312312", new DateTime(), null, "DDD", "ddd", null, null);
-            examination2.Period = new Period(new DateTime(2020, 06, 15, 09, 20, 0));
-            List<Drug> drugs1 = new List<Drug>();
-            Drug dr2 = new Drug("Kardiopirin", 0, true, null, null);
-            drugs1.Add(dr2);
-            List<Prescription> pr1 = new List<Prescription>();
-            pr1.Add(new Prescription(new Period(new DateTime(2020, 06, 12), new DateTime(2020, 06, 17)), "Mazati tanak sloj kreme preko upaljenog dela!", drugs1));
-            examination2.Prescription = pr1;
-            examination2.Refferal = new Referral(2,new Period(new DateTime(2020, 06, 25, 09, 40, 0)), new Doctor(1, "Đorđe", "Cvijić", "213123123123", "sadsds@sadsa.com", "2312312312", new DateTime(), null, "DDD", "ddd", null, null));
-            examination2.User = this._patient;
-            examination2.Anemnesis = new Anemnesis("Pacijent se žali na brzo zamaranje i ubrzan rad srca, tvrdi da mu je " +
-                                                                            "teško da se " +
-                                                      "puno kreće i da često mora da sedne da odmori. Takodje govori da " +
-                                                        "često oseti preskakanja srca i da nakon toga ne može da se smiri.");
-            examination2.Diagnosis = new Diagnosis(0, "Srčana aritmija");
-            examination2.Therapy = new Therapy(0, null, 0, "Lek uzimati svaki drugi dan 3 puta dnevno", null);
-            retVal.Add(examination1);
-            retVal.Add(examination2);
-            return retVal;
+            var app = Application.Current as App;
+            //TODO : Napuniti listu svih doktora opste prakse
+            ListOfArticles = app.ArticleController.GetAll().ToList();
+            FillAccountData(_patient);
+            setExaminations();
+            setArticle(ListOfArticles);
         }
+
 
         private void setExaminations()
         {
-            foreach(var examination in examinations)
+            var app = Application.Current as App;
+            List<Examination> examinations = new List<Examination>();
+            if(examinations == null)
+            {
+                return;
+            }
+            foreach (var examination in examinations) //TODO ubaciti kontroler za stare examinatione
             {
                 Border b = new Border();
                 b.BorderThickness = new Thickness(2);
@@ -224,9 +165,10 @@ namespace PacijentBolnicaZdravo
             }
         }
 
-        private void setArticle()
+        private void setArticle(List<Article> listOfArticles)
         {
-            foreach (var article in ListOfArticles)
+            ArticlesPanel.Children.Clear();
+            foreach (var article in listOfArticles)
             {
                 Border b = new Border();
                 b.BorderThickness = new Thickness(2);
@@ -243,12 +185,10 @@ namespace PacijentBolnicaZdravo
                 newTopic.FontSize = 15;
                 newTopic.FontWeight = FontWeights.Bold;
                 newTopic.MaxWidth = 700;
-                //newTopic.HorizontalAlignment = HorizontalAlignment.Center;
                 newText.TextWrapping = TextWrapping.Wrap;
                 newText.FontSize = 13;
                 newText.MaxWidth = 700;
                 writer.FontSize = 12;
-               // writer.HorizontalAlignment = HorizontalAlignment.Right;
 
 
                 newTopic.Text = article.Topic;
@@ -321,31 +261,18 @@ namespace PacijentBolnicaZdravo
         {
             DeleteExamination delete;
             DialogResult result;
-            if (System.Threading.Thread.CurrentThread.CurrentCulture.Equals(new CultureInfo("sr")))
-            {
-                delete = new DeleteExamination("Da li ste sigurni da želite da se odjavite?", "Da", "Ne", "Odjava", MainWindow.Theme);
-                result = delete.ShowDialog();
-            
+          
+            delete = new DeleteExamination("Are you sure you want to log out?", "Yes", "No", "Log out", MainWindow.Theme);
+            result = delete.ShowDialog();
             if (result == System.Windows.Forms.DialogResult.OK)
-                {
-                    App.j = 0;
-                    WindowLogIn wl = new WindowLogIn();
-                    wl.Show();
-                    this.Close();
-                }
-            } else
             {
-                delete = new DeleteExamination("Are you sure you want to log out?", "Yes", "No", "Log out", MainWindow.Theme);
-                result = delete.ShowDialog();
-                if (result == System.Windows.Forms.DialogResult.OK)
-                {
-                    App.j = 0;
-                    WindowLogIn wl = new WindowLogIn();
-                    wl.Show();
-                    this.Close();
-                }
+                App.j = 0;
+                WindowLogIn wl = new WindowLogIn();
+                wl.Show();
+                this.Close();
             }
         }
+        
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
@@ -367,31 +294,7 @@ namespace PacijentBolnicaZdravo
 
         private void Language_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            int selected = (int)Language.SelectedIndex;
-
-            if (App.j != 0)
-            {
-
-                if (selected == 1)
-                {
-                    System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("en-GB");
-                    System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-GB");
-                    MainWindow.culture = new CultureInfo("en-GB");
-                    cl.ChangeMainWindow(this);
-                }
-                else
-                {
-                    System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("sr");
-                    System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo("sr");
-                    MainWindow.culture = new CultureInfo("sr");
-                    cl.ChangeMainWindow(this);
-
-                }
-            }
-           
-            Console.WriteLine("Vrednost od j je :" + App.j);
-
-            App.j++;
+      
         }
 
      
@@ -407,14 +310,9 @@ namespace PacijentBolnicaZdravo
             if(scheduledExaminations.Count == 3)
             {
                 ErrorSchedule.Foreground = Brushes.Red;
-                if (Thread.CurrentThread.CurrentCulture.Equals(new CultureInfo("sr")))
-                {
-                    ErrorSchedule.Text = "Imate zakazan maksimalan broj termina!";
-                }
-                else
-                {
-                    ErrorSchedule.Text = "You have a maximum number of appointments scheduled!";
-                }
+       
+                ErrorSchedule.Text = "You have a maximum number of appointments scheduled!";
+ 
 
                 Storyboard sb = Resources["sbHideAnimation"] as Storyboard;
                 sb.Begin(ErrorSchedule);
@@ -424,18 +322,11 @@ namespace PacijentBolnicaZdravo
             ErrorSchedule.Foreground = Brushes.Green;
             DeleteExamination delete;
             ExaminationDTO deleteExam = (ExaminationDTO)selectedItem;
-            if (Thread.CurrentThread.CurrentCulture.Equals(new CultureInfo("sr")))
-            {
-                delete = new DeleteExamination("Zakažite termin kod lekara  " +
-                                                                         deleteExam.Doctor.FirstName + " " + deleteExam.Doctor.LastName + "?", "Da", "Ne", "Zakaži pregled", MainWindow.Theme);
-                ErrorSchedule.Text = "Uspešno ste zakazali pregled!";
-            }
-            else
-            {
-                delete = new DeleteExamination("Schedule examination at the doctor  " +
+
+            delete = new DeleteExamination("Schedule examination at the doctor  " +
                                                                         deleteExam.Doctor.FirstName + " " + deleteExam.Doctor.LastName + "?", "Yes", "No", "Schedule examination", MainWindow.Theme);
                 ErrorSchedule.Text = "You have successfully scheduled an examination!";
-            }
+
             DialogResult result = delete.ShowDialog();
             if (result == System.Windows.Forms.DialogResult.OK)
             {
@@ -459,18 +350,10 @@ namespace PacijentBolnicaZdravo
             ErrorCancel.Foreground = Brushes.Green;
             DeleteExamination delete;
             ExaminationDTO deleteExam = (ExaminationDTO)selectedItem;
-            if (Thread.CurrentThread.CurrentCulture.Equals(new CultureInfo("sr")))
-            {
-               delete = new DeleteExamination("Da li ste sigurni da zelite da otkažete pregled kod lekara " +
-                                                                        deleteExam.Doctor.FirstName + " " + deleteExam.Doctor.LastName + "?", "Da", "Ne", "Obriši pregled", MainWindow.Theme);
-                ErrorCancel.Text = "Uspešno ste otkazali termina!";
-            }
-            else
-            {
-                delete = new DeleteExamination("Are you sure you want to cancel the examination at the doctor  " +
+            delete = new DeleteExamination("Are you sure you want to cancel the examination at the doctor  " +
                                                                         deleteExam.Doctor.FirstName + " " + deleteExam.Doctor.LastName + "?", "Yes", "No", "Delete examination", MainWindow.Theme);
                 ErrorCancel.Text = "You have successfully canceled the appointment!";
-            }
+
             DialogResult result = delete.ShowDialog();
             if (result == System.Windows.Forms.DialogResult.OK)
             {
@@ -484,7 +367,23 @@ namespace PacijentBolnicaZdravo
 
         private void ChoosePhoto(object sender, RoutedEventArgs e)
         {
+            OpenFileDialog op = new OpenFileDialog();
+            op.Title = "Select a picture";
+            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+              "Portable Network Graphic (*.png)|*.png";
+            if (op.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+              String fileName = op.FileName;
+                ProfileImage.Source = new BitmapImage(new Uri(fileName));
+                ProfileImage2.Source = new BitmapImage(new Uri(fileName));
+                SuccessUpdatePhoto.Foreground = Brushes.Green;
 
+                SuccessUpdatePhoto.Text = "You have successfully changed photo!";
+
+                Storyboard sb = Resources["sbHideAnimation"] as Storyboard;
+                sb.Begin(SuccessUpdatePhoto);
+            }
         }
 
         private void UpdateInfo(object sender, RoutedEventArgs e)
@@ -529,17 +428,27 @@ namespace PacijentBolnicaZdravo
                 _patient.DateOfBirth = DateTime.Parse(DateBirthPicker.Text);
             }
 
+
+            Storyboard sb = Resources["sbHideAnimation"] as Storyboard;
             if (prom != 0)
             {
-                //userService.Edit(_patient);
-                FillAccountData(_patient);
-                Storyboard sb = Resources["sbHideAnimation"] as Storyboard;
-                sb.Begin(SuccessUpdateData);
-//SuccessUpdateData.Visibility = Visibility.Visible;
-                //TODO : Ispisi poruku za uspesan tok
-            }
-      
+                SuccessUpdateData.Foreground = Brushes.Green;
 
+
+                SuccessUpdateData.Text = "You have successfully changed the data!";
+                 // TODO : userService.Edit(_patient);
+                FillAccountData(_patient);
+               
+                sb.Begin(SuccessUpdateData);
+                return;
+
+            }
+            else
+            {
+                SuccessUpdateData.Foreground = Brushes.Red;
+                SuccessUpdateData.Text = "Data required for change!";
+                sb.Begin(SuccessUpdateData);
+            }
         }
 
         private void Password(object sender, RoutedEventArgs e)
@@ -568,19 +477,24 @@ namespace PacijentBolnicaZdravo
 
         private void Search(object sender, RoutedEventArgs e)
         {
-            if(ArticlesPanel.Children.Count < 5) {
-                Border b = new Border();
-
-                b.BorderThickness = new Thickness(1);
-                b.BorderBrush = Brushes.Black;
-                b.Height = 200;
-                b.CornerRadius = new CornerRadius(3);
-
-                b.Margin = new Thickness(5);
-                ArticlesPanel.Children.Add(b);
-            } else
+            if (SearchBox.Text == "")
             {
-                ArticlesPanel.Children.Clear();
+                setArticle(this.ListOfArticles);
+            }
+            else
+            {
+                List<Article> searchList = new List<Article>();
+                foreach (Article article in this.ListOfArticles)
+                {
+                    if (article.Topic.ToLower().Contains(SearchBox.Text.ToLower()))
+                        searchList.Add(article);
+                }
+                if (searchList.Count == 0)
+                {
+                    setArticle(this.ListOfArticles);
+                    return;
+                }
+                setArticle(searchList);
             }
             
         }
@@ -590,7 +504,10 @@ namespace PacijentBolnicaZdravo
             try
             {
                 Process process = new System.Diagnostics.Process();
-                String file = "C:\\Users\\jovan\\Desktop\\Faks\\HCI\\SrpskiIzvestaj.pdf";
+                String file;
+                
+                file = "C:\\Users\\jovan\\Desktop\\Faks\\HCI\\EngleskiIzvestaj2.pdf";
+                
                 process.StartInfo.FileName = file;
                 process.Start();
                 process.WaitForExit();
@@ -608,15 +525,9 @@ namespace PacijentBolnicaZdravo
             {
 
                 FeedBack.Clear();
-                if (Thread.CurrentThread.CurrentCulture.Equals(new CultureInfo("sr")))
-                {
-                    FeedbackText.Text = "Hvala Vam što ste podelili sa nama Vaše mišljenje! " ;
-                }
-                else
-                {
-                    FeedbackText.Text = "Thank you for sharing with us your opinion! ";
 
-                }
+                FeedbackText.Text = "Thank you for sharing with us your opinion! ";
+
                 Storyboard sb = Resources["sbHideAnimation"] as Storyboard;
                 sb.Begin(FeedbackText);
             }
@@ -685,31 +596,18 @@ namespace PacijentBolnicaZdravo
             if (doctor == null)
             {
                 FeedbackDOctor.Foreground = Brushes.Red;
-                if (Thread.CurrentThread.CurrentCulture.Equals(new CultureInfo("sr")))
-                {
 
-                    FeedbackDOctor.Text = "Morate izabrati lekara!";
-                }
-                else
-                {
-                    FeedbackDOctor.Text = "You have to pik doctor!";
+                FeedbackDOctor.Text = "You have to pik doctor!";
 
-                }
                 Storyboard ssb = Resources["sbHideAnimation"] as Storyboard;
                 ssb.Begin(FeedbackDOctor);
                 return;
             }
 
             FeedbackDOctor.Foreground = Brushes.Green;
-            if (Thread.CurrentThread.CurrentCulture.Equals(new CultureInfo("sr")))
-                {
-                    FeedbackDOctor.Text = "Uspešno ste ocenili lekara!";
-                }
-            else
-                {
-                    FeedbackDOctor.Text = "You have successfully graded the doctor!";
 
-                }
+            FeedbackDOctor.Text = "You have successfully graded the doctor!";
+
             Storyboard sb = Resources["sbHideAnimation"] as Storyboard;
             sb.Begin(FeedbackDOctor);
         }

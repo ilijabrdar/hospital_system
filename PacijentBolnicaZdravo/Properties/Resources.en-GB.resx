@@ -219,6 +219,21 @@
   <data name="Photo" xml:space="preserve">
     <value>Choose photo</value>
   </data>
+  <data name="Question1" xml:space="preserve">
+    <value>The kindness of the doctor</value>
+  </data>
+  <data name="Question2" xml:space="preserve">
+    <value>Professionalism of doctors</value>
+  </data>
+  <data name="Question3" xml:space="preserve">
+    <value>Doctors communication with the patient</value>
+  </data>
+  <data name="Question4" xml:space="preserve">
+    <value>Commitment to the patient</value>
+  </data>
+  <data name="Question5" xml:space="preserve">
+    <value>Your subjective opinion</value>
+  </data>
   <data name="Register" xml:space="preserve">
     <value>Register</value>
   </data>
@@ -236,6 +251,9 @@
   </data>
   <data name="Surgeries" xml:space="preserve">
     <value>Surgeries</value>
+  </data>
+  <data name="SurgeryHardCore" xml:space="preserve">
+    <value>You currently do not have any surgery</value>
   </data>
   <data name="Surname" xml:space="preserve">
     <value>Surname:</value>

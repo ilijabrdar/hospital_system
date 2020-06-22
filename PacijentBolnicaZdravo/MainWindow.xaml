@@ -168,12 +168,23 @@
                     </TabItem>
                     <TabItem Header="{x:Static p:Resources.Hospitalizations}" Name="Hospitalizations">
                         <DockPanel>
-                            <TextBlock>
-                                      <TextBlock Margin="70,100,70,10" TextDecorations="{x:Null}" Opacity="0.4" FontSize="20" Text="{x:Static p:Resources.ExaminationHardCore}" Name="ExaminationHardCore" FontWeight="Bold"/>
-                            </TextBlock>
+                            <ScrollViewer  VerticalScrollBarVisibility="auto">
+                                <StackPanel  Orientation="Vertical" HorizontalAlignment="Center">
+                               <TextBlock>
+                                   <TextBlock Margin="70,100,70,10"  TextDecorations="{x:Null}" Opacity="0.4" FontSize="20" Text="{x:Static p:Resources.ExaminationHardCore}" Name="ExaminationHardCore" FontWeight="Bold"/>
+                               </TextBlock>
+                            </StackPanel>
+                            </ScrollViewer>
                         </DockPanel>
                     </TabItem>
                     <TabItem Header="{x:Static p:Resources.Surgeries}" Name="Surgery">
+                        <ScrollViewer  VerticalScrollBarVisibility="auto">
+                            <StackPanel  Orientation="Vertical" HorizontalAlignment="Center">
+                                <TextBlock>
+                                   <TextBlock Margin="70,100,70,10"  TextDecorations="{x:Null}" Opacity="0.4" FontSize="20" Text="{x:Static p:Resources.SurgeryHardCore}" Name="SurgeriesHardCore" FontWeight="Bold"/>
+                               </TextBlock>
+                            </StackPanel>
+                        </ScrollViewer>
                     </TabItem>
                 </TabControl>
             </TabItem>
@@ -222,7 +233,7 @@
 
                             <StackPanel Orientation="Vertical">
 
-                                <TextBlock Name="UsernameLabel" Text="{x:Static p:Resources.Username}" Margin="15" FontSize="15"/>
+                                <TextBlock Name="UsernameLabel" Text="{x:Static p:Resources.Username}" Margin="15,15,15,15" FontSize="15"/>
                                 <TextBlock Name="NameLabel" Text="{x:Static p:Resources.Name}" Margin="15" FontSize="15"/>
                                 <TextBlock Margin="15" FontSize="15" Name="SurnameLabel"  Text="{x:Static p:Resources.Surname}"/>
                                 <TextBlock Name="IDLabel" Margin="15" FontSize="15"  Text="{x:Static p:Resources.ID}" />
@@ -299,7 +310,7 @@
                                     </TextBox.Text>
                                 </TextBox>
                                 
-                                <TextBlock Name="SuccessUpdateData" Text="{x:Static p:Resources.SuccessUpdateData}" Opacity="0" FontSize="15" HorizontalAlignment="Right"  Margin="0,0,10,-5" Foreground="#FF16D900"></TextBlock>
+                                <TextBlock Name="SuccessUpdateData"  Opacity="0" FontSize="15" HorizontalAlignment="Right"  Margin="0,0,10,-5" Foreground="#FF16D900"></TextBlock>
                                 <Button  Content="{x:Static p:Resources.UpdateData}" Name="UpdateData" Width="120" HorizontalAlignment="Right" Margin="10" Click="UpdateInfo">
                                     <Button.Style>
                                         <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
@@ -338,7 +349,9 @@
                             <StackPanel Orientation="Vertical">
                                 <StackPanel Orientation="Vertical">
                                     <Image x:Name="ProfileImage" Height="100" Width="90" Margin="10" Source="/PacijentBolnicaZdravo;component/Images/User.png"></Image>
-                                    <Button Margin="20" Name="ChoosePhotoButton"  Content="{x:Static p:Resources.Photo}" HorizontalAlignment="Right" VerticalAlignment="Center" Click="ChoosePhoto"></Button>
+                                    <TextBlock Name="SuccessUpdatePhoto"  Opacity="0" FontSize="15" HorizontalAlignment="Right"  Margin="0,0,10,-5" Foreground="#FF16D900"></TextBlock>
+
+                                    <Button Margin="20" Name="ChoosePhotoButton"  Content="{x:Static p:Resources.Photo}" HorizontalAlignment="Center" VerticalAlignment="Center" Click="ChoosePhoto"></Button>
                                 </StackPanel>
                             </StackPanel>
 
@@ -425,11 +438,11 @@
                     <StackPanel Orientation="Horizontal">
                
                         <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                                <TextBlock Margin="6"  Height="24"  FontSize="14">Pitanje broj jedan</TextBlock>
-                                <TextBlock Margin="6"  Height="24"  FontSize="14">Pitanje broj jedan</TextBlock>
-                                <TextBlock Margin="6"  Height="24" FontSize="14">Pitanje broj jedan</TextBlock>
-                                <TextBlock Margin="6"  Height="24" FontSize="14">Pitanje broj jedan</TextBlock>
-                                <TextBlock Margin="6,6,6,50"  Height="24" FontSize="14">Pitanje broj jedan</TextBlock>
+                                <TextBlock Margin="6" Text="{x:Static p:Resources.Question1}" Height="24" Name="Pitanje1" FontSize="14">  </TextBlock>
+                                <TextBlock Margin="6" Text="{x:Static p:Resources.Question2}" Height="24"  Name="Pitanje2" FontSize="14">  </TextBlock>
+                                <TextBlock Margin="6" Text="{x:Static p:Resources.Question3}" Height="24" Name="Pitanje3" FontSize="14">  </TextBlock>
+                                <TextBlock Margin="6" Text="{x:Static p:Resources.Question4}" Height="24" Name="Pitanje4" FontSize="14">  </TextBlock>
+                                <TextBlock Margin="6,6,6,50" Text="{x:Static p:Resources.Question5}" Height="24" Name="Pitanje5" FontSize="14">  </TextBlock>
                         </StackPanel>
                         <StackPanel Orientation="Vertical">
                             <Slider Style="{StaticResource SliderGrade}" Minimum="1" Maximum="5" TickFrequency="1" Width="200"   Margin="10,14,5,5" Name="Slider1"></Slider>

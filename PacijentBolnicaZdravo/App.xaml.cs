@@ -34,6 +34,7 @@ namespace PacijentBolnicaZdravo
         public IUserController userController { get; set; }
         public IController<Article, long> ArticleController
         { get; private set; }
+        public IDoctorController DoctorController { get; set; }
 
 
 
@@ -48,12 +49,12 @@ namespace PacijentBolnicaZdravo
             var userService = new UserService(patientService);
             userController = new UserController(userService);
             var articleRepo = new ArticleRepository(new CSVStream<Article>(_article_File, new ArticleCSVConverter("|")), new LongSequencer());
-            DoctorRepository doctorRepository = new DoctorRepository(new CSVStream<Doctor>(_doctor_File, new DoctorCSVConverter(",")), new LongSequencer(),
+            var doctorRepository = new DoctorRepository(new CSVStream<Doctor>(_doctor_File, new DoctorCSVConverter(",")), new LongSequencer(),
               null, null, null, null);
             articleRepo._doctorRepository = doctorRepository;
             var articleService = new ArticleService(articleRepo);
             ArticleController = new ArticleController(articleService);
-            
+           
            
         }
 

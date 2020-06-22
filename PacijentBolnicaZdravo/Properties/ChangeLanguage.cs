@@ -20,7 +20,13 @@ namespace PacijentBolnicaZdravo.Properties
 
             Console.WriteLine("Ovdesam");
             Console.WriteLine(currentWindow);
+            currentWindow.SurgeriesHardCore.Text = MyProject.Language.Resources.SurgeryHardCore;
             currentWindow.Note.Text = MyProject.Language.Resources.NoteForExamination;
+            currentWindow.Pitanje1.Text = MyProject.Language.Resources.Question1;
+            currentWindow.Pitanje2.Text = MyProject.Language.Resources.Question2;
+            currentWindow.Pitanje3.Text = MyProject.Language.Resources.Question3;
+            currentWindow.Pitanje4.Text = MyProject.Language.Resources.Question4;
+            currentWindow.Pitanje5.Text = MyProject.Language.Resources.Question5;
                 currentWindow.DarkModeLabel.Text = MyProject.Language.Resources.DarkMode;
                 currentWindow.LogOutButton.Content = MyProject.Language.Resources.LogOut;
                 currentWindow.Articles.Header = MyProject.Language.Resources.TabArticles;

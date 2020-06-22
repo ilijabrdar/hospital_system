@@ -367,6 +367,51 @@ namespace MyProject.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The kindness of the doctor.
+        /// </summary>
+        public static string Question1 {
+            get {
+                return ResourceManager.GetString("Question1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Professionalism of doctors.
+        /// </summary>
+        public static string Question2 {
+            get {
+                return ResourceManager.GetString("Question2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Doctors communication with the patient.
+        /// </summary>
+        public static string Question3 {
+            get {
+                return ResourceManager.GetString("Question3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Commitment to the patient.
+        /// </summary>
+        public static string Question4 {
+            get {
+                return ResourceManager.GetString("Question4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your subjective opinion.
+        /// </summary>
+        public static string Question5 {
+            get {
+                return ResourceManager.GetString("Question5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Register.
         /// </summary>
         public static string Register {
@@ -417,6 +462,15 @@ namespace MyProject.Language {
         public static string Surgeries {
             get {
                 return ResourceManager.GetString("Surgeries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You currently do not have any surgery.
+        /// </summary>
+        public static string SurgeryHardCore {
+            get {
+                return ResourceManager.GetString("SurgeryHardCore", resourceCulture);
             }
         }
         
