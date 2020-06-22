@@ -1,0 +1,4 @@
+﻿0,Jovan,Jelicki,2001998800114,sadsajodi@sdas.om,9292929299,27.05.2020,dsadasdsad,Jovan,sadasd,,0,false
+1,Tamara,Kovacevic,1231231233321,sdas@sdaasd.com,2131231233,05.02.2020,sadsaas,Tamara,asdasdas,,0,false
+2,Petar,Petrovic,2132133213213,pera@gmail.com,2132132122,07.05.2020,,Pera,dsads,,2,False
+3,Elena,Stojanovic,0211998805091,elena@gmail.com,0200200002,11.02.1998,,elena.s,elena,,3,False

@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using bolnica.Controller;
 using Model.Director;
+using Model.Dto;
+using Model.PatientSecretary;
 using Model.Users;
 
 namespace UserInterface
@@ -72,27 +74,27 @@ namespace UserInterface
 
         private void Filter(object sender, RoutedEventArgs e)
         {
-            //ExaminationDTO examinationFilter = new ExaminationDTO(SelectedDoctor, SelectedPatient, SelectedRoom, new DateTime(FromYear, FromMonth, FromDay, FromHour, FromMinute, 0), new DateTime(ToYear, ToMonth, ToDay, ToHour, ToMinute, 0));
-            //MainWindow.FilterExaminations(examinationFilter);
+            ExaminationDTO examinationFilter = new ExaminationDTO(SelectedDoctor, SelectedRoom, new Period(new DateTime(FromYear, FromMonth, FromDay, FromHour, FromMinute, 0), new DateTime(ToYear, ToMonth, ToDay, ToHour, ToMinute, 0)), SelectedPatient);
+            MainWindow.FilterExaminations(examinationFilter);
             CloseWindow(sender, e);
         }
     }
 
-    public class ExaminationDTO
-    {
-        public String Doctor { get; set; }
-        public String Patient { get; set; }
-        public String Room { get; set; }
-        public DateTime FromDate { get; set; }
-        public DateTime ToDate { get; set; }
+    //public class ExaminationDTO
+    //{
+    //    public String Doctor { get; set; }
+    //    public String Patient { get; set; }
+    //    public String Room { get; set; }
+    //    public DateTime FromDate { get; set; }
+    //    public DateTime ToDate { get; set; }
 
-        public ExaminationDTO(String doctor, String patient, String room, DateTime fromDate, DateTime toDate)
-        {
-            Doctor = doctor;
-            Patient = patient;
-            Room = room;
-            FromDate = fromDate;
-            ToDate = toDate;
-        }
-    }
+    //    public ExaminationDTO(String doctor, String patient, String room, DateTime fromDate, DateTime toDate)
+    //    {
+    //        Doctor = doctor;
+    //        Patient = patient;
+    //        Room = room;
+    //        FromDate = fromDate;
+    //        ToDate = toDate;
+    //    }
+    //}
 }

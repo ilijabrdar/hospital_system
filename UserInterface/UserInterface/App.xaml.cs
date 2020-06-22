@@ -30,26 +30,26 @@ namespace UserInterface
         private const String CSV_DICTIONARY_DELIMITER = ";";
         private const String CSV_COLOMN_DELIMITER = ":";
 
-        private const String SECRETARY_FILE = "C:/Users/Asus/Desktop/SIMS/hospital_system/UserInterface/UserInterface/Resources/SecretaryFile.txt";
-        private const String DOCTOR_FILE = "C:/Users/Asus/Desktop/SIMS/hospital_system/UserInterface/UserInterface/Resources/DoctorFile.csv";
+        private const String SECRETARY_FILE = "../../../../code/Resources/Data/SecretaryFile.txt";
+        private const String DOCTOR_FILE = "../../../../code/Resources/Data/DoctorFile.csv";
 
-        private const String ADDRESS_FILE = "C:/Users/Asus/Desktop/SIMS/hospital_system/UserInterface/UserInterface/Resources/AddressFile.txt";
-        private const String TOWN_FILE = "C:/Users/Asus/Desktop/SIMS/hospital_system/UserInterface/UserInterface/Resources/TownFile.txt";
-        private const String STATE_FILE = "C:/Users/Asus/Desktop/SIMS/hospital_system/UserInterface/UserInterface/Resources/StateFile.txt";
+        private const String ADDRESS_FILE = "../../../../code/Resources/Data/AddressFile.txt";
+        private const String TOWN_FILE = "../../../../code/Resources/Data/TownFile.txt";
+        private const String STATE_FILE = "../../../../code/Resources/Data/StateFile.txt";
 
-        private const string ROOM_FILE = "C:/Users/Asus/Desktop/SIMS/hospital_system/UserInterface/UserInterface/Resources/roomFile.txt";
-        private const string EQUIPMENT_FILE = "C:/Users/Asus/Desktop/SIMS/hospital_system/UserInterface/UserInterface/Resources/equipment.csv";
-        private const string ROOMTYPE_FILE = "C:/Users/Asus/Desktop/SIMS/hospital_system/UserInterface/UserInterface/Resources/roomtypes.csv";
-        private const String SPECIALITY_FILE = "C:/Users/Asus/Desktop/SIMS/hospital_system/UserInterface/UserInterface/Resources/SpecialityFile.csv";
-        private const String DOCTOR_GRADE_FILE = "C:/Users/Asus/Desktop/SIMS/hospital_system/UserInterface/UserInterface/Resources/DoctorGradeFile.csv";
+        private const string ROOM_FILE = "../../../../code/Resources/Data/rooms.csv";
+        private const string EQUIPMENT_FILE = "../../../../code/Resources/Data/equipment.csv";
+        private const string ROOMTYPE_FILE = "../../../../code/Resources/Data/roomtypes.csv";
+        private const String SPECIALITY_FILE = "../../../../code/Resources/Data/SpecialityFile.csv";
+        private const String DOCTOR_GRADE_FILE = "../../../../code/Resources/Data/DoctorGradeFile.csv";
 
-        private const string BUSINESSDAY_FILE = "C:/Users/Asus/Desktop/SIMS/hospital_system/UserInterface/UserInterface/Resources/businessDayFile.csv";
-        private const String ARTICLE_FILE = "C:/Users/Asus/Desktop/SIMS/hospital_system/UserInterface/UserInterface/Resources/articleFile.csv";
+        private const string BUSINESSDAY_FILE = "../../../../code/Resources/Data/businessdays.csv";
+        private const String ARTICLE_FILE = "../../../../code/Resources/Data/articles.csv";
 
-        private readonly String _patient_File = "C:/Users/Asus/Desktop/SIMS/hospital_system/UserInterface/UserInterface/Resources/PatientFile.txt";
-        private readonly String _patientFile_File = "C:/Users/Asus/Desktop/SIMS/hospital_system/UserInterface/UserInterface/Resources/patientFileFile.txt";
+        private readonly String _patient_File = "../../../../code/Resources/Data/PatientFile.txt";
+        private readonly String _patientFile_File = "../../../../code/Resources/Data/patientFileFile.txt";
 
-        private const String EXAM_UPCOMING_FILE = "C:/Users/Asus/Desktop/SIMS/hospital_system/UserInterface/UserInterface/Resources/ExaminationUpcoming.csv";
+        private const String EXAM_UPCOMING_FILE = "../../../../code/Resources/Data/ExaminationUpcoming.csv";
 
         public IUserController UserController { get; private set; }
         public IPatientController PatientController { get; private set; }
@@ -86,11 +86,14 @@ namespace UserInterface
             var roomRepository = new RoomRepository(
                new CSVStream<Room>(ROOM_FILE, new RoomCSVConverter(CSV_DELIMITER)),
                new LongSequencer(), roomTypeRepository, equipmentRepository);
+
             BusinessDayRepository businessDayRepository = new BusinessDayRepository(new CSVStream<BusinessDay>(BUSINESSDAY_FILE, new BusinessDayCSVConverter()), new LongSequencer(), roomRepository);
 
 
             SecretaryRepository secretaryRepository = new SecretaryRepository(new CSVStream<Secretary>(SECRETARY_FILE, new SecretaryCSVConverter(CSV_DELIMITER)), new LongSequencer(), addressRepository, townRepository, stateRepository);
             DoctorRepository doctorRepository = new DoctorRepository(new CSVStream<Doctor>(DOCTOR_FILE, new DoctorCSVConverter(CSV_DELIMITER)), new LongSequencer(), businessDayRepository, specialityRepository, doctorGradeRepository);//, addressRepository,townRepository,stateRepository)
+            businessDayRepository.doctorRepo = doctorRepository;
+            
             ArticleRepository articleRepository = new ArticleRepository(new CSVStream<Article>(ARTICLE_FILE, new ArticleCSVConverter(CSV_ARRAY_DELIMITER)), new LongSequencer(), doctorRepository);
             // DirectorRepository directorRepository = new DirectorRepository(new CSVStream<Director>(SECRETARY_FILE, null, new LongSequencer());
             // DoctorRepository doctorRepository = new SecretaryRepository(new CSVStream<Secretary>(SECRETARY_FILE, new SecretaryCSVConverter(CSV_DELIMITER)), new LongSequencer());

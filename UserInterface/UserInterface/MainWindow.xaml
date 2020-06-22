@@ -279,7 +279,7 @@
                         </StackPanel>
 
                     </DockPanel>
-                    <DataGrid x:Name="ScheduledExaminations" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding examinations}" 
+                    <DataGrid x:Name="ScheduledExaminations" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding examinationDisplay}" 
                               IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False" Margin="10, 0, 10, 10" SelectedItem="{Binding Path=SelectedExamination}">
                         <DataGrid.Resources>
                             <ContextMenu x:Key="RowMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
@@ -293,11 +293,11 @@
                             </Style>
                         </DataGrid.RowStyle>
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Datum" Binding="{Binding Period.StartDate.Date}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Datum" Binding="{Binding Period.StartDate.Date, StringFormat=d}" Width="*"></DataGridTextColumn>
                             <DataGridTextColumn Header="Vreme" Binding="{Binding Period.StartDate.TimeOfDay}" Width="*"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Pacijent" Binding="{Binding User.FullName}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Pacijent" Binding="{Binding Patient.FullName}" Width="*"></DataGridTextColumn>
                             <DataGridTextColumn Header="Lekar" Binding="{Binding Doctor.FullName}" Width="*"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Sala" Binding="{Binding room}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Sala" Binding="{Binding Room.RoomCode}" Width="*"></DataGridTextColumn>
 
                         </DataGrid.Columns>
                     </DataGrid>

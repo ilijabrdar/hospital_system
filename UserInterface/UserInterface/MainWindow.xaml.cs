@@ -21,6 +21,8 @@ using Controller;
 using Microsoft.Win32;
 using Model.Users;
 using Model.PatientSecretary;
+using Model.Dto;
+using Model.Director;
 
 namespace UserInterface
 {
@@ -40,10 +42,17 @@ namespace UserInterface
         public static int Year { get; set; }
         public static String NewYear { get; set; }
         public BitmapSource Image { get; set; }
-        public static List<Examination> examinations { get; set; }
+
+
+        public static List<ExaminationDTO> examinationDisplay { get; set; }
         public static List<Examination> Examinations { get; set; }
+        public static List<ExaminationDTO> ExaminationDisplay { get; set; }
+        public ExaminationDTO SelectedExamination { get; set; }
+
         public static List<Examination> freeSlots { get; set; }
         public static List<Examination> FreeSlots { get; set; }
+
+
 
         public List<State> States { get; set; }
         public List<Town> Towns { get; set; }
@@ -60,7 +69,6 @@ namespace UserInterface
 
         public String FullDate { get; set; }
 
-        public Examination SelectedExamination {get;set;}
         private static DispatcherTimer dispatcherTimer;
 
         public List<Shortcut> Shortcuts { get; set; }
@@ -109,10 +117,20 @@ namespace UserInterface
         private void FillExaminationTable()
         {
             App app = Application.Current as App;
-            examinations = new List<Examination>();
+            ExaminationDisplay = new List<ExaminationDTO>();
             Examinations = app.ExaminationController.GetAll().ToList();
-
-            examinations = new List<Examination>(Examinations);
+            foreach (Examination examination in Examinations) 
+            {
+                Room room = null;
+                foreach (BusinessDay businessDay in examination.Doctor.BusinessDay) 
+                    if(businessDay.Shift.StartDate.Date == examination.Period.StartDate.Date)
+                    {
+                        room = businessDay.room;
+                        break;
+                    }
+                ExaminationDisplay.Add(new ExaminationDTO(examination.Id, examination.Doctor, room, examination.Period, (Patient) examination.User));
+            }
+            examinationDisplay = new List<ExaminationDTO>(ExaminationDisplay);
         }
         private void PopulateCombos()
         {
@@ -238,18 +256,18 @@ namespace UserInterface
 
         private void FreeSelectedAppointment(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Da li ste sigurni da želite da otkažete pregled?", "Otkazivanje pregleda", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            //MessageBoxResult result = MessageBox.Show("Da li ste sigurni da želite da otkažete pregled?", "Otkazivanje pregleda", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-            if (result == MessageBoxResult.No) return; 
+            //if (result == MessageBoxResult.No) return; 
 
-            Examination examination = ScheduledExaminations.SelectedItem as Examination;
-            Examinations.Remove(examination);
-            examinations.Remove(examination);
-            se.ItemsSource = null;
-            se.ItemsSource = examinations;
-            msg.Content = "Pregled upsešno otkazan.";
-            msg.Visibility = Visibility.Visible;
-            dispatcherTimer.Start();
+            //Examination examination = ScheduledExaminations.SelectedItem as Examination;
+            //Examinations.Remove(examination);
+            //examinations.Remove(examination);
+            //se.ItemsSource = null;
+            //se.ItemsSource = examinations;
+            //msg.Content = "Pregled upsešno otkazan.";
+            //msg.Visibility = Visibility.Visible;
+            //dispatcherTimer.Start();
         }
 
         private void DisplayToolTip(object sender, RoutedEventArgs e)
@@ -565,10 +583,10 @@ namespace UserInterface
 
         private void SwapLists(object sender, RoutedEventArgs e)
         {
-            examinations = new List<Examination>(Examinations);
-            se.ItemsSource = null;
-            se.ItemsSource = examinations;
-            tb.Text = "";
+            //examinations = new List<Examination>(Examinations);
+            //se.ItemsSource = null;
+            //se.ItemsSource = examinations;
+            //tb.Text = "";
         }
 
         private void SwapFreeLists(object sender, RoutedEventArgs e)
@@ -580,15 +598,15 @@ namespace UserInterface
 
         public static void FilterExaminations(ExaminationDTO examinationFilter)
         {
-            //examinations = new List<Examination>(Examinations);
+            //examinationDisplay = new List<ExaminationDTO>(ExaminationDisplay);
             //for (int i = 0; i < Examinations.Count; i++)
             //{
-            //    if (!String.IsNullOrEmpty(examinationFilter.Doctor) && Examinations[i].doctor != examinationFilter.Doctor) 
+            //    if (examinationFilter.Doctor != null && ExaminationDisplay[i].doctor != examinationFilter.Doctor)
             //    {
             //        examinations.Remove(Examinations[i]);
             //        continue;
             //    }
-            //    if(!String.IsNullOrEmpty(examinationFilter.Patient) && Examinations[i].patient != examinationFilter.Patient)
+            //    if (!String.IsNullOrEmpty(examinationFilter.Patient) && Examinations[i].patient != examinationFilter.Patient)
             //    {
             //        examinations.Remove(Examinations[i]);
             //        continue;
@@ -598,7 +616,7 @@ namespace UserInterface
             //        examinations.Remove(Examinations[i]);
             //        continue;
             //    }
-            //    if(Examinations[i].dateTime < examinationFilter.FromDate || Examinations[i].dateTime > examinationFilter.ToDate)
+            //    if (Examinations[i].dateTime < examinationFilter.FromDate || Examinations[i].dateTime > examinationFilter.ToDate)
             //    {
             //        examinations.Remove(Examinations[i]);
             //        continue;
@@ -612,17 +630,17 @@ namespace UserInterface
 
         public static void EditExamination(Examination oldExamination, Examination newExamination)
         {
-            int index = Examinations.IndexOf(oldExamination);
-            Examinations.RemoveAt(index);
-            Examinations.Insert(index, newExamination);
-            index = examinations.IndexOf(oldExamination);
-            examinations.RemoveAt(index);
-            examinations.Insert(index, newExamination);
-            se.ItemsSource = null;
-            se.ItemsSource = examinations;
-            msg.Content = "Pregled upsešno izmenjen.";
-            msg.Visibility = Visibility.Visible;
-            dispatcherTimer.Start();
+            //int index = Examinations.IndexOf(oldExamination);
+            //Examinations.RemoveAt(index);
+            //Examinations.Insert(index, newExamination);
+            //index = examinations.IndexOf(oldExamination);
+            //examinations.RemoveAt(index);
+            //examinations.Insert(index, newExamination);
+            //se.ItemsSource = null;
+            //se.ItemsSource = examinations;
+            //msg.Content = "Pregled upsešno izmenjen.";
+            //msg.Visibility = Visibility.Visible;
+            //dispatcherTimer.Start();
         }
 
         private void CommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
