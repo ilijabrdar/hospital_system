@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace Repository
 {
    public interface IDoctorRepository : IRepository<Doctor,long>, IEagerRepository<Doctor, long>, IUserGetterRepository
-    {
+   {
       List<Doctor> GetDoctorsBySpeciality(Speciality specialty);
    }
 }

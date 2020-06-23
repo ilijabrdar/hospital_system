@@ -1,4 +1,3 @@
-
 using bolnica.Controller;
 using bolnica.Service;
 using Model.Doctor;
@@ -9,23 +8,21 @@ namespace Controller
 {
     public class SpecialityController : ISpecialityController
     {
-        private readonly ISpecialityService _service;
+        private readonly ISpecialityService _specialityService;
 
         public SpecialityController(ISpecialityService service)
         {
-            _service = service;
+            _specialityService = service;
         }
-
-
 
         public Speciality Get(long id)
         {
-            return _service.Get(id);
+            return _specialityService.Get(id);
         }
 
         public IEnumerable<Speciality> GetAll()
         {
-            return _service.GetAll();
+            return _specialityService.GetAll();
         }
 
     }

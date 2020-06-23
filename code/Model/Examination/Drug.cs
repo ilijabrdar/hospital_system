@@ -15,6 +15,7 @@ namespace Model.PatientSecretary
       public List<Ingredient> Ingredients { get; set; }
       public List<Drug> Alternative { get; set; }
 
+      public Drug() { }
       public Drug (long id, String name, int amount, Boolean approved, List<Ingredient> ingredients, List<Drug> alternative)
         {
             this.Id = id;

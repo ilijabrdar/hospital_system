@@ -17,8 +17,9 @@ namespace Repository
         private readonly IPrescriptionRepository prescriptionRepository;
         private readonly ITherapyRepository therapyRepository;
         private readonly IReferralRepository referralRepository;
+
         public ExaminationPreviousRepository(ICSVStream<Examination> stream, ISequencer<long> sequencer, IDoctorRepository doctorRepository, IPatientRepository patientRepository, IDiagnosisRepository diagnosisRepository, IPrescriptionRepository prescriptionRepository, ITherapyRepository therapyRepository, IReferralRepository referralRepository)
-  : base(stream, sequencer)
+         : base(stream, sequencer)
         {
             this.doctorRepository = doctorRepository;
             this.patientRepository = patientRepository;
@@ -27,6 +28,7 @@ namespace Repository
             this.therapyRepository = therapyRepository;
             this.referralRepository = referralRepository;
         }
+
         public IEnumerable<Examination> GetAllEager()
         {
             List<Examination> examinations = new List<Examination>();
@@ -50,7 +52,6 @@ namespace Repository
             {
                 Prescription temp = prescriptionRepository.GetEager(pres.Id);
                 pres.Period = temp.Period;
-                pres.Note = temp.Note;
                 List<Drug> drugs = new List<Drug>();
                 foreach (Drug drug in temp.Drug)
                 {
@@ -58,21 +59,39 @@ namespace Repository
                 }
                 pres.Drug = drugs;
             }
-
             return exam;
         }
 
         public List<Examination> GetExaminationsByUser(User user)
         {
-            List<Examination> examinations = GetAllEager().ToList();
-            foreach (Examination examination in examinations)
+            try
             {
-                if (examination.User == user)
+                Doctor doctor = (Doctor)user;
+                List<Examination> examinations = GetAllEager().ToList();
+                List<Examination> findExamination = new List<Examination>();
+                foreach (Examination examination in examinations)
                 {
-                    examinations.Add(examination);
+                    if (examination.Doctor.Id == doctor.Id)
+                    {
+                        findExamination.Add(examination);
+                    }
                 }
+                return findExamination;
             }
-            return examinations;
+            catch (Exception e)
+            {
+                Patient patient = (Patient)user;
+                List<Examination> examinations = GetAllEager().ToList();
+                List<Examination> findExamination = new List<Examination>();
+                foreach (Examination examination in examinations)
+                {
+                    if (examination.Doctor.Id == patient.Id)
+                    {
+                        findExamination.Add(examination);
+                    }
+                }
+                return findExamination;
+            }
         }
 
     }

@@ -28,6 +28,8 @@ namespace bolnica.Service
 
         void DeleteBusinessDayByRoom(Room room);
 
+        void FreePeriod(BusinessDay businessDay, DateTime period);
+
 
     }
 }

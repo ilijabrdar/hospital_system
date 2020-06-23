@@ -1,5 +1,4 @@
-﻿
-using Model.PatientSecretary;
+﻿using Model.PatientSecretary;
 using Repository;
 using System;
 using System.Collections.Generic;

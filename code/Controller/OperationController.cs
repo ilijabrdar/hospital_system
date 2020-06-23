@@ -1,6 +1,7 @@
 using bolnica.Controller;
 using bolnica.Service;
 using Model.Doctor;
+using Model.Users;
 using System;
 using System.Collections.Generic;
 
@@ -8,36 +9,42 @@ namespace Controller
 {
     public class OperationController : IOperationController
     {
-        private readonly IOperationService _service;
+        private readonly IOperationService _operationService;
 
         public OperationController(IOperationService service)
         {
-            _service = service;
+            _operationService = service;
         }
 
         public void Delete(Operation entity)
         {
-            _service.Delete(entity);
+            _operationService.Delete(entity);
         }
 
         public void Edit(Operation entity)
         {
-            _service.Edit(entity);
+            _operationService.Edit(entity);
         }
 
         public Operation Get(long id)
         {
-            return _service.Get(id);
+            return _operationService.Get(id);
         }
 
         public IEnumerable<Operation> GetAll()
         {
-            return _service.GetAll();
+            return _operationService.GetAll();
+        }
+
+        public List<Operation> GetOperationsByDoctor(Doctor doctor)
+        {
+            return _operationService.GetOperationsByDoctor(doctor);
         }
 
         public Operation Save(Operation entity)
         {
-            return _service.Save(entity);
+            return _operationService.Save(entity);
         }
+
     }
 }

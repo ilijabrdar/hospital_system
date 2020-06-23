@@ -10,8 +10,6 @@ namespace Repository
 {
    public class DoctorGradeRepository : CSVRepository<DoctorGrade,long> ,IDoctorGradeRepository
    {
-      private readonly String FilePath;
-
         public DoctorGradeRepository(ICSVStream<DoctorGrade> stream, ISequencer<long> sequencer) : base(stream, sequencer)
         {
 

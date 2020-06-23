@@ -8,11 +8,11 @@ namespace Service
 {
     public class TherapyService : ITherapyService
     {
-        private readonly ITherapyRepository _repository;
+        private readonly ITherapyRepository _therapyRepository;
 
         public TherapyService(ITherapyRepository repository)
         {
-            _repository = repository;
+            _therapyRepository = repository;
         }
 
         public Therapy AssignCurrentTherapy(PatientFile patientFile)
@@ -22,27 +22,27 @@ namespace Service
 
         public void Delete(Therapy entity)
         {
-            _repository.Delete(entity);
+            _therapyRepository.Delete(entity);
         }
 
         public void Edit(Therapy entity)
         {
-            _repository.Edit(entity);
+            _therapyRepository.Edit(entity);
         }
 
         public Therapy Get(long id)
         {
-            return _repository.Get(id);
+            return _therapyRepository.Get(id);
         }
 
         public IEnumerable<Therapy> GetAll()
         {
-            return _repository.GetAll();
+            return _therapyRepository.GetAll();
         }
 
         public Therapy Save(Therapy entity)
         {
-            return _repository.Save(entity);
+            return _therapyRepository.Save(entity);
         }
     }
 }

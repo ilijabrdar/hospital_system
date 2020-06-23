@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  ReferralService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.ReferralService
- ***********************************************************************/
-
 using bolnica.Service;
 using Model.Doctor;
 using Model.PatientSecretary;
@@ -15,36 +9,36 @@ namespace Service
 {
     public class ReferralService : IReferralService
     {
-        private IReferralRepository _repository;
+        private IReferralRepository _referralRepository;
 
         public ReferralService(IReferralRepository repository)
         {
-            _repository = repository;
+            _referralRepository = repository;
         }
 
         public void Delete(Referral entity)
         {
-            _repository.Delete(entity);
+            _referralRepository.Delete(entity);
         }
 
         public void Edit(Referral entity)
         {
-            _repository.Edit(entity);
+            _referralRepository.Edit(entity);
         }
 
         public Referral Get(long id)
         {
-            return _repository.Get(id);
+            return _referralRepository.Get(id);
         }
 
         public IEnumerable<Referral> GetAll()
         {
-            return _repository.GetAll();
+            return _referralRepository.GetAll();
         }
 
         public Referral Save(Referral entity)
         {
-            return _repository.Save(entity);
+            return _referralRepository.Save(entity);
         }
     }
 }
