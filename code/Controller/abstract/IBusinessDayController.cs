@@ -18,7 +18,7 @@ namespace bolnica.Controller
 
          Boolean SetRoomForBusinessDay(BusinessDay businessDay, Room room);
 
-
+        BusinessDay GetExactDay(Doctor doctor, DateTime date);
         List<ExaminationDTO> Search(BusinessDayDTO businessDayDTO);
 
         Boolean MarkAsOccupied(Period period, BusinessDay businessDay);
@@ -26,5 +26,7 @@ namespace bolnica.Controller
         BusinessDay getDoctorWorkingHoursForSpecificDate(Doctor doctor, DateTime date);
 
          List<BusinessDay> GetBusinessDaysByDoctor(Doctor doctor);
+
+        void FreePeriod(BusinessDay businessDay, DateTime period);
     }
 }

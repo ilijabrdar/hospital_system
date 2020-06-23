@@ -107,5 +107,18 @@ namespace Service
             }
         }
 
+        public void FreePeriod(BusinessDay businessDay, DateTime period)
+        {
+            for(int i = 0; i < businessDay.ScheduledPeriods.Count; i++)
+            {
+                if(businessDay.ScheduledPeriods[i].StartDate == period)
+                {
+                    businessDay.ScheduledPeriods.RemoveAt(i);
+                    break;
+                }
+            }
+
+            Edit(businessDay);
+        }
     }
 }
