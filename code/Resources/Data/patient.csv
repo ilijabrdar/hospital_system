@@ -1,5 +1,5 @@
-0,Jovan, Jelicki,1234567891012,hgijrdf@gmail.com, 12345678952, 12.02.1997. 00:00:00,bla,jovan,jovan,,0,false
-1,Tamara, Kovacevic,1234567891012,hgijrdf@gmail.com, 12345678952, 16.12.1998. 00:00:00,bla,tamara,tamara,,1,false
-2,Ilija, Brdar,1232231234231,jfieje@gmail.com, 1234532121, 23.12.1998. 00:00:00,bgf,icko,icko,,0,false
-3,David, Drvar,3574839283745,jifjie@gmail.com, 4283748596, 21.11.1997. 00:00:00,bla,drvar,drvar,,0,false
-4,Petar,Petrovic,2121233212333,pera@gmail.com,2131233321,30/12/1989 00:00:00,,pera,pera,,2,False
+0,Jovan, Jelicki,1234567891012,hgijrdf@gmail.com, 12345678952,12/02/1997 00:00:00,8,12,102,jovan,jovan,,0,False
+1,Tamara, Kovacevic,1234567891012,hgijrdf@gmail.com, 12345678952,16/12/1998 00:00:00,1,11,101,tamara,tamara,,1,False
+2,Ilija, Brdar,1232231234231,jfieje@gmail.com, 1234532121,23/12/1998 00:00:00,1,11,101,icko,icko,,0,False
+3,David, Drvar,3574839283745,jifjie@gmail.com, 4283748596,21/11/1997 00:00:00,1,11,101,drvar,drvar,,0,False
+4,Petar,Petrovic,2121233212333,pera@gmail.com,2131233321,30/12/1989 00:00:00,1,11,101,pera,pera,,2,True
