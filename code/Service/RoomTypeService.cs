@@ -22,9 +22,13 @@ namespace Service
             this.roomService = roomService;
         }
 
-        public bool CheckRoomTypeUnique(RoomType roomType)
+        public bool CheckRoomTypeUnique(String type)
         {
-            throw new NotImplementedException();
+            foreach (RoomType roomType in GetAll())
+                if (roomType.Name.Equals(type))
+                    return false;
+
+            return true;
         }
 
         public void Delete(RoomType entity)

@@ -21,11 +21,18 @@ namespace bolnica.Repository.CSV.Converter
 
         public Article ConvertCSVFormatToEntity(string entityCSVFormat)
         {
-            string[] tokens = entityCSVFormat.Split(_delimiter.ToCharArray());
-            return new Article(
-                long.Parse(tokens[0]),
-               (DateTime)DateTime.Parse(tokens[1]), new Doctor(long.Parse(tokens[2])), tokens[3], tokens[4]);
-            
+            try
+            {
+                string[] tokens = entityCSVFormat.Split(_delimiter.ToCharArray());
+                return new Article(
+                    long.Parse(tokens[0]),
+                   (DateTime)DateTime.Parse(tokens[1]), new Doctor(long.Parse(tokens[2])), tokens[3], tokens[4]);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+                return null;
+            }
         }
 
         public string ConvertEntityToCSVFormat(Article entity)
