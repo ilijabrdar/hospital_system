@@ -208,8 +208,8 @@ namespace upravnikKT2
                 {
                     //JMBG for password and username
 
-                    //String name, String surname, String jmbg, String email, String phone, DateTime birth, Address adress, String username, String password, Bitmap img, Speciality speciality,  List<BusinessDay> businessDay, DoctorGrade doctGrade
-                    var doctor = new Doctor(Ime, Prezime, JMBG, EMAIL, Phone, (DateTime)datum, address, JMBG, JMBG, null, (Speciality)comboSpeciality.SelectedItem, null, null);
+                    // String name, String surname, String jmbg, String email, String phone, DateTime birth, Address adress, String username, String password, Uri img, Speciality speciality, List<Article> articles, List<BusinessDay> businessDay, DoctorGrade doctGrade
+                    var doctor = new Doctor(Ime, Prezime, JMBG, EMAIL, Phone, (DateTime)datum, address, JMBG, JMBG, null, (Speciality)comboSpeciality.SelectedItem, null, null,null);
                     _doctorController.Save(doctor);
                 }
                 else

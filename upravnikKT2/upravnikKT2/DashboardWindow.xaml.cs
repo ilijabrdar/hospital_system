@@ -40,6 +40,7 @@ namespace upravnikKT2
         private readonly IBusinessDayController _businessDayController;
         private readonly IDirectorController _directorController;
         private readonly IArticleController _articleController;
+        private readonly NotificationController _notificationController;
 
         public Director director;
 
@@ -180,6 +181,7 @@ namespace upravnikKT2
             _businessDayController = app.BusinessDayController;
             _directorController = app.DirectorController;
             _articleController = app.ArticleController;
+            _notificationController = app.NotificationController;
 
             director = _directorController.Get(1);
 
@@ -637,21 +639,7 @@ namespace upravnikKT2
             AddressCombo.SelectedValue = director.Address.GetId();
 
 
-            //<TextBlock>
-            //                   <Bold>CTRL+TAB</Bold> tab unapred <LineBreak />
-            //                   <Bold>CTRL+SHIFT+TAB</Bold> tab unazad <LineBreak />
-            //                   <Bold>CTRL+`</Bold> tab unapred za Opremu i Lekare <LineBreak/>
-            //                   <Bold>CTRL+SHIFT+`</Bold> tab unazad za Opremu i Lekare <LineBreak/>
-            //                   <Bold>CTRL+N</Bold> unos entiteta u sistem <LineBreak />
-            //                   <Bold>CTRL+E</Bold> izmena entiteta<LineBreak />
-            //                   <Bold>DELETE</Bold> brisanje entiteta<LineBreak />
-            //                   <Bold>CTRL+T</Bold> otvaranje prozora za pregled tipova prostorija <LineBreak/>
-            //                   <Bold>CTRL+I</Bold> generisanje izvestaja prostorija <LineBreak />
-            //                   <Bold>TAB</Bold> kretanje unapred kroz polja za unos<LineBreak />
-            //                   <Bold>SHIFT+TAB</Bold> kretanje unazad kroz polja za unos<LineBreak/>
-            //                   <Bold>ESCAPE</Bold> zatvaranje prozora <LineBreak />
-            //                   <Bold>ENTER</Bold> umesto dugmeta za potvrdu <LineBreak />
-            //                </TextBlock>
+            
 
             List<ShortcutData> shortcuts = new List<ShortcutData>();
             shortcuts.Add(new ShortcutData("CTRL + TAB", "tab unapred"));
@@ -674,6 +662,11 @@ namespace upravnikKT2
             shortcuts.Add(new ShortcutData("ALT + F4", "zatvaranje aplikacije"));
 
             DataGridShortcuts.ItemsSource = shortcuts;
+
+
+
+            //test notifications
+            //List<NotifyDoctorBusinessDay> ret = _notificationController.NotifyDoctorOfUpcomingBusinessDays(_doctorController.Get(0));
 
         }
 
