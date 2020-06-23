@@ -121,6 +121,8 @@ namespace PacijentBolnicaZdravo
                 App.j = 0;
                 Patient p = (Patient)temp;
                 Console.WriteLine("*********************************" + p.patientFile.GetId() + "\n");
+                Console.WriteLine("****************************" + p.Address.Street);
+
                 MainWindow mw = new MainWindow((Patient)temp);
                
                 

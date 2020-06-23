@@ -72,15 +72,27 @@
                 <StackPanel  Orientation="Vertical">
                     <TextBlock Name="Note" Margin="10,10,10,1" FontSize="15" Text="{x:Static p:Resources.NoteForExamination}"></TextBlock>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Name="ChooseDoctor" Text="{x:Static p:Resources.ChooseDoctor}" FontSize="19"  Margin="20" Width="150"/>
-                        <ComboBox HorizontalAlignment="Left" Margin="20"  Width="250"  Name="DoctorsForExaminations" ItemsSource ="{Binding Path=listOfDoctors}">
+                        <TextBlock Name="ChooseDoctor" Text="{x:Static p:Resources.ChooseDoctor}" FontSize="19"  Margin="10" Width="150"/>
+                        <ComboBox HorizontalAlignment="Left" Margin="10"  Width="250"  Name="DoctorsForExaminations" ItemsSource ="{Binding Path=listOfDoctors}">
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Priority"  FontSize="19" Margin="10" Width="150"></TextBlock>
+                        <ComboBox HorizontalAlignment="Left" Margin="10" Name="PriorityBox"  Width="250" SelectedIndex="0" SelectionChanged="PriorityBox_SelectionChanged">
+                            <ComboBoxItem>No priority</ComboBoxItem>
+                            <ComboBoxItem>Doctor priority</ComboBoxItem>
+                            <ComboBoxItem>Period priority</ComboBoxItem>
                         </ComboBox>
                     </StackPanel>
                     <StackPanel x:Name="DatePicker" Orientation="Horizontal">
-                        <TextBlock Name="ChooseDate" Text="{x:Static p:Resources.ChooseDate}" FontSize="19" Margin="20" Width="150"/>
-                        <DatePicker Name="Picker" Margin="20" Width="200" FirstDayOfWeek="Monday" SelectedDateChanged="CalendarDateChanged"/>
+                        <TextBlock Name="ChooseDate" Text="{x:Static p:Resources.ChooseDate}" FontSize="19" Margin="10" Width="150"/>
+                        <DatePicker Name="Picker" Margin="10" Width="200" FirstDayOfWeek="Monday" SelectedDateChanged="CalendarDateChanged"/>
+                        <DatePicker Name="Picker2" Margin="10" Width="200" FirstDayOfWeek="Monday" SelectedDateChanged="CalendarDateChanged"/>
                     </StackPanel>
-
+                  
+                    <StackPanel>
+                        <Button Width="100" Content="Search" Click="SearchPeriods"></Button>
+                    </StackPanel>
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"></RowDefinition>
@@ -112,7 +124,7 @@
                     </Grid>
                     <TextBlock Name="ErrorSchedule"  Opacity="0" FontSize="15" HorizontalAlignment="Right"  Margin="0,0,10,-5" Foreground="#FFE01F0C"></TextBlock>
 
-                    <Button Name="Schedule" Content="{x:Static p:Resources.Schedule}" HorizontalAlignment="Right" Margin="15"  Width="76" Click="Zakazi" >
+                    <Button Name="Schedule" Content="{x:Static p:Resources.Schedule}" HorizontalAlignment="Right" Margin="10"  Width="76" Click="Zakazi" >
                         <Button.ToolTip>
                             <ToolTip x:Name="ToolTipSchedule"  Content = "{x:Static p:Resources.ToolTipSchedule}" BorderThickness="2" BorderBrush="Gray"/>
                         </Button.ToolTip>
@@ -205,14 +217,14 @@
 
                             </StackPanel>
                             <StackPanel Orientation="Vertical">
-                                <TextBlock Name="Username2" Margin="13" FontSize="15" Width="220" FontWeight="Bold" Opacity="0.6"></TextBlock>
-                                <TextBlock TextAlignment="Left" FontWeight="Bold" Opacity="0.6"  Name="Name2" Margin="13" FontSize="15" Width="220"></TextBlock>
-                                <TextBlock TextAlignment="Left" FontWeight="Bold" Opacity="0.6" FontSize="15" Name="Surname2" Margin="13,20,13,13" Width="220"></TextBlock>
-                                <TextBlock TextAlignment="Left"  FontWeight="Bold" Opacity="0.6" FontSize="15" Name="ID2" Margin="13"  Width="220"></TextBlock>
-                                <TextBlock Name="DateBirthTextBlock"  Margin="13,22,13,13" Width="220" FontSize="15" Height="30"  FontWeight="Bold" Opacity="0.6"></TextBlock>
-                                <TextBlock TextAlignment="Left"  FontSize="15"  FontWeight="Bold" Opacity="0.6" Name="Email2" Margin="13,8,13,13"  Width="220"></TextBlock>
-                                <TextBlock TextAlignment="Left"  FontSize="15"  FontWeight="Bold" Opacity="0.6" Name="Adress2" Margin="13,15,13,13" Width="220"> </TextBlock>
-                                <TextBlock TextAlignment="Left"  FontSize="15" FontWeight="Bold" Opacity="0.6" Name="PhoneNumber2" Margin="13,20,13,13" Width="220"></TextBlock>
+                                <TextBlock Name="Username2" Margin="13" FontSize="15" FontWeight="Bold" Opacity="0.6"></TextBlock>
+                                <TextBlock TextAlignment="Left" FontWeight="Bold" Opacity="0.6"  Name="Name2" Margin="13" FontSize="15" ></TextBlock>
+                                <TextBlock TextAlignment="Left" FontWeight="Bold" Opacity="0.6" FontSize="15" Name="Surname2" Margin="13,20,13,13"></TextBlock>
+                                <TextBlock TextAlignment="Left"  FontWeight="Bold" Opacity="0.6" FontSize="15" Name="ID2" Margin="13"  ></TextBlock>
+                                <TextBlock Name="DateBirthTextBlock"  Margin="13,22,13,13"  FontSize="15" Height="30"  FontWeight="Bold" Opacity="0.6"></TextBlock>
+                                <TextBlock TextAlignment="Left"  FontSize="15"  FontWeight="Bold" Opacity="0.6" Name="Email2" Margin="13,8,13,13"  ></TextBlock>
+                                <TextBlock TextAlignment="Left"  FontSize="15"  FontWeight="Bold" Opacity="0.6" Name="Adress2" Margin="13,15,13,13" > </TextBlock>
+                                <TextBlock TextAlignment="Left"  FontSize="15" FontWeight="Bold" Opacity="0.6" Name="PhoneNumber2" Margin="13,20,13,13" ></TextBlock>
                             </StackPanel>
                             <StackPanel Orientation="Vertical">
                                 <StackPanel Orientation="Vertical">
@@ -289,15 +301,11 @@
                                         </Binding>
                                     </TextBox.Text>
                                 </TextBox>
-                                <TextBox TextAlignment="Left" BorderThickness="1.5" BorderBrush="LightBlue" FontSize="15" Name="Adress" Margin="10,12,10,10" Width="220">
-                                    <TextBox.Text>
-                                        <Binding Path="ADRESS" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <local:ValidationRules/>
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox.Text>
-                                </TextBox>
+                                <WrapPanel Grid.Row="5" Grid.Column="1">
+                                    <ComboBox  x:Name="Country" Width="120"   DisplayMemberPath="Name" SelectionChanged="UpdateTownAddress" IsTextSearchEnabled="True" IsEditable="True"/>
+                                    <ComboBox x:Name="Town" Width="120"  DisplayMemberPath="Name" SelectionChanged="UpdateAddress" IsTextSearchEnabled="True" IsEditable="True"/>
+                                    <ComboBox x:Name="Addressessss" Width="120"  DisplayMemberPath="FullAddress" IsTextSearchEnabled="True" IsEditable="True"/>
+                                </WrapPanel>
                                 <TextBox TextAlignment="Left" BorderThickness="1.5" BorderBrush="LightBlue" FontSize="15" Name="PhoneNumber" Margin="10,12,10,10" Width="220">
                                     <TextBox.Text>
                                         <Binding Path="Phone" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
@@ -431,7 +439,7 @@
                     <TextBlock x:Name="GradeADoctor" Text="{x:Static p:Resources.GradeADoctor}" FontSize="16" HorizontalAlignment="Center" Margin="5" FontWeight="Bold"></TextBlock>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Margin="10,5,5,5" Name="ChooseDoctorForGrade" FontSize="16" Text="{x:Static p:Resources.ChooseDoctor}"/>
-                            <ComboBox Margin="10,5,5,5" Name="DoctorsForFeedback" Width="250" ItemsSource ="{Binding Path=listOfDoctors}"></ComboBox>
+                            <ComboBox Margin="10,5,5,5" Name="DoctorsForFeedback" Width="250" ItemsSource ="{Binding Path=doctorsForGrade}"></ComboBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                

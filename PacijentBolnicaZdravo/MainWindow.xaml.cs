@@ -29,19 +29,48 @@ namespace PacijentBolnicaZdravo
         public List<ExaminationDTO> upcomingExaminations { get; set; }
         public List<Doctor> listOfDoctors { get; set; }
         public List<Article> ListOfArticles { get; set; }
+
+        public List<Doctor> doctorsForGrade { get; set; }
         public Patient _patient { get; set; }
+        public List<State> States { get; set; }
+        public List<Town> Towns { get; set; }
+        public List<Address> Addresses { get; set; }
         public static int Theme = 0;
 
         public MainWindow(Patient patient)
         {
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             _patient = patient;
-            Console.WriteLine(_patient.patientFile.Examination);
 
             scheduledExaminations = getScheduledExaminations();
             upcomingExaminations = new List<ExaminationDTO>();
 
             InitializeComponent();
+
+            Country.DisplayMemberPath = "Name";
+            Country.SelectedValuePath = "Id";
+            App app = Application.Current as App;
+            States = app.StateController.GetAll().ToList();
+            States.Sort((x, y) => x.Name.CompareTo(y.Name));
+            Country.ItemsSource = States;
+            Town.DisplayMemberPath = "Name";
+            Town.SelectedValuePath = "Id";
+            Addressessss.DisplayMemberPath = "FullAddress";
+            Addressessss.SelectedValuePath = "Id";
+            Country.SelectedValue = _patient.Address.Town.State.GetId();
+            Town.SelectedValue = _patient.Address.Town.GetId();
+            Addressessss.SelectedValue = _patient.Address.GetId();
+
+
+
+            PriorityBox.SelectedIndex = 0;
+            Picker2.Visibility = Visibility.Hidden;
+            if(_patient.Guest == true)
+            {
+                TabExamination.Visibility = Visibility.Hidden;
+                TabFile.Visibility = Visibility.Hidden;
+                FeedbackHeader.Visibility = Visibility.Hidden;
+            }
 
             fillData();
 
@@ -68,12 +97,43 @@ namespace PacijentBolnicaZdravo
 
         }
 
+
+        private void UpdateTownAddress(object sender, RoutedEventArgs e)
+        {
+            State state = Country.SelectedItem as State;
+            Towns = state.GetTown();
+            Towns.Sort((x, y) => x.Name.CompareTo(y.Name));
+            Town.ItemsSource = Towns;
+            Addressessss.ItemsSource = null;
+
+
+        }
+
+        private void UpdateAddress(object sender, RoutedEventArgs e)
+        {
+            Town town = Town.SelectedItem as Town;
+            if (town == null)
+                return;
+            Addresses = town.GetAddress();
+            Addresses.Sort((x, y) => x.FullAddress.CompareTo(y.FullAddress));
+            Addressessss.ItemsSource = Addresses;
+        }
+
         private void fillData()
         {
             var app = Application.Current as App;
-            //TODO : Napuniti listu svih doktora opste prakse
             listOfDoctors = app.DoctorController.GetDoctorsBySpeciality(new Speciality("Opsta praksa"));
             ListOfArticles = app.ArticleController.GetAll().ToList();
+            doctorsForGrade = new List<Doctor>();
+            List<Examination> examinations = _patient.patientFile.Examination;
+            if(examinations != null)
+            {
+                foreach(Examination exam in examinations)
+                {
+                    if(!doctorsForGrade.Contains(exam.Doctor))
+                          doctorsForGrade.Add(exam.Doctor);
+                }
+            }
             FillAccountData(_patient);
             setExaminations();
             setOperation();
@@ -314,7 +374,7 @@ namespace PacijentBolnicaZdravo
             Name2.Text = _patient.FirstName;
             Surname2.Text = _patient.LastName;
             ID2.Text = _patient.Jmbg;
-            Adress2.Text = "Adresa ne radi"; //TODO: _patient.Address.ToString();
+            Adress2.Text = _patient.Address.Street + " " + _patient.Address.Number + "," + " " + _patient.Address.Town.Name + " " + _patient.Address.Town.PostalNumber + "," + " " + _patient.Address.Town.State.Name;
             DateBirthTextBlock.Text = _patient.DateOfBirth.Date.ToString();
             Email2.Text = _patient.Email;
             PhoneNumber2.Text = _patient.Phone;
@@ -409,72 +469,6 @@ namespace PacijentBolnicaZdravo
 
      
 
-        private void Zakazi(object sender, RoutedEventArgs e)
-        {
-            var selectedItem = scheduleExaminationsGrid.SelectedItem;
-           
-            if(selectedItem == null)
-            {
-                return;
-            }
-            if(scheduledExaminations.Count >= 3)
-            {
-                ErrorSchedule.Foreground = Brushes.Red;
-       
-                ErrorSchedule.Text = "You have a maximum number of appointments scheduled!";
- 
-
-                Storyboard sb = Resources["sbHideAnimation"] as Storyboard;
-                sb.Begin(ErrorSchedule);
-                return;
-            }
-
-            ErrorSchedule.Foreground = Brushes.Green;
-            DeleteExamination delete;
-            ExaminationDTO deleteExam = (ExaminationDTO)selectedItem;
-
-            delete = new DeleteExamination("Schedule examination at the doctor  " +
-                                                                        deleteExam.Doctor.FirstName + " " + deleteExam.Doctor.LastName + "?", "Yes", "No", "Schedule examination", MainWindow.Theme);
-                ErrorSchedule.Text = "You have successfully scheduled an examination!";
-
-            DialogResult result = delete.ShowDialog();
-            if (result == System.Windows.Forms.DialogResult.OK)
-            {
-                Storyboard sb = Resources["sbHideAnimation"] as Storyboard;
-                sb.Begin(ErrorSchedule);
-                upcomingExaminations.Remove((ExaminationDTO)selectedItem);
-                scheduledExaminations.Add((ExaminationDTO)selectedItem);
-                scheduledExaminationsGrid.Items.Refresh();
-                scheduleExaminationsGrid.Items.Refresh();
-            }
-
-        }
-
-        private void Otkazi(object sender, RoutedEventArgs e)
-        {
-            var selectedItem = scheduledExaminationsGrid.SelectedItem;
-            if (selectedItem == null)
-            {
-                return;
-            }
-            ErrorCancel.Foreground = Brushes.Green;
-            DeleteExamination delete;
-            ExaminationDTO deleteExam = (ExaminationDTO)selectedItem;
-            delete = new DeleteExamination("Are you sure you want to cancel the examination at the doctor  " +
-                                                                        deleteExam.Doctor.FirstName + " " + deleteExam.Doctor.LastName + "?", "Yes", "No", "Delete examination", MainWindow.Theme);
-                ErrorCancel.Text = "You have successfully canceled the appointment!";
-
-            DialogResult result = delete.ShowDialog();
-            if (result == System.Windows.Forms.DialogResult.OK)
-            {
-                Storyboard sb = Resources["sbHideAnimation"] as Storyboard;
-                sb.Begin(ErrorCancel);
-                scheduledExaminations.Remove((ExaminationDTO)selectedItem);
-                scheduledExaminationsGrid.Items.Refresh();
-
-            }
-        }
-
         private void ChoosePhoto(object sender, RoutedEventArgs e)
         {
             OpenFileDialog op = new OpenFileDialog();
@@ -499,8 +493,16 @@ namespace PacijentBolnicaZdravo
         private void UpdateInfo(object sender, RoutedEventArgs e)
         {
             int prom = 0;
-            
-            
+            var state = Country.SelectedItem as State;
+            var town = Town.SelectedItem as Town;
+            var selectedAddress = Addressessss.SelectedItem as Address;
+
+            if (town == null || state == null)
+            {
+                return;
+            }
+
+
             if (!Name.Text.ToString().Equals(""))
             {
                 prom++;
@@ -516,11 +518,12 @@ namespace PacijentBolnicaZdravo
                 prom++;
                 _patient.Jmbg = ID.Text.ToString();
             }
-            if (!Adress.Text.ToString().Equals(""))
-            {
-                prom++;
-                _patient.Address = null; //TODO : ne zaboravi
-            }
+           
+            _patient.Address = selectedAddress;
+            _patient.Address.Town = town;
+            _patient.Address.Town.State = state;
+
+
             if (!PhoneNumber.Text.ToString().Equals(""))
             {
                 prom++;
@@ -693,6 +696,92 @@ namespace PacijentBolnicaZdravo
 
 
 
+        private void Zakazi(object sender, RoutedEventArgs e)
+        {
+            var selectedItem = scheduleExaminationsGrid.SelectedItem;
+
+            if (selectedItem == null)
+            {
+                return;
+            }
+            if (scheduledExaminations.Count >= 3)
+            {
+                ErrorSchedule.Foreground = Brushes.Red;
+
+                ErrorSchedule.Text = "You have a maximum number of appointments scheduled!";
+
+
+                Storyboard sb = Resources["sbHideAnimation"] as Storyboard;
+                sb.Begin(ErrorSchedule);
+                return;
+            }
+
+            ErrorSchedule.Foreground = Brushes.Green;
+            DeleteExamination delete;
+            ExaminationDTO deleteExam = (ExaminationDTO)selectedItem;
+
+            delete = new DeleteExamination("Schedule examination at the doctor  " +
+                                                                        deleteExam.Doctor.FirstName + " " + deleteExam.Doctor.LastName + "?", "Yes", "No", "Schedule examination", MainWindow.Theme);
+            ErrorSchedule.Text = "You have successfully scheduled an examination!";
+
+            DialogResult result = delete.ShowDialog();
+            if (result == System.Windows.Forms.DialogResult.OK)
+            {
+                Storyboard sb = Resources["sbHideAnimation"] as Storyboard;
+                sb.Begin(ErrorSchedule);
+                upcomingExaminations.Remove((ExaminationDTO)selectedItem);
+                scheduledExaminations.Add((ExaminationDTO)selectedItem);
+                scheduledExaminationsGrid.Items.Refresh();
+                scheduleExaminationsGrid.Items.Refresh();
+            }
+
+        }
+
+        private void Otkazi(object sender, RoutedEventArgs e)
+        {
+            var app = Application.Current as App;
+            var selectedItem = scheduledExaminationsGrid.SelectedItem;
+            if (selectedItem == null)
+            {
+                return;
+            }
+            ErrorCancel.Foreground = Brushes.Green;
+            DeleteExamination delete;
+            ExaminationDTO deleteExam = (ExaminationDTO)selectedItem;
+            delete = new DeleteExamination("Are you sure you want to cancel the examination at the doctor  " +
+                                                                        deleteExam.Doctor.FirstName + " " + deleteExam.Doctor.LastName + "?", "Yes", "No", "Delete examination", MainWindow.Theme);
+            ErrorCancel.Text = "You have successfully canceled the appointment!";
+
+            DialogResult result = delete.ShowDialog();
+            if (result == System.Windows.Forms.DialogResult.OK)
+            {
+                Examination toDelete = new Examination(deleteExam.Id);
+                app.ExaminationController.Delete(toDelete);
+                BusinessDay selectedDay = app.BusinessDayController.GetExactDay(deleteExam.Doctor, deleteExam.Period.StartDate);
+                app.BusinessDayController.FreePeriod(selectedDay, deleteExam.Period.StartDate);
+
+                scheduledExaminations = getScheduledExaminations();
+                scheduledExaminationsGrid.ItemsSource = scheduledExaminations;
+
+                Storyboard sb = Resources["sbHideAnimation"] as Storyboard;
+                sb.Begin(ErrorCancel);
+            }
+        }
+
+
+        private void SearchPeriods(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void PriorityBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (PriorityBox.SelectedIndex != 0)
+            {
+                Picker2.Visibility = Visibility.Visible;
+            }
+            
+        }
 
 
 
@@ -879,6 +968,7 @@ namespace PacijentBolnicaZdravo
                 }
             }
         }
+
 
     }
 }

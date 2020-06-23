@@ -32,7 +32,7 @@ namespace PacijentBolnicaZdravo
         private readonly String _address_File = "../../../code/Resources/Data/AddressFile.txt";
         private readonly String _state_File = "../../../code/Resources/Data/StateFile.txt";
         private readonly String _town_File = "../../../code/Resources/Data/TownFile.txt";
-        private readonly String _doctorGrade_File = "../../../code/Resources/Data/DoctorGradeFile.csv";
+        private readonly String _doctorGrade_File = "../../../code/Resources/Data/doctorGradeFile.csv";
         private readonly String _hospitalization_File = "../../../code/Resources/Data/hospitalizationFile.csv";
         private readonly String _examinationPrevius_File = "../../../code/Resources/Data/examinationPrevious.csv";
         private readonly String _examinationUpcoming_File = "../../../code/Resources/Data/examinationUpcoming.csv";
@@ -53,7 +53,9 @@ namespace PacijentBolnicaZdravo
         public IBusinessDayController BusinessDayController { get; set; }
         public IExaminationController ExaminationController { get; set; }
         public IPatientController PatientController { get; set; }
-
+        public IStateController StateController { get; set; }
+        public ITownController TownController { get; set; }
+        public IAddressController AddressController { get; set; }
 
         App()
         {
@@ -62,7 +64,7 @@ namespace PacijentBolnicaZdravo
             var stateRepo = new StateRepository(new CSVStream<State>(_state_File, new StateCSVConverter(",", "|")), new LongSequencer(), townRepo);
             var doctorGradeRepo = new DoctorGradeRepository(new CSVStream<DoctorGrade>(_doctorGrade_File, new DoctorGradeCSVConverter("|", ";", ":")), new LongSequencer());
             var patientFileRepo = new PatientFileRepository(new CSVStream<PatientFile>(_patientFile_File, new PatientFileCSVConverter(",", "|")), new LongSequencer());
-            var patientRepo = new PatientRepository(new CSVStream<Patient>(_patient_File, new PatientCSVConverter(",")), new LongSequencer(), patientFileRepo);
+            var patientRepo = new PatientRepository(new CSVStream<Patient>(_patient_File, new PatientCSVConverter(",")), new LongSequencer(), patientFileRepo,addressRepo,townRepo,stateRepo);
             var specialityRepo = new SpecialityRepository(new CSVStream<Speciality>(_speciality_File, new SpecialityCSVConverter(",")), new LongSequencer());
             var equipmentRepo = new EquipmentRepository(new CSVStream<Equipment>(_equipment_File, new EquipmentCSVConverter(",")), new LongSequencer());
             var roomTypeRepo = new RoomTypeRepository(new CSVStream<RoomType>(_roomType_File, new RoomTypeCSVConverter(",")), new LongSequencer());
@@ -87,7 +89,7 @@ namespace PacijentBolnicaZdravo
             patientFileRepo._operationRepository = operationRepository;
             var renovationRepo = new RenovationRepository(new CSVStream<Renovation>(_renovation_File, new RenovationCSVConverter("|")), new LongSequencer(), roomRepo);
 
-
+            
             var specialityService = new SpecialityService(specialityRepo);
             var hospitalizationService = new HospitalizationService(hospitalizationRepository);
             var operationService = new OperationService(operationRepository);
@@ -115,13 +117,16 @@ namespace PacijentBolnicaZdravo
             var stateService = new StateService(stateRepo);
             doctorService._doctorGradeService = doctorGradeService;
 
-
+            
             UserController = new UserController(userService);
             ArticleController = new ArticleController(articleService);
             DoctorController = new DoctorController(doctorService);
             BusinessDayController = new BusinessDayController(businessDayService);
             ExaminationController = new ExaminationController(examinationService);
             PatientController = new PatientController(patientService);
+            TownController = new TownController(townService);
+            AddressController = new AddressController(addressService);
+            StateController = new StateController(stateService);
            
         }
 

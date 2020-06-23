@@ -111,15 +111,12 @@
                                     </Binding>
                                 </TextBox.Text>
                             </TextBox>
-                            <TextBox Margin="0,12,10,10" BorderThickness="3" BorderBrush="LightBlue" TextAlignment="Left" FontSize="15" Name="Adress"  Width="220">
-                                <TextBox.Text>
-                                    <Binding Path="ADRESS" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
-                                        <Binding.ValidationRules>
-                                            <local:ValidationRules/>
-                                        </Binding.ValidationRules>
-                                    </Binding>
-                                </TextBox.Text>
-                            </TextBox>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <ComboBox x:Name="Country" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" DisplayMemberPath="Name" SelectionChanged="UpdateTownAddress"/>
+                                <ComboBox x:Name="Town" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="120" DisplayMemberPath="Name" SelectionChanged="UpdateAddress"/>
+                                <ComboBox x:Name="Addressessss" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" DisplayMemberPath="FullAddress"/>
+
+                            </StackPanel>
                             <TextBox Margin="0,12,10,10" BorderThickness="3" BorderBrush="LightBlue" TextAlignment="Left" FontSize="15" Name="PhoneNumber"  Width="220">
                                 <TextBox.Text>
                                     <Binding Path="Phone" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">

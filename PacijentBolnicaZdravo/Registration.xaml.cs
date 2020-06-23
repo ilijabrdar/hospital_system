@@ -29,11 +29,26 @@ namespace PacijentBolnicaZdravo
 
     public partial class Registration : MetroWindow, INotifyPropertyChanged
     {
+        public List<State> States { get; set; }
+        public List<Town> Towns { get; set; }
+        public List<Address> Addresses { get; set; }
+        public State SelectedState { get; set; }
+        public Town SelectedTown { get; set; }
+        public Address SelectedAddress { get; set; }
+
+
         public Registration()
         {
 
             InitializeComponent();
-            
+
+
+            App app = Application.Current as App;
+            States = app.StateController.GetAll().ToList();
+            States.Sort((x, y) => x.Name.CompareTo(y.Name));
+            Country.ItemsSource = States;
+
+
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
             if (MainWindow.Theme == 1)
@@ -53,6 +68,28 @@ namespace PacijentBolnicaZdravo
             this.DataContext = this;
 
         }
+
+        private void UpdateTownAddress(object sender, RoutedEventArgs e)
+        {
+            State state = Country.SelectedItem as State;
+            Towns = state.GetTown();
+            Towns.Sort((x, y) => x.Name.CompareTo(y.Name));
+            Town.ItemsSource = Towns;
+            Addressessss.ItemsSource = null;
+        }
+
+        private void UpdateAddress(object sender, RoutedEventArgs e)
+        {
+
+            Town town = Town.SelectedItem as Town;
+            if (town == null)
+                return;
+            Addresses = town.GetAddress();
+            Addresses.Sort((x, y) => x.FullAddress.CompareTo(y.FullAddress));
+            Addressessss.ItemsSource = Addresses;
+        }
+
+
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
@@ -130,11 +167,11 @@ namespace PacijentBolnicaZdravo
                 Email.GetBindingExpression(System.Windows.Controls.TextBox.TextProperty).UpdateSource();
                 return;
             }
-            if (Adress.Text.ToString().Equals(""))
+           /* if (Adress.Text.ToString().Equals(""))
             {
                 Adress.GetBindingExpression(System.Windows.Controls.TextBox.TextProperty).UpdateSource();
                 return;
-            }
+            }*/
             if (PhoneNumber.Text.ToString().Equals(""))
             {
                 PhoneNumber.GetBindingExpression(System.Windows.Controls.TextBox.TextProperty).UpdateSource();
@@ -153,7 +190,7 @@ namespace PacijentBolnicaZdravo
             String Id = ID.Text.ToString();
             DateTime date = DateTime.Parse(DateBirth.Text);
             String email = Email.Text.ToString();
-            String address = Adress.Text.ToString();
+           // String address = Adress.Text.ToString();
             String phone = PhoneNumber.Text.ToString();
             String passw = NewPassword.Text.ToString();
 
