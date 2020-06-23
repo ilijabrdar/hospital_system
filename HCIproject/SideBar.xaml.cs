@@ -212,7 +212,7 @@ namespace HCIproject
                 user.Address = selectedAddress;
                 user.Address.Town = town;
                 user.Address.Town.State = state;
-
+                user.DoctorGrade = user.DoctorGrade;
                 app.UserController.Edit((Doctor)user);
 
                 string messageBoxText1 = "Uspesno ste promenili podatke!";

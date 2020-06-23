@@ -45,7 +45,8 @@ namespace HCIproject
         public IEquipmentController EquipmentController  { get; private set; }
         public IBusinessDayController BusinessDayController { get; private set; }
         public IRenovationController RenovationController { get; private set; }
-
+        public IDoctorGradeController DoctorGradeController { get; private set; }
+ 
 
         private const String CSV_DELIMITER = ",";
         private const String CSV_DELIMITER2 = "|";
@@ -165,7 +166,7 @@ namespace HCIproject
             StateController = new StateController(stateService);
             BusinessDayController = new BusinessDayController(businessDayService);
             RenovationController = new RenovationController(renovationService);
-
+            DoctorGradeController = new DoctorGradeController(doctorGradeService);
 
             //PatientFileController.Save(new PatientFile(0));
             //StateController = new StateController(stateService);

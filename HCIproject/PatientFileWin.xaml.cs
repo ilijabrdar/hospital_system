@@ -83,6 +83,7 @@ namespace HCIproject
                 TextBlock Anamnesis = new TextBlock();
                 TextBlock Diagnosis = new TextBlock();
                 TextBlock therapy = new TextBlock();
+                TextBlock Simptomi = new TextBlock();
                 Button myButton = new Button();
 
                 myButton.Content = "Izvestaj";
@@ -104,9 +105,18 @@ namespace HCIproject
                 period.Margin = new Thickness(10, 10, 10, 10);
                 stackPanelExamination.Children.Add(period);
 
-                //
+                Simptomi.FontSize = 15;
+                Simptomi.Inlines.Add(new Run("Simptomi:  ") { FontWeight = FontWeights.SemiBold });
+                Simptomi.TextWrapping = TextWrapping.Wrap;
+                Simptomi.Margin = new Thickness(10, 10, 10, 10);
+                foreach (var s in examination.Diagnosis.Symptom)
+                {
+                    Simptomi.Inlines.Add(s.Name);
+                }
+                stackPanelExamination.Children.Add(Simptomi);
+
                 Anamnesis.FontSize = 15;
-                Anamnesis.Inlines.Add(new Run("Anamnesis:  ") { FontWeight = FontWeights.SemiBold });
+                Anamnesis.Inlines.Add(new Run("Anamneza:  ") { FontWeight = FontWeights.SemiBold });
                 Anamnesis.TextWrapping = TextWrapping.Wrap;
                 Anamnesis.Margin = new Thickness(10, 10, 10, 10);
                 Anamnesis.Inlines.Add(examination.Anemnesis.Text);
@@ -318,19 +328,12 @@ namespace HCIproject
 
         private void izvestajPdf(object sender, RoutedEventArgs e)
         {
-            try
-            { 
-                Process process = new System.Diagnostics.Process();
-                String file = "C:\\Users\\Tamara Kovacevic\\Desktop\\IZVESTAJ.pdf";
-                process.StartInfo.FileName = file;
-                process.Start();
-                process.WaitForExit();
+                //Process process = new System.Diagnostics.Process();
+                //String file = "C:\\Users\\Tamara Kovacevic\\Desktop\\IZVESTAJ.pdf";
+                //process.StartInfo.FileName = file;
+                //process.Start();
+                //process.WaitForExit();
             }
-            catch
-            {
-                System.Windows.MessageBox.Show("Could not open the file.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-        }
 
-    }
+        }
 }

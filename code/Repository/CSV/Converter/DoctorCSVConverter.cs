@@ -32,6 +32,7 @@ namespace bolnica.Repository.CSV.Converter
             }
             doct.BusinessDay = businessDays;
         
+            
             if (!tokens[14].Equals("empty"))
             {
                 doct.DoctorGrade = new DoctorGrade(long.Parse(tokens[14]));
