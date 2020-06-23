@@ -67,7 +67,7 @@ namespace HCIproject
         private const String ROOM_FILE = "../../../code/Resources/Data/rooms.csv";
         private const String EQUIPMENT_FILE = "../../../code/Resources/Data/equipment.csv";
         private const String RENOVATION_FILE = "../../../code/Resources/Data/renovations.csv";
-        private const String EXAM_UPCOMING_FILE = "../../../code/Resources/Data/examinationUpcoming.csv";
+        private const String EXAM_UPCOMING_FILE = "../../../code/Resources/Data/upcomingExamination.csv";
         private const String EXAM_PREVIOUS_FILE = "../../../code/Resources/Data/examinationPrevious.csv";
         private const String PATIENTFILE_FILE = "../../../code/Resources/Data/patientFile.csv";
         private const String PATIENT_FILE = "../../../code/Resources/Data/patient.csv";
