@@ -16,9 +16,9 @@ namespace Controller
             _service = service;
         }
 
-        public Room CheckRoomTypeUnique(RoomType roomType)
+        public bool CheckRoomTypeUnique(string type)
         {
-            throw new NotImplementedException();
+            return _service.CheckRoomTypeUnique(type);
         }
 
         public void Delete(RoomType entity)
@@ -45,7 +45,6 @@ namespace Controller
         {
             return _service.Save(entity);
         }
-
 
     }
 }

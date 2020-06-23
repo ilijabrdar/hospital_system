@@ -8,9 +8,9 @@ namespace bolnica.Repository.CSV.Converter
 {
     public class DoctorGradeCSVConverter : ICSVConverter<DoctorGrade>
     {
-        private readonly String _delimiter = ",";
-        private readonly String _delimiterDictionary = ";";
-        private readonly String _delimiterQuestionGrades = ":";
+        private readonly String _delimiter;
+        private readonly String _delimiterDictionary;
+        private readonly String _delimiterQuestionGrades;
 
         public DoctorGradeCSVConverter(string delimiter, string delimiterDictionary, string delimiterQuestionGrades)
         {
@@ -27,19 +27,14 @@ namespace bolnica.Repository.CSV.Converter
             if (tokens[2] != "empty")
             {
                 string[] dictionaryPars = tokens[2].Split(_delimiterDictionary.ToCharArray());
-              
-
                 string[] questionsGrades;
 
                 for (int i = 0; i < dictionaryPars.Length; i++)
                 {
                     questionsGrades = dictionaryPars[i].Split(_delimiterQuestionGrades.ToCharArray());
                     questionsGradesDictionary[questionsGrades[0]] = double.Parse(questionsGrades[1]);
-                }
-
-               
+                }             
             }
-
             doctorGrade.GradesForEachQuestions = questionsGradesDictionary;
             return doctorGrade;
         }
@@ -63,15 +58,14 @@ namespace bolnica.Repository.CSV.Converter
 
                     if (numOfDelimiter < entity.GradesForEachQuestions.Count - 1)
                         stringBuilder.Append(_delimiterDictionary);
-
                 }
             }else
             {
                 stringBuilder.Append("empty");
             }
-            
-            return stringBuilder.ToString();
 
+            return stringBuilder.ToString();
         }
+
     }
 }

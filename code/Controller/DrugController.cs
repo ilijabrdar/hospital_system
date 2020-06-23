@@ -67,9 +67,9 @@ namespace Controller
             return _service.Save(entity);
         }
 
-        public bool CheckDrugNameUnique(Drug drug)
+        public bool CheckDrugNameUnique(String name)
         {
-            throw new NotImplementedException();
+            return _service.CheckDrugNameUnique(name);
         }
     }
 }

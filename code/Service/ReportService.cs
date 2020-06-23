@@ -4,6 +4,7 @@
  * Purpose: Definition of the Class Service.ReportService
  ***********************************************************************/
 
+using bolnica.Service;
 using Model.Dto;
 using Model.PatientSecretary;
 using Model.Users;
@@ -11,8 +12,15 @@ using System;
 
 namespace Service
 {
-   public class ReportService
+   public class ReportService : IReportService
    {
+        IExaminationService _examinationService;
+
+        public ReportService(IExaminationService examinationService)
+        {
+            _examinationService = examinationService;
+        }
+
       public DoctorReportDTO GenerateAnamnesisPrescriptionReport(PatientFile patientFile)
       {
          // TODO: implement
@@ -27,8 +35,7 @@ namespace Service
       
       public SecretaryReportDTO GenerateDoctorOccupationReport(Doctor doctor, Period period)
       {
-         // TODO: implement
-         return null;
+            return null; 
       }
       
       public Therapy GenerateTherapyTimetableReport(PatientFile patientFile)

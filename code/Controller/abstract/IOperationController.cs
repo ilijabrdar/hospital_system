@@ -1,5 +1,6 @@
 ﻿using Controller;
 using Model.Doctor;
+using Model.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,6 @@ namespace bolnica.Controller
 {
    public interface IOperationController : IController<Operation,long>
     {
+        List<Operation> GetOperationsByDoctor(Doctor doctor);
     }
 }

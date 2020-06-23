@@ -12,9 +12,14 @@ namespace bolnica.Service
 
         Boolean AddEquipment(Equipment equipment, Room room);
 
-        Boolean CheckRoomNameUnique(Room room);
         List<Room> GetVacantRooms();
         IEnumerable<Room> GetRoomsCointainingEquipment(Equipment equipment);
+
+        void DeleteRoomsByRoomType(RoomType roomType);
+
+        void DeleteEquipmentFromRooms(Equipment equipment);
+
+        bool CheckRoomCodeUnique(String roomCode);
 
     }
 }

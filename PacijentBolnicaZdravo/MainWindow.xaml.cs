@@ -341,25 +341,24 @@ namespace PacijentBolnicaZdravo
 
         private List<ExaminationDTO> getScheduledExaminations()
         {
+            var app = Application.Current as App;
+            List<Examination> upcomingExaminations = app.ExaminationController.GetUpcomingExaminationsByUser(this._patient);
             List<ExaminationDTO> retVal = new List<ExaminationDTO>();
-            Doctor dr = new Doctor(1, "Pera", "Perić", "213123123123", "sadsds@sadsa.com", "2312312312", new DateTime(), null, "DDD", "ddd", null, null);
-            Period period = new Period(new DateTime(2020, 7, 7, 12, 20, 0), new DateTime(2020, 7, 7, 12, 40, 0));
-            Console.WriteLine(period.StartDate.Date);
-            Room room = new Room("213", null, null);
-            ExaminationDTO examination = new ExaminationDTO();
-            examination.Doctor = dr;
-            examination.Period = period;
-            examination.Room = room;
-            examination.Patient = null;
-            retVal.Add(examination);
-            ExaminationDTO examination1 = new ExaminationDTO();
-            Doctor dr1 = new Doctor(1, "Jovan", "Jovanović", "213123123123", "sadsds@sadsa.com", "2312312312", new DateTime(), null, "DDD", "ddd", null, null);
-            Period period1 = new Period(new DateTime(2020, 10, 7, 9, 20, 0), new DateTime(2020, 10, 7, 12, 40, 0));
-            Room room1 = new Room("101", null, null);
-            examination1.Room = room1;
-            examination1.Period = period1;
-            examination1.Doctor = dr1;
-            retVal.Add(examination1);
+            if(upcomingExaminations == null)
+            {
+                return retVal;
+            }
+            foreach(Examination exam in upcomingExaminations)
+            {
+                ExaminationDTO examinationDTO = new ExaminationDTO();
+                examinationDTO.Id = exam.Id;
+                examinationDTO.Doctor = exam.Doctor;
+                examinationDTO.Period = exam.Period;
+                BusinessDay day = app.BusinessDayController.GetExactDay(exam.Doctor, exam.Period.StartDate);
+                examinationDTO.Room = day.room;
+                retVal.Add(examinationDTO);
+            }
+
             return retVal;
         }
 
@@ -418,7 +417,7 @@ namespace PacijentBolnicaZdravo
             {
                 return;
             }
-            if(scheduledExaminations.Count == 3)
+            if(scheduledExaminations.Count >= 3)
             {
                 ErrorSchedule.Foreground = Brushes.Red;
        
@@ -652,46 +651,7 @@ namespace PacijentBolnicaZdravo
         private void CalendarDateChanged(object sender, RoutedEventArgs e)
         {
             upcomingExaminations.Clear();
-            Doctor dr = new Doctor(1, "Pera", "Perić", "213123123123", "sadsds@sadsa.com", "2312312312", new DateTime(), null, "DDD", "ddd", null, null);
-            Doctor dr1 = new Doctor(1, "Jovan", "Jovanović", "213123123123", "sadsds@sadsa.com", "2312312312", new DateTime(), null, "DDD", "ddd", null, null);
-            Room room1 = new Room("101", null,null);
-            Room room3 = new Room("113", null,null);
-            Room room4 = new Room("103", null,null);
-            Room room6 = new Room("100", null,null);
-            Room room7 = new Room("201", null,null);
-            Period period1 = new Period(new DateTime(2020, 6, 20, 9, 20, 0));
-            Period period2 = new Period(new DateTime(2020, 6, 20, 9, 40, 0));
-            Period period3 = new Period(new DateTime(2020, 6, 20, 10, 20, 0));
-            Period period4 = new Period(new DateTime(2020, 6, 20, 10, 0, 0));
-            Period period5 = new Period(new DateTime(2020, 6, 19, 14, 20, 0));
-            Period period6 = new Period(new DateTime(2020, 7, 19, 15, 20, 0));
-            Period period7 = new Period(new DateTime(2020, 7, 19, 16, 40, 0));
-            Period period8 = new Period(new DateTime(2020, 7, 19, 17, 20, 0));
-            Period period9 = new Period(new DateTime(2020, 7, 19, 18, 0, 0));
-            ExaminationDTO exam1 = new ExaminationDTO(dr, room1, period1);
-            ExaminationDTO exam2 = new ExaminationDTO(dr, room1, period2);
-            ExaminationDTO exam3 = new ExaminationDTO(dr, room3, period3);
-            ExaminationDTO exam4 = new ExaminationDTO(dr, room1, period4);
-            ExaminationDTO exam5 = new ExaminationDTO(dr1, room4, period5);
-            ExaminationDTO exam6 = new ExaminationDTO(dr1, room4, period6);
-            ExaminationDTO exam7 = new ExaminationDTO(dr1, room6, period7);
-            ExaminationDTO exam8 = new ExaminationDTO(dr1, room7, period8);
-
-            Doctor doctorica = (Doctor) DoctorsForExaminations.SelectedItem;
-            if (doctorica != null && doctorica.FirstName.Equals("Pera"))
-            {
-                upcomingExaminations.Add(exam1);
-                upcomingExaminations.Add(exam2);
-                upcomingExaminations.Add(exam3);
-                upcomingExaminations.Add(exam4);
-            }
-            else if(doctorica != null)
-            {
-                upcomingExaminations.Add(exam5);
-                upcomingExaminations.Add(exam6);
-                upcomingExaminations.Add(exam7);
-                upcomingExaminations.Add(exam8);
-            }
+            
             scheduleExaminationsGrid.Items.Refresh();
 
 

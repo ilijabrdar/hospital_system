@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  DoctorService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.DoctorService
- ***********************************************************************/
-
 using bolnica.Controller;
 using bolnica.Service;
 using Model.Doctor;
@@ -15,11 +9,15 @@ namespace Controller
 {
     public class DoctorController : IDoctorController
     {
-
         private readonly IDoctorService _doctorservice;
         public DoctorController(IDoctorService service)
         {
             _doctorservice = service;
+        }
+
+        public bool CheckJMBGUnique(string JMBG)
+        {
+            return _doctorservice.CheckJMBGUnique(JMBG);
         }
 
         public void Delete(Doctor entity)
@@ -46,7 +44,6 @@ namespace Controller
         {
             return _doctorservice.GetDoctorsBySpeciality(specialty);
         }
-
 
         public DoctorGrade GiveGrade(DoctorGrade doctorGrade)
         {

@@ -9,14 +9,17 @@ namespace Service
 {
    public class DoctorService : IDoctorService
    {
-
         public IDoctorGradeService _doctorGradeService { get; set; }
-      private readonly IDoctorRepository _doctorRepository;
+        public IBusinessDayService _businessDayService;
+        public IArticleService _articleService;
+        private readonly IDoctorRepository _doctorRepository;
 
-        public DoctorService(IDoctorRepository doctorRepository, IDoctorGradeService doctorGradeService)
+        public DoctorService(IDoctorRepository doctorRepository, IDoctorGradeService doctorGradeService, IBusinessDayService businessDayService, IArticleService articleService)
         {
             _doctorRepository = doctorRepository;
             _doctorGradeService = doctorGradeService;
+            _businessDayService = businessDayService;
+            _articleService = articleService;
         }
 
         public DoctorService(IDoctorRepository doctorRepository)
@@ -26,7 +29,15 @@ namespace Service
 
         public void Delete(Doctor entity)
         {
+            DeleteDoctorsBusinessDays(entity);
+            _articleService.DeleteArticlesByDoctor(entity);
             _doctorRepository.Delete(entity);
+        }
+
+        private void DeleteDoctorsBusinessDays(Doctor entity)
+        {
+            foreach (BusinessDay businessDay in entity.BusinessDay)
+                _businessDayService.Delete(businessDay);
         }
 
         public void Edit(Doctor entity)
@@ -54,7 +65,6 @@ namespace Service
             return _doctorRepository.GetUserByUsername(username);
         }
 
-
         public Doctor Save(Doctor entity)
         {
             if (_doctorRepository.GetUserByUsername(entity.Username) != null)
@@ -70,5 +80,31 @@ namespace Service
             entity.DoctorGrade = _doctorGradeService.Save(new DoctorGrade(0, questionsGradesDictionary));
             return _doctorRepository.Save(entity);
         }
+
+        public void DeleteBusinessDayFromDoctor(BusinessDay businessDay)
+        {
+            Doctor doctor = Get(businessDay.doctor.Id);
+            foreach (BusinessDay business in doctor.BusinessDay)
+            {
+                if (business.Id == businessDay.Id)
+                {
+                    doctor.BusinessDay.Remove(business);
+                    Edit(doctor);
+                    break;
+                }
+            }
+        }
+
+        public bool CheckJMBGUnique(string JMBG)
+        {
+            foreach (Doctor doctor in GetAll())
+            {
+                if (doctor.Jmbg.Equals(JMBG))
+                    return false;
+                    
+            }
+            return true;
+        }
+
     }
 }

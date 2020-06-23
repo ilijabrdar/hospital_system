@@ -19,10 +19,9 @@ namespace PacijentBolnicaZdravo
     /// </summary>
     public partial class App : Application
     {
-          public static int j = 0;
+        public static int j = 0;
         private readonly String _patient_File = "../../../code/Resources/Data/patient.csv";
         private readonly String _patientFile_File = "../../../code/Resources/Data/patientFile.csv";
-
         private readonly String _article_File = "../../../code/Resources/Data/articles.csv";
         private readonly String _doctor_File = "../../../code/Resources/Data/doctors.csv";
         private readonly String _speciality_File = "../../../code/Resources/Data/speciality.csv";
@@ -33,7 +32,7 @@ namespace PacijentBolnicaZdravo
         private readonly String _address_File = "../../../code/Resources/Data/AddressFile.txt";
         private readonly String _state_File = "../../../code/Resources/Data/StateFile.txt";
         private readonly String _town_File = "../../../code/Resources/Data/TownFile.txt";
-        private readonly String _doctorGrade_File = "../../../code/Resources/Data/doctorGradeFile.csv";
+        private readonly String _doctorGrade_File = "../../../code/Resources/Data/DoctorGradeFile.csv";
         private readonly String _hospitalization_File = "../../../code/Resources/Data/hospitalizationFile.csv";
         private readonly String _examinationPrevius_File = "../../../code/Resources/Data/examinationPrevious.csv";
         private readonly String _examinationUpcoming_File = "../../../code/Resources/Data/examinationUpcoming.csv";
@@ -45,19 +44,22 @@ namespace PacijentBolnicaZdravo
         private readonly String _drug_File = "../../../code/Resources/Data/drugs.csv";
         private readonly String _ingredients_File = "../../../code/Resources/Data/ingredients.csv";
         private readonly String _diagnosis_File = "../../../code/Resources/Data/diagnosisFile.csv";
+        private readonly String _renovation_File = "../../../code/Resources/Data/renovations.csv";
 
         public IUserController UserController { get; set; }
         public IArticleController ArticleController
         { get; private set; }
         public IDoctorController DoctorController { get; set; }
         public IBusinessDayController BusinessDayController { get; set; }
-
         public IExaminationController ExaminationController { get; set; }
         public IPatientController PatientController { get; set; }
 
 
         App()
         {
+            var addressRepo = new AddressRepository(new CSVStream<Address>(_address_File, new AddressCSVConverter(",")), new LongSequencer());
+            var townRepo = new TownRepository(new CSVStream<Town>(_town_File, new TownCSVConverter(",", "|")), new LongSequencer(), addressRepo);
+            var stateRepo = new StateRepository(new CSVStream<State>(_state_File, new StateCSVConverter(",", "|")), new LongSequencer(), townRepo);
             var doctorGradeRepo = new DoctorGradeRepository(new CSVStream<DoctorGrade>(_doctorGrade_File, new DoctorGradeCSVConverter("|", ";", ":")), new LongSequencer());
             var patientFileRepo = new PatientFileRepository(new CSVStream<PatientFile>(_patientFile_File, new PatientFileCSVConverter(",", "|")), new LongSequencer());
             var patientRepo = new PatientRepository(new CSVStream<Patient>(_patient_File, new PatientCSVConverter(",")), new LongSequencer(), patientFileRepo);
@@ -65,13 +67,10 @@ namespace PacijentBolnicaZdravo
             var equipmentRepo = new EquipmentRepository(new CSVStream<Equipment>(_equipment_File, new EquipmentCSVConverter(",")), new LongSequencer());
             var roomTypeRepo = new RoomTypeRepository(new CSVStream<RoomType>(_roomType_File, new RoomTypeCSVConverter(",")), new LongSequencer());
             var roomRepo = new RoomRepository(new CSVStream<Room>(_room_File, new RoomCSVConverter(",")), new LongSequencer(), roomTypeRepo, equipmentRepo);
-            var businessDayRepo = new BusinessDayRepository(new CSVStream<BusinessDay>(_businessDay_File, new BusinessDayCSVConverter()), new LongSequencer(), roomRepo);
-            var doctorRepository = new DoctorRepository(new CSVStream<Doctor>(_doctor_File, new DoctorCSVConverter(",")), new LongSequencer(), businessDayRepo, specialityRepo, doctorGradeRepo);
+            var businessDayRepo = new BusinessDayRepository(new CSVStream<BusinessDay>(_businessDay_File, new BusinessDayCSVConverter(",")), new LongSequencer(), roomRepo);
+            var doctorRepository = new DoctorRepository(new CSVStream<Doctor>(_doctor_File, new DoctorCSVConverter(",")), new LongSequencer(), businessDayRepo, specialityRepo, doctorGradeRepo,addressRepo,townRepo,stateRepo);
             businessDayRepo.doctorRepo = doctorRepository;
             var articleRepo = new ArticleRepository(new CSVStream<Article>(_article_File, new ArticleCSVConverter("|")), new LongSequencer(), doctorRepository);
-            var addressRepo = new AddressRepository(new CSVStream<Address>(_address_File, new AddressCSVConverter(",")), new LongSequencer());
-            var townRepo = new TownRepository(new CSVStream<Town>(_town_File, new TownCSVConverter(",", "|")), new LongSequencer(), addressRepo);
-            var stateRepo = new StateRepository(new CSVStream<State>(_state_File, new StateCSVConverter(",", "|")), new LongSequencer(), townRepo);
             var symptomRepository = new SymptomRepository(new CSVStream<Symptom>(_symptom_File, new SymptomCSVConverter(",")), new LongSequencer());
             var diagnosisRepository = new DiagnosisRepository(new CSVStream<Diagnosis>(_diagnosis_File, new DiagnosisCSVConverter(",", ":")), new LongSequencer(), symptomRepository);
             var ingredientRepository = new IngredientRepository(new CSVStream<Ingredient>(_ingredients_File, new IngredientsCSVConverter(",")), new LongSequencer());
@@ -86,6 +85,7 @@ namespace PacijentBolnicaZdravo
             patientFileRepo._examinationPreviousRepository = examinationPreviousRepository;
             patientFileRepo._hospitalizationRepository = hospitalizationRepository;
             patientFileRepo._operationRepository = operationRepository;
+            var renovationRepo = new RenovationRepository(new CSVStream<Renovation>(_renovation_File, new RenovationCSVConverter("|")), new LongSequencer(), roomRepo);
 
 
             var specialityService = new SpecialityService(specialityRepo);
@@ -96,19 +96,20 @@ namespace PacijentBolnicaZdravo
             var referralService = new ReferralService(referralRepository);
             var symptomService = new SymptomService(symptomRepository);
             var therapyService = new TherapyService(therapyRepository);
-            var examinationService = new ExaminationService(examinationUpcomingRepository, examinationPreviousRepository);
+            var examinationService = new ExaminationService(examinationUpcomingRepository, examinationPreviousRepository,diagnosisService,prescriptionService,referralService,symptomService,therapyService);
             var drugService = new DrugService(drugRepository);
             var ingredientService = new IngredientService(ingredientRepository);
-            var roomService = new RoomService(roomRepo);
-            var roomTypeService = new RoomTypeService(roomTypeRepo);
-            var equipmentService = new EquipmentService(equipmentRepo);
+            var doctorService = new DoctorService(doctorRepository);
+            var businessDayService = new BusinessDayService(businessDayRepo,doctorService);
+            var renovationService = new RenovationService(renovationRepo);
+            var roomService = new RoomService(roomRepo, renovationService,businessDayService);
+            var roomTypeService = new RoomTypeService(roomTypeRepo,roomService);
+            var equipmentService = new EquipmentService(equipmentRepo,roomService);
             var doctorGradeService = new DoctorGradeService(doctorGradeRepo);
             var articleService = new ArticleService(articleRepo);
             var patientFileService = new PatientFileService(patientFileRepo);
             var patientService = new PatientService(patientRepo, patientFileService, doctorGradeService);
             var userService = new UserService(patientService);
-            var doctorService = new DoctorService(doctorRepository);
-            var businessDayService = new BusinessDayService(businessDayRepo);
             var addressService = new AddressService(addressRepo);
             var townService = new TownService(townRepo);
             var stateService = new StateService(stateRepo);

@@ -8,20 +8,16 @@ using System.Linq;
 
 namespace bolnica.Repository
 {
-   public class ExaminationUpcomingRepository : CSVRepository<Examination, long>, IExaminationUpcomingRepository
+    public class ExaminationUpcomingRepository : CSVRepository<Examination, long>, IExaminationUpcomingRepository
     {
-        private readonly IDoctorRepository doctorRepository;
-        private readonly IPatientRepository patientRepository;
-        private LongSequencer longSequencer;
-        private DoctorRepository doctorRepository1;
-        private PatientRepository patientRepository1;
+        private readonly IDoctorRepository _doctorRepository;
+        private readonly IPatientRepository _patientRepository;
 
         public ExaminationUpcomingRepository(ICSVStream<Examination> stream, ISequencer<long> sequencer, IDoctorRepository doctorRepository, IPatientRepository patientRepository)
-  : base(stream, sequencer)
+        : base(stream, sequencer)
         {
-            this.doctorRepository = doctorRepository;
-            this.patientRepository = patientRepository;
-
+            _doctorRepository = doctorRepository;
+            _patientRepository = patientRepository;
         }
 
         public IEnumerable<Examination> GetAllEager()
@@ -37,23 +33,41 @@ namespace bolnica.Repository
         public Examination GetEager(long id)
         {
             Examination exam = base.Get(id);
-            exam.Doctor = doctorRepository.GetEager(exam.Doctor.GetId());
-            exam.User =patientRepository.GetEager(exam.User.GetId());
+            exam.Doctor = _doctorRepository.GetEager(exam.Doctor.GetId());
+            exam.User =_patientRepository.GetEager(exam.User.GetId());
             return exam;
         }
 
         public  List<Examination> GetUpcomingExaminationsByUser(User user)
         {
-            List<Examination> examinations = GetAllEager().ToList();
-            List<Examination> findExamination = new List<Examination>();
-            foreach(Examination examination in examinations)
+            try
             {
-                if (examination.Doctor.Id == user.Id)
+                Doctor doctor = (Doctor)user;
+                List<Examination> examinations = GetAllEager().ToList();
+                List<Examination> findExamination = new List<Examination>();
+                foreach (Examination examination in examinations)
                 {
-                    findExamination.Add(examination);
+                    if (examination.Doctor.Id == doctor.Id)
+                    {
+                        findExamination.Add(examination);
+                    }
                 }
+                return findExamination;
+
+            }catch(Exception e)
+            {
+                Patient patient = (Patient)user;
+                List<Examination> examinations = GetAllEager().ToList();
+                List<Examination> findExamination = new List<Examination>();
+                foreach (Examination examination in examinations)
+                {
+                    if (examination.User.Id == patient.Id)
+                    {
+                        findExamination.Add(examination);
+                    }
+                }
+                return findExamination;
             }
-            return findExamination;
         }
 
         public Examination StartUpcomingExamination(Examination examination)

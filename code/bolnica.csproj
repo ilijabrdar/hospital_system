@@ -317,6 +317,7 @@
     </Compile>
     <Compile Include="Repository\abstract\IAddressRepository.cs" />
     <Compile Include="Repository\abstract\IEagerRepository.cs" />
+    <Compile Include="Repository\abstract\IEditRepository.cs" />
     <Compile Include="Repository\abstract\IGetterRepository.cs" />
     <Compile Include="Repository\abstract\IStateRepository.cs" />
     <Compile Include="Repository\abstract\ITownRepository.cs" />
@@ -505,6 +506,7 @@
     <Compile Include="Service\abstract\IPrescriptionService.cs" />
     <Compile Include="Service\abstract\IReferralService.cs" />
     <Compile Include="Service\abstract\IRenovationService.cs" />
+    <Compile Include="Service\abstract\IReportService.cs" />
     <Compile Include="Service\abstract\IRoomTypeService.cs" />
     <Compile Include="Service\abstract\ISearchPeriods.cs" />
     <Compile Include="Service\abstract\ISecretaryService.cs" />
@@ -613,7 +615,7 @@
     <None Include="Resources\Data\businessdays.csv" />
     <None Include="Resources\Data\diagnosisFile.csv" />
     <None Include="Resources\Data\director.csv" />
-    <None Include="Resources\Data\doctorGradeFile.csv" />
+    <None Include="Resources\Data\DoctorGradeFile.csv" />
     <None Include="Resources\Data\doctors.csv" />
     <None Include="Resources\Data\drugs.csv" />
     <None Include="Resources\Data\equipment.csv" />
@@ -630,7 +632,6 @@
     <None Include="Resources\Data\rooms.csv" />
     <None Include="Resources\Data\roomtypes.csv" />
     <None Include="Resources\Data\speciality.csv" />
-    <None Include="Resources\Data\specialityFile.csv" />
     <None Include="Resources\Data\symptomFile.csv" />
     <None Include="Resources\Data\therapyFile.csv" />
   </ItemGroup>

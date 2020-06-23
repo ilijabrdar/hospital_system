@@ -17,7 +17,7 @@ namespace bolnica.Controller
 
         List<Drug> GetAlternativeDrugs(Drug drug);
 
-        Boolean CheckDrugNameUnique(Drug drug);
+        Boolean CheckDrugNameUnique(String name);
 
 
         List<Drug> GetNotApprovedDrugs();

@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  PrescriptionService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.PrescriptionService
- ***********************************************************************/
-
 using bolnica.Controller;
 using bolnica.Service;
 using Model.PatientSecretary;
@@ -15,36 +9,36 @@ namespace Controller
 {
     public class PrescriptionController : IPrescriptionController
     {
-        private IPrescriptionService _service;
+        private IPrescriptionService _prescriptionService;
 
         public PrescriptionController(IPrescriptionService service)
         {
-            _service = service;
+            _prescriptionService = service;
         }
 
         public void Delete(Prescription entity)
         {
-            _service.Delete(entity);
+            _prescriptionService.Delete(entity);
         }
 
         public void Edit(Prescription entity)
         {
-            _service.Edit(entity);
+            _prescriptionService.Edit(entity);
         }
 
         public Prescription Get(long id)
         {
-            return _service.Get(id);
+            return _prescriptionService.Get(id);
         }
 
         public IEnumerable<Prescription> GetAll()
         {
-            return _service.GetAll();
+            return _prescriptionService.GetAll();
         }
 
         public Prescription Save(Prescription entity)
         {
-            return _service.Save(entity);
+            return _prescriptionService.Save(entity);
         }
     }
 }

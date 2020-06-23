@@ -39,9 +39,9 @@ namespace Controller
             return _examinationService.Save(entity);
         }
 
-        public List<Examination> GetExaminationFilter(ExaminationDTO examinationDTO)
+        public List<Examination> GetExaminationsByFilter(ExaminationDTO examinationDTO, Boolean upcomingOnly)
         {
-            return _examinationService.GetExaminationFilter(examinationDTO);
+            return _examinationService.GetExaminationsByFilter(examinationDTO, upcomingOnly);
 
         }
 

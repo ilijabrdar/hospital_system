@@ -8,10 +8,10 @@ using System.Text;
 
 namespace bolnica.Service
 {
-  public  interface IDoctorGradeService : IService<DoctorGrade,long>
-{
-         List<String> GetQuestions();
+    public  interface IDoctorGradeService : IService<DoctorGrade,long>
+    {
+        List<String> GetQuestions();
 
-         double GetAverageGrade(Doctor doctor);
+        double GetAverageGrade(Doctor doctor);
     }
 }

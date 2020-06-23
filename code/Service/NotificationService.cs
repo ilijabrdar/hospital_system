@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  NotificationService.cs
- * Author:  david
- * Purpose: Definition of the Class Service.NotificationService
- ***********************************************************************/
-
 using Model.PatientSecretary;
 using Model.Users;
 using System;

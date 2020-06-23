@@ -1,5 +1,3 @@
-
-
 using bolnica.Repository;
 using Model.Director;
 using Model.Doctor;
@@ -37,5 +35,6 @@ namespace Repository
 
             return hospitalization;
         }
+
     }
 }
