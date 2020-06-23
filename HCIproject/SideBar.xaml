@@ -76,10 +76,8 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <Label Content="Za današnji datum zakazano termina:" Margin="30,40,0,0"  Grid.Column="0" Grid.Row="0" FontSize="16" HorizontalAlignment="Left" Height="29"  VerticalAlignment="Top" Width="283"/>
                         <Label Content="Za današnji datum preostalo termina:" Margin="30,0,0,0"  Grid.Column="0" Grid.Row="1" FontSize="16" HorizontalAlignment="Left" Height="29"  VerticalAlignment="Top" Width="283" />
-                        <Label Content="5" Grid.Column="1" Grid.Row="0" FontSize="16" Margin="36,40,0,0"  Height="29"   Width="50" FontWeight="Bold"/>
-                        <Label Content="5"  Grid.Column="1" Grid.Row="1" FontSize="16" Margin="36,0,0,0"  Height="29"  Width="50" FontWeight="Bold"/>
+                        <Label x:Name="brojPregleda" Grid.Column="1" Grid.Row="1" FontSize="16" Margin="36,0,0,0"  Height="29"  Width="50" FontWeight="Bold"/>
                     </Grid>
                     <Button Content="Odjava" Background="#A2D9CE" Foreground="#2C3E50" FontSize="14" HorizontalAlignment="Right" Margin="10"  Width="102" Click="Button_Click" BorderBrush="#FF1FEECD"  />
 
@@ -112,6 +110,22 @@
                             <Grid x:Name="Grid_Grid" Margin="0,0,0,32"/>
                         </ScrollViewer>
                     </Grid>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Hospitalizacije" FontSize="19" Background="#A2D9CE" >
+                <StackPanel  x:Name="hospitalizacijeGrid" Background="#D5F5E3" SizeChanged="myGrid_SizeChanged">
+                    <ScrollViewer x:Name="scroolHospitalization" VerticalScrollBarVisibility="auto" SizeChanged="scroolHospitalization_SizeChanged" >
+                        <StackPanel Name="Hospitalizations" Orientation="Vertical">
+                        </StackPanel>
+                    </ScrollViewer>
+                </StackPanel>
+            </TabItem>
+            <TabItem x:Name="OperacijeTab" Header="Operacije" FontSize="19" Background="#A2D9CE"  >
+                <StackPanel  x:Name="operacijeGrid" Background="#D5F5E3" SizeChanged="myGrid_SizeChanged">
+                    <ScrollViewer x:Name="scroolOperation" VerticalScrollBarVisibility="auto" SizeChanged="scroolOperation_SizeChanged" >
+                        <StackPanel Name="Operations" Orientation="Vertical">
+                        </StackPanel>
+                    </ScrollViewer>
                 </StackPanel>
             </TabItem>
             <TabItem Header="Kartoni" FontSize="19" Background="#A2D9CE" Height="28" >
@@ -211,7 +225,7 @@
                                     <Label Grid.Column="0" Grid.Row="4" Foreground="#2C3E50" Content="Telefon" FontSize="14" />
                                     <Label Grid.Column="0" Grid.Row="5" Foreground="#2C3E50" Content="Adresa" FontSize="14" />
 
-                                    <TextBox x:Name="izImePrzTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="0" Margin="5" HorizontalAlignment="Right" FontSize="12" CaretBrush="#FF1FEECD">
+                                    <TextBox x:Name="izImePrzTxt" BorderBrush="Black" Width="360" Grid.Column="1" Grid.Row="0" Margin="5" HorizontalAlignment="Right" FontSize="12" CaretBrush="#FF1FEECD">
                                         <TextBox.Text>
                                             <Binding Path="TestImePrezime" UpdateSourceTrigger="PropertyChanged">
                                                 <Binding.ValidationRules>
@@ -239,8 +253,8 @@
                                     </TextBox>
 
 
-                                    <DatePicker Name="LocaleDatePicker" Width="200" Grid.Column="1" Grid.Row="1"   materialDesign:HintAssist.Hint="Unesite datum u formatu dd.mm.gggg" FontSize="10" Margin="4.4,0,5.2,0" VerticalAlignment="Bottom" />
-                                    <TextBox x:Name="izJmbgTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="2"  Margin="5" HorizontalAlignment="Right" FontSize="12"  CaretBrush="#FF1FEECD" >
+                                    <DatePicker Name="LocaleDatePicker" Width="360" Grid.Column="1" Grid.Row="1"   materialDesign:HintAssist.Hint="Unesite datum u formatu dd.mm.gggg" FontSize="10" Margin="4.4,0,5.2,0" VerticalAlignment="Bottom" />
+                                    <TextBox x:Name="izJmbgTxt" BorderBrush="Black" Width="360" Grid.Column="1" Grid.Row="2"  Margin="5" HorizontalAlignment="Right" FontSize="12"  CaretBrush="#FF1FEECD" >
                                         <TextBox.Text>
                                             <Binding Path="TestJMBG" UpdateSourceTrigger="PropertyChanged">
                                                 <Binding.ValidationRules>
@@ -267,7 +281,7 @@
                                     </TextBox>
 
 
-                                    <TextBox x:Name="izEmailTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="3"  Margin="5" HorizontalAlignment="Right" FontSize="12" CaretBrush="#FF1FEECD" >
+                                    <TextBox x:Name="izEmailTxt" BorderBrush="Black" Width="360" Grid.Column="1" Grid.Row="3"  Margin="5" HorizontalAlignment="Right" FontSize="12" CaretBrush="#FF1FEECD" >
                                         <TextBox.Text>
                                             <Binding Path="TestEmail" UpdateSourceTrigger="PropertyChanged">
                                                 <Binding.ValidationRules>
@@ -293,7 +307,7 @@
                                         </Validation.ErrorTemplate>
                                     </TextBox>
 
-                                    <TextBox x:Name="izTelTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="4"  Margin="5" HorizontalAlignment="Right" FontSize="12"  CaretBrush="#FF1FEECD" >
+                                    <TextBox x:Name="izTelTxt" BorderBrush="Black" Width="360" Grid.Column="1" Grid.Row="4"  Margin="5" HorizontalAlignment="Right" FontSize="12"  CaretBrush="#FF1FEECD" >
                                         <TextBox.Text>
                                             <Binding Path="TestPhoneNumber" UpdateSourceTrigger="PropertyChanged">
                                                 <Binding.ValidationRules>
@@ -318,7 +332,22 @@
                                             </ControlTemplate>
                                         </Validation.ErrorTemplate>
                                     </TextBox>
-                                    <TextBox x:Name="izAdresaTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="5"  Margin="5" HorizontalAlignment="Right" FontSize="12"  CaretBrush="#FF1FEECD" />
+                                    <WrapPanel Grid.Row="5" Grid.Column="1">
+                                        <ComboBox  x:Name="StateCombo" Width="120"  materialDesign:HintAssist.Hint="Drzava"  DisplayMemberPath="Name" SelectionChanged="UpdateTownAddress" IsTextSearchEnabled="True" IsEditable="True"/>
+                                        <ComboBox x:Name="TownCombo" Width="120" materialDesign:HintAssist.Hint="Grad" DisplayMemberPath="Name" SelectionChanged="UpdateAddress" IsTextSearchEnabled="True" IsEditable="True"/>
+                                        <ComboBox x:Name="AddressCombo" Width="120" materialDesign:HintAssist.Hint="Ulica" DisplayMemberPath="FullAddress" IsTextSearchEnabled="True" IsEditable="True"/>
+                                    </WrapPanel>
+                                    <!--<DockPanel Margin="3" Grid.Row="5" Grid.Column="1">
+                                        <WrapPanel DockPanel.Dock="Left" HorizontalAlignment="Left" Height="40" VerticalAlignment="Bottom" >
+                                            <ComboBox x:Name="StateCombo" Width="20"  materialDesign:HintAssist.Hint="Drzava" DisplayMemberPath="Name" SelectionChanged="UpdateTownAddress" IsTextSearchEnabled="True"
+                                                                IsEditable="True"/>
+                                            <ComboBox x:Name="TownCombo" Width="150" materialDesign:HintAssist.Hint="Grad" DisplayMemberPath="Name" SelectionChanged="UpdateAddress" IsTextSearchEnabled="True"
+                                                                IsEditable="True"/>
+                                            <ComboBox x:Name="AddressCombo" Width="200" materialDesign:HintAssist.Hint="Ulica" DisplayMemberPath="FullAddress" IsTextSearchEnabled="True" SelectionChanged="AddressCombo_SelectionChanged"
+                                                                IsEditable="True"/>
+                                        </WrapPanel>
+                                    </DockPanel>-->
+
 
                                 </Grid>
                             </StackPanel>
@@ -344,7 +373,7 @@
                                 <Label Grid.Column="0" Grid.Row="1" Foreground="#2C3E50" Content="Nova lozinka" FontSize="14" Margin="10,0,0,0" />
                                 <Label Grid.Column="0" Grid.Row="2" Foreground="#2C3E50" Content="Potvrda lozinke" FontSize="14" Margin="10,0,0,0"/>
 
-                                <PasswordBox x:Name="LozinkaTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="0" Margin="5" HorizontalAlignment="Right" FontSize="12" CaretBrush="#FF1FEECD" />
+                                <PasswordBox x:Name="LozinkaTxt"  BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="0" Margin="5" HorizontalAlignment="Right" FontSize="12" CaretBrush="#FF1FEECD" />
                                 <PasswordBox x:Name="NovaLozTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="1" Margin="5" HorizontalAlignment="Right" FontSize="12" CaretBrush="#FF1FEECD" IsKeyboardFocusedChanged="LozTxt_IsKeyboardFocusedChanged" />
                                 <PasswordBox x:Name="PotvNovaLozTxt" BorderBrush="Black" Width="200" Grid.Column="1" Grid.Row="2" Margin="5" HorizontalAlignment="Right" FontSize="12" CaretBrush="#FF1FEECD" IsKeyboardFocusedChanged="LozTxt_IsKeyboardFocusedChanged"/>
 

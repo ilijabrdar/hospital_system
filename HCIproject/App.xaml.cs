@@ -43,6 +43,9 @@ namespace HCIproject
         public IRoomController RoomController  { get; private set; }
         public IRoomTypeController RoomTypeController  { get; private set; }
         public IEquipmentController EquipmentController  { get; private set; }
+        public IBusinessDayController BusinessDayController { get; private set; }
+        public IRenovationController RenovationController { get; private set; }
+
 
         private const String CSV_DELIMITER = ",";
         private const String CSV_DELIMITER2 = "|";
@@ -62,6 +65,7 @@ namespace HCIproject
         private const String ROOMTYPE_FILE = "../../../code/Resources/Data/roomtypes.csv";
         private const String ROOM_FILE = "../../../code/Resources/Data/rooms.csv";
         private const String EQUIPMENT_FILE = "../../../code/Resources/Data/equipment.csv";
+        private const String RENOVATION_FILE = "../../../code/Resources/Data/renovations.csv";
         private const String EXAM_UPCOMING_FILE = "../../../code/Resources/Data/examinationUpcoming.csv";
         private const String EXAM_PREVIOUS_FILE = "../../../code/Resources/Data/examinationPrevious.csv";
         private const String PATIENTFILE_FILE = "../../../code/Resources/Data/patientFile.csv";
@@ -90,12 +94,10 @@ namespace HCIproject
             EquipmentRepository equipmentRepository=new EquipmentRepository(new CSVStream<Equipment>(EQUIPMENT_FILE, new EquipmentCSVConverter(CSV_DELIMITER)), new LongSequencer());
             RoomRepository roomRepository=new RoomRepository(new CSVStream<Room>(ROOM_FILE, new RoomCSVConverter(CSV_DELIMITER)), new LongSequencer(), roomTypeRepository, equipmentRepository);
             BusinessDayRepository businessDayRepository = new BusinessDayRepository(new CSVStream<BusinessDay>(BUSSINESDAY_FILE, new BusinessDayCSVConverter(CSV_DELIMITER)), new LongSequencer(), roomRepository);
-
+            RenovationRepository renovationRepository = new RenovationRepository(new CSVStream<Renovation>(RENOVATION_FILE, new RenovationCSVConverter(CSV_DELIMITER2)), new LongSequencer(), roomRepository);
             AddressRepository addressRepository = new AddressRepository(new CSVStream<Address>(ADDRESS_FILE, new AddressCSVConverter(CSV_DELIMITER)), new LongSequencer());
             TownRepository townRepository = new TownRepository(new CSVStream<Town>(TOWN_FILE, new TownCSVConverter(CSV_DELIMITER, CSV_DELIMITER2)), new LongSequencer(), addressRepository);
             StateRepository stateRepository = new StateRepository(new CSVStream<State>(STATE_FILE, new StateCSVConverter(CSV_DELIMITER, CSV_ARRAY_DELIMITER)), new LongSequencer(), townRepository);
-
-
             DoctorRepository doctorRepository = new DoctorRepository(new CSVStream<Doctor>(DOCTOR_FILE, new DoctorCSVConverter(CSV_DELIMITER)), new LongSequencer(), businessDayRepository, specialityRepository, doctorGradeRepository, addressRepository,townRepository,stateRepository);
             ArticleRepository articleRepository = new ArticleRepository(new CSVStream<Article>(ARTICLE_FILE, new ArticleCSVConverter(CSV_DELIMITER2)), new LongSequencer(), doctorRepository);
 
@@ -103,9 +105,8 @@ namespace HCIproject
 
             ReferralRepository referralRepository = new ReferralRepository(new CSVStream<Referral>(REFERRAL_FILE, new ReferralCSVConverter(CSV_DELIMITER)), new LongSequencer(), doctorRepository);
             PatientFileRepository patientFileRepository = new PatientFileRepository(new CSVStream<PatientFile>(PATIENTFILE_FILE, new PatientFileCSVConverter(CSV_DELIMITER, CSV_DELIMITER2)), new LongSequencer());
-
-            HospitalizationRepository hospitalizationRepository = new HospitalizationRepository(new CSVStream<Hospitalization>(HOSPITALIZATION_FILE, new HospitalizationCSVConverter(CSV_DELIMITER)), new LongSequencer(), roomRepository, patientFileRepository);
-            OperationRepository operationRepository = new OperationRepository(new CSVStream<Operation>(OPERATION_FILE, new OperationCSVConverter(CSV_DELIMITER)), new LongSequencer(), roomRepository,patientFileRepository,doctorRepository);
+            HospitalizationRepository hospitalizationRepository = new HospitalizationRepository(new CSVStream<Hospitalization>(HOSPITALIZATION_FILE, new HospitalizationCSVConverter(CSV_DELIMITER)), new LongSequencer(), roomRepository);
+            OperationRepository operationRepository = new OperationRepository(new CSVStream<Operation>(OPERATION_FILE, new OperationCSVConverter(CSV_DELIMITER)), new LongSequencer(), roomRepository,doctorRepository);
             PatientRepository patientRepository = new PatientRepository(new CSVStream<Patient>(PATIENT_FILE, new PatientCSVConverter(CSV_DELIMITER)), new LongSequencer(), patientFileRepository);
             ExaminationUpcomingRepository examinationUpcomingRepository = new ExaminationUpcomingRepository(new CSVStream<Examination>(EXAM_UPCOMING_FILE, new UpcomingExaminationCSVConverter(CSV_DELIMITER)), new LongSequencer(), doctorRepository, patientRepository);
             ExaminationPreviousRepository examinationPreviousRepository = new ExaminationPreviousRepository(new CSVStream<Examination>(EXAM_PREVIOUS_FILE, new PreviousExaminationCSVConverter(CSV_DELIMITER, CSV_DELIMITER2)), new LongSequencer(), doctorRepository, patientRepository, diagnosisRepository, prescriptionRepository, therapyRepository, referralRepository);
@@ -135,9 +136,11 @@ namespace HCIproject
             IngredientService ingredientService = new IngredientService(ingredientRepository);
             PatientFileService patientFileService = new PatientFileService(patientFileRepository);
             PatientService patientService = new PatientService(patientRepository,patientFileService,doctorGradeService);
-            RoomService roomService = new RoomService(roomRepository);
-            RoomTypeService roomTypeService = new RoomTypeService(roomTypeRepository);
-            EquipmentService equipmentService = new EquipmentService(equipmentRepository);
+            BusinessDayService businessDayService = new BusinessDayService(businessDayRepository, doctorService);
+            RenovationService renovationService = new RenovationService(renovationRepository);
+            RoomService roomService = new RoomService(roomRepository,renovationService, businessDayService);
+            RoomTypeService roomTypeService = new RoomTypeService(roomTypeRepository, roomService);
+            EquipmentService equipmentService = new EquipmentService(equipmentRepository, roomService);
 
             UserController = new UserController(userService);
             ArticleController = new ArticleController(articleService);
@@ -160,6 +163,8 @@ namespace HCIproject
             AddressController = new AddressController(addressService);
             TownController = new TownController(townService);
             StateController = new StateController(stateService);
+            BusinessDayController = new BusinessDayController(businessDayService);
+            RenovationController = new RenovationController(renovationService);
 
 
             //PatientFileController.Save(new PatientFile(0));

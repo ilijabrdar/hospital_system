@@ -8,8 +8,8 @@ namespace Model.Users
     public class Secretary : User, Repository.IIdentifiable<long>
     {
 
-        public Secretary(long id, 
-            String username, String password, Bitmap image, 
+        public Secretary(long id,
+            String username, String password, Uri image,
             String firstName, String lastName, String jmbg, String email, String phone, DateTime dateOfBirth, Address address)
         {
             this.Id = id;

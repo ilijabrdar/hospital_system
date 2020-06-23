@@ -13,26 +13,23 @@ namespace Model.Doctor
         public String Description;
         public Period Period;
         public Room Room;
-        public PatientFile PatientFile;
         public long Id;
 
-        public Operation( long id,Users.Doctor doctor, string description, Period period, Room room, PatientFile patientFile)
+        public Operation( long id,Users.Doctor doctor, string description, Period period, Room room)
         {
             this.Doctor = doctor;
             Description = description;
             this.Period = period;
             this.Room = room;
-            this.PatientFile = patientFile;
             this.Id = id;
         }
 
-        public Operation(Users.Doctor doctor, string description, Period period, Room room, PatientFile patientFile)
+        public Operation(Users.Doctor doctor, string description, Period period, Room room)
         {
             this.Doctor = doctor;
             Description = description;
             this.Period = period;
             this.Room = room;
-            this.PatientFile = patientFile;
         }
 
         public Operation(long id)

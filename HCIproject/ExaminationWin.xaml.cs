@@ -198,8 +198,9 @@ namespace HCIproject
 
         private void Button_Click_7(object sender, RoutedEventArgs e)
         {
-            PatientFileWin pfWin = new PatientFileWin();
-            pfWin.ShowDialog();
+            PatientFileWin patientWin = new PatientFileWin((Doctor)user, patientId);
+            // this.Visibility = Visibility.Hidden;
+            patientWin.ShowDialog();
         }
         private void izvestajPdf(object sender, RoutedEventArgs e)
         {

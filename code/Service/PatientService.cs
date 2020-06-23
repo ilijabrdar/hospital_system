@@ -5,6 +5,7 @@ using Model.Users;
 using Repository;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Service
 {
@@ -21,6 +22,13 @@ namespace Service
             _patientRepository = _patientRepo;
             _patientFileService = _servicePatientFile;
         }
+
+        public PatientService(IPatientRepository _patientRepo, IPatientFileService _servicePatientFile)
+        {
+            _patientRepository = _patientRepo;
+            _patientFileService = _servicePatientFile;
+        }
+
 
         public Patient Save(Patient entity)
         {
@@ -46,7 +54,7 @@ namespace Service
 
         public IEnumerable<Patient> GetAll()
         {
-            throw new NotImplementedException();
+            return _patientRepository.GetAllEager();
         }
 
         public Patient Get(long id)
@@ -72,8 +80,9 @@ namespace Service
         public DoctorGrade GiveGradeToDoctor(Doctor doctor, Dictionary<string, double> gradesForDoctor)
         {
             DoctorGrade doctorGrade = doctor.DoctorGrade;
+
             doctorGrade.NumberOfGrades++;
-            foreach(String question in doctorGrade.GradesForEachQuestions.Keys)
+            foreach(String question in doctorGrade.GradesForEachQuestions.Keys.ToList())
             {
                 doctorGrade.GradesForEachQuestions[question] = (doctorGrade.GradesForEachQuestions[question] +
                                                                 gradesForDoctor[question]) / doctorGrade.NumberOfGrades;

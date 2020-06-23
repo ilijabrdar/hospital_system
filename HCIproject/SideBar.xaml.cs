@@ -8,8 +8,11 @@ using Model.Users;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media;
@@ -31,6 +34,7 @@ namespace HCIproject
         public List<Town> Towns { get; set; }
         public List<Address> Addresses { get; set; }
 
+
         public string TestAdresa { get; set; }
 
 
@@ -51,9 +55,26 @@ namespace HCIproject
             setDrug();
             upcomingExaminations = new List<ExaminationDTO>();
 
+            StateCombo.DisplayMemberPath = "Name";
+            StateCombo.SelectedValuePath = "Id";
+            App app = Application.Current as App;
+            States = app.StateController.GetAll().ToList();
+            States.Sort((x, y) => x.Name.CompareTo(y.Name));
+            StateCombo.ItemsSource = States;
+            TownCombo.DisplayMemberPath = "Name";
+            TownCombo.SelectedValuePath = "Id";
+            AddressCombo.DisplayMemberPath = "FullAddress";
+            AddressCombo.SelectedValuePath = "Id";
+            StateCombo.SelectedValue = user.Address.Town.State.GetId();
+            TownCombo.SelectedValue = user.Address.Town.GetId();
+            AddressCombo.SelectedValue = user.Address.GetId();
 
+            brojPregleda.Content = app.ExaminationController.GetUpcomingExaminationsByUser(user).Count;
+            checkSpeciality();
             setViewUpcExam();
             setViewPatientFiles();
+          //  setHospitalizations();
+            setOperation();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -65,7 +86,13 @@ namespace HCIproject
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
         }
-
+        public void checkSpeciality()
+        {
+            if(user.Specialty.Name=="Opsta praksa")
+            {
+                OperacijeTab.Visibility = Visibility.Hidden;
+            }
+        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         { //odjavi se
@@ -77,23 +104,13 @@ namespace HCIproject
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {//dodaj alternativni
             DrugAlternative drugAltWind = new DrugAlternative((Doctor)user);
-          //  this.Visibility = Visibility.Hidden;
             drugAltWind.ShowDialog();
         }
 //utisak
         private void myGrid_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            //MyTabControl.Height = this.ActualHeight - 100;
             misljenje.Height = this.ActualHeight - 300;
             misljenje.Width = this.ActualHeight - 80;
-
-            //utisakGrid.Height = this.ActualHeight - 40;
-            //izmenaGrid.Height = this.ActualHeight - 40;
-            //evidencijaGrid.Height = this.ActualHeight - 40;
-            //kartoniGrid.Height = this.ActualHeight - 40;
-            //pregledGrid.Height = this.ActualHeight - 40;
-            //clanciGrid.Height = this.ActualHeight - 40;
-            //pocetnaGrid.Height = this.ActualHeight - 40;
         }
         private void Button_Click_8(object sender, RoutedEventArgs e)
         {//posalji utisak
@@ -113,7 +130,6 @@ namespace HCIproject
             var app = Application.Current as App;
 
             ImePrzSet.Text = user.FirstName + " " + user.LastName;
-            //Speciality spec = app.SpecialityController.Get(user.Specialty.Id);
             SpecSet.Text = user.Specialty.Name;
             DatSet.Text = user.DateOfBirth.ToString();
             JmbgSet.Text = user.Jmbg.ToString();
@@ -130,6 +146,28 @@ namespace HCIproject
             TestAdresa = doctorAddress;
         }
 
+        private void UpdateTownAddress(object sender, RoutedEventArgs e)
+        {
+            State state = StateCombo.SelectedItem as State;
+            Towns = state.GetTown();
+            Towns.Sort((x, y) => x.Name.CompareTo(y.Name));
+            TownCombo.ItemsSource = Towns;
+            AddressCombo.ItemsSource = null;
+
+
+        }
+
+        private void UpdateAddress(object sender, RoutedEventArgs e)
+        {
+            Town town = TownCombo.SelectedItem as Town;
+            if (town == null)
+                return;
+            Addresses = town.GetAddress();
+            Addresses.Sort((x, y) => x.FullAddress.CompareTo(y.FullAddress));
+            AddressCombo.ItemsSource = Addresses;
+
+
+        }
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {//izmena naloga potvrda
             var app = Application.Current as App;
@@ -175,7 +213,12 @@ namespace HCIproject
                 user.Jmbg = TestJMBG;
                 user.Phone = TestPhoneNumber;
                 user.Email = TestEmail;
-         //       user.Address = TestAdresa;
+                var state = StateCombo.SelectedItem as State;
+                var town = TownCombo.SelectedItem as Town;
+                var selectedAddress = AddressCombo.SelectedItem as Address;
+                var address = new Address(selectedAddress.GetId(), town.GetId(), state.GetId());
+                user.Address = address;
+
                 app.UserController.Edit((Doctor)user);
 
                 string messageBoxText1 = "Uspesno ste promenili podatke!";
@@ -284,8 +327,17 @@ namespace HCIproject
                 obavesti.Foreground = new SolidColorBrush(Color.FromRgb(199, 24, 24));
                 obavesti.Text = "Unos se ne poklapa.Pokusajte ponovo.";
             }
+            if(LozinkaTxt.Password != user.Password)
+            {
+                obavesti.Foreground = new SolidColorBrush(Color.FromRgb(199, 24, 24));
+                obavesti.Text = "Pogresan unos stare lozinke";
+            }
             else
             {
+                user.Password = NovaLozTxt.Password;
+                var app = Application.Current as App;
+                app.UserController.Edit((Doctor)user);
+
                 obavesti.Foreground = new SolidColorBrush(Color.FromRgb(64, 85, 81));
                 string messageBoxText1 = "Uspesno ste promenili lozinku!";
                 string caption1 = "Izmena lozinke.";
@@ -542,11 +594,13 @@ namespace HCIproject
                 StackPanel stack = new StackPanel();
                 DockPanel dock = new DockPanel();
                 Label lbl = new Label();
+                Label lbl1 = new Label();
                 Button btn1 = new Button();
                 Button btn2 = new Button();
 
                 stack.Children.Add(dock);
                 dock.Children.Add(lbl);
+                dock.Children.Add(lbl1);
                 dock.Children.Add(btn2);
                 dock.Children.Add(btn1);
 
@@ -559,6 +613,14 @@ namespace HCIproject
                 lbl.FontWeight = FontWeights.Bold;
                 lbl.SetValue(DockPanel.DockProperty, Dock.Left);
                 lbl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+
+                lbl1.Content = exam.Period.StartDate;
+                lbl1.Height = 32;
+                lbl1.Width = 180;
+                lbl1.FontSize = 12;
+                lbl1.FontWeight = FontWeights.SemiBold;
+                lbl1.SetValue(DockPanel.DockProperty, Dock.Left);
+                lbl1.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
 
                 btn1.Content = "Započni";
                 btn1.Height = 32;
@@ -583,7 +645,7 @@ namespace HCIproject
                     //    btn2.Click += new RoutedEventHandler(btn2_Click);
                     #endregion
 
-                    Grid_Grid.RowDefinitions.Add(new RowDefinition());
+                Grid_Grid.RowDefinitions.Add(new RowDefinition());
                 Grid_Grid.RowDefinitions[num].Height = new GridLength(66, GridUnitType.Pixel);
                 Grid_Grid.Children.Add(stack);
                 stack.SetValue(Grid.RowProperty, num);
@@ -708,6 +770,17 @@ namespace HCIproject
             scrool.Height = this.ActualHeight - 120;
         }
 
+        private void scroolHospitalization_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            scroolHospitalization.Height = this.ActualHeight - 120;
+        }
+        private void scroolOperation_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            scroolOperation.Height = this.ActualHeight - 120;
+        }
+
+
+
         private void changePhoto(object sender, RoutedEventArgs e)
         {//promeni sliku
             OpenFileDialog op = new OpenFileDialog();
@@ -723,6 +796,111 @@ namespace HCIproject
         }
 
 
+        private void setHospitalizations()
+        {
+            var app = Application.Current as App;
+
+            if (app.HospitalizationController.GetAll() == null)
+            {
+                return;
+            }
+            foreach (var hospitalization in app.HospitalizationController.GetAll())
+            {
+                Border b = new Border();
+                b.BorderThickness = new Thickness(2);
+                b.CornerRadius = new CornerRadius(3);
+                b.BorderBrush = Brushes.GreenYellow;
+                b.Margin = new Thickness(10, 10, 10, 10);
+
+                StackPanel stackPanelExamination = new StackPanel();
+                TextBlock period = new TextBlock();
+                TextBlock room = new TextBlock();
+                TextBlock hospitalizacija = new TextBlock();
+
+                hospitalizacija.FontSize = 15;
+                hospitalizacija.Inlines.Add(new Run("HOSPITALIZACIJA") { FontWeight = FontWeights.Bold });
+                hospitalizacija.Margin = new Thickness(10, 10, 10, 10);
+                stackPanelExamination.Children.Add(hospitalizacija);
+
+                period.Inlines.Add(new Run("Datum:  ") { FontWeight = FontWeights.SemiBold });
+                period.FontSize = 15;
+                period.Inlines.Add(hospitalization.Period.StartDate.ToString());
+                period.Margin = new Thickness(10, 10, 10, 10);
+                stackPanelExamination.Children.Add(period);
+
+                //
+                room.Inlines.Add(new Run("Prostorija: ") { FontWeight = FontWeights.SemiBold });
+                room.FontSize = 15;
+                room.Inlines.Add(hospitalization.Room.RoomCode);
+                room.Margin = new Thickness(10);
+                stackPanelExamination.Children.Add(room);
+
+                b.Child = stackPanelExamination;
+
+                Hospitalizations.Children.Add(b);
+            }
+        }
+        private void setOperation()
+        {
+            var app = Application.Current as App;
+
+            if (app.OperationController.GetOperationsByDoctor(user) == null)
+            {
+                return;
+            }
+            foreach (var operation in app.OperationController.GetOperationsByDoctor(user))
+            {
+                Border b = new Border();
+                b.BorderThickness = new Thickness(2);
+                b.CornerRadius = new CornerRadius(3);
+                b.BorderBrush = Brushes.Pink;
+                b.Margin = new Thickness(10, 10, 10, 10);
+
+                StackPanel stackPanelExamination = new StackPanel();
+                TextBlock operacija = new TextBlock();
+                TextBlock doctor = new TextBlock();
+                TextBlock period = new TextBlock();
+                TextBlock room = new TextBlock();
+                TextBlock description = new TextBlock();
+
+                operacija.FontSize = 15;
+                operacija.Inlines.Add(new Run("OPERACIJA") { FontWeight = FontWeights.Bold });
+                operacija.Margin = new Thickness(10, 10, 10, 10);
+                stackPanelExamination.Children.Add(operacija);
+
+                doctor.FontSize = 15;
+                doctor.Inlines.Add(new Run("Doktor:  ") { FontWeight = FontWeights.SemiBold });
+                doctor.Inlines.Add(operation.Doctor.FullName);
+                doctor.Margin = new Thickness(10, 10, 10, 10);
+                stackPanelExamination.Children.Add(doctor);
+                //
+                period.Inlines.Add(new Run("Datum:  ") { FontWeight = FontWeights.SemiBold });
+                period.FontSize = 15;
+                period.Inlines.Add(operation.Period.StartDate.ToString());
+                period.Margin = new Thickness(10, 10, 10, 10);
+                stackPanelExamination.Children.Add(period);
+
+                //
+                room.Inlines.Add(new Run("Prostorija: ") { FontWeight = FontWeights.SemiBold });
+                room.FontSize = 15;
+                room.Inlines.Add(operation.Room.RoomCode);
+                room.Margin = new Thickness(10);
+                stackPanelExamination.Children.Add(room);
+
+                //
+                description.Inlines.Add(new Run("Opis: ") { FontWeight = FontWeights.SemiBold });
+                description.FontSize = 15;
+                description.Inlines.Add(operation.Description);
+                description.Margin = new Thickness(10);
+                stackPanelExamination.Children.Add(description);
+
+
+
+                b.Child = stackPanelExamination;
+
+                Operations.Children.Add(b);
+            }
+        }
 
     }
 }

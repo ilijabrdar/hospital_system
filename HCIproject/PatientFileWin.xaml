@@ -11,26 +11,28 @@
         <StackPanel x:Name="PatientInfo" Background="#D5F5E3">
             <WrapPanel>
                 <Label Content="Ime i prezime pacijenta:" Margin="10" FontSize="13"/>
-                <Label Content="Pera Peric" Margin="10,10,100,10" FontSize="15" FontWeight="SemiBold" />
+                <Label x:Name="imePacijenta" Margin="10,10,100,10" FontSize="15" FontWeight="SemiBold" />
                 <Label Content="Godine:" Margin="10" FontSize="13"/>
-                <Label Content="25" Margin="10,10,100,10" FontSize="14" FontWeight="SemiBold"/>
+                <Label x:Name="godinePacijenta" Margin="10,10,100,10" FontSize="14" FontWeight="SemiBold"/>
                 <Label Content="Alergija:" Margin="10" FontSize="13"/>
-                <Label Content="Penicilin, polen" Margin="10" FontSize="14" FontWeight="SemiBold"/>
+                <Label x:Name="alergijePacijenta" Margin="10" FontSize="14" FontWeight="SemiBold"/>
             </WrapPanel>
 
         </StackPanel>
-        <Border  BorderBrush="#A2D9CE" BorderThickness="5" CornerRadius="8,8,8,8"  Margin="5">
+        <Border  BorderBrush="#A2D9CE" BorderThickness="5" CornerRadius="8,8,8,8"  Margin="3">
             <WrapPanel>
-                <Label Content="Pretraga kartona po lekaru ili po datumu" Margin="10" FontSize="14"/>
-                <TextBox x:Name="search_files" HorizontalAlignment="Center"  Text="Unesite parametar pretrage" Margin="10" Background="#EBF5FB" FontSize="16" Foreground="#AAB7B8" Width="222" CaretBrush="#FF1FEECD" IsKeyboardFocusedChanged="search_files_IsKeyboardFocusedChanged" KeyDown="search_files_KeyDown"  />
+                <Label Content="Pretraga kartona po lekaru ili po datumu" Margin="10" FontSize="10"/>
+                <TextBox x:Name="search_files" HorizontalAlignment="Center"  Text="Unesite parametar pretrage" Margin="10" Background="#EBF5FB" FontSize="10" Foreground="#AAB7B8" Width="222" CaretBrush="#FF1FEECD" IsKeyboardFocusedChanged="search_files_IsKeyboardFocusedChanged" KeyDown="search_files_KeyDown"  />
                 <Button Content="Povratak" Margin="5"  Background="#FFA2D9CE" Height="23" BorderBrush="#FF1FEECD" Click="Button_Click_1"/>
 
             </WrapPanel>
         </Border>
-        <ScrollViewer x:Name="patientFileScrool" VerticalScrollBarVisibility="auto" SizeChanged="patientFileScrool_SizeChanged" >
-            <StackPanel Name="Exeminations" Orientation="Vertical">
-            </StackPanel>
-        </ScrollViewer>
+        <StackPanel>
+            <ScrollViewer x:Name="patientFileScrool" VerticalScrollBarVisibility="auto" SizeChanged="patientFileScrool_SizeChanged" >
+                <StackPanel Name="Examinations" Orientation="Vertical">
+                </StackPanel>
+            </ScrollViewer>
+        </StackPanel>
 
         <WrapPanel FlowDirection="RightToLeft" Background="#D5F5E3" VerticalAlignment="Bottom" >
             <Button Content="Povratak" FontSize="18" Height="30" Width="100"  Margin="10" Background="#A2D9CE" Click="Button_Click" BorderBrush="#FF1FEECD" />

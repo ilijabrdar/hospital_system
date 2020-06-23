@@ -6,6 +6,7 @@
 
 using bolnica.Service;
 using Model.Doctor;
+using Model.Users;
 using Repository;
 using System;
 using System.Collections.Generic;
@@ -45,6 +46,11 @@ namespace Service
         {
 
            return _repository.Save(entity);
+        }
+
+        public List<Operation> GetOperationsByDoctor(Doctor doctor)
+        {
+            return _repository.GetOperationsByDoctor(doctor);
         }
     }
 }

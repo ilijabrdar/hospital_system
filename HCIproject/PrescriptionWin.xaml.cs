@@ -64,7 +64,7 @@ namespace HCIproject
             var app = Application.Current as App;
             foreach(var lek in app.DrugController.GetAll())
             {
-                lekovi.Items.Add(lek);
+                lekovi.Items.Add(lek.Name);
             }
         }
 

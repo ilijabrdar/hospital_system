@@ -9,6 +9,6 @@ namespace bolnica.Service
 {
     public interface IRoomTypeService : IService<RoomType,long>
     {
-        Boolean CheckRoomTypeUnique(RoomType roomType);
+        Boolean CheckRoomTypeUnique(String type);
     }
 }
