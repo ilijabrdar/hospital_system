@@ -18,9 +18,7 @@ using System.Windows.Shapes;
 
 namespace HCIproject
 {
-    /// <summary>
-    /// Interaction logic for ScheduleExamination.xaml
-    /// </summary>
+
     public partial class ScheduleExamination : Window
     {
         public Doctor user;
@@ -49,45 +47,30 @@ namespace HCIproject
             int godine = DateTime.Now.Year - patient.DateOfBirth.Year;
             godinePacijenta.Content = godine.ToString();
 
-            //alergijePacijenta.Content = patient.patientFile.Allergy.ToString();
-
+            foreach (Allergy allergy in patient.patientFile.Allergy)
+            {
+                alergijePacijenta.Content += allergy.Name;
+            }
         }
 
 
         private void setTableData()
         {
+            var app = Application.Current as App;
+            List<ExaminationDTO> specialistExaminations = new List<ExaminationDTO>();
             specialistExaminations.Clear();
 
-            Room room1 = new Room("101", null, null);
-            Room room3 = new Room("113", null, null);
-            Room room4 = new Room("103", null, null);
-            Room room6 = new Room("100", null, null);
-            Room room7 = new Room("201", null, null);
-            Period period1 = new Period(new DateTime(2020, 6, 20, 9, 20, 0));
-            Period period2 = new Period(new DateTime(2020, 6, 20, 9, 40, 0));
-            Period period3 = new Period(new DateTime(2020, 6, 20, 10, 20, 0));
-            Period period4 = new Period(new DateTime(2020, 6, 20, 10, 0, 0));
-            Period period5 = new Period(new DateTime(2020, 6, 19, 14, 20, 0));
-            Period period6 = new Period(new DateTime(2020, 7, 19, 15, 20, 0));
-            Period period7 = new Period(new DateTime(2020, 7, 19, 16, 40, 0));
-            Period period8 = new Period(new DateTime(2020, 7, 19, 17, 20, 0));
-            Period period9 = new Period(new DateTime(2020, 7, 19, 18, 0, 0));
-            ExaminationDTO exam1 = new ExaminationDTO(room1, period1);
-            ExaminationDTO exam2 = new ExaminationDTO(room1, period2);
-            ExaminationDTO exam3 = new ExaminationDTO(room3, period3);
-            ExaminationDTO exam5 = new ExaminationDTO(room4, period5);
-            ExaminationDTO exam6 = new ExaminationDTO(room4, period6);
-            ExaminationDTO exam7 = new ExaminationDTO(room6, period7);
-            ExaminationDTO exam8 = new ExaminationDTO(room7, period8);
+          foreach(Examination exam in app.ExaminationController.GetUpcomingExaminationsByUser(user))
+            {
+                Room room = null;
+                foreach (BusinessDay businessDay in exam.Doctor.BusinessDay)
+                {
+                    room = businessDay.room;
+                    break;
+                }
 
-
-            specialistExaminations.Add(exam1);
-            specialistExaminations.Add(exam2);
-            specialistExaminations.Add(exam3);
-            specialistExaminations.Add(exam5);
-            specialistExaminations.Add(exam6);
-            specialistExaminations.Add(exam7);
-            specialistExaminations.Add(exam8);
+                specialistExaminations.Add(new ExaminationDTO(exam.Period));
+            }
 
             specialistGrid.ItemsSource = specialistExaminations;
         }

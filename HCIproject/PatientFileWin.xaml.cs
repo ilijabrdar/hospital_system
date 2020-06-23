@@ -51,8 +51,10 @@ namespace HCIproject
             int godine = DateTime.Now.Year - patient.DateOfBirth.Year;
             godinePacijenta.Content = godine.ToString();
 
-            //alergijePacijenta.Content = patient.patientFile.Allergy.ToString();
-
+            foreach (Allergy allergy in patient.patientFile.Allergy)
+            {
+                alergijePacijenta.Content += allergy.Name;
+            }
         }
         private void setExaminations()
         {
@@ -81,6 +83,14 @@ namespace HCIproject
                 TextBlock Anamnesis = new TextBlock();
                 TextBlock Diagnosis = new TextBlock();
                 TextBlock therapy = new TextBlock();
+                Button myButton = new Button();
+
+                myButton.Content = "Izvestaj";
+                myButton.Width = 100;
+                myButton.Height = 30;
+                myButton.Background = new SolidColorBrush(Color.FromRgb(162, 217, 206));
+                myButton.Click += new RoutedEventHandler(izvestajPdf);
+                stackPanelExamination.Children.Add(myButton);
 
                 doctor.FontSize = 15;
                 doctor.Inlines.Add(new Run("Doktor:  ") { FontWeight = FontWeights.SemiBold });

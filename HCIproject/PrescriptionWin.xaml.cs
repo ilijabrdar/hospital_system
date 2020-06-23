@@ -55,8 +55,10 @@ namespace HCIproject
             int godine=DateTime.Now.Year - patient.DateOfBirth.Year;
             godinePacijenta.Content = godine.ToString();
 
-            //alergijePacijenta.Content = patient.patientFile.Allergy.ToString();
-
+            foreach (Allergy allergy in patient.patientFile.Allergy)
+            {
+                alergijePacijenta.Content += allergy.Name;
+            }
         }
 
         private void setDrugCombo()

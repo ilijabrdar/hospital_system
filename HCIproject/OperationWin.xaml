@@ -59,8 +59,6 @@
                         <DataGrid x:Name="specialistGrid" FontSize="14" BorderThickness="1"  AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" ItemsSource ="{Binding specialistExamination}"  materialDesign:DataGridAssist.CellPadding="4 2 2 2" materialDesign:DataGridAssist.ColumnHeaderPadding="4 2 2 2" Background="#FFC4F3EA" Width="378" HorizontalAlignment="Center"  >
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Datum" Binding="{Binding Period.StartDate.Date }" Width="80"></DataGridTextColumn>
-                                <DataGridTextColumn Header="Vreme" Binding="{Binding Period.StartDate.TimeOfDay}" Width="*"></DataGridTextColumn>
-                                <DataGridTextColumn  Header="Sala" Binding="{Binding Room.RoomCode }" Width="*"></DataGridTextColumn>
 
                             </DataGrid.Columns>
                         </DataGrid>

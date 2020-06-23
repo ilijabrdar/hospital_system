@@ -9,7 +9,6 @@ namespace Repository
 {
     public class RoomRepository : CSVRepository<Room, long>, IRoomRepository, IEagerRepository<Room, long>
     {
-        private String FilePath;
         private readonly IRoomTypeRepository _roomTypeRepository;
         private readonly IEquipmentRepository _equipmentRepository;
 

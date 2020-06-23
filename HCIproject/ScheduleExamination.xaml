@@ -28,8 +28,6 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Datum" Binding="{Binding Period.StartDate.Date }" Width="80"></DataGridTextColumn>
                             <DataGridTextColumn Header="Vreme" Binding="{Binding Period.StartDate.TimeOfDay}" Width="*"></DataGridTextColumn>
-                            <DataGridTextColumn  Header="Sala" Binding="{Binding Room.RoomCode }" Width="*"></DataGridTextColumn>
-
                         </DataGrid.Columns>
                     </DataGrid>
                 </Border>

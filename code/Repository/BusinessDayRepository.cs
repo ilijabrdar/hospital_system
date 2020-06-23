@@ -9,10 +9,7 @@ using System.Linq;
 namespace Repository
 {
    public class BusinessDayRepository : CSVRepository<BusinessDay,long>, IBusinessDayRepository
-   {
-
-        private String FilePath;
-        public  IDoctorRepository doctorRepo;
+   {        public  IDoctorRepository doctorRepo;
         private readonly IRoomRepository roomRepo;
         public BusinessDayRepository(ICSVStream<BusinessDay> stream, ISequencer<long> sequencer, IRoomRepository room)
            : base(stream, sequencer)

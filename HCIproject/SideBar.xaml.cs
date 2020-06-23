@@ -208,8 +208,10 @@ namespace HCIproject
                 var state = StateCombo.SelectedItem as State;
                 var town = TownCombo.SelectedItem as Town;
                 var selectedAddress = AddressCombo.SelectedItem as Address;
-                var address = new Address(selectedAddress.GetId(), town.GetId(), state.GetId());
-                user.Address = address;
+                //var address = new Address(selectedAddress.GetId(), town.GetId(), state.GetId());
+                user.Address = selectedAddress;
+                user.Address.Town = town;
+                user.Address.Town.State = state;
 
                 app.UserController.Edit((Doctor)user);
 

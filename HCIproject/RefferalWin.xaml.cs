@@ -20,13 +20,8 @@ using System.Windows.Shapes;
 
 namespace HCIproject
 {
-    /// <summary>
-    /// Interaction logic for Refferal.xaml
-    /// </summary>
-
     public partial class RefferalWin : Window
     {
-        private int colNum = 0;
         public Doctor user;
         public long patientId;
         private string dijagnoza;
@@ -47,7 +42,6 @@ namespace HCIproject
             setInfoExamination();
             this.DataContext = this;
 
-
         }
         private void setPatientInfo()
         {
@@ -59,7 +53,10 @@ namespace HCIproject
             int godine = DateTime.Now.Year - patient.DateOfBirth.Year;
             godinePacijenta.Content = godine.ToString();
 
-            //alergijePacijenta.Content = patient.patientFile.Allergy.ToString();
+            foreach(Allergy allergy in patient.patientFile.Allergy)
+            {
+                alergijePacijenta.Content += allergy.Name;
+            }
 
         }
 
@@ -75,44 +72,24 @@ namespace HCIproject
         }
         private void setInfoExamination()
         {
-            specialistExaminations.Clear();
-            Doctor dr = new Doctor(1, "Pera", "Perić", "213123123123", "sadsds@sadsa.com", "2312312312", new DateTime(), null, "DDD", "ddd", null, null);
-            Doctor dr1 = new Doctor(1, "Jovan", "Jovanović", "213123123123", "sadsds@sadsa.com", "2312312312", new DateTime(), null, "DDD", "ddd", null, null);
-            Room room1 = new Room("101", null,null);
-            Room room3 = new Room("113", null,null);
-            Room room4 = new Room("103", null,null);
-            Room room6 = new Room("100", null,null);
-            Room room7 = new Room("201", null,null);
-            Period period1 = new Period(new DateTime(2020, 6, 20, 9, 20, 0));
-            Period period2 = new Period(new DateTime(2020, 6, 20, 9, 40, 0));
-            Period period3 = new Period(new DateTime(2020, 6, 20, 10, 20, 0));
-            Period period4 = new Period(new DateTime(2020, 6, 20, 10, 0, 0));
-            Period period5 = new Period(new DateTime(2020, 6, 19, 14, 20, 0));
-            Period period6 = new Period(new DateTime(2020, 7, 19, 15, 20, 0));
-            Period period7 = new Period(new DateTime(2020, 7, 19, 16, 40, 0));
-            Period period8 = new Period(new DateTime(2020, 7, 19, 17, 20, 0));
-            Period period9 = new Period(new DateTime(2020, 7, 19, 18, 0, 0));
-            ExaminationDTO exam1 = new ExaminationDTO(dr, room1, period1);
-            ExaminationDTO exam2 = new ExaminationDTO(dr, room1, period2);
-            ExaminationDTO exam3 = new ExaminationDTO(dr, room3, period3);
-            ExaminationDTO exam4 = new ExaminationDTO(dr, room1, period4);
-            ExaminationDTO exam5 = new ExaminationDTO(dr1, room4, period5);
-            ExaminationDTO exam6 = new ExaminationDTO(dr1, room4, period6);
-            ExaminationDTO exam7 = new ExaminationDTO(dr1, room6, period7);
-            ExaminationDTO exam8 = new ExaminationDTO(dr1, room7, period8);
+            
+                var app = Application.Current as App;
+                List<ExaminationDTO> specialistExaminations = new List<ExaminationDTO>();
+                specialistExaminations.Clear();
 
+                foreach (Examination exam in app.ExaminationController.GetUpcomingExaminationsByUser(user))
+                {
+                    Room room = null;
+                    foreach (BusinessDay businessDay in exam.Doctor.BusinessDay)
+                    {
+                        room = businessDay.room;
+                        break;
+                    }
 
-                specialistExaminations.Add(exam1);
-                specialistExaminations.Add(exam2);
-                specialistExaminations.Add(exam3);
-                specialistExaminations.Add(exam4);
-                specialistExaminations.Add(exam5);
-                specialistExaminations.Add(exam6);
-                specialistExaminations.Add(exam7);
-                specialistExaminations.Add(exam8);
+                    specialistExaminations.Add(new ExaminationDTO(exam.Doctor, exam.Period));
+                }
 
-            specialistGrid.ItemsSource = specialistExaminations;
-
+                specialistGrid.ItemsSource = specialistExaminations;
         }
         private void Button_Click_1(object sender, RoutedEventArgs e)
         { //potvrdi

@@ -1,4 +1,5 @@
-﻿using Model.Users;
+﻿using Model.PatientSecretary;
+using Model.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,6 @@ using System.Windows.Shapes;
 
 namespace HCIproject
 {
-    /// <summary>
-    /// Interaction logic for Hospitalization.xaml
-    /// </summary>
 
     public partial class HospitalizationWin : Window
     {
@@ -55,8 +53,10 @@ namespace HCIproject
             int godine = DateTime.Now.Year - patient.DateOfBirth.Year;
             godinePacijenta.Content = godine.ToString();
 
-            //alergijePacijenta.Content = patient.patientFile.Allergy.ToString();
-
+            foreach (Allergy allergy in patient.patientFile.Allergy)
+            {
+                alergijePacijenta.Content += allergy.Name;
+            }
         }
 
         private void setSpecialityCombo()

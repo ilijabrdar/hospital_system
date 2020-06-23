@@ -18,10 +18,6 @@ using System.Windows.Shapes;
 
 namespace HCIproject
 {
-    /// <summary>
-    /// Interaction logic for Examination.xaml
-    /// </summary>
-
     public partial class ExaminationWin : Window
     {
         public Doctor user;
