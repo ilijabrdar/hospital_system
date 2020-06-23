@@ -1,5 +1,6 @@
 using Model.Director;
 using Model.PatientSecretary;
+using Model.Users;
 using Repository;
 using System;
 using System.Collections.Generic;
@@ -11,13 +12,16 @@ namespace Model.Doctor
         public long Id;
         public Period Period;
         public Room Room;
-        //TODO description
+        public Model.Users.Doctor Doctor;
+        public User Patient;
 
-        public Hospitalization(long id, Period period, Room room)
+        public Hospitalization(long id, User patient, Model.Users.Doctor doctor, Period period, Room room)
         {
+            Patient = patient;
+            Doctor = doctor;
             Id = id;
-            this.Period = period;
-            this.Room = room;
+            Period = period;
+            Room = room;
         }
 
         public Hospitalization(Period period, Room room)

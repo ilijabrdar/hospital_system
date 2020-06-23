@@ -63,7 +63,7 @@ namespace bolnica.Service
             DateTime End = Start.AddMinutes(BusinessDayService.durationOfExamination);
             while(End <= businessDay.Shift.EndDate)
             {
-                if(!businessDay.ScheduledPeriods.Any(item => item == new Period(Start, End)))
+                if(businessDay.ScheduledPeriods.SingleOrDefault(x => x.StartDate == Start) == null)
                 {
                     ExaminationDTO examinationDTO = new ExaminationDTO
                     {
@@ -74,7 +74,8 @@ namespace bolnica.Service
                     retVal.Add(examinationDTO);
                     return retVal;
                 }
-                
+                End = End.AddMinutes(BusinessDayService.durationOfExamination);
+                Start = Start.AddMinutes(BusinessDayService.durationOfExamination);
             }
             return null;
         }
