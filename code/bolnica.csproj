@@ -317,6 +317,7 @@
     </Compile>
     <Compile Include="Repository\abstract\IAddressRepository.cs" />
     <Compile Include="Repository\abstract\IEagerRepository.cs" />
+    <Compile Include="Repository\abstract\IEditRepository.cs" />
     <Compile Include="Repository\abstract\IGetterRepository.cs" />
     <Compile Include="Repository\abstract\IStateRepository.cs" />
     <Compile Include="Repository\abstract\ITownRepository.cs" />
@@ -631,7 +632,6 @@
     <None Include="Resources\Data\rooms.csv" />
     <None Include="Resources\Data\roomtypes.csv" />
     <None Include="Resources\Data\speciality.csv" />
-    <None Include="Resources\Data\specialityFile.csv" />
     <None Include="Resources\Data\symptomFile.csv" />
     <None Include="Resources\Data\therapyFile.csv" />
   </ItemGroup>
