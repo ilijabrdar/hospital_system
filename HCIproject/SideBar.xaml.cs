@@ -37,14 +37,6 @@ namespace HCIproject
 
         public string TestAdresa { get; set; }
 
-
-        public SideBar()
-        {
-            InitializeComponent();
-            this.DataContext = this;
-            setArticle();
-            setDrug();
-        }
         public SideBar(Doctor _user)
         {
             InitializeComponent();
@@ -73,7 +65,7 @@ namespace HCIproject
             checkSpeciality();
             setViewUpcExam();
             setViewPatientFiles();
-          //  setHospitalizations();
+            setHospitalizations();
             setOperation();
         }
 
@@ -804,7 +796,7 @@ namespace HCIproject
             {
                 return;
             }
-            foreach (var hospitalization in app.HospitalizationController.GetAll())
+            foreach (var hospitalization in app.HospitalizationController.GetHospitalizationByDoctor(user))
             {
                 Border b = new Border();
                 b.BorderThickness = new Thickness(2);
@@ -815,6 +807,7 @@ namespace HCIproject
                 StackPanel stackPanelExamination = new StackPanel();
                 TextBlock period = new TextBlock();
                 TextBlock room = new TextBlock();
+                TextBlock patient = new TextBlock();
                 TextBlock hospitalizacija = new TextBlock();
 
                 hospitalizacija.FontSize = 15;
@@ -827,6 +820,12 @@ namespace HCIproject
                 period.Inlines.Add(hospitalization.Period.StartDate.ToString());
                 period.Margin = new Thickness(10, 10, 10, 10);
                 stackPanelExamination.Children.Add(period);
+
+                patient.Inlines.Add(new Run("Pacijent:  ") { FontWeight = FontWeights.SemiBold });
+                patient.FontSize = 15;
+                patient.Inlines.Add(hospitalization.Patient.FullName);
+                patient.Margin = new Thickness(10, 10, 10, 10);
+                stackPanelExamination.Children.Add(patient);
 
                 //
                 room.Inlines.Add(new Run("Prostorija: ") { FontWeight = FontWeights.SemiBold });
@@ -858,7 +857,7 @@ namespace HCIproject
 
                 StackPanel stackPanelExamination = new StackPanel();
                 TextBlock operacija = new TextBlock();
-                TextBlock doctor = new TextBlock();
+                TextBlock patient = new TextBlock();
                 TextBlock period = new TextBlock();
                 TextBlock room = new TextBlock();
                 TextBlock description = new TextBlock();
@@ -868,11 +867,11 @@ namespace HCIproject
                 operacija.Margin = new Thickness(10, 10, 10, 10);
                 stackPanelExamination.Children.Add(operacija);
 
-                doctor.FontSize = 15;
-                doctor.Inlines.Add(new Run("Doktor:  ") { FontWeight = FontWeights.SemiBold });
-                doctor.Inlines.Add(operation.Doctor.FullName);
-                doctor.Margin = new Thickness(10, 10, 10, 10);
-                stackPanelExamination.Children.Add(doctor);
+                patient.FontSize = 15;
+                patient.Inlines.Add(new Run("Pacijent:  ") { FontWeight = FontWeights.SemiBold });
+                patient.Inlines.Add(operation.Patient.FullName);
+                patient.Margin = new Thickness(10, 10, 10, 10);
+                stackPanelExamination.Children.Add(patient);
                 //
                 period.Inlines.Add(new Run("Datum:  ") { FontWeight = FontWeights.SemiBold });
                 period.FontSize = 15;
