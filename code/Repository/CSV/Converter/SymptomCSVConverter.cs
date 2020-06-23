@@ -9,7 +9,7 @@ namespace bolnica.Repository.CSV.Converter
     public class SymptomCSVConverter : ICSVConverter<Symptom>
     {
 
-        private readonly String _delimiter = ",";
+        private readonly String _delimiter;
 
         public SymptomCSVConverter(string delimiter)
         {
@@ -26,7 +26,7 @@ namespace bolnica.Repository.CSV.Converter
         public string ConvertEntityToCSVFormat(Symptom entity)
         {
             return string.Join(_delimiter, entity.Id, entity.Name);
-
         }
+
     }
 }

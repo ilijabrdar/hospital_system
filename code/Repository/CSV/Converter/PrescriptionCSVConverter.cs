@@ -8,8 +8,8 @@ namespace bolnica.Repository.CSV.Converter
 {
     public class PrescriptionCSVConverter : ICSVConverter<Prescription>
     {
-        private readonly String _delimiter = ",";
-        private readonly String _drugDelimiter = ";";
+        private readonly String _delimiter;
+        private readonly String _drugDelimiter;
 
         public PrescriptionCSVConverter(string delimiter, string drugDelimiter)
         {
@@ -28,9 +28,7 @@ namespace bolnica.Repository.CSV.Converter
             foreach(string id in drugIds)
             {
                 Drugs.Add(new Drug(long.Parse(id)));
-
             }
-
             prescription.Drug = Drugs;
 
             return prescription;
@@ -44,7 +42,6 @@ namespace bolnica.Repository.CSV.Converter
             stringBuilder.Append(format);
             stringBuilder.Append(_delimiter);
 
-
             foreach (Drug drug in entity.Drug)
             {  
                 stringBuilder.Append(drug.GetId());
@@ -53,5 +50,6 @@ namespace bolnica.Repository.CSV.Converter
             stringBuilder.Remove(stringBuilder.Length - 1, 1);
             return stringBuilder.ToString();
         }
+        
     }
 }

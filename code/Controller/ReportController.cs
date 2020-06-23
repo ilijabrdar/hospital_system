@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  ReportService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.ReportService
- ***********************************************************************/
-
 using Model.Dto;
 using Model.PatientSecretary;
 using Model.Users;

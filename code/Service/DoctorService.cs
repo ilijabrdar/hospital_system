@@ -9,18 +9,17 @@ namespace Service
 {
    public class DoctorService : IDoctorService
    {
-
         public IDoctorGradeService _doctorGradeService { get; set; }
-      private readonly IDoctorRepository _doctorRepository;
-        public IBusinessDayService businessDayService;
-        public IArticleService articleService;
+        public IBusinessDayService _businessDayService;
+        public IArticleService _articleService;
+        private readonly IDoctorRepository _doctorRepository;
 
         public DoctorService(IDoctorRepository doctorRepository, IDoctorGradeService doctorGradeService, IBusinessDayService businessDayService, IArticleService articleService)
         {
             _doctorRepository = doctorRepository;
             _doctorGradeService = doctorGradeService;
-            this.businessDayService = businessDayService;
-            this.articleService = articleService;
+            _businessDayService = businessDayService;
+            _articleService = articleService;
         }
 
         public DoctorService(IDoctorRepository doctorRepository)
@@ -31,14 +30,14 @@ namespace Service
         public void Delete(Doctor entity)
         {
             DeleteDoctorsBusinessDays(entity);
-            articleService.DeleteArticlesByDoctor(entity);
+            _articleService.DeleteArticlesByDoctor(entity);
             _doctorRepository.Delete(entity);
         }
 
         private void DeleteDoctorsBusinessDays(Doctor entity)
         {
             foreach (BusinessDay businessDay in entity.BusinessDay)
-                businessDayService.Delete(businessDay);
+                _businessDayService.Delete(businessDay);
         }
 
         public void Edit(Doctor entity)
@@ -65,7 +64,6 @@ namespace Service
         {
             return _doctorRepository.GetUserByUsername(username);
         }
-
 
         public Doctor Save(Doctor entity)
         {
@@ -95,8 +93,6 @@ namespace Service
                     break;
                 }
             }
-                
-
         }
 
         public bool CheckJMBGUnique(string JMBG)
@@ -107,7 +103,6 @@ namespace Service
                     return false;
                     
             }
-
             return true;
         }
 

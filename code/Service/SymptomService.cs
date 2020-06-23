@@ -10,36 +10,36 @@ namespace Service
 {
     public class SymptomService : ISymptomService
     {
-        private readonly ISymptomRepository _repository;
+        private readonly ISymptomRepository _symptomRepository;
 
         public SymptomService(ISymptomRepository repository)
         {
-            _repository = repository;
+            _symptomRepository = repository;
         }
 
         public void Delete(Symptom entity)
         {
-            _repository.Delete(entity);
+            _symptomRepository.Delete(entity);
         }
 
         public void Edit(Symptom entity)
         {
-            _repository.Edit(entity);
+            _symptomRepository.Edit(entity);
         }
 
         public Symptom Get(long id)
         {
-            return _repository.Get(id);
+            return _symptomRepository.Get(id);
         }
 
         public IEnumerable<Symptom> GetAll()
         {
-            return _repository.GetAll();
+            return _symptomRepository.GetAll();
         }
 
         public Symptom Save(Symptom entity)
         {
-            return _repository.Save(entity);
+            return _symptomRepository.Save(entity);
         }
     }
  }

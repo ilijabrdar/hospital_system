@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  HospitalizationService.cs
- * Author:  david
- * Purpose: Definition of the Class Service.HospitalizationService
- ***********************************************************************/
-
 using bolnica.Controller;
 using bolnica.Service;
 using Model.Doctor;
@@ -14,36 +8,36 @@ namespace Controller
 {
     public class HospitalizationController : IHospitalizationController
     {
-        private IHospitalizationService _service;
+        private IHospitalizationService _hospitalizationService;
 
         public HospitalizationController(IHospitalizationService service)
         {
-            _service = service;
+            _hospitalizationService = service;
         }
 
         public void Delete(Hospitalization entity)
         {
-            _service.Delete(entity);
+            _hospitalizationService.Delete(entity);
         }
 
         public void Edit(Hospitalization entity)
         {
-            _service.Edit(entity);
+            _hospitalizationService.Edit(entity);
         }
 
         public Hospitalization Get(long id)
         {
-            return _service.Get(id);
+            return _hospitalizationService.Get(id);
         }
 
         public IEnumerable<Hospitalization> GetAll()
         {
-            return _service.GetAll();
+            return _hospitalizationService.GetAll();
         }
 
         public Hospitalization Save(Hospitalization entity)
         {
-            return _service.Save(entity);
+            return _hospitalizationService.Save(entity);
         }
     }
 }

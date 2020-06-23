@@ -1,5 +1,6 @@
 using bolnica.Repository;
 using Model.Doctor;
+using Model.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,5 +35,19 @@ namespace Repository
             operation.Doctor = _doctorRepository.GetEager(operation.Doctor.GetId());
             return operation;
         }
+
+        public List<Operation> GetOperationsByDoctor(Doctor doctor)
+        {
+            List<Operation> operations = this.GetAllEager().ToList();
+            List<Operation> retVal = new List<Operation>();
+            foreach(Operation operation in operations)
+            {
+                if (operation.Doctor.Id == doctor.Id) {
+                    retVal.Add(operation);
+                }
+            }
+            return retVal;
+        }
+
     }
 }

@@ -1,5 +1,3 @@
-
-
 using bolnica.Controller;
 using bolnica.Service;
 using Model.PatientSecretary;
@@ -10,20 +8,20 @@ namespace Controller
 {
     public class DiagnosisController : IDiagnosisController
     {
-        private readonly IDiagnosisService _service;
+        private readonly IDiagnosisService _diagnosisService;
         public DiagnosisController(IDiagnosisService service)
         {
-            _service = service;
+            _diagnosisService = service;
         }
 
         public Diagnosis Get(long id)
         {
-            return _service.Get(id); throw new NotImplementedException();
+            return _diagnosisService.Get(id);
         }
 
         public IEnumerable<Diagnosis> GetAll()
         {
-            return _service.GetAll();
+            return _diagnosisService.GetAll();
         }
 
         public Diagnosis RecommendDiagnosisBasedOnSymptoms(Symptom symptom, Diagnosis diagnosis)

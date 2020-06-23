@@ -54,8 +54,9 @@ namespace Service
         {
             if (entity.GetType() == typeof(Doctor))
             {
-
-            }else if(entity.GetType() == typeof(Patient))
+                _doctorService.Edit((Doctor)entity);
+            }
+            else if(entity.GetType() == typeof(Patient))
             {
                 _patientService.Edit((Patient)entity);
             }
