@@ -44,7 +44,7 @@ namespace Repository
             Examination exam = base.Get(id);
             exam.Doctor = doctorRepository.Get(exam.Doctor.GetId());
             exam.User = patientRepository.Get(exam.User.GetId());
-            exam.Diagnosis = diagnosisRepository.Get(exam.Diagnosis.GetId());
+            exam.Diagnosis = diagnosisRepository.GetEager(exam.Diagnosis.GetId());
             exam.Therapy = therapyRepository.Get(exam.Therapy.GetId());
             exam.Refferal = referralRepository.Get(exam.Refferal.GetId());
 

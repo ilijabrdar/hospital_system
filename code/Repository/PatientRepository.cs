@@ -11,7 +11,6 @@ namespace Repository
 {
    public class PatientRepository : CSVRepository<Patient,long> ,IPatientRepository, IEagerRepository<Patient,long>
    {
-        private String FilePath;
         private readonly IPatientFileRepository patientFleRepository;
         public PatientRepository(ICSVStream<Patient> stream, ISequencer<long> sequencer, IPatientFileRepository patientFileRepository)
             : base(stream, sequencer)
