@@ -48,6 +48,7 @@ namespace Repository
             exam.Therapy = therapyRepository.GetEager(exam.Therapy.GetId());
             exam.Refferal = referralRepository.GetEager(exam.Refferal.GetId());
 
+
             foreach (Prescription pres in exam.Prescription)
             {
                 Prescription temp = prescriptionRepository.GetEager(pres.Id);

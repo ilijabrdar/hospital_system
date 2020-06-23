@@ -35,7 +35,7 @@ namespace PacijentBolnicaZdravo
         private readonly String _doctorGrade_File = "../../../code/Resources/Data/doctorGradeFile.csv";
         private readonly String _hospitalization_File = "../../../code/Resources/Data/hospitalizationFile.csv";
         private readonly String _examinationPrevius_File = "../../../code/Resources/Data/examinationPrevious.csv";
-        private readonly String _examinationUpcoming_File = "../../../code/Resources/Data/examinationUpcoming.csv";
+        private readonly String _examinationUpcoming_File = "../../../code/Resources/Data/upcomingExamination.csv";
         private readonly String _operation_File = "../../../code/Resources/Data/operationFile.csv";
         private readonly String _prescription_File = "../../../code/Resources/Data/prescriptionFile.csv";
         private readonly String _referral_File = "../../../code/Resources/Data/referralFile.csv";
@@ -80,8 +80,8 @@ namespace PacijentBolnicaZdravo
             var prescriptionRepository = new PrescriptionRepository(new CSVStream<Prescription>(_prescription_File, new PrescriptionCSVConverter(",", ":")), new LongSequencer(), drugRepository);
             var therapyRepository = new TherapyRepository(new CSVStream<Therapy>(_therapy_File, new TherapyCSVConverter(",", ":")), new LongSequencer(), drugRepository);
             var referralRepository = new ReferralRepository(new CSVStream<Referral>(_referral_File, new ReferralCSVConverter(",")), new LongSequencer(), doctorRepository);
-            var hospitalizationRepository = new HospitalizationRepository(new CSVStream<Hospitalization>(_hospitalization_File, new HospitalizationCSVConverter(",")), new LongSequencer(), roomRepo);
-            var operationRepository = new OperationRepository(new CSVStream<Operation>(_operation_File, new OperationCSVConverter(",")), new LongSequencer(), roomRepo, doctorRepository);
+            var hospitalizationRepository = new HospitalizationRepository(new CSVStream<Hospitalization>(_hospitalization_File, new HospitalizationCSVConverter(",")), new LongSequencer(), roomRepo,patientRepo);
+            var operationRepository = new OperationRepository(new CSVStream<Operation>(_operation_File, new OperationCSVConverter(",")), new LongSequencer(), roomRepo, doctorRepository, patientRepo);
             var examinationUpcomingRepository = new ExaminationUpcomingRepository(new CSVStream<Examination>(_examinationUpcoming_File, new UpcomingExaminationCSVConverter(",")), new LongSequencer(), doctorRepository, patientRepo);
             var examinationPreviousRepository = new ExaminationPreviousRepository(new CSVStream<Examination>(_examinationPrevius_File, new PreviousExaminationCSVConverter(",", "|")), new LongSequencer(), doctorRepository, patientRepo, diagnosisRepository, prescriptionRepository, therapyRepository, referralRepository);
             patientFileRepo._examinationPreviousRepository = examinationPreviousRepository;

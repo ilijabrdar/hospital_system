@@ -11,7 +11,6 @@ namespace Repository
 {
    public class PatientRepository : CSVRepository<Patient,long> ,IPatientRepository, IEagerRepository<Patient,long>
    {
-        private String FilePath;
         private readonly IPatientFileRepository patientFleRepository;
         private readonly IEagerRepository<Address, long> _addressRepository;
         private readonly IEagerRepository<Town, long> _townRepository;

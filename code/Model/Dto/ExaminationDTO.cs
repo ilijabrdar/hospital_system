@@ -18,6 +18,11 @@ namespace Model.Dto
 
         public ExaminationDTO() { }
 
+        public ExaminationDTO(Period period)
+        {
+            Period = period;
+        }
+
         public ExaminationDTO(long id, Model.Users.Doctor doctor, Room room, Period period, Patient patient)
         {
             Id = id;
@@ -42,6 +47,13 @@ namespace Model.Dto
             Room = room;
             Period = period;
         }
+
+        public ExaminationDTO(Model.Users.Doctor doctor, Period period)
+        {
+            Doctor = doctor;
+            Period = period;
+        }
+
 
         public ExaminationDTO( Patient patient, Period period)
         {

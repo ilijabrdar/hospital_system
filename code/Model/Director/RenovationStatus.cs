@@ -7,13 +7,13 @@ namespace Model.Director
    public enum RenovationStatus
    {
         [Description("U toku")]
-        InProgress,
+        Traje,
         [Description("Zavrseno")]
-        Completed,
+        Zavrseno,
         [Description("Zakazano")]
-        Scheduled,
+        Zakazano,
         [Description("Otkazano")]
-        Cancelled,
+        Otkazano,
    
    }
 }

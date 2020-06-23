@@ -1,6 +1,7 @@
 using bolnica.Controller;
 using bolnica.Service;
 using Model.Doctor;
+using Model.Users;
 using System;
 using System.Collections.Generic;
 
@@ -38,6 +39,11 @@ namespace Controller
         public Hospitalization Save(Hospitalization entity)
         {
             return _hospitalizationService.Save(entity);
+        }
+
+        public List<Hospitalization> GetHospitalizationByDoctor(Doctor doctor)
+        {
+            return _hospitalizationService.GetHospitalizationByDoctor(doctor);
         }
     }
 }

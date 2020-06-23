@@ -9,7 +9,7 @@ namespace Service
 {
    public class DrugService : IDrugService
    {
-      private readonly IDrugRepository _repository;
+        private readonly IDrugRepository _repository;
         private readonly IIngredientService _ingredientService;
         public DrugService(IDrugRepository repository)
         {

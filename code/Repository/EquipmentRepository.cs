@@ -8,8 +8,7 @@ namespace Repository
 {
    public class EquipmentRepository : CSVRepository<Equipment,long>, IEquipmentRepository
    {
-      private String FilePath;
-      public EquipmentRepository(ICSVStream<Equipment> stream, ISequencer<long> sequencer)
+        public EquipmentRepository(ICSVStream<Equipment> stream, ISequencer<long> sequencer)
            : base(stream, sequencer)
         {
 
