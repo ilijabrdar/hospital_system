@@ -79,7 +79,7 @@ namespace Controller
 
         public List<ExaminationDTO> Search(BusinessDayDTO businessDayDTO)
         {
-            throw new NotImplementedException();
+            return _businessDayService.Search(businessDayDTO);
         }
 
         public bool SetRoomForBusinessDay(BusinessDay businessDay, Room room)

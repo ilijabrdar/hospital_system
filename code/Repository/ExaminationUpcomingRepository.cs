@@ -61,7 +61,7 @@ namespace bolnica.Repository
                 List<Examination> findExamination = new List<Examination>();
                 foreach (Examination examination in examinations)
                 {
-                    if (examination.Doctor.Id == patient.Id)
+                    if (examination.User.Id == patient.Id)
                     {
                         findExamination.Add(examination);
                     }

@@ -317,6 +317,7 @@
     </Compile>
     <Compile Include="Repository\abstract\IAddressRepository.cs" />
     <Compile Include="Repository\abstract\IEagerRepository.cs" />
+    <Compile Include="Repository\abstract\IEditRepository.cs" />
     <Compile Include="Repository\abstract\IGetterRepository.cs" />
     <Compile Include="Repository\abstract\IStateRepository.cs" />
     <Compile Include="Repository\abstract\ITownRepository.cs" />
@@ -614,12 +615,11 @@
     <None Include="Resources\Data\businessdays.csv" />
     <None Include="Resources\Data\diagnosisFile.csv" />
     <None Include="Resources\Data\director.csv" />
-    <None Include="Resources\Data\DoctorGradeFile.csv" />
+    <None Include="Resources\Data\doctorGradeFile.csv" />
     <None Include="Resources\Data\doctors.csv" />
     <None Include="Resources\Data\drugs.csv" />
     <None Include="Resources\Data\equipment.csv" />
     <None Include="Resources\Data\examinationPrevious.csv" />
-    <None Include="Resources\Data\examinationUpcoming.csv" />
     <None Include="Resources\Data\hospitalizationFile.csv" />
     <None Include="Resources\Data\ingredients.csv" />
     <None Include="Resources\Data\operationFile.csv" />
@@ -633,6 +633,7 @@
     <None Include="Resources\Data\speciality.csv" />
     <None Include="Resources\Data\symptomFile.csv" />
     <None Include="Resources\Data\therapyFile.csv" />
+    <None Include="Resources\Data\upcomingExamination.csv" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
