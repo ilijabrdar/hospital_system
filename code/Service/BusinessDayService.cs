@@ -126,7 +126,7 @@ namespace Service
             BusinessDay businessDay = GetExactDay(examination.Doctor, examination.Period.StartDate);
             if (businessDay == null) return true;
             //if ()
-            return false;
+                return false;
         }
 
         private bool isRoomEmpty(Room room, Period period)

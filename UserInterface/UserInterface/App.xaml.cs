@@ -73,6 +73,8 @@ namespace UserInterface
 
         public IDoctorController DoctorController { get; private set; }
         public IBusinessDayController BusinessDayController { get; private set; }
+        public BusinessDayService businessDayService { get; set; }
+
 
         public IExaminationController ExaminationController { get; private set; }
 
@@ -132,7 +134,7 @@ namespace UserInterface
             var patientService = new PatientService(patientRepo, patientFileService);
             PatientController = new PatientController(patientService);
 
-            var businessDayService = new BusinessDayService(businessDayRepository, doctorService);
+            businessDayService = new BusinessDayService(businessDayRepository, doctorService);
             BusinessDayController = new BusinessDayController(businessDayService);
 
             var roomService = new RoomService(roomRepository, null, businessDayService);

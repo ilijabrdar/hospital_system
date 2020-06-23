@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using bolnica.Model.Dto;
 using Model.Users;
 
 namespace UserInterface
@@ -20,11 +21,12 @@ namespace UserInterface
     /// </summary>
     public partial class AppointmentSearch : Window
     {
-        public int Day { get; set; }
-        public static int Month { get; set; }
-        public static int Year { get; set; }
-        public int Hour  { get; set; }
-        public int Minute { get; set; }
+        public int FromDay { get; set; }
+        public static int FromMonth { get; set; }
+        public static int FromYear { get; set; }
+        public static int ToDay  { get; set; }
+        public static int ToMonth { get; set; }
+        public static int ToYear { get; set; }
 
         public List<Doctor> Doctors { get; set; }
         public Doctor SelectedDoctor { get; set; }
@@ -33,11 +35,12 @@ namespace UserInterface
         {
             InitializeComponent();
             this.DataContext = this;
-            Day = DateTime.Now.Day;
-            Month = DateTime.Now.Month;
-            Year = DateTime.Now.Year;
-            Hour = DateTime.Now.Hour;
-            Minute = DateTime.Now.Minute;
+            FromDay = DateTime.Now.Day;
+            FromMonth = DateTime.Now.Month;
+            FromYear = DateTime.Now.Year;
+            ToDay = DateTime.Now.Hour;
+            ToMonth = DateTime.Now.Minute;
+            ToYear = DateTime.Now.Minute;
 
             App app = Application.Current as App;
             Doctors = app.DoctorController.GetAll().ToList();
@@ -52,11 +55,12 @@ namespace UserInterface
 
         private void FilterExaminations(object sender, RoutedEventArgs e)
         {
-            //ExaminationDTO examinationFilter = new ExaminationDTO(SelectedDoctor, "", "", new DateTime(Year, Month, Day, Hour, Minute, 0), new DateTime());
+            BusinessDayDTO filter = new BusinessDayDTO(SelectedDoctor, new Model.PatientSecretary.Period(new DateTime(FromYear, FromMonth, FromDay, 0, 0, 0), new DateTime(ToYear, ToMonth, ToDay, 0, 0, 0)));
             //if ((bool)DoctorFirst.IsChecked)
             //    MainWindow.FilterFreeSlots(examinationFilter, true);
             //else if((bool)PeriodFirst.IsChecked)
             //    MainWindow.FilterFreeSlots(examinationFilter, false);
+            MainWindow.FilterFreeSlots(filter);
             this.Close();
         }
     }

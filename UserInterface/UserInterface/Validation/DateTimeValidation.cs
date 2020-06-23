@@ -76,15 +76,15 @@ namespace UserInterface.Validation
             if (String.IsNullOrEmpty(val))
                 return new ValidationResult(false, "Obavezno");
 
-            if (AppointmentSearch.Year != 0 && AppointmentSearch.Month != 0)
+            if (AppointmentSearch.FromYear != 0 && AppointmentSearch.FromMonth != 0)
             {
                 if (int.TryParse(val, out int day))
                 {
-                    if (day < 1 || day > DateTime.DaysInMonth(AppointmentSearch.Year, AppointmentSearch.Month))
-                        return new ValidationResult(false, "1 - " + DateTime.DaysInMonth(AppointmentSearch.Year, AppointmentSearch.Month));
+                    if (day < 1 || day > DateTime.DaysInMonth(AppointmentSearch.FromYear, AppointmentSearch.FromMonth))
+                        return new ValidationResult(false, "1 - " + DateTime.DaysInMonth(AppointmentSearch.FromYear, AppointmentSearch.FromMonth));
                     return new ValidationResult(true, null);
                 }
-                return new ValidationResult(false, "1 - " + DateTime.DaysInMonth(AppointmentSearch.Year, AppointmentSearch.Month));
+                return new ValidationResult(false, "1 - " + DateTime.DaysInMonth(AppointmentSearch.FromYear, AppointmentSearch.FromMonth));
             }
             else
             {

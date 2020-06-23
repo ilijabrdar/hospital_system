@@ -23,6 +23,8 @@ using Model.Users;
 using Model.PatientSecretary;
 using Model.Dto;
 using Model.Director;
+using bolnica.Model.Dto;
+using bolnica.Service;
 
 namespace UserInterface
 {
@@ -49,8 +51,8 @@ namespace UserInterface
         public static List<ExaminationDTO> ExaminationDisplay { get; set; }
         public ExaminationDTO SelectedExamination { get; set; }
 
-        public static List<Examination> freeSlots { get; set; }
-        public static List<Examination> FreeSlots { get; set; }
+        public static List<ExaminationDTO> freeSlots { get; set; }
+        public static List<ExaminationDTO> FreeSlots { get; set; }
 
 
 
@@ -99,8 +101,8 @@ namespace UserInterface
             FillExaminationTable();
 
 
-            FreeSlots = new List<Examination>();
-            freeSlots = new List<Examination>(FreeSlots);
+            FreeSlots = new List<ExaminationDTO>();
+            freeSlots = new List<ExaminationDTO>(FreeSlots);
 
             Shortcuts = new List<Shortcut>();
             CreateShortcuts();
@@ -600,9 +602,9 @@ namespace UserInterface
 
         private void SwapFreeLists(object sender, RoutedEventArgs e)
         {
-            freeSlots = new List<Examination>(FreeSlots);
-            ee.ItemsSource = null;
-            ee.ItemsSource = freeSlots;
+            //freeSlots = new List<Examination>(FreeSlots);
+            //ee.ItemsSource = null;
+            //ee.ItemsSource = freeSlots;
         }
 
         public static void FilterExaminations(ExaminationDTO examinationFilter)
@@ -642,34 +644,15 @@ namespace UserInterface
                 e.CanExecute = true;
         }
 
-        public static void FilterFreeSlots(ExaminationDTO examinationFilter, bool doctorPriority)
+        public static void FilterFreeSlots(BusinessDayDTO examinationFilter /*, bool doctorPriority*/)
         {
-            //freeSlots = new List<Examination>(FreeSlots);
-            //for(int i = 0; i < FreeSlots.Count; i++)
-            //{
-            //    if (!String.IsNullOrEmpty(examinationFilter.Doctor) && FreeSlots[i].doctor != examinationFilter.Doctor)
-            //    {
-            //        if (doctorPriority)
-            //        {
-            //            freeSlots.Remove(FreeSlots[i]);
-            //            continue;
-            //        }
-            //    }
-
-            //    if (FreeSlots[i].dateTime != examinationFilter.FromDate)
-            //    {
-            //        if (!doctorPriority)
-            //        {
-            //            if (Math.Abs(FreeSlots[i].dateTime.Day - examinationFilter.FromDate.Day) > 2)
-            //            {
-            //                freeSlots.Remove(FreeSlots[i]);
-            //                continue;
-            //            }
-            //        }
-            //    }
-            //}
-            //ee.ItemsSource = null;
-            //ee.ItemsSource = freeSlots;
+            //freeSlots = new List<ExaminationDTO>(FreeSlots);
+            App app = Application.Current as App;
+            //app.businessDayService._searchPeriods = new NoPrioritySearch();
+            //app.businessDayService._searchPeriods = new DoctorPrioritySearch();
+            app.businessDayService._searchPeriods = new DatePrioritySearch();
+            FreeSlots = app.BusinessDayController.Search(examinationFilter);
+            ee.ItemsSource = FreeSlots;
         }
 
         Examination SelectedFreeSlot;

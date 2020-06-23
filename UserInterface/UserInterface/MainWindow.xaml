@@ -441,13 +441,13 @@
                             <Image Source="blue_arrow.png" RenderTransformOrigin="0.571,0.571"/>
                         </Button>
                     </Grid>
-                    <DataGrid x:Name="EmptyExaminations" Grid.Row="1" HorizontalAlignment="Stretch" Margin="10,10,10,10" VerticalAlignment="Stretch" ItemsSource="{Binding freeSlots}" 
+                    <DataGrid x:Name="EmptyExaminations" Grid.Row="1" HorizontalAlignment="Stretch" Margin="10,10,10,10" VerticalAlignment="Stretch" ItemsSource="{Binding FreeSlots}" 
                               IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Datum" Binding="{Binding onlyDate}" Width="*"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Vreme" Binding="{Binding dateTime.TimeOfDay}" Width="*"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Doktor" Binding="{Binding doctor}" Width="*"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Sala" Binding="{Binding room}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Datum" Binding="{Binding Period.StartDate.Date}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Vreme" Binding="{Binding Period.StartDate.TimeOfDay}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Doktor" Binding="{Binding Doctor.FullName}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Sala" Binding="{Binding Room.RoomCode}" Width="*"></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                     <Label x:Name="SuccessLabel" Visibility="Collapsed" Content="Pregled uspešno zakazan." Margin="273,12,215,10" Grid.Row="2" FontStyle="Italic" Foreground="Green"/>
