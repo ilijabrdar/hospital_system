@@ -84,7 +84,7 @@ namespace Service
             doctorGrade.NumberOfGrades++;
             foreach(String question in doctorGrade.GradesForEachQuestions.Keys.ToList())
             {
-                doctorGrade.GradesForEachQuestions[question] = (doctorGrade.GradesForEachQuestions[question] +
+                doctorGrade.GradesForEachQuestions[question] = (doctorGrade.GradesForEachQuestions[question]*(doctorGrade.NumberOfGrades-1) +
                                                                 gradesForDoctor[question]) / doctorGrade.NumberOfGrades;
             }
 

@@ -74,8 +74,13 @@ namespace Service
 
         public List<BusinessDay> GetBusinessDaysByDoctor(Doctor doctor)
         {
+            List<BusinessDay> ret = new List<BusinessDay>();
 
-            throw new NotImplementedException();
+            foreach (BusinessDay businessDay in GetAll())
+                if (businessDay.doctor.Id == doctor.Id)
+                    ret.Add(businessDay);
+
+            return ret;
         }
 
         public bool MarkAsOccupied(Period period, BusinessDay businessDay)

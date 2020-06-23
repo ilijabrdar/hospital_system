@@ -38,7 +38,10 @@ namespace bolnica.Service
             DateTime End = Start.AddMinutes(BusinessDayService.durationOfExamination);
             while (End <= businessDay.Shift.EndDate)
             {
-                if (!businessDay.ScheduledPeriods.Any(item => item == new Period(Start, End)))
+
+
+                //if (!businessDay.ScheduledPeriods.Any(item => item == new Period(Start, End)))
+                if (businessDay.ScheduledPeriods.SingleOrDefault(x => x.StartDate == Start) == null)
                 {
                     ExaminationDTO examinationDTO = new ExaminationDTO
                     {
@@ -48,9 +51,11 @@ namespace bolnica.Service
                     };
                     retVal.Add(examinationDTO);
                 }
+                End = End.AddMinutes(BusinessDayService.durationOfExamination);
+                Start = Start.AddMinutes(BusinessDayService.durationOfExamination);
 
             }
-            return null;
+            return retVal;
         }
 
         public List<BusinessDay> DaysForExactPeriod(Period period, List<BusinessDay> businessDaysCollection)
@@ -60,7 +65,7 @@ namespace bolnica.Service
             {
                 foreach (BusinessDay day in businessDaysCollection)
                 {
-                    if (day.Shift.StartDate.Date >= period.StartDate.Date && day.Shift.EndDate.Date <= period.EndDate.Date)
+                    if (day.Shift.StartDate.Date == period.StartDate.Date)
                     {
                         businessDays.Add(day);
                         return businessDays;
