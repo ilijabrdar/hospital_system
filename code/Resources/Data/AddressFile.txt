@@ -1,8 +1,0 @@
-﻿1,Vuka Karadzica,12,11
-2,Branka Radicevica,1,12
-3,Puskinova,5,11
-4,Jevrejska,3,11
-5,Balzakova,121,11
-6,Seljackih buna,66,12
-7,Bate Brkica,98,12
-8,Mesopotamijska,101,12
