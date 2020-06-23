@@ -18,6 +18,8 @@ using System.Windows.Forms;
 using Model.Doctor;
 using Application = System.Windows.Application;
 using System.Linq;
+using bolnica.Service;
+using bolnica.Model.Dto;
 
 namespace PacijentBolnicaZdravo
 {
@@ -125,6 +127,7 @@ namespace PacijentBolnicaZdravo
             listOfDoctors = app.DoctorController.GetDoctorsBySpeciality(new Speciality("Opsta praksa"));
             ListOfArticles = app.ArticleController.GetAll().ToList();
             doctorsForGrade = new List<Doctor>();
+            upcomingExaminations = new List<ExaminationDTO>();
             List<Examination> examinations = _patient.patientFile.Examination;
             if(examinations != null)
             {
@@ -653,10 +656,6 @@ namespace PacijentBolnicaZdravo
 
         private void CalendarDateChanged(object sender, RoutedEventArgs e)
         {
-            upcomingExaminations.Clear();
-            
-            scheduleExaminationsGrid.Items.Refresh();
-
 
         }
 
@@ -771,7 +770,56 @@ namespace PacijentBolnicaZdravo
 
         private void SearchPeriods(object sender, RoutedEventArgs e)
         {
+            var app = Application.Current as App;
 
+            if (DoctorsForExaminations.SelectedItem == null)
+                return;
+            if(PriorityBox.SelectedIndex == 0)
+            {
+                if (Picker.SelectedDate == null)
+                    return;
+
+                app.BusinessDayService._searchPeriods = new NoPrioritySearch();
+                Doctor doctor = (Doctor)DoctorsForExaminations.SelectedItem;
+                Period period = new Period();
+                period.StartDate = DateTime.Parse(Picker.Text);
+                BusinessDayDTO businessDayDTO = new BusinessDayDTO(doctor,period);
+                upcomingExaminations = app.BusinessDayController.Search(businessDayDTO);
+                scheduleExaminationsGrid.ItemsSource = upcomingExaminations;
+            }else if(PriorityBox.SelectedIndex == 1)
+            {
+                if (Picker.SelectedDate == null || Picker2.SelectedDate == null)
+                    return;
+
+                Period period = new Period();
+                period.StartDate = DateTime.Parse(Picker.Text);
+                period.EndDate = DateTime.Parse(Picker2.Text);
+
+                if (period.StartDate >= period.EndDate)
+                    return;
+
+                app.BusinessDayService._searchPeriods = new DoctorPrioritySearch();
+                Doctor doctor = (Doctor)DoctorsForExaminations.SelectedItem;
+                BusinessDayDTO businessDayDTO = new BusinessDayDTO(doctor, period);
+                upcomingExaminations = app.BusinessDayController.Search(businessDayDTO);
+                scheduleExaminationsGrid.ItemsSource = upcomingExaminations;
+            }else
+            {
+                if (Picker.SelectedDate == null || Picker2.SelectedDate == null)
+                    return;
+
+                Period period = new Period();
+                period.StartDate = DateTime.Parse(Picker.Text);
+                period.EndDate = DateTime.Parse(Picker2.Text);
+                if (period.StartDate >= period.EndDate)
+                    return;
+
+                app.BusinessDayService._searchPeriods = new DatePrioritySearch();
+                Doctor doctor = (Doctor)DoctorsForExaminations.SelectedItem;
+                BusinessDayDTO businessDayDTO = new BusinessDayDTO(doctor, period);
+                upcomingExaminations = app.BusinessDayController.Search(businessDayDTO);
+                scheduleExaminationsGrid.ItemsSource = upcomingExaminations;
+            }
         }
 
         private void PriorityBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

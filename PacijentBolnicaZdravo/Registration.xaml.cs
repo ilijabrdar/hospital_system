@@ -167,11 +167,7 @@ namespace PacijentBolnicaZdravo
                 Email.GetBindingExpression(System.Windows.Controls.TextBox.TextProperty).UpdateSource();
                 return;
             }
-           /* if (Adress.Text.ToString().Equals(""))
-            {
-                Adress.GetBindingExpression(System.Windows.Controls.TextBox.TextProperty).UpdateSource();
-                return;
-            }*/
+
             if (PhoneNumber.Text.ToString().Equals(""))
             {
                 PhoneNumber.GetBindingExpression(System.Windows.Controls.TextBox.TextProperty).UpdateSource();
@@ -183,6 +179,16 @@ namespace PacijentBolnicaZdravo
                 return;
             }
 
+            var state = Country.SelectedItem as State;
+            var town = Town.SelectedItem as Town;
+            var selectedAddress = Addressessss.SelectedItem as Address;
+
+            if (town == null || state == null || selectedAddress == null)
+            {
+                return;
+            }
+
+         
 
             String username = Username.Text.ToString();
             String name = Name.Text.ToString();
@@ -195,6 +201,10 @@ namespace PacijentBolnicaZdravo
             String passw = NewPassword.Text.ToString();
 
             Patient patient = new Patient(-1, name, surname, Id, email, phone, date, null, username, passw, null);
+            patient.Address = selectedAddress;
+            patient.Address.Town = town;
+            patient.Address.Town.State = state;
+
             var app = Application.Current as App;
             var temp = app.UserController.Save(patient);
             if (temp == null)

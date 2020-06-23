@@ -56,6 +56,7 @@ namespace PacijentBolnicaZdravo
         public IStateController StateController { get; set; }
         public ITownController TownController { get; set; }
         public IAddressController AddressController { get; set; }
+        public BusinessDayService BusinessDayService { get; set; }
 
         App()
         {
@@ -102,9 +103,9 @@ namespace PacijentBolnicaZdravo
             var drugService = new DrugService(drugRepository);
             var ingredientService = new IngredientService(ingredientRepository);
             var doctorService = new DoctorService(doctorRepository);
-            var businessDayService = new BusinessDayService(businessDayRepo,doctorService);
+            BusinessDayService = new BusinessDayService(businessDayRepo,doctorService);
             var renovationService = new RenovationService(renovationRepo);
-            var roomService = new RoomService(roomRepo, renovationService,businessDayService);
+            var roomService = new RoomService(roomRepo, renovationService,BusinessDayService);
             var roomTypeService = new RoomTypeService(roomTypeRepo,roomService);
             var equipmentService = new EquipmentService(equipmentRepo,roomService);
             var doctorGradeService = new DoctorGradeService(doctorGradeRepo);
@@ -121,7 +122,7 @@ namespace PacijentBolnicaZdravo
             UserController = new UserController(userService);
             ArticleController = new ArticleController(articleService);
             DoctorController = new DoctorController(doctorService);
-            BusinessDayController = new BusinessDayController(businessDayService);
+            BusinessDayController = new BusinessDayController(BusinessDayService);
             ExaminationController = new ExaminationController(examinationService);
             PatientController = new PatientController(patientService);
             TownController = new TownController(townService);
