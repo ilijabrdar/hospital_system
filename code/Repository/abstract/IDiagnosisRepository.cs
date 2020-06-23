@@ -10,5 +10,5 @@ namespace bolnica.Repository
 {
     public interface IDiagnosisRepository : IGetterRepository<Diagnosis, long>, IEagerRepository<Diagnosis, long>
     {
-}
+    }
 }

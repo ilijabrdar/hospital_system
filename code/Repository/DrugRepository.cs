@@ -60,8 +60,12 @@ namespace Repository
 
         public List<Drug> GetAlternativeDrugs(Drug drug)
         {
-            //TODO
-            throw new NotImplementedException();
+            List<Drug> alternativeDrugs = new List<Drug>();
+            foreach (Drug drugAlternative in drug.Alternative)
+            {
+                alternativeDrugs.Add(drugAlternative);
+            }
+            return alternativeDrugs;
         }
 
         public Drug GetEager(long id)
@@ -69,7 +73,7 @@ namespace Repository
             Drug drug = base.Get(id);
             foreach (Ingredient ingredient in drug.Ingredients)
             {
-                 Ingredient temp = _ingredientRepository.Get(ingredient.Id);
+                Ingredient temp = _ingredientRepository.Get(ingredient.Id);
                 ingredient.Name = temp.Name;
                 ingredient.Quantity = temp.Quantity;
             }

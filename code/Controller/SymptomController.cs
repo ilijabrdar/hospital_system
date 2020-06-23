@@ -9,36 +9,36 @@ namespace bolnica.Controller
 {
     public class SymptomController : ISymptomController
     {
-        private readonly ISymptomService _service;
+        private readonly ISymptomService _symptomService;
 
         public SymptomController(ISymptomService service)
         {
-            _service = service;
+            _symptomService = service;
         }
 
         public void Delete(Symptom entity)
         {
-            _service.Delete(entity);
+            _symptomService.Delete(entity);
         }
 
         public void Edit(Symptom entity)
         {
-            _service.Edit(entity);
+            _symptomService.Edit(entity);
         }
 
         public Symptom Get(long id)
         {
-            return _service.Get(id);
+            return _symptomService.Get(id);
         }
 
         public IEnumerable<Symptom> GetAll()
         {
-            return _service.GetAll();
+            return _symptomService.GetAll();
         }
 
         public Symptom Save(Symptom entity)
         {
-            return _service.Save(entity);
+            return _symptomService.Save(entity);
         }
     }
 }

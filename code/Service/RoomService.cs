@@ -35,8 +35,6 @@ namespace Service
          return null;
       }
 
-
-
         public IEnumerable<Room> GetAll()
         {
             return _repository.GetAllEager();

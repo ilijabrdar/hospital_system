@@ -8,9 +8,7 @@ using System.Text;
 
 namespace bolnica.Repository.CSV.Converter
 {
-
    public class DoctorCSVConverter : ICSVConverter<Doctor>
-
     {
         private readonly string _delimiter;
 
@@ -45,8 +43,7 @@ namespace bolnica.Repository.CSV.Converter
         public string ConvertEntityToCSVFormat(Doctor entity)
         {
             StringBuilder sb = new StringBuilder();
-            string generalData = string.Join(_delimiter, entity.Id, entity.FirstName, entity.LastName, entity.Jmbg, entity.Email, 
-                entity.Phone, entity.DateOfBirth, entity.Address.GetId(), entity.Address.Town.GetId(), entity.Address.Town.State.GetId(), entity.Username, entity.Password,  entity.Specialty.GetId());
+            string generalData = string.Join(_delimiter, entity.Id, entity.FirstName, entity.LastName, entity.Jmbg, entity.Email, entity.Phone, entity.DateOfBirth, entity.Address.GetId(), entity.Address.Town.GetId(), entity.Address.Town.State.GetId(), entity.Username, entity.Password,  entity.Specialty.GetId());
 
             var businessDay_count = entity.BusinessDay == null ? 0 : entity.BusinessDay.Count;
 
@@ -74,5 +71,6 @@ namespace bolnica.Repository.CSV.Converter
                 sb.Append("empty");
             return sb.ToString();
         }
+
     }
 }

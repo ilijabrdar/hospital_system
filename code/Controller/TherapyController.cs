@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  TherapyService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.TherapyService
- ***********************************************************************/
-
 using bolnica.Controller;
 using bolnica.Service;
 using Model.PatientSecretary;
@@ -14,11 +8,11 @@ namespace Controller
 {
     public class TherapyController : ITherapyController
     {
-        private ITherapyService _service;
+        private ITherapyService _therapyService;
 
         public TherapyController(ITherapyService service)
         {
-            _service = service;
+            _therapyService = service;
         }
 
         public Therapy AssignCurrentTherapy(PatientFile patientFile)
@@ -28,27 +22,27 @@ namespace Controller
 
         public void Delete(Therapy entity)
         {
-            _service.Delete(entity);
+            _therapyService.Delete(entity);
         }
 
         public void Edit(Therapy entity)
         {
-            _service.Edit(entity);
+            _therapyService.Edit(entity);
         }
 
         public Therapy Get(long id)
         {
-            return _service.Get(id);
+            return _therapyService.Get(id);
         }
 
         public IEnumerable<Therapy> GetAll()
         {
-            return _service.GetAll();
+            return _therapyService.GetAll();
         }
 
         public Therapy Save(Therapy entity)
         {
-            return _service.Save(entity);
+            return _therapyService.Save(entity);
         }
     }
 }

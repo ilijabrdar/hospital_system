@@ -37,10 +37,9 @@ namespace Repository
             {
                 doctors.Add(GetEager(doctor.GetId()));
             }
-
             return doctors;
-
         }
+
         public Doctor GetEager(long id)
         {
             Doctor doctor = Get(id);

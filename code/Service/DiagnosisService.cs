@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  DiagnosisService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.DiagnosisService
- ***********************************************************************/
-
 using bolnica.Repository;
 using bolnica.Service;
 using Model.PatientSecretary;
@@ -15,23 +9,21 @@ namespace Service
     public class DiagnosisService : IDiagnosisService
     {
 
-        private IDiagnosisRepository _repository;
+        private IDiagnosisRepository _diagnosisRepository;
 
         public DiagnosisService(IDiagnosisRepository repository)
         {
-            _repository = repository;
+            _diagnosisRepository = repository;
         }
-
-   
 
         public Diagnosis Get(long id)
         {
-            return _repository.Get(id);
+            return _diagnosisRepository.Get(id);
         }
 
         public IEnumerable<Diagnosis> GetAll()
         {
-            return _repository.GetAll();
+            return _diagnosisRepository.GetAll();
         }
 
         public Diagnosis RecommendDiagnosisBasedOnSymptoms(Symptom symptom, Diagnosis diagnosis)
