@@ -17,8 +17,9 @@ namespace Repository
         private readonly IPrescriptionRepository prescriptionRepository;
         private readonly ITherapyRepository therapyRepository;
         private readonly IReferralRepository referralRepository;
+
         public ExaminationPreviousRepository(ICSVStream<Examination> stream, ISequencer<long> sequencer, IDoctorRepository doctorRepository, IPatientRepository patientRepository, IDiagnosisRepository diagnosisRepository, IPrescriptionRepository prescriptionRepository, ITherapyRepository therapyRepository, IReferralRepository referralRepository)
-  : base(stream, sequencer)
+         : base(stream, sequencer)
         {
             this.doctorRepository = doctorRepository;
             this.patientRepository = patientRepository;
@@ -27,6 +28,7 @@ namespace Repository
             this.therapyRepository = therapyRepository;
             this.referralRepository = referralRepository;
         }
+
         public IEnumerable<Examination> GetAllEager()
         {
             List<Examination> examinations = new List<Examination>();
@@ -57,7 +59,6 @@ namespace Repository
                 }
                 pres.Drug = drugs;
             }
-
             return exam;
         }
 

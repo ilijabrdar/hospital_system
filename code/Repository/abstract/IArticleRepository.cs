@@ -6,6 +6,5 @@ namespace Repository
 {
    public interface IArticleRepository : IRepository<Article, long>, IEagerRepository<Article, long>
    {
-
    }
 }

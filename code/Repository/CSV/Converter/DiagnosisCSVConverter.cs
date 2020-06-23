@@ -9,8 +9,8 @@ namespace bolnica.Repository.CSV.Converter
 {
      public  class DiagnosisCSVConverter : ICSVConverter<Diagnosis>
     {
-        private readonly String _delimiter = ",";
-        private readonly string _symptomDelimiter=":";
+        private readonly String _delimiter;
+        private readonly string _symptomDelimiter;
 
         public DiagnosisCSVConverter(string delimiter, string symptomDelimiter)
         {
@@ -32,8 +32,6 @@ namespace bolnica.Repository.CSV.Converter
             diagnosis.Symptom = symptoms;
 
             return diagnosis;
-
-
         }
 
         public string ConvertEntityToCSVFormat(Diagnosis entity)
@@ -51,5 +49,6 @@ namespace bolnica.Repository.CSV.Converter
                 stringBuilder.Remove(stringBuilder.Length - 1, 1);
             return stringBuilder.ToString();
         }
+
     }
 }

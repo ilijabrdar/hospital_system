@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  OperationService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.OperationService
- ***********************************************************************/
-
 using bolnica.Service;
 using Model.Doctor;
 using Model.Users;
@@ -15,42 +9,42 @@ namespace Service
 {
    public class OperationService : IOperationService
    {
-      private IOperationRepository _repository;
+      private IOperationRepository _operationRepository;
 
         public OperationService(IOperationRepository repository)
         {
-            _repository = repository;
+            _operationRepository = repository;
         }
 
         public void Delete(Operation entity)
         {
-            _repository.Delete(entity);
+            _operationRepository.Delete(entity);
         }
 
         public void Edit(Operation entity)
         {
-            _repository.Edit(entity);
+            _operationRepository.Edit(entity);
         }
 
         public Operation Get(long id)
         {
-            return _repository.Get(id);
+            return _operationRepository.Get(id);
         }
 
         public IEnumerable<Operation> GetAll()
         {
-            return _repository.GetAll();
+            return _operationRepository.GetAll();
         }
 
         public Operation Save(Operation entity)
         {
 
-           return _repository.Save(entity);
+           return _operationRepository.Save(entity);
         }
 
         public List<Operation> GetOperationsByDoctor(Doctor doctor)
         {
-            return _repository.GetOperationsByDoctor(doctor);
+            return _operationRepository.GetOperationsByDoctor(doctor);
         }
     }
 }

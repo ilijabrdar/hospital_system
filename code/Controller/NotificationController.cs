@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  NotificationService.cs
- * Author:  david
- * Purpose: Definition of the Class Service.NotificationService
- ***********************************************************************/
-
 using Model.PatientSecretary;
 using Model.Users;
 using System;
@@ -14,11 +8,9 @@ namespace Controller
    {
       public Drug NotifyDoctorOfAddedDrug(Drug drug, Doctor doctor)
       {
-         // TODO: implement
+         // TODO: notification 
          return null;
       }
-   
-      //private Service.IService _service;
-   
+      
    }
 }

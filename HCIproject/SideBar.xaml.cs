@@ -321,7 +321,7 @@ namespace HCIproject
 
         private void Button_Click_5(object sender, RoutedEventArgs e)
         {//sacuvaj lozinku
-         //TODO provera da li je dobra stara sifra
+         // provera da li je dobra stara sifra
             if (NovaLozTxt.Password != PotvNovaLozTxt.Password)
             {
                 obavesti.Foreground = new SolidColorBrush(Color.FromRgb(199, 24, 24));
