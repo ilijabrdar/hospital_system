@@ -49,9 +49,13 @@ namespace Service
 
         public IEnumerable<Equipment> GetInconsumableEquipment() => _repository.getInconsumableEquipment();
 
-        public bool CheckEquipmentNameUnique(Equipment equipment)
+        public bool CheckEquipmentNameUnique(String name)
         {
-            throw new NotImplementedException();
+            foreach (Equipment equipment in GetAll())
+                if (equipment.Name.Equals(name))
+                    return false;
+
+            return true;
         }
     }
 }

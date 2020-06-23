@@ -5,6 +5,7 @@ using Model.Users;
 using Repository;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Service
 {
@@ -79,8 +80,9 @@ namespace Service
         public DoctorGrade GiveGradeToDoctor(Doctor doctor, Dictionary<string, double> gradesForDoctor)
         {
             DoctorGrade doctorGrade = doctor.DoctorGrade;
+
             doctorGrade.NumberOfGrades++;
-            foreach(String question in doctorGrade.GradesForEachQuestions.Keys)
+            foreach(String question in doctorGrade.GradesForEachQuestions.Keys.ToList())
             {
                 doctorGrade.GradesForEachQuestions[question] = (doctorGrade.GradesForEachQuestions[question] +
                                                                 gradesForDoctor[question]) / doctorGrade.NumberOfGrades;

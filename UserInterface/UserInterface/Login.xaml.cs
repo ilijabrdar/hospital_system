@@ -35,8 +35,8 @@ namespace UserInterface
             var userController = app.UserController;
             var SecretaryController = app.SecretaryController;
             PasswordBox passwordBox = FindName("password") as PasswordBox;
-            try
-            {
+            //try
+            //{
                 Secretary user = (Secretary)userController.Login(Username, passwordBox.Password);
                 MainWindow mainWindow = new MainWindow(user);
                 mainWindow.Show();
@@ -48,12 +48,12 @@ namespace UserInterface
                 //    IntroductionWizard wizard = new IntroductionWizard();
                 //    wizard.ShowDialog();
                 //}
-            }
-            catch(Exception exception)
-            {
-                TextBlock err = (TextBlock)FindName("ErrorMessage");
-                err.Visibility = Visibility.Visible;
-            }     
+            //}
+            //catch(Exception exception)
+            //{
+            //    TextBlock err = (TextBlock)FindName("ErrorMessage");
+            //    err.Visibility = Visibility.Visible;
+            //}     
         }
     }
 }

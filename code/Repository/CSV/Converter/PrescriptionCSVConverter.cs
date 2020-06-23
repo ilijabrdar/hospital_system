@@ -20,9 +20,9 @@ namespace bolnica.Repository.CSV.Converter
         public Prescription ConvertCSVFormatToEntity(string entityCSVFormat)
         {  
             string[] tokens = entityCSVFormat.Split(_delimiter.ToCharArray());
-            Prescription prescription = new Prescription(long.Parse(tokens[0]), new Period(DateTime.Parse(tokens[1]), DateTime.Parse(tokens[2])), tokens[3]);
+            Prescription prescription = new Prescription(long.Parse(tokens[0]), new Period(DateTime.Parse(tokens[1]), DateTime.Parse(tokens[2])));
 
-            string[] drugIds = tokens[4].Split(_drugDelimiter.ToCharArray());
+            string[] drugIds = tokens[3].Split(_drugDelimiter.ToCharArray());
             List<Drug> Drugs = new List<Drug>();
 
             foreach(string id in drugIds)
@@ -40,7 +40,7 @@ namespace bolnica.Repository.CSV.Converter
         public string ConvertEntityToCSVFormat(Prescription entity)
         {
             StringBuilder stringBuilder = new StringBuilder();
-            String format = String.Join(_delimiter, entity.Id, entity.Period.StartDate, entity.Period.EndDate, entity.Note);
+            String format = String.Join(_delimiter, entity.Id, entity.Period.StartDate, entity.Period.EndDate);
             stringBuilder.Append(format);
             stringBuilder.Append(_delimiter);
 

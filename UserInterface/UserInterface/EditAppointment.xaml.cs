@@ -13,7 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using bolnica.Controller;
 using Model.Director;
+using Model.Dto;
 using Model.PatientSecretary;
+using Model.Users;
 
 namespace UserInterface
 {
@@ -28,74 +30,35 @@ namespace UserInterface
         public static int Hour { get; set; }
         public static int Minute { get; set; }
 
-        public List<String> Rooms { get; set; }
-        public List<String> Patients { get; set; }
-        public List<String> Doctors { get; set; }
-        public String SelectedRoom { get; set; }
-        public String SelectedPatient { get; set; }
-        public String SelectedDoctor { get; set; }
-        public Examination SelectedExamination { get; set; }
+        public List<Room> Rooms { get; set; }
+        public List<Patient> Patients { get; set; }
+        public List<Doctor> Doctors { get; set; }
+        public Room SelectedRoom { get; set; }
+        public Patient SelectedPatient { get; set; }
+        public Doctor SelectedDoctor { get; set; }
+        public ExaminationDTO SelectedExamination { get; set; }
         
-        public EditAppointment(Examination examination)
+        public EditAppointment(ExaminationDTO examination)
         {
             InitializeComponent();
             this.DataContext = this;
             SelectedExamination = examination;
-            //Day = examination.dateTime.Day;
-            //Month = examination.dateTime.Month;
-            //Year = examination.dateTime.Year;
-            //Hour = examination.dateTime.Hour;
-            //Minute = examination.dateTime.Minute;
-            Rooms = new List<String>();
-            Rooms.Add("S10");
-            Rooms.Add("S11");
-            Rooms.Add("S12");
-            Rooms.Add("S13");
-            Rooms.Add("S14");
-            Rooms.Add("S15");
-            Rooms.Add("S16");
-            Rooms.Add("S17");
-            Patients = new List<String>();
-            Patients.Add("Pera Peric");
-            Patients.Add("Nikola Nikolic");
-            Patients.Add("Marko Markovic");
-            Patients.Add("Ivan Ivanovic");
-            Doctors = new List<String>();
-            Doctors.Add("Pera Peric");
-            Doctors.Add("Nikola Nikolic");
-            Doctors.Add("Marko Markovic");
-            Doctors.Add("Ivan Ivanovic");
-            //SelectedPatient = examination.patient;
-            //SelectedDoctor = examination.doctor;
-            //SelectedRoom = examination.room;
-            PopulateCombos();
+            App app = Application.Current as App;
 
-        }
+            Rooms = app.RoomController.GetAll().ToList();
+            SelectedRoom = Rooms.SingleOrDefault(entity => entity.Id == examination.Room.Id);
 
-        private void PopulateCombos()
-        {
-            //App app = Application.Current as App;
-            //IRoomController roomController = app.RoomController;
-            //Rooms = roomController.GetAll().ToList(); 
-            //foreach (String room in Rooms)
-            //{
-            //    if(room == SelectedExamination.room)
-            //    {
-            //        SelectedRoom = SelectedExamination.room;
-            //    }
-            //}
+            Patients = app.PatientController.GetAll().ToList();
+            SelectedPatient = Patients.SingleOrDefault(entity => entity.Id == examination.Patient.Id);
 
-            //foreach(String doctor in Doctors)
-            //{
-            //    if (doctor == SelectedExamination.doctor)
-            //        SelectedDoctor = doctor;
-            //}
+            Doctors = app.DoctorController.GetAll().ToList();
+            SelectedDoctor = Doctors.SingleOrDefault(entity => entity.Id == examination.Doctor.Id);
 
-            //foreach(String patient in Patients)
-            //{
-            //    if (patient == SelectedExamination.patient)
-            //        SelectedPatient = patient;
-            //}
+            Year = examination.Period.StartDate.Year;
+            Month = examination.Period.StartDate.Month;
+            Day = examination.Period.StartDate.Day;
+            Hour = examination.Period.StartDate.Hour;
+            Minute = examination.Period.StartDate.Minute;
         }
 
         private void CloseDialog(object sender, RoutedEventArgs e)

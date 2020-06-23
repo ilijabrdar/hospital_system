@@ -10,21 +10,19 @@ namespace Model.Doctor
     {
         public long Id;
         public Period Period;
-        public PatientFile PatientFile;
         public Room Room;
+        //TODO description
 
-        public Hospitalization(long id, Period period, PatientFile patientFile, Room room)
+        public Hospitalization(long id, Period period, Room room)
         {
             Id = id;
             this.Period = period;
-            this.PatientFile = patientFile;
             this.Room = room;
         }
 
-        public Hospitalization(Period period, PatientFile patientFile, Room room)
+        public Hospitalization(Period period, Room room)
         {
             Period = period;
-            PatientFile = patientFile;
             Room = room;
         }
 

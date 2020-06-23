@@ -258,8 +258,8 @@ namespace UserInterface
 
         private void EditSelectedAppointment(object sender, RoutedEventArgs e)
         {
-            //EditAppointment editDialog = new EditAppointment(SelectedExamination);
-            //editDialog.ShowDialog();
+            EditAppointment editDialog = new EditAppointment(SelectedExamination);
+            editDialog.ShowDialog();
         }
 
         private void FreeSelectedAppointment(object sender, RoutedEventArgs e)

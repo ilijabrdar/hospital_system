@@ -12,7 +12,7 @@ namespace bolnica.Service
 
         IEnumerable<Equipment> GetConsumableEquipment();
 
-        Boolean CheckEquipmentNameUnique(Equipment equipment);
+        Boolean CheckEquipmentNameUnique(String name);
         IEnumerable<Equipment> GetInconsumableEquipment();
     }
 }

@@ -10,7 +10,7 @@ namespace bolnica.Controller
     public interface IEquipmentController : IController<Equipment,long>
     {
 
-        Boolean CheckEquipmentNameUnique(Equipment equipment);
+        Boolean CheckEquipmentNameUnique(String name);
 
         IEnumerable<Equipment> getConsumableEquipment();
 

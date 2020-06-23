@@ -9,13 +9,11 @@ namespace Repository
    public class OperationRepository : CSVRepository<Operation,long>, IOperationRepository
    {
         private readonly IRoomRepository _roomRepository;
-        private readonly IPatientFileRepository _patientFileRepository;
         private readonly IDoctorRepository _doctorRepository;
-        public OperationRepository(ICSVStream<Operation> stream, ISequencer<long> sequencer, IRoomRepository roomRepository, IPatientFileRepository patientFileRepository, IDoctorRepository doctorRepository)
+        public OperationRepository(ICSVStream<Operation> stream, ISequencer<long> sequencer, IRoomRepository roomRepository, IDoctorRepository doctorRepository)
           : base(stream, sequencer)
         {
             _roomRepository = roomRepository;
-            _patientFileRepository = patientFileRepository;
             _doctorRepository = doctorRepository;
         }
 
@@ -33,7 +31,6 @@ namespace Repository
         {
             Operation operation = Get(id);
             operation.Room = _roomRepository.GetEager(operation.Room.GetId());
-            operation.PatientFile = _patientFileRepository.Get(operation.PatientFile.GetId());
             operation.Doctor = _doctorRepository.GetEager(operation.Doctor.GetId());
             return operation;
         }

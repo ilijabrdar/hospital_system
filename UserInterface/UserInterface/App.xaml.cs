@@ -54,6 +54,8 @@ namespace UserInterface
         private const string BUSINESSDAY_FILE = "../../../../code/Resources/Data/businessdays.csv";
         private const String ARTICLE_FILE = "../../../../code/Resources/Data/articles.csv";
 
+        private const String HOSPITALIZATION_FILE = "../../../../code/Resources/Data/hospitalizationFile.csv";
+        private const String OPERATION_FILE = "../../../../code/Resources/Data/operationFile.csv";
         private readonly String _patient_File = "../../../../code/Resources/Data/patient.csv";
         private readonly String _patientFile_File = "../../../../code/Resources/Data/patientFile.csv";
 
@@ -96,11 +98,11 @@ namespace UserInterface
                new CSVStream<Room>(ROOM_FILE, new RoomCSVConverter(CSV_DELIMITER)),
                new LongSequencer(), roomTypeRepository, equipmentRepository);
 
-            BusinessDayRepository businessDayRepository = new BusinessDayRepository(new CSVStream<BusinessDay>(BUSINESSDAY_FILE, new BusinessDayCSVConverter()), new LongSequencer(), roomRepository);
+            BusinessDayRepository businessDayRepository = new BusinessDayRepository(new CSVStream<BusinessDay>(BUSINESSDAY_FILE, new BusinessDayCSVConverter(CSV_DELIMITER)), new LongSequencer(), roomRepository);
 
 
             SecretaryRepository secretaryRepository = new SecretaryRepository(new CSVStream<Secretary>(SECRETARY_FILE, new SecretaryCSVConverter(CSV_DELIMITER)), new LongSequencer(), addressRepository, townRepository, stateRepository);
-            DoctorRepository doctorRepository = new DoctorRepository(new CSVStream<Doctor>(DOCTOR_FILE, new DoctorCSVConverter(CSV_DELIMITER)), new LongSequencer(), businessDayRepository, specialityRepository, doctorGradeRepository);//, addressRepository,townRepository,stateRepository)
+            DoctorRepository doctorRepository = new DoctorRepository(new CSVStream<Doctor>(DOCTOR_FILE, new DoctorCSVConverter(CSV_DELIMITER)), new LongSequencer(), businessDayRepository, specialityRepository, doctorGradeRepository, addressRepository, townRepository, stateRepository);
             businessDayRepository.doctorRepo = doctorRepository;
             
             ArticleRepository articleRepository = new ArticleRepository(new CSVStream<Article>(ARTICLE_FILE, new ArticleCSVConverter(CSV_ARRAY_DELIMITER)), new LongSequencer(), doctorRepository);
@@ -120,9 +122,13 @@ namespace UserInterface
             DoctorService doctorService = new DoctorService(doctorRepository);
             DoctorController = new DoctorController(doctorService);
 
-            var patientFileRepo = new PatientFileRepository(new CSVStream<PatientFile>(_patientFile_File, new PatientFileCSVConverter(CSV_DELIMITER, CSV_ARRAY_DELIMITER)), new LongSequencer());
-            var patientFileService = new PatientFileService(patientFileRepo);
-            var patientRepo = new PatientRepository(new CSVStream<Patient>(_patient_File, new PatientCSVConverter(CSV_DELIMITER)), new LongSequencer(), patientFileRepo);
+            var patientFileRepository = new PatientFileRepository(new CSVStream<PatientFile>(_patientFile_File, new PatientFileCSVConverter(CSV_DELIMITER, CSV_ARRAY_DELIMITER)), new LongSequencer());
+            HospitalizationRepository hospitalizationRepository = new HospitalizationRepository(new CSVStream<Hospitalization>(HOSPITALIZATION_FILE, new HospitalizationCSVConverter(CSV_DELIMITER)), new LongSequencer(), roomRepository);
+            OperationRepository operationRepository = new OperationRepository(new CSVStream<Operation>(OPERATION_FILE, new OperationCSVConverter(CSV_DELIMITER)), new LongSequencer(), roomRepository, doctorRepository);
+
+
+            var patientFileService = new PatientFileService(patientFileRepository);
+            var patientRepo = new PatientRepository(new CSVStream<Patient>(_patient_File, new PatientCSVConverter(CSV_DELIMITER)), new LongSequencer(), patientFileRepository);
             var patientService = new PatientService(patientRepo, patientFileService);
             PatientController = new PatientController(patientService);
 
@@ -150,6 +156,10 @@ namespace UserInterface
 
             ExaminationService examinationService = new ExaminationService(examinationUpcomingRepository, examinationPreviousRepository);
             ExaminationController = new ExaminationController(examinationService);
+
+            patientFileRepository._hospitalizationRepository = hospitalizationRepository;
+            patientFileRepository._operationRepository = operationRepository;
+            patientFileRepository._examinationPreviousRepository = examinationPreviousRepository;
         }
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)

@@ -13,7 +13,7 @@ namespace bolnica.Controller
         Boolean AddEquipment(Equipment equipment, Room room);
 
 
-        Boolean CheckRoomNameUnique(Room room);
+        Boolean CheckRoomCodeUnique(String name);
 
         IEnumerable<Room> GetRoomsContainingEquipment(Equipment equipment);
     }

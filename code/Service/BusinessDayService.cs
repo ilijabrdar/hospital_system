@@ -121,5 +121,25 @@ namespace Service
             Edit(businessDay);
         }
 
+        public bool isExaminationPossible(ExaminationDTO examination)
+        {
+            BusinessDay businessDay = GetExactDay(examination.Doctor, examination.Period.StartDate);
+            if (businessDay == null) return true;
+            //if ()
+            return false;
+        }
+
+        private bool isRoomEmpty(Room room, Period period)
+        {
+            List<BusinessDay> businessDays = GetAll().ToList();
+            foreach (BusinessDay businessDay in businessDays)
+            {
+                if(businessDay.room.Id == room.Id)
+                {
+                    //if()
+                }
+            }
+            return true;
+        }
     }
 }
