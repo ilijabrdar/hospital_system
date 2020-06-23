@@ -631,7 +631,6 @@
     <None Include="Resources\Data\rooms.csv" />
     <None Include="Resources\Data\roomtypes.csv" />
     <None Include="Resources\Data\speciality.csv" />
-    <None Include="Resources\Data\specialityFile.csv" />
     <None Include="Resources\Data\symptomFile.csv" />
     <None Include="Resources\Data\therapyFile.csv" />
   </ItemGroup>

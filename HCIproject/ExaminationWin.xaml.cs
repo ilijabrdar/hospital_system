@@ -180,7 +180,6 @@ namespace HCIproject
                 dijagnoza = diagnosisCombo.SelectedItem.ToString();
 
                 OperationWin opeWin = new OperationWin((Doctor)user, patientId, dijagnoza);
-                // this.Visibility = Visibility.Hidden;
                 opeWin.ShowDialog();
 
             }

@@ -29,6 +29,7 @@ namespace HCIproject
         public OperationWin(Doctor user, long _patientId, String _dijagnoza)
         {
             this.user = user;
+            this.id = _patientId;
             InitializeComponent();
 
             dijagnoza = _dijagnoza;
