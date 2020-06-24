@@ -21,7 +21,7 @@ namespace bolnica.Controller
         BusinessDay GetExactDay(Doctor doctor, DateTime date);
         List<ExaminationDTO> Search(BusinessDayDTO businessDayDTO);
 
-        Boolean MarkAsOccupied(Period period, BusinessDay businessDay);
+        void MarkAsOccupied(Period period, BusinessDay businessDay);
 
         BusinessDay getDoctorWorkingHoursForSpecificDate(Doctor doctor, DateTime date);
 

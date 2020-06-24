@@ -25,6 +25,14 @@ namespace Model.PatientSecretary
             Doctor = doctor;
             Period = period;
         }
+
+        public Examination(User patient, Users.Doctor doctor, Period period)
+        {
+            User = patient;
+            Doctor = doctor;
+            Period = period;
+        }
+
         public Examination(long id, User user, Users.Doctor doctor, Period period, Diagnosis diagnosis, Anemnesis anemnesis, Therapy therapy, Referral refferal)
         {
             User = user;
