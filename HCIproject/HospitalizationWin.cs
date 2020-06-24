@@ -36,13 +36,6 @@ namespace HCIproject
             setSpecialityCombo();
         }
 
-        public HospitalizationWin()
-        {
-            InitializeComponent();
-            StartDate.SelectedDate = DateTime.Today;
-            EndDate.SelectedDate = DateTime.Today;
-
-        }
         private void setPatientInfo()
         {
             var app = Application.Current as App;
@@ -109,9 +102,6 @@ namespace HCIproject
 
         private void Button_Click(object sender, RoutedEventArgs e)
         { //otkazi
-            //ExaminationWin exam = new ExaminationWin((Doctor)user);
-            //this.Visibility = Visibility.Hidden;
-            //exam.Show();
             this.Close();
         }
 

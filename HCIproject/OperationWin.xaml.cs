@@ -1,4 +1,5 @@
-﻿using Model.Director;
+﻿using bolnica.Service;
+using Model.Director;
 using Model.Dto;
 using Model.PatientSecretary;
 using Model.Users;
@@ -104,15 +105,21 @@ namespace HCIproject
 
         private void Button_Click(object sender, RoutedEventArgs e)
         { //otkazi
-          //  Examination exam = new Examination();
-          //  this.Visibility = Visibility.Hidden;
-          //  exam.Show();
             this.Close();
         }
 
         private void scrol_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             scrol.Height = this.ActualHeight - 130;
+        }
+
+        private void SearchPeriods(object sender, RoutedEventArgs e)
+        {
+            var app = Application.Current as App;
+
+            app.BusinessDayService._searchPeriods = new NoPrioritySearch();
+            Period period = new Period();
+            
         }
     }
 }

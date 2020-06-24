@@ -1,4 +1,6 @@
-﻿using Model.Director;
+﻿using bolnica.Model.Dto;
+using bolnica.Service;
+using Model.Director;
 using Model.Dto;
 using Model.PatientSecretary;
 using Model.Users;
@@ -24,6 +26,8 @@ namespace HCIproject
         public Doctor user;
         private long id;
         public List<ExaminationDTO> specialistExaminations { get; set; }
+        public List<ExaminationDTO> upcomingExaminations { get; set; }
+
 
         public ScheduleExamination(Doctor user, long patientId)
         {
@@ -32,8 +36,8 @@ namespace HCIproject
             InitializeComponent();
 
             specialistExaminations = new List<ExaminationDTO>();
-            setTableData();
             setPatientInfo();
+          //  SearchPeriods();
             this.DataContext = this;
 
         }
@@ -53,29 +57,6 @@ namespace HCIproject
             }
         }
 
-
-        private void setTableData()
-        {
-            var app = Application.Current as App;
-            List<ExaminationDTO> specialistExaminations = new List<ExaminationDTO>();
-            specialistExaminations.Clear();
-
-          foreach(Examination exam in app.ExaminationController.GetUpcomingExaminationsByUser(user))
-            {
-                Room room = null;
-                foreach (BusinessDay businessDay in exam.Doctor.BusinessDay)
-                {
-                    room = businessDay.room;
-                    break;
-                }
-
-                specialistExaminations.Add(new ExaminationDTO(exam.Period));
-            }
-
-            specialistGrid.ItemsSource = specialistExaminations;
-        }
-
-
         public ScheduleExamination()
         {
             InitializeComponent();
@@ -86,28 +67,67 @@ namespace HCIproject
             this.Close();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            if (specialistGrid.SelectedItem != null)
-            {
-                ExaminationDTO examDTO = (ExaminationDTO)specialistGrid.SelectedItem;
-                string messageBoxText = "Uspesno ste zakazali kontrolu za dan" + examDTO.Period.StartDate;
-                string caption = "Kontrola";
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Information;
-                MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
-                this.Close();
+       
 
-            }
-            else
+        private void SearchPeriods(object sender, RoutedEventArgs e)
+        {
+                var app = Application.Current as App;
+
+                if (Picker.SelectedDate == null)
+                   return;
+
+                app.BusinessDayService._searchPeriods = new NoPrioritySearch();
+                Period period = new Period();
+                period.StartDate = DateTime.Parse(Picker.Text);
+                BusinessDayDTO businessDayDTO = new BusinessDayDTO(user, period);
+                upcomingExaminations = app.BusinessDayController.Search(businessDayDTO);
+                specialistGrid.Visibility = Visibility.Visible;
+                specialistGrid.ItemsSource = upcomingExaminations; 
+        }
+
+        private void Zakazi(object sender, RoutedEventArgs e)
+        {
+            var app = Application.Current as App;
+            var selectedItem = specialistGrid.SelectedItem;
+
+            if (selectedItem == null)
             {
-                string messageBoxText = "Morate izabrati odgovarajuce podatke iz tabele kako biste uspesno zakazali kontrolu.";
-                string caption = "Kontrola";
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Information;
-                MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+                return;
             }
+
+            ExaminationDTO scheduleExam = (ExaminationDTO)selectedItem;
+
+            Period period = scheduleExam.Period;
+            Patient patient = app.PatientController.Get(id);
+            Examination examination = new Examination(patient, user, period);
+            app.ExaminationController.Save(examination);
+            BusinessDay day = app.BusinessDayController.GetExactDay(user, period.StartDate);
+            app.BusinessDayController.MarkAsOccupied(period, day);
+
+
+                if (specialistGrid.SelectedItem != null)
+                {
+                    ExaminationDTO examDTO = (ExaminationDTO)specialistGrid.SelectedItem;
+                    string messageBoxText = "Uspesno ste zakazali kontrolu za dan" + examDTO.Period.StartDate;
+                    string caption = "Kontrola";
+                    MessageBoxButton button = MessageBoxButton.OK;
+                    MessageBoxImage icon = MessageBoxImage.Information;
+                    MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+                    this.Close();
+
+                }
+                else
+                {
+                    string messageBoxText = "Morate izabrati odgovarajuce podatke iz tabele kako biste uspesno zakazali kontrolu.";
+                    string caption = "Kontrola";
+                    MessageBoxButton button = MessageBoxButton.OK;
+                    MessageBoxImage icon = MessageBoxImage.Information;
+                    MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+                }
+            
 
         }
+
+
     }
-}
+    }

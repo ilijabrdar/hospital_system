@@ -44,6 +44,7 @@ namespace HCIproject
         public IRoomTypeController RoomTypeController  { get; private set; }
         public IEquipmentController EquipmentController  { get; private set; }
         public IBusinessDayController BusinessDayController { get; private set; }
+        public BusinessDayService BusinessDayService { get; set; }
         public IRenovationController RenovationController { get; private set; }
         public IDoctorGradeController DoctorGradeController { get; private set; }
  
@@ -137,9 +138,12 @@ namespace HCIproject
             IngredientService ingredientService = new IngredientService(ingredientRepository);
             PatientFileService patientFileService = new PatientFileService(patientFileRepository);
             PatientService patientService = new PatientService(patientRepository,patientFileService,doctorGradeService);
-            BusinessDayService businessDayService = new BusinessDayService(businessDayRepository, doctorService);
+            // BusinessDayService businessDayService = new BusinessDayService(businessDayRepository, doctorService);
+            BusinessDayService = new BusinessDayService(businessDayRepository, doctorService);
+
+
             RenovationService renovationService = new RenovationService(renovationRepository);
-            RoomService roomService = new RoomService(roomRepository,renovationService, businessDayService);
+            RoomService roomService = new RoomService(roomRepository,renovationService, BusinessDayService);
             RoomTypeService roomTypeService = new RoomTypeService(roomTypeRepository, roomService);
             EquipmentService equipmentService = new EquipmentService(equipmentRepository, roomService);
 
@@ -164,7 +168,7 @@ namespace HCIproject
             AddressController = new AddressController(addressService);
             TownController = new TownController(townService);
             StateController = new StateController(stateService);
-            BusinessDayController = new BusinessDayController(businessDayService);
+            BusinessDayController = new BusinessDayController(BusinessDayService);
             RenovationController = new RenovationController(renovationService);
             DoctorGradeController = new DoctorGradeController(doctorGradeService);
 

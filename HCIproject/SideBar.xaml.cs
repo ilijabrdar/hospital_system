@@ -357,7 +357,6 @@ namespace HCIproject
         private void Button_Click_7(object sender, RoutedEventArgs e)
         {//novi clanak
             CreateArticle creWin = new CreateArticle((Doctor)user);
-         //   this.Visibility = Visibility.Hidden;
             creWin.ShowDialog();
             setArticle();
         }
