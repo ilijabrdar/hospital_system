@@ -20,7 +20,7 @@ namespace bolnica.Service
 
         List<ExaminationDTO> Search(BusinessDayDTO businessDayDTO);
 
-        Boolean MarkAsOccupied(Period period, BusinessDay businessDay);
+        void MarkAsOccupied(Period period, BusinessDay businessDay);
 
         BusinessDay GetExactDay(Doctor doctor, DateTime date);
 
