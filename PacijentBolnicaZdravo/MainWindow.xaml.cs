@@ -697,6 +697,7 @@ namespace PacijentBolnicaZdravo
 
         private void Zakazi(object sender, RoutedEventArgs e)
         {
+            var app = Application.Current as App;
             var selectedItem = scheduleExaminationsGrid.SelectedItem;
 
             if (selectedItem == null)
@@ -717,21 +718,30 @@ namespace PacijentBolnicaZdravo
 
             ErrorSchedule.Foreground = Brushes.Green;
             DeleteExamination delete;
-            ExaminationDTO deleteExam = (ExaminationDTO)selectedItem;
+            ExaminationDTO scheduleExam = (ExaminationDTO)selectedItem;
 
             delete = new DeleteExamination("Schedule examination at the doctor  " +
-                                                                        deleteExam.Doctor.FirstName + " " + deleteExam.Doctor.LastName + "?", "Yes", "No", "Schedule examination", MainWindow.Theme);
+                                                                        scheduleExam.Doctor.FirstName + " " + scheduleExam.Doctor.LastName + "?", "Yes", "No", "Schedule examination", MainWindow.Theme);
             ErrorSchedule.Text = "You have successfully scheduled an examination!";
 
             DialogResult result = delete.ShowDialog();
             if (result == System.Windows.Forms.DialogResult.OK)
             {
+                Doctor doctor = scheduleExam.Doctor;
+                Period period = scheduleExam.Period;
+
+                Examination examination = new Examination(this._patient, doctor, period);
+                app.ExaminationController.Save(examination);
+                BusinessDay day = app.BusinessDayController.GetExactDay(doctor, period.StartDate);
+                app.BusinessDayController.MarkAsOccupied(period, day);
+
+                scheduledExaminations = getScheduledExaminations();
+                scheduledExaminationsGrid.ItemsSource = scheduledExaminations;
+                upcomingExaminations = new List<ExaminationDTO>();
+                scheduleExaminationsGrid.ItemsSource = upcomingExaminations;
+
                 Storyboard sb = Resources["sbHideAnimation"] as Storyboard;
                 sb.Begin(ErrorSchedule);
-                upcomingExaminations.Remove((ExaminationDTO)selectedItem);
-                scheduledExaminations.Add((ExaminationDTO)selectedItem);
-                scheduledExaminationsGrid.Items.Refresh();
-                scheduleExaminationsGrid.Items.Refresh();
             }
 
         }
