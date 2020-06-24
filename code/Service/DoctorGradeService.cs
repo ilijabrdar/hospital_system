@@ -7,9 +7,8 @@ using System.Collections.Generic;
 
 namespace Service
 {
-
-   public class DoctorGradeService : IDoctorGradeService
-   {
+    public class DoctorGradeService : IDoctorGradeService
+    {
    
         private readonly IDoctorGradeRepository _doctorGradeRepository;
 

@@ -74,6 +74,7 @@ namespace Service
 
         public Examination Get(long id)
         {
+
             return _upcomingRepository.Get(id);
         }
 

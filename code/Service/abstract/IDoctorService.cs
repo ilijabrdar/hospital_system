@@ -10,7 +10,7 @@ namespace bolnica.Service
 {
    public interface IDoctorService : IService<Doctor, long>, IUserGetterService
     {
-    List<Doctor> GetDoctorsBySpeciality(Speciality specialty);
+        List<Doctor> GetDoctorsBySpeciality(Speciality specialty);
 
         void DeleteBusinessDayFromDoctor(BusinessDay businessDay);
 

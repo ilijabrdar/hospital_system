@@ -9,22 +9,21 @@ namespace Service
 {
    public class SpecialityService : ISpecialityService
    {
-      private readonly ISpecialityRepository _repository;
+      private readonly ISpecialityRepository _specialityRepository;
 
         public SpecialityService(ISpecialityRepository repository)
         {
-            _repository = repository;
+            _specialityRepository = repository;
         }
-
 
         public Speciality Get(long id)
         {
-            return _repository.Get(id);
+            return _specialityRepository.Get(id);
         }
 
         public IEnumerable<Speciality> GetAll()
         {
-            return _repository.GetAll();
+            return _specialityRepository.GetAll();
         }
 
     }

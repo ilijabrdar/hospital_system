@@ -8,11 +8,9 @@ using System.Text;
 
 namespace bolnica.Repository.CSV.Converter
 {
-
    public class ArticleCSVConverter : ICSVConverter<Article>
-
-    {
-        private readonly String _delimiter="|";
+   {
+        private readonly String _delimiter;
 
         public ArticleCSVConverter(string delimiter)
         {
@@ -39,5 +37,6 @@ namespace bolnica.Repository.CSV.Converter
         { 
             return string.Join(_delimiter, entity.Id, entity.DatePublished,entity.Doctor.GetId(), entity.Topic, entity.Text);
         }
+
     }
 }

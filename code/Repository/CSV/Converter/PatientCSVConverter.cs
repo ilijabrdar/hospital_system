@@ -24,9 +24,9 @@ namespace bolnica.Repository.CSV.Converter
             try
             {
                 string[] tokens = entityCSVFormat.Split(_delimiter.ToCharArray());
-                Patient patient = new Patient(long.Parse(tokens[0]), tokens[1], tokens[2], tokens[3], tokens[4], tokens[5], DateTime.Parse(tokens[6]), null, tokens[8], tokens[9], null);
-                patient.patientFile = new PatientFile(long.Parse(tokens[11]));
-                patient.Guest = Boolean.Parse(tokens[12]);
+                Patient patient = new Patient(long.Parse(tokens[0]), tokens[1], tokens[2], tokens[3], tokens[4], tokens[5], DateTime.Parse(tokens[6]), new Address(long.Parse(tokens[7]), long.Parse(tokens[8]), long.Parse(tokens[9])), tokens[10], tokens[11], null);
+                patient.patientFile = new PatientFile(long.Parse(tokens[13]));
+                patient.Guest = Boolean.Parse(tokens[14]);
                 return patient;
             }
             catch (Exception e)
@@ -37,9 +37,7 @@ namespace bolnica.Repository.CSV.Converter
         }
         public string ConvertEntityToCSVFormat(Patient entity)
         {
-            //  entity.Image.Save("../../Images/" + entity.Username + ".Jpeg", System.Drawing.Imaging.ImageFormat.Jpeg);
-            //String date = entity.DateOfBirth.ToString("MM.dd.yyyy HH:mm:ss");
-            return string.Join(_delimiter, entity.Id, entity.FirstName, entity.LastName, entity.Jmbg, entity.Email, entity.Phone, entity.DateOfBirth, null, entity.Username, entity.Password, null,entity.patientFile.GetId(), entity.Guest);
+            return string.Join(_delimiter, entity.Id, entity.FirstName, entity.LastName, entity.Jmbg, entity.Email, entity.Phone, entity.DateOfBirth, entity.Address.GetId(), entity.Address.Town.GetId(), entity.Address.Town.State.GetId(), entity.Username, entity.Password, null,entity.patientFile.GetId(), entity.Guest);
         }
     }
 }

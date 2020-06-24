@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  RenovationService.cs
- * Author:  david
- * Purpose: Definition of the Class Service.RenovationService
- ***********************************************************************/
-
 using bolnica.Repository;
 using Model.Director;
 using System;
@@ -14,11 +8,10 @@ namespace Repository
 {
    public class RenovationRepository : CSVRepository<Renovation,long>, IRenovationRepository
    {
-      private String FilePath;
         public IRoomRepository _roomRepository;
 
         public RenovationRepository(ICSVStream<Renovation> stream, ISequencer<long> sequencer,IRoomRepository roomRepository)
-     : base(stream, sequencer)
+        : base(stream, sequencer)
         {
             _roomRepository = roomRepository;
         }

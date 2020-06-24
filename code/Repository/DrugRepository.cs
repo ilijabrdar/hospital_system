@@ -1,5 +1,3 @@
-
-
 using bolnica.Repository;
 using Model.PatientSecretary;
 using System;
@@ -10,7 +8,6 @@ namespace Repository
 {
    public class DrugRepository : CSVRepository<Drug,long>, IDrugRepository, IEagerRepository<Drug,long>
    {
-      private String FilePath;
         private readonly IIngredientRepository _ingredientRepository;
         public DrugRepository(ICSVStream<Drug> stream, ISequencer<long> sequencer, IIngredientRepository ingredientRepository)
             : base(stream, sequencer)
@@ -60,8 +57,12 @@ namespace Repository
 
         public List<Drug> GetAlternativeDrugs(Drug drug)
         {
-            //TODO
-            throw new NotImplementedException();
+            List<Drug> alternativeDrugs = new List<Drug>();
+            foreach (Drug drugAlternative in drug.Alternative)
+            {
+                alternativeDrugs.Add(drugAlternative);
+            }
+            return alternativeDrugs;
         }
 
         public Drug GetEager(long id)
@@ -69,7 +70,7 @@ namespace Repository
             Drug drug = base.Get(id);
             foreach (Ingredient ingredient in drug.Ingredients)
             {
-                 Ingredient temp = _ingredientRepository.Get(ingredient.Id);
+                Ingredient temp = _ingredientRepository.Get(ingredient.Id);
                 ingredient.Name = temp.Name;
                 ingredient.Quantity = temp.Quantity;
             }

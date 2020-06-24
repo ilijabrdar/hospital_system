@@ -1,24 +1,29 @@
-/***********************************************************************
- * Module:  NotificationService.cs
- * Author:  david
- * Purpose: Definition of the Class Service.NotificationService
- ***********************************************************************/
-
 using Model.PatientSecretary;
 using Model.Users;
+using Service;
 using System;
+using System.Collections.Generic;
 
 namespace Controller
 {
    public class NotificationController
    {
-      public Drug NotifyDoctorOfAddedDrug(Drug drug, Doctor doctor)
-      {
-         // TODO: implement
-         return null;
-      }
-   
-      //private Service.IService _service;
-   
-   }
+        private readonly NotificationService service;
+
+        public NotificationController(NotificationService service)
+        {
+            this.service = service;
+        }
+
+        public int NotifyDoctorOfDrugsForValidation()
+        {
+            return service.NotifyDoctorOfDrugsForValidation();
+        }
+
+        public List<NotifyDoctorBusinessDay> NotifyDoctorOfUpcomingBusinessDays(Doctor doctor)
+        {
+            return service.NotifyDoctorOfUpcomingBusinessDays(doctor);
+        }
+
+    }
 }

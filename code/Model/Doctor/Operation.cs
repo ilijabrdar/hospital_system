@@ -2,6 +2,7 @@
 
 using Model.Director;
 using Model.PatientSecretary;
+using Model.Users;
 using Repository;
 using System;
 
@@ -14,22 +15,25 @@ namespace Model.Doctor
         public Period Period;
         public Room Room;
         public long Id;
+        public User Patient;
 
-        public Operation( long id,Users.Doctor doctor, string description, Period period, Room room)
+        public Operation( long id, User patient, Users.Doctor doctor, string description, Period period, Room room)
         {
-            this.Doctor = doctor;
+            Doctor = doctor;
+            Patient = patient;
             Description = description;
-            this.Period = period;
-            this.Room = room;
-            this.Id = id;
+            Period = period;
+            Room = room;
+            Id = id;
         }
 
-        public Operation(Users.Doctor doctor, string description, Period period, Room room)
+        public Operation( User patient,Users.Doctor doctor, string description, Period period, Room room)
         {
-            this.Doctor = doctor;
+            Patient = patient;
+            Doctor = doctor;
             Description = description;
-            this.Period = period;
-            this.Room = room;
+            Period = period;
+            Room = room;
         }
 
         public Operation(long id)

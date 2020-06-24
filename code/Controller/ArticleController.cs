@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  ArticleService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.ArticleService
- ***********************************************************************/
-
 using bolnica.Controller;
 using bolnica.Service;
 using Model.Doctor;
@@ -14,39 +8,38 @@ namespace Controller
 {
    public class ArticleController : IArticleController
    {
-        private readonly IArticleService _service;
+        private readonly IArticleService _articleService;
 
         public ArticleController(IArticleService service)
         {
-            _service = service;
+            _articleService = service;
         }
 
         public Article Save(Article entity)
         {
-            return _service.Save(entity);
+            return _articleService.Save(entity);
         }
 
         public void Delete(Article entity)
         {
-            _service.Delete(entity);
+            _articleService.Delete(entity);
         }
 
         public void Edit(Article entity)
         {
-            _service.Edit(entity);
+            _articleService.Edit(entity);
         }
 
         public Article Get(long id)
         {
-            return _service.Get(id);
+            return _articleService.Get(id);
         }
 
         public IEnumerable<Article> GetAll()
         {
-            return _service.GetAll();
+            return _articleService.GetAll();
         }
-
-
+       //TODO: Tamara pretraga clanaka
         public List<Article> SearchArticle(string criteria)
         {
             throw new NotImplementedException();
