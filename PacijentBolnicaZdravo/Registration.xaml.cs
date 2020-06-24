@@ -15,6 +15,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Documents.DocumentStructures;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -23,6 +24,8 @@ using MahApps.Metro;
 using MahApps.Metro.Controls;
 using Model.Users;
 using PacijentBolnicaZdravo.Properties;
+using Application = System.Windows.Application;
+using MessageBox = System.Windows.MessageBox;
 
 namespace PacijentBolnicaZdravo
 {
@@ -209,7 +212,15 @@ namespace PacijentBolnicaZdravo
             var temp = app.UserController.Save(patient);
             if (temp == null)
             {
-                Console.WriteLine("Nije uspeo");
+                USERNAME = "";
+                Username.GetBindingExpression(System.Windows.Controls.TextBox.TextProperty).UpdateSource();
+                string message = "Username already exists!";
+                string caption = "Information";
+                MessageBoxButton buttons = MessageBoxButton.OK;
+                MessageBoxResult result;
+                result = MessageBox.Show(message, caption, buttons);
+                return;
+
             }
             App.j = 0;
             WindowLogIn lg = new WindowLogIn();

@@ -111,7 +111,7 @@
                                     </Binding>
                                 </TextBox.Text>
                             </TextBox>
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <StackPanel Orientation="Horizontal" Margin="12" HorizontalAlignment="Right">
                                 <ComboBox x:Name="Country" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" DisplayMemberPath="Name" SelectionChanged="UpdateTownAddress"/>
                                 <ComboBox x:Name="Town" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="120" DisplayMemberPath="Name" SelectionChanged="UpdateAddress"/>
                                 <ComboBox x:Name="Addressessss" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" DisplayMemberPath="FullAddress"/>

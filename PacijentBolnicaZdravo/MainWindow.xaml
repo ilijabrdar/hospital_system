@@ -255,7 +255,15 @@
                             </StackPanel>
 
                             <StackPanel Orientation="Vertical">
-                                <TextBlock Margin="13" Name="UsernameConst" FontSize="15" Width="220" FontWeight="Bold" Opacity="0.6"></TextBlock>
+                                <TextBox Margin="13" Name="UsernameConst" FontSize="15" Width="220"  FontWeight="Bold" Opacity="0.6">
+                                    <TextBox.Text>
+                                        <Binding Path="USERNAME"  ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <local:ValidationRules />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
                                 <TextBox  TextAlignment="Left" BorderThickness="1.5" BorderBrush="LightBlue" Name="Name" Margin="10" FontSize="15" Width="220">
                                     <TextBox.Text>
                                         <Binding Path="Ime"  ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
@@ -296,12 +304,12 @@
                                     <TextBox.Text>
                                         <Binding Path="EMAIL" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                                             <Binding.ValidationRules>
-                                                <local:EmailValidationRule/>
+                                                <local:EmailValidationRule />
                                             </Binding.ValidationRules>
                                         </Binding>
                                     </TextBox.Text>
                                 </TextBox>
-                                <WrapPanel Grid.Row="5" Grid.Column="1">
+                                <WrapPanel Grid.Row="5" Margin="12" Grid.Column="1">
                                     <ComboBox  x:Name="Country" Width="120"   DisplayMemberPath="Name" SelectionChanged="UpdateTownAddress" IsTextSearchEnabled="True" IsEditable="True"/>
                                     <ComboBox x:Name="Town" Width="120"  DisplayMemberPath="Name" SelectionChanged="UpdateAddress" IsTextSearchEnabled="True" IsEditable="True"/>
                                     <ComboBox x:Name="Addressessss" Width="120"  DisplayMemberPath="FullAddress" IsTextSearchEnabled="True" IsEditable="True"/>

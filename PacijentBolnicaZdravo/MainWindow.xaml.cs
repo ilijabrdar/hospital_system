@@ -389,14 +389,29 @@ namespace PacijentBolnicaZdravo
             DateBirthTextBlock.Text = _patient.DateOfBirth.Date.ToString();
             Email2.Text = _patient.Email;
             PhoneNumber2.Text = _patient.Phone;
-            UsernameConst.Text = _patient.Username;
+            
 
             Ime = _patient.FirstName;
             Prezime = _patient.LastName;
             JMBG = _patient.Jmbg;
-            EMAIL = _patient.Email;
-            Phone = _patient.Phone;
-           DATETIME =  _patient.DateOfBirth;
+            DATETIME = _patient.DateOfBirth;
+
+            if (_patient.Guest)
+            {
+                UsernameConst.IsEnabled = true;
+                USERNAME = "";
+                EMAIL = "";
+                Phone = "";
+            }else
+            {
+                USERNAME = _patient.Username;
+                UsernameConst.IsEnabled = false;
+                EMAIL = _patient.Email;
+                Phone = _patient.Phone;
+            }
+
+            
+           
         }
 
 
@@ -503,6 +518,8 @@ namespace PacijentBolnicaZdravo
 
         private void UpdateInfo(object sender, RoutedEventArgs e)
         {
+
+            var app = Application.Current as App;
             int prom = 0;
             var state = Country.SelectedItem as State;
             var town = Town.SelectedItem as Town;
@@ -551,9 +568,46 @@ namespace PacijentBolnicaZdravo
                 prom++;
                 _patient.DateOfBirth = DateTime.Parse(DateBirthPicker.Text);
             }
-
-
             Storyboard sb = Resources["sbHideAnimation"] as Storyboard;
+
+            if (_patient.Guest)
+            {
+                if (UsernameConst.Text.ToString().Equals("") || _patient.Email.Equals("") || _patient.Phone.Equals(""))
+                {
+                    UsernameConst.GetBindingExpression(System.Windows.Controls.TextBox.TextProperty).UpdateSource();
+                    PhoneNumber.GetBindingExpression(System.Windows.Controls.TextBox.TextProperty).UpdateSource();
+                    Email.GetBindingExpression(System.Windows.Controls.TextBox.TextProperty).UpdateSource();
+                    SuccessUpdateData.Foreground = Brushes.Red;
+                    SuccessUpdateData.Text = "All blank fields are required!";
+                    sb.Begin(SuccessUpdateData);
+                    return;
+                }
+                _patient.Username = UsernameConst.Text.ToString();
+                if (app.UserController.IsUsernamedValid(_patient.Username) == null)
+                {
+                    _patient.Guest = false;
+                    TabExamination.Visibility = Visibility.Visible;
+                    TabFile.Visibility = Visibility.Visible;
+                    FeedbackHeader.Visibility = Visibility.Visible;
+                    SuccessUpdateData.Foreground = Brushes.Green;
+                    SuccessUpdateData.Text = "You have successfully changed the data!";
+                    sb.Begin(SuccessUpdateData);
+                    app.UserController.Edit(_patient);
+                    FillAccountData(_patient);
+                    return;
+                }else
+                {
+                    SuccessUpdateData.Foreground = Brushes.Red;
+                    SuccessUpdateData.Text = "Username already exists!";
+                    sb.Begin(SuccessUpdateData);
+                    USERNAME = "";
+                    UsernameConst.GetBindingExpression(System.Windows.Controls.TextBox.TextProperty).UpdateSource();
+                    return;
+                }
+
+            }
+
+      
             if (prom != 0)
             {
                 SuccessUpdateData.Foreground = Brushes.Green;
@@ -561,7 +615,7 @@ namespace PacijentBolnicaZdravo
 
                 SuccessUpdateData.Text = "You have successfully changed the data!";
                 Console.WriteLine(_patient.patientFile.GetId());
-                var app = Application.Current as App;
+             
                 app.UserController.Edit(_patient);
                 FillAccountData(_patient);
                
