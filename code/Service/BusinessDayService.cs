@@ -56,9 +56,10 @@ namespace Service
 
         public List<ExaminationDTO> Search(BusinessDayDTO businessDayDTO)
         {
+            
+            businessDayDTO.Doctor = doctorService.Get(businessDayDTO.Doctor.GetId());
             List<BusinessDay> businessDayCollection = _businessDayRepository.GetAllEager().ToList();
             return _searchPeriods.Search(businessDayDTO, businessDayCollection);
-
         }
 
 
