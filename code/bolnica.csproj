@@ -114,6 +114,7 @@
     <Compile Include="Controller\abstract\IPrescriptionController.cs" />
     <Compile Include="Controller\abstract\IReferralController.cs" />
     <Compile Include="Controller\abstract\IRenovationController.cs" />
+    <Compile Include="Controller\abstract\IReportController.cs" />
     <Compile Include="Controller\abstract\ISecretaryController.cs" />
     <Compile Include="Controller\abstract\ISpecialityController.cs" />
     <Compile Include="Controller\abstract\IStateController.cs" />

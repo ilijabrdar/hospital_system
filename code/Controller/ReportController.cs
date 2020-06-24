@@ -1,3 +1,5 @@
+using bolnica.Controller;
+using bolnica.Service;
 using Model.Dto;
 using Model.PatientSecretary;
 using Model.Users;
@@ -5,8 +7,15 @@ using System;
 
 namespace Controller
 {
-   public class ReportController
+   public class ReportController : IReportController
    {
+        IReportService _reportService;
+
+        public ReportController(IReportService reportService)
+        {
+            _reportService = reportService;
+        }
+
       public DoctorReportDTO GenerateAnamnesisPrescriptionReport(PatientFile patientFile)
       {
          // TODO: implement
@@ -21,8 +30,7 @@ namespace Controller
       
       public SecretaryReportDTO GenerateDoctorOccupationReport(Doctor doctor, Period period)
       {
-         // TODO: implement
-         return null;
+            return _reportService.GenerateDoctorOccupationReport(doctor, period);
       }
       
       public Therapy GenerateTherapyTimetableReport(PatientFile patientFile)
