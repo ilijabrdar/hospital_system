@@ -61,10 +61,32 @@ namespace upravnikKT2
             RoomCode = _selectedRoom.RoomCode;
 
             comboRoomTypes.SelectedItem = selectedRoom.RoomType.GetId();
+
+            if (selectedRoom.MaxNumberOfPatientsForHospitalization !=0)
+            {
+                checkForHospitalization.IsChecked = true;
+                maxPatients.Visibility = Visibility.Visible;
+                Amount = _selectedRoom.MaxNumberOfPatientsForHospitalization;
+            }
             
         }
 
-
+        private int _amount;
+        public int Amount
+        {
+            get
+            {
+                return _amount;
+            }
+            set
+            {
+                if (value != _amount)
+                {
+                    _amount = value;
+                    OnPropertyChanged("Amount");
+                }
+            }
+        }
 
         private void Button_Click_OK_Room(object sender, RoutedEventArgs e)
         {
@@ -72,7 +94,11 @@ namespace upravnikKT2
             {
                 if (_roomController.CheckRoomCodeUnique(RoomCode))
                 {
-                    _roomController.Save(new Room(RoomCode, (RoomType)comboRoomTypes.SelectedItem, null));
+                    int maxPatientsNum = 0;
+                    if ((bool) checkForHospitalization.IsChecked)
+                        maxPatientsNum = Amount;
+
+                    _roomController.Save(new Room(RoomCode, (RoomType)comboRoomTypes.SelectedItem, null,maxPatientsNum,0));
                 }
                 else
                 {
@@ -99,6 +125,11 @@ namespace upravnikKT2
                 }
                 else
                 {
+                    int maxPatientsNum = 0;
+                    if ((bool)checkForHospitalization.IsChecked)
+                        maxPatientsNum = Amount;
+
+                    _selectedRoom.MaxNumberOfPatientsForHospitalization = maxPatientsNum;
                     _selectedRoom.RoomCode = RoomCode;
                     _selectedRoom.RoomType = (RoomType)comboRoomTypes.SelectedItem;
                     _roomController.Edit(_selectedRoom);
@@ -175,6 +206,16 @@ namespace upravnikKT2
                     e.Handled = true;
                 }
             }
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            maxPatients.Visibility = Visibility.Visible;
+        }
+
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            maxPatients.Visibility = Visibility.Hidden;
         }
     }
 }

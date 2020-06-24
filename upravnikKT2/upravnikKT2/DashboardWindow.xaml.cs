@@ -666,7 +666,7 @@ namespace upravnikKT2
 
 
             //test notifications
-            //List<NotifyDoctorBusinessDay> ret = _notificationController.NotifyDoctorOfUpcomingBusinessDays(_doctorController.Get(0));
+            List<NotifyDoctorBusinessDay> ret = _notificationController.NotifyDoctorOfUpcomingBusinessDays(_doctorController.Get(0));
 
         }
 
