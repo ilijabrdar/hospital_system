@@ -48,7 +48,7 @@ namespace PacijentBolnicaZdravo
             upcomingExaminations = new List<ExaminationDTO>();
 
             InitializeComponent();
-
+            
             Country.DisplayMemberPath = "Name";
             Country.SelectedValuePath = "Id";
             App app = Application.Current as App;
@@ -75,7 +75,7 @@ namespace PacijentBolnicaZdravo
             }
 
             fillData();
-
+        //    Proba();
             PasswordValidation2.password2 = _patient.Password;
            
             DoctorsForFeedback.DisplayMemberPath = "FullName";
@@ -99,7 +99,15 @@ namespace PacijentBolnicaZdravo
 
         }
 
+   /*     private void Proba()
+        {
+            Doctor doctor = listOfDoctors[0];
+            Period period = new Period(new DateTime(2020, 10, 04));
 
+            BusinessDayDTO day = new BusinessDayDTO(doctor, period);
+            var app = Application.Current as App;
+            app.BusinessDayService.OperationSearch(day, 180);
+        }*/
         private void UpdateTownAddress(object sender, RoutedEventArgs e)
         {
             State state = Country.SelectedItem as State;
@@ -794,6 +802,7 @@ namespace PacijentBolnicaZdravo
                 Period period = new Period();
                 period.StartDate = DateTime.Parse(Picker.Text);
                 BusinessDayDTO businessDayDTO = new BusinessDayDTO(doctor,period);
+                businessDayDTO.PatientScheduling = true;
                 upcomingExaminations = app.BusinessDayController.Search(businessDayDTO);
                 scheduleExaminationsGrid.ItemsSource = upcomingExaminations;
             }else if(PriorityBox.SelectedIndex == 1)
@@ -811,6 +820,7 @@ namespace PacijentBolnicaZdravo
                 app.BusinessDayService._searchPeriods = new DoctorPrioritySearch();
                 Doctor doctor = (Doctor)DoctorsForExaminations.SelectedItem;
                 BusinessDayDTO businessDayDTO = new BusinessDayDTO(doctor, period);
+                businessDayDTO.PatientScheduling = true;
                 upcomingExaminations = app.BusinessDayController.Search(businessDayDTO);
                 scheduleExaminationsGrid.ItemsSource = upcomingExaminations;
             }else
@@ -827,6 +837,7 @@ namespace PacijentBolnicaZdravo
                 app.BusinessDayService._searchPeriods = new DatePrioritySearch();
                 Doctor doctor = (Doctor)DoctorsForExaminations.SelectedItem;
                 BusinessDayDTO businessDayDTO = new BusinessDayDTO(doctor, period);
+                businessDayDTO.PatientScheduling = true;
                 upcomingExaminations = app.BusinessDayController.Search(businessDayDTO);
                 scheduleExaminationsGrid.ItemsSource = upcomingExaminations;
             }
