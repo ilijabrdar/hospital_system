@@ -253,7 +253,10 @@ namespace upravnikKT2
             IngredientService ingredientService = new IngredientService(ingredientRepository);
             PatientFileService patientFileService = new PatientFileService(patientFileRepository);
             PatientService patientService = new PatientService(patientRepository, patientFileService, doctorGradeService);
+            doctorService._articleService = articleService;
+            doctorService._doctorGradeService = doctorGradeService;
             BusinessDayService businessDayService = new BusinessDayService(businessDayRepository, doctorService);
+            doctorService._businessDayService = businessDayService;
             RenovationService renovationService = new RenovationService(renovationRepository);
             RoomService roomService = new RoomService(roomRepository, renovationService, businessDayService);
             RoomTypeService roomTypeService = new RoomTypeService(roomTypeRepository, roomService);
