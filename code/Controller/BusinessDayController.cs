@@ -62,16 +62,16 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        public bool MarkAsOccupied(Period period, BusinessDay businessDay)
+        public void MarkAsOccupied(Period period, BusinessDay businessDay)
         {
-            throw new NotImplementedException();
+            _businessDayService.MarkAsOccupied(period, businessDay);
         }
 
-  /*      public List<Examination> PeriodRecommendationByDate(DateTime date)
-        {
-            throw new NotImplementedException();
-        }
-*/
+        /*      public List<Examination> PeriodRecommendationByDate(DateTime date)
+              {
+                  throw new NotImplementedException();
+              }
+      */
         public BusinessDay Save(BusinessDay entity)
         {
             return _businessDayService.Save(entity);
@@ -79,7 +79,7 @@ namespace Controller
 
         public List<ExaminationDTO> Search(BusinessDayDTO businessDayDTO)
         {
-            throw new NotImplementedException();
+            return _businessDayService.Search(businessDayDTO);
         }
 
         public bool SetRoomForBusinessDay(BusinessDay businessDay, Room room)

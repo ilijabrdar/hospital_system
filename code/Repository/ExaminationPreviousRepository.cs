@@ -42,11 +42,12 @@ namespace Repository
         public Examination GetEager(long id)
         {
             Examination exam = base.Get(id);
-            exam.Doctor = doctorRepository.Get(exam.Doctor.GetId());
+            exam.Doctor = doctorRepository.GetEager(exam.Doctor.GetId());
             exam.User = patientRepository.Get(exam.User.GetId());
-            exam.Diagnosis = diagnosisRepository.Get(exam.Diagnosis.GetId());
-            exam.Therapy = therapyRepository.Get(exam.Therapy.GetId());
-            exam.Refferal = referralRepository.Get(exam.Refferal.GetId());
+            exam.Diagnosis = diagnosisRepository.GetEager(exam.Diagnosis.GetId());
+            exam.Therapy = therapyRepository.GetEager(exam.Therapy.GetId());
+            exam.Refferal = referralRepository.GetEager(exam.Refferal.GetId());
+
 
             foreach (Prescription pres in exam.Prescription)
             {

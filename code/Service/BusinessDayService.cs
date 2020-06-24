@@ -83,10 +83,10 @@ namespace Service
             return ret;
         }
 
-        public bool MarkAsOccupied(Period period, BusinessDay businessDay)
+        public void MarkAsOccupied(Period period, BusinessDay businessDay)
         {
-
-            throw new NotImplementedException();
+            businessDay.ScheduledPeriods.Add(period);
+            _businessDayRepository.Edit(businessDay);
         }
 
 

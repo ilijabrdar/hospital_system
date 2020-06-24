@@ -620,7 +620,6 @@
     <None Include="Resources\Data\drugs.csv" />
     <None Include="Resources\Data\equipment.csv" />
     <None Include="Resources\Data\examinationPrevious.csv" />
-    <None Include="Resources\Data\examinationUpcoming.csv" />
     <None Include="Resources\Data\hospitalizationFile.csv" />
     <None Include="Resources\Data\ingredients.csv" />
     <None Include="Resources\Data\operationFile.csv" />
@@ -634,6 +633,7 @@
     <None Include="Resources\Data\speciality.csv" />
     <None Include="Resources\Data\symptomFile.csv" />
     <None Include="Resources\Data\therapyFile.csv" />
+    <None Include="Resources\Data\upcomingExamination.csv" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -1,5 +1,3 @@
-
-
 using bolnica.Repository;
 using Model.PatientSecretary;
 using System;
@@ -10,7 +8,6 @@ namespace Repository
 {
    public class DrugRepository : CSVRepository<Drug,long>, IDrugRepository, IEagerRepository<Drug,long>
    {
-      private String FilePath;
         private readonly IIngredientRepository _ingredientRepository;
         public DrugRepository(ICSVStream<Drug> stream, ISequencer<long> sequencer, IIngredientRepository ingredientRepository)
             : base(stream, sequencer)
