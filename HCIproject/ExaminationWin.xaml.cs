@@ -53,22 +53,6 @@ namespace HCIproject
         }
 
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {//otkazi
-            string messageBoxText = "Da li ste sigurni da želite da otkažete pregled?.";
-            string caption = "Otkazivanje";
-            MessageBoxButton button = MessageBoxButton.YesNo;
-            MessageBoxImage icon = MessageBoxImage.Information;
-            MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
-            if (result == MessageBoxResult.Yes)
-            {
-                SideBar sideBarWin = new SideBar((Doctor)user);
-                this.Visibility = Visibility.Hidden;
-                sideBarWin.MyTabControl.SelectedIndex = 2;
-                sideBarWin.Show();
-            }
-
-        }
         private void Button_Click_1(object sender, RoutedEventArgs e)
         { //potvrdi
             if (diagnosisCombo.SelectedItem == null)

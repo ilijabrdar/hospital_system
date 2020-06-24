@@ -10,6 +10,7 @@
         WindowStartupLocation="CenterScreen">
     <StackPanel x:Name="ResizePanel" Background="#D0ECE7" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
         <StackPanel x:Name="PatientInfo" Background="#D5F5E3">
+         
             <WrapPanel>
                 <Label Content="Ime i prezime pacijenta:" Margin="10" FontSize="13"/>
                 <Label x:Name="imePacijenta" Margin="10,10,60,10" FontSize="15" FontWeight="SemiBold" />
@@ -20,7 +21,7 @@
             </WrapPanel>
         </StackPanel>
         <ScrollViewer  x:Name="scrol" VerticalScrollBarVisibility="Auto" SizeChanged="scrol_SizeChanged" >
-            <StackPanel>
+            <StackPanel HorizontalAlignment="Center"> 
                 <Grid  VerticalAlignment="Center" HorizontalAlignment="Center"  Margin="10" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -35,29 +36,33 @@
                         <ColumnDefinition Width="400"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="Dijagnoza" Grid.Row="0" Grid.Column="0" FontSize="16" Margin="5,5,4.6,4.6"/>
-                    <TextBlock x:Name="dijagnozaTxt" Grid.Row="0" Grid.Column="1" FontSize="16" Margin="5.4,5,4.6,4.6"/>
+                    <Label Content="Dijagnoza" Grid.Row="0" Grid.Column="0" FontSize="16" Margin="5"/>
+                    <TextBlock x:Name="dijagnozaTxt" Grid.Row="0" Grid.Column="1" FontSize="16" Margin="5"/>
 
-                    <Label Content="Napomena" Grid.Row="1" Grid.Column="0" FontSize="16" Margin="5,5.4,4.6,5.2"/>
+                    <Label Content="Napomena" Grid.Row="1" Grid.Column="0" FontSize="16" Margin="5"/>
                     <TextBox Grid.Row="1" Grid.Column="1" Margin="5.4,5.4,4.6,4.2" AcceptsReturn="True" FontSize="16" CaretBrush="#FF1FEECD"/>
 
-                    <Label Content="Odeljenje" Grid.Row="2" Grid.Column="0" FontSize="16" Margin="5,4.8,4.6,4.8"  />
-                    <ComboBox x:Name="odeljenjeCMB" Text="Strelice koristite za kretanje kroz listu,sa Tab+Ctrl potvrdite izbor." IsEditable="True" IsReadOnly="True" Grid.Row="2"  Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2" />
+                    <Label Content="Odeljenje" Grid.Row="2" Grid.Column="0" FontSize="16" Margin="5"  />
+                    <ComboBox x:Name="odeljenjeCMB"  IsEditable="True" IsReadOnly="True" Grid.Row="2"  Grid.Column="1" Grid.ColumnSpan="2"  DropDownClosed="odeljenjeCMB_DropDownClosed"/> 
+
+                    <Label Content="Lekar specijalista" Grid.Row="3" Grid.Column="0" FontSize="16" Margin="5"  />
+                    <ComboBox x:Name="lekarCMB" IsEditable="True" IsReadOnly="True" Grid.Row="3"  Grid.Column="1" Grid.ColumnSpan="2"  ItemsSource ="{Binding Path=listOfDoctors}" Grid.RowSpan="2"/>
 
                 </Grid>
-                <TextBlock Text="Kretanjem sa Tab dugmetom pozicionirajte se na tabelu i krecite kroz nju." HorizontalAlignment="Center" FontSize="10"/>
-                <TextBlock Text="Kada se pozicionirate na zeljene podatke sa Ctrl+Tab napustite tabelu." HorizontalAlignment="Center" FontSize="10"/>
+                <Label Content="Izaberite datum:" FontWeight="DemiBold" FontSize="16" Margin="10"/>
+                <StackPanel x:Name="DatePicker" Orientation="Horizontal">
+                    <DatePicker Name="Picker" Margin="10" Width="200" FirstDayOfWeek="Monday"/>
+                    <Button Content="Potvrdi unos" Click="SearchPeriods" Background="#A2D9CE"  ></Button>
+                </StackPanel>
+                
 
-                    <Border Height="170" Width="500" HorizontalAlignment="Center">
-                        <DataGrid x:Name="specialistGrid" FontSize="14" BorderThickness="1"  AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" ItemsSource ="{Binding specialistExamination}"  materialDesign:DataGridAssist.CellPadding="4 2 2 2" materialDesign:DataGridAssist.ColumnHeaderPadding="4 2 2 2" Background="#FFC4F3EA" Width="500" HorizontalAlignment="Center" Margin="0,0,0,63.6" >
+                <Border Height="170" Width="500" HorizontalAlignment="Center">
+                        <DataGrid x:Name="specialistGrid" FontSize="14" Visibility="Hidden" BorderThickness="1"  AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" ItemsSource ="{Binding specialistExamination}"  materialDesign:DataGridAssist.CellPadding="4 2 2 2" materialDesign:DataGridAssist.ColumnHeaderPadding="4 2 2 2" Background="#FFC4F3EA" Width="200" HorizontalAlignment="Center" Margin="0,0,0,63.6" >
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Ime" Binding="{Binding Doctor.FirstName}" Width="*"></DataGridTextColumn>
-                                <DataGridTextColumn Header="Prezime" Binding="{Binding Doctor.LastName}" Width="*"></DataGridTextColumn>
-                                <DataGridTextColumn Header="Datum" Binding="{Binding Period.StartDate.Date }" Width="80"></DataGridTextColumn>
-                                <DataGridTextColumn Header="Vreme" Binding="{Binding Period.StartDate.TimeOfDay}" Width="*"></DataGridTextColumn>
-                                <DataGridTextColumn  Header="Ordinacija" Binding="{Binding Room.RoomCode }" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Datum" Binding="{Binding Period.StartDate.Date }" Width="80"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Vreme" Binding="{Binding Period.StartDate.TimeOfDay}" Width="*"></DataGridTextColumn>
 
-                            </DataGrid.Columns>
+                        </DataGrid.Columns>
                         </DataGrid>
                     </Border>
             </StackPanel>
@@ -71,7 +76,7 @@
          -->
         <WrapPanel FlowDirection="RightToLeft" Background="#D5F5E3" HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
             <Button Content="Otkaži" FontSize="18" Height="30" Width="100"  Margin="10,10,10,10" Background="#A2D9CE" Click="Button_Click" BorderBrush="#FF1FEECD" ></Button>
-            <Button Content="Potvrdi" FontSize="18" Height="30" Width="100"  Margin="10,10,10,10" Background="#A2D9CE" Click="Button_Click_1" BorderBrush="#FF1FEECD" ></Button>
+            <Button Content="Potvrdi" FontSize="18" Height="30" Width="100"  Margin="10,10,10,10" Background="#A2D9CE" Click="Zakazi" BorderBrush="#FF1FEECD" ></Button>
         </WrapPanel>
     </StackPanel>
 </Window>

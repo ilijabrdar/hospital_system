@@ -1,5 +1,8 @@
-﻿using Controller;
+﻿using bolnica.Model.Dto;
+using bolnica.Service;
+using Controller;
 using Model.Director;
+using Model.Doctor;
 using Model.Dto;
 using Model.PatientSecretary;
 using Model.Users;
@@ -26,6 +29,8 @@ namespace HCIproject
         public long patientId;
         private string dijagnoza;
         public List<ExaminationDTO> specialistExaminations { get; set; }
+        public List<Doctor> listOfDoctors { get; set; }
+
 
         public RefferalWin(Doctor user, long _patientId, string _dijagnoza)
         {
@@ -38,8 +43,8 @@ namespace HCIproject
             setPatientInfo();
             dijagnozaTxt.Text = dijagnoza;
             specialistExaminations = new List<ExaminationDTO>();
+            
 
-            setInfoExamination();
             this.DataContext = this;
 
         }
@@ -60,39 +65,75 @@ namespace HCIproject
 
         }
 
-
         private void setOdeljenjeCMB()
         {
             var app = Application.Current as App;
             foreach(var speciality in app.SpecialityController.GetAll())
             {
-                odeljenjeCMB.Items.Add(speciality.Name);
+                if(speciality.Name!="Opsta praksa")
+                    odeljenjeCMB.Items.Add(speciality.Name);
             }
 
+
         }
-        private void setInfoExamination()
+
+    
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        { 
+            this.Close();
+        }
+        private void scrol_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            
-                var app = Application.Current as App;
-                List<ExaminationDTO> specialistExaminations = new List<ExaminationDTO>();
-                specialistExaminations.Clear();
-
-                foreach (Examination exam in app.ExaminationController.GetUpcomingExaminationsByUser(user))
-                {
-                    Room room = null;
-                    foreach (BusinessDay businessDay in exam.Doctor.BusinessDay)
-                    {
-                        room = businessDay.room;
-                        break;
-                    }
-
-                    specialistExaminations.Add(new ExaminationDTO(exam.Doctor, exam.Period));
-                }
-
-                specialistGrid.ItemsSource = specialistExaminations;
+            scrol.Height = this.ActualHeight - 150;
         }
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        { //potvrdi
+
+        private void SearchPeriods(object sender, RoutedEventArgs e)
+        {
+            var app = Application.Current as App;
+
+            if (Picker.SelectedDate == null)
+                return;
+
+            if(odeljenjeCMB.SelectedItem==null) return;
+            if (lekarCMB.SelectedItem == null) return;
+
+            String doctorsInfo = lekarCMB.SelectedItem.ToString();
+            String [] tokens = doctorsInfo.Split(")".ToCharArray());
+            long doctorId = long.Parse(tokens[0]);
+            Doctor doctor = app.DoctorController.Get(doctorId);
+
+            app.BusinessDayService._searchPeriods = new NoPrioritySearch();
+            Period period = new Period();
+            period.StartDate = DateTime.Parse(Picker.Text);
+            BusinessDayDTO businessDayDTO = new BusinessDayDTO(doctor, period);
+            specialistExaminations = app.BusinessDayController.Search(businessDayDTO);
+            specialistGrid.Visibility = Visibility.Visible;
+            specialistGrid.ItemsSource = specialistExaminations;
+            specialistGrid.Visibility = Visibility.Visible;
+        }
+
+        private void Zakazi(object sender, RoutedEventArgs e)
+        {
+            var app = Application.Current as App;
+            var selectedItem = specialistGrid.SelectedItem;
+
+            if (lekarCMB.SelectedItem == null) return;
+            if (selectedItem == null) return;
+
+            String doctorsInfo = lekarCMB.SelectedItem.ToString();
+            String[] tokens = doctorsInfo.Split(")".ToCharArray());
+            long doctorId = long.Parse(tokens[0]);
+            Doctor doctor = app.DoctorController.Get(doctorId);
+            
+            ExaminationDTO scheduleExam = (ExaminationDTO)selectedItem;
+            Period period = scheduleExam.Period;
+            Patient patient = app.PatientController.Get(patientId);
+            Examination examination = new Examination(patient, doctor, period);
+            app.ExaminationController.Save(examination);
+            BusinessDay day = app.BusinessDayController.GetExactDay(doctor, period.StartDate);
+            app.BusinessDayController.MarkAsOccupied(period, day);
+
 
             if (specialistGrid.SelectedItem != null)
             {
@@ -113,20 +154,33 @@ namespace HCIproject
                 MessageBoxImage icon = MessageBoxImage.Information;
                 MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
             }
+
+
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        { //otkazi
-            //ExaminationWin exam = new ExaminationWin((Doctor)user);
-            //this.Visibility = Visibility.Hidden;
-            //exam.Show();
-            this.Close();
-        }
-        private void scrol_SizeChanged(object sender, SizeChangedEventArgs e)
+     
+
+        private void odeljenjeCMB_DropDownClosed(object sender, EventArgs e)
         {
-            scrol.Height = this.ActualHeight - 150;
+            var app = Application.Current as App;
+            if (odeljenjeCMB.SelectedItem == null) return;
+
+            Speciality speciality = new Speciality();
+            foreach (Speciality spec in app.SpecialityController.GetAll())
+            {
+                if (spec.Name == odeljenjeCMB.SelectedItem.ToString())
+                {
+                    speciality = new Speciality(spec.Id, spec.Name);
+                }
+            }
+            lekarCMB.Items.Clear();
+            List<Doctor> doctors= app.DoctorController.GetDoctorsBySpeciality(speciality);
+            foreach(Doctor doctor in doctors)
+            {
+                lekarCMB.Items.Add(doctor.Id+")"+ doctor.FullName);
+            }
+            //  listOfDoctors = app.DoctorController.GetDoctorsBySpeciality(speciality);
+
         }
-
-
     }
 }

@@ -100,7 +100,6 @@
             </ScrollViewer>
         </StackPanel>
         <WrapPanel FlowDirection="RightToLeft" Background="#D5F5E3" >
-            <Button Content="Otkaži" FontSize="18" Height="30" Width="100"  Margin="10,10,10,20" Background="#A2D9CE" Click="Button_Click" BorderBrush="#FF1FEECD" ></Button>
             <Button Content="Potvrdi" FontSize="18" Height="30" Width="100"  Margin="10,10,10,20" Background="#A2D9CE" Click="Button_Click_1" BorderBrush="#FF1FEECD" ></Button>
         </WrapPanel>
     </StackPanel>

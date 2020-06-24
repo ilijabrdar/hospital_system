@@ -591,7 +591,7 @@ namespace HCIproject
             var app = Application.Current as App;
 
             foreach (var exam in app.ExaminationController.GetUpcomingExaminationsByUser(user)) 
-            { 
+            {
                 StackPanel stack = new StackPanel();
                 DockPanel dock = new DockPanel();
                 Label lbl = new Label();
@@ -607,7 +607,7 @@ namespace HCIproject
 
 
                 #region DockPanel Content Properties
-                lbl.Content = exam.User.FirstName+ " " + exam.User.LastName;
+                lbl.Content = exam.User.FirstName + " " + exam.User.LastName;
                 lbl.Height = 32;
                 lbl.Width = 180;
                 lbl.FontSize = 15;
@@ -643,14 +643,15 @@ namespace HCIproject
                 btn2.SetValue(DockPanel.DockProperty, Dock.Right);
                 btn2.Margin = new Thickness(10, 10, 15, 0);
                 btn2.Background = new SolidColorBrush(Color.FromRgb(162, 217, 206));
-                    //    btn2.Click += new RoutedEventHandler(btn2_Click);
-                    #endregion
+                //    btn2.Click += new RoutedEventHandler(btn2_Click);
+                #endregion
 
                 Grid_Grid.RowDefinitions.Add(new RowDefinition());
                 Grid_Grid.RowDefinitions[num].Height = new GridLength(66, GridUnitType.Pixel);
                 Grid_Grid.Children.Add(stack);
                 stack.SetValue(Grid.RowProperty, num);
                 num++;
+
             }
 
         }
@@ -701,6 +702,7 @@ namespace HCIproject
                     Grid_Grid1.Children.Add(stack);
                     stack.SetValue(Grid.RowProperty, num1);
                     num1++;
+
                 }
             }
             foreach (var exam in app.ExaminationController.GetFinishedxaminationsByUser(user))
@@ -718,7 +720,6 @@ namespace HCIproject
                     dock.Children.Add(btn1);
 
 
-                    #region DockPanel Content Properties
                     lbl.Content = exam.User.FirstName + " " + exam.User.LastName;
                     lbl.Height = 32;
                     lbl.Width = 180;
@@ -737,7 +738,6 @@ namespace HCIproject
                     btn1.Click += new RoutedEventHandler(ClickOpenPatientFile);
                     btn1.Margin = new Thickness(10, 10, 15, 0);
                     btn1.Background = new SolidColorBrush(Color.FromRgb(162, 217, 206));
-                    #endregion
 
                     Grid_Grid1.RowDefinitions.Add(new RowDefinition());
                     Grid_Grid1.RowDefinitions[num1].Height = new GridLength(66, GridUnitType.Pixel);
@@ -752,10 +752,20 @@ namespace HCIproject
 
         private void ClickStartExamination(object sender, RoutedEventArgs e)
         {//posalji utisak
-            var PatientId = ((Button)sender).Tag;
-            ExaminationWin examWinn = new ExaminationWin((Doctor)user, (long)PatientId);
-             this.Visibility = Visibility.Hidden;
-            examWinn.ShowDialog();
+
+            string messageBoxText = "Da li ste sigurni da želite da pokrenete pregled? Jednom pokrenut pregled se ne moze otkazati!";
+            string caption = "Pregled";
+            MessageBoxButton button = MessageBoxButton.YesNo;
+            MessageBoxImage icon = MessageBoxImage.Information;
+            MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+            if (result == MessageBoxResult.Yes)
+            {
+
+                var PatientId = ((Button)sender).Tag;
+                ExaminationWin examWinn = new ExaminationWin((Doctor)user, (long)PatientId);
+                this.Visibility = Visibility.Hidden;
+                examWinn.ShowDialog();
+            }
         }  
         
         private void ClickOpenPatientFile(object sender, RoutedEventArgs e)
