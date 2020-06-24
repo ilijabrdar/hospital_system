@@ -112,22 +112,6 @@
                     </Grid>
                 </StackPanel>
             </TabItem>
-            <TabItem Header="Hospitalizacije" FontSize="19" Background="#A2D9CE" >
-                <StackPanel  x:Name="hospitalizacijeGrid" Background="#D5F5E3" SizeChanged="myGrid_SizeChanged">
-                    <ScrollViewer x:Name="scroolHospitalization" VerticalScrollBarVisibility="auto" SizeChanged="scroolHospitalization_SizeChanged" >
-                        <StackPanel Name="Hospitalizations" Orientation="Vertical">
-                        </StackPanel>
-                    </ScrollViewer>
-                </StackPanel>
-            </TabItem>
-            <TabItem x:Name="OperacijeTab" Header="Operacije" FontSize="19" Background="#A2D9CE"  >
-                <StackPanel  x:Name="operacijeGrid" Background="#D5F5E3" SizeChanged="myGrid_SizeChanged">
-                    <ScrollViewer x:Name="scroolOperation" VerticalScrollBarVisibility="auto" SizeChanged="scroolOperation_SizeChanged" >
-                        <StackPanel Name="Operations" Orientation="Vertical">
-                        </StackPanel>
-                    </ScrollViewer>
-                </StackPanel>
-            </TabItem>
             <TabItem Header="Kartoni" FontSize="19" Background="#A2D9CE" Height="28" >
                 <StackPanel  x:Name="kartoniGrid" Background="#D5F5E3" SizeChanged="myGrid_SizeChanged">
                     <StackPanel Orientation="Vertical">
@@ -145,7 +129,24 @@
                     </StackPanel>
 
                 </StackPanel>
+            </TabItem>  
+            <TabItem Header="Hospitalizacije" FontSize="19" Background="#A2D9CE" >
+                <StackPanel  x:Name="hospitalizacijeGrid" Background="#D5F5E3" SizeChanged="myGrid_SizeChanged">
+                    <ScrollViewer x:Name="scroolHospitalization" VerticalScrollBarVisibility="auto" SizeChanged="scroolHospitalization_SizeChanged" >
+                        <StackPanel Name="Hospitalizations" Orientation="Vertical">
+                        </StackPanel>
+                    </ScrollViewer>
+                </StackPanel>
             </TabItem>
+            <TabItem x:Name="OperacijeTab" Header="Operacije" FontSize="19" Background="#A2D9CE"  >
+                <StackPanel  x:Name="operacijeGrid" Background="#D5F5E3" SizeChanged="myGrid_SizeChanged">
+                    <ScrollViewer x:Name="scroolOperation" VerticalScrollBarVisibility="auto" SizeChanged="scroolOperation_SizeChanged" >
+                        <StackPanel Name="Operations" Orientation="Vertical">
+                        </StackPanel>
+                    </ScrollViewer>
+                </StackPanel>
+            </TabItem>
+            
             <TabItem Header="Evidencija lekova" FontSize="19"  Background="#A2D9CE">
                 <StackPanel  x:Name="evidencijaGrid" Background="#D5F5E3" Orientation="Vertical" >
                     <Label x:Name="validacijaLeka" Content="Validacija sastava leka" FontSize="17" FontWeight="Bold"/>

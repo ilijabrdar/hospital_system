@@ -326,6 +326,14 @@ namespace HCIproject
                 obavesti.Foreground = new SolidColorBrush(Color.FromRgb(199, 24, 24));
                 obavesti.Text = "Pogresan unos stare lozinke";
             }
+            if(StateCombo.SelectedItem==null && TownCombo.SelectedItem == null && AddressCombo.SelectedItem == null)
+            {
+                string messageBoxText1 = "Morate da unesete podatke vezane za adresu!";
+                string caption1 = "Izmena adrese.";
+                MessageBoxButton button1 = MessageBoxButton.OK;
+                MessageBoxImage icon1 = MessageBoxImage.Information;
+                MessageBoxResult result1 = MessageBox.Show(messageBoxText1, caption1, button1, icon1);
+            }
             else
             {
                 user.Password = NovaLozTxt.Password;
