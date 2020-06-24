@@ -52,7 +52,17 @@ namespace Service
 
         public Renovation Save(Renovation entity)
         {
-            return _repository.Save(entity);
+            if (validateDates(entity))
+                return _repository.Save(entity);
+            else
+                return null;
+        }
+
+        private bool validateDates(Renovation entity)
+        {
+            if (DateTime.Compare(entity.Period.StartDate, entity.Period.EndDate) >= 0)
+                return false;
+            return true;
         }
     }
 }
