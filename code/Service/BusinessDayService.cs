@@ -10,6 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Configuration;
+using System.Web.Configuration;
 
 namespace Service
 {
@@ -18,7 +20,10 @@ namespace Service
 
         private readonly IBusinessDayRepository _businessDayRepository;
         public ISearchPeriods _searchPeriods { get; set; }
-        public static double durationOfExamination = 20;
+
+        [Obsolete]
+        public static double durationOfExamination = Double.Parse(ConfigurationSettings.AppSettings["examinationDuration"]);
+
         public IDoctorService doctorService;
 
         public BusinessDayService(IBusinessDayRepository businessDayRepository, IDoctorService doctorService)
@@ -45,6 +50,7 @@ namespace Service
 
         public BusinessDay GetExactDay(Doctor doctor, DateTime date)
         {
+           
             foreach (BusinessDay day in _businessDayRepository.GetAllEager())
             {
                 if (day.doctor.Id == doctor.Id && day.Shift.EndDate.Date.Equals(date.Date))
@@ -53,12 +59,63 @@ namespace Service
             return null;
         }
 
+        [Obsolete]
+        public List<ExaminationDTO> OperationSearch(BusinessDayDTO businessDayDTO, double durationOfOperation)
+        {
+            List<ExaminationDTO> retVal = new List<ExaminationDTO>();
+            _searchPeriods = new NoPrioritySearch();
+            List<ExaminationDTO> timeSlots = Search(businessDayDTO);
+            
+            if (timeSlots == null)
+                return null;
 
+            double MinutesFree = 0;
+            foreach(ExaminationDTO examinationDTO in timeSlots)
+            {
+                if (retVal.Count == 0)
+                {
+                    retVal.Add(examinationDTO);
+                    MinutesFree = MinutesFree + durationOfExamination;
+                }
+                else
+                {
+                    if (retVal.SingleOrDefault(any => any.Period.StartDate.AddMinutes(durationOfExamination) == examinationDTO.Period.StartDate) != null)
+                    {
+                        retVal.Add(examinationDTO);
+                        MinutesFree += 20;
+                    }
+                    else
+                    {
+                        retVal.Clear();
+                        retVal.Add(examinationDTO);
+                        MinutesFree = durationOfExamination;
+                    }
+                }
+                if(durationOfOperation == MinutesFree)
+                    break;
+           
+            }
+
+            return retVal;
+
+        }
+
+        [Obsolete]
         public List<ExaminationDTO> Search(BusinessDayDTO businessDayDTO)
         {
+            TimeSpan difference = businessDayDTO.Period.StartDate - DateTime.Now;
+            if(difference.Days <= Double.Parse(ConfigurationSettings.AppSettings["scheduleRestriction"])){
+                if(businessDayDTO.PatientScheduling)
+                {
+                    if(_searchPeriods.GetType() != typeof(NoPrioritySearch))
+                        businessDayDTO.Period.StartDate = businessDayDTO.Period.StartDate.AddDays(Double.Parse(ConfigurationSettings.AppSettings["scheduleRestriction"]));
+                    else
+                        return null;
+                }
+            }
+            businessDayDTO.Doctor = doctorService.Get(businessDayDTO.Doctor.GetId());
             List<BusinessDay> businessDayCollection = _businessDayRepository.GetAllEager().ToList();
             return _searchPeriods.Search(businessDayDTO, businessDayCollection);
-
         }
 
 
@@ -92,7 +149,30 @@ namespace Service
 
         public BusinessDay Save(BusinessDay entity)
         {
-            return _businessDayRepository.Save(entity);
+            if (validateDates(entity))
+                return _businessDayRepository.Save(entity);
+            else
+                return null;
+        }
+
+        private bool validateDates(BusinessDay entity)
+        {
+            foreach (BusinessDay businessDay in GetBusinessDaysByDoctor(entity.doctor)) //15/07 - 25/-7
+            {
+                if (DateTime.Compare(businessDay.Shift.StartDate, entity.Shift.StartDate) <= 0 && DateTime.Compare(businessDay.Shift.EndDate, entity.Shift.EndDate) >= 0)  // 16/07 - 21/07
+                    return false;
+                else if ((DateTime.Compare(businessDay.Shift.StartDate, entity.Shift.StartDate) <= 0 && DateTime.Compare(businessDay.Shift.EndDate, entity.Shift.StartDate) >= 0) && DateTime.Compare(businessDay.Shift.EndDate, entity.Shift.EndDate) <= 0)  // 13/07 - 17/07
+                    return false;
+                else if (DateTime.Compare(businessDay.Shift.StartDate, entity.Shift.StartDate) >= 0 && DateTime.Compare(businessDay.Shift.StartDate, entity.Shift.EndDate) <= 0 && DateTime.Compare(businessDay.Shift.EndDate, entity.Shift.EndDate) >= 0)  // 17/07 -27/07
+                    return false;
+                else if (DateTime.Compare(entity.Shift.StartDate,businessDay.Shift.StartDate) <= 0 && DateTime.Compare( entity.Shift.EndDate, businessDay.Shift.EndDate) >= 0)  //10/07 - 30/07
+                    return false;
+            }
+
+            if (DateTime.Compare(entity.Shift.StartDate, entity.Shift.EndDate) >= 0)  //   18/04 - 11/04 XXX
+                return false;
+
+            return true;
         }
 
         public bool SetRoomForBusinessDay(BusinessDay businessDay, Room room)

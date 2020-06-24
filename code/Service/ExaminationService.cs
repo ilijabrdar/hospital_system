@@ -8,7 +8,6 @@ using Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Configuration;
 
 namespace Service
 {
@@ -21,8 +20,6 @@ namespace Service
         private readonly IReferralService _referralService;
         private readonly ISymptomService _symptomService;
         private readonly ITherapyService _therapyService;
-
-       
 
         public ExaminationService(IExaminationUpcomingRepository upcomingRepository, IExaminationPreviousRepository previousRepository, IDiagnosisService diagnosisService, IPrescriptionService prescriptionService, IReferralService referralService, ISymptomService symptomService, ITherapyService therapyService)
         {

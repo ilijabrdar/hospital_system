@@ -2,18 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
+using Model.Director;
+using Model.Doctor;
 using Model.Dto;
 using Model.PatientSecretary;
 using Model.Users;
@@ -76,18 +68,29 @@ namespace UserInterface
             ToFullDate = new DateTime(ToYear, ToMonth, ToDay, ToHour, ToMinute, 0);
 
             App app = Application.Current as App;
-            ExaminationDTO examinationFilter = new ExaminationDTO(SelectedDoctor, null, new Period(new DateTime(FromYear, FromMonth, FromDay, FromHour, FromMinute, 0), new DateTime(ToYear, ToMonth, ToDay, ToHour, ToMinute, 0)), null);
-            List<Examination> examinations = app.ExaminationController.GetExaminationsByFilter(examinationFilter, false);
+            SecretaryReportDTO data = app.ReportController.GenerateDoctorOccupationReport(SelectedDoctor, new Period(FromFullDate, ToFullDate));
 
             String html = "<html><head><style>table {border-collapse: collapse; width: 100%;} table, th, td {border: 1px solid black;}</style></head><body><h1 style=\"text - align:center\">IZVEŠTAJ O ZAUZETOSTI LEKARA</h1>" +
-                "<p><br><br>Lekar:  Pera Perić<br>Od:  18/6/2020 00:00:00<br>Do:  19/6/2020 17:00:00<br><br></p>" +
-                "<table><tr style=\"text-align: center;\"><th>Datum</th><th>Vreme</th><th>Pacijent</th><th>Sala</th></tr>" +
-                "<tr><td>18/6/2020</td><td>1:45:00</td><td>Petar Petrovic</td><td>S12</td></tr>" +
-                "<tr><td>18/6/2020</td><td>17:40:00</td><td>Marko Petrovic</td><td>S12</td></tr>" +
-                "<tr><td>19/6/2020</td><td>2:45:00</td><td>Dusan Markovic</td><td>S12</td></tr>" +
-                "</table>" +
-                "<p>Ukupna zauzetost: 30% radnog vremena</p>" +
-                "</body></html>";
+                "<p><br><br>Lekar:\t" + SelectedDoctor.FullName + "<br>Od:\t" + FromFullDate + "<br>Do:\t" + ToFullDate + "<br><br></p><h2>Pregledi:</h2>" +
+                "<table><tr style=\"text-align: center;\"><th>Datum</th><th>Vreme</th><th>Pacijent</th></tr>";
+            foreach (Examination examination in data.Examinations)
+            {
+                Room room = null;
+                foreach (BusinessDay businessDay in examination.Doctor.BusinessDay)
+                    if (businessDay.Shift.StartDate.Date == examination.Period.StartDate.Date)
+                    {
+                        room = businessDay.room;
+                        break;
+                    }
+                html += "<tr><td>" + examination.Period.StartDate.Date.ToString("dd/MM/yyyy") + "</td><td>" + examination.Period.StartDate.TimeOfDay + "</td><td>" + examination.User.FullName + "</td></tr>";
+            }
+            html += "</table><h2>Operacije:</h2>";
+            html += "<table><tr style=\"text-align: center;\"><th>Datum</th><th>Vreme</th><th>Pacijent</th></tr>";
+            foreach(Operation operation in data.Operations)
+            {
+                html += "<tr><td>" + operation.Period.StartDate.Date.ToString("dd/MM/yyyy") + "</td><td>" + operation.Period.StartDate.TimeOfDay + "</td><td>" + operation.Patient.FullName + "</td></tr>";
+            }
+            html += "</table></body></html>";
             try
             {
                 Byte[] res = null;
@@ -97,12 +100,12 @@ namespace UserInterface
                     PDF.Save(ms);
                     res = ms.ToArray();
                 }
-                File.WriteAllBytes("C:/Users/Asus/Desktop/hospital_system/UserInterface/UserInterface/Resources/Report1.pdf", res);
+                File.WriteAllBytes("C:\\Users\\Asus\\Desktop\\SIMS\\hospital_system\\code\\Resources\\Reports\\Report.pdf", res);
                 this.Close();
 
                 System.Diagnostics.Process process = new System.Diagnostics.Process();
-                Uri pdf = new Uri("C:/Users/Asus/Desktop/hospital_system/UserInterface/UserInterface/Resources/Report.pdf");
-                process.StartInfo.FileName = new Uri("C:/Users/Asus/Desktop/hospital_system/UserInterface/UserInterface/Resources/Report1.pdf").ToString();
+                Uri pdf = new Uri("C:\\Users\\Asus\\Desktop\\SIMS\\hospital_system\\code\\Resources\\Reports\\Report.pdf");
+                process.StartInfo.FileName = new Uri("C:\\Users\\Asus\\Desktop\\SIMS\\hospital_system\\code\\Resources\\Reports\\Report.pdf").ToString();
                 process.Start();
                 process.WaitForExit();
 

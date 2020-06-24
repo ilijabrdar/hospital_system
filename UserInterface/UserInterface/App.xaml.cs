@@ -75,6 +75,7 @@ namespace UserInterface
         public IBusinessDayController BusinessDayController { get; private set; }
         public BusinessDayService businessDayService { get; set; }
 
+        public IReportController ReportController { get; set; }
 
         public IExaminationController ExaminationController { get; private set; }
 
@@ -135,6 +136,7 @@ namespace UserInterface
 
             HospitalizationRepository hospitalizationRepository = new HospitalizationRepository(new CSVStream<Hospitalization>(HOSPITALIZATION_FILE, new HospitalizationCSVConverter(CSV_DELIMITER)), new LongSequencer(), roomRepository, patientRepo);
             OperationRepository operationRepository = new OperationRepository(new CSVStream<Operation>(OPERATION_FILE, new OperationCSVConverter(CSV_DELIMITER)), new LongSequencer(), roomRepository, doctorRepository, patientRepo);
+            OperationService operationService = new OperationService(operationRepository);
 
             businessDayService = new BusinessDayService(businessDayRepository, doctorService);
             BusinessDayController = new BusinessDayController(businessDayService);
@@ -164,6 +166,10 @@ namespace UserInterface
             patientFileRepository._hospitalizationRepository = hospitalizationRepository;
             patientFileRepository._operationRepository = operationRepository;
             patientFileRepository._examinationPreviousRepository = examinationPreviousRepository;
+
+            //report
+            ReportService reportService = new ReportService(examinationService, operationService);
+            ReportController = new ReportController(reportService);
         }
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
