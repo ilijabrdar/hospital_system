@@ -92,7 +92,30 @@ namespace Service
 
         public BusinessDay Save(BusinessDay entity)
         {
-            return _businessDayRepository.Save(entity);
+            if (validateDates(entity))
+                return _businessDayRepository.Save(entity);
+            else
+                return null;
+        }
+
+        private bool validateDates(BusinessDay entity)
+        {
+            foreach (BusinessDay businessDay in GetBusinessDaysByDoctor(entity.doctor)) //15/07 - 25/-7
+            {
+                if (DateTime.Compare(businessDay.Shift.StartDate, entity.Shift.StartDate) <= 0 && DateTime.Compare(businessDay.Shift.EndDate, entity.Shift.EndDate) >= 0)  // 16/07 - 21/07
+                    return false;
+                else if ((DateTime.Compare(businessDay.Shift.StartDate, entity.Shift.StartDate) <= 0 && DateTime.Compare(businessDay.Shift.EndDate, entity.Shift.StartDate) >= 0) && DateTime.Compare(businessDay.Shift.EndDate, entity.Shift.EndDate) <= 0)  // 13/07 - 17/07
+                    return false;
+                else if (DateTime.Compare(businessDay.Shift.StartDate, entity.Shift.StartDate) >= 0 && DateTime.Compare(businessDay.Shift.StartDate, entity.Shift.EndDate) <= 0 && DateTime.Compare(businessDay.Shift.EndDate, entity.Shift.EndDate) >= 0)  // 17/07 -27/07
+                    return false;
+                else if (DateTime.Compare(entity.Shift.StartDate,businessDay.Shift.StartDate) <= 0 && DateTime.Compare( entity.Shift.EndDate, businessDay.Shift.EndDate) >= 0)  //10/07 - 30/07
+                    return false;
+            }
+
+            if (DateTime.Compare(entity.Shift.StartDate, entity.Shift.EndDate) >= 0)  //   18/04 - 11/04 XXX
+                return false;
+
+            return true;
         }
 
         public bool SetRoomForBusinessDay(BusinessDay businessDay, Room room)
