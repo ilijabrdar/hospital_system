@@ -11,7 +11,7 @@ namespace bolnica.Model.Dto
     {
       public Doctor Doctor { get; set; }
       public Period Period { get; set; }
-
+      public Boolean PatientScheduling = false;
     public BusinessDayDTO(Doctor doctor, Period period)
         {
             this.Doctor = doctor;

@@ -45,6 +45,16 @@ namespace Model.Users
             this.Guest = guest;
         }
 
+        public Patient(String name, String surname, String jmbg, String email, String phone, DateTime birth, Boolean guest)
+        {
+            this.FirstName = name;
+            this.LastName = surname;
+            this.Jmbg = jmbg;
+            this.Email = email;
+            this.Phone = phone;
+            this.DateOfBirth = birth;
+            this.Guest = guest;
+        }
 
         public Patient(long id)
         {
