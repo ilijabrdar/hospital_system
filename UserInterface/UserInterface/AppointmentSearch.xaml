@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:UserInterface"
          xmlns:val="clr-namespace:UserInterface.Validation"
         mc:Ignorable="d"
-        Title="Pretraga pregleda" Height="250" Width="380"
+        Title="Pretraga pregleda" Height="260" Width="380"
         ResizeMode="NoResize">
     <Grid>
         <Label Content="Lekar" HorizontalAlignment="Left" Margin="40,10,0,0" VerticalAlignment="Top"/>
@@ -128,11 +128,19 @@
                 </Binding>
             </TextBox.Text>-->
         </TextBox>
-        <RadioButton x:Name="PeriodFirst" Content="Prioritet termin" HorizontalAlignment="Left" Margin="40,130,0,0" VerticalAlignment="Top"/>
-        <RadioButton x:Name="DoctorFirst" Content="Prioritet lekar" HorizontalAlignment="Left" Margin="40,150,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="IToDay" HorizontalAlignment="Left" Height="23" Margin="280,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" Text="{Binding Path=ToDay}">
+            <!--><Binding Path="ToDay" UpdateSourceTrigger="PropertyChanged">
+                <Binding.ValidationRules>
+                    <val:DaySearchValidation ValidationStep="RawProposedValue"/>
+                </Binding.ValidationRules>
+            </Binding>-->
+        </TextBox>
+        <RadioButton x:Name="NoPriority" Content="Bez prioriteta" HorizontalAlignment="Left" Margin="40,125,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="PeriodFirst" Content="Prioritet termin" HorizontalAlignment="Left" Margin="40,145,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="DoctorFirst" Content="Prioritet lekar" HorizontalAlignment="Left" Margin="40,165,0,0" VerticalAlignment="Top"/>
         <Label Content="/" HorizontalAlignment="Left" Margin="185,50,0,0" VerticalAlignment="Top"/>
         <Label Content="/" HorizontalAlignment="Left" Margin="260,50,0,0" VerticalAlignment="Top"/>
-        <Button Content="_Pretraži" HorizontalAlignment="Left" Margin="175,177,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="FilterExaminations">
+        <Button Content="_Pretraži" HorizontalAlignment="Left" Margin="175,185,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="FilterExaminations">
             <!--><Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="IsEnabled" Value="False"/>
@@ -151,15 +159,9 @@
                 </Style>
             </Button.Style>-->
         </Button>
-        <Button Content="_Odustani" HorizontalAlignment="Left" Margin="255,177,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="CencelDialog"/>
+        <Button Content="_Odustani" HorizontalAlignment="Left" Margin="260,185,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="CencelDialog"/>
         <Label Content="/" HorizontalAlignment="Left" Margin="185,90,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="IToDay" HorizontalAlignment="Left" Height="23" Margin="280,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" Text="{Binding Path=ToDay}">
-            <!--><Binding Path="ToDay" UpdateSourceTrigger="PropertyChanged">
-                <Binding.ValidationRules>
-                    <val:DaySearchValidation ValidationStep="RawProposedValue"/>
-                </Binding.ValidationRules>
-            </Binding>-->
-        </TextBox>
+        
         <Label Content="/" HorizontalAlignment="Left" Margin="260,87,0,0" VerticalAlignment="Top"/>
 
 

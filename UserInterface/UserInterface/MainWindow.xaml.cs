@@ -644,31 +644,51 @@ namespace UserInterface
                 e.CanExecute = true;
         }
 
-        public static void FilterFreeSlots(BusinessDayDTO examinationFilter /*, bool doctorPriority*/)
+        public static void FilterFreeSlots(BusinessDayDTO examinationFilter, String choice)
         {
-            //freeSlots = new List<ExaminationDTO>(FreeSlots);
             App app = Application.Current as App;
-            //app.businessDayService._searchPeriods = new NoPrioritySearch();
-            //app.businessDayService._searchPeriods = new DoctorPrioritySearch();
-            app.businessDayService._searchPeriods = new DatePrioritySearch();
+            if(choice == "noPriority")
+                app.businessDayService._searchPeriods = new NoPrioritySearch();
+            else if(choice == "doctorFirst")
+                app.businessDayService._searchPeriods = new DoctorPrioritySearch();
+            else
+                app.businessDayService._searchPeriods = new DatePrioritySearch();
             FreeSlots = app.BusinessDayController.Search(examinationFilter);
             ee.ItemsSource = FreeSlots;
         }
 
-        Examination SelectedFreeSlot;
+        ExaminationDTO SelectedFreeSlot;
         private void Schedule(object sender, RoutedEventArgs e)
         {
-            //SelectedFreeSlot = ee.SelectedItem as Examination;
-            //if (SelectedFreeSlot == null)
-            //{
-            //    MessageBox.Show("Selektujte pregled pre zakazivanja.", "Oops", MessageBoxButton.OK, MessageBoxImage.Error);
-            //    return;
-            //}
-            //Examination newExamination = new Examination(SelectedFreeSlot.dateTime, SelectedFreeSlot.doctor, GuestPatient.FirstName + " " + GuestPatient.LastName, SelectedFreeSlot.room);
-            //Examinations.Add(newExamination);
-            //SwapLists(sender, e);
-            //SuccessLabel.Visibility = Visibility.Visible;
-            //dispatcherTimer.Start();
+            App app = Application.Current as App;
+            SelectedFreeSlot = ee.SelectedItem as ExaminationDTO;
+            if (SelectedFreeSlot == null)
+            {
+                MessageBox.Show("Selektujte pregled pre zakazivanja.", "Oops", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (GuestPatient.Guest)
+            {
+                GuestPatient.DateOfBirth = new DateTime(int.Parse(IGuestYear.Text), int.Parse(IGuestMonth.Text), int.Parse(IGuestDay.Text));
+                GuestPatient.Address = Addresses[0];
+                GuestPatient.Address.Town = Towns[0];
+                GuestPatient.Address.Town.State = States[0];
+                GuestPatient.Username = GuestPatient.Jmbg;
+                GuestPatient.Password = GuestPatient.Jmbg;
+                GuestPatient = app.PatientController.Save(GuestPatient);
+            }
+                
+            Examination newExamination = new Examination(GuestPatient, SelectedFreeSlot.Doctor, SelectedFreeSlot.Period);
+            BusinessDay businessDay = app.BusinessDayController.GetExactDay(newExamination.Doctor, newExamination.Period.StartDate);
+            app.BusinessDayController.MarkAsOccupied(newExamination.Period, businessDay);
+
+            app.ExaminationController.Save(newExamination);
+            FillExaminationTable();
+            FreeSlots.Clear();
+            ee.ItemsSource = FreeSlots;
+
+            SuccessLabel.Visibility = Visibility.Visible;
+            dispatcherTimer.Start();
         }
     }
 

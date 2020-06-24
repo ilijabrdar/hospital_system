@@ -38,14 +38,14 @@ namespace UserInterface
             FromDay = DateTime.Now.Day;
             FromMonth = DateTime.Now.Month;
             FromYear = DateTime.Now.Year;
-            ToDay = DateTime.Now.Hour;
-            ToMonth = DateTime.Now.Minute;
-            ToYear = DateTime.Now.Minute;
+            ToDay = DateTime.Now.Day;
+            ToMonth = DateTime.Now.Month;
+            ToYear = DateTime.Now.Year;
 
             App app = Application.Current as App;
             Doctors = app.DoctorController.GetAll().ToList();
             SelectedDoctor = Doctors[0];
-            DoctorFirst.IsChecked = true;
+            NoPriority.IsChecked = true;
         }
 
         private void CencelDialog(object sender, RoutedEventArgs e)
@@ -56,11 +56,13 @@ namespace UserInterface
         private void FilterExaminations(object sender, RoutedEventArgs e)
         {
             BusinessDayDTO filter = new BusinessDayDTO(SelectedDoctor, new Model.PatientSecretary.Period(new DateTime(FromYear, FromMonth, FromDay, 0, 0, 0), new DateTime(ToYear, ToMonth, ToDay, 0, 0, 0)));
-            //if ((bool)DoctorFirst.IsChecked)
-            //    MainWindow.FilterFreeSlots(examinationFilter, true);
-            //else if((bool)PeriodFirst.IsChecked)
-            //    MainWindow.FilterFreeSlots(examinationFilter, false);
-            MainWindow.FilterFreeSlots(filter);
+
+            if ((bool)NoPriority.IsChecked)
+                MainWindow.FilterFreeSlots(filter, "noPriority");
+            else if ((bool)DoctorFirst.IsChecked)
+                MainWindow.FilterFreeSlots(filter, "doctorFirst");
+            else if((bool)PeriodFirst.IsChecked)
+                MainWindow.FilterFreeSlots(filter, "periodFirst");
             this.Close();
         }
     }

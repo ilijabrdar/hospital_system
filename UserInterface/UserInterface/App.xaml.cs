@@ -59,7 +59,7 @@ namespace UserInterface
         private readonly String _patient_File = "../../../../code/Resources/Data/patient.csv";
         private readonly String _patientFile_File = "../../../../code/Resources/Data/patientFile.csv";
 
-        private const String EXAM_UPCOMING_FILE = "../../../../code/Resources/Data/ExaminationUpcoming.csv";
+        private const String EXAM_UPCOMING_FILE = "../../../../code/Resources/Data/upcomingExamination.csv";
         private const String EXAM_PREVIOUS_FILE = "../../../../code/Resources/Data/examinationPrevious.csv";
 
         public IUserController UserController { get; private set; }
@@ -125,14 +125,16 @@ namespace UserInterface
             DoctorController = new DoctorController(doctorService);
 
             var patientFileRepository = new PatientFileRepository(new CSVStream<PatientFile>(_patientFile_File, new PatientFileCSVConverter(CSV_DELIMITER, CSV_ARRAY_DELIMITER)), new LongSequencer());
-            HospitalizationRepository hospitalizationRepository = new HospitalizationRepository(new CSVStream<Hospitalization>(HOSPITALIZATION_FILE, new HospitalizationCSVConverter(CSV_DELIMITER)), new LongSequencer(), roomRepository);
-            OperationRepository operationRepository = new OperationRepository(new CSVStream<Operation>(OPERATION_FILE, new OperationCSVConverter(CSV_DELIMITER)), new LongSequencer(), roomRepository, doctorRepository);
+            
 
 
             var patientFileService = new PatientFileService(patientFileRepository);
-            var patientRepo = new PatientRepository(new CSVStream<Patient>(_patient_File, new PatientCSVConverter(CSV_DELIMITER)), new LongSequencer(), patientFileRepository);
+            var patientRepo = new PatientRepository(new CSVStream<Patient>(_patient_File, new PatientCSVConverter(CSV_DELIMITER)), new LongSequencer(), patientFileRepository, addressRepository, townRepository, stateRepository);
             var patientService = new PatientService(patientRepo, patientFileService);
             PatientController = new PatientController(patientService);
+
+            HospitalizationRepository hospitalizationRepository = new HospitalizationRepository(new CSVStream<Hospitalization>(HOSPITALIZATION_FILE, new HospitalizationCSVConverter(CSV_DELIMITER)), new LongSequencer(), roomRepository, patientRepo);
+            OperationRepository operationRepository = new OperationRepository(new CSVStream<Operation>(OPERATION_FILE, new OperationCSVConverter(CSV_DELIMITER)), new LongSequencer(), roomRepository, doctorRepository, patientRepo);
 
             businessDayService = new BusinessDayService(businessDayRepository, doctorService);
             BusinessDayController = new BusinessDayController(businessDayService);
