@@ -27,8 +27,8 @@ namespace upravnikKT2
         private readonly IBusinessDayController _businessDayController;
 
         private Doctor selectedDoctor;
-
-        public OpenAllShiftsWindow(Doctor selectedDoctor)
+        private DataGrid DataGridLekari;
+        public OpenAllShiftsWindow(Doctor selectedDoctor, DataGrid dataGridLekari)
         {
             InitializeComponent();
             this.DataContext = this;
@@ -39,6 +39,8 @@ namespace upravnikKT2
             var app = Application.Current as App;
             _doctorController = app.DoctorController;
             _businessDayController = app.BusinessDayController;
+
+            DataGridLekari = dataGridLekari;
         }
 
         private void AddShift(object sender, RoutedEventArgs e)
@@ -46,8 +48,9 @@ namespace upravnikKT2
             ShiftWindow window = new ShiftWindow(selectedDoctor);
             window.ShowDialog();
 
-            DataGridShifts.Items.Refresh();
-
+            //DataGridShifts.Items.Refresh();
+            DataGridShifts.ItemsSource = null;
+            DataGridShifts.ItemsSource = selectedDoctor.BusinessDay;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -72,6 +75,9 @@ namespace upravnikKT2
                     _businessDayController.Delete(businessDay);
                     //selectedDoctor.BusinessDay.Remove(businessDay);
                     //_doctorController.Edit(selectedDoctor);
+
+                    DataGridLekari.ItemsSource = null;
+                    DataGridLekari.ItemsSource = _doctorController.GetAll();
 
                     this.DataGridShifts.ItemsSource = null;
                     List<BusinessDay> days = _doctorController.Get(selectedDoctor.Id).BusinessDay;

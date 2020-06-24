@@ -438,7 +438,7 @@ namespace upravnikKT2
 
         private void OpenAllShiftsWindow(object sender, RoutedEventArgs e)
         {
-            OpenAllShiftsWindow window = new OpenAllShiftsWindow((Doctor)dataGridLekari.SelectedItem);
+            OpenAllShiftsWindow window = new OpenAllShiftsWindow((Doctor)dataGridLekari.SelectedItem, dataGridLekari);
             window.ShowDialog();
         }
 

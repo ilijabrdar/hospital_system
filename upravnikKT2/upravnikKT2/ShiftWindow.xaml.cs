@@ -97,6 +97,16 @@ namespace upravnikKT2
                 BusinessDay businessDay = new BusinessDay(temp, doctor, room, null);
 
                 BusinessDay saved = _businessDayController.Save(businessDay);
+                if (saved==null)
+                {
+                    string messageBoxText = "Unesena smena se preklapa sa drugom.";
+                    string caption = "Greska";
+                    MessageBoxButton button = MessageBoxButton.OK;
+                    MessageBoxImage icon = MessageBoxImage.Error;
+
+                    MessageBox.Show(messageBoxText, caption, button, icon);
+                    return;
+                }
                 selectedDoctor.BusinessDay.Add(saved);
                 _doctorController.Edit(selectedDoctor);
             }
