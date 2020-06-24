@@ -1,13 +1,24 @@
+using bolnica.Service;
 using Model.Dto;
 using Model.PatientSecretary;
 using Model.Users;
+using Service;
 using System;
+using System.Collections.Generic;
+using System.Windows.Documents;
 
 namespace Controller
 {
    public class ReportController
    {
-      public DoctorReportDTO GenerateAnamnesisPrescriptionReport(PatientFile patientFile)
+        private readonly IReportService _service;
+
+        public ReportController(IReportService service)
+        {
+            _service = service;
+        }
+
+        public DoctorReportDTO GenerateAnamnesisPrescriptionReport(PatientFile patientFile)
       {
          // TODO: implement
          return null;
@@ -25,13 +36,10 @@ namespace Controller
          return null;
       }
       
-      public Therapy GenerateTherapyTimetableReport(PatientFile patientFile)
+      public List<Therapy> GenerateTherapyTimetableReport(PatientFile patientFile)
       {
-         // TODO: implement
-         return null;
+            return _service.GenerateTherapyTimetableReport(patientFile);
       }
-   
-      //private Service.IService _service;
    
    }
 }
