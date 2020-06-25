@@ -18,12 +18,12 @@ using System.Threading.Tasks;
 using System.Windows;
 
 namespace HCIproject
-{ 
+{
     public partial class App : Application
     {
         public IUserController UserController { get; private set; }
         public IDoctorController DoctorController { get; private set; }
-        public ISpecialityController SpecialityController{ get; private set; }
+        public ISpecialityController SpecialityController { get; private set; }
         public IExaminationController ExaminationController { get; private set; }
         public IPatientController PatientController { get; private set; }
         public IPatientFileController PatientFileController { get; private set; }
@@ -35,21 +35,23 @@ namespace HCIproject
         public IReferralController ReferralController { get; private set; }
         public ISymptomController SymptomController { get; private set; }
         public ITherapyController TherapyController { get; private set; }
-        public IArticleController ArticleController  { get; private set; }
-        public IIngredientController IngredientController  { get; private set; }
-        public IAddressController AddressController  { get; private set; }
-        public IStateController StateController  { get; private set; }
-        public ITownController TownController  { get; private set; }
-        public IRoomController RoomController  { get; private set; }
-        public IRoomTypeController RoomTypeController  { get; private set; }
-        public IEquipmentController EquipmentController  { get; private set; }
+        public IArticleController ArticleController { get; private set; }
+        public IIngredientController IngredientController { get; private set; }
+        public IAddressController AddressController { get; private set; }
+        public IStateController StateController { get; private set; }
+        public ITownController TownController { get; private set; }
+        public IRoomController RoomController { get; private set; }
+        public IRoomTypeController RoomTypeController { get; private set; }
+        public IEquipmentController EquipmentController { get; private set; }
         public IBusinessDayController BusinessDayController { get; private set; }
         public BusinessDayService BusinessDayService { get; set; }
         public IRenovationController RenovationController { get; private set; }
         public IDoctorGradeController DoctorGradeController { get; private set; }
         public DoctorController Doctor { get; private set; }
 
- 
+        public NotificationController NotificationController { get; private set; }
+
+
 
         private const String CSV_DELIMITER = ",";
         private const String CSV_DELIMITER2 = "|";
@@ -140,14 +142,14 @@ namespace HCIproject
             IngredientService ingredientService = new IngredientService(ingredientRepository);
             PatientFileService patientFileService = new PatientFileService(patientFileRepository);
             PatientService patientService = new PatientService(patientRepository,patientFileService,doctorGradeService);
-            // BusinessDayService businessDayService = new BusinessDayService(businessDayRepository, doctorService);
             BusinessDayService = new BusinessDayService(businessDayRepository, doctorService);
-
-
             RenovationService renovationService = new RenovationService(renovationRepository);
-            RoomService roomService = new RoomService(roomRepository,renovationService, BusinessDayService);
+            RoomService roomService = new RoomService(roomRepository,renovationService, BusinessDayService,hospitalizationService);
             RoomTypeService roomTypeService = new RoomTypeService(roomTypeRepository, roomService);
             EquipmentService equipmentService = new EquipmentService(equipmentRepository, roomService);
+            NotificationService notificationService = new NotificationService(drugService, BusinessDayService);
+            NotificationController = new NotificationController(notificationService);
+
 
             UserController = new UserController(userService);
             ArticleController = new ArticleController(articleService);
@@ -175,6 +177,8 @@ namespace HCIproject
             DoctorGradeController = new DoctorGradeController(doctorGradeService);
             DoctorController = new DoctorController(doctorService);
             TherapyController = new TherapyController(therapyService);
+
+
             //PatientFileController.Save(new PatientFile(0));
             //StateController = new StateController(stateService);
             //AddressController = new AddressController(addressService);

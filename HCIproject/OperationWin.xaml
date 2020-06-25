@@ -46,17 +46,20 @@
                     <Label Content="Naziv operacije" Grid.Row="2" Grid.Column="0" FontSize="16" Margin="3"/>
                     <TextBox x:Name="naziv" Grid.Row="2 " Grid.Column="1"  FontSize="16" Margin="3" CaretBrush="#FF1FEECD"/>
 
-                    <Label Content="Procena trajanja operacije" Grid.Row="3" Grid.Column="0" FontSize="16" Margin="3"/>
-                    <TextBox x:Name="vreme" Grid.Row="3 " Grid.Column="1"  FontSize="16" Margin="3" CaretBrush="#FF1FEECD"/>
+                    <Label Content="Procena trajanja operacije u minutima" Grid.Row="3" Grid.Column="0" FontSize="16" Margin="3"/>
+                    <TextBox x:Name="vreme" Grid.Row="3 " Grid.Column="1"  FontSize="16" Margin="3" Width="35" CaretBrush="#FF1FEECD"/>
 
                     <Label Content="Napomena" Grid.Row="4" Grid.Column="0" FontSize="16" Margin="3"/>
                     <TextBox Grid.Row="4" Grid.Column="1" Margin="3" AcceptsReturn="True"  FontSize="16" CaretBrush="#FF1FEECD"/>
                 </Grid>
-                <Label Content="Navigiranjem sa Tab dugmetom pozicionirajte se na tebelu i izaberite podatke koje vam odgovaraju." HorizontalAlignment="Center" FontSize="10"></Label>
-                <Label Content="Nakon pozicioniranja na zeljene podatka komandom CTRL+Tab zavrsite pretragu." HorizontalAlignment="Center" FontSize="10"></Label>
+                <Label Content="Izaberite datum:" FontWeight="DemiBold" FontSize="16" Margin="10" HorizontalAlignment="Center"/>
+                <StackPanel x:Name="DatePicker" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <DatePicker Name="Picker" Margin="10" Width="200" FirstDayOfWeek="Monday"/>
+                    <Button Content="Potvrdi unos" Click="SearchPeriods" Background="#A2D9CE"  ></Button>
+                </StackPanel>
                 <ScrollViewer VerticalScrollBarVisibility="Auto" >
                     <Border Height="170" Width="500" HorizontalAlignment="Center">
-                        <DataGrid x:Name="specialistGrid" FontSize="14" BorderThickness="1"  AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" ItemsSource ="{Binding specialistExamination}"  materialDesign:DataGridAssist.CellPadding="4 2 2 2" materialDesign:DataGridAssist.ColumnHeaderPadding="4 2 2 2" Background="#FFC4F3EA" Width="378" HorizontalAlignment="Center"  >
+                        <DataGrid x:Name="specialistGrid" Visibility="Hidden" FontSize="14" BorderThickness="1"  AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" ItemsSource ="{Binding specialistExamination}"  materialDesign:DataGridAssist.CellPadding="4 2 2 2" materialDesign:DataGridAssist.ColumnHeaderPadding="4 2 2 2" Background="#FFC4F3EA" Width="200" HorizontalAlignment="Center"  >
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Datum" Binding="{Binding Period.StartDate.Date }" Width="80"></DataGridTextColumn>
 
@@ -69,7 +72,7 @@
         </ScrollViewer>
         <WrapPanel FlowDirection="RightToLeft" Background="#D5F5E3" VerticalAlignment="Bottom" >
             <Button Content="Otkaži" FontSize="18" Height="30" Width="100"  Margin="10" Background="#A2D9CE" Click="Button_Click" BorderBrush="#FF1FEECD" />
-            <Button Content="Potvrdi" FontSize="18" Height="30" Width="100"  Margin="10" Background="#A2D9CE" Click="Button_Click_1" BorderBrush="#FF1FEECD" />
+            <Button Content="Potvrdi" FontSize="18" Height="30" Width="100"  Margin="10" Background="#A2D9CE" Click="Zakazi" BorderBrush="#FF1FEECD" />
         </WrapPanel>
     </StackPanel>
 </Window>

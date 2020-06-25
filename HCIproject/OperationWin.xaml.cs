@@ -1,4 +1,5 @@
-﻿using bolnica.Service;
+﻿using bolnica.Model.Dto;
+using bolnica.Service;
 using Model.Director;
 using Model.Dto;
 using Model.PatientSecretary;
@@ -39,7 +40,6 @@ namespace HCIproject
             dijagnozaTxt.Text = dijagnoza;
             lekarTxt.Text = user.FirstName + " " + user.LastName;
             specialistExaminations = new List<ExaminationDTO>();
-            setTableData();
             this.DataContext = this;
 
         }
@@ -59,26 +59,6 @@ namespace HCIproject
             }
         }
 
-        private void setTableData()
-        {
-            var app = Application.Current as App;
-            List<ExaminationDTO> specialistExaminations = new List<ExaminationDTO>();
-            specialistExaminations.Clear();
-
-            foreach (Examination exam in app.ExaminationController.GetUpcomingExaminationsByUser(user))
-            {
-                Room room = null;
-                foreach (BusinessDay businessDay in exam.Doctor.BusinessDay)
-                {
-                    room = businessDay.room;
-                    break;
-                }
-
-                specialistExaminations.Add(new ExaminationDTO(exam.Period));
-            }
-
-            specialistGrid.ItemsSource = specialistExaminations;
-        }
         private void Button_Click_1(object sender, RoutedEventArgs e)
         { //potvrdi
             if (specialistGrid.SelectedItem != null || vreme.Text!="" || naziv.Text!="")
@@ -117,9 +97,55 @@ namespace HCIproject
         {
             var app = Application.Current as App;
 
+            if (Picker.SelectedDate == null)
+                return;
+
             app.BusinessDayService._searchPeriods = new NoPrioritySearch();
             Period period = new Period();
-            
+            period.StartDate = DateTime.Parse(Picker.Text);
+            BusinessDayDTO businessDayDTO = new BusinessDayDTO(user, period);
+            specialistExaminations = app.BusinessDayController.Search(businessDayDTO);
+            specialistGrid.ItemsSource = specialistExaminations;
+            specialistGrid.Visibility = Visibility.Visible;
+
+        }
+
+        private void Zakazi(object sender, RoutedEventArgs e)
+        {
+            var app = Application.Current as App;
+            var selectedItem = specialistGrid.SelectedItem;       
+
+            ExaminationDTO scheduleExam = (ExaminationDTO)selectedItem;
+            Period period = scheduleExam.Period;
+            Patient patient = app.PatientController.Get(id);
+            Examination examination = new Examination(patient, user, period);
+            app.ExaminationController.Save(examination);
+            BusinessDay day = app.BusinessDayController.GetExactDay(user, period.StartDate);
+            app.BusinessDayController.MarkAsOccupied(period, day);
+
+
+            if (specialistGrid.SelectedItem != null)
+            {
+                
+                ExaminationDTO examDTO = (ExaminationDTO)specialistGrid.SelectedItem;
+                string messageBoxText = "Uspesno ste zakazali operaciju " + " dana" + " " + examDTO.Period.StartDate;
+                string caption = "Potvrda operacije!";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Information;
+                MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+                this.Close();
+
+            }
+            else
+            {
+                string messageBoxText = "Morate izabrati odgovarajuce podatke iz tabele kako biste uspesno zakazali operaciju.";
+                string caption = "Uput";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Information;
+                MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+            }
+
+
         }
     }
 }

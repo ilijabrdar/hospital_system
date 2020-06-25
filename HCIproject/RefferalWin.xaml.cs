@@ -110,7 +110,6 @@ namespace HCIproject
             period.StartDate = DateTime.Parse(Picker.Text);
             BusinessDayDTO businessDayDTO = new BusinessDayDTO(doctor, period);
             specialistExaminations = app.BusinessDayController.Search(businessDayDTO);
-            specialistGrid.Visibility = Visibility.Visible;
             specialistGrid.ItemsSource = specialistExaminations;
             specialistGrid.Visibility = Visibility.Visible;
         }

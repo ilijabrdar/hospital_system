@@ -1,13 +1,16 @@
-﻿using Microsoft.Win32;
+﻿using Controller;
+using Microsoft.Win32;
 using MindFusion.Charting.Wpf;
 using Model.Director;
 using Model.Doctor;
 using Model.Dto;
 using Model.PatientSecretary;
 using Model.Users;
+using Service;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows;
@@ -33,9 +36,8 @@ namespace HCIproject
         public List<State> States { get; set; }
         public List<Town> Towns { get; set; }
         public List<Address> Addresses { get; set; }
-
-
         public string TestAdresa { get; set; }
+
 
         public SideBar(Doctor _user)
         {
@@ -61,7 +63,7 @@ namespace HCIproject
             TownCombo.SelectedValue = user.Address.Town.GetId();
             AddressCombo.SelectedValue = user.Address.GetId();
 
-            brojPregleda.Content = app.ExaminationController.GetUpcomingExaminationsByUser(user).Count;
+            setNotifications();
             checkSpeciality();
             setViewUpcExam();
             setViewPatientFiles();
@@ -115,7 +117,27 @@ namespace HCIproject
             misljenje.Text = "";
         }
 
-//izmena naloga
+        private void setNotifications()
+        {
+            var app = Application.Current as App;
+
+            brojPregleda.Content = app.ExaminationController.GetUpcomingExaminationsByUser(user).Count;
+            List<NotifyDoctorBusinessDay> ret = app.NotificationController.NotifyDoctorOfUpcomingBusinessDays(user);
+
+            foreach (var r in ret)
+            {
+                if (r == null)
+                {
+                    smene.Text += "SLOBODAN" + "\n";
+                }
+                else
+                {
+                    smene.Text += r.shift.StartDate.TimeOfDay + " " + r.shift.EndDate.TimeOfDay + " " + r.room.RoomCode + "\n";
+                }
+            }
+        }
+
+        //izmena naloga
         private void setDoctorsData()
         {
 
