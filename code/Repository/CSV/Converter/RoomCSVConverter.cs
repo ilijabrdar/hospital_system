@@ -16,7 +16,6 @@ namespace bolnica.Repository
             _delimiter = delimiter;
         }
 
-        //long id, string roomCode, RoomType roomType, Dictionary<Equipment, int> equipment_inventory, int MaxNumberOfPatientsForHospitalization, int CurrentNumberOfPatients
         public Room ConvertCSVFormatToEntity(string roomCSV)
         {
             string[] tokens = roomCSV.Split(_delimiter.ToCharArray());
@@ -43,8 +42,7 @@ namespace bolnica.Repository
                 helping,
                 int.Parse(tokens[4]),
                 int.Parse(tokens[5])
-                );
-
+                ); 
 
         }
 

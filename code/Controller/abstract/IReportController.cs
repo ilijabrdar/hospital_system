@@ -6,9 +6,9 @@ using Model.Dto;
 using Model.PatientSecretary;
 using Model.Users;
 
-namespace bolnica.Service
+namespace bolnica.Controller
 {
-    public interface IReportService
+    public interface IReportController
     {
         DoctorReportDTO GenerateAnamnesisPrescriptionReport(PatientFile patientFile);
 
@@ -18,4 +18,5 @@ namespace bolnica.Service
 
         List<Therapy> GenerateTherapyTimetableReport(PatientFile patientFile);
     }
+
 }
