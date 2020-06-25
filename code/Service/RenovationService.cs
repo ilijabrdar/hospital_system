@@ -1,8 +1,4 @@
-/***********************************************************************
- * Module:  RenovationService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.RenovationService
- ***********************************************************************/
+
 
 using bolnica.Service;
 using Model.Director;
