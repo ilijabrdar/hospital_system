@@ -1,4 +1,6 @@
+using bolnica.Model.Dto;
 using bolnica.Service;
+using Model.Director;
 using Model.Dto;
 using Model.PatientSecretary;
 using Model.Users;
@@ -24,10 +26,9 @@ namespace Controller
          return null;
       }
       
-      public String GenerateRoomOccupationReport()
+      public RoomOccupationReportDTO GenerateRoomOccupationReport(Room room, Period period)
       {
-         // TODO: implement
-         return null;
+            return _service.GenerateRoomOccupationReport(room, period);
       }
       
       public SecretaryReportDTO GenerateDoctorOccupationReport(Doctor doctor, Period period)

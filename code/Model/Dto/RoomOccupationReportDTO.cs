@@ -8,7 +8,7 @@ using System.Text;
 
 namespace bolnica.Model.Dto
 {
-    class RoomOccupationReportDTO
+    public class RoomOccupationReportDTO
     {
         //renovations, operations, examinations, equipment inventory, hospitalizations
 
@@ -22,13 +22,21 @@ namespace bolnica.Model.Dto
 
         public List<Hospitalization> hospitalizations { get; set; }
 
-        public RoomOccupationReportDTO(Room room, List<Renovation> renovations, List<Operation> operations, List<Examination> examinations, List<Hospitalization> hospitalizations)
+        public Period period { get; set; }
+
+        public RoomOccupationReportDTO()
+        {
+
+        }
+
+        public RoomOccupationReportDTO(Room room, List<Renovation> renovations, List<Operation> operations, List<Examination> examinations, List<Hospitalization> hospitalizations, Period period)
         {
             this.room = room;
             this.renovations = renovations;
             this.operations = operations;
             this.examinations = examinations;
             this.hospitalizations = hospitalizations;
+            this.period = period;
         }
     }
 }

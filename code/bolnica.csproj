@@ -610,6 +610,8 @@
     <Content Include="Resources\Data\config.txt" />
     <Content Include="Resources\Data\StateFile.txt" />
     <Content Include="Resources\Data\TownFile.txt" />
+    <Content Include="Resources\Images\kim.jpg" />
+    <Content Include="Resources\LoggedIn\config.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Data\articles.csv" />

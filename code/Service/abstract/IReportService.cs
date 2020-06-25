@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using bolnica.Model.Dto;
+using Model.Director;
 using Model.Dto;
 using Model.PatientSecretary;
 using Model.Users;
@@ -12,7 +14,7 @@ namespace bolnica.Service
     {
         DoctorReportDTO GenerateAnamnesisPrescriptionReport(PatientFile patientFile);
 
-        String GenerateRoomOccupationReport();
+        RoomOccupationReportDTO GenerateRoomOccupationReport(Room room, Period period);
 
         SecretaryReportDTO GenerateDoctorOccupationReport(Doctor doctor, Period period);
 
