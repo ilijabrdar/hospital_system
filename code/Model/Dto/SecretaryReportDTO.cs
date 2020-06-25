@@ -1,15 +1,19 @@
-
-
 using System;
+using System.Collections.Generic;
+using Model.Doctor;
+using Model.PatientSecretary;
 
 namespace Model.Dto
 {
    public class SecretaryReportDTO
    {
-      private Model.Users.Doctor Doctor;
-      private Model.PatientSecretary.Period Period;
-      private Model.Doctor.Operation Operation;
-      private Model.PatientSecretary.Examination Examination;
-   
+      public List<Operation> Operations { get; set; }
+      public List<Examination> Examinations { get; set; }
+
+        public SecretaryReportDTO()
+        {
+            Operations = new List<Operation>();
+            Examinations = new List<Examination>();
+        }
    }
 }

@@ -114,12 +114,14 @@
     <Compile Include="Controller\abstract\IPrescriptionController.cs" />
     <Compile Include="Controller\abstract\IReferralController.cs" />
     <Compile Include="Controller\abstract\IRenovationController.cs" />
+    <Compile Include="Controller\abstract\IReportController.cs" />
     <Compile Include="Controller\abstract\ISecretaryController.cs" />
     <Compile Include="Controller\abstract\ISpecialityController.cs" />
     <Compile Include="Controller\abstract\IStateController.cs" />
     <Compile Include="Controller\abstract\ISymptomController.cs" />
     <Compile Include="Controller\abstract\ITherapyController.cs" />
     <Compile Include="Controller\abstract\ITownController.cs" />
+    <Compile Include="Controller\abstract\PatientNotificationController.cs" />
     <Compile Include="Controller\AddressController.cs" />
     <Compile Include="Controller\ArticleController.cs">
       <SubType>Code</SubType>
@@ -173,6 +175,7 @@
     <Compile Include="Controller\PatientFileController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controller\PatientNotificationController.cs" />
     <Compile Include="Controller\PrescriptionController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -246,6 +249,7 @@
     <Compile Include="Model\Dto\ExaminationDTO.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Model\Dto\PatientNotification.cs" />
     <Compile Include="Model\Dto\SecretaryReportDTO.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -319,6 +323,7 @@
     <Compile Include="Repository\abstract\IEagerRepository.cs" />
     <Compile Include="Repository\abstract\IEditRepository.cs" />
     <Compile Include="Repository\abstract\IGetterRepository.cs" />
+    <Compile Include="Repository\abstract\IPatientNotificationRepository.cs" />
     <Compile Include="Repository\abstract\IStateRepository.cs" />
     <Compile Include="Repository\abstract\ITownRepository.cs" />
     <Compile Include="Repository\abstract\IUserGetterRepository.cs" />
@@ -336,9 +341,11 @@
     </Compile>
     <Compile Include="Repository\CSV\Converter\AddressCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\DirectorCSVConverter.cs" />
+    <Compile Include="Repository\CSV\Converter\PatientNotificationCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\ReferralCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\SymptomCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\TherapyCSVConverter.cs" />
+    <Compile Include="Repository\PatientNotificationRepository.cs" />
     <Compile Include="Repository\ReferralRepository.cs" />
     <Compile Include="Repository\CSV\Converter\ArticleCSVConverter.cs" />
     <Compile Include="Repository\CSV\Converter\BusinessDayCSVConverter.cs" />
@@ -502,6 +509,7 @@
     <Compile Include="Service\abstract\IIngredientService.cs" />
     <Compile Include="Service\abstract\IOperationService.cs" />
     <Compile Include="Service\abstract\IPatientFileService.cs" />
+    <Compile Include="Service\abstract\IPatientNotificationService.cs" />
     <Compile Include="Service\abstract\IPatientService.cs" />
     <Compile Include="Service\abstract\IPrescriptionService.cs" />
     <Compile Include="Service\abstract\IReferralService.cs" />
@@ -567,6 +575,7 @@
     <Compile Include="Service\PatientFileService.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Service\PatientNotificationService.cs" />
     <Compile Include="Service\PatientService.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -1,5 +1,3 @@
-
-
 using bolnica.Repository;
 using Model.PatientSecretary;
 using Model.Users;
@@ -47,9 +45,7 @@ namespace Repository
             exam.Diagnosis = diagnosisRepository.GetEager(exam.Diagnosis.GetId());
             exam.Therapy = therapyRepository.GetEager(exam.Therapy.GetId());
             exam.Refferal = referralRepository.GetEager(exam.Refferal.GetId());
-            exam.Prescription = prescriptionRepository.GetEager(exam.Prescription.GetId());
-
-          
+            exam.Prescription = prescriptionRepository.GetEager(exam.Prescription.GetId());     
             return exam;
         }
 

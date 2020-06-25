@@ -62,9 +62,18 @@ namespace Service
             return _patientRepository.GetEager(id);
         }
 
-        public Patient ClaimAccount(String id)
+        public Patient ClaimAccount(Patient patient)
         {
-            throw new NotImplementedException();
+            if (GetUserByUsername(patient.Username) == null)
+            {
+                if (!patient.Phone.Equals("") && !patient.Email.Equals(""))
+                {
+                    patient.Guest = false;
+                    Edit(patient);
+                    return _patientRepository.GetEager(patient.GetId());
+                }
+            }
+            return null;
         }
 
         public User GetUserByUsername(String username)

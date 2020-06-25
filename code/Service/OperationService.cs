@@ -28,12 +28,12 @@ namespace Service
 
         public Operation Get(long id)
         {
-            return _operationRepository.Get(id);
+            return _operationRepository.GetEager(id);
         }
 
         public IEnumerable<Operation> GetAll()
         {
-            return _operationRepository.GetAll();
+            return _operationRepository.GetAllEager();
         }
 
         public Operation Save(Operation entity)
