@@ -78,13 +78,12 @@ namespace Service
 
             if ((user = _patientService.GetUserByUsername(username)) != null)
                 return user;
-            //if ((user = _secretaryService.GetUserByUsername(username)) != null)
-            //    return user;
-
-            //else if ((user = _directorService.GetUserByUsername(username)) != null)
-            //    return user;
-            /* if ((user = _doctorService.GetUserByUsername(username)) != null)
-               return user;*/
+            else if ((user = _secretaryService.GetUserByUsername(username)) != null)
+                return user;
+            else if ((user = _directorService.GetUserByUsername(username)) != null)
+                return user;
+            else if ((user = _doctorService.GetUserByUsername(username)) != null)
+               return user;
 
             return user;
         }
