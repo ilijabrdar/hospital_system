@@ -4,7 +4,10 @@
  * Purpose: Definition of the Class Service.ReportService
  ***********************************************************************/
 
+using bolnica.Model.Dto;
 using bolnica.Service;
+using Model.Director;
+using Model.Doctor;
 using Model.Dto;
 using Model.PatientSecretary;
 using Model.Users;
@@ -33,20 +36,42 @@ namespace Service
          // TODO: implement
          return null;
       }
-      
-        //renovations, operations, examinations, equipment inventory, hospitalizations
-      public String GenerateRoomOccupationReport()  //arguments: Room room, Period period
+
+        //renovations, equipment inventory, operations, examinations, hospitalizations
+        public RoomOccupationReportDTO GenerateRoomOccupationReport(Room room, Period period)  //arguments: Room room, Period period
       {
-            // TODO: implement
+            RoomOccupationReportDTO report = new RoomOccupationReportDTO();
+
+            report.room = room;
+            report.period = period;
+
+            List<Renovation> renovations = new List<Renovation>();
+            foreach (Renovation renovation in _renovationService.GetAll())
+                if (renovation.Room.RoomCode.Equals(room.RoomCode) && DateTime.Compare(renovation.Period.StartDate.Date, period.StartDate.Date) >= 0 && DateTime.Compare(renovation.Period.EndDate.Date, period.EndDate.Date) <= 0)
+                    renovations.Add(renovation);
+            report.renovations = renovations;
+
+
             List<Examination> examinations = new List<Examination>();
-
             foreach (Examination examination in _examinationService.GetAll())
-            {
+                if (DateTime.Compare(examination.Period.StartDate.Date, period.StartDate.Date) >= 0 && DateTime.Compare(examination.Period.EndDate.Date, period.EndDate.Date) <= 0)
+                    examinations.Add(examination);
+            report.examinations = examinations;
 
-            }
+            List<Operation> operations = new List<Operation>();
+            foreach (Operation operation in _operationService.GetAll())
+                if (DateTime.Compare(operation.Period.StartDate.Date, period.StartDate.Date) >= 0 && DateTime.Compare(operation.Period.EndDate.Date, period.EndDate.Date) <= 0)
+                    operations.Add(operation);
+            report.operations = operations;
+
+            List<Hospitalization> hospitalizations = new List<Hospitalization>();
+            foreach (Hospitalization hospitalization in _hospitalizationService.GetAll())
+                if (DateTime.Compare(hospitalization.Period.StartDate.Date, period.StartDate.Date) >= 0 && DateTime.Compare(hospitalization.Period.EndDate.Date, period.EndDate.Date) <= 0)
+                    hospitalizations.Add(hospitalization);
+            report.hospitalizations = hospitalizations;
 
 
-         return null;
+            return report;
       }
       
       public SecretaryReportDTO GenerateDoctorOccupationReport(Doctor doctor, Period period)
