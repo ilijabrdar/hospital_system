@@ -52,7 +52,8 @@ namespace upravnikKT2
                 {
 
                     //delete false and write true
-                    string path = @"C:\Users\david\Desktop\cc\hospital_system\upravnikKT2\upravnikKT2\Resources\Data\config.txt";
+                    string path; //= @"C:\Users\david\Desktop\cc\hospital_system\upravnikKT2\upravnikKT2\Resources\Data\config.txt";
+                    path = @"../../../../code/Resources/LoggedIn/config.txt";
                     //File.Delete(path);
 
                     File.WriteAllText(path, "true");
@@ -60,7 +61,9 @@ namespace upravnikKT2
                 else
                 {
                     //delete true and write false
-                    string path = @"C:\Users\david\Desktop\cc\hospital_system\upravnikKT2\upravnikKT2\Resources\Data\config.txt";
+                    //string path = @"C:\Users\david\Desktop\cc\hospital_system\upravnikKT2\upravnikKT2\Resources\Data\config.txt";
+                    string path; //= @"C:\Users\david\Desktop\cc\hospital_system\upravnikKT2\upravnikKT2\Resources\Data\config.txt";
+                    path = @"../../../../code/Resources/LoggedIn/config.txt";
 
                     File.WriteAllText(path, "false");
                 }

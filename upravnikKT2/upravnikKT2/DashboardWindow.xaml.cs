@@ -196,6 +196,10 @@ namespace upravnikKT2
             JMBG = director.Jmbg;
 
             setDirectorField();
+
+            Uri temp = director.Image;
+
+            UserImage.Source = new BitmapImage(director.Image);
         }
 
         private void setDirectorField()

@@ -20,6 +20,9 @@ using iTextSharp.text;
 using iTextSharp.text.pdf;
 using Model.Director;
 using Paragraph = iTextSharp.text.Paragraph;
+using Model.PatientSecretary;
+using bolnica.Model.Dto;
+using Model.Doctor;
 
 namespace upravnikKT2
 {
@@ -30,6 +33,7 @@ namespace upravnikKT2
     {
         private readonly IRoomController roomController;
         private readonly IRenovationController renovationController;
+        private readonly ReportController reportController;
         public GenerateReportDialog()
         {
             InitializeComponent();
@@ -39,12 +43,287 @@ namespace upravnikKT2
             var app = Application.Current as App;
             roomController = app.RoomController;
             renovationController = app.RenovationController;
+            reportController = app.ReportController;
         }
 
         private void Button_Click_Cancel(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
+
+        private void createBasicRoomReport(RoomOccupationReportDTO report, Document doc)
+        {
+            Room room = report.room;
+
+            bool found = false;
+
+            Paragraph basicInfo = new Paragraph();
+            Chunk basicInfoheader = new Chunk("OSNOVNE INFORMACIJE");
+            basicInfoheader.Font.Size = 14;
+            basicInfoheader.Font.SetStyle(1);
+            basicInfo.Add(basicInfoheader);
+            basicInfo.Add(new Chunk("\n"));
+            basicInfo.Add("Sifra prostorije: " + room.RoomCode);
+            basicInfo.Add(new Chunk("\n"));
+            basicInfo.Add("Tip prostorije: " + room.RoomType.Name);
+            basicInfo.Add(new Chunk("\n"));
+
+
+            Paragraph equipment_inventory = new Paragraph();
+            equipment_inventory.Add(new Chunk("\n"));
+            equipment_inventory.Add(new Chunk("\n"));
+            Chunk equipmentHeader = new Chunk("SPISAK OPREME");
+            equipmentHeader.Font.Size = 14;
+            equipmentHeader.Font.SetStyle(1);
+            equipment_inventory.Add(equipmentHeader);
+            equipment_inventory.Add(new Chunk("\n"));
+
+            foreach (KeyValuePair<Equipment, int> pair in room.Equipment_inventory)
+            {
+                equipment_inventory.Add(pair.Key.Name + ": " + pair.Value);
+                equipment_inventory.Add(new Chunk("\n"));
+                found = true;
+            }
+
+            if (!found)
+            {
+                equipment_inventory.Add("Inventar opreme prostorije je prazan!");
+                equipment_inventory.Add(new Chunk("\n"));
+            }
+
+            found = false;
+
+            equipment_inventory.Add(new Chunk("\n"));
+
+            Paragraph renovation_paragraph = new Paragraph();
+            renovation_paragraph.Add(new Chunk("\n"));
+            Chunk renovationHeader = new Chunk("SPISAK RENOVIRANJA");
+            renovationHeader.Font.Size = 14;
+            renovationHeader.Font.SetStyle(1);
+            renovation_paragraph.Add(renovationHeader);
+            renovation_paragraph.Add(new Chunk("\n"));
+
+
+            foreach (Renovation renovation in report.renovations)
+            {
+                renovation_paragraph.Add("Status : " + renovation.Status.ToString());
+                renovation_paragraph.Add(new Chunk("\n"));
+                renovation_paragraph.Add("Datum pocetka : " + renovation.Period.StartDate.ToString("dd/MM/yyyy"));
+                renovation_paragraph.Add(new Chunk("\n"));
+                renovation_paragraph.Add("Datum kraja : " + renovation.Period.EndDate.ToString("dd/MM/yyyy"));
+                renovation_paragraph.Add(new Chunk("\n"));
+                renovation_paragraph.Add("Opis : " + renovation.Description);
+                renovation_paragraph.Add(new Chunk("\n"));
+                renovation_paragraph.Add(new Chunk("\n"));
+                found = true;
+
+            }
+
+            if (!found)
+            {
+                renovation_paragraph.Add("Nema renoviranja u navedenom periodu!");
+                renovation_paragraph.Add(new Chunk("\n"));
+            }
+
+
+            doc.Add(basicInfo);
+            doc.Add(equipment_inventory);
+            doc.Add(renovation_paragraph);
+            doc.Close();
+        }
+
+        private void createHospitalizationRoomReport(RoomOccupationReportDTO report, Document doc)
+        {
+            Room room = report.room;
+
+            bool found = false;
+
+            Paragraph basicInfo = new Paragraph();
+            Chunk basicInfoheader = new Chunk("OSNOVNE INFORMACIJE");
+            basicInfoheader.Font.Size = 14;
+            basicInfoheader.Font.SetStyle(1);
+            basicInfo.Add(basicInfoheader);
+            basicInfo.Add(new Chunk("\n"));
+            basicInfo.Add("Sifra prostorije: " + room.RoomCode);
+            basicInfo.Add(new Chunk("\n"));
+            basicInfo.Add("Tip prostorije: " + room.RoomType.Name);
+            basicInfo.Add(new Chunk("\n"));
+            basicInfo.Add("Max kapacitet: " + room.MaxNumberOfPatientsForHospitalization);
+            basicInfo.Add(new Chunk("\n"));
+            basicInfo.Add("Trenutni kapacitet: " + room.CurrentNumberOfPatients);
+            basicInfo.Add(new Chunk("\n"));
+
+
+            Paragraph equipment_inventory = new Paragraph();
+            equipment_inventory.Add(new Chunk("\n"));
+            equipment_inventory.Add(new Chunk("\n"));
+            Chunk equipmentHeader = new Chunk("SPISAK OPREME");
+            equipmentHeader.Font.Size = 14;
+            equipmentHeader.Font.SetStyle(1);
+            equipment_inventory.Add(equipmentHeader);
+            equipment_inventory.Add(new Chunk("\n"));
+
+            foreach (KeyValuePair<Equipment, int> pair in room.Equipment_inventory)
+            {
+                equipment_inventory.Add(pair.Key.Name + ": " + pair.Value);
+                equipment_inventory.Add(new Chunk("\n"));
+                found = true;
+            }
+
+            if (!found)
+            {
+                equipment_inventory.Add("Inventar opreme prostorije je prazan!");
+                equipment_inventory.Add(new Chunk("\n"));
+            }
+
+            found = false;
+
+            equipment_inventory.Add(new Chunk("\n"));
+
+            Paragraph renovation_paragraph = new Paragraph();
+            renovation_paragraph.Add(new Chunk("\n"));
+            Chunk renovationHeader = new Chunk("SPISAK RENOVIRANJA");
+            renovationHeader.Font.Size = 14;
+            renovationHeader.Font.SetStyle(1);
+            renovation_paragraph.Add(renovationHeader);
+            renovation_paragraph.Add(new Chunk("\n"));
+
+
+            foreach (Renovation renovation in report.renovations)
+            {
+                renovation_paragraph.Add("Status : " + renovation.Status.ToString());
+                renovation_paragraph.Add(new Chunk("\n"));
+                renovation_paragraph.Add("Datum pocetka : " + renovation.Period.StartDate.ToString("dd/MM/yyyy"));
+                renovation_paragraph.Add(new Chunk("\n"));
+                renovation_paragraph.Add("Datum kraja : " + renovation.Period.EndDate.ToString("dd/MM/yyyy"));
+                renovation_paragraph.Add(new Chunk("\n"));
+                renovation_paragraph.Add("Opis : " + renovation.Description);
+                renovation_paragraph.Add(new Chunk("\n"));
+                renovation_paragraph.Add(new Chunk("\n"));
+                found = true;
+
+            }
+
+            if (!found)
+            {
+                renovation_paragraph.Add("Nema renoviranja u navedenom periodu!");
+                renovation_paragraph.Add(new Chunk("\n"));
+            }
+
+
+            found = false;
+            Paragraph examination_paragraph = new Paragraph();
+            examination_paragraph.Add(new Chunk("\n"));
+            Chunk examinationHeader = new Chunk("ZAKAZANI PREGLEDI");
+            examinationHeader.Font.Size = 14;
+            examinationHeader.Font.SetStyle(1);
+            examination_paragraph.Add(examinationHeader);
+            examination_paragraph.Add(new Chunk("\n"));
+
+
+            foreach (Examination examination in report.examinations)
+            {
+                examination_paragraph.Add("Datum pregleda: " + examination.Period.StartDate.ToString("dd/MM/yyyy"));
+                examination_paragraph.Add(new Chunk("\n"));
+                examination_paragraph.Add("Doktor : " + examination.Doctor.FullName);
+                examination_paragraph.Add(new Chunk("\n"));
+                examination_paragraph.Add("Pacijent : " + examination.User.FullName);
+                examination_paragraph.Add(new Chunk("\n"));
+                examination_paragraph.Add("Dijagnoza : " + examination.Diagnosis.Name);
+                examination_paragraph.Add(new Chunk("\n"));
+                examination_paragraph.Add("Anamneza : " + examination.Anemnesis.Text);
+                examination_paragraph.Add(new Chunk("\n"));
+                examination_paragraph.Add("Terapija : " + examination.Therapy.Note);
+                examination_paragraph.Add(new Chunk("\n"));
+                examination_paragraph.Add(new Chunk("\n"));
+
+
+                found = true;
+
+            }
+
+            if (!found)
+            {
+                examination_paragraph.Add("Nema zakazanih pregleda u navedenom periodu!");
+                examination_paragraph.Add(new Chunk("\n"));
+            }
+
+
+            found = false;
+            Paragraph hospitalization_paragraph = new Paragraph();
+            hospitalization_paragraph.Add(new Chunk("\n"));
+            Chunk hospitalizationHeader = new Chunk("HOSPITALIZACIJE");
+            hospitalizationHeader.Font.Size = 14;
+            hospitalizationHeader.Font.SetStyle(1);
+            hospitalization_paragraph.Add(hospitalizationHeader);
+            hospitalization_paragraph.Add(new Chunk("\n"));
+
+
+            foreach (Hospitalization hospitalization in report.hospitalizations)
+            {
+                hospitalization_paragraph.Add("Datum hospitalizacije: " + hospitalization.Period.StartDate.ToString("dd/MM/yyyy"));
+                hospitalization_paragraph.Add(new Chunk("\n"));
+                hospitalization_paragraph.Add("Doktor : " + hospitalization.Doctor.FullName);
+                hospitalization_paragraph.Add(new Chunk("\n"));
+                hospitalization_paragraph.Add("Pacijent : " + hospitalization.Patient.FullName);
+                hospitalization_paragraph.Add(new Chunk("\n"));
+                hospitalization_paragraph.Add(new Chunk("\n"));
+
+
+                found = true;
+            }
+
+            if (!found)
+            {
+                hospitalization_paragraph.Add("Nema zakazanih hospitalizacija u navedenom periodu!");
+                hospitalization_paragraph.Add(new Chunk("\n"));
+            }
+
+
+            found = false;
+            Paragraph operation_paragraph = new Paragraph();
+            operation_paragraph.Add(new Chunk("\n"));
+            Chunk operationHeader = new Chunk("OPERACIJE");
+            operationHeader.Font.Size = 14;
+            operationHeader.Font.SetStyle(1);
+            operation_paragraph.Add(operationHeader);
+            operation_paragraph.Add(new Chunk("\n"));
+
+
+            foreach (Operation operation in report.operations)
+            {
+                operation_paragraph.Add("Datum operacije: " + operation.Period.StartDate.ToString("dd/MM/yyyy"));
+                operation_paragraph.Add(new Chunk("\n"));
+                operation_paragraph.Add("Doktor : " + operation.Doctor.FullName);
+                operation_paragraph.Add(new Chunk("\n"));
+                operation_paragraph.Add("Pacijent : " + operation.Patient.FullName);
+                operation_paragraph.Add(new Chunk("\n"));
+                operation_paragraph.Add("Opis : " + operation.Description);
+                operation_paragraph.Add(new Chunk("\n"));
+                operation_paragraph.Add(new Chunk("\n"));
+
+
+                found = true;
+            }
+
+            if (!found)
+            {
+                operation_paragraph.Add("Nema zakazanih operacija u navedenom periodu!");
+                operation_paragraph.Add(new Chunk("\n"));
+            }
+
+
+            doc.Add(basicInfo);
+            doc.Add(equipment_inventory);
+            doc.Add(renovation_paragraph);
+            doc.Add(examination_paragraph);
+            doc.Add(hospitalization_paragraph);
+            doc.Add(operation_paragraph);
+            doc.Close();
+        }
+
+
+
         private void Button_Click_OK(object sender, RoutedEventArgs e)
         {
             if (DateTime.Compare((DateTime)startDatePicker.SelectedDate, (DateTime)endDatePicker.SelectedDate) > 0)
@@ -69,8 +348,10 @@ namespace upravnikKT2
             Nullable<bool> result = dlg.ShowDialog();
 
             Room room = (Room)comboRooms.SelectedItem;
-            DateTime beginDate =(DateTime) startDatePicker.SelectedDate;
-            DateTime endDate = (DateTime) endDatePicker.SelectedDate;
+            DateTime beginDate = (DateTime)startDatePicker.SelectedDate;
+            DateTime endDate = (DateTime)endDatePicker.SelectedDate;
+
+            RoomOccupationReportDTO report = reportController.GenerateRoomOccupationReport(room, new Period(beginDate, endDate));
 
             // Process save file dialog box results
             if (result == true)
@@ -101,84 +382,11 @@ namespace upravnikKT2
                 doc.Add(new Chunk("\n"));
                 doc.Add(new Chunk("\n"));
                 doc.Add(new Chunk("\n"));
-                bool found = false;
 
-                Paragraph basicInfo = new Paragraph();
-                Chunk basicInfoheader = new Chunk("OSNOVNE INFORMACIJE");
-                basicInfoheader.Font.Size = 14;
-                basicInfoheader.Font.SetStyle(1);
-                basicInfo.Add(basicInfoheader);
-                basicInfo.Add(new Chunk("\n"));
-                basicInfo.Add("Sifra prostorije: " + room.RoomCode);
-                basicInfo.Add(new Chunk("\n"));
-                basicInfo.Add("Tip prostorije: " + room.RoomType.Name);
-                basicInfo.Add(new Chunk("\n"));
-
-
-                Paragraph equipment_inventory = new Paragraph();
-                equipment_inventory.Add(new Chunk("\n"));
-                equipment_inventory.Add(new Chunk("\n"));
-                Chunk equipmentHeader = new Chunk("SPISAK OPREME");
-                equipmentHeader.Font.Size = 14;
-                equipmentHeader.Font.SetStyle(1);
-                equipment_inventory.Add(equipmentHeader);
-                equipment_inventory.Add(new Chunk("\n"));
-
-                foreach (KeyValuePair<Equipment,int> pair in room.Equipment_inventory)
-                {
-                    equipment_inventory.Add(pair.Key.Name + ": " + pair.Value);
-                    equipment_inventory.Add(new Chunk("\n"));
-                    found = true;
-                }
-
-                if (!found)
-                {
-                    equipment_inventory.Add("Inventar opreme prostorije je prazan!");
-                    equipment_inventory.Add(new Chunk("\n"));
-                }
-
-                found = false;
-
-                equipment_inventory.Add(new Chunk("\n"));
-
-                Paragraph renovation_paragraph = new Paragraph();
-                renovation_paragraph.Add(new Chunk("\n"));
-                Chunk renovationHeader = new Chunk("SPISAK RENOVIRANJA");
-                renovationHeader.Font.Size = 14;
-                renovationHeader.Font.SetStyle(1);
-                renovation_paragraph.Add(renovationHeader);
-                renovation_paragraph.Add(new Chunk("\n"));
-                
-
-                foreach (Renovation renovation in renovationController.GetAll())
-                {
-                    if (renovation.Room.RoomCode.Equals(room.RoomCode) && DateTime.Compare(renovation.Period.StartDate, beginDate)>=0 && DateTime.Compare(renovation.Period.EndDate,endDate)<=0)
-                    {
-                        renovation_paragraph.Add("Status : " + renovation.Status.ToString());
-                        renovation_paragraph.Add(new Chunk("\n"));
-                        renovation_paragraph.Add("Datum pocetka : " + renovation.Period.StartDate.ToString("dd/MM/yyyy"));
-                        renovation_paragraph.Add(new Chunk("\n"));
-                        renovation_paragraph.Add("Datum kraja : " + renovation.Period.EndDate.ToString("dd/MM/yyyy"));
-                        renovation_paragraph.Add(new Chunk("\n"));
-                        renovation_paragraph.Add("Opis : " + renovation.Description);
-                        renovation_paragraph.Add(new Chunk("\n"));
-                        renovation_paragraph.Add(new Chunk("\n"));
-                        found = true;
-                    }
-                }
-
-                if (!found)
-                {
-                    renovation_paragraph.Add("Nema renoviranja u navedenom periodu!");
-                    renovation_paragraph.Add(new Chunk("\n"));
-                }
-
-                
-
-                doc.Add(basicInfo);
-                doc.Add(equipment_inventory);
-                doc.Add(renovation_paragraph);
-                doc.Close();
+                if (report.room.MaxNumberOfPatientsForHospitalization != 0)
+                    createHospitalizationRoomReport(report, doc);
+                else
+                    createBasicRoomReport(report, doc);
 
 
                 string messageBoxText = "Uspesno kreiran izvestaj!";
@@ -189,69 +397,19 @@ namespace upravnikKT2
                 MessageBox.Show(messageBoxText, caption, button, icon);
             }
 
-            //Document doc = new Document(iTextSharp.text.PageSize.A4, 20f, 20f, 30f, 30f);
-            //PdfWriter writer = PdfWriter.GetInstance(doc, new FileStream("TestFINAL.pdf", FileMode.Create));
-            //doc.Open();
 
-            //iTextSharp.text.Paragraph paragraph = new iTextSharp.text.Paragraph("This is my first line using Paragraph");
-            //doc.Add(paragraph);
-            //doc.Close();
+
+            
+
 
             this.Close();
 
 
-            //iTextSharp.text.Document doc = null;
-
-            //doc = new Document();
-            //iTextSharp.text.pdf.PdfWriter writer = iTextSharp.text.pdf.PdfWriter.GetInstance(doc,
-            //    new System.IO.FileStream(System.IO.Directory.GetCurrentDirectory() + "\\ScienceReport.pdf",
-            //        System.IO.FileMode.Create));
-
-            //// Set margins and page size for the document
-            //doc.SetMargins(50, 50, 50, 50);
-            //// There are a huge number of possible page sizes, including such sizes as
-            //// EXECUTIVE, LEGAL, LETTER_LANDSCAPE, and NOTE
-            //doc.SetPageSize(new iTextSharp.text.Rectangle(iTextSharp.text.PageSize.LETTER.Width,
-            //    iTextSharp.text.PageSize.LETTER.Height));
-
-            //// Add metadata to the document.  This information is visible when viewing the
-            //// document properities within Adobe Reader.
-            //doc.AddTitle("My Science Report");
-            //doc.AddCreator("M. Lichtenberg");
-            //doc.AddKeywords("paper airplanes");
-
-            //// Add Xmp metadata to the document.
-
-
-            //// Open the document for writing content
-            //doc.Open();
-
-            //// Add pages to the document
-
-
-            //// Add page labels to the document
-            //iTextSharp.text.pdf.PdfPageLabels pdfPageLabels = new iTextSharp.text.pdf.PdfPageLabels();
-            //pdfPageLabels.AddPageLabel(1, iTextSharp.text.pdf.PdfPageLabels.EMPTY, "Basic Formatting");
-            //pdfPageLabels.AddPageLabel(2, iTextSharp.text.pdf.PdfPageLabels.EMPTY, "Internal Links");
-            //pdfPageLabels.AddPageLabel(3, iTextSharp.text.pdf.PdfPageLabels.EMPTY, "Bullet List");
-            //pdfPageLabels.AddPageLabel(4, iTextSharp.text.pdf.PdfPageLabels.EMPTY, "External Links");
-            //pdfPageLabels.AddPageLabel(5, iTextSharp.text.pdf.PdfPageLabels.EMPTY, "Image");
-            //writer.PageLabels = pdfPageLabels;
-
-            //doc.Close();
+            
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            //ObservableCollection<RoomMockup> DataGridRooms = new ObservableCollection<RoomMockup>();
-            //DataGridRooms.Add(new RoomMockup { Sifra = "1243"});
-            //DataGridRooms.Add(new RoomMockup { Sifra = "6475"});
-            //DataGridRooms.Add(new RoomMockup { Sifra = "9876"});
-            //DataGridRooms.Add(new RoomMockup { Sifra = "8674"});
-            //DataGridRooms.Add(new RoomMockup { Sifra = "5532"});
-            //DataGridRooms.Add(new RoomMockup { Sifra = "7684" });
-            //this.DataGridProstorije.ItemsSource = DataGridRooms;
-
+        { 
             comboRooms.ItemsSource = roomController.GetAll().ToList();
             comboRooms.DisplayMemberPath = "RoomCode";
             comboRooms.SelectedValuePath = "Id";

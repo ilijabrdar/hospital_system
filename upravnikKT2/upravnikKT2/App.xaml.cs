@@ -112,7 +112,7 @@ namespace upravnikKT2
         public ISymptomController SymptomController { get; private set; }
         public ITherapyController TherapyController { get; private set; }
         public ITownController TownController { get; private set; }
-
+        public ReportController ReportController { get; private set; }
 
 
         public App()
@@ -293,7 +293,9 @@ namespace upravnikKT2
             BusinessDayController = new BusinessDayController(businessDayService);
             RenovationController = new RenovationController(renovationService);
             DoctorController = new DoctorController(doctorService);
-                
+
+            ReportService reportService = new ReportService(examinationService, renovationService, hospitalizationService, operationService);
+            ReportController = new ReportController(reportService);
 
             
 
