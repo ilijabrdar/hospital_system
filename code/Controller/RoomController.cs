@@ -1,5 +1,3 @@
-
-
 using bolnica.Controller;
 using bolnica.Service;
 using Model.Director;
@@ -9,8 +7,8 @@ using System.Collections.Generic;
 
 namespace Controller
 {
-   public class RoomController : IRoomController
-   {
+    public class RoomController : IRoomController
+    {
         private readonly IRoomService _service;
 
         public RoomController(IRoomService service)
@@ -55,7 +53,7 @@ namespace Controller
             return _service.Get(id);
         }
 
-        public IEnumerable<Room> GetRoomsContainingEquipment (Equipment equipment)
+        public IEnumerable<Room> GetRoomsContainingEquipment(Equipment equipment)
         {
             return _service.GetRoomsCointainingEquipment(equipment);
         }
@@ -64,5 +62,16 @@ namespace Controller
         {
             return _service.CheckRoomCodeUnique(name);
         }
+
+        public List<Room> GetRoomsForHospitalization()
+        {
+            return _service.GetRoomsForHospitalization();
+        }
+
+        public void CheckHospitalizationDurationInRoom()
+        {
+            _service.CheckHospitalizationDurationInRoom();
+        }
+
     }
 }
