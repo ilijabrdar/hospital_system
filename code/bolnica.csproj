@@ -246,6 +246,7 @@
     <Compile Include="Model\Dto\ExaminationDTO.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Model\Dto\RoomOccupationReportDTO.cs" />
     <Compile Include="Model\Dto\SecretaryReportDTO.cs">
       <SubType>Code</SubType>
     </Compile>

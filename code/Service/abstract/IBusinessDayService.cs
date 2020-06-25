@@ -16,7 +16,6 @@ namespace bolnica.Service
 
         Boolean DeletePreviousBusinessDay();
 
-        Boolean SetRoomForBusinessDay(BusinessDay businessDay, Room room);
 
         List<ExaminationDTO> Search(BusinessDayDTO businessDayDTO);
 
@@ -29,6 +28,8 @@ namespace bolnica.Service
         void DeleteBusinessDayByRoom(Room room);
 
         void FreePeriod(BusinessDay businessDay, DateTime period);
+
+        Boolean ChangeDoctorShift(BusinessDay newShift);
 
 
     }
