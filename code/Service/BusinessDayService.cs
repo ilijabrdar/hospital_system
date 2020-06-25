@@ -82,7 +82,7 @@ namespace Service
                     if (retVal.SingleOrDefault(any => any.Period.StartDate.AddMinutes(durationOfExamination) == examinationDTO.Period.StartDate) != null)
                     {
                         retVal.Add(examinationDTO);
-                        MinutesFree += 20;
+                        MinutesFree += durationOfExamination;
                     }
                     else
                     {
@@ -140,9 +140,9 @@ namespace Service
             return ret;
         }
 
-        public void MarkAsOccupied(Period period, BusinessDay businessDay)
+        public void MarkAsOccupied(List<Period> period, BusinessDay businessDay)
         {
-            businessDay.ScheduledPeriods.Add(period);
+            businessDay.ScheduledPeriods.AddRange(period);
             _businessDayRepository.Edit(businessDay);
         }
 
@@ -192,14 +192,16 @@ namespace Service
             }
         }
 
-        public void FreePeriod(BusinessDay businessDay, DateTime period)
+        public void FreePeriod(BusinessDay businessDay, List<DateTime> period)
         {
+            int index = 0;
             for(int i = 0; i < businessDay.ScheduledPeriods.Count; i++)
             {
-                if(businessDay.ScheduledPeriods[i].StartDate == period)
+                if(businessDay.ScheduledPeriods[i].StartDate == period[index++])
                 {
                     businessDay.ScheduledPeriods.RemoveAt(i);
-                    break;
+                    if (index == period.Count - 1)
+                        break;
                 }
             }
 

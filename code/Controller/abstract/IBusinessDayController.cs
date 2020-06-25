@@ -21,13 +21,13 @@ namespace bolnica.Controller
         BusinessDay GetExactDay(Doctor doctor, DateTime date);
         List<ExaminationDTO> Search(BusinessDayDTO businessDayDTO);
 
-        void MarkAsOccupied(Period period, BusinessDay businessDay);
+        void MarkAsOccupied(List<Period> period, BusinessDay businessDay);
 
         BusinessDay getDoctorWorkingHoursForSpecificDate(Doctor doctor, DateTime date);
 
          List<BusinessDay> GetBusinessDaysByDoctor(Doctor doctor);
 
-        void FreePeriod(BusinessDay businessDay, DateTime period);
+        void FreePeriod(BusinessDay businessDay, List<DateTime> period);
         Boolean isExaminationPossible(Examination examination);
     }
 }

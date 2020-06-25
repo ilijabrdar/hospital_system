@@ -20,7 +20,7 @@ namespace bolnica.Service
 
         List<ExaminationDTO> Search(BusinessDayDTO businessDayDTO);
 
-        void MarkAsOccupied(Period period, BusinessDay businessDay);
+        void MarkAsOccupied(List<Period> period, BusinessDay businessDay);
 
         BusinessDay GetExactDay(Doctor doctor, DateTime date);
 
@@ -28,7 +28,7 @@ namespace bolnica.Service
 
         void DeleteBusinessDayByRoom(Room room);
 
-        void FreePeriod(BusinessDay businessDay, DateTime period);
+        void FreePeriod(BusinessDay businessDay, List<DateTime> period);
 
         Boolean isExaminationPossible(Examination examination);
     }

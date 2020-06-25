@@ -62,7 +62,7 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        public void MarkAsOccupied(Period period, BusinessDay businessDay)
+        public void MarkAsOccupied(List<Period> period, BusinessDay businessDay)
         {
             _businessDayService.MarkAsOccupied(period, businessDay);
         }
@@ -87,7 +87,7 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        public void FreePeriod(BusinessDay businessDay, DateTime period)
+        public void FreePeriod(BusinessDay businessDay, List<DateTime> period)
         {
             _businessDayService.FreePeriod(businessDay, period);
         }

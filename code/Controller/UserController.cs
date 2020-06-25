@@ -71,9 +71,9 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        public bool IsUsernamedValid(string username)
+        public User IsUsernamedValid(string username)
         {
-            throw new NotImplementedException();
+            return _userService.IsUsernameValid(username);
         }
     }
 }

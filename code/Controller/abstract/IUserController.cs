@@ -12,7 +12,7 @@ namespace bolnica.Controller
         Feedback SendFeedback(String feedback);
 
         Boolean IsPasswordValid(String password);
-        Boolean IsUsernamedValid(String username);
+        User IsUsernamedValid(String username);
 
         Boolean BlockUser(String username);
         User Login(String username, String password);
