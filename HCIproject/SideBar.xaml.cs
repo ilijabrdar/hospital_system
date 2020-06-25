@@ -589,7 +589,8 @@ namespace HCIproject
 
         public void setViewUpcExam() {
             var app = Application.Current as App;
-
+            Grid_Grid.Children.Clear();
+            num = 0;
             foreach (var exam in app.ExaminationController.GetUpcomingExaminationsByUser(user)) 
             {
                 StackPanel stack = new StackPanel();
@@ -598,7 +599,7 @@ namespace HCIproject
                 Label lbl1 = new Label();
                 Button btn1 = new Button();
                 Button btn2 = new Button();
-
+                
                 stack.Children.Add(dock);
                 dock.Children.Add(lbl);
                 dock.Children.Add(lbl1);
@@ -629,7 +630,7 @@ namespace HCIproject
                 btn1.FontSize = 12;
                 btn1.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
                 btn1.SetValue(DockPanel.DockProperty, Dock.Right);
-                btn1.Tag = exam.User.Id;
+                btn1.Tag = exam;
                 btn1.Click += new RoutedEventHandler(ClickStartExamination);
                 btn1.Margin = new Thickness(10, 10, 15, 0);
                 btn1.Background = new SolidColorBrush(Color.FromRgb(162, 217, 206));
@@ -643,7 +644,8 @@ namespace HCIproject
                 btn2.SetValue(DockPanel.DockProperty, Dock.Right);
                 btn2.Margin = new Thickness(10, 10, 15, 0);
                 btn2.Background = new SolidColorBrush(Color.FromRgb(162, 217, 206));
-                //    btn2.Click += new RoutedEventHandler(btn2_Click);
+                btn2.Tag = exam;
+                btn2.Click += new RoutedEventHandler(CancelExamination);
                 #endregion
 
                 Grid_Grid.RowDefinitions.Add(new RowDefinition());
@@ -760,14 +762,23 @@ namespace HCIproject
             MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
             if (result == MessageBoxResult.Yes)
             {
-
-                var PatientId = ((Button)sender).Tag;
-                ExaminationWin examWinn = new ExaminationWin((Doctor)user, (long)PatientId);
+                Examination Exam =(Examination) ((Button)sender).Tag;
+                var PatientId = Exam.User.Id;
+                ExaminationWin examWinn = new ExaminationWin((Doctor)user, (long)PatientId,Exam);
                 this.Visibility = Visibility.Hidden;
                 examWinn.ShowDialog();
             }
-        }  
-        
+        }
+
+        private void CancelExamination(object sender, RoutedEventArgs e)
+        {
+            var app = Application.Current as App;
+            Examination exam = (Examination)((Button)sender).Tag;
+
+            app.ExaminationController.Delete(exam);
+            setViewUpcExam();
+
+        }
         private void ClickOpenPatientFile(object sender, RoutedEventArgs e)
         {//posalji utisak
             var PatientId = ((Button)sender).Tag;

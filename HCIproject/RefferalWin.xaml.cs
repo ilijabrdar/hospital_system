@@ -31,6 +31,8 @@ namespace HCIproject
         public List<ExaminationDTO> specialistExaminations { get; set; }
         public List<Doctor> listOfDoctors { get; set; }
 
+        public static Referral referral = new Referral();
+
 
         public RefferalWin(Doctor user, long _patientId, string _dijagnoza)
         {
@@ -137,6 +139,8 @@ namespace HCIproject
 
             if (specialistGrid.SelectedItem != null)
             {
+                referral = new Referral(period, doctor);
+                app.ReferralController.Save(referral);
                 ExaminationDTO examDTO = (ExaminationDTO)specialistGrid.SelectedItem;
                 string messageBoxText = "Uspesno ste zakazali pregled kod lekara" + examDTO.Doctor.FirstName + " " + examDTO.Doctor.LastName + " dana" + " " + examDTO.Period.StartDate;
                 string caption = "Potvrda uputa za lekara specijalistu!";

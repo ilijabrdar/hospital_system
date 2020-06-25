@@ -29,7 +29,6 @@ namespace HCIproject
 
         public Period period = new Period();
 
-        public string TerapijaBinding { get; set; }
         public PrescriptionWin(Doctor user, long _patientId, String _dijagnoza)
         {
             this.user = user;
@@ -92,13 +91,13 @@ namespace HCIproject
                         }
                     }
                 }
-                if (TerapijaBinding != null)
-                {
-                    terapija.Note = TerapijaBinding;
-                }
-                terapija = new Therapy(TerapijaBinding, period, lekoviListBox);
+
+                terapija = new Therapy(terapija2.Text, period, lekoviListBox);
                 prescription = new Prescription(period,lekoviListBox);
 
+
+                app.PrescriptionController.Save(prescription);
+                app.TherapyController.Save(terapija);
                 string messageBoxText = "Uspesno!";
                 string caption = "Recept";
                 MessageBoxButton button = MessageBoxButton.OK;
@@ -106,6 +105,13 @@ namespace HCIproject
                 MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
                 this.Close();
 
+            }
+            else if(StartDate.SelectedDate > EndDate.SelectedDate || StartDate.SelectedDate < DateTime.Now){
+                string messageBoxText = "Datumi mogu biti iskljucivo u buducnosti, pocetni datum ne moze biti pre krajnjeg.";
+                string caption = "Recept";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Information;
+                MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
             }
             else{
                 string messageBoxText = "Morate izabrati neki lek kako biste pacijentu izdali recept";

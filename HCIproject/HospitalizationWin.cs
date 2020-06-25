@@ -1,4 +1,6 @@
-﻿using Model.PatientSecretary;
+﻿using Model.Director;
+using Model.Doctor;
+using Model.PatientSecretary;
 using Model.Users;
 using System;
 using System.Collections.Generic;
@@ -33,7 +35,7 @@ namespace HCIproject
             InitializeComponent();
             setPatientInfo();
             dijagnozaTxt.Text = dijagnoza;
-            setSpecialityCombo();
+            setRoomCombo();
         }
 
         private void setPatientInfo()
@@ -52,25 +54,22 @@ namespace HCIproject
             }
         }
 
-        private void setSpecialityCombo()
+        private void setRoomCombo()
         {
             var app = Application.Current as App;
-            foreach(var spec in app.SpecialityController.GetAll())
+            foreach(var room in app.RoomController.GetRoomsForHospitalization())
             {
-                specialitiCMB.Items.Add(spec.Name);
+                roomCMB.Items.Add(room.RoomCode+"-"+room.RoomType.Name);
             }
 
-
-            Random rand = new Random();
-            int randInt = rand.Next(0, 200);
-            sobaTxt.Text = randInt.ToString();
         }
         private void Button_Click_1(object sender, RoutedEventArgs e)
         { //potvrdi
+            var app = Application.Current as App;
 
-            if (StartDate.SelectedDate > EndDate.SelectedDate || StartDate.SelectedDate < DateTime.Now || specialitiCMB.SelectedItem == null)
+            if (StartDate.SelectedDate > EndDate.SelectedDate || StartDate.SelectedDate < DateTime.Now || roomCMB.SelectedItem == null)
             {
-                if (specialitiCMB.SelectedItem == null)
+                if (roomCMB.SelectedItem == null)
                 {
                     string messageBoxText1 = "Morate izabrati odeljenje kako biste izvrsili hospitalizaciju!";
                     string caption1 = "Hospitalizacija";
@@ -89,6 +88,27 @@ namespace HCIproject
                 }
             }else
             {
+                if (roomCMB.SelectedItem == null) return;
+
+                String idTip = roomCMB.SelectedItem.ToString();
+                String[] tokens = idTip.Split("-".ToCharArray());
+                string id = tokens[0];
+                Room room= new Room();
+
+                foreach(Room r in app.RoomController.GetAll())
+                {
+                    if (r.RoomCode == id)
+                    {
+                        room = r;
+                    }
+                }
+                room.CurrentNumberOfPatients++;
+                app.RoomController.Edit(room);
+                Patient patient = app.PatientController.Get(patientId);
+                if (StartDate.SelectedDate == null || EndDate.SelectedDate == null) return;
+                Period period = new Period(StartDate.SelectedDate, EndDate.SelectedDate);
+
+                app.HospitalizationController.Save(new Hospitalization(patient, user, period, room));
                 string messageBoxText = "Uspesno ste izvrsili hospitalizaciju pacijenta!";
                 string caption = "Hospitalizacija";
                 MessageBoxButton button = MessageBoxButton.OK;

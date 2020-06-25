@@ -23,6 +23,14 @@ namespace Model.Doctor
             Period = period;
             Room = room;
         }
+        public Hospitalization(User patient, Model.Users.Doctor doctor, Period period, Room room)
+        {
+            Patient = patient;
+            Doctor = doctor;
+            Period = period;
+            Room = room;
+        }
+
 
         public Hospitalization(Period period, Room room)
         {

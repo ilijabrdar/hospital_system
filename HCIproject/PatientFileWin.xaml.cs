@@ -136,9 +136,8 @@ namespace HCIproject
                 prescription.TextWrapping = TextWrapping.Wrap;
                 prescription.Margin = new Thickness(10, 10, 10, 10);
                 prescription.Inlines.Add(new Run("Recept: ") { FontWeight = FontWeights.SemiBold });
-                foreach (Prescription pr in examination.Prescription)
+                foreach (Drug dr in examination.Prescription.Drug)
                 {
-                    foreach (Drug dr in pr.Drug)
                         prescription.Inlines.Add(dr.Name);
                 }
                 stackPanelExamination.Children.Add(prescription);

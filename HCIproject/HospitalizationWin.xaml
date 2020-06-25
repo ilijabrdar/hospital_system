@@ -40,12 +40,9 @@
               <Label Content="Dijagnoza" Grid.Row="0" Grid.Column="0" FontSize="16" Margin="10"/>
              <TextBlock x:Name="dijagnozaTxt" Grid.Row="0" Grid.Column="1" Margin="10" FontSize="16" FontWeight="SemiBold"/>
 
-             <Label Content="Odeljenje" Grid.Row="1" Grid.Column="0" FontSize="16" Margin="10"/>
-                    <ComboBox x:Name="specialitiCMB" Text="Koristite strelice za kretanje i tab+ctrl za izbor " IsEditable="True" IsReadOnly="True" Grid.Row="1" Grid.Column="1" Margin="10"/>
-
-                    <Label Content="Soba" Grid.Row="2" Grid.Column="0" FontSize="16" Margin="10"/>
-            <TextBlock x:Name="sobaTxt" Grid.Row="2" Grid.Column="1" Margin="10"/>
-            <WrapPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+             <Label Content="Soba" Grid.Row="1" Grid.Column="0" FontSize="16" Margin="10"/>
+                    <ComboBox x:Name="roomCMB" Text="Izaberite sobu" IsEditable="True" IsReadOnly="True" Grid.Row="1" Grid.Column="1" Margin="10"/>
+                    <WrapPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
                         <Label Content="Vremenski period" FontSize="16" Margin="10" />
                 <Label Content="od" FontSize="18" Margin="10"/>
                         <DatePicker Name="StartDate" Width="200" Grid.Column="1" Grid.Row="2"   materialDesign:HintAssist.Hint="Unesite datum u formatu dd.mm.gggg" FontSize="10" Margin="10" VerticalAlignment="Bottom" />

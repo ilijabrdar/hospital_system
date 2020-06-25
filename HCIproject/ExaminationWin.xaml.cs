@@ -22,20 +22,19 @@ namespace HCIproject
     {
         public Doctor user;
         public long patientId;
+        public Examination examination;
 
-        private String anamneza;
         private String dijagnoza;
-        private Symptom simptom;
 
         public string Simptom{get; set;}
         public string Anamneza { get; set; }
 
 
-        public ExaminationWin(Doctor user, long _patientId)
+        public ExaminationWin(Doctor user, long _patientId, Examination _examination)
         {
             this.user = user;
             this.patientId = _patientId;
-
+            this.examination = _examination;
             
 
             InitializeComponent();
@@ -56,7 +55,7 @@ namespace HCIproject
         private void Button_Click_1(object sender, RoutedEventArgs e)
         { //potvrdi
             if (diagnosisCombo.SelectedItem == null)
-            {
+            {           
                 string messageBoxText = "Kako biste zavrsili pregled morate popuniti polje za dijagnozu.";
                 string caption = "Molimo popunite podatke.";
                 MessageBoxButton button = MessageBoxButton.OK;
@@ -65,12 +64,33 @@ namespace HCIproject
             }
             else
             {
+                var app = Application.Current as App;
+                String diagnosisString = diagnosisCombo.SelectedItem.ToString();
+                Diagnosis diagnosis = new Diagnosis();
+                foreach (Diagnosis d in app.DiagnosisController.GetAll())
+                {
+                    if (diagnosisString == d.Name)
+                    {
+                        diagnosis = d;
+                    }
+                }
+                
+                Patient patient = new Patient();
+                patient = app.PatientController.Get(patientId);
+                User userPatient = patient as User;
+                
+                Examination saveExamination = new Examination(userPatient, user, examination.Period, diagnosis, new Anemnesis(anamnezaTxt.Text), PrescriptionWin.terapija, RefferalWin.referral, PrescriptionWin.prescription);
+                app.ExaminationController.SaveFinishedExamination(saveExamination);
+
+                app.ExaminationController.Delete(examination);
+                BusinessDay selectedDay = app.BusinessDayController.GetExactDay(examination.Doctor, examination.Period.StartDate);
+                app.BusinessDayController.FreePeriod(selectedDay, examination.Period.StartDate);
+
                 string messageBoxText = "Pregled uspesno zavrsen";
                 string caption = "Pregled gotov";
                 MessageBoxButton button = MessageBoxButton.OK;
                 MessageBoxImage icon = MessageBoxImage.Information;
                 MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
-                var app = Application.Current as App;
 
                 SideBar sideBarWin = new SideBar((Doctor)user);
                 this.Visibility = Visibility.Hidden;
