@@ -21,6 +21,12 @@ using System.Linq;
 using bolnica.Service;
 using bolnica.Model.Dto;
 
+using System.IO;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using Paragraph = iTextSharp.text.Paragraph;
+using System.Text;
+
 namespace PacijentBolnicaZdravo
 {
 
@@ -261,6 +267,7 @@ namespace PacijentBolnicaZdravo
                 StackPanel stackPanelExamination = new StackPanel();
                 TextBlock period = new TextBlock();
                 TextBlock room = new TextBlock();
+                TextBlock description = new TextBlock();
 
                 //
                 period.Inlines.Add(new Run("Datum:  ") { FontWeight = FontWeights.Bold });
@@ -275,6 +282,12 @@ namespace PacijentBolnicaZdravo
                 room.Inlines.Add(hospitalization.Room.RoomCode);
                 room.Margin = new Thickness(10);
                 stackPanelExamination.Children.Add(room);
+
+          /*      description.Inlines.Add(new Run("Dodatni opis: ") { FontWeight = FontWeights.Bold });
+                description.FontSize = 15;
+                description.Inlines.Add(hospitalization.);
+                description.Margin = new Thickness(10);
+                stackPanelExamination.Children.Add(room);*/
 
                 b.Child = stackPanelExamination;
 
@@ -294,6 +307,7 @@ namespace PacijentBolnicaZdravo
             }
             foreach (var operation in operations)
             {
+                
                 Border b = new Border();
                 b.BorderThickness = new Thickness(2);
                 b.CornerRadius = new CornerRadius(3);
@@ -583,16 +597,16 @@ namespace PacijentBolnicaZdravo
                     return;
                 }
                 _patient.Username = UsernameConst.Text.ToString();
-                if (app.UserController.IsUsernamedValid(_patient.Username) == null)
+                Patient patient;
+                if ((patient = app.PatientController.ClaimAccount(_patient)) != null)
                 {
-                    _patient.Guest = false;
+                    _patient = patient;
                     TabExamination.Visibility = Visibility.Visible;
                     TabFile.Visibility = Visibility.Visible;
                     FeedbackHeader.Visibility = Visibility.Visible;
                     SuccessUpdateData.Foreground = Brushes.Green;
                     SuccessUpdateData.Text = "You have successfully changed the data!";
                     sb.Begin(SuccessUpdateData);
-                    app.UserController.Edit(_patient);
                     FillAccountData(_patient);
                     return;
                 }else
@@ -683,12 +697,102 @@ namespace PacijentBolnicaZdravo
 
         private void CurrentTherapy(object sender, RoutedEventArgs e)
         {
+            var app = Application.Current as App;
+            Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
+            dlg.FileName = "Izvestaj"; // Default file name
+
+            dlg.Title = "Select PDFFile";
+            dlg.Filter = "PDF(*.pdf)|*.pdf";
+            String path = "";
+
+            Nullable<bool> result = dlg.ShowDialog();
+            
+            if (result == true)
+            {
+                path = Path.GetFullPath(dlg.FileName);
+                string filename = dlg.FileName;
+
+                Document doc = new Document(iTextSharp.text.PageSize.A4, 20f, 20f, 30f, 30f);
+                PdfWriter writer = PdfWriter.GetInstance(doc, new FileStream(filename, FileMode.Create));
+                doc.Open();
+                doc.SetMargins(50, 50, 50, 50);
+
+                Paragraph header = new Paragraph("Izveštaj o trenutnoj terapiji");
+
+                header.Alignment = 1;
+                header.Font.Size = 18;
+                header.Font.SetStyle(1);
+                doc.Add(header);
+                doc.Add(new Chunk("\n"));
+                doc.Add(new Chunk("\n"));
+                doc.Add(new Chunk("\n"));
+
+                Paragraph basicInfo = new Paragraph();
+                Chunk basicInfoheader = new Chunk("OSNOVNE INFORMACIJE O PACIJENTU");
+                basicInfoheader.Font.Size = 14;
+                basicInfoheader.Font.SetStyle(1);
+                basicInfo.Add(basicInfoheader);
+                basicInfo.Add(new Chunk("\n"));
+                basicInfo.Add("Ime i prezime pacijenta: " + _patient.FullName);
+                basicInfo.Add(new Chunk("\n"));
+                basicInfo.Add("Username: " + _patient.Username);
+                basicInfo.Add(new Chunk("\n"));
+
+
+                Paragraph therapy = new Paragraph();
+                therapy.Add(new Chunk("\n"));
+                therapy.Add(new Chunk("\n"));
+                Chunk therapHeader = new Chunk("Trenutna terapija: ");
+                therapHeader.Font.Size = 14;
+                therapHeader.Font.SetStyle(1);
+                therapy.Add(therapHeader);
+                therapy.Add(new Chunk("\n"));
+                List<Therapy> therapyCollection = app.ReportController.GenerateTherapyTimetableReport(_patient.patientFile);
+                if (therapyCollection.Count != 0)
+                {
+                    foreach (Therapy current in therapyCollection)
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        foreach(Drug drug in current.Drug)
+                        {
+                            sb.Append(drug.Name);
+                            sb.Append(", ");
+                        }
+                        therapy.Add(sb.ToString() +" : " + current.Note + ", terapija je prepisana :"+ current.Period.StartDate.ToString("dd/MM/yyyy") + " i vazi do :" + current.Period.EndDate.ToString("dd/MM/yyyy"));
+                        therapy.Add(new Chunk("\n"));
+
+                    }
+                }else
+                {
+                    therapy.Add("Trenutno Vam nije prepisana ni jedna terapija!");
+                }
+                  therapy.Add(new Chunk("\n"));
+
+                    doc.Add(basicInfo);
+                    doc.Add(therapy);
+                    doc.Close();
+                    
+
+
+                    string messageBoxText = "Uspesno kreiran izvestaj!";
+                    string caption = "Informacija";
+                    MessageBoxButton button = MessageBoxButton.OK;
+                    MessageBoxImage icon = MessageBoxImage.Information;
+
+                    System.Windows.MessageBox.Show(messageBoxText, caption, button, icon);
+                
+            } else
+            {
+                return;
+            }
+
+
             try
             {
                 Process process = new System.Diagnostics.Process();
                 String file;
                 
-                file = "C:\\Users\\jovan\\Desktop\\Faks\\HCI\\EngleskiIzvestaj2.pdf";
+                file = path;
                 
                 process.StartInfo.FileName = file;
                 process.Start();

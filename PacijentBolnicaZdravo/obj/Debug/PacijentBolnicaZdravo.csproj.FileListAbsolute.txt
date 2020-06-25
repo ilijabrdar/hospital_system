@@ -91,3 +91,5 @@ C:\Users\jovan\Desktop\hospital_system\PacijentBolnicaZdravo\bin\Debug\bolnica.p
 C:\Users\jovan\Desktop\hospital_system\PacijentBolnicaZdravo\bin\Debug\Caliburn.Micro.dll
 C:\Users\jovan\Desktop\hospital_system\PacijentBolnicaZdravo\bin\Debug\Caliburn.Micro.xml
 C:\Users\jovan\Desktop\hospital_system\PacijentBolnicaZdravo\obj\Debug\PacijentBolnicaZdravo.DeleteExamination.resources
+C:\Users\jovan\Desktop\hospital_system\PacijentBolnicaZdravo\bin\Debug\itextsharp.dll
+C:\Users\jovan\Desktop\hospital_system\PacijentBolnicaZdravo\bin\Debug\itextsharp.xml

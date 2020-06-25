@@ -58,6 +58,8 @@ namespace PacijentBolnicaZdravo
         public IAddressController AddressController { get; set; }
         public BusinessDayService BusinessDayService { get; set; }
 
+        public IReportController ReportController { get; set; }
+
         App()
         {
             var addressRepo = new AddressRepository(new CSVStream<Address>(_address_File, new AddressCSVConverter(",")), new LongSequencer());
@@ -117,6 +119,7 @@ namespace PacijentBolnicaZdravo
             var townService = new TownService(townRepo);
             var stateService = new StateService(stateRepo);
             doctorService._doctorGradeService = doctorGradeService;
+            var reportService = new ReportService(examinationService, operationService);
 
             
             UserController = new UserController(userService);
@@ -128,6 +131,7 @@ namespace PacijentBolnicaZdravo
             TownController = new TownController(townService);
             AddressController = new AddressController(addressService);
             StateController = new StateController(stateService);
+            ReportController = new ReportController(reportService);
            
         }
 
