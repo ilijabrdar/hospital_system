@@ -17,9 +17,9 @@ namespace Controller
         {
             _patientService = patientService;
         }
-        public Patient ClaimAccount(String jmbg)
+        public Patient ClaimAccount(Patient patient)
         {
-            return _patientService.ClaimAccount(jmbg);
+            return _patientService.ClaimAccount(patient);
         }
 
         public void Delete(Patient entity)
