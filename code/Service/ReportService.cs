@@ -15,22 +15,37 @@ namespace Service
 {
    public class ReportService : IReportService
    {
-        IExaminationService _examinationService;
+        public IExaminationService _examinationService { get; set; }
+        public IRenovationService _renovationService { get; set; }
+        public IHospitalizationService _hospitalizationService { get; set; }
+        public IOperationService _operationService { get; set; }
 
-        public ReportService(IExaminationService examinationService)
+        public ReportService(IExaminationService examinationService, IRenovationService renovationService, IHospitalizationService hospitalizationService, IOperationService operationService)
         {
             _examinationService = examinationService;
+            _renovationService = renovationService;
+            _hospitalizationService = hospitalizationService;
+            _operationService = operationService;
         }
 
-      public DoctorReportDTO GenerateAnamnesisPrescriptionReport(PatientFile patientFile)
+        public DoctorReportDTO GenerateAnamnesisPrescriptionReport(PatientFile patientFile)
       {
          // TODO: implement
          return null;
       }
       
-      public String GenerateRoomOccupationReport()
+        //renovations, operations, examinations, equipment inventory, hospitalizations
+      public String GenerateRoomOccupationReport()  //arguments: Room room, Period period
       {
-         // TODO: implement
+            // TODO: implement
+            List<Examination> examinations = new List<Examination>();
+
+            foreach (Examination examination in _examinationService.GetAll())
+            {
+
+            }
+
+
          return null;
       }
       
