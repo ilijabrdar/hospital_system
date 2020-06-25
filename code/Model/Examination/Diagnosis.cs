@@ -12,6 +12,7 @@ namespace Model.PatientSecretary
         public string Name;
         public List<Symptom> Symptom;
 
+        public Diagnosis() { }
         public Diagnosis(long id)
         {
             Id = id;

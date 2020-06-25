@@ -13,6 +13,7 @@ namespace Model.Doctor
         public Period Period;
         public Model.Users.Doctor Doctor;
 
+        public Referral() { }
 
         public Referral(long id)
         {
