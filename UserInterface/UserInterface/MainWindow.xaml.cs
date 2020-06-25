@@ -25,6 +25,7 @@ using Model.Dto;
 using Model.Director;
 using bolnica.Model.Dto;
 using bolnica.Service;
+using Model.Doctor;
 
 namespace UserInterface
 {
@@ -54,7 +55,8 @@ namespace UserInterface
         public static List<ExaminationDTO> freeSlots { get; set; }
         public static List<ExaminationDTO> FreeSlots { get; set; }
 
-
+        public List<Operation> Operations { get; set; }
+        public Operation SelectedOperation { get; set; }
 
         public List<State> States { get; set; }
         public List<Town> Towns { get; set; }
@@ -104,6 +106,7 @@ namespace UserInterface
             msg = SuccessMsg;
 
             FillExaminationTable();
+            FillOperationTable();
 
 
             FreeSlots = new List<ExaminationDTO>();
@@ -118,6 +121,14 @@ namespace UserInterface
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 2);
         }
+
+        private void FillOperationTable()
+        {
+            App app = Application.Current as App;
+            Operations = app.OperationController.GetAll().ToList();
+            ScheduledOperations.ItemsSource = Operations;
+        }
+
         private static void FillExaminationTable()
         {
             App app = Application.Current as App;
@@ -277,7 +288,9 @@ namespace UserInterface
             Examination toDelete = Examinations.SingleOrDefault(entity => entity.Id == examination.Id);
             app.ExaminationController.Delete(toDelete);
             BusinessDay selectedDay = app.BusinessDayController.GetExactDay(toDelete.Doctor, toDelete.Period.StartDate);
-            app.BusinessDayController.FreePeriod(selectedDay, toDelete.Period.StartDate);
+            List<DateTime> dateList = new List<DateTime>();
+            dateList.Add(toDelete.Period.StartDate);
+            app.BusinessDayController.FreePeriod(selectedDay, dateList);
             FillExaminationTable();
 
             PatientNotification notification = new PatientNotification((Patient)examination.Patient, false, "Pregled zakazan za " + examination.Period.StartDate + " je otkazan!");
@@ -648,9 +661,13 @@ namespace UserInterface
                     return;
                 }
                 app.ExaminationController.Edit(toEdit);
-                app.BusinessDayController.FreePeriod(previousDay, examinationDTO.Period.StartDate);
+                List<DateTime> dateList = new List<DateTime>();
+                dateList.Add(examinationDTO.Period.StartDate);
+                app.BusinessDayController.FreePeriod(previousDay, dateList);
                 selectedDay = app.BusinessDayController.GetExactDay(toEdit.Doctor, toEdit.Period.StartDate);
-                app.BusinessDayController.MarkAsOccupied(toEdit.Period, selectedDay);
+                List<Period> periodList = new List<Period>();
+                periodList.Add(toEdit.Period);
+                app.BusinessDayController.MarkAsOccupied(periodList, selectedDay);
             }
             else
                 app.ExaminationController.Edit(toEdit);
@@ -713,7 +730,9 @@ namespace UserInterface
                 
             Examination newExamination = new Examination(GuestPatient, SelectedFreeSlot.Doctor, SelectedFreeSlot.Period);
             BusinessDay businessDay = app.BusinessDayController.GetExactDay(newExamination.Doctor, newExamination.Period.StartDate);
-            app.BusinessDayController.MarkAsOccupied(newExamination.Period, businessDay);
+            List<Period> periodList = new List<Period>();
+            periodList.Add(newExamination.Period);
+            app.BusinessDayController.MarkAsOccupied(periodList, businessDay);
 
             app.ExaminationController.Save(newExamination);
             FillExaminationTable();
@@ -722,6 +741,20 @@ namespace UserInterface
 
             SuccessLabel.Visibility = Visibility.Visible;
             dispatcherTimer.Start();
+        }
+
+        public void CancelOperation()
+        {
+            if (SelectedOperation == null)
+            {
+                MessageBox.Show("Niste izabrali operaciju za otkazivanje.", "Oops", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            App app = Application.Current as App;
+            app.OperationController.Delete(SelectedOperation);
+
+
         }
     }
 

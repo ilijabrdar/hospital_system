@@ -83,6 +83,7 @@ namespace UserInterface
         public IExaminationController ExaminationController { get; private set; }
 
         public IPatientNotificationController NotificationController {get; private set; }
+        public IOperationController OperationController { get; set; }
         public App()
         {
             AddressRepository addressRepository = new AddressRepository(new CSVStream<Address>(ADDRESS_FILE, new AddressCSVConverter(CSV_DELIMITER)), new LongSequencer());
@@ -140,6 +141,7 @@ namespace UserInterface
             HospitalizationRepository hospitalizationRepository = new HospitalizationRepository(new CSVStream<Hospitalization>(HOSPITALIZATION_FILE, new HospitalizationCSVConverter(CSV_DELIMITER)), new LongSequencer(), roomRepository, patientRepo);
             OperationRepository operationRepository = new OperationRepository(new CSVStream<Operation>(OPERATION_FILE, new OperationCSVConverter(CSV_DELIMITER)), new LongSequencer(), roomRepository, doctorRepository, patientRepo);
             OperationService operationService = new OperationService(operationRepository);
+            OperationController = new OperationController(operationService);
 
             businessDayService = new BusinessDayService(businessDayRepository, doctorService);
             BusinessDayController = new BusinessDayController(businessDayService);
