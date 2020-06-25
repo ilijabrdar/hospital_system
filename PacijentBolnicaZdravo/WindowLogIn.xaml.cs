@@ -115,28 +115,32 @@ namespace PacijentBolnicaZdravo
             String password = PasswordLogIn.Password.ToString();
             
                 var app = Application.Current as App;
-                var temp =(Patient) app.UserController.Login(username,password);
-            if (temp != null) {
-                
-                App.j = 0;
-                Patient p = (Patient)temp;
-                Console.WriteLine("*********************************" + p.patientFile.GetId() + "\n");
-                Console.WriteLine("****************************" + p.Address.Street);
+            try
+            {
+                var temp = (Patient)app.UserController.Login(username, password);
+                if (temp != null)
+                {
 
-                MainWindow mw = new MainWindow((Patient)temp);
-               
-                
+                    App.j = 0;
+                    Patient p = (Patient)temp;
 
-                mw.Show();
-                //TODO : provera za ako ne nadje
+                    MainWindow mw = new MainWindow((Patient)temp);
 
-                this.Close();
-                return;
+                    mw.Show();
+                    //TODO : provera za ako ne nadje
+
+                    this.Close();
+                    return;
+                }
             }
-            LogInValidation.badUserString = "badUserString";
-            UsernameLogIn.GetBindingExpression(System.Windows.Controls.TextBox.TextProperty).UpdateSource();
-            return;
- 
+            catch
+            {
+                LogInValidation.badUserString = "badUserString";
+                UsernameLogIn.GetBindingExpression(System.Windows.Controls.TextBox.TextProperty).UpdateSource();
+                return;
+
+            }
+
         }
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)

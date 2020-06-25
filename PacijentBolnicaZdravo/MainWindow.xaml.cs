@@ -37,7 +37,6 @@ namespace PacijentBolnicaZdravo
         public List<ExaminationDTO> upcomingExaminations { get; set; }
         public List<Doctor> listOfDoctors { get; set; }
         public List<Article> ListOfArticles { get; set; }
-
         public List<Doctor> doctorsForGrade { get; set; }
         public Patient _patient { get; set; }
         public List<State> States { get; set; }
@@ -81,6 +80,7 @@ namespace PacijentBolnicaZdravo
             }
 
             fillData();
+
         //    Proba();
             PasswordValidation2.password2 = _patient.Password;
            
@@ -103,7 +103,7 @@ namespace PacijentBolnicaZdravo
                                    ThemeManager.GetAppTheme("BaseLight"));
                 DarkMode.Value = DarkMode.Minimum;
             }
-
+            NotifyPatient();
         }
 
    /*     private void Proba()
@@ -115,6 +115,28 @@ namespace PacijentBolnicaZdravo
             var app = Application.Current as App;
             app.BusinessDayService.OperationSearch(day, 180);
         }*/
+
+        private void NotifyPatient()
+        {
+            var app = Application.Current as App;
+            List<PatientNotification> patientNotifications = app.PatientNotificationController.getNotificationByPatient(_patient).ToList();
+            if(patientNotifications != null)
+            {
+                StringBuilder sb = new StringBuilder();
+                foreach(PatientNotification notification in patientNotifications)
+                {
+                    sb.Append(notification.Message);
+                    sb.Append("\n");
+                }
+                string messageBoxText = sb.ToString();
+                string caption = "Informacija";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Information;
+
+                System.Windows.MessageBox.Show(messageBoxText, caption, button, icon);
+            }
+
+        }
         private void UpdateTownAddress(object sender, RoutedEventArgs e)
         {
             State state = Country.SelectedItem as State;
@@ -900,7 +922,9 @@ namespace PacijentBolnicaZdravo
                 Examination examination = new Examination(this._patient, doctor, period);
                 app.ExaminationController.Save(examination);
                 BusinessDay day = app.BusinessDayController.GetExactDay(doctor, period.StartDate);
-                app.BusinessDayController.MarkAsOccupied(period, day);
+                List<Period> periods = new List<Period>();
+                periods.Add(period);
+                app.BusinessDayController.MarkAsOccupied(periods, day);
 
                 scheduledExaminations = getScheduledExaminations();
                 scheduledExaminationsGrid.ItemsSource = scheduledExaminations;
@@ -943,7 +967,9 @@ namespace PacijentBolnicaZdravo
                 Examination toDelete = new Examination(deleteExam.Id);
                 app.ExaminationController.Delete(toDelete);
                 BusinessDay selectedDay = app.BusinessDayController.GetExactDay(deleteExam.Doctor, deleteExam.Period.StartDate);
-                app.BusinessDayController.FreePeriod(selectedDay, deleteExam.Period.StartDate);
+                List<DateTime> periods = new List<DateTime>();
+                periods.Add(deleteExam.Period.StartDate);
+                app.BusinessDayController.FreePeriod(selectedDay, periods);
 
                 scheduledExaminations = getScheduledExaminations();
                 scheduledExaminationsGrid.ItemsSource = scheduledExaminations;

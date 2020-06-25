@@ -1,4 +1,5 @@
 ﻿using bolnica.Controller;
+using bolnica.Model.Dto;
 using bolnica.Repository;
 using bolnica.Repository.CSV.Converter;
 using bolnica.Service;
@@ -45,6 +46,9 @@ namespace PacijentBolnicaZdravo
         private readonly String _ingredients_File = "../../../code/Resources/Data/ingredients.csv";
         private readonly String _diagnosis_File = "../../../code/Resources/Data/diagnosisFile.csv";
         private readonly String _renovation_File = "../../../code/Resources/Data/renovations.csv";
+        private readonly String _secretary_File = "../../../code/Resources/Data/SecretaryFile.txt";
+        private readonly String _director_File = "../../../code/Resources/Data/director.csv";
+        private readonly String _notification_File = "../../../code/Resources/Data/patientNotification.csv";
 
         public IUserController UserController { get; set; }
         public IArticleController ArticleController
@@ -58,6 +62,7 @@ namespace PacijentBolnicaZdravo
         public IAddressController AddressController { get; set; }
         public BusinessDayService BusinessDayService { get; set; }
 
+        public IPatientNotificationController PatientNotificationController { get; set; }
         public IReportController ReportController { get; set; }
 
         App()
@@ -91,8 +96,11 @@ namespace PacijentBolnicaZdravo
             patientFileRepo._hospitalizationRepository = hospitalizationRepository;
             patientFileRepo._operationRepository = operationRepository;
             var renovationRepo = new RenovationRepository(new CSVStream<Renovation>(_renovation_File, new RenovationCSVConverter("|")), new LongSequencer(), roomRepo);
+            var secretaryRepo = new SecretaryRepository(new CSVStream<Secretary>(_secretary_File, new SecretaryCSVConverter(",")), new LongSequencer(), addressRepo, townRepo, stateRepo);
+            var directorRepo = new DirectorRepository(new CSVStream<Director>(_director_File, new DirectorCSVConverter(",")), new LongSequencer(), addressRepo, townRepo, stateRepo);
+            var notificationRepo = new PatientNotificationRepository(new CSVStream<PatientNotification>(_notification_File, new PatientNotificationCSVConverter(",")), new LongSequencer(), patientRepo);
 
-            
+
             var specialityService = new SpecialityService(specialityRepo);
             var hospitalizationService = new HospitalizationService(hospitalizationRepository);
             var operationService = new OperationService(operationRepository);
@@ -114,12 +122,15 @@ namespace PacijentBolnicaZdravo
             var articleService = new ArticleService(articleRepo);
             var patientFileService = new PatientFileService(patientFileRepo);
             var patientService = new PatientService(patientRepo, patientFileService, doctorGradeService);
-            var userService = new UserService(patientService);
+            var secretaryService = new SecretaryService(secretaryRepo);
+            var directorService = new DirectorService(directorRepo);
+            var userService = new UserService(patientService,doctorService, secretaryService,directorService);
             var addressService = new AddressService(addressRepo);
             var townService = new TownService(townRepo);
             var stateService = new StateService(stateRepo);
             doctorService._doctorGradeService = doctorGradeService;
             var reportService = new ReportService(examinationService, operationService);
+            var notificationService = new PatientNotificationService(notificationRepo);
 
             
             UserController = new UserController(userService);
@@ -132,6 +143,7 @@ namespace PacijentBolnicaZdravo
             AddressController = new AddressController(addressService);
             StateController = new StateController(stateService);
             ReportController = new ReportController(reportService);
+            PatientNotificationController = new PatientNotificationController(notificationService);
            
         }
 

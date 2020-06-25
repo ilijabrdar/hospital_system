@@ -209,9 +209,16 @@ namespace PacijentBolnicaZdravo
             patient.Address.Town.State = state;
 
             var app = Application.Current as App;
-            var temp = app.UserController.Save(patient);
-            if (temp == null)
+            if (app.UserController.IsUsernamedValid(Username.Text.ToString()) == null)
             {
+                var temp = app.UserController.Save(patient);
+                if (temp != null)
+                {
+                    App.j = 0;
+                    WindowLogIn lg = new WindowLogIn();
+                    lg.Show();
+                    this.Close();
+                }
                 USERNAME = "";
                 Username.GetBindingExpression(System.Windows.Controls.TextBox.TextProperty).UpdateSource();
                 string message = "Username already exists!";
@@ -220,12 +227,10 @@ namespace PacijentBolnicaZdravo
                 MessageBoxResult result;
                 result = MessageBox.Show(message, caption, buttons);
                 return;
-
+              
             }
-            App.j = 0;
-            WindowLogIn lg = new WindowLogIn();
-            lg.Show();
-            this.Close();
+
+          
         }
 
         private void UpdatePw(object sender, RoutedEventArgs e)
