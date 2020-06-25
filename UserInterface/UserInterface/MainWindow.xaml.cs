@@ -98,6 +98,11 @@ namespace UserInterface
             ProfilePic.Source = new BitmapImage(Secretary.Image);
             ChProfilePic.Source = new BitmapImage(Secretary.Image);
 
+            se = ScheduledExaminations;
+            ee = EmptyExaminations;
+            tb = FilterInfo;
+            msg = SuccessMsg;
+
             FillExaminationTable();
 
 
@@ -107,22 +112,19 @@ namespace UserInterface
             Shortcuts = new List<Shortcut>();
             CreateShortcuts();
 
-            se = ScheduledExaminations;
-            ee = EmptyExaminations;
-            tb = FilterInfo;
-            msg = SuccessMsg;
+            
 
             dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 2);
         }
-        private void FillExaminationTable()
+        private static void FillExaminationTable()
         {
             App app = Application.Current as App;
             Examinations = app.ExaminationController.GetAll().ToList();
             ExaminationDisplay = ConvertExaminationToExaminationDTO(Examinations);
             examinationDisplay = new List<ExaminationDTO>(ExaminationDisplay);
-            ScheduledExaminations.ItemsSource = examinationDisplay;
+            se.ItemsSource = examinationDisplay;
         }
 
         private static List<ExaminationDTO> ConvertExaminationToExaminationDTO(List<Examination> examinations)
@@ -277,6 +279,10 @@ namespace UserInterface
             BusinessDay selectedDay = app.BusinessDayController.GetExactDay(toDelete.Doctor, toDelete.Period.StartDate);
             app.BusinessDayController.FreePeriod(selectedDay, toDelete.Period.StartDate);
             FillExaminationTable();
+
+            PatientNotification notification = new PatientNotification((Patient)examination.Patient, false, "Pregled zakazan za " + examination.Period.StartDate + " je otkazan!");
+            app.NotificationController.Save(notification);
+
             msg.Content = "Pregled upsešno otkazan.";
             msg.Visibility = Visibility.Visible;
             dispatcherTimer.Start();
@@ -616,19 +622,46 @@ namespace UserInterface
             se.ItemsSource = examinationDisplay;
         }
 
-        public static void EditExamination(Examination oldExamination, Examination newExamination)
+        public static void EditExamination(Examination newExamination)
         {
-            //int index = Examinations.IndexOf(oldExamination);
-            //Examinations.RemoveAt(index);
-            //Examinations.Insert(index, newExamination);
-            //index = examinations.IndexOf(oldExamination);
-            //examinations.RemoveAt(index);
-            //examinations.Insert(index, newExamination);
-            //se.ItemsSource = null;
-            //se.ItemsSource = examinations;
-            //msg.Content = "Pregled upsešno izmenjen.";
-            //msg.Visibility = Visibility.Visible;
-            //dispatcherTimer.Start();
+            ExaminationDTO examinationDTO = se.SelectedItem as ExaminationDTO;
+            App app = Application.Current as App;
+            BusinessDay previousDay = app.BusinessDayController.GetExactDay(examinationDTO.Doctor, examinationDTO.Period.StartDate);
+            Examination toEdit = Examinations.SingleOrDefault(entity => entity.Id == examinationDTO.Id);
+
+            toEdit.Doctor = newExamination.Doctor;
+            toEdit.Period = newExamination.Period;
+            toEdit.User = newExamination.User;
+
+            if (examinationDTO.Doctor.Id != newExamination.Doctor.Id || examinationDTO.Period.StartDate != newExamination.Period.StartDate)
+            {
+                BusinessDay selectedDay = app.BusinessDayController.GetExactDay(toEdit.Doctor, toEdit.Period.StartDate);
+                if (selectedDay == null)
+                {
+                    MessageBox.Show("Izabrani doktor ne radi u izabranom terminu.", "Oops", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                if (!app.BusinessDayController.isExaminationPossible(toEdit))
+                {
+                    MessageBox.Show("Izabrani termin nije validan.", "Oops", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                app.ExaminationController.Edit(toEdit);
+                app.BusinessDayController.FreePeriod(previousDay, examinationDTO.Period.StartDate);
+                selectedDay = app.BusinessDayController.GetExactDay(toEdit.Doctor, toEdit.Period.StartDate);
+                app.BusinessDayController.MarkAsOccupied(toEdit.Period, selectedDay);
+            }
+            else
+                app.ExaminationController.Edit(toEdit);
+
+            FillExaminationTable();
+
+            PatientNotification notification = new PatientNotification((Patient) toEdit.User, false, "Pregled zakazan za " + examinationDTO.Period.StartDate + " je izmenjen!");
+            app.NotificationController.Save(notification);
+            msg.Content = "Pregled upsešno izmenjen.";
+            msg.Visibility = Visibility.Visible;
+            dispatcherTimer.Start();
         }
 
         private void CommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)

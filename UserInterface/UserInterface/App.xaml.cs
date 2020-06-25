@@ -17,6 +17,7 @@ using bolnica.Service;
 using Model.PatientSecretary;
 using Model.Director;
 using Model.Doctor;
+using bolnica.Model.Dto;
 
 namespace UserInterface
 {
@@ -62,10 +63,12 @@ namespace UserInterface
         private const String EXAM_UPCOMING_FILE = "../../../../code/Resources/Data/upcomingExamination.csv";
         private const String EXAM_PREVIOUS_FILE = "../../../../code/Resources/Data/examinationPrevious.csv";
 
+        private const String NOTIFICATION_FILE = "../../../../code/Resources/Data/patientNotification.csv";
+
         public IUserController UserController { get; private set; }
         public IPatientController PatientController { get; private set; }
         public IStateController StateController { get; private set; }
-        public ISecretaryController SecretaryController { get;private set; }
+        public ISecretaryController SecretaryController { get; private set; }
 
         public IRoomController RoomController { get; private set; }
 
@@ -79,6 +82,7 @@ namespace UserInterface
 
         public IExaminationController ExaminationController { get; private set; }
 
+        public IPatientNotificationController NotificationController {get; private set; }
         public App()
         {
             AddressRepository addressRepository = new AddressRepository(new CSVStream<Address>(ADDRESS_FILE, new AddressCSVConverter(CSV_DELIMITER)), new LongSequencer());
@@ -116,8 +120,7 @@ namespace UserInterface
             SecretaryService secretaryService = new SecretaryService(secretaryRepository);
             SecretaryController = new SecretaryController(secretaryService);
 
-            UserService userService = new UserService(null, null, secretaryService, null);
-            UserController = new UserController(userService);
+            
 
             StateService stateService = new StateService(stateRepository);
             StateController = new StateController(stateService);
@@ -170,6 +173,14 @@ namespace UserInterface
             //report
             ReportService reportService = new ReportService(examinationService, operationService);
             ReportController = new ReportController(reportService);
+
+            UserService userService = new UserService(patientService, doctorService, secretaryService, null);
+            UserController = new UserController(userService);
+
+            //notify
+            PatientNotificationRepository notificationRepo = new PatientNotificationRepository(new CSVStream<PatientNotification>(NOTIFICATION_FILE, new PatientNotificationCSVConverter(CSV_DELIMITER)), new LongSequencer(), patientRepo);
+            PatientNotificationService notificationService = new PatientNotificationService(notificationRepo);
+            NotificationController = new PatientNotificationController(notificationService);
         }
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)

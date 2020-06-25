@@ -45,9 +45,6 @@ namespace UserInterface
             SelectedExamination = examination;
             App app = Application.Current as App;
 
-            Rooms = app.RoomController.GetAll().ToList();
-            SelectedRoom = Rooms.SingleOrDefault(entity => entity.Id == examination.Room.Id);
-
             Patients = app.PatientController.GetAll().ToList();
             SelectedPatient = Patients.SingleOrDefault(entity => entity.Id == examination.Patient.Id);
 
@@ -68,9 +65,11 @@ namespace UserInterface
 
         private void Edit(object sender, RoutedEventArgs e)
         {
-            //Examination examination = new Examination(new DateTime(Year, Month, Day, Hour, Minute, 0), SelectedDoctor, SelectedPatient, SelectedRoom);
-            //MainWindow.EditExamination(SelectedExamination, examination);
-            //this.Close();
+            Period period = new Period(new DateTime(Year, Month, Day, Hour, Minute, 0));
+            App app = Application.Current as App;
+            Examination examination = new Examination(SelectedPatient, SelectedDoctor, period);
+            MainWindow.EditExamination(examination);
+            this.Close();
         }
     }
 }
