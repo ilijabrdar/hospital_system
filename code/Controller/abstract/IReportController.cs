@@ -16,7 +16,7 @@ namespace bolnica.Controller
 
         SecretaryReportDTO GenerateDoctorOccupationReport(Doctor doctor, Period period);
 
-        Therapy GenerateTherapyTimetableReport(PatientFile patientFile);
+        List<Therapy> GenerateTherapyTimetableReport(PatientFile patientFile);
     }
 
 }

@@ -96,5 +96,10 @@ namespace Controller
         {
             return _businessDayService.GetExactDay(doctor, date);
         }
+
+        public Boolean isExaminationPossible(Examination examination)
+        {
+            return _businessDayService.isExaminationPossible(examination);
+        }
     }
 }
