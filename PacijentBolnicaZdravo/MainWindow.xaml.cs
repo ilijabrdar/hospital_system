@@ -86,7 +86,8 @@ namespace PacijentBolnicaZdravo
            
             DoctorsForFeedback.DisplayMemberPath = "FullName";
             DoctorsForExaminations.DisplayMemberPath = "FullName";
-           
+            Picker.DisplayDateStart = DateTime.Now.AddDays(1);
+            Picker2.DisplayDateStart = DateTime.Now.AddDays(1);
             this.DataContext = this;
            
             if (Theme == 1)
@@ -147,7 +148,7 @@ namespace PacijentBolnicaZdravo
             {
                 foreach(Examination exam in examinations)
                 {
-                    if(!doctorsForGrade.Contains(exam.Doctor))
+                    if (doctorsForGrade.SingleOrDefault(any => any.GetId() == exam.Doctor.GetId()) == null)
                           doctorsForGrade.Add(exam.Doctor);
                 }
             }
@@ -920,13 +921,22 @@ namespace PacijentBolnicaZdravo
             {
                 return;
             }
+
             ErrorCancel.Foreground = Brushes.Green;
             DeleteExamination delete;
             ExaminationDTO deleteExam = (ExaminationDTO)selectedItem;
             delete = new DeleteExamination("Are you sure you want to cancel the examination at the doctor  " +
                                                                         deleteExam.Doctor.FirstName + " " + deleteExam.Doctor.LastName + "?", "Yes", "No", "Delete examination", MainWindow.Theme);
             ErrorCancel.Text = "You have successfully canceled the appointment!";
-
+            TimeSpan difference = deleteExam.Period.StartDate - DateTime.Now;
+            if(difference.TotalMinutes < 24 * 60)
+            {
+                ErrorCancel.Text = "It is not possible to cancel an appointment held in the next 24";
+                ErrorCancel.Foreground = Brushes.Red;
+                Storyboard sb = Resources["sbHideAnimation"] as Storyboard;
+                sb.Begin(ErrorCancel);
+                return;
+            }
             DialogResult result = delete.ShowDialog();
             if (result == System.Windows.Forms.DialogResult.OK)
             {
@@ -938,6 +948,8 @@ namespace PacijentBolnicaZdravo
                 scheduledExaminations = getScheduledExaminations();
                 scheduledExaminationsGrid.ItemsSource = scheduledExaminations;
 
+                ErrorCancel.Text = "You have successfully canceled the appointment.";
+                ErrorCancel.Foreground = Brushes.Green;
                 Storyboard sb = Resources["sbHideAnimation"] as Storyboard;
                 sb.Begin(ErrorCancel);
             }
