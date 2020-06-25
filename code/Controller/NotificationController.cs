@@ -26,10 +26,5 @@ namespace Controller
             return service.NotifyDoctorOfUpcomingBusinessDays(doctor);
         }
 
-        //public PatientNotification NotifyPatientOfExaminationRescheduling()
-        //{
-
-        //}
-
     }
 }

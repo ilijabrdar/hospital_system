@@ -139,6 +139,7 @@ namespace UserInterface
             PatientController = new PatientController(patientService);
 
             HospitalizationRepository hospitalizationRepository = new HospitalizationRepository(new CSVStream<Hospitalization>(HOSPITALIZATION_FILE, new HospitalizationCSVConverter(CSV_DELIMITER)), new LongSequencer(), roomRepository, patientRepo);
+            HospitalizationService hospitalizationService = new HospitalizationService(hospitalizationRepository);
             OperationRepository operationRepository = new OperationRepository(new CSVStream<Operation>(OPERATION_FILE, new OperationCSVConverter(CSV_DELIMITER)), new LongSequencer(), roomRepository, doctorRepository, patientRepo);
             OperationService operationService = new OperationService(operationRepository);
             OperationController = new OperationController(operationService);
@@ -146,7 +147,7 @@ namespace UserInterface
             businessDayService = new BusinessDayService(businessDayRepository, doctorService);
             BusinessDayController = new BusinessDayController(businessDayService);
 
-            var roomService = new RoomService(roomRepository, null, businessDayService);
+            var roomService = new RoomService(roomRepository, null, businessDayService, hospitalizationService);
 
             RoomController = new RoomController(roomService);
 
@@ -163,7 +164,7 @@ namespace UserInterface
             ReferralRepository referralRepository = new ReferralRepository(new CSVStream<Referral>(REFERRAL_FILE, new ReferralCSVConverter(CSV_DELIMITER)), new LongSequencer(), doctorRepository);
 
             ExaminationUpcomingRepository examinationUpcomingRepository = new ExaminationUpcomingRepository(new CSVStream<Model.PatientSecretary.Examination>(EXAM_UPCOMING_FILE, new UpcomingExaminationCSVConverter(CSV_DELIMITER)), new LongSequencer(), doctorRepository, patientRepo);
-            ExaminationPreviousRepository examinationPreviousRepository = new ExaminationPreviousRepository(new CSVStream<Examination>(EXAM_PREVIOUS_FILE, new PreviousExaminationCSVConverter(CSV_DELIMITER, CSV_ARRAY_DELIMITER)), new LongSequencer(), doctorRepository, patientRepo, diagnosisRepository, prescriptionRepository, therapyRepository, referralRepository);
+            ExaminationPreviousRepository examinationPreviousRepository = new ExaminationPreviousRepository(new CSVStream<Examination>(EXAM_PREVIOUS_FILE, new PreviousExaminationCSVConverter(CSV_ARRAY_DELIMITER)), new LongSequencer(), doctorRepository, patientRepo, diagnosisRepository, prescriptionRepository, therapyRepository, referralRepository);
 
             ExaminationService examinationService = new ExaminationService(examinationUpcomingRepository, examinationPreviousRepository);
             ExaminationController = new ExaminationController(examinationService);
