@@ -1,6 +1,7 @@
 ﻿using bolnica.Model.Dto;
 using bolnica.Service;
 using Model.Director;
+using Model.Doctor;
 using Model.Dto;
 using Model.PatientSecretary;
 using Model.Users;
@@ -27,6 +28,8 @@ namespace HCIproject
         private String dijagnoza;
         public List<ExaminationDTO> specialistExaminations { get; set; }
 
+
+        public List<ExaminationDTO> operationList { get; set; }
         public OperationWin() { }
         public OperationWin(Doctor user, long _patientId, String _dijagnoza)
         {
@@ -93,6 +96,7 @@ namespace HCIproject
             scrol.Height = this.ActualHeight - 130;
         }
 
+        [Obsolete]
         private void SearchPeriods(object sender, RoutedEventArgs e)
         {
             var app = Application.Current as App;
@@ -100,11 +104,20 @@ namespace HCIproject
             if (Picker.SelectedDate == null)
                 return;
 
-            app.BusinessDayService._searchPeriods = new NoPrioritySearch();
+
             Period period = new Period();
             period.StartDate = DateTime.Parse(Picker.Text);
             BusinessDayDTO businessDayDTO = new BusinessDayDTO(user, period);
-            specialistExaminations = app.BusinessDayController.Search(businessDayDTO);
+
+
+            operationList=app.BusinessDayService.OperationSearch(businessDayDTO, double.Parse(vreme.Text));
+
+            if (operationList == null)  
+                return;
+
+
+            specialistExaminations.Add(operationList[0]);
+
             specialistGrid.ItemsSource = specialistExaminations;
             specialistGrid.Visibility = Visibility.Visible;
 
@@ -116,17 +129,24 @@ namespace HCIproject
             var selectedItem = specialistGrid.SelectedItem;       
 
             ExaminationDTO scheduleExam = (ExaminationDTO)selectedItem;
-            Period period = scheduleExam.Period;
+
+            Period period = new Period(operationList[0].Period.StartDate, operationList.LastOrDefault().Period.EndDate);
             Patient patient = app.PatientController.Get(id);
-            Examination examination = new Examination(patient, user, period);
-            app.ExaminationController.Save(examination);
+
+            Operation operation = new Operation(patient, user, "Operacija kolena", period, operationList[0].Room);
+            app.OperationController.Save(operation);
+
             BusinessDay day = app.BusinessDayController.GetExactDay(user, period.StartDate);
-            app.BusinessDayController.MarkAsOccupied(period, day);
+            List<Period> pom = new List<Period>();
+            foreach(ExaminationDTO p in operationList)
+            {
+                pom.Add(p.Period);
+            }
+            app.BusinessDayController.MarkAsOccupied(pom, day);
 
 
             if (specialistGrid.SelectedItem != null)
             {
-                
                 ExaminationDTO examDTO = (ExaminationDTO)specialistGrid.SelectedItem;
                 string messageBoxText = "Uspesno ste zakazali operaciju " + " dana" + " " + examDTO.Period.StartDate;
                 string caption = "Potvrda operacije!";
@@ -134,7 +154,6 @@ namespace HCIproject
                 MessageBoxImage icon = MessageBoxImage.Information;
                 MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
                 this.Close();
-
             }
             else
             {

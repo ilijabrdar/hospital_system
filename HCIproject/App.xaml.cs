@@ -50,6 +50,8 @@ namespace HCIproject
         public DoctorController Doctor { get; private set; }
 
         public NotificationController NotificationController { get; private set; }
+        public ISecretaryController SecretaryController { get; private set; }
+        public IDirectorController Director { get; private set; }
 
 
 
@@ -82,6 +84,9 @@ namespace HCIproject
         private const String ADDRESS_FILE = "../../../code/Resources/Data/AddressFile.txt";
         private const String TOWN_FILE = "../../../code/Resources/Data/townFile.txt";
         private const String STATE_FILE = "../../../code/Resources/Data/StateFile.txt";
+        private const String SECRETARY_FILE = "../../../code/Resources/Data/SecretaryFile.txt";
+        private const String DIRECTOR_FILE = "../../../code/Resources/Data/director.csv";
+        
 
 
 
@@ -106,6 +111,8 @@ namespace HCIproject
             StateRepository stateRepository = new StateRepository(new CSVStream<State>(STATE_FILE, new StateCSVConverter(CSV_DELIMITER, CSV_ARRAY_DELIMITER)), new LongSequencer(), townRepository);
             DoctorRepository doctorRepository = new DoctorRepository(new CSVStream<Doctor>(DOCTOR_FILE, new DoctorCSVConverter(CSV_DELIMITER)), new LongSequencer(), businessDayRepository, specialityRepository, doctorGradeRepository, addressRepository,townRepository,stateRepository);
             ArticleRepository articleRepository = new ArticleRepository(new CSVStream<Article>(ARTICLE_FILE, new ArticleCSVConverter(CSV_DELIMITER2)), new LongSequencer(), doctorRepository);
+            
+
 
             businessDayRepository.doctorRepo = doctorRepository;
 
@@ -136,7 +143,6 @@ namespace HCIproject
             SymptomService symptomService = new SymptomService(symptomRepository);
             TherapyService therapyService = new TherapyService(therapyRepository);
             ArticleService articleService = new ArticleService(articleRepository);
-            UserService userService = new UserService(null, doctorService,null,null);
             ExaminationService examinationService = new ExaminationService(examinationUpcomingRepository, examinationPreviousRepository);
             DrugService drugService = new DrugService(drugRepository);
             IngredientService ingredientService = new IngredientService(ingredientRepository);
@@ -149,6 +155,7 @@ namespace HCIproject
             EquipmentService equipmentService = new EquipmentService(equipmentRepository, roomService);
             NotificationService notificationService = new NotificationService(drugService, BusinessDayService);
             NotificationController = new NotificationController(notificationService);
+            UserService userService = new UserService(null, doctorService, null, null); 
 
 
             UserController = new UserController(userService);

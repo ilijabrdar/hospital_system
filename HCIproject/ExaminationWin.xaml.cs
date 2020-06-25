@@ -84,7 +84,9 @@ namespace HCIproject
 
                 app.ExaminationController.Delete(examination);
                 BusinessDay selectedDay = app.BusinessDayController.GetExactDay(examination.Doctor, examination.Period.StartDate);
-                app.BusinessDayController.FreePeriod(selectedDay, examination.Period.StartDate);
+                List<DateTime> pom = new List<DateTime>();
+                pom.Add(examination.Period.StartDate);
+                app.BusinessDayController.FreePeriod(selectedDay, pom);
 
                 string messageBoxText = "Pregled uspesno zavrsen";
                 string caption = "Pregled gotov";

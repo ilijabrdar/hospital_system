@@ -133,7 +133,9 @@ namespace HCIproject
             Examination examination = new Examination(patient, doctor, period);
             app.ExaminationController.Save(examination);
             BusinessDay day = app.BusinessDayController.GetExactDay(doctor, period.StartDate);
-            app.BusinessDayController.MarkAsOccupied(period, day);
+            List<Period> pom = new List<Period>();
+            pom.Add(period);
+            app.BusinessDayController.MarkAsOccupied(pom, day);
 
 
             if (specialistGrid.SelectedItem != null)
