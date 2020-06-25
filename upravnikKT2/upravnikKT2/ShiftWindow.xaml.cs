@@ -30,6 +30,8 @@ namespace upravnikKT2
 
         private Doctor selectedDoctor;
         private BusinessDay selectedBusinessDay;
+        private BusinessDay oldBusinessDay;
+        DateTime old;
 
         public ShiftWindow(Doctor selectedDoctor)
         {
@@ -64,12 +66,20 @@ namespace upravnikKT2
             startTimePicker.SelectedTime = selectedBusinessDay.Shift.StartDate;
             endTimePicker.SelectedTime = selectedBusinessDay.Shift.EndDate;
 
-            
+            labelStartDate.Content = "Datum radnog vremena";
+            labelEndDate.Visibility = Visibility.Hidden;
+            endDatePicker.Visibility = Visibility.Hidden;
+
+            old = businessDay.Shift.StartDate;
+
+
         }
 
         private void Button_Click_Ok(object sender, RoutedEventArgs e)
         {
-            if (DateTime.Compare((DateTime)startDatePicker.SelectedDate, (DateTime)endDatePicker.SelectedDate) > 0)
+
+                
+            if (DateTime.Compare((DateTime)startDatePicker.SelectedDate, (DateTime)endDatePicker.SelectedDate) > 0 && selectedBusinessDay == null)
             {
                 string messageBoxText = "Ne moze datum pocetka smene biti posle datuma kraja smene!";
                 string caption = "Greska";
@@ -94,21 +104,33 @@ namespace upravnikKT2
                 Doctor doctor = selectedDoctor; //(Doctor)comboDoctor.SelectedItem;
                 Room room = (Room)comboRoom.SelectedItem;
 
-                BusinessDay businessDay = new BusinessDay(temp, doctor, room, null);
 
-                BusinessDay saved = _businessDayController.Save(businessDay);
-                if (saved==null)
+                int i = 0;
+                while (start.Date < end.Date)
                 {
-                    string messageBoxText = "Unesena smena se preklapa sa drugom.";
-                    string caption = "Greska";
-                    MessageBoxButton button = MessageBoxButton.OK;
-                    MessageBoxImage icon = MessageBoxImage.Error;
+                    start = start.AddDays(i);
+                    if (i == 0)
+                        i = 1;
+                    DateTime startDate = new DateTime(start.Year, start.Month, start.Day, timeStart.Hour, timeStart.Minute, timeStart.Second);
+                    DateTime endDate = new DateTime(start.Year, start.Month, start.Day, timeEnd.Hour, timeEnd.Minute, timeEnd.Second);
+                    Period newPeriod = new Period(startDate, endDate);
 
-                    MessageBox.Show(messageBoxText, caption, button, icon);
-                    return;
+                    BusinessDay businessDay = new BusinessDay(newPeriod, doctor, room, null);
+
+                    BusinessDay saved = _businessDayController.Save(businessDay);
+                    if (saved == null)
+                    {
+                        string messageBoxText = "Unesena smena se preklapa sa drugom.";
+                        string caption = "Greska";
+                        MessageBoxButton button = MessageBoxButton.OK;
+                        MessageBoxImage icon = MessageBoxImage.Error;
+
+                        MessageBox.Show(messageBoxText, caption, button, icon);
+                        return;
+                    }
+                    selectedDoctor.BusinessDay.Add(saved);
+                    _doctorController.Edit(selectedDoctor);
                 }
-                selectedDoctor.BusinessDay.Add(saved);
-                _doctorController.Edit(selectedDoctor);
             }
             else
             {
@@ -118,7 +140,7 @@ namespace upravnikKT2
 
                 DateTime end = (DateTime)endDatePicker.SelectedDate;
                 DateTime timeEnd = (DateTime)endTimePicker.SelectedTime;
-                var finalEnd = new DateTime(end.Year, end.Month, end.Day, timeEnd.Hour, timeEnd.Minute, timeEnd.Second);
+                var finalEnd = new DateTime(start.Year, start.Month, start.Day, timeEnd.Hour, timeEnd.Minute, timeEnd.Second);
 
                 Period temp = new Period(finalStart, finalEnd);
 
@@ -127,11 +149,52 @@ namespace upravnikKT2
                 selectedBusinessDay.room = room;
                 selectedBusinessDay.Shift = temp;
 
+                //TODO: kako obavestiti da je neuspeli edit
+                if (!validateDates(selectedBusinessDay) && old.Date!=selectedBusinessDay.Shift.StartDate.Date)
+                {
+                    string messageBoxText = "Unesena smena se preklapa sa drugom.";
+                    string caption = "Greska";
+                    MessageBoxButton button = MessageBoxButton.OK;
+                    MessageBoxImage icon = MessageBoxImage.Error;
+
+                    MessageBox.Show(messageBoxText, caption, button, icon);
+                    return;
+                }
+                if (!_businessDayController.ChangeDoctorShift(selectedBusinessDay))
+                {
+                    string messageBoxText = "Ne mozete izmeniti smenu ukoliko ima zakazanih pregleda.";
+                    string caption = "Greska";
+                    MessageBoxButton button = MessageBoxButton.OK;
+                    MessageBoxImage icon = MessageBoxImage.Error;
+
+                    MessageBox.Show(messageBoxText, caption, button, icon);
+                    return;
+                }
                 _doctorController.Edit(selectedDoctor);
                 _businessDayController.Edit(selectedBusinessDay);
             }
 
             this.Close();
+        }
+
+        private bool validateDates(BusinessDay entity)
+        {
+            foreach (BusinessDay businessDay in _businessDayController.GetBusinessDaysByDoctor(entity.doctor)) //15/07 - 25/-7
+            {
+                if (DateTime.Compare(businessDay.Shift.StartDate, entity.Shift.StartDate) <= 0 && DateTime.Compare(businessDay.Shift.EndDate, entity.Shift.EndDate) >= 0)  // 16/07 - 21/07
+                    return false;
+                else if ((DateTime.Compare(businessDay.Shift.StartDate, entity.Shift.StartDate) <= 0 && DateTime.Compare(businessDay.Shift.EndDate, entity.Shift.StartDate) >= 0) && DateTime.Compare(businessDay.Shift.EndDate, entity.Shift.EndDate) <= 0)  // 13/07 - 17/07
+                    return false;
+                else if (DateTime.Compare(businessDay.Shift.StartDate, entity.Shift.StartDate) >= 0 && DateTime.Compare(businessDay.Shift.StartDate, entity.Shift.EndDate) <= 0 && DateTime.Compare(businessDay.Shift.EndDate, entity.Shift.EndDate) >= 0)  // 17/07 -27/07
+                    return false;
+                else if (DateTime.Compare(entity.Shift.StartDate, businessDay.Shift.StartDate) <= 0 && DateTime.Compare(entity.Shift.EndDate, businessDay.Shift.EndDate) >= 0)  //10/07 - 30/07
+                    return false;
+            }
+
+            if (DateTime.Compare(entity.Shift.StartDate, entity.Shift.EndDate) >= 0)  //   18/04 - 11/04 XXX
+                return false;
+
+            return true;
         }
 
         private void Button_Click_Cancel(object sender, RoutedEventArgs e)

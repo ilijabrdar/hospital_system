@@ -1,5 +1,6 @@
 ﻿using bolnica.Controller;
 using Model.Users;
+using System;
 using System.Collections;
 using System.IO;
 using System.Reflection.Emit;
@@ -15,6 +16,7 @@ namespace upravnikKT2
     public partial class MainWindow : Window
     {
         private IDirectorController directorController;
+        private IUserController userController;
 
         public MainWindow()
         {
@@ -24,6 +26,7 @@ namespace upravnikKT2
 
             var app = Application.Current as App;
             directorController = app.DirectorController;
+            userController = app.UserController;
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
@@ -41,12 +44,13 @@ namespace upravnikKT2
 
                 //MessageBox.Show(messageBoxText, caption, button, icon);
             }
-            else if (TxtBoxKorisnickoIme.Text.Equals("marko") || lozinka.Password.Equals("marko"))
+            try
             {
+                Director director = (Director) userController.Login(TxtBoxKorisnickoIme.Text, lozinka.Password);
                 bool selected = (bool)stayLoggedIn.IsChecked;
                 if (selected)
                 {
-                    
+
                     //delete false and write true
                     string path = @"C:\Users\david\Desktop\cc\hospital_system\upravnikKT2\upravnikKT2\Resources\Data\config.txt";
                     //File.Delete(path);
@@ -60,17 +64,48 @@ namespace upravnikKT2
 
                     File.WriteAllText(path, "false");
                 }
-                Director temp = directorController.Get(1);
                 DashboardWindow dashBoard = new DashboardWindow();
+                dashBoard.director = director;
                 dashBoard.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 dashBoard.Show();
                 this.Close();
+
             }
-            else
+            catch (Exception ee)
             {
                 labelError.Content = "Neispravno korisnicko ime/lozinka!";
                 labelError.Visibility = Visibility.Visible;
             }
+            //else if (TxtBoxKorisnickoIme.Text.Equals("marko") || lozinka.Password.Equals("marko"))
+            //{
+            //    bool selected = (bool)stayLoggedIn.IsChecked;
+            //    if (selected)
+            //    {
+                    
+            //        //delete false and write true
+            //        string path = @"C:\Users\david\Desktop\cc\hospital_system\upravnikKT2\upravnikKT2\Resources\Data\config.txt";
+            //        //File.Delete(path);
+
+            //        File.WriteAllText(path, "true");
+            //    }
+            //    else
+            //    {
+            //        //delete true and write false
+            //        string path = @"C:\Users\david\Desktop\cc\hospital_system\upravnikKT2\upravnikKT2\Resources\Data\config.txt";
+
+            //        File.WriteAllText(path, "false");
+            //    }
+            //    Director temp = directorController.Get(1);
+            //    DashboardWindow dashBoard = new DashboardWindow();
+            //    dashBoard.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            //    dashBoard.Show();
+            //    this.Close();
+            //}
+            //else
+            //{
+            //    labelError.Content = "Neispravno korisnicko ime/lozinka!";
+            //    labelError.Visibility = Visibility.Visible;
+            //}
 
             
         }

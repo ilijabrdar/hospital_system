@@ -70,6 +70,7 @@ namespace upravnikKT2
         private const String ADDRESS_FILE = "../../../../code/Resources/Data/AddressFile.txt";
         private const String TOWN_FILE = "../../../../code/Resources/Data/townFile.txt";
         private const String STATE_FILE = "../../../../code/Resources/Data/StateFile.txt";
+       // private const String SECRETARY_FILE = "../../../../code/Resources/Data/secretaryFile.txt";
 
 
         public IRoomTypeController RoomTypeController { get; private set; }
@@ -111,6 +112,8 @@ namespace upravnikKT2
         public ISymptomController SymptomController { get; private set; }
         public ITherapyController TherapyController { get; private set; }
         public ITownController TownController { get; private set; }
+
+
 
         public App()
         {
@@ -234,7 +237,9 @@ namespace upravnikKT2
             StateService stateService = new StateService(stateRepository);
             TownService townService = new TownService(townRepository);
 
-
+            var directorRepository = new DirectorRepository(new CSVStream<Director>(DIRECTOR_FILE, new DirectorCSVConverter(CSV_DELIMITER)), new LongSequencer(), addressRepository, townRepository, stateRepository);
+            var directorService = new DirectorService(directorRepository);
+            DirectorController = new DirectorContoller(directorService);
 
             DoctorService doctorService = new DoctorService(doctorRepository);
             DoctorGradeService doctorGradeService = new DoctorGradeService(doctorGradeRepository);
@@ -247,7 +252,7 @@ namespace upravnikKT2
             SymptomService symptomService = new SymptomService(symptomRepository);
             TherapyService therapyService = new TherapyService(therapyRepository);
             ArticleService articleService = new ArticleService(articleRepository);
-            UserService userService = new UserService(null, doctorService, null, null);
+           
             ExaminationService examinationService = new ExaminationService(examinationUpcomingRepository, examinationPreviousRepository);
             DrugService drugService = new DrugService(drugRepository);
             IngredientService ingredientService = new IngredientService(ingredientRepository);
@@ -256,11 +261,13 @@ namespace upravnikKT2
             doctorService._articleService = articleService;
             doctorService._doctorGradeService = doctorGradeService;
             BusinessDayService businessDayService = new BusinessDayService(businessDayRepository, doctorService);
+            businessDayService.examinationService = examinationService;
             doctorService._businessDayService = businessDayService;
             RenovationService renovationService = new RenovationService(renovationRepository);
             RoomService roomService = new RoomService(roomRepository, renovationService, businessDayService);
             RoomTypeService roomTypeService = new RoomTypeService(roomTypeRepository, roomService);
             EquipmentService equipmentService = new EquipmentService(equipmentRepository, roomService);
+            UserService userService = new UserService(patientService, doctorService, null, directorService);
 
             UserController = new UserController(userService);
             ArticleController = new ArticleController(articleService);
@@ -288,9 +295,9 @@ namespace upravnikKT2
             DoctorController = new DoctorController(doctorService);
                 
 
-            var directorRepository = new DirectorRepository(new CSVStream<Director>(DIRECTOR_FILE, new DirectorCSVConverter(CSV_DELIMITER)), new LongSequencer(), addressRepository, townRepository, stateRepository);
-            var directorService = new DirectorService(directorRepository);
-            DirectorController = new DirectorContoller(directorService);
+            
+
+            UserController = new UserController(userService);
 
             NotificationService notificationService = new NotificationService(drugService, businessDayService);
             NotificationController = new NotificationController(notificationService);

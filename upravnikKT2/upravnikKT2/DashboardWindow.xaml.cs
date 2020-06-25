@@ -42,7 +42,7 @@ namespace upravnikKT2
         private readonly IArticleController _articleController;
         private readonly NotificationController _notificationController;
 
-        public Director director;
+        public Director director { get; set; }
 
 
         public List<State> States { get; set; }
@@ -183,7 +183,11 @@ namespace upravnikKT2
             _articleController = app.ArticleController;
             _notificationController = app.NotificationController;
 
-            director = _directorController.Get(1);
+            //director = _directorController.Get(1);
+            if (director == null)
+                director = _directorController.Get(1);
+            else 
+                this.director = director;
 
             FirstName = director.FirstName;
             LastName = director.LastName;
