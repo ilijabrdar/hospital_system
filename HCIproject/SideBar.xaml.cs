@@ -120,50 +120,50 @@ namespace HCIproject
 
         private void setNotifications()
         {
-            var app = Application.Current as App;
+            //var app = Application.Current as App;
 
-            brojPregleda.Content = app.ExaminationController.GetUpcomingExaminationsByUser(user).Count;
-            List<NotifyDoctorBusinessDay> ret = app.NotificationController.NotifyDoctorOfUpcomingBusinessDays(user);
-            DateTime danas = DateTime.Now;
-            DateTime day1 = danas.AddDays(1);
-            DateTime day2 = danas.AddDays(2);
-            DateTime day3 = danas.AddDays(3);
-            bool flag1 = false;
-            bool flag2 = false;
-            bool flag3 = false;
+            //brojPregleda.Content = app.ExaminationController.GetUpcomingExaminationsByUser(user).Count;
+            //List<NotifyDoctorBusinessDay> ret = app.NotificationController.NotifyDoctorOfUpcomingBusinessDays(user);
+            //DateTime danas = DateTime.Now;
+            //DateTime day1 = danas.AddDays(1);
+            //DateTime day2 = danas.AddDays(2);
+            //DateTime day3 = danas.AddDays(3);
+            //bool flag1 = false;
+            //bool flag2 = false;
+            //bool flag3 = false;
 
-            foreach (var r in ret)
-            {
-                if (day1.Date == r.day.Date)// && day2.Date != r.day.Date && day3.Date != r.day.Date)
-                {
-                    flag1 = true;
-                    smene.Text += r.day.Date.Date.ToString("dd.MM.yyyy.") + " " + r.shift.StartDate.TimeOfDay + " " + r.shift.EndDate.TimeOfDay + " " + r.room.RoomCode + "\n";
-                }
-                else if (day2.Date == r.day.Date)// && day2.Date != r.day.Date && day3.Date != r.day.Date)
-                {
-                    flag2 = true;
-                    smene.Text += r.day.Date.Date.ToString("dd.MM.yyyy.") + " " + r.shift.StartDate.TimeOfDay + " " + r.shift.EndDate.TimeOfDay + " " + r.room.RoomCode + "\n";
-                }
-                else if (day3.Date == r.day.Date)// && day2.Date != r.day.Date && day3.Date != r.day.Date)
-                {
-                    flag3 = true;
-                    smene.Text += r.day.Date.Date.ToString("dd.MM.yyyy.") + " " + r.shift.StartDate.TimeOfDay + " " + r.shift.EndDate.TimeOfDay + " " + r.room.RoomCode + "\n";
-                }       
+            //foreach (var r in ret)
+            //{
+            //    if (day1.Date == r.day.Date)// && day2.Date != r.day.Date && day3.Date != r.day.Date)
+            //    {
+            //        flag1 = true;
+            //        smene.Text += r.day.Date.Date.ToString("dd.MM.yyyy.") + " " + r.shift.StartDate.TimeOfDay + " " + r.shift.EndDate.TimeOfDay + " " + r.room.RoomCode + "\n";
+            //    }
+            //    else if (day2.Date == r.day.Date)// && day2.Date != r.day.Date && day3.Date != r.day.Date)
+            //    {
+            //        flag2 = true;
+            //        smene.Text += r.day.Date.Date.ToString("dd.MM.yyyy.") + " " + r.shift.StartDate.TimeOfDay + " " + r.shift.EndDate.TimeOfDay + " " + r.room.RoomCode + "\n";
+            //    }
+            //    else if (day3.Date == r.day.Date)// && day2.Date != r.day.Date && day3.Date != r.day.Date)
+            //    {
+            //        flag3 = true;
+            //        smene.Text += r.day.Date.Date.ToString("dd.MM.yyyy.") + " " + r.shift.StartDate.TimeOfDay + " " + r.shift.EndDate.TimeOfDay + " " + r.room.RoomCode + "\n";
+            //    }       
                 
-            }
+            //}
 
-            if (!flag1)
-            {
-                smene.Text += day1.Date.Date.ToString("dd.MM.yyyy") + "slobodan";
-            }
-            if (!flag2)
-            {
-                smene.Text += day2.Date.Date.ToString("dd.MM.yyyy") + "slobodan";
-            }
-            if (!flag3)
-            {
-                smene.Text += day3.Date.Date.ToString("dd.MM.yyyy") + "slobodan";
-            }
+            //if (!flag1)
+            //{
+            //    smene.Text += day1.Date.Date.ToString("dd.MM.yyyy") + "slobodan";
+            //}
+            //if (!flag2)
+            //{
+            //    smene.Text += day2.Date.Date.ToString("dd.MM.yyyy") + "slobodan";
+            //}
+            //if (!flag3)
+            //{
+            //    smene.Text += day3.Date.Date.ToString("dd.MM.yyyy") + "slobodan";
+            //}
 
         }
 

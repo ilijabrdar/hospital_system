@@ -54,6 +54,9 @@ namespace HCIproject
         public IDirectorController Director { get; private set; }
         public ReportController ReportController { get; private set; }
 
+        public DirectorContoller DirectorContoller { get; private set; }
+
+
 
         private const String CSV_DELIMITER = ",";
         private const String CSV_DELIMITER2 = "|";
@@ -111,7 +114,9 @@ namespace HCIproject
             StateRepository stateRepository = new StateRepository(new CSVStream<State>(STATE_FILE, new StateCSVConverter(CSV_DELIMITER, CSV_ARRAY_DELIMITER)), new LongSequencer(), townRepository);
             DoctorRepository doctorRepository = new DoctorRepository(new CSVStream<Doctor>(DOCTOR_FILE, new DoctorCSVConverter(CSV_DELIMITER)), new LongSequencer(), businessDayRepository, specialityRepository, doctorGradeRepository, addressRepository,townRepository,stateRepository);
             ArticleRepository articleRepository = new ArticleRepository(new CSVStream<Article>(ARTICLE_FILE, new ArticleCSVConverter(CSV_DELIMITER2)), new LongSequencer(), doctorRepository);
-            
+            SecretaryRepository secretaryRepository = new SecretaryRepository(new CSVStream<Secretary>(SECRETARY_FILE, new SecretaryCSVConverter(",")), new LongSequencer(), addressRepository, townRepository, stateRepository);
+            DirectorRepository directorRepository = new DirectorRepository(new CSVStream<Director>(DIRECTOR_FILE, new DirectorCSVConverter(",")), new LongSequencer(), addressRepository, townRepository, stateRepository);
+
 
 
             businessDayRepository.doctorRepo = doctorRepository;
@@ -119,18 +124,17 @@ namespace HCIproject
             ReferralRepository referralRepository = new ReferralRepository(new CSVStream<Referral>(REFERRAL_FILE, new ReferralCSVConverter(CSV_DELIMITER)), new LongSequencer(), doctorRepository);
             PatientFileRepository patientFileRepository = new PatientFileRepository(new CSVStream<PatientFile>(PATIENTFILE_FILE, new PatientFileCSVConverter(CSV_DELIMITER, CSV_DELIMITER2)), new LongSequencer());
             PatientRepository patientRepository = new PatientRepository(new CSVStream<Patient>(PATIENT_FILE, new PatientCSVConverter(CSV_DELIMITER)), new LongSequencer(), patientFileRepository,addressRepository, townRepository, stateRepository);
-            HospitalizationRepository hospitalizationRepository = new HospitalizationRepository(new CSVStream<Hospitalization>(HOSPITALIZATION_FILE, new HospitalizationCSVConverter(CSV_DELIMITER)), new LongSequencer(), roomRepository, patientRepository);
+            HospitalizationRepository hospitalizationRepository = new HospitalizationRepository(new CSVStream<Hospitalization>(HOSPITALIZATION_FILE, new HospitalizationCSVConverter(CSV_DELIMITER)), new LongSequencer(), roomRepository, patientRepository,doctorRepository);
             OperationRepository operationRepository = new OperationRepository(new CSVStream<Operation>(OPERATION_FILE, new OperationCSVConverter(CSV_DELIMITER)), new LongSequencer(), roomRepository,doctorRepository,patientRepository);
             ExaminationUpcomingRepository examinationUpcomingRepository = new ExaminationUpcomingRepository(new CSVStream<Examination>(EXAM_UPCOMING_FILE, new UpcomingExaminationCSVConverter(CSV_DELIMITER)), new LongSequencer(), doctorRepository, patientRepository);
             ExaminationPreviousRepository examinationPreviousRepository = new ExaminationPreviousRepository(new CSVStream<Examination>(EXAM_PREVIOUS_FILE, new PreviousExaminationCSVConverter(CSV_DELIMITER2)), new LongSequencer(), doctorRepository, patientRepository, diagnosisRepository, prescriptionRepository, therapyRepository, referralRepository);
             patientFileRepository._hospitalizationRepository = hospitalizationRepository;
             patientFileRepository._operationRepository = operationRepository;
             patientFileRepository._examinationPreviousRepository = examinationPreviousRepository;
+          
             AddressService addressService = new AddressService(addressRepository);
             StateService stateService = new StateService(stateRepository);
             TownService townService = new TownService(townRepository);
-
-
             DoctorService doctorService = new DoctorService(doctorRepository);
             DoctorGradeService doctorGradeService = new DoctorGradeService(doctorGradeRepository);
             SpecialityService specialityService = new SpecialityService(specialityRepository);
@@ -154,8 +158,11 @@ namespace HCIproject
             EquipmentService equipmentService = new EquipmentService(equipmentRepository, roomService);
             NotificationService notificationService = new NotificationService(drugService, BusinessDayService);
             NotificationController = new NotificationController(notificationService);
-            UserService userService = new UserService(null, doctorService, null, null);
-            ReportService reportService = new ReportService(examinationService, operationService);
+            ReportService reportService = new ReportService(examinationService,renovationService,hospitalizationService, operationService);
+            SecretaryService secretaryService = new SecretaryService(secretaryRepository);
+            DirectorService directorService = new DirectorService(directorRepository);
+            UserService userService = new UserService(patientService, doctorService, secretaryService, directorService);
+
 
 
             UserController = new UserController(userService);
@@ -185,66 +192,10 @@ namespace HCIproject
             DoctorController = new DoctorController(doctorService);
             TherapyController = new TherapyController(therapyService);
             ReportController = new ReportController(reportService);
-
-            //PatientFileController.Save(new PatientFile(0));
-            //StateController = new StateController(stateService);
-            //AddressController = new AddressController(addressService);
-            //TownController = new TownController(townService);
-            //  ArticleController articleController = new ArticleController(articleService);
-            // DiagnosisController diagnosisController = new DiagnosisController(diagnosisService);
-            // DoctorGradeController doctorGradeController = new DoctorGradeController(doctorGradeService);
-            // HospitalizationController hospitalizationController = new HospitalizationController(hospitalizationService);
-            // OperationController operationController = new OperationController(operationService);
-            // PrescriptionController prescriptionController = new PrescriptionController(prescriptionService);
-            // ReferralController referralController = new ReferralController(referralService);
-            //// SpecialityController specialityController = new SpecialityController(specialityService);
-            // SymptomController symptomController = new SymptomController(symptomService);
-            // TherapyController therapyController = new TherapyController(therapyService);
-            //DrugController drugController = new DrugController(drugService);
-            // List<Symptom> s = new List<Symptom>();
-            //Symptom si = new Symptom(1, "ime");
-            //Symptom si2 = new Symptom(2, "ime2");
-            // s.Add(si);
-            // s.Add(si2);
-            //   Diagnosis dijagnoza = new Diagnosis(111,"imedijagnoze", s);
-            ////Console.WriteLine(dijagnoza.Symptom);
-            ////articleController.Save(new Article(111, DateTime.Today, "bllllla", "blaaaa"));
-            //  diagnosisController.Save(dijagnoza);
-            //Dictionary<String, double> dic = new Dictionary<string, double>();
-            //dic["pitanje1"] = 1;
-            //dic["pitanje2"] = 2.22;
-            //DoctorGrade dg = new DoctorGrade(11, 11, dic);
-            //doctorGradeController.Save(dg);           
-            //hospitalizationController.Save( new Hospitalization(11, new Period(new DateTime(2015,10,10), new DateTime(2006,10,15)), new PatientFile(2), new Room(3)));
-            //// operationController.Save(new Operation(111, new Doctor(5), "naziv", new Period(new DateTime(2015, 10, 10), new DateTime(2006, 10, 15)), new Room(3), new PatientFile(3)));
-         //   List<Drug> d = new List<Drug>();
-        //    Drug gr = new Drug(2);
-       ///     Drug gr1 = new Drug(3);
-        //d.Add(gr);
-        //    d.Add(gr1);
-            //prescriptionController.Save(new Prescription(111,new Period( new DateTime(2016, 10, 10), new DateTime(2016, 10, 15)), "note", d));
-            //referralController.Save(new Referral(11, new Period(new DateTime(2016, 10, 10), new DateTime(2016, 10, 15)), new Doctor(5)));
-            //specialityController.Save(new Speciality("lslsl"));
-            // symptomController.Save(new Symptom("ime"));
-            //       therapyController.Save(new Therapy("note", new Period(new DateTime(2015, 10, 10), new DateTime(2006, 10, 15)), 23,d));
-            //       Article article = new Article(new DateTime(2015, 10, 10), new Doctor(1), "Naslov", "dfcjd");
-            //       articleController.Save(article);
-            // diagnosisController.GetAll\
-            //Article ar= articleRepository.GetEager(1);
-            // Console.WriteLine(ar.Doctor.FirstName);
-
-            //        public Examination(User user, Users.Doctor doctor, Period period, Diagnosis diagnosis, List<Prescription> prescription, Anemnesis anemnesis, Therapy therapy, Referral refferal)
-         //   Prescription pre = new Prescription(111, new Period(new DateTime(2016, 10, 10), new DateTime(2016, 10, 15)), "note", d);
-         //   List<Prescription> p = new List<Prescription>();
-         //    p.Add(pre);
-        //     Patient patient = new Patient(1);
-            // ExaminationController.Save( new Examination((User)patient, new Doctor(2), new Period(new DateTime(2019, 10, 10), new DateTime(2016, 10, 15)), new Diagnosis(2),p ,new Anemnesis("ssssss"), new Therapy(1), new Referral(1)));
-           // ExaminationController.SaveFinishedExamination(new Examination((User)patient, new Doctor(2), new Period(new DateTime(2019, 10, 10), new DateTime(2016, 10, 15)), new Diagnosis(2), p, new Anemnesis("ssssss"), new Therapy(1), new Referral(1)));
-            // List<Drug> non = drugController.GetNotApprovedDrugs();
-            // foreach(Drug d in non)
-            //{
-            //     Console.WriteLine(d.Name);
-            // }
+            PatientController = new PatientController(patientService);
+            SecretaryController = new SecretaryController(secretaryService);
+            DirectorContoller = new DirectorContoller(directorService);
+     
         }
 
     }

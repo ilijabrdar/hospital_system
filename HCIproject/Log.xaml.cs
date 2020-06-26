@@ -35,22 +35,16 @@ namespace HCIproject
             try
             {
                 Doctor user = (Doctor)app.UserController.Login(Username, passwordBox.Password);
-                if (user == null)
-                {
-                    obavestiGreska.Text = "Uneti podaci su neispravni. Molimo pokusajte ponovo";
-                }
-                else
-                {
-                    SideBar sidBarWin = new SideBar((Doctor)user);
-                    this.Visibility = Visibility.Hidden;
-                    sidBarWin.Show();
-                }
-
+                SideBar sideBar = new SideBar((Doctor)user);
+                sideBar.Show();
+                this.Close();
             }
             catch (Exception exception)
             {
-                MessageBox.Show(exception.Message);
+                TextBlock err = (TextBlock)FindName("ErrorMessage");
+                err.Visibility = Visibility.Visible;
             }
+
 
         }
 
