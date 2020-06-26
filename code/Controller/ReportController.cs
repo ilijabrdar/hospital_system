@@ -30,7 +30,7 @@ namespace Controller
       
       public RoomOccupationReportDTO GenerateRoomOccupationReport(Room room, Period period)
       {
-            return _service.GenerateRoomOccupationReport(room, period);
+            return _reportService.GenerateRoomOccupationReport(room, period);
       }
       
       public SecretaryReportDTO GenerateDoctorOccupationReport(Doctor doctor, Period period)

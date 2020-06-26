@@ -273,5 +273,19 @@ namespace Service
                   
         }
 
+
+        [Obsolete]
+        public Boolean isExaminationPossible(Examination examination)
+        {
+            _searchPeriods = new NoPrioritySearch();
+            List<ExaminationDTO> examinations = Search(new BusinessDayDTO(examination.Doctor, examination.Period));
+            foreach (ExaminationDTO exam in examinations)
+            {
+                if (exam.Period.StartDate == examination.Period.StartDate)
+                    return true;
+            }
+            return false;
+        }
+
     }
 }
