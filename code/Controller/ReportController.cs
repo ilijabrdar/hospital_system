@@ -20,10 +20,9 @@ namespace Controller
             _reportService = reportService;
         }
 
-      public DoctorReportDTO GenerateAnamnesisPrescriptionReport(PatientFile patientFile)
+      public DoctorReportDTO GenerateAnamnesisPrescriptionReport(Examination examination)
       {
-         // TODO: implement
-         return null;
+         return _reportService.GenerateAnamnesisPrescriptionReport(examination);
       }
       
       public String GenerateRoomOccupationReport()

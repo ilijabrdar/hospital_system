@@ -61,16 +61,19 @@ namespace Service
                     {
                         NotifyDoctorBusinessDay notification = new NotifyDoctorBusinessDay(businessDay.Shift, DateTime.Now.AddDays(days_ahead++), businessDay.room);
                         ret.Add(notification);
+                        continue;
                     }
                     if (DateTime.Compare(businessDay.Shift.EndDate.Date, DateTime.Now.AddDays(2).Date) >= 0 && days_ahead != 4)
                     {
                         NotifyDoctorBusinessDay notification = new NotifyDoctorBusinessDay(businessDay.Shift, DateTime.Now.AddDays(days_ahead++), businessDay.room);
                         ret.Add(notification);
+                        continue;
                     }
                     if (DateTime.Compare(businessDay.Shift.EndDate.Date, DateTime.Now.AddDays(3).Date) >= 0 && days_ahead != 4)
                     {
                         NotifyDoctorBusinessDay notification = new NotifyDoctorBusinessDay(businessDay.Shift, DateTime.Now.AddDays(days_ahead++), businessDay.room);
                         ret.Add(notification);
+                        continue;
                     }
 
                     if (ret.Count == 4)
