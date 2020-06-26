@@ -229,23 +229,59 @@ namespace upravnikKT2
                 examination_paragraph.Add(new Chunk("\n"));
                 examination_paragraph.Add("Pacijent : " + examination.User.FullName);
                 examination_paragraph.Add(new Chunk("\n"));
-                examination_paragraph.Add("Dijagnoza : " + examination.Diagnosis.Name);
+                examination_paragraph.Add("Period : " + examination.Period.StartDate);
                 examination_paragraph.Add(new Chunk("\n"));
-                examination_paragraph.Add("Anamneza : " + examination.Anemnesis.Text);
-                examination_paragraph.Add(new Chunk("\n"));
-                examination_paragraph.Add("Terapija : " + examination.Therapy.Note);
-                examination_paragraph.Add(new Chunk("\n"));
+                //examination_paragraph.Add("Anamneza : " + examination.Anemnesis.Text);  //ovo je upcoming examinations pa nema dijagnozu i te stvari, pokusaj kroz previous da ides
+                
+                //examination_paragraph.Add(new Chunk("\n"));
+                //examination_paragraph.Add("Terapija : " + examination.Therapy.Note);
+                //examination_paragraph.Add(new Chunk("\n"));
                 examination_paragraph.Add(new Chunk("\n"));
 
 
                 found = true;
 
             }
-
             if (!found)
             {
                 examination_paragraph.Add("Nema zakazanih pregleda u navedenom periodu!");
                 examination_paragraph.Add(new Chunk("\n"));
+            }
+
+            found = false;
+            Paragraph examination_previous_paragraph = new Paragraph();
+            examination_previous_paragraph.Add(new Chunk("\n"));
+            Chunk examinationPreviousHeader = new Chunk("PROSLI PREGLEDI");
+            examinationPreviousHeader.Font.Size = 14;
+            examinationPreviousHeader.Font.SetStyle(1);
+            examination_previous_paragraph.Add(examinationPreviousHeader);
+            examination_previous_paragraph.Add(new Chunk("\n"));
+
+
+            foreach (Examination examination in report.previousExaminations)
+            {
+                examination_previous_paragraph.Add("Datum pregleda: " + examination.Period.StartDate.ToString("dd/MM/yyyy"));
+                examination_previous_paragraph.Add(new Chunk("\n"));
+                examination_previous_paragraph.Add("Doktor : " + examination.Doctor.FullName);
+                examination_previous_paragraph.Add(new Chunk("\n"));
+                examination_previous_paragraph.Add("Pacijent : " + examination.User.FullName);
+                examination_previous_paragraph.Add(new Chunk("\n"));
+                examination_previous_paragraph.Add("Period : " + examination.Period.StartDate);
+                examination_previous_paragraph.Add(new Chunk("\n"));
+                examination_paragraph.Add("Anamneza : " + examination.Anemnesis.Text);  //ovo je upcoming examinations pa nema dijagnozu i te stvari, pokusaj kroz previous da ides
+                examination_paragraph.Add(new Chunk("\n"));
+                examination_paragraph.Add("Terapija : " + examination.Therapy.Note);
+                examination_paragraph.Add(new Chunk("\n"));
+                examination_previous_paragraph.Add(new Chunk("\n"));
+
+
+                found = true;
+
+            }
+            if (!found)
+            {
+                examination_previous_paragraph.Add("Nema proslih pregleda u navedenom periodu!");
+                examination_previous_paragraph.Add(new Chunk("\n"));
             }
 
 
@@ -317,8 +353,10 @@ namespace upravnikKT2
             doc.Add(equipment_inventory);
             doc.Add(renovation_paragraph);
             doc.Add(examination_paragraph);
+            doc.Add(examination_previous_paragraph);
             doc.Add(hospitalization_paragraph);
             doc.Add(operation_paragraph);
+            
             doc.Close();
         }
 
@@ -415,10 +453,10 @@ namespace upravnikKT2
             comboRooms.SelectedValuePath = "Id";
 
             startDatePicker.DisplayDateStart = new DateTime(DateTime.Now.Year, 1, 1);
-            startDatePicker.DisplayDateEnd = DateTime.Now;
+            startDatePicker.DisplayDateEnd = DateTime.Now.AddMonths(12);
 
             endDatePicker.DisplayDateStart = new DateTime(DateTime.Now.Year, 1, 1);
-            endDatePicker.DisplayDateEnd = DateTime.Now;
+            endDatePicker.DisplayDateEnd = DateTime.Now.AddMonths(12);
         }
 
         private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
