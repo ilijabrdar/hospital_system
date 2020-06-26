@@ -1,4 +1,5 @@
-﻿using Model.Dto;
+﻿using Model.Director;
+using Model.Dto;
 using Model.PatientSecretary;
 using Model.Users;
 using Service;
@@ -17,5 +18,8 @@ namespace bolnica.Service
         List<Examination> GetFinishedxaminationsByUser(User user);
         List<Examination> GetExaminationsByFilter(ExaminationDTO examinationDTO, Boolean upcomingOnly);
         IEnumerable<Examination> GetAllPrevious();
+
+        Room getExaminationRoom(Examination examination);
+
     }
 }

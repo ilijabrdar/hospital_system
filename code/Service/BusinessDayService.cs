@@ -26,6 +26,8 @@ namespace Service
 
         public IDoctorService doctorService;
 
+        public IExaminationService examinationService { get; set; }
+
         public BusinessDayService(IBusinessDayRepository businessDayRepository, IDoctorService doctorService)
         {
             _businessDayRepository = businessDayRepository;
@@ -40,12 +42,12 @@ namespace Service
 
         public bool DeletePreviousBusinessDay()
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException();//TODO - logicko brisanje?
         }
 
         public void Edit(BusinessDay entity)
         {
-            _businessDayRepository.Edit(entity);
+                _businessDayRepository.Edit(entity);
         }
 
         public BusinessDay GetExactDay(Doctor doctor, DateTime date)
@@ -175,10 +177,7 @@ namespace Service
             return true;
         }
 
-        public bool SetRoomForBusinessDay(BusinessDay businessDay, Room room)
-        {
-            throw new NotImplementedException();
-        }
+
 
         public void DeleteBusinessDayByRoom(Room room)
         {
@@ -197,11 +196,12 @@ namespace Service
             int index = 0;
             for(int i = 0; i < businessDay.ScheduledPeriods.Count; i++)
             {
-                if(businessDay.ScheduledPeriods[i].StartDate == period[index++])
+                if(businessDay.ScheduledPeriods[i].StartDate == period[index])
                 {
-                    businessDay.ScheduledPeriods.RemoveAt(i);
+                    businessDay.ScheduledPeriods.RemoveAt(i--);
                     if (index == period.Count - 1)
                         break;
+                    index++;
                 }
             }
 
@@ -209,8 +209,73 @@ namespace Service
         }
 
         [Obsolete]
+        public Boolean ChangeDoctorShift(BusinessDay newShift)
+        {
+            //naci razliku smene
+            TimeSpan shiftDuration = new TimeSpan();
+            shiftDuration = newShift.Shift.EndDate - newShift.Shift.StartDate;  //razlika u minutama
+
+            //sabrati minute zakazanih termina i uporediti ih sa shiftDuration -> ako su manji onda ne moze, ako nisu onda ih premesti u novi termin
+
+
+            double periodTotalMinutes = 0;
+            foreach (Period period in newShift.ScheduledPeriods)
+            {
+                periodTotalMinutes += durationOfExamination;
+            }
+
+            if (shiftDuration.TotalMinutes < periodTotalMinutes)
+            {
+                return false;
+            }
+
+            //zakazati nove preglede
+            BusinessDay temp = new BusinessDay(newShift.Id, newShift.Shift,newShift.doctor, newShift.room,new List<Period>());
+
+
+            bool found = false;
+
+            foreach (Period period in newShift.ScheduledPeriods)
+            {
+                if (!periodCorrespondsToNewShift(newShift.Shift, period))
+                {
+                    //foreach (Examination examination in examinationService.GetUpcomingExaminationsByUser(newShift.doctor))
+                    //{
+                    //    if (DateTime.Compare(examination.Period.StartDate, period.StartDate) == 0)
+                    //    {
+                    //        //if (temp.ScheduledPeriods.SingleOrDefault(any => any.StartDate == examination.Period.StartDate) == null)
+                    //        //{
+
+                    //        //}
+
+                    //        //iskoristi Ilijino
+                    //        return false;
+                    //    }
+                    //}
+
+                    return false;
+                }
+                
+            }
+
+
+            //return found;
+            return true;
+        }
+
+        private bool periodCorrespondsToNewShift(Period shift, Period period)
+        {
+            if (DateTime.Compare(shift.StartDate, period.StartDate)<= 0 && DateTime.Compare(shift.EndDate, period.EndDate) >= 0)
+                return true;
+
+            return false;
+
+                  
+        }
+
+        [Obsolete]
         public Boolean isExaminationPossible(Examination examination)
-        { 
+        {
             _searchPeriods = new NoPrioritySearch();
             List<ExaminationDTO> examinations = Search(new BusinessDayDTO(examination.Doctor, examination.Period));
             foreach (ExaminationDTO exam in examinations)
@@ -220,6 +285,6 @@ namespace Service
             }
             return false;
         }
-     
+
     }
 }
