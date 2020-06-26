@@ -23,7 +23,7 @@ namespace bolnica.Controller.decorators
             AuthorizedUsers = new Dictionary<string, List<string>>();
             AuthorizedUsers["GenerateAnamnesisPrescriptionReport"] = new List<String>() { "Doctor"};
             AuthorizedUsers["GenerateDoctorOccupationReport"] = new List<String>() { "Director" };
-            AuthorizedUsers["GenerateRoomOccupationReport"] = new List<String>() { "Secretary" };
+            AuthorizedUsers["GenerateRoomOccupationReport"] = new List<String>() { "Director" };
             AuthorizedUsers["GenerateTherapyTimetableReport"] = new List<String>() { "Patient" };
         }
 
