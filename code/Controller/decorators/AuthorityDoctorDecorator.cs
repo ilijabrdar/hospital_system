@@ -50,14 +50,14 @@ namespace bolnica.Controller.decorators
         public Doctor Get(long id)
         {
             if (AuthorizedUsers["Get"].SingleOrDefault(any => any.Equals(Role)) != null)
-                DoctorController.Get(id);
+                return DoctorController.Get(id);
             return null;
         }
 
         public IEnumerable<Doctor> GetAll()
         {
             if (AuthorizedUsers["GetAll"].SingleOrDefault(any => any.Equals(Role)) != null)
-                DoctorController.GetAll();
+                return DoctorController.GetAll();
             return null;
         }
 
