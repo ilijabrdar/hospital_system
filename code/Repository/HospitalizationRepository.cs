@@ -14,11 +14,13 @@ namespace Repository
     {
         private readonly IRoomRepository _roomRepository;
         private readonly IPatientRepository _patientRepository;
-        public HospitalizationRepository(ICSVStream<Hospitalization> stream, ISequencer<long> sequencer, IRoomRepository roomRepository, IPatientRepository patientRepository)
+        private readonly IDoctorRepository _doctorRepository;
+        public HospitalizationRepository(ICSVStream<Hospitalization> stream, ISequencer<long> sequencer, IRoomRepository roomRepository, IPatientRepository patientRepository, IDoctorRepository doctorRepository)
             : base(stream, sequencer)
         {
             _patientRepository = patientRepository;
             _roomRepository = roomRepository;
+            _doctorRepository = doctorRepository;
         }
 
         public IEnumerable<Hospitalization> GetAllEager()
@@ -36,6 +38,7 @@ namespace Repository
             Hospitalization hospitalization = Get(id);
             hospitalization.Room=_roomRepository.GetEager(hospitalization.Room.GetId());
             hospitalization.Patient = _patientRepository.Get(hospitalization.Patient.GetId());
+            hospitalization.Doctor = _doctorRepository.GetEager(hospitalization.Doctor.GetId());
             return hospitalization;
         }
 
