@@ -273,7 +273,6 @@ namespace Service
                   
         }
 
-
         [Obsolete]
         public Boolean isExaminationPossible(Examination examination)
         {
