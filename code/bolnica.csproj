@@ -130,16 +130,26 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controller\decorators\AuthorityArticleDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthorityBusinessDayDecorator.cs" />
     <Compile Include="Controller\decorators\AuthorityDiagnosisDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthorityDirectorDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthorityDoctorDecorator.cs" />
     <Compile Include="Controller\decorators\AuthorityDoctorGradeDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthorityDrugDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthorityEquipmentDecorator.cs" />
     <Compile Include="Controller\decorators\AuthorityExaminationDecorator.cs" />
     <Compile Include="Controller\decorators\AuthorityHospitalizationDecorator.cs" />
     <Compile Include="Controller\decorators\AuthorityIngredientDecorator.cs" />
     <Compile Include="Controller\decorators\AuthorityOperationDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthorityPatientDecorator.cs" />
     <Compile Include="Controller\decorators\AuthorityPatientFileDecorator.cs" />
     <Compile Include="Controller\decorators\AuthorityPrescriptionDecorator.cs" />
     <Compile Include="Controller\decorators\AuthorityRefferalDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthorityRenovationDecoratorcs.cs" />
     <Compile Include="Controller\decorators\AuthorityReportDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthorityRoomDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthorityRoomTypeDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthoritySecretaryDecorator.cs" />
     <Compile Include="Controller\decorators\AuthoritySpecialityDecorator.cs" />
     <Compile Include="Controller\decorators\AuthoritySympthomDecorator.cs" />
     <Compile Include="Controller\decorators\AuthorityTherapyDecorator.cs" />

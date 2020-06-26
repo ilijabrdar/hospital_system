@@ -73,8 +73,10 @@
                     <TextBlock Name="Note" Margin="10,10,10,1" FontSize="15" Text="{x:Static p:Resources.NoteForExamination}"></TextBlock>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Name="ChooseDoctor" Text="{x:Static p:Resources.ChooseDoctor}" FontSize="19"  Margin="10" Width="150"/>
-                        <ComboBox HorizontalAlignment="Left" Margin="10"  Width="250"  Name="DoctorsForExaminations" ItemsSource ="{Binding Path=listOfDoctors}">
+                        <ComboBox HorizontalAlignment="Left" Margin="10"  Width="250" Height="25" Name="DoctorsForExaminations" ItemsSource ="{Binding Path=listOfDoctors}" SelectionChanged="DoctorsForExaminations_SelectionChanged">
                         </ComboBox>
+                        <Button Margin="10" Foreground="Black" ToolTipService.ShowOnDisabled="true" ToolTip="Average grade of doctor." FontSize="14" Name="ButtonGrade" Width="40" Height="40" IsEnabled="False"/>
+
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Priority"  FontSize="19" Margin="10" Width="150"></TextBlock>
@@ -86,10 +88,9 @@
                     </StackPanel>
                     <StackPanel x:Name="DatePicker" Orientation="Horizontal">
                         <TextBlock Name="ChooseDate" Text="{x:Static p:Resources.ChooseDate}" FontSize="19" Margin="10" Width="150"/>
-                        <DatePicker Name="Picker" Margin="10" Width="200" FirstDayOfWeek="Monday" SelectedDateChanged="CalendarDateChanged"/>
-                        <DatePicker Name="Picker2" Margin="10" Width="200" FirstDayOfWeek="Monday" SelectedDateChanged="CalendarDateChanged"/>
+                        <DatePicker Name="Picker"  Margin="10" Width="200" FirstDayOfWeek="Monday" SelectedDateChanged="CalendarDateChanged"/>
+                        <DatePicker Name="Picker2"  Margin="10" Width="200" FirstDayOfWeek="Monday" SelectedDateChanged="CalendarDateChanged"/>
                     </StackPanel>
-                  
                     <StackPanel>
                         <Button Width="100" Content="Search" Click="SearchPeriods"></Button>
                     </StackPanel>

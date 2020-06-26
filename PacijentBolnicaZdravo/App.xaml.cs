@@ -1,4 +1,5 @@
 ﻿using bolnica.Controller;
+using bolnica.Controller.decorators;
 using bolnica.Model.Dto;
 using bolnica.Repository;
 using bolnica.Repository.CSV.Converter;
@@ -51,19 +52,21 @@ namespace PacijentBolnicaZdravo
         private readonly String _notification_File = "../../../code/Resources/Data/patientNotification.csv";
 
         public IUserController UserController { get; set; }
-        public IArticleController ArticleController
+        public AuthorityArticleDecorator ArticleDecorator
         { get; private set; }
-        public IDoctorController DoctorController { get; set; }
-        public IBusinessDayController BusinessDayController { get; set; }
-        public IExaminationController ExaminationController { get; set; }
-        public IPatientController PatientController { get; set; }
+        public AuthorityDoctorDecorator DoctorDecorator { get; set; }
+        public AuthorityBusinessDayDecorator BusinessDayDecorator { get; set; }
+        public AuthorityExaminationDecorator ExaminationDecorator { get; set; }
+        public AuthorityPatientDecorator PatientDecorator { get; set; }
         public IStateController StateController { get; set; }
         public ITownController TownController { get; set; }
         public IAddressController AddressController { get; set; }
         public BusinessDayService BusinessDayService { get; set; }
 
         public IPatientNotificationController PatientNotificationController { get; set; }
-        public IReportController ReportController { get; set; }
+        public AuthorityReportDecorator ReportDecorator { get; set; }
+
+        public AuthorityDoctorGradeDecorator DoctorGradeDecorator { get; set; }
 
         App()
         {
@@ -86,12 +89,12 @@ namespace PacijentBolnicaZdravo
             var ingredientRepository = new IngredientRepository(new CSVStream<Ingredient>(_ingredients_File, new IngredientsCSVConverter(",")), new LongSequencer());
             var drugRepository = new DrugRepository(new CSVStream<Drug>(_drug_File, new DrugCSVConverter(",")), new LongSequencer(), ingredientRepository);
             var prescriptionRepository = new PrescriptionRepository(new CSVStream<Prescription>(_prescription_File, new PrescriptionCSVConverter(",", ":")), new LongSequencer(), drugRepository);
-            var therapyRepository = new TherapyRepository(new CSVStream<Therapy>(_therapy_File, new TherapyCSVConverter(",", ":")), new LongSequencer(), drugRepository);
+            var therapyRepository = new TherapyRepository(new CSVStream<Therapy>(_therapy_File, new TherapyCSVConverter("|", ":")), new LongSequencer(), drugRepository);
             var referralRepository = new ReferralRepository(new CSVStream<Referral>(_referral_File, new ReferralCSVConverter(",")), new LongSequencer(), doctorRepository);
             var hospitalizationRepository = new HospitalizationRepository(new CSVStream<Hospitalization>(_hospitalization_File, new HospitalizationCSVConverter(",")), new LongSequencer(), roomRepo,patientRepo);
             var operationRepository = new OperationRepository(new CSVStream<Operation>(_operation_File, new OperationCSVConverter(",")), new LongSequencer(), roomRepo, doctorRepository, patientRepo);
             var examinationUpcomingRepository = new ExaminationUpcomingRepository(new CSVStream<Examination>(_examinationUpcoming_File, new UpcomingExaminationCSVConverter(",")), new LongSequencer(), doctorRepository, patientRepo);
-            var examinationPreviousRepository = new ExaminationPreviousRepository(new CSVStream<Examination>(_examinationPrevius_File, new PreviousExaminationCSVConverter(",", "|")), new LongSequencer(), doctorRepository, patientRepo, diagnosisRepository, prescriptionRepository, therapyRepository, referralRepository);
+            var examinationPreviousRepository = new ExaminationPreviousRepository(new CSVStream<Examination>(_examinationPrevius_File, new PreviousExaminationCSVConverter("|")), new LongSequencer(), doctorRepository, patientRepo, diagnosisRepository, prescriptionRepository, therapyRepository, referralRepository);
             patientFileRepo._examinationPreviousRepository = examinationPreviousRepository;
             patientFileRepo._hospitalizationRepository = hospitalizationRepository;
             patientFileRepo._operationRepository = operationRepository;
@@ -115,7 +118,7 @@ namespace PacijentBolnicaZdravo
             var doctorService = new DoctorService(doctorRepository);
             BusinessDayService = new BusinessDayService(businessDayRepo,doctorService);
             var renovationService = new RenovationService(renovationRepo);
-            var roomService = new RoomService(roomRepo, renovationService,BusinessDayService);
+            var roomService = new RoomService(roomRepo, renovationService,BusinessDayService, hospitalizationService);
             var roomTypeService = new RoomTypeService(roomTypeRepo,roomService);
             var equipmentService = new EquipmentService(equipmentRepo,roomService);
             var doctorGradeService = new DoctorGradeService(doctorGradeRepo);
@@ -134,16 +137,26 @@ namespace PacijentBolnicaZdravo
 
             
             UserController = new UserController(userService);
-            ArticleController = new ArticleController(articleService);
-            DoctorController = new DoctorController(doctorService);
-            BusinessDayController = new BusinessDayController(BusinessDayService);
-            ExaminationController = new ExaminationController(examinationService);
-            PatientController = new PatientController(patientService);
+           var articleController = new ArticleController(articleService);
+           var doctorController = new DoctorController(doctorService);
+           var businessDayController = new BusinessDayController(BusinessDayService);
+           var examinationController = new ExaminationController(examinationService);
+           var patientController = new PatientController(patientService);
             TownController = new TownController(townService);
             AddressController = new AddressController(addressService);
             StateController = new StateController(stateService);
-            ReportController = new ReportController(reportService);
+           var reportController = new ReportController(reportService);
             PatientNotificationController = new PatientNotificationController(notificationService);
+            var doctorGradeController = new DoctorGradeController(doctorGradeService);
+
+            ArticleDecorator = new AuthorityArticleDecorator(articleController, "Patient");
+            DoctorDecorator = new AuthorityDoctorDecorator(doctorController, "Patient");
+            BusinessDayDecorator = new AuthorityBusinessDayDecorator(businessDayController, "Patient");
+            ExaminationDecorator = new AuthorityExaminationDecorator(examinationController, "Patient");
+            PatientDecorator = new AuthorityPatientDecorator(patientController, "Patient");
+            ReportDecorator = new AuthorityReportDecorator(reportController, "Patient");
+            DoctorGradeDecorator = new AuthorityDoctorGradeDecorator(doctorGradeController, "Patient");
+
            
         }
 

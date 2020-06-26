@@ -120,19 +120,21 @@ namespace PacijentBolnicaZdravo
         {
             var app = Application.Current as App;
             List<PatientNotification> patientNotifications = app.PatientNotificationController.getNotificationByPatient(_patient).ToList();
-            if(patientNotifications != null)
+            if(patientNotifications.Count != 0)
             {
                 StringBuilder sb = new StringBuilder();
                 foreach(PatientNotification notification in patientNotifications)
                 {
                     sb.Append(notification.Message);
                     sb.Append("\n");
+                    notification.Read = true;
+                    app.PatientNotificationController.Edit(notification);
                 }
                 string messageBoxText = sb.ToString();
                 string caption = "Informacija";
                 MessageBoxButton button = MessageBoxButton.OK;
                 MessageBoxImage icon = MessageBoxImage.Information;
-
+                
                 System.Windows.MessageBox.Show(messageBoxText, caption, button, icon);
             }
 
@@ -161,8 +163,8 @@ namespace PacijentBolnicaZdravo
         private void fillData()
         {
             var app = Application.Current as App;
-            listOfDoctors = app.DoctorController.GetDoctorsBySpeciality(new Speciality("Opsta praksa"));
-            ListOfArticles = app.ArticleController.GetAll().ToList();
+            listOfDoctors = app.DoctorDecorator.GetDoctorsBySpeciality(new Speciality("Opsta praksa"));
+            ListOfArticles = app.ArticleDecorator.GetAll().ToList();
             doctorsForGrade = new List<Doctor>();
             upcomingExaminations = new List<ExaminationDTO>();
             List<Examination> examinations = _patient.patientFile.Examination;
@@ -242,10 +244,9 @@ namespace PacijentBolnicaZdravo
                 prescription.TextWrapping = TextWrapping.Wrap;
                 prescription.Margin = new Thickness(10, 10, 10, 10);
                 prescription.Inlines.Add(new Run("Recept: ") { FontWeight = FontWeights.Bold });
-                foreach(Prescription pr in examination.Prescription)
+                foreach(Drug pr in examination.Prescription.Drug)
                 {
-                    foreach (Drug dr in pr.Drug)
-                        prescription.Inlines.Add( dr.Name);
+                        prescription.Inlines.Add( pr.Name);
                 }
                 stackPanelExamination.Children.Add(prescription);
 
@@ -465,7 +466,7 @@ namespace PacijentBolnicaZdravo
         private List<ExaminationDTO> getScheduledExaminations()
         {
             var app = Application.Current as App;
-            List<Examination> upcomingExaminations = app.ExaminationController.GetUpcomingExaminationsByUser(this._patient);
+            List<Examination> upcomingExaminations = app.ExaminationDecorator.GetUpcomingExaminationsByUser(this._patient);
             List<ExaminationDTO> retVal = new List<ExaminationDTO>();
             if(upcomingExaminations == null)
             {
@@ -477,7 +478,7 @@ namespace PacijentBolnicaZdravo
                 examinationDTO.Id = exam.Id;
                 examinationDTO.Doctor = exam.Doctor;
                 examinationDTO.Period = exam.Period;
-                BusinessDay day = app.BusinessDayController.GetExactDay(exam.Doctor, exam.Period.StartDate);
+                BusinessDay day = app.BusinessDayDecorator.GetExactDay(exam.Doctor, exam.Period.StartDate);
                 examinationDTO.Room = day.room;
                 retVal.Add(examinationDTO);
             }
@@ -621,7 +622,7 @@ namespace PacijentBolnicaZdravo
                 }
                 _patient.Username = UsernameConst.Text.ToString();
                 Patient patient;
-                if ((patient = app.PatientController.ClaimAccount(_patient)) != null)
+                if ((patient = app.PatientDecorator.ClaimAccount(_patient)) != null)
                 {
                     _patient = patient;
                     TabExamination.Visibility = Visibility.Visible;
@@ -770,7 +771,7 @@ namespace PacijentBolnicaZdravo
                 therapHeader.Font.SetStyle(1);
                 therapy.Add(therapHeader);
                 therapy.Add(new Chunk("\n"));
-                List<Therapy> therapyCollection = app.ReportController.GenerateTherapyTimetableReport(_patient.patientFile);
+                List<Therapy> therapyCollection = app.ReportDecorator.GenerateTherapyTimetableReport(_patient.patientFile);
                 if (therapyCollection.Count != 0)
                 {
                     foreach (Therapy current in therapyCollection)
@@ -871,7 +872,7 @@ namespace PacijentBolnicaZdravo
             }
 
             var app = Application.Current as App;
-            app.PatientController.GiveGradeToDoctor(doctor, gradesPerQuestion);
+            app.PatientDecorator.GiveGradeToDoctor(doctor, gradesPerQuestion);
             FeedbackDOctor.Foreground = Brushes.Green;
 
             FeedbackDOctor.Text = "You have successfully graded the doctor!";
@@ -920,11 +921,11 @@ namespace PacijentBolnicaZdravo
                 Period period = scheduleExam.Period;
 
                 Examination examination = new Examination(this._patient, doctor, period);
-                app.ExaminationController.Save(examination);
-                BusinessDay day = app.BusinessDayController.GetExactDay(doctor, period.StartDate);
+                app.ExaminationDecorator.Save(examination);
+                BusinessDay day = app.BusinessDayDecorator.GetExactDay(doctor, period.StartDate);
                 List<Period> periods = new List<Period>();
                 periods.Add(period);
-                app.BusinessDayController.MarkAsOccupied(periods, day);
+                app.BusinessDayDecorator.MarkAsOccupied(periods, day);
 
                 scheduledExaminations = getScheduledExaminations();
                 scheduledExaminationsGrid.ItemsSource = scheduledExaminations;
@@ -965,11 +966,11 @@ namespace PacijentBolnicaZdravo
             if (result == System.Windows.Forms.DialogResult.OK)
             {
                 Examination toDelete = new Examination(deleteExam.Id);
-                app.ExaminationController.Delete(toDelete);
-                BusinessDay selectedDay = app.BusinessDayController.GetExactDay(deleteExam.Doctor, deleteExam.Period.StartDate);
+                app.ExaminationDecorator.Delete(toDelete);
+                BusinessDay selectedDay = app.BusinessDayDecorator.GetExactDay(deleteExam.Doctor, deleteExam.Period.StartDate);
                 List<DateTime> periods = new List<DateTime>();
                 periods.Add(deleteExam.Period.StartDate);
-                app.BusinessDayController.FreePeriod(selectedDay, periods);
+                app.BusinessDayDecorator.FreePeriod(selectedDay, periods);
 
                 scheduledExaminations = getScheduledExaminations();
                 scheduledExaminationsGrid.ItemsSource = scheduledExaminations;
@@ -999,7 +1000,7 @@ namespace PacijentBolnicaZdravo
                 period.StartDate = DateTime.Parse(Picker.Text);
                 BusinessDayDTO businessDayDTO = new BusinessDayDTO(doctor,period);
                 businessDayDTO.PatientScheduling = true;
-                upcomingExaminations = app.BusinessDayController.Search(businessDayDTO);
+                upcomingExaminations = app.BusinessDayDecorator.Search(businessDayDTO);
                 scheduleExaminationsGrid.ItemsSource = upcomingExaminations;
             }else if(PriorityBox.SelectedIndex == 1)
             {
@@ -1017,7 +1018,7 @@ namespace PacijentBolnicaZdravo
                 Doctor doctor = (Doctor)DoctorsForExaminations.SelectedItem;
                 BusinessDayDTO businessDayDTO = new BusinessDayDTO(doctor, period);
                 businessDayDTO.PatientScheduling = true;
-                upcomingExaminations = app.BusinessDayController.Search(businessDayDTO);
+                upcomingExaminations = app.BusinessDayDecorator.Search(businessDayDTO);
                 scheduleExaminationsGrid.ItemsSource = upcomingExaminations;
             }else
             {
@@ -1034,7 +1035,7 @@ namespace PacijentBolnicaZdravo
                 Doctor doctor = (Doctor)DoctorsForExaminations.SelectedItem;
                 BusinessDayDTO businessDayDTO = new BusinessDayDTO(doctor, period);
                 businessDayDTO.PatientScheduling = true;
-                upcomingExaminations = app.BusinessDayController.Search(businessDayDTO);
+                upcomingExaminations = app.BusinessDayDecorator.Search(businessDayDTO);
                 scheduleExaminationsGrid.ItemsSource = upcomingExaminations;
             }
         }
@@ -1234,6 +1235,14 @@ namespace PacijentBolnicaZdravo
             }
         }
 
-
+        private void DoctorsForExaminations_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var app = Application.Current as App;
+            var selectedItem = DoctorsForExaminations.SelectedItem;
+            Doctor dr = (Doctor)selectedItem;
+            if (dr != null) {
+                ButtonGrade.Content = app.DoctorGradeDecorator.GetAverageGrade(dr).ToString();
+            }
+        }
     }
 }
