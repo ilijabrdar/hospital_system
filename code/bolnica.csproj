@@ -616,6 +616,7 @@
   <ItemGroup>
     <Content Include="Resources\Data\AddressFile.txt" />
     <Content Include="Resources\Data\config.txt" />
+    <Content Include="Resources\Data\SecretaryFile.txt" />
     <Content Include="Resources\Data\StateFile.txt" />
     <Content Include="Resources\Data\TownFile.txt" />
   </ItemGroup>
@@ -634,6 +635,7 @@
     <None Include="Resources\Data\operationFile.csv" />
     <None Include="Resources\Data\patient.csv" />
     <None Include="Resources\Data\patientFile.csv" />
+    <None Include="Resources\Data\patientNotification.csv" />
     <None Include="Resources\Data\prescriptionFile.csv" />
     <None Include="Resources\Data\referralFile.csv" />
     <None Include="Resources\Data\renovations.csv" />

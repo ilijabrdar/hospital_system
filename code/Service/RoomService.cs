@@ -1,7 +1,7 @@
-
-
 using bolnica.Service;
+using Controller;
 using Model.Director;
+using Model.Doctor;
 using Model.Users;
 using Repository;
 using System;
@@ -10,30 +10,32 @@ using System.Collections.Generic;
 
 namespace Service
 {
-   public class RoomService : IRoomService
-   {
+    public class RoomService : IRoomService
+    {
         private readonly IRoomRepository _repository;
         public IRenovationService renovationService;
         public IBusinessDayService businessDayService;
+        public IHospitalizationService hospitalizationService;
 
-        public RoomService(IRoomRepository repository, IRenovationService renovationService, IBusinessDayService businessDayService)
+        public RoomService(IRoomRepository repository, IRenovationService renovationService, IBusinessDayService businessDayService, IHospitalizationService hospitalizationService)
         {
             _repository = repository;
             this.renovationService = renovationService;
             this.businessDayService = businessDayService;
+            this.hospitalizationService = hospitalizationService;
         }
-      
-      public Boolean AddEquipment(Equipment equipment, Room room)
-      {
-         // TODO: implement
-         return false;
-      }
-      
-      public List<Room> GetVacantRooms()
-      {
-         // TODO: implement
-         return null;
-      }
+
+        public Boolean AddEquipment(Equipment equipment, Room room)
+        {
+            // TODO: implement
+            return false;
+        }
+
+        public List<Room> GetVacantRooms()
+        {
+            // TODO: implement
+            return null;
+        }
 
         public IEnumerable<Room> GetAll()
         {
@@ -124,5 +126,33 @@ namespace Service
 
             return true;
         }
+
+        public List<Room> GetRoomsForHospitalization()
+        {
+            List<Room> freeRooms = new List<Room>();
+            foreach(Room room in GetAll())
+            {
+                if (room.MaxNumberOfPatientsForHospitalization - room.CurrentNumberOfPatients > 0)
+                {
+                    freeRooms.Add(room);
+                }
+            }
+            return freeRooms;
+        }
+       public void CheckHospitalizationDurationInRoom()
+        {
+            Room hospitalizationRoom = new Room();
+            foreach(Hospitalization hospitalization in hospitalizationService.GetAll())
+            {
+                if(hospitalization.Period.EndDate == DateTime.Today)
+                {
+                    hospitalizationRoom = Get(hospitalization.Room.Id);
+                    hospitalizationRoom.CurrentNumberOfPatients--;
+                    Edit(hospitalizationRoom);
+                }
+            }
+        }
+
+
     }
 }

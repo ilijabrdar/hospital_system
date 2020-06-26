@@ -16,5 +16,9 @@ namespace bolnica.Controller
         Boolean CheckRoomCodeUnique(String name);
 
         IEnumerable<Room> GetRoomsContainingEquipment(Equipment equipment);
+
+        List<Room> GetRoomsForHospitalization();
+        void CheckHospitalizationDurationInRoom();
+
     }
 }

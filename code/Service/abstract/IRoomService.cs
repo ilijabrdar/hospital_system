@@ -21,5 +21,9 @@ namespace bolnica.Service
 
         bool CheckRoomCodeUnique(String roomCode);
 
+        List<Room> GetRoomsForHospitalization();
+
+        void CheckHospitalizationDurationInRoom();
+
     }
 }
