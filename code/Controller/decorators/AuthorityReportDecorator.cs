@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using bolnica.Model.Dto;
+using Model.Director;
 using Model.Dto;
 using Model.PatientSecretary;
 using Model.Users;
@@ -41,10 +43,10 @@ namespace bolnica.Controller.decorators
                 return null;
         }
 
-        public string GenerateRoomOccupationReport()
+        public RoomOccupationReportDTO GenerateRoomOccupationReport(Room room, Period period)
         {
             if (AuthorizedUsers["GenerateRoomOccupationReport"].SingleOrDefault(x => x == Role) != null)
-                return ReportController.GenerateRoomOccupationReport();
+                return ReportController.GenerateRoomOccupationReport(room, period);
             else
                 return null;
         }
