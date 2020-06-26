@@ -40,9 +40,9 @@ namespace upravnikKT2
             this.DataContext = this;
 
             var app = Application.Current as App;
-            _doctorController = app.DoctorController;
-            _roomController = app.RoomController;
-            _businessDayController = app.BusinessDayController;
+            _doctorController = app.authorityDoctor;
+            _roomController = app.authorityRoom;
+            _businessDayController = app.authorityBusinessDay;
 
             this.selectedDoctor = selectedDoctor;
         }
@@ -54,9 +54,9 @@ namespace upravnikKT2
             this.DataContext = this;
 
             var app = Application.Current as App;
-            _doctorController = app.DoctorController;
-            _roomController = app.RoomController;
-            _businessDayController = app.BusinessDayController;
+            _doctorController = app.authorityDoctor;
+            _roomController = app.authorityRoom;
+            _businessDayController = app.authorityBusinessDay;
 
             this.selectedDoctor = selectedDoctor;
             this.selectedBusinessDay = businessDay;

@@ -173,14 +173,14 @@ namespace upravnikKT2
 
 
             var app = Application.Current as App;
-            _roomController = app.RoomController;
-            _equipmentController = app.EquipmentController;
-            _renovationController = app.RenovationController;
-            _drugController = app.DrugController;
-            _doctorController = app.DoctorController;
-            _businessDayController = app.BusinessDayController;
-            _directorController = app.DirectorController;
-            _articleController = app.ArticleController;
+            _roomController = app.authorityRoom;
+            _equipmentController = app.authorityEquipment;
+            _renovationController = app.authorityRenovation;
+            _drugController = app.authorityDrug;
+            _doctorController = app.authorityDoctor;
+            _businessDayController = app.authorityBusinessDay;
+            _directorController = app.authorityDirector;
+            _articleController = app.authorityArticle;
             _notificationController = app.NotificationController;
 
             //director = _directorController.Get(1);

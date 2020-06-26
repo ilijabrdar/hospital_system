@@ -33,7 +33,7 @@ namespace upravnikKT2
     {
         private readonly IRoomController roomController;
         private readonly IRenovationController renovationController;
-        private readonly ReportController reportController;
+        private readonly IReportController reportController;
         public GenerateReportDialog()
         {
             InitializeComponent();
@@ -41,9 +41,9 @@ namespace upravnikKT2
             this.DataContext = this;
 
             var app = Application.Current as App;
-            roomController = app.RoomController;
-            renovationController = app.RenovationController;
-            reportController = app.ReportController;
+            roomController = app.authorityRoom;
+            renovationController = app.authorityRenovation;
+            reportController = app.authorityReport;
         }
 
         private void Button_Click_Cancel(object sender, RoutedEventArgs e)

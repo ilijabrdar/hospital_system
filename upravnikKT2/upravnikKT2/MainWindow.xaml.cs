@@ -25,7 +25,7 @@ namespace upravnikKT2
 
 
             var app = Application.Current as App;
-            directorController = app.DirectorController;
+            directorController = app.authorityDirector;
             userController = app.UserController;
         }
 

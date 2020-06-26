@@ -43,8 +43,8 @@ namespace upravnikKT2
             this.DataContext = this;
 
             var app = Application.Current as App;
-            _roomController = app.RoomController;
-            _roomTypeController = app.RoomTypeController;
+            _roomController = app.authorityRoom;
+            _roomTypeController = app.authorityRoomType;
         }
 
         public RoomDialog(Room selectedRoom)
@@ -54,8 +54,8 @@ namespace upravnikKT2
             this.DataContext = this;
 
             var app = Application.Current as App;
-            _roomController = app.RoomController;
-            _roomTypeController = app.RoomTypeController;
+            _roomController = app.authorityRoom;
+            _roomTypeController = app.authorityRoomType;
 
             _selectedRoom = selectedRoom;
             RoomCode = _selectedRoom.RoomCode;

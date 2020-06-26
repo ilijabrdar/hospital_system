@@ -48,8 +48,8 @@ namespace upravnikKT2
             this.DataContext = this;
 
             var app = Application.Current as App;
-            _ingredientController = app.IngredientController;
-            _drugController = app.DrugController;
+            _ingredientController = app.authorityIngredient;
+            _drugController = app.authorityDrug;
         }
 
         public DrugDialog(Drug selectedDrug)
@@ -60,8 +60,8 @@ namespace upravnikKT2
 
 
             var app = Application.Current as App;
-            _ingredientController = app.IngredientController;
-            _drugController = app.DrugController;
+            _ingredientController = app.authorityIngredient;
+            _drugController = app.authorityDrug;
 
 
             _selectedDrug = selectedDrug;

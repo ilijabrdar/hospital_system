@@ -37,8 +37,8 @@ namespace upravnikKT2
             this.selectedDoctor = selectedDoctor;
 
             var app = Application.Current as App;
-            _doctorController = app.DoctorController;
-            _businessDayController = app.BusinessDayController;
+            _doctorController = app.authorityDoctor;
+            _businessDayController = app.authorityBusinessDay;
 
             DataGridLekari = dataGridLekari;
         }

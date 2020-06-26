@@ -1,4 +1,5 @@
 ﻿using bolnica.Controller;
+using bolnica.Controller.decorators;
 using bolnica.Repository;
 using bolnica.Repository.CSV.Converter;
 using bolnica.Service;
@@ -70,30 +71,30 @@ namespace upravnikKT2
         private const String ADDRESS_FILE = "../../../../code/Resources/Data/AddressFile.txt";
         private const String TOWN_FILE = "../../../../code/Resources/Data/townFile.txt";
         private const String STATE_FILE = "../../../../code/Resources/Data/StateFile.txt";
-       // private const String SECRETARY_FILE = "../../../../code/Resources/Data/secretaryFile.txt";
+        private const String SECRETARY_FILE = "../../../../code/Resources/Data/SecretaryFile.txt";
 
 
-        public IRoomTypeController RoomTypeController { get; private set; }
-        public IIngredientController IngredientController { get; private set; }
-        public IRoomController RoomController { get; private set; }
+        public AuthorityRoomTypeDecorator authorityRoomType { get; private set; }
+        public AuthorityIngredientDecorator authorityIngredient { get; private set; }
+        public AuthorityRoomDecorator authorityRoom { get; private set; }
 
-        public IEquipmentController EquipmentController { get; private set; }
+        public AuthorityEquipmentDecorator authorityEquipment { get; private set; }
 
-        public IRenovationController RenovationController { get; private set; }
+        public AuthorityRenovationDecoratorcs authorityRenovation { get; private set; }
 
-        public IDrugController DrugController { get; private set; }
+        public AuthorityDrugDecorator authorityDrug { get; private set; }
 
-        public IDoctorController DoctorController { get; private set; }
+        public AuthorityDoctorDecorator authorityDoctor { get; private set; }
 
-        public ISpecialityController SpecialityController { get; private set; }
+        public AuthoritySpecialityDecorator authoritySpeciality { get; private set; }
 
         public IStateController StateController { get; private set; }
 
-        public IBusinessDayController BusinessDayController { get; private set; }
+        public AuthorityBusinessDayDecorator authorityBusinessDay { get; private set; }
 
-        public IDirectorController DirectorController { get; private set; }
+        public AuthorityDirectorDecorator authorityDirector { get; private set; }
 
-        public IArticleController ArticleController { get; private set; }
+        public AuthorityArticleDecorator authorityArticle { get; private set; }
 
         public AddressController AddressController { get; private set; }
         public NotificationController NotificationController { get; private set; }
@@ -101,108 +102,60 @@ namespace upravnikKT2
 
 
         public IUserController UserController { get; private set; }
-        public IExaminationController ExaminationController { get; private set; }
-        public IPatientController PatientController { get; private set; }
-        public IPatientFileController PatientFileController { get; private set; }
-        public IHospitalizationController HospitalizationController { get; private set; }
-        public IOperationController OperationController { get; private set; }
-        public IDiagnosisController DiagnosisController { get; private set; }
-        public IPrescriptionController PrescriptionController { get; private set; }
-        public IReferralController ReferralController { get; private set; }
-        public ISymptomController SymptomController { get; private set; }
-        public ITherapyController TherapyController { get; private set; }
+        public AuthorityExaminationDecorator authorityExamination { get; private set; }
+        public AuthorityPatientDecorator authorityPatient { get; private set; }
+        public AuthorityPatientFileDecorator authorityPatientFile { get; private set; }
+        public AuthorityHospitalizationDecorator authorityHospitalization { get; private set; }
+        public AuthorityOperationDecorator authorityOperation { get; private set; }
+        public AuthorityDiagnosisDecorator authorityDiagnosis { get; private set; }
+        public AuthorityPrescriptionDecorator authorityPrescription { get; private set; }
+        public AuthorityRefferalDecorator authorityRefferal { get; private set; }
+        public AuthoritySympthomDecorator authoritySymptom { get; private set; }
+        public AuthorityTherapyDecorator authorityTherapy { get; private set; }
         public ITownController TownController { get; private set; }
-        public ReportController ReportController { get; private set; }
+        public AuthorityReportDecorator authorityReport { get; private set; }
 
 
         public App()
         {
-            //var roomTypeRepository = new RoomTypeRepository(
-            //    new CSVStream<RoomType>(ROOMTYPE_FILE, new RoomTypeCSVConverter(CSV_DELIMITER)),
-            //    new LongSequencer());
-            //var roomTypeService = new RoomTypeService(roomTypeRepository,null);
-            //RoomTypeController = new RoomTypeController(roomTypeService);
+            IRoomTypeController RoomTypeController;
+            IIngredientController IngredientController;
+            IRoomController RoomController;
+
+            IEquipmentController EquipmentController;
+
+            IRenovationController RenovationController;
+
+            IDrugController DrugController;
+
+            IDoctorController DoctorController;
+
+            ISpecialityController SpecialityController;
 
 
-            //var ingredientRepository = new IngredientRepository(
-            //    new CSVStream<Ingredient>(INGREDIENTS_FILE, new IngredientsCSVConverter(CSV_DELIMITER)),
-            //    new LongSequencer());
-            //var ingredientService = new IngredientService(ingredientRepository);
-            //IngredientController = new IngredientController(ingredientService);
+            IBusinessDayController BusinessDayController;
+
+            IDirectorController DirectorController;
+
+            IArticleController ArticleController;
+
+            //NotificationController NotificationController;
+
+            //IUserController UserController;
+            IExaminationController ExaminationController;
+            IPatientController PatientController;
+            IPatientFileController PatientFileController;
+            IHospitalizationController HospitalizationController;
+            IOperationController OperationController;
+            IDiagnosisController DiagnosisController;
+            IPrescriptionController PrescriptionController;
+            IReferralController ReferralController;
+            ISymptomController SymptomController;
+            ITherapyController TherapyController;
+            IReportController ReportController;
 
 
-            //var equipmentRepository = new EquipmentRepository(
-            //   new CSVStream<Equipment>(EQUIPMENT_FILE, new EquipmentCSVConverter(CSV_DELIMITER)),
-            //   new LongSequencer());
-            //var equipmentService = new EquipmentService(equipmentRepository,null);
-            //EquipmentController = new EquipmentController(equipmentService);
-
-
-
-
-            //var renovationRepository = new RenovationRepository(new CSVStream<Renovation>(RENOVATIONS_FILE, new RenovationCSVConverter("|")), new LongSequencer(),null);
-            //var renovationService = new RenovationService(renovationRepository);
-            //RenovationController = new RenovationController(renovationService);
-
-            //var roomRepository = new RoomRepository(
-            //   new CSVStream<Room>(ROOMS_FILE, new RoomCSVConverter(CSV_DELIMITER)),
-            //   new LongSequencer(), roomTypeRepository, equipmentRepository);
-            //var roomService = new RoomService(roomRepository, renovationService,null);
-            //RoomController = new RoomController(roomService);
-
-            //equipmentService.roomService = roomService;
-
-            //renovationRepository._roomRepository = roomRepository;
-            //roomTypeService.roomService = roomService;
-
-            //var drugRepository = new DrugRepository(new CSVStream<Drug>(DRUGS_FILE, new DrugCSVConverter(CSV_DELIMITER)), new LongSequencer(), ingredientRepository);
-            //var drugService = new DrugService(drugRepository);
-            //DrugController = new DrugController(drugService);
-
-            //var specialityRepository = new SpecialityRepository(new CSVStream<Speciality>(SPECIALITY_FILE, new SpecialityCSVConverter(CSV_DELIMITER)), new LongSequencer());
-            //var specialityService = new SpecialityService(specialityRepository);
-            //SpecialityController = new SpecialityController(specialityService);
-
-
-
-            //AddressRepository addressRepository = new AddressRepository(new CSVStream<Address>(ADDRESS_FILE, new AddressCSVConverter(CSV_DELIMITER)), new LongSequencer());
-            //TownRepository townRepository = new TownRepository(new CSVStream<Town>(TOWN_FILE, new TownCSVConverter(CSV_DELIMITER, CSV_ARRAY_DELIMITER)), new LongSequencer(), addressRepository);
-            //StateRepository stateRepository = new StateRepository(new CSVStream<State>(STATE_FILE, new StateCSVConverter(CSV_DELIMITER, CSV_ARRAY_DELIMITER)), new LongSequencer(), townRepository);
-
-            //AddressService addressService = new AddressService(addressRepository);
-            //AddressController = new AddressController(addressService);
-
-            //StateService stateService = new StateService(stateRepository);
-            //StateController = new StateController(stateService);
-
-            //var businessDayRepository = new BusinessDayRepository(new CSVStream<BusinessDay>(BUSINESSDAY_FILE, new BusinessDayCSVConverter()), new LongSequencer(), roomRepository);
-            //businessDayRepository.doctorRepo = doctorRepository;
-            //var businessDayService = new BusinessDayService(businessDayRepository, doctorService);
-
-            //var doctorRepository = new DoctorRepository(new CSVStream<Doctor>(DOCTORS_FILE, new DoctorCSVConverter(CSV_DELIMITER)), new LongSequencer(), null, specialityRepository, null);
-            //var doctorService = new DoctorService(doctorRepository, null, null, null);
-            //DoctorController = new DoctorController(doctorService);
-
-
-            //BusinessDayController = new BusinessDayController(businessDayService);
-
-            //roomService.businessDayService = businessDayService;
-
-            //doctorService._businessDayService = businessDayService;
-
-
-            //doctorRepository._businessDayRepo = businessDayRepository;
-
-
-
-            //ArticleRepository articleRepository = new ArticleRepository(new CSVStream<Article>(ARTICLES_FILE, new ArticleCSVConverter(CSV_DELIMITER)), new LongSequencer(),doctorRepository);
-            //articleRepository._doctorRepository = doctorRepository;
-            //ArticleService articleService = new ArticleService(articleRepository);
-            //ArticleController = new ArticleController(articleService);
-
-            //doctorService._articleService = articleService;
-
-            DoctorGradeRepository doctorGradeRepository = new DoctorGradeRepository(new CSVStream<DoctorGrade>(DOCTOR_GRADE_FILE, new DoctorGradeCSVConverter(CSV_DELIMITER2, CSV_DICTIONARY_DELIMITER, CSV_ARRAY_DELIMITER)), new LongSequencer());
+        DoctorGradeRepository doctorGradeRepository = new DoctorGradeRepository(new CSVStream<DoctorGrade>(DOCTOR_GRADE_FILE, new DoctorGradeCSVConverter(CSV_DELIMITER2, CSV_DICTIONARY_DELIMITER, CSV_ARRAY_DELIMITER)), new LongSequencer());
             SpecialityRepository specialityRepository = new SpecialityRepository(new CSVStream<Speciality>(SPECIALITY_FILE, new SpecialityCSVConverter(CSV_DELIMITER)), new LongSequencer());
             SymptomRepository symptomRepository = new SymptomRepository(new CSVStream<Symptom>(SYMPTOM_FILE, new SymptomCSVConverter(CSV_DELIMITER)), new LongSequencer());
             DiagnosisRepository diagnosisRepository = new DiagnosisRepository(new CSVStream<Diagnosis>(DIAGNOSIS_FILE, new DiagnosisCSVConverter(CSV_DELIMITER, CSV_ARRAY_DELIMITER)), new LongSequencer(), symptomRepository);
@@ -239,7 +192,11 @@ namespace upravnikKT2
 
             var directorRepository = new DirectorRepository(new CSVStream<Director>(DIRECTOR_FILE, new DirectorCSVConverter(CSV_DELIMITER)), new LongSequencer(), addressRepository, townRepository, stateRepository);
             var directorService = new DirectorService(directorRepository);
-            DirectorController = new DirectorContoller(directorService);
+
+
+            var secretaryRepository = new SecretaryRepository(new CSVStream<Secretary>(SECRETARY_FILE, new SecretaryCSVConverter(CSV_DELIMITER)), new LongSequencer(), addressRepository, townRepository, stateRepository);
+            var secretaryService = new SecretaryService(secretaryRepository);
+            
 
             DoctorService doctorService = new DoctorService(doctorRepository);
             DoctorGradeService doctorGradeService = new DoctorGradeService(doctorGradeRepository);
@@ -267,7 +224,8 @@ namespace upravnikKT2
             RoomService roomService = new RoomService(roomRepository, renovationService, businessDayService, hospitalizationService);
             RoomTypeService roomTypeService = new RoomTypeService(roomTypeRepository, roomService);
             EquipmentService equipmentService = new EquipmentService(equipmentRepository, roomService);
-            UserService userService = new UserService(patientService, doctorService, null, directorService);
+            UserService userService = new UserService(patientService, doctorService, secretaryService, directorService);
+
 
             UserController = new UserController(userService);
             ArticleController = new ArticleController(articleService);
@@ -293,16 +251,53 @@ namespace upravnikKT2
             BusinessDayController = new BusinessDayController(businessDayService);
             RenovationController = new RenovationController(renovationService);
             DoctorController = new DoctorController(doctorService);
+            DirectorController = new DirectorContoller(directorService);
+            TherapyController = new TherapyController(therapyService);
+            
 
             ReportService reportService = new ReportService(examinationService, renovationService, hospitalizationService, operationService);
             ReportController = new ReportController(reportService);
 
-            
+
+            authorityReport = new AuthorityReportDecorator(ReportController, "Director");
+            authorityArticle = new AuthorityArticleDecorator(ArticleController, "Director");
+            authorityBusinessDay = new AuthorityBusinessDayDecorator(BusinessDayController, "Director");
+            authorityDiagnosis = new AuthorityDiagnosisDecorator(DiagnosisController, "Director");
+            authorityDirector = new AuthorityDirectorDecorator(DirectorController, "Director");
+            authorityDoctor = new AuthorityDoctorDecorator(DoctorController, "Director");
+            authorityDrug = new AuthorityDrugDecorator(DrugController, "Director");
+            authorityEquipment = new AuthorityEquipmentDecorator(EquipmentController, "Director");
+            authorityHospitalization = new AuthorityHospitalizationDecorator(HospitalizationController, "Director");
+            authorityIngredient = new AuthorityIngredientDecorator(IngredientController, "Director");
+            authorityOperation = new AuthorityOperationDecorator(OperationController, "Director");
+            authorityPatient = new AuthorityPatientDecorator(PatientController, "Director");
+            authorityPatientFile = new AuthorityPatientFileDecorator(PatientFileController, "Director");
+            authorityPrescription = new AuthorityPrescriptionDecorator(PrescriptionController, "Director");
+            authorityRefferal = new AuthorityRefferalDecorator(ReferralController, "Director");
+            authorityRenovation = new AuthorityRenovationDecoratorcs(RenovationController, "Director");
+            authorityRoom = new AuthorityRoomDecorator(RoomController, "Director");
+            authoritySymptom = new AuthoritySympthomDecorator(SymptomController, "Director");
+            authorityRoomType = new AuthorityRoomTypeDecorator(RoomTypeController, "Director");
+            authorityDiagnosis = new AuthorityDiagnosisDecorator(DiagnosisController, "Director");
+            authoritySpeciality = new AuthoritySpecialityDecorator(SpecialityController, "Director");
+            authorityExamination = new AuthorityExaminationDecorator(ExaminationController, "Director");
+
+
+
+
+
 
             UserController = new UserController(userService);
 
             NotificationService notificationService = new NotificationService(drugService, businessDayService);
             NotificationController = new NotificationController(notificationService);
+
+
+
+
+
+            authorityArticle = new AuthorityArticleDecorator(ArticleController, "Director");
+            
 
         }
 

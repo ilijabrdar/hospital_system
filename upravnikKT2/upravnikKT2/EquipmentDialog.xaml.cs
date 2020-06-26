@@ -42,7 +42,7 @@ namespace upravnikKT2
             this.DataContext = this;
 
             var app = Application.Current as App;
-            _equipmentController = app.EquipmentController;
+            _equipmentController = app.authorityEquipment;
 
             this.isConsumable = isConsumable;
         }
@@ -54,7 +54,7 @@ namespace upravnikKT2
             this.DataContext = this;
 
             var app = Application.Current as App;
-            _equipmentController = app.EquipmentController;
+            _equipmentController = app.authorityEquipment;
 
             this._selectedEquipment = selectedEquipment;
             Amount = selectedEquipment.Amount;

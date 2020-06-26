@@ -31,8 +31,8 @@ namespace upravnikKT2
             InitializeComponent();
 
             var app = Application.Current as App;
-            _roomTypeController = app.RoomTypeController;
-            _roomController = app.RoomController;
+            _roomTypeController = app.authorityRoomType;
+            _roomController = app.authorityRoom;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

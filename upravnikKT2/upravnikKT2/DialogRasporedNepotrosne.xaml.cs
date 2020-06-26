@@ -33,7 +33,7 @@ namespace upravnikKT2
 
 
             var app = Application.Current as App;
-            _roomController = app.RoomController;
+            _roomController = app.authorityRoom;
 
             _selectedEquipment = selectedEquipment;
         }

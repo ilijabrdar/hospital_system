@@ -30,7 +30,7 @@ namespace upravnikKT2
             _selectedRoom = selectedRoom;
 
             var app = Application.Current as App;
-            _roomController = app.RoomController;
+            _roomController = app.authorityRoom;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

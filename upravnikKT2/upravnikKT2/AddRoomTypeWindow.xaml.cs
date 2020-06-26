@@ -42,7 +42,7 @@ namespace upravnikKT2
             this.DataContext = this;
 
             var app = Application.Current as App;
-            _roomTypeController = app.RoomTypeController;
+            _roomTypeController = app.authorityRoomType;
 
             list = listView;
         }
@@ -53,7 +53,7 @@ namespace upravnikKT2
             this.DataContext = this;
 
             var app = Application.Current as App;
-            _roomTypeController = app.RoomTypeController;
+            _roomTypeController = app.authorityRoomType;
 
             list = listView;
             this.roomTypeForEdit = roomTypeForEdit;

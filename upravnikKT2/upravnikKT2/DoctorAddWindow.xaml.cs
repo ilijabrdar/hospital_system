@@ -161,8 +161,8 @@ namespace upravnikKT2
             BirthDate = new DateTime(1999, 12, 31);
 
             var app = Application.Current as App;
-            _specialityController = app.SpecialityController;
-            _doctorController = app.DoctorController;
+            _specialityController = app.authoritySpeciality;
+            _doctorController = app.authorityDoctor;
 
             PopulateCombos();
         }
@@ -176,8 +176,8 @@ namespace upravnikKT2
             BirthDate = selectedDoctor.DateOfBirth;
 
             var app = Application.Current as App;
-            _specialityController = app.SpecialityController;
-            _doctorController = app.DoctorController;
+            _specialityController = app.authoritySpeciality;
+            _doctorController = app.authorityDoctor;
 
             PopulateCombos();
 

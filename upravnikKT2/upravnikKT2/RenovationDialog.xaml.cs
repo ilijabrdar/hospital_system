@@ -33,8 +33,8 @@ namespace upravnikKT2
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
             var app = Application.Current as App;
-            _renovationController = app.RenovationController;
-            _roomController = app.RoomController;
+            _renovationController = app.authorityRenovation;
+            _roomController = app.authorityRoom;
         }
 
         public RenovationDialog(Renovation selectedItem)
@@ -50,8 +50,8 @@ namespace upravnikKT2
             txtDescription.Text = selectedItem.Description;
 
             var app = Application.Current as App;
-            _renovationController = app.RenovationController;
-            _roomController = app.RoomController;
+            _renovationController = app.authorityRenovation;
+            _roomController = app.authorityRoom;
             
         }
 
