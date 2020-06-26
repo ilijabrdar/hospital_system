@@ -34,9 +34,10 @@
             <Image Height="44" Width="56" Grid.Row="1" Grid.Column="0" Source="password.png"/>
             <Label Content="lozinka" Grid.Row="1" Grid.Column="1" FontSize="18"/>
             <PasswordBox  x:Name="password_text" Margin="0,0,0,10"  Grid.Row="1" Grid.Column="2" Height="33" FontSize="16"  Width="245" Foreground="#515A5A" Focusable="True"  CaretBrush="#FF1FEECD"/>
-            <TextBlock x:Name="obavestiGreska" HorizontalAlignment="Center" Text="" Grid.Row="2"  Grid.ColumnSpan="3" Foreground="#FF972929"/>
 
         </Grid>
+        <TextBlock x:Name="obavestiGreska" Visibility="Hidden" HorizontalAlignment="Center" Text="Uneti podaci nisu validni, molimo pokusajte ponovo!"  Foreground="#FF972929"/>
+
         <Button x:Name="prijavaBtn" Content="Prijava"  HorizontalAlignment="Center"  Background="#A2D9CE" Foreground="#2C3E50" FontSize="17" Margin="30" VerticalAlignment="Top" Width="159" Click="Button_Click_1" BorderBrush="#FF1FEECD"/>
 
     </StackPanel>

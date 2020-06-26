@@ -69,6 +69,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                             <RowDefinition />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
@@ -76,11 +77,14 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <Label Content="Za današnji datum preostalo termina:" Margin="30,0,0,0"  Grid.Column="0" Grid.Row="0" FontSize="12" HorizontalAlignment="Left" Height="29"  VerticalAlignment="Top" Width="283" />
-                        <Label x:Name="brojPregleda" Grid.Column="1" Grid.Row="0" FontSize="14" Margin="36,0,0,0"  Height="29"  Width="50" FontWeight="Bold"/>
+                        <Label Content="Za današnji datum preostalo termina:"  Grid.Column="0" Grid.Row="0" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top"  />
+                        <Label x:Name="brojPregleda" Grid.Column="1" Grid.Row="0" FontSize="14" FontWeight="Bold"/>
 
-                        <Label Content="Radno vreme:" Margin="30,0,0,0"  Grid.Column="0" Grid.Row="1" FontSize="12" HorizontalAlignment="Left" Height="29"  VerticalAlignment="Top" Width="283" />
-                        <TextBox x:Name="smene"  AcceptsReturn="True" Grid.Column="1"  Grid.Row="1" FontSize="13" Margin="36,0,0,0" FontWeight="Bold"/>
+                        <Label Content="Radno vreme:"  Grid.Column="0" Grid.Row="1" FontSize="12" HorizontalAlignment="Left"   VerticalAlignment="Top" />
+                        <TextBox x:Name="smene"  AcceptsReturn="True" Grid.Column="1"  Grid.Row="1" FontSize="13" FontWeight="Bold"/> 
+                        
+                        <Label Content="Broj lekova za validiranje"  Grid.Column="0" Grid.Row="2" FontSize="12" HorizontalAlignment="Left"   VerticalAlignment="Top" />
+                        <TextBox x:Name="lekoviValidacija"  AcceptsReturn="True" Grid.Column="1"  Grid.Row="2" FontSize="13" FontWeight="Bold"/>
                     </Grid>
                     <Button Content="Odjava" Background="#A2D9CE" Foreground="#2C3E50" FontSize="14" HorizontalAlignment="Right" Margin="10"  Width="102" Click="Button_Click" BorderBrush="#FF1FEECD"  />
 

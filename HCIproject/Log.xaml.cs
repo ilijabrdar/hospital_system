@@ -35,14 +35,26 @@ namespace HCIproject
             try
             {
                 Doctor user = (Doctor)app.UserController.Login(Username, passwordBox.Password);
-                SideBar sideBar = new SideBar((Doctor)user);
-                sideBar.Show();
-                this.Close();
+                if (user != null)
+                {
+                    SideBar sideBar = new SideBar((Doctor)user);
+                    sideBar.Show();
+                    this.Close();
+                }
+                else
+                {
+
+                    TextBlock err = (TextBlock)FindName("obavestiGreska");
+                    err.Visibility = Visibility.Visible;
+                   // obavestiGreska.Visibility = Visibility.Visible;
+
+                }
             }
             catch (Exception exception)
             {
-                TextBlock err = (TextBlock)FindName("ErrorMessage");
+                TextBlock err = (TextBlock)FindName("obavestiGreska");
                 err.Visibility = Visibility.Visible;
+
             }
 
 
