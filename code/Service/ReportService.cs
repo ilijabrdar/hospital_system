@@ -6,6 +6,7 @@ using Model.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 namespace Service
 {
@@ -19,11 +20,13 @@ namespace Service
             _examinationService = examinationService;
             _operationService = operationService;
         }
+        //long id, List<Allergy> allergy, List<Hospitalization> hospitalizations, List<Operation> operations, List<Examination> examinations)
+        //long id, User user,Users.Doctor doctor, Period period, Diagnosis diagnosis, Anemnesis anemnesis, Therapy therapy, Referral refferal, Prescription prescription)
 
-      public DoctorReportDTO GenerateAnamnesisPrescriptionReport(PatientFile patientFile)
-      {
-         // TODO: implement
-         return null;
+        public DoctorReportDTO GenerateAnamnesisPrescriptionReport(Examination examination)
+      {//prescription anamnesis patient
+            DoctorReportDTO retVal = new DoctorReportDTO(examination.Prescription, examination.Anemnesis, (Patient)examination.User);
+            return retVal;    
       }
       
       public String GenerateRoomOccupationReport()

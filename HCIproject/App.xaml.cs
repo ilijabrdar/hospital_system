@@ -52,7 +52,7 @@ namespace HCIproject
         public NotificationController NotificationController { get; private set; }
         public ISecretaryController SecretaryController { get; private set; }
         public IDirectorController Director { get; private set; }
-
+        public ReportController ReportController { get; private set; }
 
 
         private const String CSV_DELIMITER = ",";
@@ -131,7 +131,6 @@ namespace HCIproject
             TownService townService = new TownService(townRepository);
 
 
-
             DoctorService doctorService = new DoctorService(doctorRepository);
             DoctorGradeService doctorGradeService = new DoctorGradeService(doctorGradeRepository);
             SpecialityService specialityService = new SpecialityService(specialityRepository);
@@ -155,7 +154,8 @@ namespace HCIproject
             EquipmentService equipmentService = new EquipmentService(equipmentRepository, roomService);
             NotificationService notificationService = new NotificationService(drugService, BusinessDayService);
             NotificationController = new NotificationController(notificationService);
-            UserService userService = new UserService(null, doctorService, null, null); 
+            UserService userService = new UserService(null, doctorService, null, null);
+            ReportService reportService = new ReportService(examinationService, operationService);
 
 
             UserController = new UserController(userService);
@@ -184,7 +184,7 @@ namespace HCIproject
             DoctorGradeController = new DoctorGradeController(doctorGradeService);
             DoctorController = new DoctorController(doctorService);
             TherapyController = new TherapyController(therapyService);
-
+            ReportController = new ReportController(reportService);
 
             //PatientFileController.Save(new PatientFile(0));
             //StateController = new StateController(stateService);

@@ -40,15 +40,15 @@
                         <TextBox x:Name="anamnezaTxt" Grid.Row="0" Text="{Binding Path=Anamneza}"  Grid.Column="1" Grid.ColumnSpan="4" AcceptsReturn="True" CaretBrush="#FF1FEECD" />
 
                         <Label Content="Simptomi" Grid.Row="1" Grid.Column="0" FontWeight="SemiBold" FontSize="16" VerticalAlignment="Center" />
-                        <TextBox x:Name="simptomiTxt" Text="{Binding Path=Simptom}" Grid.Row="1"  Grid.Column="1" Grid.ColumnSpan="4" AcceptsReturn="True" CaretBrush="#FF1FEECD"/>
+                        <ComboBox x:Name="simptomiCombo"  IsEditable="True" IsReadOnly="True" Grid.Row="1"  Grid.Column="1" Grid.ColumnSpan="4"  />
 
                         <Label Content="Dijagnoza" Grid.Row="2" Grid.Column="0" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center"/>
-                        <ComboBox x:Name="diagnosisCombo"  Text="Strelicama se krecite kroz ponudjene dijagnoze. Sa Tab+Ctrl potvrdite svoj izbor." IsEditable="True" IsReadOnly="True" Grid.Row="2"  Grid.Column="1" Grid.ColumnSpan="4"  />
+                        <ComboBox x:Name="diagnosisCombo" IsEditable="True" IsReadOnly="True" Grid.Row="2"  Grid.Column="1" Grid.ColumnSpan="4"  />
 
 
                         <Label Content="Recept" Grid.Row="4" Grid.Column="0" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center"/>
                         <Grid Width="124" Grid.Column="1" Grid.Row="4" >
-                            <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Margin="10" Background="#A2D9CE" Height="Auto" materialDesign:ButtonAssist.CornerRadius="25" ToolTip="MaterialDesignRaisedDarkButton with Round Corners" Click="Button_Click_2" >
+                            <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Margin="10,10,10,0" Background="#A2D9CE" Height="30" materialDesign:ButtonAssist.CornerRadius="25" ToolTip="MaterialDesignRaisedDarkButton with Round Corners" Click="Button_Click_2" VerticalAlignment="Top" >
                                 <TextBlock  Text="Dodaj" />
                             </Button>
                         </Grid>
@@ -67,9 +67,9 @@
                                 <TextBlock  Text="Dodaj" />
                             </Button>
                         </Grid>
-                        <Label Content="Operacija" Grid.Row="5" Grid.Column="3" FontSize="16" FontWeight="SemiBold" Margin="10" VerticalAlignment="Center" />
+                        <Label x:Name="labelOperacija"  Visibility="Visible" Content="Operacija" Grid.Row="5" Grid.Column="3" FontSize="16" FontWeight="SemiBold" Margin="10" VerticalAlignment="Center" />
                         <Grid Width="124" Grid.Column="4" Grid.Row="5" >
-                            <Button Margin="10,10,10,9.6" Background="#A2D9CE" Height="Auto" materialDesign:ButtonAssist.CornerRadius="25" ToolTip="MaterialDesignRaisedDarkButton with Round Corners" Click="Button_Click_6" >
+                            <Button x:Name="buttonOperacija" Visibility="Visible" Margin="10,10,10,9.6" Background="#A2D9CE" Height="Auto" materialDesign:ButtonAssist.CornerRadius="25" ToolTip="MaterialDesignRaisedDarkButton with Round Corners" Click="Button_Click_6" >
                                 <TextBlock  Text="Dodaj" />
                                 <Button.Style>
                                     <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedDarkButton}">
@@ -89,12 +89,7 @@
                                 <TextBlock  Text="Zakaži" Height="24" />
                             </Button>
                         </Grid>
-                        <Label Content="Izveštaj anamneza i recept" Grid.Row="7" Grid.Column="0" FontSize="14" VerticalAlignment="Center"/>
-                        <Grid Width="124" Grid.Column="1" Grid.Row="7" >
-                            <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Margin="10,10,10,9.6" Background="#A2D9CE" Height="Auto" materialDesign:ButtonAssist.CornerRadius="25" ToolTip="MaterialDesignRaisedDarkButton with Round Corners" Click="izvestajPdf" >
-                                <TextBlock  Text="Štampaj" />
-                            </Button>
-                        </Grid>
+
                     </Grid>
                 </Border>
             </ScrollViewer>

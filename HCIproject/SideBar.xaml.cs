@@ -7,6 +7,7 @@ using Model.Dto;
 using Model.PatientSecretary;
 using Model.Users;
 using Service;
+using Syncfusion.UI.Xaml.Charts;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -123,18 +124,47 @@ namespace HCIproject
 
             brojPregleda.Content = app.ExaminationController.GetUpcomingExaminationsByUser(user).Count;
             List<NotifyDoctorBusinessDay> ret = app.NotificationController.NotifyDoctorOfUpcomingBusinessDays(user);
+            DateTime danas = DateTime.Now;
+            DateTime day1 = danas.AddDays(1);
+            DateTime day2 = danas.AddDays(2);
+            DateTime day3 = danas.AddDays(3);
+            bool flag1 = false;
+            bool flag2 = false;
+            bool flag3 = false;
 
             foreach (var r in ret)
             {
-                if (r == null)
+                if (day1.Date == r.day.Date)// && day2.Date != r.day.Date && day3.Date != r.day.Date)
                 {
-                    smene.Text += "SLOBODAN" + "\n";
+                    flag1 = true;
+                    smene.Text += r.day.Date.Date.ToString("dd.MM.yyyy.") + " " + r.shift.StartDate.TimeOfDay + " " + r.shift.EndDate.TimeOfDay + " " + r.room.RoomCode + "\n";
                 }
-                else
+                else if (day2.Date == r.day.Date)// && day2.Date != r.day.Date && day3.Date != r.day.Date)
                 {
-                    smene.Text += r.shift.StartDate.TimeOfDay + " " + r.shift.EndDate.TimeOfDay + " " + r.room.RoomCode + "\n";
+                    flag2 = true;
+                    smene.Text += r.day.Date.Date.ToString("dd.MM.yyyy.") + " " + r.shift.StartDate.TimeOfDay + " " + r.shift.EndDate.TimeOfDay + " " + r.room.RoomCode + "\n";
                 }
+                else if (day3.Date == r.day.Date)// && day2.Date != r.day.Date && day3.Date != r.day.Date)
+                {
+                    flag3 = true;
+                    smene.Text += r.day.Date.Date.ToString("dd.MM.yyyy.") + " " + r.shift.StartDate.TimeOfDay + " " + r.shift.EndDate.TimeOfDay + " " + r.room.RoomCode + "\n";
+                }       
+                
             }
+
+            if (!flag1)
+            {
+                smene.Text += day1.Date.Date.ToString("dd.MM.yyyy") + "slobodan";
+            }
+            if (!flag2)
+            {
+                smene.Text += day2.Date.Date.ToString("dd.MM.yyyy") + "slobodan";
+            }
+            if (!flag3)
+            {
+                smene.Text += day3.Date.Date.ToString("dd.MM.yyyy") + "slobodan";
+            }
+
         }
 
         //izmena naloga
@@ -467,55 +497,7 @@ namespace HCIproject
             }
             return articles;
         }
-//KARTON PREGLED    
-        private void search_patient_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                if (search_patient.Text == "")
-                {
-                    return;
-                }
-                else
-                {
-                    List<ExaminationDTO> findFile = searchMyFiles(search_patient.Text);
-                    if (findFile.Count == 0)
-                    {
-                        string messageBoxText = "Ne postoje pacijenti sa zadatim parametrima.";
-                        string caption = "Pretraga";
-                        MessageBoxButton button = MessageBoxButton.OK;
-                        MessageBoxImage icon = MessageBoxImage.Information;
-                        MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
-                    }
-                    else
-                    {
-                        var winFind = new FindFileWindow((Doctor)user,findFile);
-                        winFind.ShowDialog();
-                    }
-                }
-            }
-        }
-        private List<ExaminationDTO> searchMyFiles(string search)
-        {
-            List<ExaminationDTO> lista = new List<ExaminationDTO>();
-            foreach (var exam in upcomingExaminations)
-            {
-                if ((exam.Patient.FirstName).Equals(search) || (exam.Patient.LastName).Equals(search) || (exam.Patient.FirstName+" " +exam.Patient.LastName).Equals(search))
-                {
-                    lista.Add(exam);
-                }
-            }
-            return lista;
-        }
 
-        private void search_patient_IsKeyboardFocusedChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            if (search_patient.Text == "Pretraga")
-            {
-                search_patient.Text = "";
-            }
-
-        }
 
         private void LozTxt_IsKeyboardFocusedChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
@@ -615,67 +597,69 @@ namespace HCIproject
             num = 0;
             foreach (var exam in app.ExaminationController.GetUpcomingExaminationsByUser(user)) 
             {
-                StackPanel stack = new StackPanel();
-                DockPanel dock = new DockPanel();
-                Label lbl = new Label();
-                Label lbl1 = new Label();
-                Button btn1 = new Button();
-                Button btn2 = new Button();
-                
-                stack.Children.Add(dock);
-                dock.Children.Add(lbl);
-                dock.Children.Add(lbl1);
-                dock.Children.Add(btn2);
-                dock.Children.Add(btn1);
+                if (exam.Period.StartDate.Date.Date.ToString() == DateTime.Now.Date.Date.ToString())
+                {
+                    StackPanel stack = new StackPanel();
+                    DockPanel dock = new DockPanel();
+                    Label lbl = new Label();
+                    Label lbl1 = new Label();
+                    Button btn1 = new Button();
+                    Button btn2 = new Button();
+
+                    stack.Children.Add(dock);
+                    dock.Children.Add(lbl);
+                    dock.Children.Add(lbl1);
+                    dock.Children.Add(btn2);
+                    dock.Children.Add(btn1);
 
 
-                #region DockPanel Content Properties
-                lbl.Content = exam.User.FirstName + " " + exam.User.LastName;
-                lbl.Height = 32;
-                lbl.Width = 180;
-                lbl.FontSize = 15;
-                lbl.FontWeight = FontWeights.Bold;
-                lbl.SetValue(DockPanel.DockProperty, Dock.Left);
-                lbl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+                    #region DockPanel Content Properties
+                    lbl.Content = exam.User.FirstName + " " + exam.User.LastName;
+                    lbl.Height = 32;
+                    lbl.Width = 180;
+                    lbl.FontSize = 15;
+                    lbl.FontWeight = FontWeights.Bold;
+                    lbl.SetValue(DockPanel.DockProperty, Dock.Left);
+                    lbl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
 
-                lbl1.Content = exam.Period.StartDate;
-                lbl1.Height = 32;
-                lbl1.Width = 180;
-                lbl1.FontSize = 12;
-                lbl1.FontWeight = FontWeights.SemiBold;
-                lbl1.SetValue(DockPanel.DockProperty, Dock.Left);
-                lbl1.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+                    lbl1.Content = exam.Period.StartDate;
+                    lbl1.Height = 32;
+                    lbl1.Width = 180;
+                    lbl1.FontSize = 12;
+                    lbl1.FontWeight = FontWeights.SemiBold;
+                    lbl1.SetValue(DockPanel.DockProperty, Dock.Left);
+                    lbl1.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
 
-                btn1.Content = "Započni";
-                btn1.Height = 32;
-                btn1.Width = 100;
-                btn1.FontSize = 12;
-                btn1.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
-                btn1.SetValue(DockPanel.DockProperty, Dock.Right);
-                btn1.Tag = exam;
-                btn1.Click += new RoutedEventHandler(ClickStartExamination);
-                btn1.Margin = new Thickness(10, 10, 15, 0);
-                btn1.Background = new SolidColorBrush(Color.FromRgb(162, 217, 206));
+                    btn1.Content = "Započni";
+                    btn1.Height = 32;
+                    btn1.Width = 100;
+                    btn1.FontSize = 12;
+                    btn1.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
+                    btn1.SetValue(DockPanel.DockProperty, Dock.Right);
+                    btn1.Tag = exam;
+                    btn1.Click += new RoutedEventHandler(ClickStartExamination);
+                    btn1.Margin = new Thickness(10, 10, 15, 0);
+                    btn1.Background = new SolidColorBrush(Color.FromRgb(162, 217, 206));
 
 
-                btn2.Content = "Otkaži";
-                btn2.Height = 32;
-                btn2.Width = 100;
-                btn2.FontSize = 12;
-                btn2.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
-                btn2.SetValue(DockPanel.DockProperty, Dock.Right);
-                btn2.Margin = new Thickness(10, 10, 15, 0);
-                btn2.Background = new SolidColorBrush(Color.FromRgb(162, 217, 206));
-                btn2.Tag = exam;
-                btn2.Click += new RoutedEventHandler(CancelExamination);
-                #endregion
+                    btn2.Content = "Otkaži";
+                    btn2.Height = 32;
+                    btn2.Width = 100;
+                    btn2.FontSize = 12;
+                    btn2.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
+                    btn2.SetValue(DockPanel.DockProperty, Dock.Right);
+                    btn2.Margin = new Thickness(10, 10, 15, 0);
+                    btn2.Background = new SolidColorBrush(Color.FromRgb(162, 217, 206));
+                    btn2.Tag = exam;
+                    btn2.Click += new RoutedEventHandler(CancelExamination);
+                    #endregion
 
-                Grid_Grid.RowDefinitions.Add(new RowDefinition());
-                Grid_Grid.RowDefinitions[num].Height = new GridLength(66, GridUnitType.Pixel);
-                Grid_Grid.Children.Add(stack);
-                stack.SetValue(Grid.RowProperty, num);
-                num++;
-
+                    Grid_Grid.RowDefinitions.Add(new RowDefinition());
+                    Grid_Grid.RowDefinitions[num].Height = new GridLength(66, GridUnitType.Pixel);
+                    Grid_Grid.Children.Add(stack);
+                    stack.SetValue(Grid.RowProperty, num);
+                    num++;
+                }
             }
 
         }

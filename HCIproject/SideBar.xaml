@@ -118,12 +118,6 @@
             <TabItem Header="Kartoni" FontSize="19" Background="#A2D9CE" Height="28" >
                 <StackPanel  x:Name="kartoniGrid" Background="#D5F5E3" SizeChanged="myGrid_SizeChanged">
                     <StackPanel Orientation="Vertical">
-                        <Border  BorderBrush="#A2D9CE" BorderThickness="8" CornerRadius="8,8,8,8"  Margin="5">
-                            <StackPanel Orientation="Horizontal">
-                                <Label  Content="Pretraga kartona po imenu ili prezimenu pacijenta" HorizontalAlignment="Center" FontSize="14" />
-                                <TextBox x:Name="search_patient" HorizontalAlignment="Center"  Text="Pretraga" Margin="5" Background="#EBF5FB" FontSize="16" Foreground="#AAB7B8" Width="127" CaretBrush="#FF1FEECD" KeyDown="search_patient_KeyDown" IsKeyboardFocusedChanged="search_patient_IsKeyboardFocusedChanged" />
-                            </StackPanel>
-                        </Border>
                         <Grid>
                             <ScrollViewer VerticalScrollBarVisibility="Auto" Height="300"  >
                                 <Grid x:Name="Grid_Grid1" Margin="0,0,0,32"/>

@@ -39,8 +39,18 @@ namespace HCIproject
 
             InitializeComponent();
             setDiagnosisCombo();
+            setSimptomiCombo();
+            checkSpeciality();
         }
 
+        private void checkSpeciality()
+        {
+            if(user.Specialty.Name=="Opsta praksa")
+            {
+                labelOperacija.Visibility = Visibility.Hidden;
+                buttonOperacija.Visibility = Visibility.Hidden;
+            }
+        }
         private void setDiagnosisCombo()
         {
 
@@ -49,6 +59,16 @@ namespace HCIproject
             {
                 diagnosisCombo.Items.Add(diag.Name);
             }
+        } 
+        private void setSimptomiCombo()
+        {
+
+            var app = Application.Current as App;
+            foreach(Symptom symptom in app.SymptomController.GetAll())
+            {
+                simptomiCombo.Items.Add(symptom.Name);
+            }
+
         }
 
 
@@ -184,7 +204,6 @@ namespace HCIproject
             else
             {
                 dijagnoza = diagnosisCombo.SelectedItem.ToString();
-
                 OperationWin opeWin = new OperationWin((Doctor)user, patientId, dijagnoza);
                 opeWin.ShowDialog();
 
@@ -203,20 +222,6 @@ namespace HCIproject
             // this.Visibility = Visibility.Hidden;
             patientWin.ShowDialog();
         }
-        private void izvestajPdf(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                Process process = new System.Diagnostics.Process();
-                String file = "C:\\Users\\Tamara Kovacevic\\Desktop\\IZVESTAJ.pdf";
-                process.StartInfo.FileName = file;
-                process.Start();
-                process.WaitForExit();
-            }
-            catch
-            {
-                System.Windows.MessageBox.Show("Could not open the file.", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-        }
+    
     }
 }

@@ -48,7 +48,7 @@
 
                     <Label Content="Procena trajanja operacije u minutima" Grid.Row="3" Grid.Column="0" FontSize="16" Margin="3"/>
                     <TextBox x:Name="vreme" Grid.Row="3 " Grid.Column="1"  FontSize="16" Margin="3" Width="35" CaretBrush="#FF1FEECD"/>
-
+                    
                     <Label Content="Napomena" Grid.Row="4" Grid.Column="0" FontSize="16" Margin="3"/>
                     <TextBox Grid.Row="4" Grid.Column="1" Margin="3" AcceptsReturn="True"  FontSize="16" CaretBrush="#FF1FEECD"/>
                 </Grid>

@@ -37,6 +37,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="itextsharp, Version=5.5.13.1, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>packages\iTextSharp.5.5.13.1\lib\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="MaterialDesignColors, Version=1.2.6.1513, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\MaterialDesignColors.1.2.6\lib\net45\MaterialDesignColors.dll</HintPath>
     </Reference>
@@ -79,6 +82,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AllergyWin.xaml.cs">
+      <DependentUpon>AllergyWin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="chart.xaml.cs">
       <DependentUpon>chart.xaml</DependentUpon>
     </Compile>
@@ -96,6 +102,10 @@
     <Compile Include="VALIDATION\NecessaryValidationRule.cs" />
     <Compile Include="VALIDATION\TelephoneNumberValidationRule.cs" />
     <Compile Include="VALIDATION\StringValidationRule.cs" />
+    <Page Include="AllergyWin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ArticleWin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

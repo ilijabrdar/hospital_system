@@ -17,6 +17,13 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+using System.IO;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using Model.Director;
+using Paragraph = iTextSharp.text.Paragraph;
+using bolnica.Model.Dto;
+
 namespace HCIproject
 {
     /// <summary>
@@ -90,6 +97,7 @@ namespace HCIproject
                 myButton.Width = 100;
                 myButton.Height = 30;
                 myButton.Background = new SolidColorBrush(Color.FromRgb(162, 217, 206));
+                myButton.Tag = examination;
                 myButton.Click += new RoutedEventHandler(izvestajPdf);
                 stackPanelExamination.Children.Add(myButton);
 
@@ -289,31 +297,7 @@ namespace HCIproject
         }
 
 
-        private void search_files_IsKeyboardFocusedChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            if (search_files.Text == "Unesite parametar pretrage")
-            {
-                search_files.Text = "";
-            }
-        }
-
-        private void search_files_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                if (search_files.Text == "")
-                {
-                    return;
-                }
-                else
-                {
-                    searchMyExam(search_files.Text);
-                    //   ArticleWin artWind = new ArticleWin(findAexarticles);
-                    //    artWind.ShowDialog();
-                    search_files.Text = "";
-                }
-            }
-        }
+       
 
         private void searchMyExam(String input)
         {
@@ -327,12 +311,148 @@ namespace HCIproject
 
         private void izvestajPdf(object sender, RoutedEventArgs e)
         {
-                //Process process = new System.Diagnostics.Process();
-                //String file = "C:\\Users\\Tamara Kovacevic\\Desktop\\IZVESTAJ.pdf";
-                //process.StartInfo.FileName = file;
-                //process.Start();
-                //process.WaitForExit();
+            
+            Examination examination =(Examination) ((Button)sender).Tag;
+            var app = Application.Current as App;
+            Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
+            dlg.FileName = "Izvestaj"; // Default file name
+
+            dlg.Title = "Select PDFFile";
+            dlg.Filter = "PDF(*.pdf)|*.pdf";
+            String path = "";
+
+            Nullable<bool> result = dlg.ShowDialog();
+
+            if (result == true)
+            {
+                path = System.IO.Path.GetFullPath(dlg.FileName);
+                string filename = dlg.FileName;
+
+                Document doc = new Document(iTextSharp.text.PageSize.A4, 20f, 20f, 30f, 30f);
+                PdfWriter writer = PdfWriter.GetInstance(doc, new FileStream(filename, FileMode.Create));
+                doc.Open();
+                doc.SetMargins(50, 50, 50, 50);
+
+                Paragraph header = new Paragraph("Izveštaj anamneza recept");
+
+                header.Alignment = 1;
+                header.Font.Size = 18;
+                header.Font.SetStyle(1);
+                doc.Add(header);
+                doc.Add(new Chunk("\n"));
+                doc.Add(new Chunk("\n"));
+                doc.Add(new Chunk("\n"));
+
+                Paragraph basicInfo = new Paragraph();
+                Chunk basicInfoheader = new Chunk("OSNOVNE INFORMACIJE O PACIJENTU");
+                basicInfoheader.Font.Size = 14;
+                basicInfoheader.Font.SetStyle(1);
+                basicInfo.Add(basicInfoheader);
+                basicInfo.Add(new Chunk("\n"));
+                basicInfo.Add("Ime i prezime pacijenta: " + app.PatientController.Get(id).FullName);
+                basicInfo.Add(new Chunk("\n"));
+                basicInfo.Add("Datum rodjenja: " + app.PatientController.Get(id).DateOfBirth);
+                basicInfo.Add(new Chunk("\n"));
+           
+                DoctorReportDTO doctorDTO = app.ReportController.GenerateAnamnesisPrescriptionReport(examination);
+
+                Paragraph anamnesis = new Paragraph();
+                anamnesis.Add(new Chunk("\n"));
+                anamnesis.Add(new Chunk("\n"));
+                Chunk anamnesisHeader = new Chunk("Anamneza:");
+                anamnesisHeader.Font.Size = 14;
+                anamnesisHeader.Font.SetStyle(1);
+                anamnesis.Add(anamnesisHeader);
+                anamnesis.Add(new Chunk("\n"));
+                StringBuilder sb = new StringBuilder();
+                if (doctorDTO.Anemnesis.Text != "")
+                {
+                    anamnesis.Add(doctorDTO.Anemnesis.Text);
+                    anamnesis.Add(new Chunk("\n"));
+                }
+                else
+                {
+                    anamnesis.Add("Nije uneta ni jedna anamneza!");
+                    anamnesis.Add(new Chunk("\n"));
+                }
+
+
+                Paragraph prescription = new Paragraph();
+                prescription.Add(new Chunk("\n"));
+                prescription.Add(new Chunk("\n"));
+                Chunk prescriptionHeader = new Chunk("Recept:");
+                prescriptionHeader.Font.Size = 14;
+                prescriptionHeader.Font.SetStyle(1);
+                prescription.Add(prescriptionHeader);
+                prescription.Add(new Chunk("\n"));
+
+                if (doctorDTO.Prescription!=null)
+                {
+                    prescription.Add("Vreme koriscenja terapije"+" od "+ doctorDTO.Prescription.Period.StartDate+" do "+doctorDTO.Prescription.Period.EndDate);
+                    prescription.Add(new Chunk("\n"));
+                    prescription.Add("Prepisani lekovi: ");
+                    foreach (Drug drug in doctorDTO.Prescription.Drug)
+                    {
+                            sb.Append(drug.Name);
+                            sb.Append(", ");                   
+                    }
+                    prescription.Add(sb.ToString());
+                    prescription.Add(new Chunk("\n"));
+                }
+                else
+                {
+                    prescription.Add("Nije uneta ni jedan recept!");
+                    prescription.Add(new Chunk("\n"));
+                }
+
+                doc.Add(basicInfo);
+                doc.Add(anamnesis);
+                doc.Add(prescription);
+                doc.Close();
+
+                string messageBoxText = "Uspesno kreiran izvestaj!";
+                string caption = "Informacija";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Information;
+
+                System.Windows.MessageBox.Show(messageBoxText, caption, button, icon);
+
+            }
+            else
+            {
+                return;
             }
 
+
+            try
+            {
+                Process process = new System.Diagnostics.Process();
+                String file;
+
+                file = path;
+
+                process.StartInfo.FileName = file;
+                process.Start();
+                process.WaitForExit();
+            }
+            catch
+            {
+                System.Windows.MessageBox.Show("Could not open the file.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+
+
         }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {//dodaj alergiju
+
+            var app = Application.Current as App;
+            Patient patient = app.PatientController.Get(id);
+
+            AllergyWin allergyWin = new AllergyWin((Doctor)user, patient);
+
+            allergyWin.Show();
+
+        }
+    }
 }

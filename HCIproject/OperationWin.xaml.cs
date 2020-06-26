@@ -109,8 +109,35 @@ namespace HCIproject
             period.StartDate = DateTime.Parse(Picker.Text);
             BusinessDayDTO businessDayDTO = new BusinessDayDTO(user, period);
 
+            double vremeTrajanje;
+            try
+            {
+                vremeTrajanje = double.Parse(vreme.Text);
+            }
+            catch
+            {
+                string messageBoxText = "Trajanje operacije mora biti ceo broj u minutima.";
+                string caption = "Vreme";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Information;
+                MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+            }
 
-            operationList=app.BusinessDayService.OperationSearch(businessDayDTO, double.Parse(vreme.Text));
+             double vremeTrajanje1=0;
+            try
+            {
+                vremeTrajanje = double.Parse(vreme.Text);
+                operationList = app.BusinessDayService.OperationSearch(businessDayDTO, vremeTrajanje1);
+
+            }
+            catch
+            {
+                string messageBoxText = "Trajanje operacije mora biti ceo broj u minutima.";
+                string caption = "Vreme";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Information;
+                MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+            }
 
             if (operationList == null)  
                 return;
@@ -126,8 +153,13 @@ namespace HCIproject
         private void Zakazi(object sender, RoutedEventArgs e)
         {
             var app = Application.Current as App;
-            var selectedItem = specialistGrid.SelectedItem;       
+            var selectedItem = specialistGrid.SelectedItem;
 
+            if (selectedItem == null)
+            {
+                return;
+            }
+            
             ExaminationDTO scheduleExam = (ExaminationDTO)selectedItem;
 
             Period period = new Period(operationList[0].Period.StartDate, operationList.LastOrDefault().Period.EndDate);
