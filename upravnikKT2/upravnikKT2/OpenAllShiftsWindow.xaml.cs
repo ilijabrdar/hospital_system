@@ -136,10 +136,10 @@ namespace upravnikKT2
             {
                 editShiftBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
             }
-            else if (e.Key == System.Windows.Input.Key.Delete)
-            {
-                deletShiftBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
-            }
+            //else if (e.Key == System.Windows.Input.Key.Delete)
+            //{
+            //    deletShiftBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+            //}
 
         }
 

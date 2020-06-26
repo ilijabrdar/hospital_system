@@ -148,10 +148,10 @@ namespace upravnikKT2
             {
                 editRoomTypeBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
             }
-            else if (e.Key == System.Windows.Input.Key.Delete)
-            {
-                deleteRoomTypeBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
-            }
+            //else if (e.Key == System.Windows.Input.Key.Delete)
+            //{
+            //    deleteRoomTypeBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+            //}
         }
     }
 }

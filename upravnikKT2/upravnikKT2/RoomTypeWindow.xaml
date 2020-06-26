@@ -39,7 +39,7 @@
 
 
 
-        <Button x:Name="deleteRoomTypeBtn" HorizontalAlignment="Left" Margin="157,10,0,0"  Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+        <Button x:Name="deleteRoomTypeBtn" HorizontalAlignment="Left" Margin="157,10,0,0"  Style="{StaticResource MaterialDesignFloatingActionMiniButton}" Visibility="Hidden" IsEnabled="False"
                  ToolTip="Izbrisi tip prostorije prostorije" RenderTransformOrigin="1.775,0.6" Click="Button_Click_Delete">
             <materialDesign:PackIcon
                                     Kind="DeleteForever"

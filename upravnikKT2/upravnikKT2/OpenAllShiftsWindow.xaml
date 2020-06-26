@@ -36,7 +36,7 @@
 
 
  
-        <Button x:Name="deletShiftBtn" HorizontalAlignment="Left" Margin="157,10,0,10"  Style="{StaticResource MaterialDesignFloatingActionMiniButton}" Click="DeleteShiftBtnClick"
+        <Button x:Name="deletShiftBtn" HorizontalAlignment="Left" Margin="157,10,0,10"  Style="{StaticResource MaterialDesignFloatingActionMiniButton}" Click="DeleteShiftBtnClick" Visibility="Hidden" IsEnabled="False"
                  ToolTip="Izbriši smenu" RenderTransformOrigin="1.775,0.6">
             <materialDesign:PackIcon
                                     Kind="DeleteForever"

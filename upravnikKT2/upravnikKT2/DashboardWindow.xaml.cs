@@ -787,10 +787,10 @@ namespace upravnikKT2
             {
                 editDrugBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
             }
-            else if (e.Key == System.Windows.Input.Key.Delete)
-            {
-                deleteDrugBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
-            }
+            //else if (e.Key == System.Windows.Input.Key.Delete)
+            //{
+            //    deleteDrugBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+            //}
             else if (e.Key == System.Windows.Input.Key.S && Keyboard.Modifiers == ModifierKeys.Control)
             {
                 searchDrugBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
@@ -819,10 +819,10 @@ namespace upravnikKT2
                 txtsearchRooms.Focus();
                 e.Handled = true;
             }
-            else if (e.Key == System.Windows.Input.Key.Delete)
-            {
-                deleteRoomBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
-            }
+            //else if (e.Key == System.Windows.Input.Key.Delete)
+            //{
+            //    deleteRoomBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+            //}
             else if (e.Key == System.Windows.Input.Key.T && Keyboard.Modifiers == ModifierKeys.Control)
                 addRoomTypeBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
         }
@@ -837,10 +837,10 @@ namespace upravnikKT2
             {
                 editDoctorBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
             }
-            else if (e.Key == System.Windows.Input.Key.Delete)
-            {
-                deleteDoctorBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
-            }
+            //else if (e.Key == System.Windows.Input.Key.Delete)
+            //{
+            //    deleteDoctorBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+            //}
         }
 
         private void TabItem_PreviewKeyDown_Shifts(object sender, KeyEventArgs e)
@@ -1456,10 +1456,10 @@ namespace upravnikKT2
             {
                 editDoctorBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
             }
-            else if (e.Key == System.Windows.Input.Key.Delete)
-            {
-                deleteDoctorBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
-            }
+            //else if (e.Key == System.Windows.Input.Key.Delete)
+            //{
+            //    deleteDoctorBtn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+            //}
         }
 
         private void txtSearchArticles_KeyUp(object sender, KeyEventArgs e)
@@ -1721,6 +1721,9 @@ namespace upravnikKT2
                 //MessageBoxImage icon = MessageBoxImage.Information;
 
                 //MessageBox.Show(messageBoxText, caption, button, icon);
+
+                director.Password = txtNewPassword.Text;
+                _directorController.Edit(director);
 
                 passwordInfo.Content = "Uspesno izmenjeni podaci!";
                 passwordInfo.Visibility = Visibility.Visible;

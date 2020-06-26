@@ -177,7 +177,7 @@
                                     Height="24"
                                     Width="24" />
                                 </Button>
-                                <Button Margin="10,10,30,10"  x:Name="deleteDoctorBtn" Click="deleteDoctorBtn_Click"
+                                <Button Margin="10,10,30,10"  x:Name="deleteDoctorBtn" Click="deleteDoctorBtn_Click" IsEnabled="False" Visibility="Hidden"
                                   Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
                                   HorizontalAlignment="Left"
                                   ToolTip="Izbriši lekara">
@@ -211,17 +211,17 @@
                                         <DataGridTextColumn Header="Adresa" Binding="{Binding Address.FullAddress}" Width="*" />
                                         <DataGridTextColumn Header="Datum rođenja" Binding="{Binding DateOfBirth, StringFormat=\{0:dd/MM/yyyy\}}" Width="*"/>
                                         <DataGridTextColumn Header="Odeljenje" Binding="{Binding Specialty.Name}" Width="*"/>
-                                        <!-- <DataGridTextColumn Header="Ocena" Binding="{Binding Ocena}" Width="*"/> -->
-                                        <DataGridTemplateColumn Header="Ocena" Width="*">
+                                        <DataGridTextColumn Header="Ocena" Binding="{Binding DoctorGrade.AverageGrade}" Width="*"/> 
+                                        <!--<DataGridTemplateColumn Header="Ocena" Width="*">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <materialDesign:RatingBar
-                                                                  Value="4"
+                                                                  
                                                                   IsReadOnly="True"
                                                                   x:Name="ReadOnlyRatingBar" />
                                                 </DataTemplate>
                                             </DataGridTemplateColumn.CellTemplate>
-                                        </DataGridTemplateColumn>
+                                        </DataGridTemplateColumn>-->
                                         <DataGridTemplateColumn Header="Smene lekara" Width="*">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
@@ -445,7 +445,7 @@
                                     Height="24"
                                     Width="24" />
                             </Button>
-                            <Button Margin="10,10,30,10" x:Name="deleteDrugBtn"
+                            <Button Margin="10,10,30,10" x:Name="deleteDrugBtn" Visibility="Hidden" IsEnabled="False"
                                   Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
                                   HorizontalAlignment="Left"
                                   ToolTip="Izbriši lek" Click="deleteDrugBtn_Click">
@@ -523,7 +523,7 @@
                                     Height="24"
                                     Width="24" />
                             </Button>
-                            <Button Margin="10,10,30,10"  x:Name="deleteRoomBtn"
+                            <Button Margin="10,10,30,10"  x:Name="deleteRoomBtn" Visibility="Collapsed" IsEnabled="False"
                                   Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
                                   HorizontalAlignment="Left"
                                   ToolTip="Izbriši prostoriju" Click="deleteRoomBtn_Click">
