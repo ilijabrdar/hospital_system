@@ -1,5 +1,3 @@
-
-
 using Repository;
 using System;
 using System.Collections;
@@ -13,7 +11,6 @@ namespace Model.Director
 
         public string RoomCode { get; set; }
 
-
         public long Id { get; set; }
 
         public long GetId() => Id;
@@ -26,6 +23,9 @@ namespace Model.Director
 
         public int CurrentNumberOfPatients { get; set; }
 
+
+        public Room() { }
+
         public Room(string roomCode, RoomType roomType, Dictionary<Equipment, int> equipment_inventory, int MaxNumberOfPatientsForHospitalization, int CurrentNumberOfPatients)
         {
             Equipment_inventory = equipment_inventory;
@@ -35,9 +35,6 @@ namespace Model.Director
             this.MaxNumberOfPatientsForHospitalization = MaxNumberOfPatientsForHospitalization;
             this.CurrentNumberOfPatients = CurrentNumberOfPatients;
         }
-
-
-
 
         public Room(long id, string roomCode, RoomType roomType, Dictionary<Equipment, int> equipment_inventory, int MaxNumberOfPatientsForHospitalization, int CurrentNumberOfPatients)
         {

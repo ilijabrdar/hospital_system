@@ -1,5 +1,3 @@
-
-
 using bolnica.Repository;
 using Model.PatientSecretary;
 using Model.Users;
@@ -47,19 +45,7 @@ namespace Repository
             exam.Diagnosis = diagnosisRepository.GetEager(exam.Diagnosis.GetId());
             exam.Therapy = therapyRepository.GetEager(exam.Therapy.GetId());
             exam.Refferal = referralRepository.GetEager(exam.Refferal.GetId());
-
-
-            foreach (Prescription pres in exam.Prescription)
-            {
-                Prescription temp = prescriptionRepository.GetEager(pres.Id);
-                pres.Period = temp.Period;
-                List<Drug> drugs = new List<Drug>();
-                foreach (Drug drug in temp.Drug)
-                {
-                    drugs.Add(drug);
-                }
-                pres.Drug = drugs;
-            }
+            exam.Prescription = prescriptionRepository.GetEager(exam.Prescription.GetId());     
             return exam;
         }
 
