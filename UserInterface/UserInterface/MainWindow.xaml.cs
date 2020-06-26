@@ -26,6 +26,7 @@ using Model.Director;
 using bolnica.Model.Dto;
 using bolnica.Service;
 using Model.Doctor;
+using System.Configuration;
 
 namespace UserInterface
 {
@@ -35,6 +36,9 @@ namespace UserInterface
     /// 
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
+        [Obsolete]
+        public static double ExaminationDuration = Double.Parse(ConfigurationSettings.AppSettings["examinationDuration"]);
+
         public Secretary Secretary { get; set; }
         public List<Patient> Patients;
         public Patient GuestPatient { get; set; }
@@ -552,6 +556,7 @@ namespace UserInterface
             ThankYouMsg.Visibility = System.Windows.Visibility.Hidden;
             SuccessLabel.Visibility = Visibility.Collapsed;
             msg.Visibility = Visibility.Collapsed;
+            OperationMsg.Visibility = Visibility.Collapsed;
 
             dispatcherTimer.IsEnabled = false;
         }
@@ -743,7 +748,8 @@ namespace UserInterface
             dispatcherTimer.Start();
         }
 
-        public void CancelOperation()
+        [Obsolete]
+        private void CancelOperation(object sender, RoutedEventArgs e)
         {
             if (SelectedOperation == null)
             {
@@ -751,10 +757,25 @@ namespace UserInterface
                 return;
             }
 
+            MessageBoxResult result = MessageBox.Show("Da li ste sigurni da želite da otkažete operaciju?", "Otkazivanje operacije", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.No) return;
+
             App app = Application.Current as App;
             app.OperationController.Delete(SelectedOperation);
 
-
+            List<DateTime> toDelete = new List<DateTime>();
+            DateTime time = SelectedOperation.Period.StartDate;
+            while(time <= SelectedOperation.Period.EndDate)
+            {
+                toDelete.Add(time);
+                time = time.AddMinutes(ExaminationDuration);
+            }
+            BusinessDay businessDay = app.BusinessDayController.GetExactDay(SelectedOperation.Doctor, SelectedOperation.Period.StartDate);
+            app.BusinessDayController.FreePeriod(businessDay, toDelete);
+            FillOperationTable();
+            OperationMsg.Visibility = Visibility.Visible;
+            dispatcherTimer.Start();
         }
     }
 

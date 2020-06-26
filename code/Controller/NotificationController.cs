@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using bolnica.Model.Dto;
 
+
 namespace Controller
 {
    public class NotificationController
@@ -25,6 +26,11 @@ namespace Controller
         {
             return service.NotifyDoctorOfUpcomingBusinessDays(doctor);
         }
+
+        //public PatientNotification NotifyPatientOfExaminationRescheduling()
+        //{
+
+        //}
 
     }
 }

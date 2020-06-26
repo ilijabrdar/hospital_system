@@ -210,12 +210,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\PatientFile.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\patientFileFile.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\roomFile.txt" />
   </ItemGroup>
   <ItemGroup>

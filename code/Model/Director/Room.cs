@@ -23,6 +23,7 @@ namespace Model.Director
 
         public int CurrentNumberOfPatients { get; set; }
 
+
         public Room() { }
 
         public Room(string roomCode, RoomType roomType, Dictionary<Equipment, int> equipment_inventory, int MaxNumberOfPatientsForHospitalization, int CurrentNumberOfPatients)

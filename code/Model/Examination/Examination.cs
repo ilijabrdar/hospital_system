@@ -33,6 +33,7 @@ namespace Model.PatientSecretary
             Period = period;
         }
 
+
         public Examination(long id, User user,Users.Doctor doctor, Period period, Diagnosis diagnosis, Anemnesis anemnesis, Therapy therapy, Referral refferal, Prescription prescription)
         {
             Id = id;

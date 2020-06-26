@@ -262,8 +262,8 @@
             <TabItem x:Name="ExaminationTab" Header="Evidencija pregleda" Height="40" Background="#D7E1E9" Margin="-2,0,0,0" VerticalAlignment="Top">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="2*"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <DockPanel Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                         <Grid DockPanel.Dock="Left">
@@ -322,7 +322,8 @@
                             <DataGridTextColumn Header="Sala" Binding="{Binding Room.RoomCode}" Width="*"></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button Grid.Row="1" HorizontalAlignment="Right" Margin="10">Otkaži</Button>
+                    <Button Grid.Row="1" HorizontalAlignment="Right" Margin="10" Click="CancelOperation">Otkaži</Button>
+                    <Label x:Name="OperationMsg" Content="Operacija uspešno otkazana!" HorizontalAlignment="Left" Margin="270,39,0,0" Grid.Row="1" VerticalAlignment="Top" Width="162" Foreground="Green" FontStyle="Italic" Visibility="Collapsed"/>
                 </Grid>
             </TabItem>
             <TabItem x:Name="NewPatientTab" Header="Novi pacijent" Height="40" Background="#D7E1E9">
