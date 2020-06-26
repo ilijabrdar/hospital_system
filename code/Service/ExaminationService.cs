@@ -15,11 +15,11 @@ namespace Service
     { 
         private readonly IExaminationUpcomingRepository _upcomingRepository;
         private readonly IExaminationPreviousRepository _previousRepository;
-        private readonly IDiagnosisService _diagnosisService;
-        private readonly IPrescriptionService _prescriptionService;
-        private readonly IReferralService _referralService;
-        private readonly ISymptomService _symptomService;
-        private readonly ITherapyService _therapyService;
+        public IDiagnosisService _diagnosisService { get; set; }
+        public IPrescriptionService _prescriptionService { get; set; }
+        public IReferralService _referralService { get; set; }
+        public ISymptomService _symptomService { get; set; }
+        public ITherapyService _therapyService { get; set; }
 
         public ExaminationService(IExaminationUpcomingRepository upcomingRepository, IExaminationPreviousRepository previousRepository, IDiagnosisService diagnosisService, IPrescriptionService prescriptionService, IReferralService referralService, ISymptomService symptomService, ITherapyService therapyService)
         {
@@ -128,7 +128,7 @@ namespace Service
             return examinations;
         }
 
-        private Room getExaminationRoom(Examination examination)
+        public Room getExaminationRoom(Examination examination)
         {
             Room room = null;
             foreach (BusinessDay businessDay in examination.Doctor.BusinessDay)

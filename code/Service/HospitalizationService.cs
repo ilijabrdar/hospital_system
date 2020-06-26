@@ -28,12 +28,12 @@ namespace Service
 
         public Hospitalization Get(long id)
         {
-            return _hospitalizationRepository.Get(id);
+            return _hospitalizationRepository.GetEager(id);
         }
 
         public IEnumerable<Hospitalization> GetAll()
         {
-            return _hospitalizationRepository.GetAll();
+            return _hospitalizationRepository.GetAllEager();
         }
 
         public Hospitalization Save(Hospitalization entity)
