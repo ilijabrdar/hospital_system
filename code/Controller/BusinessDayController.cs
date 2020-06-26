@@ -62,7 +62,7 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        public void MarkAsOccupied(Period period, BusinessDay businessDay)
+        public void MarkAsOccupied(List<Period> period, BusinessDay businessDay)
         {
             _businessDayService.MarkAsOccupied(period, businessDay);
         }
@@ -87,7 +87,7 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        public void FreePeriod(BusinessDay businessDay, DateTime period)
+        public void FreePeriod(BusinessDay businessDay, List<DateTime> period)
         {
             _businessDayService.FreePeriod(businessDay, period);
         }
@@ -95,6 +95,11 @@ namespace Controller
         public BusinessDay GetExactDay(Doctor doctor, DateTime date)
         {
             return _businessDayService.GetExactDay(doctor, date);
+        }
+
+        public Boolean isExaminationPossible(Examination examination)
+        {
+            return _businessDayService.isExaminationPossible(examination);
         }
 
         public bool ChangeDoctorShift(BusinessDay  newShift)
