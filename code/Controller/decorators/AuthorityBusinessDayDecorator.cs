@@ -35,6 +35,14 @@ namespace bolnica.Controller.decorators
             AuthorizedUsers["Save"] = new List<string>() { "Director" };
             AuthorizedUsers["Search"] = new List<string>() { "Doctor", "Secretary", "Patient" };
             AuthorizedUsers["SetRoomForBusinessDay"] = new List<string>() { "Director" };
+            AuthorizedUsers["ChangeDoctorShift"] = new List<string>() { "Director" };
+        }
+
+        public Boolean ChangeDoctorShift(BusinessDay newShift)
+        {
+            if (AuthorizedUsers["ChangeDoctorShift"].SingleOrDefault(any => any.Equals(Role)) != null)
+                return BusinessDayController.ChangeDoctorShift(newShift);
+            return false;
         }
 
         public void Delete(BusinessDay entity)
