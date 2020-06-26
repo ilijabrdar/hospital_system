@@ -129,6 +129,20 @@
     <Compile Include="Controller\BusinessDayController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controller\decorators\AuthorityArticleDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthorityDiagnosisDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthorityDoctorGradeDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthorityExaminationDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthorityHospitalizationDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthorityIngredientDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthorityOperationDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthorityPatientFileDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthorityPrescriptionDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthorityRefferalDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthorityReportDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthoritySpecialityDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthoritySympthomDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthorityTherapyDecorator.cs" />
     <Compile Include="Controller\DiagnosisController.cs">
       <SubType>Code</SubType>
     </Compile>

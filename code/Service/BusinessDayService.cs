@@ -197,11 +197,12 @@ namespace Service
             int index = 0;
             for(int i = 0; i < businessDay.ScheduledPeriods.Count; i++)
             {
-                if(businessDay.ScheduledPeriods[i].StartDate == period[index++])
+                if(businessDay.ScheduledPeriods[i].StartDate == period[index])
                 {
-                    businessDay.ScheduledPeriods.RemoveAt(i);
+                    businessDay.ScheduledPeriods.RemoveAt(i--);
                     if (index == period.Count - 1)
                         break;
+                    index++;
                 }
             }
 

@@ -11,6 +11,5 @@ namespace bolnica.Controller
     public interface IPatientNotificationController : IController<PatientNotification, long>
     {
         IEnumerable<PatientNotification> getNotificationByPatient(Patient patient);
-
     }
 }

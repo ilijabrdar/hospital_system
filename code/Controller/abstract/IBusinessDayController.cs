@@ -25,7 +25,7 @@ namespace bolnica.Controller
 
         BusinessDay getDoctorWorkingHoursForSpecificDate(Doctor doctor, DateTime date);
 
-         List<BusinessDay> GetBusinessDaysByDoctor(Doctor doctor);
+        List<BusinessDay> GetBusinessDaysByDoctor(Doctor doctor);
 
         void FreePeriod(BusinessDay businessDay, List<DateTime> period);
         Boolean isExaminationPossible(Examination examination);

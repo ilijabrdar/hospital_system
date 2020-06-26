@@ -12,6 +12,12 @@ namespace Model.Users
         public Speciality Specialty { get; set; }
         public DoctorGrade DoctorGrade { get; set; }
 
+        public Doctor(long id, String name, String surname)
+        {
+            Id = id;
+            FirstName = name;
+            LastName = surname;
+        }
         public Doctor(long id, String name, String surname, String jmbg, String email, String phone, DateTime birth, Address address, String username, String password, Uri img,Speciality spec )
         {
             this.Id = id;

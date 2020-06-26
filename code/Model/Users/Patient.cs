@@ -13,7 +13,7 @@ namespace Model.Users
       public PatientFile patientFile { get; set; }
       public Boolean Guest = false;
        
-
+        public Patient() { }
         public Patient(long id,String name, String surname, String jmbg, String email, String phone, DateTime birth, Address address, String username, String password, Uri img)
         {
             this.Id = id;
