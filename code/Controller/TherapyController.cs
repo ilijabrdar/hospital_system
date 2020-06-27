@@ -15,11 +15,6 @@ namespace Controller
             _therapyService = service;
         }
 
-        public Therapy AssignCurrentTherapy(PatientFile patientFile)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Delete(Therapy entity)
         {
             _therapyService.Delete(entity);

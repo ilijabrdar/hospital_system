@@ -10,7 +10,7 @@ namespace bolnica.Service
 {
     public interface IArticleService : IService<Article, long>
     {
-        List<Article> SearchArticle(String criteria);
+
 
         void DeleteArticlesByDoctor(Doctor doctor);
     }

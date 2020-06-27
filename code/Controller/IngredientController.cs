@@ -14,7 +14,7 @@ using System.Collections.Generic;
 
 namespace Controller
 {
-   public class IngredientController : IIngredientController
+   public class IngredientController : IIngredientController  //TODO - treba samo getAll
    {
         private readonly IIngredientService _service;
 

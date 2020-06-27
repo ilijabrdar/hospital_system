@@ -51,12 +51,6 @@ namespace bolnica.Controller.decorators
             return null;
         }
 
-        public Doctor RegisterDoctor(Doctor doctor)
-        {
-            if (AuthorizedUsers["RegisterDoctor"].SingleOrDefault(any => any.Equals(Role)) != null)
-                return DirectorController.RegisterDoctor(doctor);
-            return null;
-        }
 
         public Director Save(Director entity)
         {

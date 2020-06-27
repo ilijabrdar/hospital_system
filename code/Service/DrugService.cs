@@ -21,10 +21,6 @@ namespace Service
             throw new NotImplementedException();
         }
 
-        public Drug ApproveDrug(Drug drug)
-        {
-            throw new NotImplementedException();
-        }
 
         public Drug RecommendDrugBasedOnDiagnosis(Diagnosis diagnosis)
         {
@@ -51,10 +47,7 @@ namespace Service
             return _repository.GetAllEager();
         }
 
-        public List<Drug> GetAlternativeDrug(Drug drug)
-        {
-            throw new NotImplementedException();
-        }
+
 
         public List<Drug> GetNotApproved()
         {

@@ -55,15 +55,7 @@ namespace Repository
             }
         }
 
-        public List<Drug> GetAlternativeDrugs(Drug drug)
-        {
-            List<Drug> alternativeDrugs = new List<Drug>();
-            foreach (Drug drugAlternative in drug.Alternative)
-            {
-                alternativeDrugs.Add(drugAlternative);
-            }
-            return alternativeDrugs;
-        }
+
 
         public Drug GetEager(long id)
         {

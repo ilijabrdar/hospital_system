@@ -44,10 +44,6 @@ namespace Controller
 
         }
 
-        public List<string> GetQuestions()
-        {
-            throw new NotImplementedException();
-        }
 
         public DoctorGrade Save(DoctorGrade entity)
         {

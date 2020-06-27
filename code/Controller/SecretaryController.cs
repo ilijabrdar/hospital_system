@@ -12,7 +12,7 @@ using Model.Users;
 
 namespace Controller
 {
-    public class SecretaryController : ISecretaryController
+    public class SecretaryController : ISecretaryController //TODO: sta cemo sa metodama
     {
         private ISecretaryService _service;
 

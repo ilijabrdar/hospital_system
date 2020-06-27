@@ -25,13 +25,6 @@ namespace bolnica.Controller.decorators
             AuthorizedUsers["Save"] = new List<String>() { "Doctor" };
         }
 
-        public Therapy AssignCurrentTherapy(PatientFile patientFile)
-        {
-            if (AuthorizedUsers["AssignCurrentTherapy"].SingleOrDefault(x => x == Role) != null)
-                return TherapyController.AssignCurrentTherapy(patientFile);
-            else
-                return null;
-        }
 
         public void Delete(Therapy entity)
         {

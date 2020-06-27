@@ -23,7 +23,7 @@ namespace Controller
             return _userService.Save(entity);
         }
 
-        public bool BlockUser(string username)
+        public bool BlockUser(string username)  //TODO - uraditi
         {
             throw new NotImplementedException();
         }
@@ -34,7 +34,7 @@ namespace Controller
             return user;
         }
 
-        public bool Logout(User user)
+        public bool Logout(User user) //TODO: sta beese ovo?
         {
             throw new NotImplementedException();
         }

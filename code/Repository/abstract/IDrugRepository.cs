@@ -9,7 +9,7 @@ namespace Repository
 {
    public interface IDrugRepository : IRepository<Drug,long>, IEagerRepository<Drug,long>
    {
-      List<Drug> GetAlternativeDrugs(Drug drug);
+
       List<Drug> GetNotApprovedDrugs();
    }
 }

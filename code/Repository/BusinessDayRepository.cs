@@ -51,9 +51,6 @@ namespace Repository
             return businessDay;
         }
 
-        public bool SetRoomForBusinessDay(BusinessDay businessDay, Room room)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }

@@ -16,7 +16,7 @@ namespace Controller
             this.directorService = directorService;
         }
 
-        public void Delete(Director entity)
+        public void Delete(Director entity)  //TODO: sta cemo sa ovim
         {
             throw new NotImplementedException();
         }
@@ -28,20 +28,15 @@ namespace Controller
 
         public Director Get(long id)
         {
-            return directorService.Get(1);
+            return directorService.Get(id);
         }
 
-        public IEnumerable<Director> GetAll()
+        public IEnumerable<Director> GetAll()  //sta cemo sa ovim
         {
             throw new NotImplementedException();
         }
 
-        public Doctor RegisterDoctor(Doctor doctor)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Director Save(Director entity)
+        public Director Save(Director entity)  //TODO: sta cemo sa ovim
         {
             throw new NotImplementedException();
         }

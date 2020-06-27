@@ -31,12 +31,6 @@ namespace bolnica.Controller.decorators
 
         }
 
-        public bool AddEquipment(Equipment equipment, Room room)
-        {
-            if (AuthorizedUsers["AddEquipment"].SingleOrDefault(any => any.Equals(Role)) != null)
-                return RoomController.AddEquipment(equipment, room);
-            return false;
-        }
 
         public void CheckHospitalizationDurationInRoom()
         {
@@ -91,12 +85,6 @@ namespace bolnica.Controller.decorators
             return null;
         }
 
-        public IEnumerable<Room> GetVacantRooms()
-        {
-            if (AuthorizedUsers["GetVacantRooms"].SingleOrDefault(any => any.Equals(Role)) != null)
-                return RoomController.GetVacantRooms();
-            return null;
-        }
 
         public Room Save(Room entity)
         {
