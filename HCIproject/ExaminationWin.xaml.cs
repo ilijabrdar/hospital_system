@@ -82,7 +82,7 @@ namespace HCIproject
                     max2 = d;
                 }
             }
-
+            diagnosisCombo.Items.Clear();
             diagnosisCombo.Items.Add(app.DiagnosisDecorator.Get(verovatnoce.IndexOf(max1)));
             diagnosisCombo.Items.Add(app.DiagnosisDecorator.Get(verovatnoce.IndexOf(max2)));
         } 

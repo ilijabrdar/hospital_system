@@ -59,7 +59,7 @@ namespace ComputationalGraph
             File.WriteAllText(FileName, jsonString);
         }
 
-        public List<double> PredictDiagnosis(List<double> vector) //vraca listu verovatnoca, uzimas dve najvece verovatnoce, pamtis im indekse u listi 
+        public List<double> PredictDiagnosis(List<double> vector)
         {
             var result = File.ReadAllText(FileName);
             List<double> retVal = new List<double>();
