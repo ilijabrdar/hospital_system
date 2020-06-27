@@ -8,6 +8,6 @@ using System.Text;
 namespace bolnica.Controller
 {
     public interface ISecretaryController : IController<Secretary, long>
-{
-}
+    {
+    }
 }

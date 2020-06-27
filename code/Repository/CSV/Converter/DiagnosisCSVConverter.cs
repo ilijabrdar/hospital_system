@@ -11,13 +11,13 @@ namespace bolnica.Repository.CSV.Converter
     {
         private readonly String _delimiter;
 
-        public DiagnosisCSVConverter(string delimiter, string symptomDelimiter)
+        public DiagnosisCSVConverter(string delimiter)
         {
             _delimiter = delimiter;
         }
 
         public Diagnosis ConvertCSVFormatToEntity(string entityCSVFormat)
-        {//111,"imedijagnoze", s
+        {
             string[] tokens = entityCSVFormat.Split(_delimiter.ToCharArray());
             Diagnosis diagnosis = new Diagnosis(long.Parse(tokens[0]), tokens[1]);           
 

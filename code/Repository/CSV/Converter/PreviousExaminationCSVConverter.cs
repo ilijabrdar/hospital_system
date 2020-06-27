@@ -20,7 +20,7 @@ namespace bolnica.Repository.CSV.Converter
         }
 
         public Examination ConvertCSVFormatToEntity(string entityCSVFormat)
-        {//(long id, User user, Users.Doctor doctor, Period period, Diagnosis diagnosis, Anemnesis anemnesis, Therapy therapy, Referral refferal)
+        {
 
             string[] tokens = entityCSVFormat.Split(_delimiter.ToCharArray());
             Examination examination = new Examination(long.Parse(tokens[0]), (User)new Patient(long.Parse(tokens[1])),

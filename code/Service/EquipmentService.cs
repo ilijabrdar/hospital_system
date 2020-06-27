@@ -18,7 +18,6 @@ namespace Service
             this.roomService = roomService;
         }
 
-
         public Equipment Save(Equipment entity)
         {
             return _repository.Save(entity);
@@ -45,9 +44,14 @@ namespace Service
             return _repository.Get(id);
         }
 
-        public IEnumerable<Equipment> GetConsumableEquipment() => _repository.getConsumableEquipment();
-
-        public IEnumerable<Equipment> GetInconsumableEquipment() => _repository.getInconsumableEquipment();
+        public IEnumerable<Equipment> GetConsumableEquipment()
+        {
+            return _repository.getConsumableEquipment();
+        }
+        public IEnumerable<Equipment> GetInconsumableEquipment()
+        {
+            return _repository.getInconsumableEquipment();
+        }
 
         public bool CheckEquipmentNameUnique(String name)
         {

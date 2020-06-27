@@ -25,8 +25,6 @@ namespace Service
             this.hospitalizationService = hospitalizationService;
         }
 
-
-
         public IEnumerable<Room> GetAll()
         {
             return _repository.GetAllEager();
@@ -60,11 +58,6 @@ namespace Service
             List<Room> result = new List<Room>();
             foreach (Room room in rooms)
             {
-                //if (room.Equipment_inventory.ContainsKey(equipment))
-                //{
-                //    result.Add(room);
-                //}
-
                 foreach (KeyValuePair<Equipment, int> pair in room.Equipment_inventory)
                 {
                     if (pair.Key.Id == equipment.Id)
@@ -73,10 +66,8 @@ namespace Service
                     }
                 }
             }
-
             return result;
         }
-
 
         public void DeleteRoomsByRoomType(RoomType roomType)
         {
@@ -138,7 +129,6 @@ namespace Service
                 }
             }
         }
-
 
     }
 }

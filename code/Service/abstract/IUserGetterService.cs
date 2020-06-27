@@ -7,7 +7,7 @@ using System.Text;
 namespace bolnica.Service
 {
     public interface IUserGetterService
-{
-     User GetUserByUsername(String username);
-}
+    {
+      User GetUserByUsername(String username);
+    }
 }

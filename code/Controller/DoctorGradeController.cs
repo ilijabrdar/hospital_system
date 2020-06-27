@@ -7,7 +7,6 @@ using System.Collections.Generic;
 
 namespace Controller
 {
-
     public class DoctorGradeController : IDoctorGradeController
     {
         private readonly IDoctorGradeService _doctorGradeService;
@@ -43,7 +42,6 @@ namespace Controller
            return _doctorGradeService.GetAverageGrade(doctor);
 
         }
-
 
         public DoctorGrade Save(DoctorGrade entity)
         {

@@ -9,8 +9,6 @@ namespace bolnica.Service
 {
     public interface IRoomService : IService<Room, long>
     {
-
-
         IEnumerable<Room> GetRoomsCointainingEquipment(Equipment equipment);
 
         void DeleteRoomsByRoomType(RoomType roomType);

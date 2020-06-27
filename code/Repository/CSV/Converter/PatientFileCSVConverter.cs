@@ -11,8 +11,8 @@ namespace bolnica.Repository.CSV.Converter
    public class PatientFileCSVConverter : ICSVConverter<PatientFile>
     {
 
-        private readonly string _delimiter = ",";
-        private readonly string _arrayDelimiter = "|";
+        private readonly string _delimiter;
+        private readonly string _arrayDelimiter;
 
         public PatientFileCSVConverter(string delimiter, string arrayDelimiter)
         {

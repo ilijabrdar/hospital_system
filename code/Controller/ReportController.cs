@@ -14,13 +14,12 @@ namespace Controller
 {
    public class ReportController : IReportController
    {
+     IReportService _reportService;
 
-        IReportService _reportService;
-
-        public ReportController(IReportService reportService)
-        {
-            _reportService = reportService;
-        }
+     public ReportController(IReportService reportService)
+     {
+          _reportService = reportService;
+     }
 
       public DoctorReportDTO GenerateAnamnesisPrescriptionReport(Examination examination)
       {

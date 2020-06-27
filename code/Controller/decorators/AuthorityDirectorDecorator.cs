@@ -21,7 +21,6 @@ namespace bolnica.Controller.decorators
             AuthorizedUsers["Edit"] = new List<string>() { "Director" };
             AuthorizedUsers["Get"] = new List<string>() { "Director" };
             AuthorizedUsers["GetAll"] = new List<string>() { "Director" };
-            AuthorizedUsers["RegisterDoctor"] = new List<string>() { "Director" };
             AuthorizedUsers["Save"] = new List<string>() { "Director" };
         }
 
@@ -50,7 +49,6 @@ namespace bolnica.Controller.decorators
                 return DirectorController.GetAll();
             return null;
         }
-
 
         public Director Save(Director entity)
         {

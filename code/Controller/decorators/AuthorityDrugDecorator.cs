@@ -17,19 +17,15 @@ namespace bolnica.Controller.decorators
             this.DrugController = drugController;
             this.Role = role;
             AuthorizedUsers = new Dictionary<string, List<string>>();
-            AuthorizedUsers["AddAlternativeDrug"] = new List<string>() { "Doctor" };
             AuthorizedUsers["ApproveDrug"] = new List<string>() { "Doctor" };
             AuthorizedUsers["CheckDrugNameUnique"] = new List<string>() { "Director" };
             AuthorizedUsers["Delete"] = new List<string>() { "Director" };
             AuthorizedUsers["Edit"] = new List<string>() { "Director", "Doctor" };
             AuthorizedUsers["Get"] = new List<string>() { "Director", "Doctor" };
             AuthorizedUsers["GetAll"] = new List<string>() { "Director", "Doctor" };
-            AuthorizedUsers["GetAlternativeDrugs"] = new List<string>() { "Director" };
             AuthorizedUsers["GetNotApprovedDrugs"] = new List<string>() { "Doctor" };
-            AuthorizedUsers["RecommendDrugBasedOnDiagnosis"] = new List<string>() { "Doctor" };
             AuthorizedUsers["Save"] = new List<string>() { "Director" };
         }
-
 
         public bool CheckDrugNameUnique(string name)
         {
@@ -69,13 +65,6 @@ namespace bolnica.Controller.decorators
         {
             if (AuthorizedUsers["GetNotApprovedDrugs"].SingleOrDefault(any => any.Equals(Role)) != null)
                 return DrugController.GetNotApprovedDrugs();
-            return null;
-        }
-
-        public Drug RecommendDrugBasedOnDiagnosis(Diagnosis diagnosis)
-        {
-            if (AuthorizedUsers["RecommendDrugBasedOnDiagnosis"].SingleOrDefault(any => any.Equals(Role)) != null)
-                return DrugController.RecommendDrugBasedOnDiagnosis(diagnosis);
             return null;
         }
 

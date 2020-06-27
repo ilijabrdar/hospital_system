@@ -9,12 +9,13 @@ using System.Linq;
 namespace Repository
 {
    public class BusinessDayRepository : CSVRepository<BusinessDay,long>, IBusinessDayRepository
-   {        public  IDoctorRepository doctorRepo;
-        private readonly IRoomRepository roomRepo;
+   {    
+        public  IDoctorRepository _doctorRepository;
+        private readonly IRoomRepository _roomRepository;
         public BusinessDayRepository(ICSVStream<BusinessDay> stream, ISequencer<long> sequencer, IRoomRepository room)
            : base(stream, sequencer)
-        { 
-            roomRepo = room;
+        {
+            _roomRepository = room;
         }
 
 
@@ -46,8 +47,8 @@ namespace Repository
         public BusinessDay GetEager(long id)
         {
             BusinessDay businessDay = Get(id);
-            businessDay.doctor = doctorRepo.Get(businessDay.doctor.GetId());
-            businessDay.room = roomRepo.GetEager(businessDay.room.GetId());
+            businessDay.doctor = _doctorRepository.Get(businessDay.doctor.GetId());
+            businessDay.room = _roomRepository.GetEager(businessDay.room.GetId());
             return businessDay;
         }
 

@@ -42,7 +42,6 @@ namespace Controller
         public List<Examination> GetExaminationsByFilter(ExaminationDTO examinationDTO, Boolean upcomingOnly)
         {
             return _examinationService.GetExaminationsByFilter(examinationDTO, upcomingOnly);
-
         }
 
         public List<Examination> GetFinishedxaminationsByUser(User user)
@@ -60,9 +59,5 @@ namespace Controller
             return _examinationService.SaveFinishedExamination(examination);
         }
 
-        public Examination StartUpcomingExamination(Examination examination)
-        {
-            return _examinationService.StartUpcomingExamination(examination);
-        }
     }
 }

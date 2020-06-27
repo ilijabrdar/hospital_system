@@ -9,15 +9,7 @@ namespace bolnica.Service
 {
     public interface IDrugService : IService<Drug, long>
     {
-        Drug RecommendDrugBasedOnDiagnosis(Diagnosis diagnosis);
-
-        
-
         Boolean CheckDrugNameUnique(String name);
-
-
-
-
 
         List<Drug> GetNotApproved();
     }

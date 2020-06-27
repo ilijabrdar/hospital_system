@@ -8,7 +8,7 @@ using System.Text;
 
 namespace bolnica.Controller
 { 
-  public  interface IDoctorGradeController : IController<DoctorGrade,long>
+    public  interface IDoctorGradeController : IController<DoctorGrade,long>
     {
         double GetAverageGrade(Doctor doctor);
 

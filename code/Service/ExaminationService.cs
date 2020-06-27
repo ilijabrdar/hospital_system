@@ -63,10 +63,6 @@ namespace Service
             return _previousRepository.Save(examination);
         }
 
-        public Examination StartUpcomingExamination(Examination examination)
-        {
-            return _upcomingRepository.StartUpcomingExamination(examination);
-        }
         public List<Examination> GetUpcomingExaminationsByUser(User user)
         {
             return _upcomingRepository.GetUpcomingExaminationsByUser(user);

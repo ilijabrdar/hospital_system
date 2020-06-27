@@ -10,8 +10,6 @@ namespace bolnica.Model.Dto
 {
     public class RoomOccupationReportDTO
     {
-        //renovations, operations, examinations, equipment inventory, hospitalizations
-
         public Room room { get; set; }
 
         public List<Renovation> renovations { get; set; }

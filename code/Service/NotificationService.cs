@@ -16,12 +16,10 @@ namespace Service
         public NotifyDoctorBusinessDay(Period shift, Room room)
         {
             this.shift = shift;
-            //this.day = day;
             this.room = room;
         }
     }
-
-        
+   
    public class NotificationService
    {
         public IDrugService drugService;
@@ -46,7 +44,6 @@ namespace Service
       public List<NotifyDoctorBusinessDay> NotifyDoctorOfUpcomingBusinessDays(Doctor doctor)
         {
             List<NotifyDoctorBusinessDay> ret = new List<NotifyDoctorBusinessDay>();
-            //int days_ahead = 1;
 
             bool day1 = false;
             bool day2 = false;
@@ -75,18 +72,10 @@ namespace Service
                     NotifyDoctorBusinessDay notification = new NotifyDoctorBusinessDay(businessDay.Shift, businessDay.room);
                     ret[2] = notification;
                     day3 = true;   
-                }
-           
+                }  
             }
-
-
             return ret;
         }
 
-        //private bool checkBelonging(BusinessDay businessDay)
-        //{
-        //    return ((DateTime.Compare(businessDay.Shift.StartDate.Date, DateTime.Now.AddDays(1).Date) <= 0 || DateTime.Compare(businessDay.Shift.StartDate.Date, DateTime.Now.AddDays(2).Date) <= 0 || DateTime.Compare(businessDay.Shift.StartDate.Date, DateTime.Now.AddDays(3).Date) <= 0) 
-        //        && (DateTime.Compare(businessDay.Shift.EndDate.Date, DateTime.Now.AddDays(1).Date) >= 0 || DateTime.Compare(businessDay.Shift.EndDate.Date, DateTime.Now.AddDays(2).Date) >= 0 || DateTime.Compare(businessDay.Shift.EndDate.Date, DateTime.Now.AddDays(3).Date) >= 0));
-        //}
     }
 }

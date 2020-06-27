@@ -12,7 +12,7 @@ namespace bolnica.Repository.CSV.Converter
 {
    public class PatientCSVConverter : ICSVConverter<Patient>
     {
-        private readonly string _delimiter = ",";
+        private readonly string _delimiter;
 
         public PatientCSVConverter(string delimiter)
         {

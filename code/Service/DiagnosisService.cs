@@ -26,10 +26,5 @@ namespace Service
             return _diagnosisRepository.GetAll();
         }
 
-        public Diagnosis RecommendDiagnosisBasedOnSymptoms(Symptom symptom, Diagnosis diagnosis)
-        {
-            throw new NotImplementedException();
-        }
-
     }
 }

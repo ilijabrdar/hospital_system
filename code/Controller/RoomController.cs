@@ -15,12 +15,10 @@ namespace Controller
         {
             _service = service;
         }
-
         public Room Save(Room entity)
         {
             return _service.Save(entity);
         }
-
 
         public IEnumerable<Room> GetAll()
         {
@@ -36,10 +34,6 @@ namespace Controller
         {
             _service.Delete(entity);
         }
-
-
-
-
 
         public Room Get(long id)
         {

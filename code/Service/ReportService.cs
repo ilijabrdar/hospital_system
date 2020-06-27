@@ -32,7 +32,7 @@ namespace Service
             return retVal;    
         }
 
-        public RoomOccupationReportDTO GenerateRoomOccupationReport(Room room, Period period)  //arguments: Room room, Period period
+        public RoomOccupationReportDTO GenerateRoomOccupationReport(Room room, Period period)  
         {
             RoomOccupationReportDTO report = new RoomOccupationReportDTO();
 

@@ -17,7 +17,6 @@ namespace bolnica.Controller.decorators
             TherapyController = therapyController;
             Role = role;
             AuthorizedUsers = new Dictionary<string, List<string>>();
-            AuthorizedUsers["AssignCurrentTherapy"] = new List<String>() { "Patient" };
             AuthorizedUsers["Delete"] = new List<String>() { "Doctor" };
             AuthorizedUsers["Edit"] = new List<String>() { "Doctor" };
             AuthorizedUsers["Get"] = new List<String>() { "Doctor" };

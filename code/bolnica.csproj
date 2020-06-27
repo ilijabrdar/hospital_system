@@ -143,6 +143,7 @@
     <Compile Include="Controller\abstract\IDoctorController.cs" />
     <Compile Include="Controller\abstract\IDrugController.cs" />
     <Compile Include="Controller\abstract\IGetterController.cs" />
+    <Compile Include="Controller\abstract\INotificationController.cs" />
     <Compile Include="Controller\abstract\IPatientController.cs" />
     <Compile Include="Controller\abstract\IDoctorGradeController.cs" />
     <Compile Include="Controller\abstract\IEquipmentController.cs" />
@@ -685,7 +686,6 @@
     <Content Include="Resources\Data\SecretaryFile.txt" />
     <Content Include="Resources\Data\StateFile.txt" />
     <Content Include="Resources\Data\TownFile.txt" />
-    <Content Include="Resources\Images\kim.jpg" />
     <Content Include="Resources\LoggedIn\config.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -717,6 +717,9 @@
     <None Include="Resources\Data\therapyFile.csv" />
     <None Include="Resources\Data\upcomingExamination.csv" />
     <None Include="Resources\Reports\Report.pdf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\Images\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
