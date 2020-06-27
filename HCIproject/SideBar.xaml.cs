@@ -122,7 +122,7 @@ namespace HCIproject
         {
             var app = Application.Current as App;
 
-            brojPregleda.Content = app.ExaminationController.GetUpcomingExaminationsByUser(user).Count;
+            brojPregleda.Content = app.ExaminationDecorator.GetUpcomingExaminationsByUser(user).Count;
             List<NotifyDoctorBusinessDay> ret = app.NotificationController.NotifyDoctorOfUpcomingBusinessDays(user);
 
             foreach(var r in ret)
@@ -383,7 +383,7 @@ namespace HCIproject
             var app = Application.Current as App;
 
 
-            foreach (var article in app.ArticleController.GetAll())
+            foreach (var article in app.ArticleDecorator.GetAll())
             {
 
                 Border b = new Border();
@@ -454,7 +454,7 @@ namespace HCIproject
         {
             var app = Application.Current as App;
             List<Article> articles = new List<Article>();
-            foreach (var article in app.ArticleController.GetAll())
+            foreach (var article in app.ArticleDecorator.GetAll())
             {
                 if (article.Topic.Contains(input))
                 {
@@ -476,7 +476,7 @@ namespace HCIproject
         {
             var app = Application.Current as App;
             DrugValidationPanel.Children.Clear();
-            if (app.DrugController.GetNotApprovedDrugs().Count == 0)
+            if (app.DrugDecorator.GetNotApprovedDrugs().Count == 0)
             {
                 Grid myGrid = new Grid();
                 myGrid.Width = 250;
@@ -500,7 +500,7 @@ namespace HCIproject
             }
             else
             {
-                foreach (var drug in app.DrugController.GetNotApprovedDrugs())
+                foreach (var drug in app.DrugDecorator.GetNotApprovedDrugs())
                 {
                     Grid myGrid = new Grid();
                     myGrid.Width = 250;
@@ -561,7 +561,7 @@ namespace HCIproject
             var app = Application.Current as App;
             Grid_Grid.Children.Clear();
             num = 0;
-            foreach (var exam in app.ExaminationController.GetUpcomingExaminationsByUser(user)) 
+            foreach (var exam in app.ExaminationDecorator.GetUpcomingExaminationsByUser(user)) 
             {
                 if (exam.Period.StartDate.Date.Date.ToString() == DateTime.Now.Date.Date.ToString())
                 {
@@ -634,7 +634,7 @@ namespace HCIproject
             var app = Application.Current as App;
 
             List<long> helpExam = new List<long>();
-            foreach (var exam in app.ExaminationController.GetUpcomingExaminationsByUser(user))
+            foreach (var exam in app.ExaminationDecorator.GetUpcomingExaminationsByUser(user))
             {
                 if (!helpExam.Contains(exam.User.Id))
                 {
@@ -679,7 +679,7 @@ namespace HCIproject
 
                 }
             }
-            foreach (var exam in app.ExaminationController.GetFinishedxaminationsByUser(user))
+            foreach (var exam in app.ExaminationDecorator.GetFinishedxaminationsByUser(user))
             {
                 if (!helpExam.Contains(exam.User.Id))
                 {
@@ -747,7 +747,7 @@ namespace HCIproject
             var app = Application.Current as App;
             Examination exam = (Examination)((Button)sender).Tag;
 
-            app.ExaminationController.Delete(exam);
+            app.ExaminationDecorator.Delete(exam);
             setViewUpcExam();
 
         }
@@ -794,11 +794,11 @@ namespace HCIproject
         {
             var app = Application.Current as App;
 
-            if (app.HospitalizationController.GetAll() == null)
+            if (app.HospitalizationDecorator.GetAll() == null)
             {
                 return;
             }
-            foreach (var hospitalization in app.HospitalizationController.GetHospitalizationByDoctor(user))
+            foreach (var hospitalization in app.HospitalizationDecorator.GetHospitalizationByDoctor(user))
             {
                 Border b = new Border();
                 b.BorderThickness = new Thickness(2);
@@ -845,11 +845,11 @@ namespace HCIproject
         {
             var app = Application.Current as App;
 
-            if (app.OperationController.GetOperationsByDoctor(user) == null)
+            if (app.OperationDecorator.GetOperationsByDoctor(user) == null)
             {
                 return;
             }
-            foreach (var operation in app.OperationController.GetOperationsByDoctor(user))
+            foreach (var operation in app.OperationDecorator.GetOperationsByDoctor(user))
             {
                 Border b = new Border();
                 b.BorderThickness = new Thickness(2);

@@ -58,7 +58,7 @@ namespace HCIproject
             else
             {
                 var app = Application.Current as App;
-                foreach (Drug drug in app.DrugController.GetAll())
+                foreach (Drug drug in app.DrugDecorator.GetAll())
                 {
                     if (drug.Name == cBox.SelectedItem.ToString())
                     {
@@ -84,8 +84,8 @@ namespace HCIproject
                     {
                         drug1.Alternative.Add(drug2);
                         drug2.Alternative.Add(drug1);
-                        app.DrugController.Edit(drug1);
-                        app.DrugController.Edit(drug2);
+                        app.DrugDecorator.Edit(drug1);
+                        app.DrugDecorator.Edit(drug2);
                         string messageBoxText = "Uspesno ste dodali alternativni lek " + cBox1.SelectedItem.ToString() + " za lek " + cBox.SelectedItem.ToString() + "!";
                         string caption = "Potvrda dodavanja alternativnog leka!";
                         MessageBoxButton button = MessageBoxButton.OK;
@@ -106,8 +106,8 @@ namespace HCIproject
                 {
                     drug1.Alternative.Add(drug2);
                     drug2.Alternative.Add(drug1);
-                    app.DrugController.Edit(drug1);
-                    app.DrugController.Edit(drug2);
+                    app.DrugDecorator.Edit(drug1);
+                    app.DrugDecorator.Edit(drug2);
 
                     string messageBoxText = "Uspesno ste dodali alternativni lek " + cBox1.SelectedItem.ToString() + " za lek " + cBox.SelectedItem.ToString() + "!";
                     string caption = "Potvrda dodavanja alternativnog leka!";
@@ -128,7 +128,7 @@ namespace HCIproject
         private void initializeComboBox()
         {// cBox drugPass
             var app = Application.Current as App;
-            foreach (Drug drug in app.DrugController.GetAll())
+            foreach (Drug drug in app.DrugDecorator.GetAll())
             {
                 cBox.Items.Add(drug.Name);
                 cBox1.Items.Add(drug.Name);
@@ -145,7 +145,7 @@ namespace HCIproject
             obavestenje.Content = "";
             String lek = cBox.SelectedItem.ToString();
 
-            foreach (Drug drug in app.DrugController.GetAll())
+            foreach (Drug drug in app.DrugDecorator.GetAll())
             {
                 if (lek.Equals(drug.Name))
                 {
@@ -161,7 +161,7 @@ namespace HCIproject
             obavestenje.Content = "";
             String lek = cBox1.SelectedItem.ToString();
 
-            foreach (Drug drug in app.DrugController.GetAll())
+            foreach (Drug drug in app.DrugDecorator.GetAll())
             {
                 if (lek.Equals(drug.Name))
                 {

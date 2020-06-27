@@ -53,7 +53,7 @@ namespace HCIproject
         private void setPatientInfo()
         {
             var app = Application.Current as App;
-            Patient patient = app.PatientController.Get(patientId);
+            Patient patient = app.PatientDecorator.Get(patientId);
             String imePrez = patient.FirstName + " " + patient.LastName;
             imePacijenta.Content = imePrez;
 
@@ -70,7 +70,7 @@ namespace HCIproject
         private void setOdeljenjeCMB()
         {
             var app = Application.Current as App;
-            foreach(var speciality in app.SpecialityController.GetAll())
+            foreach(var speciality in app.SpecialityDecorator.GetAll())
             {
                 if(speciality.Name!="Opsta praksa")
                     odeljenjeCMB.Items.Add(speciality.Name);
@@ -103,13 +103,13 @@ namespace HCIproject
             String doctorsInfo = lekarCMB.SelectedItem.ToString();
             String [] tokens = doctorsInfo.Split(")".ToCharArray());
             long doctorId = long.Parse(tokens[0]);
-            Doctor doctor = app.DoctorController.Get(doctorId);
+            Doctor doctor = app.DoctorDecorator.Get(doctorId);
 
             app.BusinessDayService._searchPeriods = new NoPrioritySearch();
             Period period = new Period();
             period.StartDate = DateTime.Parse(Picker.Text);
             BusinessDayDTO businessDayDTO = new BusinessDayDTO(doctor, period);
-            specialistExaminations = app.BusinessDayController.Search(businessDayDTO);
+            specialistExaminations = app.BusinessDayDecorator.Search(businessDayDTO);
             specialistGrid.ItemsSource = specialistExaminations;
             specialistGrid.Visibility = Visibility.Visible;
         }
@@ -125,23 +125,23 @@ namespace HCIproject
             String doctorsInfo = lekarCMB.SelectedItem.ToString();
             String[] tokens = doctorsInfo.Split(")".ToCharArray());
             long doctorId = long.Parse(tokens[0]);
-            Doctor doctor = app.DoctorController.Get(doctorId);
+            Doctor doctor = app.DoctorDecorator.Get(doctorId);
             
             ExaminationDTO scheduleExam = (ExaminationDTO)selectedItem;
             Period period = scheduleExam.Period;
-            Patient patient = app.PatientController.Get(patientId);
+            Patient patient = app.PatientDecorator.Get(patientId);
             Examination examination = new Examination(patient, doctor, period);
-            app.ExaminationController.Save(examination);
-            BusinessDay day = app.BusinessDayController.GetExactDay(doctor, period.StartDate);
+            app.ExaminationDecorator.Save(examination);
+            BusinessDay day = app.BusinessDayDecorator.GetExactDay(doctor, period.StartDate);
             List<Period> pom = new List<Period>();
             pom.Add(period);
-            app.BusinessDayController.MarkAsOccupied(pom, day);
+            app.BusinessDayDecorator.MarkAsOccupied(pom, day);
 
 
             if (specialistGrid.SelectedItem != null)
             {
                 referral = new Referral(period, doctor);
-                app.ReferralController.Save(referral);
+                app.RefferalDecorator.Save(referral);
                 ExaminationDTO examDTO = (ExaminationDTO)specialistGrid.SelectedItem;
                 string messageBoxText = "Uspesno ste zakazali pregled kod lekara" + examDTO.Doctor.FirstName + " " + examDTO.Doctor.LastName + " dana" + " " + examDTO.Period.StartDate;
                 string caption = "Potvrda uputa za lekara specijalistu!";
@@ -171,7 +171,7 @@ namespace HCIproject
             if (odeljenjeCMB.SelectedItem == null) return;
 
             Speciality speciality = new Speciality();
-            foreach (Speciality spec in app.SpecialityController.GetAll())
+            foreach (Speciality spec in app.SpecialityDecorator.GetAll())
             {
                 if (spec.Name == odeljenjeCMB.SelectedItem.ToString())
                 {
@@ -179,7 +179,7 @@ namespace HCIproject
                 }
             }
             lekarCMB.Items.Clear();
-            List<Doctor> doctors= app.DoctorController.GetDoctorsBySpeciality(speciality);
+            List<Doctor> doctors= app.DoctorDecorator.GetDoctorsBySpeciality(speciality);
             foreach(Doctor doctor in doctors)
             {
                 lekarCMB.Items.Add(doctor.Id+")"+ doctor.FullName);

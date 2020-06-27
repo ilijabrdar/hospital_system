@@ -30,7 +30,7 @@ namespace HCIproject
             user = _user;
             drugId = id;
             var app = Application.Current as App;
-            foreach (Ingredient ingredient in app.IngredientController.GetAll())
+            foreach (Ingredient ingredient in app.IngredientDecorator.GetAll())
             {
                 sastojci.Add(ingredient);
             }
@@ -39,7 +39,7 @@ namespace HCIproject
         private void initializeComboBox()
         {
             var app = Application.Current as App;
-            Drug drug = app.DrugController.Get(drugId);
+            Drug drug = app.DrugDecorator.Get(drugId);
             List<Ingredient> drugIngredients = drug.Ingredients;
             bool flag = false;
             if (drugIngredients.Count == sastojci.Count)
@@ -95,7 +95,7 @@ namespace HCIproject
                         MessageBoxImage icon1 = MessageBoxImage.Information;
                         MessageBoxResult result1 = MessageBox.Show(messageBoxText1, caption1, button1, icon1);
                     }
-                    app.IngredientController.Edit(noviLek);
+                    app.IngredientDecorator.Edit(noviLek);
 
                 }
                 catch
@@ -119,9 +119,9 @@ namespace HCIproject
                     MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
 
   
-                    Drug drug = app.DrugController.Get(drugId);
+                    Drug drug = app.DrugDecorator.Get(drugId);
                     drug.Ingredients.Add(noviLek);
-                    app.DrugController.Edit(drug);
+                    app.DrugDecorator.Edit(drug);
                     this.Close();
 
                 }

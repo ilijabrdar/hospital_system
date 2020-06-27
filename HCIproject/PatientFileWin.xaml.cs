@@ -51,7 +51,7 @@ namespace HCIproject
         private void setPatientInfo()
         {
             var app = Application.Current as App;
-            Patient patient = app.PatientController.Get(id);
+            Patient patient = app.PatientDecorator.Get(id);
             String imePrez = patient.FirstName + " " + patient.LastName;
             imePacijenta.Content = imePrez;
 
@@ -68,7 +68,7 @@ namespace HCIproject
             var app = Application.Current as App;
             List<Examination> examinations = new List<Examination>();
 
-            Patient _patient = app.PatientController.Get(id);
+            Patient _patient = app.PatientDecorator.Get(id);
             examinations = _patient.patientFile.Examination;
             if (examinations == null)
             {
@@ -174,7 +174,7 @@ namespace HCIproject
         {
             var app = Application.Current as App;
             List<Hospitalization> hospitalizations = new List<Hospitalization>();
-            Patient _patient = app.PatientController.Get(id);
+            Patient _patient = app.PatientDecorator.Get(id);
             hospitalizations = _patient.patientFile.Hospitalization;
             if (hospitalizations == null)
             {
@@ -222,7 +222,7 @@ namespace HCIproject
         {
             var app = Application.Current as App;
             List<Operation> operations = new List<Operation>();
-            Patient _patient = app.PatientController.Get(id);
+            Patient _patient = app.PatientDecorator.Get(id);
             operations = _patient.patientFile.Operation;
             if (operations == null)
             {
@@ -349,12 +349,12 @@ namespace HCIproject
                 basicInfoheader.Font.SetStyle(1);
                 basicInfo.Add(basicInfoheader);
                 basicInfo.Add(new Chunk("\n"));
-                basicInfo.Add("Ime i prezime pacijenta: " + app.PatientController.Get(id).FullName);
+                basicInfo.Add("Ime i prezime pacijenta: " + app.PatientDecorator.Get(id).FullName);
                 basicInfo.Add(new Chunk("\n"));
-                basicInfo.Add("Datum rodjenja: " + app.PatientController.Get(id).DateOfBirth);
+                basicInfo.Add("Datum rodjenja: " + app.PatientDecorator.Get(id).DateOfBirth);
                 basicInfo.Add(new Chunk("\n"));
            
-                DoctorReportDTO doctorDTO = app.ReportController.GenerateAnamnesisPrescriptionReport(examination);
+                DoctorReportDTO doctorDTO = app.ReportDecorator.GenerateAnamnesisPrescriptionReport(examination);
 
                 Paragraph anamnesis = new Paragraph();
                 anamnesis.Add(new Chunk("\n"));
@@ -447,7 +447,7 @@ namespace HCIproject
         {//dodaj alergiju
 
             var app = Application.Current as App;
-            Patient patient = app.PatientController.Get(id);
+            Patient patient = app.PatientDecorator.Get(id);
 
             AllergyWin allergyWin = new AllergyWin((Doctor)user, patient);
 

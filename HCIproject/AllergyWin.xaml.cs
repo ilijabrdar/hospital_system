@@ -59,7 +59,7 @@ namespace HCIproject
                 patient.patientFile.Allergy.Add(new Allergy(alergijaDodaj.Text));
             }
 
-            app.PatientFileController.Edit(patient.patientFile);
+            app.PatientFileDecorator.Edit(patient.patientFile);
             this.Close();
         }
     }

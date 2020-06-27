@@ -41,7 +41,7 @@ namespace HCIproject
         private void setPatientInfo()
         {
             var app = Application.Current as App;
-            Patient patient = app.PatientController.Get(patientId);
+            Patient patient = app.PatientDecorator.Get(patientId);
             String imePrez = patient.FirstName + " " + patient.LastName;
             imePacijenta.Content = imePrez;
 
@@ -57,7 +57,7 @@ namespace HCIproject
         private void setRoomCombo()
         {
             var app = Application.Current as App;
-            foreach(var room in app.RoomController.GetRoomsForHospitalization())
+            foreach(var room in app.RoomDecorator.GetRoomsForHospitalization())
             {
                 roomCMB.Items.Add(room.RoomCode+"-"+room.RoomType.Name);
             }
@@ -95,7 +95,7 @@ namespace HCIproject
                 string id = tokens[0];
                 Room room= new Room();
 
-                foreach(Room r in app.RoomController.GetAll())
+                foreach(Room r in app.RoomDecorator.GetAll())
                 {
                     if (r.RoomCode == id)
                     {
@@ -103,12 +103,12 @@ namespace HCIproject
                     }
                 }
                 room.CurrentNumberOfPatients++;
-                app.RoomController.Edit(room);
-                Patient patient = app.PatientController.Get(patientId);
+                app.RoomDecorator.Edit(room);
+                Patient patient = app.PatientDecorator.Get(patientId);
                 if (StartDate.SelectedDate == null || EndDate.SelectedDate == null) return;
                 Period period = new Period(StartDate.SelectedDate, EndDate.SelectedDate);
 
-                app.HospitalizationController.Save(new Hospitalization(patient, user, period, room));
+                app.HospitalizationDecorator.Save(new Hospitalization(patient, user, period, room));
                 string messageBoxText = "Uspesno ste izvrsili hospitalizaciju pacijenta!";
                 string caption = "Hospitalizacija";
                 MessageBoxButton button = MessageBoxButton.OK;

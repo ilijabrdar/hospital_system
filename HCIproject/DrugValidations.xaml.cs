@@ -56,7 +56,7 @@ namespace HCIproject
             customLabels.Clear();
             data.Clear();
             var app = Application.Current as App;
-            Drug drug = app.DrugController.Get(drugId);
+            Drug drug = app.DrugDecorator.Get(drugId);
 
             foreach (Ingredient ing in drug.Ingredients)
             {
@@ -130,13 +130,13 @@ namespace HCIproject
             if (result == MessageBoxResult.Yes)
             {
                 var app = Application.Current as App;
-                Drug drug = app.DrugController.Get(drugId);
+                Drug drug = app.DrugDecorator.Get(drugId);
 
                 foreach (Ingredient ing in vratiObrisano)
                 {
                     drug.Ingredients.Add(ing);
                 }
-                app.DrugController.Edit(drug);
+                app.DrugDecorator.Edit(drug);
 
                 bool flag = false;
                 //u obrisi dodato se nalaze samo oni na pocetku koji su bili tu
@@ -156,7 +156,7 @@ namespace HCIproject
                         drug.Ingredients.Remove(ing);
                     }
                 }
-                app.DrugController.Edit(drug);
+                app.DrugDecorator.Edit(drug);
 
             }
 
@@ -193,9 +193,9 @@ namespace HCIproject
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {//potvrdjeni
             var app = Application.Current as App;
-            Drug drug = app.DrugController.Get(drugId);
+            Drug drug = app.DrugDecorator.Get(drugId);
             drug.Approved = true;
-            app.DrugController.Edit(drug);
+            app.DrugDecorator.Edit(drug);
 
             string messageBoxText = "Uspesno ste validirali lek " + drug.Name + "!";
             string caption = "Potvrda validacije leka!";
@@ -210,8 +210,8 @@ namespace HCIproject
         private void dataInitialize()
         {
             var app = Application.Current as App;
-            String name = app.DrugController.Get(drugId).Name;
-            long sifra = app.DrugController.Get(drugId).Id;
+            String name = app.DrugDecorator.Get(drugId).Name;
+            long sifra = app.DrugDecorator.Get(drugId).Id;
             imeLeka.Content = name.ToString();
             sifraLeka.Content = sifra.ToString();
             Random rand = new Random();
@@ -222,14 +222,14 @@ namespace HCIproject
         private void fillTable()
         {
             var app = Application.Current as App;
-            List<Ingredient> drugIngr = app.DrugController.Get(drugId).Ingredients;
+            List<Ingredient> drugIngr = app.DrugDecorator.Get(drugId).Ingredients;
 
-            ingrediantsGrid.ItemsSource = app.DrugController.Get(drugId).Ingredients;
+            ingrediantsGrid.ItemsSource = app.DrugDecorator.Get(drugId).Ingredients;
 
             if (!flag)
             {
                 flag = true;
-                foreach (Ingredient ing in app.DrugController.Get(drugId).Ingredients)
+                foreach (Ingredient ing in app.DrugDecorator.Get(drugId).Ingredients)
                 {
                     obrisiDodato.Add(ing);
                 }
@@ -243,7 +243,7 @@ namespace HCIproject
 
             var app = Application.Current as App;
             ingrediantsGrid.ItemsSource = null;
-            ingrediantsGrid.ItemsSource = app.DrugController.Get(drugId).Ingredients;
+            ingrediantsGrid.ItemsSource = app.DrugDecorator.Get(drugId).Ingredients;
             fillGraph();
         }
 
@@ -253,7 +253,7 @@ namespace HCIproject
             {
                 Ingredient ingredient = (Ingredient)ingrediantsGrid.SelectedItem;
                 var app = Application.Current as App;
-                Drug drug = app.DrugController.Get(drugId);
+                Drug drug = app.DrugDecorator.Get(drugId);
 
                 foreach (Ingredient ing in drug.Ingredients)
                 {
@@ -264,7 +264,7 @@ namespace HCIproject
                         break;
                     }
                 }
-                app.DrugController.Edit(drug);
+                app.DrugDecorator.Edit(drug);
 
                 string messageBoxText = "Uspesno ste obrisali sastojak " + ingredient.Name+ "!";
                 string caption = "Potvrda brisanja sastojka!";
@@ -273,7 +273,7 @@ namespace HCIproject
                 MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
 
                 ingrediantsGrid.ItemsSource = null;
-                ingrediantsGrid.ItemsSource = app.DrugController.Get(drugId).Ingredients;
+                ingrediantsGrid.ItemsSource = app.DrugDecorator.Get(drugId).Ingredients;
                 fillGraph();
             }
         }

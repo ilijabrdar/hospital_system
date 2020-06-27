@@ -55,7 +55,7 @@ namespace HCIproject
         {
 
             var app = Application.Current as App;
-            foreach (Diagnosis diag in app.DiagnosisController.GetAll())
+            foreach (Diagnosis diag in app.DiagnosisDecorator.GetAll())
             {
                 diagnosisCombo.Items.Add(diag.Name);
             }
@@ -64,7 +64,7 @@ namespace HCIproject
         {
 
             var app = Application.Current as App;
-            foreach(Symptom symptom in app.SymptomController.GetAll())
+            foreach(Symptom symptom in app.SympthomDecorator.GetAll())
             {
                 simptomiCombo.Items.Add(symptom.Name);
             }
@@ -87,7 +87,7 @@ namespace HCIproject
                 var app = Application.Current as App;
                 String diagnosisString = diagnosisCombo.SelectedItem.ToString();
                 Diagnosis diagnosis = new Diagnosis();
-                foreach (Diagnosis d in app.DiagnosisController.GetAll())
+                foreach (Diagnosis d in app.DiagnosisDecorator.GetAll())
                 {
                     if (diagnosisString == d.Name)
                     {
@@ -96,17 +96,17 @@ namespace HCIproject
                 }
                 
                 Patient patient = new Patient();
-                patient = app.PatientController.Get(patientId);
+                patient = app.PatientDecorator.Get(patientId);
                 User userPatient = patient as User;
                 
                 Examination saveExamination = new Examination(userPatient, user, examination.Period, diagnosis, new Anemnesis(anamnezaTxt.Text), PrescriptionWin.terapija, RefferalWin.referral, PrescriptionWin.prescription);
-                app.ExaminationController.SaveFinishedExamination(saveExamination);
+                app.ExaminationDecorator.SaveFinishedExamination(saveExamination);
 
-                app.ExaminationController.Delete(examination);
-                BusinessDay selectedDay = app.BusinessDayController.GetExactDay(examination.Doctor, examination.Period.StartDate);
+                app.ExaminationDecorator.Delete(examination);
+                BusinessDay selectedDay = app.BusinessDayDecorator.GetExactDay(examination.Doctor, examination.Period.StartDate);
                 List<DateTime> pom = new List<DateTime>();
                 pom.Add(examination.Period.StartDate);
-                app.BusinessDayController.FreePeriod(selectedDay, pom);
+                app.BusinessDayDecorator.FreePeriod(selectedDay, pom);
 
                 string messageBoxText = "Pregled uspesno zavrsen";
                 string caption = "Pregled gotov";

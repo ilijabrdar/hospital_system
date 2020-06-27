@@ -49,7 +49,7 @@ namespace HCIproject
         private void setPatientInfo()
         {
             var app = Application.Current as App;
-            Patient patient = app.PatientController.Get(id);
+            Patient patient = app.PatientDecorator.Get(id);
             String imePrez = patient.FirstName + " " + patient.LastName;
             imePacijenta.Content = imePrez;
 
@@ -163,18 +163,18 @@ namespace HCIproject
             ExaminationDTO scheduleExam = (ExaminationDTO)selectedItem;
 
             Period period = new Period(operationList[0].Period.StartDate, operationList.LastOrDefault().Period.EndDate);
-            Patient patient = app.PatientController.Get(id);
+            Patient patient = app.PatientDecorator.Get(id);
 
             Operation operation = new Operation(patient, user, "Operacija kolena", period, operationList[0].Room);
-            app.OperationController.Save(operation);
+            app.OperationDecorator.Save(operation);
 
-            BusinessDay day = app.BusinessDayController.GetExactDay(user, period.StartDate);
+            BusinessDay day = app.BusinessDayDecorator.GetExactDay(user, period.StartDate);
             List<Period> pom = new List<Period>();
             foreach(ExaminationDTO p in operationList)
             {
                 pom.Add(p.Period);
             }
-            app.BusinessDayController.MarkAsOccupied(pom, day);
+            app.BusinessDayDecorator.MarkAsOccupied(pom, day);
 
 
             if (specialistGrid.SelectedItem != null)

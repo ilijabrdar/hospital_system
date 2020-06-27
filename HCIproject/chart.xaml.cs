@@ -30,7 +30,7 @@ namespace HCIproject
 
 
 			var app = Application.Current as App;
-			Drug drug = app.DrugController.Get(id);
+			Drug drug = app.DrugDecorator.Get(id);
 
 			foreach(Ingredient ing in drug.Ingredients)
 			{

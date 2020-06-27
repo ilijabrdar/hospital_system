@@ -67,7 +67,7 @@ namespace HCIproject
         {
             var app = Application.Current as App;
             List<Article> articles = new List<Article>();
-            foreach (var article in app.ArticleController.GetAll())
+            foreach (var article in app.ArticleDecorator.GetAll())
             {
                 if (article.Topic.Contains(input))
                 {
@@ -81,7 +81,7 @@ namespace HCIproject
             var app = Application.Current as App;
 
 
-            foreach (var article in app.ArticleController.GetAll())
+            foreach (var article in app.ArticleDecorator.GetAll())
             {
                 Border b = new Border();
                 b.BorderThickness = new Thickness(4);

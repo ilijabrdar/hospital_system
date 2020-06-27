@@ -53,7 +53,7 @@ namespace HCIproject
             }
             else {
                 article = new Article(DateTime.Today, user, Topic, NewArticle);
-                app.ArticleController.Save(article);
+                app.ArticleDecorator.Save(article);
 
                 string messageBoxText1 = "Uspesno ste uneli članak!";
                 string caption1 = "Unos novog članka";

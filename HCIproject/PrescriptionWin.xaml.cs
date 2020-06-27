@@ -47,7 +47,7 @@ namespace HCIproject
         private void setPatientInfo()
         {
             var app = Application.Current as App;
-            Patient patient = app.PatientController.Get(patientId);
+            Patient patient = app.PatientDecorator.Get(patientId);
             String imePrez = patient.FirstName + " " + patient.LastName;
             imePacijenta.Content = imePrez;
 
@@ -63,7 +63,7 @@ namespace HCIproject
         private void setDrugCombo()
         {
             var app = Application.Current as App;
-            foreach(var lek in app.DrugController.GetAll())
+            foreach(var lek in app.DrugDecorator.GetAll())
             {
                 lekovi.Items.Add(lek.Name);
             }
@@ -83,7 +83,7 @@ namespace HCIproject
 
                 foreach(String drug in lekovi.SelectedItems)
                 {
-                    foreach (Drug lek in app.DrugController.GetAll())
+                    foreach (Drug lek in app.DrugDecorator.GetAll())
                     {
                         if (drug == lek.Name)
                         {
@@ -96,8 +96,8 @@ namespace HCIproject
                 prescription = new Prescription(period,lekoviListBox);
 
 
-                app.PrescriptionController.Save(prescription);
-                app.TherapyController.Save(terapija);
+                app.PrescriptionDecorator.Save(prescription);
+                app.TherapyDecorator.Save(terapija);
                 string messageBoxText = "Uspesno!";
                 string caption = "Recept";
                 MessageBoxButton button = MessageBoxButton.OK;

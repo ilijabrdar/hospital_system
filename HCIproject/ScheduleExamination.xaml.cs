@@ -44,7 +44,7 @@ namespace HCIproject
         private void setPatientInfo()
         {
             var app = Application.Current as App;
-            Patient patient = app.PatientController.Get(id);
+            Patient patient = app.PatientDecorator.Get(id);
             String imePrez = patient.FirstName + " " + patient.LastName;
             imePacijenta.Content = imePrez;
 
@@ -80,7 +80,7 @@ namespace HCIproject
                 Period period = new Period();
                 period.StartDate = DateTime.Parse(Picker.Text);
                 BusinessDayDTO businessDayDTO = new BusinessDayDTO(user, period);
-                upcomingExaminations = app.BusinessDayController.Search(businessDayDTO);
+                upcomingExaminations = app.BusinessDayDecorator.Search(businessDayDTO);
                 specialistGrid.Visibility = Visibility.Visible;
                 specialistGrid.ItemsSource = upcomingExaminations; 
         }
@@ -98,13 +98,13 @@ namespace HCIproject
             ExaminationDTO scheduleExam = (ExaminationDTO)selectedItem;
 
             Period period = scheduleExam.Period;
-            Patient patient = app.PatientController.Get(id);
+            Patient patient = app.PatientDecorator.Get(id);
             Examination examination = new Examination(patient, user, period);
-            app.ExaminationController.Save(examination);
-            BusinessDay day = app.BusinessDayController.GetExactDay(user, period.StartDate);
+            app.ExaminationDecorator.Save(examination);
+            BusinessDay day = app.BusinessDayDecorator.GetExactDay(user, period.StartDate);
             List<Period> pom = new List<Period>();
             pom.Add(period);
-            app.BusinessDayController.MarkAsOccupied(pom, day);
+            app.BusinessDayDecorator.MarkAsOccupied(pom, day);
 
 
                 if (specialistGrid.SelectedItem != null)
