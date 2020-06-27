@@ -197,7 +197,7 @@
                                     </TextBox>
                                     <ComboBox x:Name="StateCombo" HorizontalAlignment="Left" Margin="150,260,0,0" VerticalAlignment="Top" Width="263" DisplayMemberPath="Name" LostFocus="UpdateTownAddress"/>
                                     <ComboBox x:Name="TownCombo" HorizontalAlignment="Left" Margin="150,300,0,0" VerticalAlignment="Top" Width="263" DisplayMemberPath="Name" LostFocus="UpdateAddress"/>
-                                    <ComboBox x:Name="AddressCombo" HorizontalAlignment="Left" Margin="150,340,0,0" VerticalAlignment="Top" Width="263" DisplayMemberPath="FullAddress"/>
+                                    <ComboBox x:Name="AddressCombo" HorizontalAlignment="Left" Margin="150,340,0,0" VerticalAlignment="Top" Width="263" DisplayMemberPath="FullAddress" SelectedItem="{Binding Path=SelectedAddress}"/>
                                     <Label Content="/" HorizontalAlignment="Left" Margin="228,220,0,0" VerticalAlignment="Top"/>
                                     <Label Content="/" HorizontalAlignment="Left" Margin="323,220,0,0" VerticalAlignment="Top"/>
 
@@ -437,30 +437,11 @@
                                 </Style>
                             </TextBlock.Style>
                         </TextBlock>
-                        <TextBox x:Name="IGuestPhone" HorizontalAlignment="Left" Height="23" Margin="192,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240">
-                            <TextBox.Text>
-                                <Binding Path="GuestPatient.Phone" UpdateSourceTrigger="PropertyChanged">
-                                    <Binding.ValidationRules>
-                                        <val:PhoneValidation ValidationStep="RawProposedValue"/>
-                                    </Binding.ValidationRules>
-                                </Binding>
-                            </TextBox.Text>
-                        </TextBox>
-                        <TextBox x:Name="IGuestEmail" HorizontalAlignment="Left" Height="23" Margin="192,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240">
-                            <TextBox.Text>
-                                <Binding Path="GuestPatient.Email" UpdateSourceTrigger="PropertyChanged">
-                                    <Binding.ValidationRules>
-                                        <val:EmailValidation ValidationStep="RawProposedValue"/>
-                                    </Binding.ValidationRules>
-                                </Binding>
-                            </TextBox.Text>
-                        </TextBox>
+                        <TextBox x:Name="IGuestPhone" HorizontalAlignment="Left" Height="23" Margin="192,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" Text="{Binding Path=GuestPatient.Phone}"/>
+                        <TextBox x:Name="IGuestEmail" HorizontalAlignment="Left" Height="23" Margin="192,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" Text="{Binding Path=GuestPatient.Email}"/>
                         <Label Content="/" HorizontalAlignment="Left" Margin="247,140,0,0" VerticalAlignment="Top"/>
                         <Label Content="/" HorizontalAlignment="Left" Margin="322,140,0,0" VerticalAlignment="Top"/>
                         <Button x:Name="SearchBtn"  Content="_Pretraži" HorizontalAlignment="Left" Margin="232,260,0,0" VerticalAlignment="Top" Click="FindFreeAppointment" ToolTip ="Pretraga po lekaru i terminu" GotFocus="DisplayToolTip" LostFocus="RemoveToolTip"/>
-                        <Button HorizontalAlignment="Left" Margin="10,260,0,0" VerticalAlignment="Top" Width="30" Background="Transparent" BorderBrush="Transparent" Click="SwapFreeLists" RenderTransformOrigin="0.511,0.12">
-                            <Image Source="blue_arrow.png" RenderTransformOrigin="0.571,0.571"/>
-                        </Button>
                     </Grid>
                     <DataGrid x:Name="EmptyExaminations" Grid.Row="1" HorizontalAlignment="Stretch" Margin="10,10,10,10" VerticalAlignment="Stretch" ItemsSource="{Binding FreeSlots}" 
                               IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False">
@@ -472,8 +453,8 @@
                         </DataGrid.Columns>
                     </DataGrid>
                     <Label x:Name="SuccessLabel" Visibility="Collapsed" Content="Pregled uspešno zakazan." Margin="273,12,215,10" Grid.Row="2" FontStyle="Italic" Foreground="Green"/>
-                    <Button x:Name="ScheduleBtn" Grid.Row="2" Content="_Zakaži" HorizontalAlignment="Right" Width="200" Height="25" Margin="0 0 10 0" ToolTip ="Zakaži novi preged" GotFocus="DisplayToolTip" LostFocus="RemoveToolTip" Click="Schedule" IsEnabled="False">
-                        <Button.Style>
+                    <Button x:Name="ScheduleBtn" Grid.Row="2" Content="_Zakaži" HorizontalAlignment="Right" Width="200" Height="25" Margin="0 0 10 0" ToolTip ="Zakaži novi preged" GotFocus="DisplayToolTip" LostFocus="RemoveToolTip" Click="Schedule">
+                        <!--<Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="IsEnabled" Value="False"/>
                                 <Style.Triggers>
@@ -485,14 +466,12 @@
                                             <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IGuestDay}" Value="False"/>
                                             <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IGuestMonth}" Value="False"/>
                                             <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IGuestYear}" Value="False"/>
-                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IGuestPhone}" Value="False"/>
-                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IGuestEmail}" Value="False"/>
                                         </MultiDataTrigger.Conditions>
                                         <Setter Property="IsEnabled" Value="True"/>
                                     </MultiDataTrigger>
                                 </Style.Triggers>
                             </Style>
-                        </Button.Style>
+                        </Button.Style>-->
                     </Button>
                 </Grid>
             </TabItem>

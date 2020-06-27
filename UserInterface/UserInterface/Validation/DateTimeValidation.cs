@@ -130,6 +130,58 @@ namespace UserInterface.Validation
         }
     }
 
+    public class FromDaySearchValidation : ValidationRule
+    {
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            String val = value as String;
+            if (String.IsNullOrEmpty(val))
+                return new ValidationResult(false, "Obavezno");
+
+            if (int.TryParse(val, out int day))
+            {
+                if (AppointmentSearch.FromYear == DateTime.Now.Year && AppointmentSearch.FromMonth == DateTime.Now.Month)
+                {
+                    if (day < DateTime.Now.Day || day > DateTime.DaysInMonth(AppointmentSearch.FromYear, AppointmentSearch.FromMonth))
+                        return new ValidationResult(false, DateTime.Now.Day + " - " + DateTime.DaysInMonth(AppointmentSearch.FromYear, AppointmentSearch.FromMonth));
+                }
+                else
+                {
+                    if (day < 1 || day > DateTime.DaysInMonth(AppointmentSearch.FromYear, AppointmentSearch.FromMonth))
+                        return new ValidationResult(false,  "1 - " + DateTime.DaysInMonth(AppointmentSearch.FromYear, AppointmentSearch.FromMonth));
+                }
+                return new ValidationResult(true, null);
+            }
+            return new ValidationResult(false, DateTime.Now.Day + " - " + DateTime.DaysInMonth(AppointmentSearch.FromYear, AppointmentSearch.FromMonth));
+        }
+    }
+
+    public class ToDaySearchValidation : ValidationRule
+    {
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            String val = value as String;
+            if (String.IsNullOrEmpty(val))
+                return new ValidationResult(false, "Obavezno");
+
+            if (int.TryParse(val, out int day))
+            {
+                if (AppointmentSearch.FromYear == AppointmentSearch.ToYear && AppointmentSearch.FromMonth == AppointmentSearch.ToMonth)
+                {
+                    if (day < AppointmentSearch.FromDay || day > DateTime.DaysInMonth(AppointmentSearch.ToYear, AppointmentSearch.ToMonth))
+                        return new ValidationResult(false, AppointmentSearch.FromDay + " - " + DateTime.DaysInMonth(AppointmentSearch.ToYear, AppointmentSearch.ToMonth));
+                }
+                else
+                {
+                    if (day < 1 || day > DateTime.DaysInMonth(AppointmentSearch.ToYear, AppointmentSearch.ToMonth))
+                        return new ValidationResult(false, "1 - " + DateTime.DaysInMonth(AppointmentSearch.ToYear, AppointmentSearch.ToMonth));
+                }
+                return new ValidationResult(true, null);
+            }
+            return new ValidationResult(false, "1 - " + DateTime.DaysInMonth(AppointmentSearch.FromYear, AppointmentSearch.FromMonth));
+        }
+    }
+
     public class FromDayReportValidation : ValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
@@ -354,6 +406,62 @@ namespace UserInterface.Validation
         }
     }
 
+    public class FromMonthSearchValidation : ValidationRule
+    {
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            String val = value as String;
+            if (String.IsNullOrEmpty(val))
+                return new ValidationResult(false, "Obavezno");
+
+            if (int.TryParse(val, out int month))
+            {
+                if (AppointmentSearch.FromYear == DateTime.Now.Year)
+                {
+                    if (month < DateTime.Now.Month || month > 12)
+                        return new ValidationResult(false, DateTime.Now.Month + " - 12");
+                }
+                else
+                {
+                    if (month < 1 || month > 12)
+                    {
+                        return new ValidationResult(false, "1 - 12");
+                    }
+                }
+                return new ValidationResult(true, null);
+            }
+            return new ValidationResult(false, "1 - 12");
+        }
+    }
+
+    public class ToMonthSearchValidation : ValidationRule
+    {
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            String val = value as String;
+            if (String.IsNullOrEmpty(val))
+                return new ValidationResult(false, "Obavezno");
+
+            if (int.TryParse(val, out int month))
+            {
+                if (AppointmentSearch.FromYear == AppointmentSearch.ToYear)
+                {
+                    if (month < AppointmentSearch.FromMonth || month > 12)
+                        return new ValidationResult(false, AppointmentSearch.FromMonth + " - 12");
+                }
+                else
+                {
+                    if (month < 1 || month > 12)
+                    {
+                        return new ValidationResult(false, "1 - 12");
+                    }
+                }
+                return new ValidationResult(true, null);
+            }
+            return new ValidationResult(false, "1 - 12");
+        }
+    }
+
     public class YearValidation : ValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
@@ -411,6 +519,40 @@ namespace UserInterface.Validation
                 return new ValidationResult(true, null);
             }
             return new ValidationResult(false, AppointmentFilter.FromYear + " - " + (DateTime.Now.Year + 5));
+        }
+    }
+
+    public class FromYearSearchValidation : ValidationRule
+    {
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            String val = value as String;
+            if (String.IsNullOrEmpty(val))
+                return new ValidationResult(false, "Obavezno");
+            if (int.TryParse(val, out int year))
+            {
+                if (year < DateTime.Now.Year || year > DateTime.Now.Year + 2)
+                    return new ValidationResult(false, DateTime.Now.Year + " - " + (DateTime.Now.Year + 2));
+                return new ValidationResult(true, null);
+            }
+            return new ValidationResult(false, DateTime.Now.Year + " - " + (DateTime.Now.Year + 2));
+        }
+    }
+
+    public class ToYearSearchValidation : ValidationRule
+    {
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            String val = value as String;
+            if (String.IsNullOrEmpty(val))
+                return new ValidationResult(false, "Obavezno");
+            if (int.TryParse(val, out int year))
+            {
+                if (year < AppointmentSearch.FromYear || year > DateTime.Now.Year + 2)
+                    return new ValidationResult(false, AppointmentSearch.FromYear + " - " + (DateTime.Now.Year + 2));
+                return new ValidationResult(true, null);
+            }
+            return new ValidationResult(false, DateTime.Now.Year + " - " + (DateTime.Now.Year + 2));
         }
     }
 

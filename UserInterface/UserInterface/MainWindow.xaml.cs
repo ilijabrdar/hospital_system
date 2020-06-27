@@ -49,7 +49,7 @@ namespace UserInterface
         public static int Year { get; set; }
         public static String NewYear { get; set; }
         public BitmapSource Image { get; set; }
-
+        bool bio = false;
 
         public static List<ExaminationDTO> examinationDisplay { get; set; }
         public static List<Examination> Examinations { get; set; }
@@ -98,6 +98,7 @@ namespace UserInterface
             Month = secretary.DateOfBirth.Month;
             Year = secretary.DateOfBirth.Year;
             FullDate = string.Join("/", Day, Month, Year);
+            _fileName = Secretary.Image.ToString();
             PopulateCombos();
             PopulatePatients();
 
@@ -326,11 +327,11 @@ namespace UserInterface
 
         private void RequiredFieldError(object sender, KeyEventArgs e)
         {
-            TextBox textField = sender as TextBox;
-            textField.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-            ScheduleBtn.IsEnabled = false;
-            if (IGuestJMBG.Text != "" && IGuestFirstName.Text != "" && IGuestLastName.Text != "" && IGuestYear.Text != "" && IGuestMonth.Text != "" && IGuestDay.Text != "")
-                ScheduleBtn.IsEnabled = true;
+            //TextBox textField = sender as TextBox;
+            //textField.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            //ScheduleBtn.IsEnabled = false;
+            //if (IGuestJMBG.Text != "" && IGuestFirstName.Text != "" && IGuestLastName.Text != "" && IGuestYear.Text != "" && IGuestMonth.Text != "" && IGuestDay.Text != "")
+            //    ScheduleBtn.IsEnabled = true;
         }
 
         private void UpdateTownAddress(object sender, RoutedEventArgs e)
@@ -715,14 +716,24 @@ namespace UserInterface
         ExaminationDTO SelectedFreeSlot;
         private void Schedule(object sender, RoutedEventArgs e)
         {
+
+
+            if (IGuestJMBG.Text == "" || IGuestFirstName.Text == "" || IGuestLastName.Text == "" || IGuestDay.Text == "" || IGuestMonth.Text == "" || IGuestYear.Text == "")
+            {
+                MessageBox.Show("Prvo morate uneti pacijenta.", "Oops", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             App app = Application.Current as App;
+            IPatientController patientController = app.PatientController;
+            Patient guest = patientController.GetPatientByJMBG(GuestPatient.Jmbg);
             SelectedFreeSlot = ee.SelectedItem as ExaminationDTO;
             if (SelectedFreeSlot == null)
             {
                 MessageBox.Show("Selektujte pregled pre zakazivanja.", "Oops", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            if (GuestPatient.Guest)
+            if (GuestPatient.Guest && guest == null)
             {
                 GuestPatient.DateOfBirth = new DateTime(int.Parse(IGuestYear.Text), int.Parse(IGuestMonth.Text), int.Parse(IGuestDay.Text));
                 GuestPatient.Address = Addresses[0];

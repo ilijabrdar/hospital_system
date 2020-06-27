@@ -18,6 +18,7 @@ using Model.PatientSecretary;
 using Model.Director;
 using Model.Doctor;
 using bolnica.Model.Dto;
+using bolnica.Controller.decorators;
 
 namespace UserInterface
 {
@@ -65,25 +66,27 @@ namespace UserInterface
 
         private const String NOTIFICATION_FILE = "../../../../code/Resources/Data/patientNotification.csv";
 
+        private readonly String Role = "Secretary";
+
         public IUserController UserController { get; private set; }
-        public IPatientController PatientController { get; private set; }
+        public AuthorityPatientDecorator PatientController { get; private set; }
         public IStateController StateController { get; private set; }
-        public ISecretaryController SecretaryController { get; private set; }
+        public AuthoritySecretaryDecorator SecretaryController { get; private set; }
 
-        public IRoomController RoomController { get; private set; }
+        public AuthorityRoomDecorator RoomController { get; private set; }
 
-        public IArticleController ArticleController { get; private set; }
+        public AuthorityArticleDecorator ArticleController { get; private set; }
 
-        public IDoctorController DoctorController { get; private set; }
-        public IBusinessDayController BusinessDayController { get; private set; }
+        public AuthorityDoctorDecorator DoctorController { get; private set; }
+        public AuthorityBusinessDayDecorator BusinessDayController { get; private set; }
         public BusinessDayService businessDayService { get; set; }
 
-        public IReportController ReportController { get; set; }
+        public AuthorityReportDecorator ReportController { get; set; }
 
-        public IExaminationController ExaminationController { get; private set; }
+        public AuthorityExaminationDecorator ExaminationController { get; private set; }
 
-        public IPatientNotificationController NotificationController {get; private set; }
-        public IOperationController OperationController { get; set; }
+        public IPatientNotificationController NotificationController {get; private set; } //TODO Napraviti i za ovo decorator
+        public AuthorityOperationDecorator OperationController { get; set; }
         public App()
         {
             AddressRepository addressRepository = new AddressRepository(new CSVStream<Address>(ADDRESS_FILE, new AddressCSVConverter(CSV_DELIMITER)), new LongSequencer());
@@ -119,7 +122,7 @@ namespace UserInterface
             // PatientRepository patientRepository = new SecretaryRepository(new CSVStream<Secretary>(SECRETARY_FILE, new SecretaryCSVConverter(CSV_DELIMITER)), new LongSequencer());
 
             SecretaryService secretaryService = new SecretaryService(secretaryRepository);
-            SecretaryController = new SecretaryController(secretaryService);
+            SecretaryController = new AuthoritySecretaryDecorator(new SecretaryController(secretaryService), Role);
 
             
 
@@ -127,7 +130,7 @@ namespace UserInterface
             StateController = new StateController(stateService);
 
             DoctorService doctorService = new DoctorService(doctorRepository);
-            DoctorController = new DoctorController(doctorService);
+            DoctorController = new AuthorityDoctorDecorator(new DoctorController(doctorService), Role);
 
             var patientFileRepository = new PatientFileRepository(new CSVStream<PatientFile>(_patientFile_File, new PatientFileCSVConverter(CSV_DELIMITER, CSV_ARRAY_DELIMITER)), new LongSequencer());
             
@@ -136,23 +139,23 @@ namespace UserInterface
             var patientFileService = new PatientFileService(patientFileRepository);
             var patientRepo = new PatientRepository(new CSVStream<Patient>(_patient_File, new PatientCSVConverter(CSV_DELIMITER)), new LongSequencer(), patientFileRepository, addressRepository, townRepository, stateRepository);
             var patientService = new PatientService(patientRepo, patientFileService);
-            PatientController = new PatientController(patientService);
+            PatientController = new AuthorityPatientDecorator(new PatientController(patientService), Role);
 
             HospitalizationRepository hospitalizationRepository = new HospitalizationRepository(new CSVStream<Hospitalization>(HOSPITALIZATION_FILE, new HospitalizationCSVConverter(CSV_DELIMITER)), new LongSequencer(), roomRepository, patientRepo);
             HospitalizationService hospitalizationService = new HospitalizationService(hospitalizationRepository);
             OperationRepository operationRepository = new OperationRepository(new CSVStream<Operation>(OPERATION_FILE, new OperationCSVConverter(CSV_DELIMITER)), new LongSequencer(), roomRepository, doctorRepository, patientRepo);
             OperationService operationService = new OperationService(operationRepository);
-            OperationController = new OperationController(operationService);
+            OperationController = new AuthorityOperationDecorator(new OperationController(operationService), Role);
 
             businessDayService = new BusinessDayService(businessDayRepository, doctorService);
-            BusinessDayController = new BusinessDayController(businessDayService);
+            BusinessDayController = new AuthorityBusinessDayDecorator(new BusinessDayController(businessDayService), Role);
 
             var roomService = new RoomService(roomRepository, null, businessDayService, hospitalizationService);
 
-            RoomController = new RoomController(roomService);
+            RoomController = new AuthorityRoomDecorator(new RoomController(roomService), Role);
 
             ArticleService articleService = new ArticleService(articleRepository);
-            ArticleController = new ArticleController(articleService);
+            ArticleController = new AuthorityArticleDecorator(new ArticleController(articleService), Role);
 
             //pizdarije
             SymptomRepository symptomRepository = new SymptomRepository(new CSVStream<Symptom>(SYMPTOM_FILE, new SymptomCSVConverter(CSV_DELIMITER)), new LongSequencer());
@@ -167,15 +170,15 @@ namespace UserInterface
             ExaminationPreviousRepository examinationPreviousRepository = new ExaminationPreviousRepository(new CSVStream<Examination>(EXAM_PREVIOUS_FILE, new PreviousExaminationCSVConverter(CSV_ARRAY_DELIMITER)), new LongSequencer(), doctorRepository, patientRepo, diagnosisRepository, prescriptionRepository, therapyRepository, referralRepository);
 
             ExaminationService examinationService = new ExaminationService(examinationUpcomingRepository, examinationPreviousRepository);
-            ExaminationController = new ExaminationController(examinationService);
+            ExaminationController = new AuthorityExaminationDecorator(new ExaminationController(examinationService), Role);
 
             patientFileRepository._hospitalizationRepository = hospitalizationRepository;
             patientFileRepository._operationRepository = operationRepository;
             patientFileRepository._examinationPreviousRepository = examinationPreviousRepository;
 
             //report
-            ReportService reportService = new ReportService(examinationService, operationService);
-            ReportController = new ReportController(reportService);
+            ReportService reportService = new ReportService(examinationService, null, null, operationService);
+            ReportController = new AuthorityReportDecorator(new ReportController(reportService), Role);
 
             UserService userService = new UserService(patientService, doctorService, secretaryService, null);
             UserController = new UserController(userService);

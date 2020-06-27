@@ -19,7 +19,7 @@
                     <Style.Triggers>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IYear}" Value="True"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IFromYear}" Value="True"/>
                             </MultiDataTrigger.Conditions>
                             <Setter Property="Visibility" Value="Collapsed"/>
                         </MultiDataTrigger>
@@ -27,11 +27,11 @@
                 </Style>
             </TextBlock.Style>
         </TextBlock>
-        <TextBox x:Name="IYear" HorizontalAlignment="Left" Height="23" Margin="130,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50">
+        <TextBox x:Name="IFromYear" HorizontalAlignment="Left" Height="23" Margin="130,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50">
             <TextBox.Text>
                 <Binding Path="FromYear" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
-                        <val:YearValidation ValidationStep="RawProposedValue"/>
+                        <val:FromYearSearchValidation ValidationStep="RawProposedValue"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
@@ -42,7 +42,7 @@
                     <Style.Triggers>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IMonth}" Value="True"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IFromMonth}" Value="True"/>
                             </MultiDataTrigger.Conditions>
                             <Setter Property="Visibility" Value="Collapsed"/>
                         </MultiDataTrigger>
@@ -50,11 +50,11 @@
                 </Style>
             </TextBlock.Style>
         </TextBlock>
-        <TextBox x:Name="IMonth" HorizontalAlignment="Left" Height="23" Margin="205,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50">
+        <TextBox x:Name="IFromMonth" HorizontalAlignment="Left" Height="23" Margin="205,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50">
             <TextBox.Text>
                 <Binding Path="FromMonth" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
-                        <val:MonthValidation ValidationStep="RawProposedValue"/>
+                        <val:FromMonthSearchValidation ValidationStep="RawProposedValue"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
@@ -65,7 +65,7 @@
                     <Style.Triggers>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IDay}" Value="True"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IFromDay}" Value="True"/>
                             </MultiDataTrigger.Conditions>
                             <Setter Property="Visibility" Value="Collapsed"/>
                         </MultiDataTrigger>
@@ -73,22 +73,22 @@
                 </Style>
             </TextBlock.Style>
         </TextBlock>
-        <TextBox x:Name="IDay" HorizontalAlignment="Left" Height="23" Margin="280,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50">
+        <TextBox x:Name="IFromDay" HorizontalAlignment="Left" Height="23" Margin="280,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50">
             <TextBox.Text>
                 <Binding Path="FromDay" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
-                        <val:DaySearchValidation ValidationStep="RawProposedValue"/>
+                        <val:FromDaySearchValidation ValidationStep="RawProposedValue"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <TextBlock HorizontalAlignment="Left" Margin="145,75,0,0" Text="HH" VerticalAlignment="Top" Height="15" FontWeight="Bold" Foreground="gray" Opacity="50">
+        <TextBlock HorizontalAlignment="Left" Margin="140,75,0,0" Text="YYYY" VerticalAlignment="Top" Height="15" FontWeight="Bold" Foreground="gray" Opacity="50">
             <TextBlock.Style>
                 <Style TargetType="TextBlock">
                     <Style.Triggers>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IHour}" Value="True"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IToYear}" Value="True"/>
                             </MultiDataTrigger.Conditions>
                             <Setter Property="Visibility" Value="Collapsed"/>
                         </MultiDataTrigger>
@@ -96,14 +96,14 @@
                 </Style>
             </TextBlock.Style>
         </TextBlock>
-        <TextBox x:Name="IToYear" HorizontalAlignment="Left" Height="23" Margin="130,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" Text="{Binding Path=ToYear}">
-            <!--<TextBox.Text>
+        <TextBox x:Name="IToYear" HorizontalAlignment="Left" Height="23" Margin="130,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" >
+            <TextBox.Text>
                 <Binding Path="ToYear" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
-                        <val:HourValidation ValidationStep="RawProposedValue"/>
+                        <val:ToYearSearchValidation ValidationStep="RawProposedValue"/>
                     </Binding.ValidationRules>
                 </Binding>
-            </TextBox.Text>-->
+            </TextBox.Text>
         </TextBox>
         <TextBlock HorizontalAlignment="Left" Margin="220,75,0,0" Text="MM" VerticalAlignment="Top" Height="15" FontWeight="Bold" Foreground="gray" Opacity="50">
             <TextBlock.Style>
@@ -111,7 +111,7 @@
                     <Style.Triggers>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IMinute}" Value="True"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IToMonth}" Value="True"/>
                             </MultiDataTrigger.Conditions>
                             <Setter Property="Visibility" Value="Collapsed"/>
                         </MultiDataTrigger>
@@ -119,21 +119,35 @@
                 </Style>
             </TextBlock.Style>
         </TextBlock>
-        <TextBox x:Name="IToMonth" HorizontalAlignment="Left" Height="23" Margin="205,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" Text="{Binding Path=ToMonth}">
-            <!--<TextBox.Text>
+        <TextBox x:Name="IToMonth" HorizontalAlignment="Left" Height="23" Margin="205,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" >
+            <TextBox.Text>
                 <Binding Path="ToMonth" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
-                        <val:MinuteValidation ValidationStep="RawProposedValue"/>
+                        <val:ToMonthSearchValidation ValidationStep="RawProposedValue"/>
                     </Binding.ValidationRules>
                 </Binding>
-            </TextBox.Text>-->
+            </TextBox.Text>
         </TextBox>
-        <TextBox x:Name="IToDay" HorizontalAlignment="Left" Height="23" Margin="280,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" Text="{Binding Path=ToDay}">
-            <!--><Binding Path="ToDay" UpdateSourceTrigger="PropertyChanged">
+        <TextBlock HorizontalAlignment="Left" Margin="295,75,0,0" Text="DD" VerticalAlignment="Top" Height="15" FontWeight="Bold" Foreground="gray" Opacity="50">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IToDay}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <TextBox x:Name="IToDay" HorizontalAlignment="Left" Height="23" Margin="280,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50">
+            <Binding Path="ToDay" UpdateSourceTrigger="PropertyChanged">
                 <Binding.ValidationRules>
-                    <val:DaySearchValidation ValidationStep="RawProposedValue"/>
+                    <val:ToDaySearchValidation ValidationStep="RawProposedValue"/>
                 </Binding.ValidationRules>
-            </Binding>-->
+            </Binding>
         </TextBox>
         <RadioButton x:Name="NoPriority" Content="Bez prioriteta" HorizontalAlignment="Left" Margin="40,125,0,0" VerticalAlignment="Top"/>
         <RadioButton x:Name="PeriodFirst" Content="Prioritet termin" HorizontalAlignment="Left" Margin="40,145,0,0" VerticalAlignment="Top"/>
@@ -141,23 +155,24 @@
         <Label Content="/" HorizontalAlignment="Left" Margin="185,50,0,0" VerticalAlignment="Top"/>
         <Label Content="/" HorizontalAlignment="Left" Margin="260,50,0,0" VerticalAlignment="Top"/>
         <Button Content="_Pretraži" HorizontalAlignment="Left" Margin="175,185,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="FilterExaminations">
-            <!--><Button.Style>
+            <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="IsEnabled" Value="False"/>
                     <Style.Triggers>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IYear}" Value="False"/>
-                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IMinute}" Value="False"/>
-                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IHour}" Value="False"/>
-                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IMonth}" Value="False"/>
-                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IDay}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IFromYear}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IFromMonth}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IFromDay}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IToYear}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IToMonth}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IToDay}" Value="False"/>
                             </MultiDataTrigger.Conditions>
                             <Setter Property="IsEnabled" Value="True"/>
                         </MultiDataTrigger>
                     </Style.Triggers>
                 </Style>
-            </Button.Style>-->
+            </Button.Style>
         </Button>
         <Button Content="_Odustani" HorizontalAlignment="Left" Margin="260,185,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="CencelDialog"/>
         <Label Content="/" HorizontalAlignment="Left" Margin="185,90,0,0" VerticalAlignment="Top"/>

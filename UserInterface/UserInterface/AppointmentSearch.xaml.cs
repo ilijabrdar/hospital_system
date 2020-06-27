@@ -21,7 +21,7 @@ namespace UserInterface
     /// </summary>
     public partial class AppointmentSearch : Window
     {
-        public int FromDay { get; set; }
+        public static int FromDay { get; set; }
         public static int FromMonth { get; set; }
         public static int FromYear { get; set; }
         public static int ToDay  { get; set; }
