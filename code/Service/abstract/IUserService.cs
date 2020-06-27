@@ -10,12 +10,9 @@ namespace bolnica.Service
 {
     public interface IUserService : IService<User, long>
     {
-        Boolean IsPasswordValid(User user,String password);
         User IsUsernameValid(String username);
-        Feedback SendFeedback(String feedback);
+        bool IsPasswordValid(User user, String password);
 
-        Boolean BlockUser(String username);
         User Login(String username, String password);
-        Boolean Logout(User user);
     }
 }

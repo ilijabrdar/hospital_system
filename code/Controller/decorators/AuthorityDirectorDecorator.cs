@@ -21,7 +21,6 @@ namespace bolnica.Controller.decorators
             AuthorizedUsers["Edit"] = new List<string>() { "Director" };
             AuthorizedUsers["Get"] = new List<string>() { "Director" };
             AuthorizedUsers["GetAll"] = new List<string>() { "Director" };
-            AuthorizedUsers["RegisterDoctor"] = new List<string>() { "Director" };
             AuthorizedUsers["Save"] = new List<string>() { "Director" };
         }
 
@@ -48,13 +47,6 @@ namespace bolnica.Controller.decorators
         {
             if (AuthorizedUsers["GetAll"].SingleOrDefault(any => any.Equals(Role)) != null)
                 return DirectorController.GetAll();
-            return null;
-        }
-
-        public Doctor RegisterDoctor(Doctor doctor)
-        {
-            if (AuthorizedUsers["RegisterDoctor"].SingleOrDefault(any => any.Equals(Role)) != null)
-                return DirectorController.RegisterDoctor(doctor);
             return null;
         }
 

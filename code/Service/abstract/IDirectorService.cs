@@ -9,6 +9,6 @@ namespace bolnica.Service
 {
     public interface IDirectorService : IService<Director, long>, IUserGetterService
     {
-        Doctor RegisterDoctor(Doctor doctor);
+
     }
 }

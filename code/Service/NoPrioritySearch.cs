@@ -14,6 +14,7 @@ namespace bolnica.Service
     {
         public NoPrioritySearch() { }
 
+        [Obsolete]
         public List<ExaminationDTO> Search(BusinessDayDTO businessDayDTO, List<BusinessDay> businessDayCollection)
         {
             List<BusinessDay> IterationDays = DaysForExactPeriod(businessDayDTO.Period, businessDayDTO.Doctor.BusinessDay);
@@ -30,7 +31,7 @@ namespace bolnica.Service
             }
             return null;
         }
-
+        [Obsolete]
         public List<ExaminationDTO> CreateExaminationDTO(BusinessDay businessDay)
         {
             List<ExaminationDTO> retVal = new List<ExaminationDTO>();
@@ -38,9 +39,6 @@ namespace bolnica.Service
             DateTime End = Start.AddMinutes(BusinessDayService.durationOfExamination);
             while (End <= businessDay.Shift.EndDate)
             {
-
-
-                //if (!businessDay.ScheduledPeriods.Any(item => item == new Period(Start, End)))
                 if (businessDay.ScheduledPeriods.SingleOrDefault(x => x.StartDate == Start) == null)
                 {
                     ExaminationDTO examinationDTO = new ExaminationDTO
@@ -53,7 +51,6 @@ namespace bolnica.Service
                 }
                 End = End.AddMinutes(BusinessDayService.durationOfExamination);
                 Start = Start.AddMinutes(BusinessDayService.durationOfExamination);
-
             }
             return retVal;
         }

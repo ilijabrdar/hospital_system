@@ -1,5 +1,3 @@
-
-
 using System;
 using System.Collections.Generic;
 
@@ -7,11 +5,11 @@ namespace Model.Users
 {
    public class State : Repository.IIdentifiable<long>
    {
-      public long Id { get; set; }
-      public String Name { get; set; }
-      public String Code { get; set; }
+        public long Id;
+        public String Name { get; set; }
+        public String Code { get; set; }
 
-      private List<Town> town;
+        private List<Town> town;
 
         public State(long id, String name, String code)
         {
@@ -26,7 +24,6 @@ namespace Model.Users
             Id = id;
         }
 
-      /// <pdGenerated>default getter</pdGenerated>
       public List<Town> GetTown()
       {
          if (town == null)
@@ -34,7 +31,6 @@ namespace Model.Users
          return town;
       }
       
-      /// <pdGenerated>default setter</pdGenerated>
       public void SetTown(List<Town> newTown)
       {
          RemoveAllTown();
@@ -42,7 +38,6 @@ namespace Model.Users
             AddTown(oTown);
       }
       
-      /// <pdGenerated>default Add</pdGenerated>
       public void AddTown(Town newTown)
       {
          if (newTown == null)
@@ -56,7 +51,6 @@ namespace Model.Users
          }
       }
       
-      /// <pdGenerated>default Remove</pdGenerated>
       public void RemoveTown(Town oldTown)
       {
          if (oldTown == null)
@@ -69,7 +63,6 @@ namespace Model.Users
             }
       }
       
-      /// <pdGenerated>default removeAll</pdGenerated>
       public void RemoveAllTown()
       {
          if (town != null)

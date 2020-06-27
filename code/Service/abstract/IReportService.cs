@@ -12,7 +12,7 @@ namespace bolnica.Service
 {
     public interface IReportService
     {
-        DoctorReportDTO GenerateAnamnesisPrescriptionReport(PatientFile patientFile);
+        DoctorReportDTO GenerateAnamnesisPrescriptionReport(Examination examination);
 
         RoomOccupationReportDTO GenerateRoomOccupationReport(Room room, Period period);
 

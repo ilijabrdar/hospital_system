@@ -13,10 +13,6 @@ namespace bolnica.Service
 {
     public interface IBusinessDayService : IService<BusinessDay, long>
     {
-
-        Boolean DeletePreviousBusinessDay();
-
-
         List<ExaminationDTO> Search(BusinessDayDTO businessDayDTO);
 
         void MarkAsOccupied(List<Period> period, BusinessDay businessDay);

@@ -8,14 +8,15 @@ namespace Model.Director
 {
    public class Renovation : IIdentifiable<long>
    {
-      public string  Description { get; set; }
-      public RenovationStatus Status { get; set; }
+        public string  Description { get; set; }
+        public RenovationStatus Status { get; set; }
       
-      public Period Period { get; set; }
+        public Period Period { get; set; }
 
-      public Room Room { get; set; }
+        public Room Room { get; set; }
         
         public long Id { get; set; }
+
         public long GetId() => Id;
 
         public void SetId(long id) => Id = id;

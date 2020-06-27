@@ -18,7 +18,6 @@ namespace bolnica.Controller.decorators
             AuthorizedUsers = new Dictionary<string, List<string>>();
             AuthorizedUsers["Get"] = new List<String>() { "Doctor" };
             AuthorizedUsers["GetAll"] = new List<String>() { "Doctor" };
-            AuthorizedUsers["RecommendDiagnosisBasedOnSymptoms"] = new List<String>() { "Doctor" };
         }
 
         public Diagnosis Get(long id)
@@ -33,14 +32,6 @@ namespace bolnica.Controller.decorators
         {
             if (AuthorizedUsers["GetAll"].SingleOrDefault(x => x == Role) != null)
                 return DiagnosisController.GetAll();
-            else
-                return null;
-        }
-
-        public Diagnosis RecommendDiagnosisBasedOnSymptoms(Symptom symptom, Diagnosis diagnosis)
-        {
-            if (AuthorizedUsers["RecommendDiagnosisBasedOnSymptoms"].SingleOrDefault(x => x == Role) != null)
-                return DiagnosisController.RecommendDiagnosisBasedOnSymptoms(symptom, diagnosis);
             else
                 return null;
         }

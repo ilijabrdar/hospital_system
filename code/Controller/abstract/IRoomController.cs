@@ -9,9 +9,6 @@ namespace bolnica.Controller
 {
     public interface IRoomController : IController<Room, long>
     {
-        IEnumerable<Room> GetVacantRooms();
-        Boolean AddEquipment(Equipment equipment, Room room);
-
 
         Boolean CheckRoomCodeUnique(String name);
 

@@ -10,10 +10,10 @@ namespace Model.Doctor
    public class Hospitalization : IIdentifiable<long>
     {
         public long Id;
-        public Period Period;
-        public Room Room;
-        public Model.Users.Doctor Doctor;
-        public User Patient;
+        public Period Period { get; set; }
+        public Room Room { get; set; }
+        public Model.Users.Doctor Doctor { get; set; }
+        public User Patient { get; set; }
 
         public Hospitalization(long id, User patient, Model.Users.Doctor doctor, Period period, Room room)
         {

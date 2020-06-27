@@ -23,7 +23,6 @@ namespace bolnica.Controller.decorators
             AuthorizedUsers["GetAll"] = new List<String>() { "Patient" };
             AuthorizedUsers["Save"] = new List<String>() { "Patient" };
             AuthorizedUsers["GetAverageGrade"] = new List<String>() { "Patient" };
-            AuthorizedUsers["GetQuestions"] = new List<String>() { "Patient" };
         }
 
         public void Delete(DoctorGrade entity)
@@ -60,14 +59,6 @@ namespace bolnica.Controller.decorators
                 return DoctorGradeController.GetAverageGrade(doctor);
             else
                 return 0;
-        }
-
-        public List<string> GetQuestions()
-        {
-            if (AuthorizedUsers["GetQuestions"].SingleOrDefault(x => x == Role) != null)
-                return DoctorGradeController.GetQuestions();
-            else
-                return null;
         }
 
         public DoctorGrade Save(DoctorGrade entity)

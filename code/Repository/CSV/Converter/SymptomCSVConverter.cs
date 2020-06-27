@@ -8,7 +8,6 @@ namespace bolnica.Repository.CSV.Converter
 {
     public class SymptomCSVConverter : ICSVConverter<Symptom>
     {
-
         private readonly String _delimiter;
 
         public SymptomCSVConverter(string delimiter)

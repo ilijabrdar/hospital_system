@@ -10,20 +10,19 @@ namespace Repository
 {
     public class DoctorRepository : CSVRepository<Doctor, long>, IDoctorRepository
     {
-        private readonly IEagerRepository<BusinessDay, long> _businessDayRepo;
-        private readonly ISpecialityRepository _specialityRepo;
+        private readonly IBusinessDayRepository _businessDayRepository;
+        private readonly ISpecialityRepository _specialityRepository;
         private readonly IDoctorGradeRepository _doctorGradeRepository;
-        private readonly IEagerRepository<Address, long> _addressRepository;
-        private readonly IEagerRepository<Town, long> _townRepository;
-        private readonly IEagerRepository<State, long> _stateRepository;
+        private readonly IAddressRepository _addressRepository;
+        private readonly ITownRepository _townRepository;
+        private readonly IStateRepository _stateRepository;
 
-        public DoctorRepository(ICSVStream<Doctor> stream, ISequencer<long> sequencer, IEagerRepository<BusinessDay, long> businessDay, ISpecialityRepository speciality,
-            IDoctorGradeRepository doctorGrade, IEagerRepository<Address, long> addressRepository,
-            IEagerRepository<Town, long> townRepository, IEagerRepository<State, long> stateRepository)
+        public DoctorRepository(ICSVStream<Doctor> stream, ISequencer<long> sequencer, IBusinessDayRepository businessDayRepository, ISpecialityRepository speciality,
+            IDoctorGradeRepository doctorGrade, IAddressRepository addressRepository, ITownRepository townRepository, IStateRepository stateRepository)
             : base(stream, sequencer)
         {
-            _specialityRepo = speciality;
-            _businessDayRepo = businessDay;
+            _specialityRepository = speciality;
+            _businessDayRepository = businessDayRepository;
             _doctorGradeRepository = doctorGrade;
             _addressRepository = addressRepository;
             _townRepository = townRepository;
@@ -49,12 +48,12 @@ namespace Repository
             {
                 foreach (BusinessDay day in doctor.BusinessDay)
                 {
-                    businessDays.Add(_businessDayRepo.GetEager(day.GetId()));
+                    businessDays.Add(_businessDayRepository.GetEager(day.GetId()));
                 }
             }
             doctor.BusinessDay = businessDays;
 
-            doctor.Specialty = _specialityRepo.Get(doctor.Specialty.GetId());
+            doctor.Specialty = _specialityRepository.Get(doctor.Specialty.GetId());
             doctor.Address = _addressRepository.GetEager(doctor.Address.GetId());
             doctor.Address.Town = _townRepository.GetEager(doctor.Address.Town.GetId());
             doctor.Address.Town.State = _stateRepository.GetEager(doctor.Address.Town.State.GetId());
@@ -85,7 +84,6 @@ namespace Repository
             }
             return retVal;
         }
-
 
     }
 }

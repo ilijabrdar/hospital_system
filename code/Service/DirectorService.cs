@@ -18,7 +18,7 @@ namespace Service
 
         public void Delete(Director entity)
         {
-            throw new NotImplementedException();
+            _directorRepository.Delete(entity);
         }
 
         public void Edit(Director entity)
@@ -28,12 +28,12 @@ namespace Service
 
         public Director Get(long id)
         {
-            return _directorRepository.GetEager(id);
+            return _directorRepository.Get(id);
         }
 
         public IEnumerable<Director> GetAll()
         {
-            throw new NotImplementedException();
+            return _directorRepository.GetAll();
         }
 
         public User GetUserByUsername(string username)
@@ -41,14 +41,9 @@ namespace Service
             return _directorRepository.GetUserByUsername(username);
         }
 
-        public Doctor RegisterDoctor(Doctor doctor)
-        {
-            throw new NotImplementedException();
-        }
-
         public Director Save(Director entity)
         {
-            throw new NotImplementedException();
+            return _directorRepository.Save(entity);
         }
     }
 }

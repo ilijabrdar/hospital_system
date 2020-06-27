@@ -26,11 +26,10 @@ namespace bolnica.Controller.decorators
             AuthorizedUsers["GenerateRoomOccupationReport"] = new List<String>() { "Director" };
             AuthorizedUsers["GenerateTherapyTimetableReport"] = new List<String>() { "Patient" };
         }
-
-        public DoctorReportDTO GenerateAnamnesisPrescriptionReport(PatientFile patientFile)
+        public DoctorReportDTO GenerateAnamnesisPrescriptionReport(Examination examination)
         {
             if (AuthorizedUsers["GenerateAnamnesisPrescriptionReport"].SingleOrDefault(x => x == Role) != null)
-                return ReportController.GenerateAnamnesisPrescriptionReport(patientFile);
+                return ReportController.GenerateAnamnesisPrescriptionReport(examination);
             else
                 return null;
         }
@@ -46,7 +45,7 @@ namespace bolnica.Controller.decorators
         public RoomOccupationReportDTO GenerateRoomOccupationReport(Room room, Period period)
         {
             if (AuthorizedUsers["GenerateRoomOccupationReport"].SingleOrDefault(x => x == Role) != null)
-                return ReportController.GenerateRoomOccupationReport(room, period);
+                return ReportController.GenerateRoomOccupationReport( room,  period);
             else
                 return null;
         }

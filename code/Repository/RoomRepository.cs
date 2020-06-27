@@ -70,19 +70,8 @@ namespace Repository
             return room;
         }
 
-        public int GetRoomByID()
-        {
-            throw new NotImplementedException();
-        }
 
-        public int GetVacantRooms()
-        {
-            throw new NotImplementedException();
-        }
 
-        public IEnumerable<Room> GetRoomsContainingEquipment(Equipment equipment)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }

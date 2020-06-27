@@ -1,5 +1,3 @@
-
-
 using bolnica.Controller;
 using bolnica.Service;
 using Model.Director;
@@ -30,7 +28,6 @@ namespace Controller
         {
             return _service.Get(id);
         }
-
         public IEnumerable<Renovation> GetAll()
         {
             return _service.GetAll();
