@@ -24,10 +24,5 @@ namespace Controller
             return _diagnosisService.GetAll();
         }
 
-        public Diagnosis RecommendDiagnosisBasedOnSymptoms(Symptom symptom, Diagnosis diagnosis)
-        {
-            throw new NotImplementedException();
-        }
-
     }
 }

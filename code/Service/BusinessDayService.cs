@@ -40,11 +40,6 @@ namespace Service
             _businessDayRepository.Delete(entity);
         }
 
-        public bool DeletePreviousBusinessDay()
-        {
-            throw new NotImplementedException();//TODO - logicko brisanje?
-        }
-
         public void Edit(BusinessDay entity)
         {
                 _businessDayRepository.Edit(entity);
@@ -159,7 +154,7 @@ namespace Service
 
         private bool validateDates(BusinessDay entity)
         {
-            foreach (BusinessDay businessDay in GetBusinessDaysByDoctor(entity.doctor)) //15/07 - 25/-7
+            foreach (BusinessDay businessDay in GetBusinessDaysByDoctor(entity.doctor)) 
             {
                 if (DateTime.Compare(businessDay.Shift.StartDate, entity.Shift.StartDate) <= 0 && DateTime.Compare(businessDay.Shift.EndDate, entity.Shift.EndDate) >= 0)  // 16/07 - 21/07
                     return false;
@@ -171,7 +166,7 @@ namespace Service
                     return false;
             }
 
-            if (DateTime.Compare(entity.Shift.StartDate, entity.Shift.EndDate) >= 0)  //   18/04 - 11/04 XXX
+            if (DateTime.Compare(entity.Shift.StartDate, entity.Shift.EndDate) >= 0)  
                 return false;
 
             return true;
@@ -211,12 +206,8 @@ namespace Service
         [Obsolete]
         public Boolean ChangeDoctorShift(BusinessDay newShift)
         {
-            //naci razliku smene
             TimeSpan shiftDuration = new TimeSpan();
-            shiftDuration = newShift.Shift.EndDate - newShift.Shift.StartDate;  //razlika u minutama
-
-            //sabrati minute zakazanih termina i uporediti ih sa shiftDuration -> ako su manji onda ne moze, ako nisu onda ih premesti u novi termin
-
+            shiftDuration = newShift.Shift.EndDate - newShift.Shift.StartDate;  
 
             double periodTotalMinutes = 0;
             foreach (Period period in newShift.ScheduledPeriods)
@@ -229,30 +220,12 @@ namespace Service
                 return false;
             }
 
-            //zakazati nove preglede
             BusinessDay temp = new BusinessDay(newShift.Id, newShift.Shift,newShift.doctor, newShift.room,new List<Period>());
-
-
-            bool found = false;
 
             foreach (Period period in newShift.ScheduledPeriods)
             {
                 if (!periodCorrespondsToNewShift(newShift.Shift, period))
                 {
-                    //foreach (Examination examination in examinationService.GetUpcomingExaminationsByUser(newShift.doctor))
-                    //{
-                    //    if (DateTime.Compare(examination.Period.StartDate, period.StartDate) == 0)
-                    //    {
-                    //        //if (temp.ScheduledPeriods.SingleOrDefault(any => any.StartDate == examination.Period.StartDate) == null)
-                    //        //{
-
-                    //        //}
-
-                    //        //iskoristi Ilijino
-                    //        return false;
-                    //    }
-                    //}
-
                     return false;
                 }
                 

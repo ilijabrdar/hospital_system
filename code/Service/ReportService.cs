@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Threading;
 
 namespace Service
 {
@@ -29,16 +30,14 @@ namespace Service
             _hospitalizationService = hospitalizationService;
             _operationService = operationService;
         }
+        public DoctorReportDTO GenerateAnamnesisPrescriptionReport(Examination examination)
+        {
+            DoctorReportDTO retVal = new DoctorReportDTO(examination.Prescription, examination.Anemnesis, (Patient)examination.User);
+            return retVal;    
+        }
 
-        public DoctorReportDTO GenerateAnamnesisPrescriptionReport(PatientFile patientFile)
-      {
-         // TODO: implement
-         return null;
-      }
-
-        //renovations, equipment inventory, operations, examinations, hospitalizations
-        public RoomOccupationReportDTO GenerateRoomOccupationReport(Room room, Period period)  //arguments: Room room, Period period
-      {
+        public RoomOccupationReportDTO GenerateRoomOccupationReport(Room room, Period period)  
+        {
             RoomOccupationReportDTO report = new RoomOccupationReportDTO();
 
             report.room = room;
@@ -54,18 +53,32 @@ namespace Service
             List<Examination> examinations = new List<Examination>();
             foreach (Examination examination in _examinationService.GetAll())
                 if (DateTime.Compare(examination.Period.StartDate.Date, period.StartDate.Date) >= 0 && DateTime.Compare(examination.Period.EndDate.Date, period.EndDate.Date) <= 0)
-                    examinations.Add(examination);
+                {
+                    Room examRoom = _examinationService.getExaminationRoom(examination);
+                    if (examRoom.Id == room.Id)
+                        examinations.Add(examination);
+                }
             report.examinations = examinations;
+
+            List<Examination> previousExam = new List<Examination>();
+            foreach (Examination examination in _examinationService.GetAllPrevious())
+                if (DateTime.Compare(examination.Period.StartDate.Date, period.StartDate.Date) >= 0 && DateTime.Compare(examination.Period.EndDate.Date, period.EndDate.Date) <= 0)
+                {
+                    Room examRoom = _examinationService.getExaminationRoom(examination);
+                    if (examRoom.Id == room.Id)
+                        previousExam.Add(examination);
+                }
+            report.previousExaminations = previousExam;
 
             List<Operation> operations = new List<Operation>();
             foreach (Operation operation in _operationService.GetAll())
-                if (DateTime.Compare(operation.Period.StartDate.Date, period.StartDate.Date) >= 0 && DateTime.Compare(operation.Period.EndDate.Date, period.EndDate.Date) <= 0)
+                if (DateTime.Compare(operation.Period.StartDate.Date, period.StartDate.Date) >= 0 && DateTime.Compare(operation.Period.EndDate.Date, period.EndDate.Date) <= 0 && operation.Room.Id == room.Id)
                     operations.Add(operation);
             report.operations = operations;
 
             List<Hospitalization> hospitalizations = new List<Hospitalization>();
             foreach (Hospitalization hospitalization in _hospitalizationService.GetAll())
-                if (DateTime.Compare(hospitalization.Period.StartDate.Date, period.StartDate.Date) >= 0 && DateTime.Compare(hospitalization.Period.EndDate.Date, period.EndDate.Date) <= 0)
+                if (DateTime.Compare(hospitalization.Period.StartDate.Date, period.StartDate.Date) >= 0 && DateTime.Compare(hospitalization.Period.EndDate.Date, period.EndDate.Date) <= 0 && hospitalization.Room.Id == room.Id)
                     hospitalizations.Add(hospitalization);
             report.hospitalizations = hospitalizations;
 

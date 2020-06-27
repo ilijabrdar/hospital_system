@@ -24,18 +24,10 @@ namespace bolnica.Controller.decorators
             AuthorizedUsers["Edit"] = new List<string>() { "Director" };
             AuthorizedUsers["GetRoomsContainingEquipment"] = new List<string>() { "Director" };
             AuthorizedUsers["GetRoomsForHospitalization"] = new List<string>() { "Doctor" };
-            AuthorizedUsers["GetVacantRooms"] = new List<string>() { "Doctor" };
             AuthorizedUsers["Save"] = new List<string>() { "Director" };
             AuthorizedUsers["Get"] = new List<string>() { "Director", "Doctor", "Secretary" };
             AuthorizedUsers["GetAll"] = new List<string>() { "Director", "Doctor", "Secretary" };
 
-        }
-
-        public bool AddEquipment(Equipment equipment, Room room)
-        {
-            if (AuthorizedUsers["AddEquipment"].SingleOrDefault(any => any.Equals(Role)) != null)
-                return RoomController.AddEquipment(equipment, room);
-            return false;
         }
 
         public void CheckHospitalizationDurationInRoom()
@@ -88,13 +80,6 @@ namespace bolnica.Controller.decorators
         {
             if (AuthorizedUsers["GetRoomsForHospitalization"].SingleOrDefault(any => any.Equals(Role)) != null)
                 return RoomController.GetRoomsForHospitalization();
-            return null;
-        }
-
-        public IEnumerable<Room> GetVacantRooms()
-        {
-            if (AuthorizedUsers["GetVacantRooms"].SingleOrDefault(any => any.Equals(Role)) != null)
-                return RoomController.GetVacantRooms();
             return null;
         }
 

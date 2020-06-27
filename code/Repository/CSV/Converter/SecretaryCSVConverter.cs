@@ -27,8 +27,6 @@ namespace bolnica.Repository
 
         public string ConvertEntityToCSVFormat(Secretary entity)
         {
-            //entity.Image.Save("../../Images/"+entity.Username+".Jpeg", System.Drawing.Imaging.ImageFormat.Jpeg);
-
             return String.Join(_delimiter, entity.GetId(), entity.Username, entity.Password, entity.Image.ToString(), entity.FirstName, entity.LastName, entity.Jmbg, entity.Email, entity.Phone, entity.DateOfBirth.ToString("dd.MM.yyyy"), entity.Address.GetId(), entity.Address.Town.GetId(), entity.Address.Town.State.GetId());
         }
     }

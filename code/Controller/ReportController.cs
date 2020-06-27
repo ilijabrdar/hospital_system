@@ -14,18 +14,16 @@ namespace Controller
 {
    public class ReportController : IReportController
    {
+     IReportService _reportService;
 
-        IReportService _reportService;
+     public ReportController(IReportService reportService)
+     {
+          _reportService = reportService;
+     }
 
-        public ReportController(IReportService reportService)
-        {
-            _reportService = reportService;
-        }
-
-      public DoctorReportDTO GenerateAnamnesisPrescriptionReport(PatientFile patientFile)
+      public DoctorReportDTO GenerateAnamnesisPrescriptionReport(Examination examination)
       {
-         // TODO: implement
-         return null;
+         return _reportService.GenerateAnamnesisPrescriptionReport(examination);
       }
       
       public RoomOccupationReportDTO GenerateRoomOccupationReport(Room room, Period period)

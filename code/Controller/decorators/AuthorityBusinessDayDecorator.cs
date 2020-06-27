@@ -21,33 +21,31 @@ namespace bolnica.Controller.decorators
             this.BusinessDayController = businessDayController;
             this.Role = role;
             AuthorizedUsers = new Dictionary<string, List<string>>();
-            AuthorizedUsers["Delete"] = new List<string>() { "Director" };
-            AuthorizedUsers["DeletePreviousBusinessDay"] = new List<string>() { "Director" };
-            AuthorizedUsers["Edit"] = new List<string>() { "Director" };
-            AuthorizedUsers["FreePeriod"] = new List<string>() { "Doctor", "Secretary", "Patient" };
-            AuthorizedUsers["Get"] = new List<string>() { "Director", "Doctor" };
-            AuthorizedUsers["GetAll"] = new List<string>() { "Director" };
-            AuthorizedUsers["GetBusinessDaysByDoctor"] = new List<string>() { "Director" };
-            AuthorizedUsers["getDoctorWorkingHoursForSpecificDate"] = new List<string>() { "Director", "Doctor" };
-            AuthorizedUsers["GetExactDay"] = new List<string>() { "Doctor", "Secretary", "Patient" };
-            AuthorizedUsers["isExaminationPossible"] = new List<string>() { "Secretary" };
-            AuthorizedUsers["MarkAsOccupied"] = new List<string>() { "Doctor", "Patient", "Secretary" };
-            AuthorizedUsers["Save"] = new List<string>() { "Director" };
-            AuthorizedUsers["Search"] = new List<string>() { "Doctor", "Secretary", "Patient" };
-            AuthorizedUsers["SetRoomForBusinessDay"] = new List<string>() { "Director" };
+             AuthorizedUsers["Delete"] = new List<string>() { "Director" };
+             AuthorizedUsers["Edit"] = new List<string>() { "Director" };
+             AuthorizedUsers["FreePeriod"] = new List<string>() { "Doctor", "Secretary", "Patient" };
+             AuthorizedUsers["Get"] = new List<string>() { "Director", "Doctor" };
+             AuthorizedUsers["GetAll"] = new List<string>() { "Director" };
+             AuthorizedUsers["GetBusinessDaysByDoctor"] = new List<string>() { "Director" };
+             AuthorizedUsers["GetExactDay"] = new List<string>() { "Doctor", "Secretary", "Patient" };
+             AuthorizedUsers["isExaminationPossible"] = new List<string>() { "Secretary" };
+             AuthorizedUsers["MarkAsOccupied"] = new List<string>() { "Doctor", "Patient", "Secretary" };
+             AuthorizedUsers["Save"] = new List<string>() { "Director" };   
+             AuthorizedUsers["Search"] = new List<string>() { "Doctor", "Secretary", "Patient" };      
+             AuthorizedUsers["ChangeDoctorShift"] = new List<string>() { "Director" };
+        }
+
+        public Boolean ChangeDoctorShift(BusinessDay newShift)
+        {
+            if (AuthorizedUsers["ChangeDoctorShift"].SingleOrDefault(any => any.Equals(Role)) != null)
+                return BusinessDayController.ChangeDoctorShift(newShift);
+            return false;
         }
 
         public void Delete(BusinessDay entity)
         {
             if (AuthorizedUsers["Delete"].SingleOrDefault(any => any.Equals(Role)) != null)
                 BusinessDayController.Delete(entity);
-        }
-
-        public bool DeletePreviousBusinessDay()
-        {
-            if (AuthorizedUsers["DeletePreviousBusinessDay"].SingleOrDefault(any => any.Equals(Role)) != null)
-                return BusinessDayController.DeletePreviousBusinessDay();
-            return false;
         }
 
         public void Edit(BusinessDay entity)
@@ -84,13 +82,6 @@ namespace bolnica.Controller.decorators
         
         }
 
-        public BusinessDay getDoctorWorkingHoursForSpecificDate(Doctor doctor, DateTime date)
-        {
-            if (AuthorizedUsers["getDoctorWorkingHoursForSpecificDate"].SingleOrDefault(any => any.Equals(Role)) != null)
-                return BusinessDayController.getDoctorWorkingHoursForSpecificDate(doctor, date);
-            return null;
-        }
-
         public BusinessDay GetExactDay(Doctor doctor, DateTime date)
         {
             if (AuthorizedUsers["GetExactDay"].SingleOrDefault(any => any.Equals(Role)) != null)
@@ -123,13 +114,6 @@ namespace bolnica.Controller.decorators
             if (AuthorizedUsers["Search"].SingleOrDefault(any => any.Equals(Role)) != null)
                 return BusinessDayController.Search(businessDayDTO);
             return null;
-        }
-
-        public bool SetRoomForBusinessDay(BusinessDay businessDay, Room room)
-        {
-            if (AuthorizedUsers["SetRoomForBusinessDay"].SingleOrDefault(any => any.Equals(Role)) != null)
-                return BusinessDayController.SetRoomForBusinessDay(businessDay, room);
-            return false;
         }
     }
 }

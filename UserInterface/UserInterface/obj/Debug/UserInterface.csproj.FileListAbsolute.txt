@@ -164,3 +164,4 @@ C:\Users\Asus\Desktop\SIMS\hospital_system\UserInterface\UserInterface\bin\Debug
 C:\Users\Asus\Desktop\SIMS\hospital_system\UserInterface\UserInterface\bin\Debug\System.Text.Json.xml
 C:\Users\Asus\Desktop\SIMS\hospital_system\UserInterface\UserInterface\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\Asus\Desktop\SIMS\hospital_system\UserInterface\UserInterface\bin\Debug\System.ValueTuple.xml
+C:\Users\Asus\Desktop\SIMS\hospital_system\UserInterface\UserInterface\bin\Debug\bolnica.dll.config

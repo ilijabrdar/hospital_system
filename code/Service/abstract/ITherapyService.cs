@@ -9,6 +9,6 @@ namespace bolnica.Service
 {
     public interface ITherapyService : IService<Therapy,long>
     {
-        Therapy AssignCurrentTherapy(PatientFile patientFile);
+
     }
 }

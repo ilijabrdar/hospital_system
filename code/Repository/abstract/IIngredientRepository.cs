@@ -1,5 +1,3 @@
-
-
 using bolnica.Repository;
 using Model.PatientSecretary;
 using System;

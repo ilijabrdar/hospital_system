@@ -10,7 +10,6 @@ namespace Repository
         public IngredientRepository(ICSVStream<Ingredient> stream, ISequencer<long> sequencer)
             : base(stream, sequencer)
         {
-
         }
 
     }

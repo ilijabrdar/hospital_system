@@ -9,6 +9,5 @@ namespace Repository
    public interface IHospitalizationRepository : IRepository<Hospitalization, long>, IEagerRepository<Hospitalization, long>
    {
         List<Hospitalization> GetHospitalizationByDoctor(Doctor doctor);
-
-    }
+   }
 }

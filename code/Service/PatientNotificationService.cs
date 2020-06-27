@@ -19,7 +19,7 @@ namespace bolnica.Service
         }
         public void Delete(PatientNotification entity)
         {
-            throw new NotImplementedException();
+            _patientNotificationRepository.Delete(entity);
         }
 
         public void Edit(PatientNotification entity)
@@ -44,11 +44,6 @@ namespace bolnica.Service
 
         public IEnumerable<PatientNotification> getNotificationByPatient(Patient patient)
             => GetAll().ToList().FindAll(notification => notification.Patient.Id == patient.Id && !notification.Read);
-            //List<PatientNotification> notifications = GetAll().ToList();
-            //List<PatientNotification> filteredNotifications = new List<PatientNotification>();
-            //foreach(PatientNotification notification in notifications)
-            //    if (notification.Patient.Id == patient.Id && !notification.Read)
-            //        filteredNotifications.Add(notification);
-            //return filteredNotifications;
+
     }
 }

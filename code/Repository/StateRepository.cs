@@ -10,9 +10,9 @@ namespace bolnica.Repository
 {
     public class StateRepository : CSVGetterRepository<State, long>, IStateRepository 
     {
-        private readonly IEagerRepository<Town, long> _townRepository;
+        private readonly ITownRepository _townRepository;
 
-        public StateRepository(ICSVStream<State> stream, ISequencer<long> sequencer, IEagerRepository<Town, long> townRepository) : base(stream, sequencer)
+        public StateRepository(ICSVStream<State> stream, ISequencer<long> sequencer, ITownRepository townRepository) : base(stream, sequencer)
         {
             _townRepository = townRepository;
         }

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Repository
 {
-   public interface IEquipmentRepository : IRepository<Equipment,long>, IEagerRepository<Equipment,long>
+   public interface IEquipmentRepository : IRepository<Equipment,long>
    {
 
 
