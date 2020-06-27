@@ -54,7 +54,7 @@ namespace Controller
 
         public List<BusinessDay> GetBusinessDaysByDoctor(Doctor doctor)
         {
-            throw new NotImplementedException();
+            return _businessDayService.GetBusinessDaysByDoctor(doctor);
         }
 
         public BusinessDay getDoctorWorkingHoursForSpecificDate(Doctor doctor, DateTime date)
@@ -100,6 +100,11 @@ namespace Controller
         public Boolean isExaminationPossible(Examination examination)
         {
             return _businessDayService.isExaminationPossible(examination);
+        }
+
+        public bool ChangeDoctorShift(BusinessDay  newShift)
+        {
+            return _businessDayService.ChangeDoctorShift(newShift);
         }
     }
 }

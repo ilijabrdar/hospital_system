@@ -1,6 +1,8 @@
 using Repository;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Web.UI.WebControls;
 
 namespace Model.Doctor
 {
@@ -10,6 +12,18 @@ namespace Model.Doctor
         public int NumberOfGrades { get; set; }
 
         public long Id;
+
+        public double AverageGrade
+        {
+            get
+            {
+                return GradesForEachQuestions.Values.Sum()/ GradesForEachQuestions.Keys.Count;
+            }
+            set
+            {
+
+            }
+        }
 
 
         public DoctorGrade() { }

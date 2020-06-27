@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
   <PropertyGroup>
     <ProjectType>Local</ProjectType>
     <ProductVersion>7.10.3077</ProductVersion>
@@ -23,6 +23,8 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>0.0</OldToolsVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>bin\Debug\</OutputPath>
@@ -42,6 +44,7 @@
     <DebugType>full</DebugType>
     <ErrorReport>prompt</ErrorReport>
     <UseVSHostingProcess>true</UseVSHostingProcess>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -60,12 +63,22 @@
     <WarningLevel>4</WarningLevel>
     <DebugType>none</DebugType>
     <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\UserInterface\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\UserInterface\packages\Newtonsoft.Json.12.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationFramework" />
     <Reference Include="System">
       <Name>System</Name>
       <HintPath>%25windowsDirectory%25\\Microsoft.NET\\Framework\\v1.0.3705\\System.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\UserInterface\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.Data">
       <Name>System.Data</Name>
@@ -74,6 +87,31 @@
     <Reference Include="System.Drawing">
       <Name>System.Drawing</Name>
       <HintPath>%25windowsDirectory%25\\Microsoft.NET\\Framework\\v1.0.3705\\System.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Json, Version=2.0.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\UserInterface\packages\System.Json.4.7.1\lib\net461\System.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\UserInterface\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\UserInterface\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\UserInterface\packages\System.Runtime.CompilerServices.Unsafe.4.7.1\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\UserInterface\packages\System.Text.Encodings.Web.4.7.1\lib\net461\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\UserInterface\packages\System.Text.Json.4.7.2\lib\net461\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\UserInterface\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\UserInterface\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
     <Reference Include="System.Web">
       <Name>System.Web</Name>
@@ -96,6 +134,14 @@
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ComputationalGraph\MultiplyNode.cs" />
+    <Compile Include="ComputationalGraph\NeuralLayer.cs" />
+    <Compile Include="ComputationalGraph\NeuralNetwork.cs" />
+    <Compile Include="ComputationalGraph\NeuronNode.cs" />
+    <Compile Include="ComputationalGraph\Program.cs" />
+    <Compile Include="ComputationalGraph\RandomGaussian.cs" />
+    <Compile Include="ComputationalGraph\SigmoidNode.cs" />
+    <Compile Include="ComputationalGraph\SumNode.cs" />
     <Compile Include="Controller\abstract\IAddressController.cs" />
     <Compile Include="Controller\abstract\IBusinessDayController.cs" />
     <Compile Include="Controller\abstract\IDiagnosisController.cs" />
@@ -129,6 +175,30 @@
     <Compile Include="Controller\BusinessDayController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controller\decorators\AuthorityArticleDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthorityBusinessDayDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthorityDiagnosisDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthorityDirectorDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthorityDoctorDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthorityDoctorGradeDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthorityDrugDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthorityEquipmentDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthorityExaminationDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthorityHospitalizationDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthorityIngredientDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthorityOperationDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthorityPatientDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthorityPatientFileDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthorityPrescriptionDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthorityRefferalDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthorityRenovationDecoratorcs.cs" />
+    <Compile Include="Controller\decorators\AuthorityReportDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthorityRoomDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthorityRoomTypeDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthoritySecretaryDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthoritySpecialityDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthoritySympthomDecorator.cs" />
+    <Compile Include="Controller\decorators\AuthorityTherapyDecorator.cs" />
     <Compile Include="Controller\DiagnosisController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -249,6 +319,7 @@
     <Compile Include="Model\Dto\ExaminationDTO.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Model\Dto\RoomOccupationReportDTO.cs" />
     <Compile Include="Model\Dto\PatientNotification.cs" />
     <Compile Include="Model\Dto\SecretaryReportDTO.cs">
       <SubType>Code</SubType>
@@ -619,8 +690,11 @@
     <Content Include="Resources\Data\SecretaryFile.txt" />
     <Content Include="Resources\Data\StateFile.txt" />
     <Content Include="Resources\Data\TownFile.txt" />
+    <Content Include="Resources\Images\kim.jpg" />
+    <Content Include="Resources\LoggedIn\config.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Resources\Data\articles.csv" />
     <None Include="Resources\Data\businessdays.csv" />
     <None Include="Resources\Data\diagnosisFile.csv" />
