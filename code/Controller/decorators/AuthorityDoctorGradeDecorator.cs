@@ -62,13 +62,7 @@ namespace bolnica.Controller.decorators
                 return 0;
         }
 
-        public List<string> GetQuestions()
-        {
-            if (AuthorizedUsers["GetQuestions"].SingleOrDefault(x => x == Role) != null)
-                return DoctorGradeController.GetQuestions();
-            else
-                return null;
-        }
+
 
         public DoctorGrade Save(DoctorGrade entity)
         {

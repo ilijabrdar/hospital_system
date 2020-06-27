@@ -14,16 +14,12 @@ namespace bolnica.Controller
    public interface IBusinessDayController : IController<BusinessDay, long>
     {
 
-         Boolean DeletePreviousBusinessDay();
-
-         Boolean SetRoomForBusinessDay(BusinessDay businessDay, Room room);
 
         BusinessDay GetExactDay(Doctor doctor, DateTime date);
         List<ExaminationDTO> Search(BusinessDayDTO businessDayDTO);
 
         void MarkAsOccupied(List<Period> period, BusinessDay businessDay);
 
-        BusinessDay getDoctorWorkingHoursForSpecificDate(Doctor doctor, DateTime date);
 
         List<BusinessDay> GetBusinessDaysByDoctor(Doctor doctor);
 

@@ -11,7 +11,7 @@ namespace Repository
 {
    public interface IBusinessDayRepository : IRepository<BusinessDay, long>, IEagerRepository<BusinessDay, long>
     {
-      Boolean SetRoomForBusinessDay(BusinessDay businessDay, Room room);
+
       List<BusinessDay> GetBusinessDaysByDate(DateTime date);
    }
 }

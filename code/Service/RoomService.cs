@@ -25,17 +25,7 @@ namespace Service
             this.hospitalizationService = hospitalizationService;
         }
 
-        public Boolean AddEquipment(Equipment equipment, Room room)
-        {
-            // TODO: implement
-            return false;
-        }
 
-        public List<Room> GetVacantRooms()
-        {
-            // TODO: implement
-            return null;
-        }
 
         public IEnumerable<Room> GetAll()
         {
@@ -87,10 +77,6 @@ namespace Service
             return result;
         }
 
-        List<Room> IRoomService.GetVacantRooms()
-        {
-            throw new NotImplementedException();
-        }
 
         public void DeleteRoomsByRoomType(RoomType roomType)
         {
@@ -144,7 +130,7 @@ namespace Service
             Room hospitalizationRoom = new Room();
             foreach(Hospitalization hospitalization in hospitalizationService.GetAll())
             {
-                if(hospitalization.Period.EndDate == DateTime.Today)
+                if(hospitalization.Period.EndDate.Date == DateTime.Today.Date)
                 {
                     hospitalizationRoom = Get(hospitalization.Room.Id);
                     hospitalizationRoom.CurrentNumberOfPatients--;

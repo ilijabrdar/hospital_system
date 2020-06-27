@@ -11,12 +11,6 @@ namespace bolnica.Controller
     {
         Drug RecommendDrugBasedOnDiagnosis(Diagnosis diagnosis);
 
-        Drug AddAlternativeDrug(Drug originalDrug, Drug alternativeDrug);
-
-        Drug ApproveDrug(Drug drug);
-
-        List<Drug> GetAlternativeDrugs(Drug drug);
-
         Boolean CheckDrugNameUnique(String name);
 
 

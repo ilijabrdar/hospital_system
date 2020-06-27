@@ -10,9 +10,7 @@ namespace bolnica.Service
     public interface IRoomService : IService<Room, long>
     {
 
-        Boolean AddEquipment(Equipment equipment, Room room);
 
-        List<Room> GetVacantRooms();
         IEnumerable<Room> GetRoomsCointainingEquipment(Equipment equipment);
 
         void DeleteRoomsByRoomType(RoomType roomType);

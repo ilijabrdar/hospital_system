@@ -11,13 +11,13 @@ namespace bolnica.Service
     {
         Drug RecommendDrugBasedOnDiagnosis(Diagnosis diagnosis);
 
-        Drug AddAlternativeDrug(Drug originalDrug, Drug alternativeDrug);
+        
 
         Boolean CheckDrugNameUnique(String name);
 
-        Drug ApproveDrug(Drug drug);
 
-        List<Drug> GetAlternativeDrug(Drug drug);
+
+
 
         List<Drug> GetNotApproved();
     }

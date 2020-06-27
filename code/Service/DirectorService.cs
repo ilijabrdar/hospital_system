@@ -41,10 +41,7 @@ namespace Service
             return _directorRepository.GetUserByUsername(username);
         }
 
-        public Doctor RegisterDoctor(Doctor doctor)
-        {
-            throw new NotImplementedException();
-        }
+
 
         public Director Save(Director entity)
         {

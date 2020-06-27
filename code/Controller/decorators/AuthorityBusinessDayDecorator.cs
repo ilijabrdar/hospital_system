@@ -51,12 +51,6 @@ namespace bolnica.Controller.decorators
                 BusinessDayController.Delete(entity);
         }
 
-        public bool DeletePreviousBusinessDay()
-        {
-            if (AuthorizedUsers["DeletePreviousBusinessDay"].SingleOrDefault(any => any.Equals(Role)) != null)
-                return BusinessDayController.DeletePreviousBusinessDay();
-            return false;
-        }
 
         public void Edit(BusinessDay entity)
         {
@@ -92,12 +86,6 @@ namespace bolnica.Controller.decorators
         
         }
 
-        public BusinessDay getDoctorWorkingHoursForSpecificDate(Doctor doctor, DateTime date)
-        {
-            if (AuthorizedUsers["getDoctorWorkingHoursForSpecificDate"].SingleOrDefault(any => any.Equals(Role)) != null)
-                return BusinessDayController.getDoctorWorkingHoursForSpecificDate(doctor, date);
-            return null;
-        }
 
         public BusinessDay GetExactDay(Doctor doctor, DateTime date)
         {
@@ -133,11 +121,6 @@ namespace bolnica.Controller.decorators
             return null;
         }
 
-        public bool SetRoomForBusinessDay(BusinessDay businessDay, Room room)
-        {
-            if (AuthorizedUsers["SetRoomForBusinessDay"].SingleOrDefault(any => any.Equals(Role)) != null)
-                return BusinessDayController.SetRoomForBusinessDay(businessDay, room);
-            return false;
-        }
+
     }
 }

@@ -30,19 +30,6 @@ namespace bolnica.Controller.decorators
             AuthorizedUsers["Save"] = new List<string>() { "Director" };
         }
 
-        public Drug AddAlternativeDrug(Drug originalDrug, Drug alternativeDrug)
-        {
-            if (AuthorizedUsers["AddAlternativeDrug"].SingleOrDefault(any => any.Equals(Role)) != null)
-                return DrugController.AddAlternativeDrug(originalDrug, alternativeDrug);
-            return null;
-        }
-
-        public Drug ApproveDrug(Drug drug)
-        {
-            if (AuthorizedUsers["ApproveDrug"].SingleOrDefault(any => any.Equals(Role)) != null)
-                return DrugController.ApproveDrug(drug);
-            return null;
-        }
 
         public bool CheckDrugNameUnique(string name)
         {
@@ -77,12 +64,6 @@ namespace bolnica.Controller.decorators
             return null;
         }
 
-        public List<Drug> GetAlternativeDrugs(Drug drug)
-        {
-            if (AuthorizedUsers["GetAlternativeDrugs"].SingleOrDefault(any => any.Equals(Role)) != null)
-                return DrugController.GetAlternativeDrugs(drug);
-            return null;
-        }
 
         public List<Drug> GetNotApprovedDrugs()
         {

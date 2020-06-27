@@ -40,10 +40,6 @@ namespace Service
             _businessDayRepository.Delete(entity);
         }
 
-        public bool DeletePreviousBusinessDay()
-        {
-            throw new NotImplementedException();//TODO - logicko brisanje?
-        }
 
         public void Edit(BusinessDay entity)
         {
@@ -233,7 +229,7 @@ namespace Service
             BusinessDay temp = new BusinessDay(newShift.Id, newShift.Shift,newShift.doctor, newShift.room,new List<Period>());
 
 
-            bool found = false;
+            //bool found = false;
 
             foreach (Period period in newShift.ScheduledPeriods)
             {

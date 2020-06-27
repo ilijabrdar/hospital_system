@@ -17,17 +17,7 @@ namespace Controller
             _service = service;
         }
 
-        public Drug AddAlternativeDrug(Drug originalDrug, Drug alternativeDrug)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Drug ApproveDrug(Drug drug)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Drug RecommendDrugBasedOnDiagnosis(Diagnosis diagnosis)
+        public Drug RecommendDrugBasedOnDiagnosis(Diagnosis diagnosis)  //TODO: ?
         {
             throw new NotImplementedException();
         }
@@ -52,10 +42,10 @@ namespace Controller
             return _service.GetAll();
         }
 
-        public List<Drug> GetAlternativeDrugs(Drug drug)
-        {
-            throw new NotImplementedException();
-        }
+        //public List<Drug> GetAlternativeDrugs(Drug drug)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public List<Drug> GetNotApprovedDrugs()
         {
