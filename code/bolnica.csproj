@@ -639,6 +639,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\AIDataSet\NeuralNetwork.txt" />
     <Content Include="Resources\Data\AddressFile.txt" />
     <Content Include="Resources\Data\config.txt" />
     <Content Include="Resources\Data\SecretaryFile.txt" />
@@ -648,6 +649,7 @@
     <Content Include="Resources\LoggedIn\config.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\AIDataSet\sims_dataset.csv" />
     <None Include="Resources\Data\articles.csv" />
     <None Include="Resources\Data\businessdays.csv" />
     <None Include="Resources\Data\diagnosisFile.csv" />
@@ -672,6 +674,7 @@
     <None Include="Resources\Data\symptomFile.csv" />
     <None Include="Resources\Data\therapyFile.csv" />
     <None Include="Resources\Data\upcomingExamination.csv" />
+    <None Include="Resources\Reports\Report.pdf" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

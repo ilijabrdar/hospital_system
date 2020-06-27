@@ -25,11 +25,7 @@ using Paragraph = iTextSharp.text.Paragraph;
 using bolnica.Model.Dto;
 
 namespace HCIproject
-{
-    /// <summary>
-    /// Interaction logic for PatientFile.xaml
-    /// </summary>
-   
+{   
     public partial class PatientFileWin : Window
     {
         public Doctor user;
@@ -117,10 +113,10 @@ namespace HCIproject
                 Simptomi.Inlines.Add(new Run("Simptomi:  ") { FontWeight = FontWeights.SemiBold });
                 Simptomi.TextWrapping = TextWrapping.Wrap;
                 Simptomi.Margin = new Thickness(10, 10, 10, 10);
-                foreach (var s in examination.Diagnosis.Symptom)
-                {
-                    Simptomi.Inlines.Add(s.Name);
-                }
+                //foreach (var s in examination.Diagnosis.Symptom)
+                //{
+                //    Simptomi.Inlines.Add(s.Name);
+                //}
                 stackPanelExamination.Children.Add(Simptomi);
 
                 Anamnesis.FontSize = 15;

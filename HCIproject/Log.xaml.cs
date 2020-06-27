@@ -43,18 +43,12 @@ namespace HCIproject
                 }
                 else
                 {
-
-                    TextBlock err = (TextBlock)FindName("obavestiGreska");
-                    err.Visibility = Visibility.Visible;
-                   // obavestiGreska.Visibility = Visibility.Visible;
-
+                    obavestiGreska.Visibility = Visibility.Visible;
                 }
             }
             catch (Exception exception)
             {
-                TextBlock err = (TextBlock)FindName("obavestiGreska");
-                err.Visibility = Visibility.Visible;
-
+                obavestiGreska.Visibility = Visibility.Visible;
             }
 
 
@@ -67,10 +61,5 @@ namespace HCIproject
             mainWin.Show();
         }
 
-        private void username_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            obavestiGreska.Text = "";
-
-        }
     }
 }
