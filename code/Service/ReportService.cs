@@ -32,53 +32,17 @@ namespace Service
          return null;
       }
 
-        //renovations, equipment inventory, operations, examinations, hospitalizations
-        public RoomOccupationReportDTO GenerateRoomOccupationReport(Room room, Period period)  //arguments: Room room, Period period
+        public RoomOccupationReportDTO GenerateRoomOccupationReport(Room room, Period period)
       {
             RoomOccupationReportDTO report = new RoomOccupationReportDTO();
 
             report.room = room;
             report.period = period;
-
-            List<Renovation> renovations = new List<Renovation>();
-            foreach (Renovation renovation in _renovationService.GetAll())
-                if (renovation.Room.RoomCode.Equals(room.RoomCode) && DateTime.Compare(renovation.Period.StartDate.Date, period.StartDate.Date) >= 0 && DateTime.Compare(renovation.Period.EndDate.Date, period.EndDate.Date) <= 0)
-                    renovations.Add(renovation);
-            report.renovations = renovations;
-
-
-            List<Examination> examinations = new List<Examination>();
-            foreach (Examination examination in _examinationService.GetAll())
-                if (DateTime.Compare(examination.Period.StartDate.Date, period.StartDate.Date) >= 0 && DateTime.Compare(examination.Period.EndDate.Date, period.EndDate.Date) <= 0)
-                {
-                    Room examRoom = _examinationService.getExaminationRoom(examination);
-                    if (examRoom.Id == room.Id)
-                        examinations.Add(examination);
-                }
-            report.examinations = examinations;
-
-            List<Examination> previousExam = new List<Examination>();
-            foreach (Examination examination in _examinationService.GetAllPrevious())
-                if (DateTime.Compare(examination.Period.StartDate.Date, period.StartDate.Date) >= 0 && DateTime.Compare(examination.Period.EndDate.Date, period.EndDate.Date) <= 0)
-                {
-                    Room examRoom = _examinationService.getExaminationRoom(examination);
-                    if (examRoom.Id == room.Id)
-                        previousExam.Add(examination);
-                }
-            report.previousExaminations = previousExam;
-
-            List<Operation> operations = new List<Operation>();
-            foreach (Operation operation in _operationService.GetAll())
-                if (DateTime.Compare(operation.Period.StartDate.Date, period.StartDate.Date) >= 0 && DateTime.Compare(operation.Period.EndDate.Date, period.EndDate.Date) <= 0 && operation.Room.Id == room.Id)
-                    operations.Add(operation);
-            report.operations = operations;
-
-            List<Hospitalization> hospitalizations = new List<Hospitalization>();
-            foreach (Hospitalization hospitalization in _hospitalizationService.GetAll())
-                if (DateTime.Compare(hospitalization.Period.StartDate.Date, period.StartDate.Date) >= 0 && DateTime.Compare(hospitalization.Period.EndDate.Date, period.EndDate.Date) <= 0 && hospitalization.Room.Id == room.Id)
-                    hospitalizations.Add(hospitalization);
-            report.hospitalizations = hospitalizations;
-
+            report.renovations = _renovationService.GetRenovationsByRoomAndPeriod(room, period).ToList();
+            report.examinations = _examinationService.GetUpcomingExaminationsByRoomAndPeriod(room, period);
+            report.previousExaminations = _examinationService.GetPreviousExaminationsByRoomAndPeriod(room,period);
+            report.operations = _operationService.GetOperationsByRoomAndPeriod(room, period);
+            report.hospitalizations = _hospitalizationService.GetHospitalizationsByRoomAndPeriod(room, period);
 
             return report;
       }
