@@ -40,11 +40,12 @@
                         <TextBox x:Name="anamnezaTxt" Grid.Row="0" Text="{Binding Path=Anamneza}"  Grid.Column="1" Grid.ColumnSpan="4" AcceptsReturn="True" CaretBrush="#FF1FEECD" />
 
                         <Label Content="Simptomi" Grid.Row="1" Grid.Column="0" FontWeight="SemiBold" FontSize="16" VerticalAlignment="Center" />
-                        <ComboBox x:Name="simptomiCombo"  IsEditable="True" IsReadOnly="True" Grid.Row="1"  Grid.Column="1" Grid.ColumnSpan="4"  />
+                        <ListBox x:Name="simptomiCombo" DisplayMemberPath="Name"  Grid.Row="1"  Grid.Column="1" Grid.ColumnSpan="4"  Margin="5" SelectionMode="Multiple" />
 
+                        
                         <Label Content="Dijagnoza" Grid.Row="2" Grid.Column="0" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center"/>
-                        <ComboBox x:Name="diagnosisCombo" IsEditable="True" IsReadOnly="True" Grid.Row="2"  Grid.Column="1" Grid.ColumnSpan="4"  />
-
+                        <ComboBox x:Name="diagnosisCombo" DisplayMemberPath="Name" IsEditable="True" IsReadOnly="True" Grid.Row="2"  Grid.Column="1" Grid.ColumnSpan="4" GotFocus="diagnosisCombo_GotFocus"/>
+                        
 
                         <Label Content="Recept" Grid.Row="4" Grid.Column="0" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center"/>
                         <Grid Width="124" Grid.Column="1" Grid.Row="4" >

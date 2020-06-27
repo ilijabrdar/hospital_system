@@ -29,7 +29,7 @@ namespace HCIproject
         public string Simptom{get; set;}
         public string Anamneza { get; set; }
 
-
+        
         public ExaminationWin(Doctor user, long _patientId, Examination _examination)
         {
             this.user = user;
@@ -38,7 +38,7 @@ namespace HCIproject
             
 
             InitializeComponent();
-            setDiagnosisCombo();
+            //setDiagnosisCombo();
             setSimptomiCombo();
             checkSpeciality();
         }
@@ -51,24 +51,49 @@ namespace HCIproject
                 buttonOperacija.Visibility = Visibility.Hidden;
             }
         }
+
         private void setDiagnosisCombo()
         {
-
             var app = Application.Current as App;
-            foreach (Diagnosis diag in app.DiagnosisDecorator.GetAll())
+            if (simptomiCombo.SelectedItems == null)
             {
-                diagnosisCombo.Items.Add(diag.Name);
+                return;
             }
+
+            double[] niz = new double[20];
+            List<double> vektor = new List<double>();
+            
+            foreach(Symptom s in simptomiCombo.SelectedItems)
+            {
+                niz[s.Id] = 1;
+            }
+            List<double> verovatnoce = app.Program.PredictDiagnosis(niz.ToList());
+
+            double max1 =-1;
+            double max2 =-1;
+            foreach(double d in verovatnoce)
+            {
+                if (d > max1)
+                {
+                    max2 = max1;
+                    max1 = d;
+                }else if (d > max2)
+                {
+                    max2 = d;
+                }
+            }
+
+            diagnosisCombo.Items.Add(app.DiagnosisDecorator.Get(verovatnoce.IndexOf(max1)));
+            diagnosisCombo.Items.Add(app.DiagnosisDecorator.Get(verovatnoce.IndexOf(max2)));
         } 
+
         private void setSimptomiCombo()
         {
-
             var app = Application.Current as App;
             foreach(Symptom symptom in app.SympthomDecorator.GetAll())
             {
-                simptomiCombo.Items.Add(symptom.Name);
+                simptomiCombo.Items.Add(symptom);
             }
-
         }
 
 
@@ -85,16 +110,16 @@ namespace HCIproject
             else
             {
                 var app = Application.Current as App;
-                String diagnosisString = diagnosisCombo.SelectedItem.ToString();
-                Diagnosis diagnosis = new Diagnosis();
-                foreach (Diagnosis d in app.DiagnosisDecorator.GetAll())
-                {
-                    if (diagnosisString == d.Name)
-                    {
-                        diagnosis = d;
-                    }
-                }
-                
+                //String diagnosisString = diagnosisCombo.SelectedItem.ToString();
+                //Diagnosis diagnosis = new Diagnosis();
+                //foreach (Diagnosis d in app.DiagnosisDecorator.GetAll())
+                //{
+                //    if (diagnosisString == d.Name)
+                //    {
+                //        diagnosis = d;
+                //    }
+                //}
+                Diagnosis diagnosis =(Diagnosis)diagnosisCombo.SelectedItem;
                 Patient patient = new Patient();
                 patient = app.PatientDecorator.Get(patientId);
                 User userPatient = patient as User;
@@ -222,6 +247,10 @@ namespace HCIproject
             // this.Visibility = Visibility.Hidden;
             patientWin.ShowDialog();
         }
-    
+
+        private void diagnosisCombo_GotFocus(object sender, RoutedEventArgs e)
+        {
+            setDiagnosisCombo();
+        }
     }
 }

@@ -3,6 +3,7 @@ using bolnica.Controller.decorators;
 using bolnica.Repository;
 using bolnica.Repository.CSV.Converter;
 using bolnica.Service;
+using ComputationalGraph;
 using Controller;
 using Model.Director;
 using Model.Doctor;
@@ -55,6 +56,7 @@ namespace HCIproject
 
         public AuthorityDoctorGradeDecorator DoctorGradeDecorator { get; private set; }
         public AuthorityReportDecorator ReportDecorator { get; private set; }
+
 
     //public IDoctorController DoctorController { get; private set; }
     //public ISpecialityController SpecialityController { get; private set; }
@@ -121,9 +123,11 @@ namespace HCIproject
         private const String STATE_FILE = "../../../code/Resources/Data/StateFile.txt";
         private const String SECRETARY_FILE = "../../../code/Resources/Data/SecretaryFile.txt";
         private const String DIRECTOR_FILE = "../../../code/Resources/Data/director.csv";
+        
+        private const String NeuralNetwork= "C:/Users/Tamara Kovacevic/Desktop/hospital_system/code/Resources/AIDataSet/NeuralNetwork.txt";
+        private const String DataSet = "C:/Users/Tamara Kovacevic/Desktop/hospital_system/code/Resources/AIDataSet/sims_dataset.csv";
 
-
-
+        public Program Program = new Program(NeuralNetwork,DataSet);
 
         public App()
         {

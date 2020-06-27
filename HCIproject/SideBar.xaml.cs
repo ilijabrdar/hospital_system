@@ -64,7 +64,7 @@ namespace HCIproject
             TownCombo.SelectedValue = user.Address.Town.GetId();
             AddressCombo.SelectedValue = user.Address.GetId();
 
-            //setNotifications();
+            setNotifications();
             checkSpeciality();
             setViewUpcExam();
             setViewPatientFiles();
@@ -127,7 +127,14 @@ namespace HCIproject
 
             foreach(var r in ret)
             {
-                smene.Text+=r.shift.StartDate.ToString()+" do "+r.shift.EndDate.ToString() +" ordinacija "+r.room.RoomCode;
+                if (r == null)
+                {
+                    smene.Text += "Slobodan" + "\n";
+                }
+                else
+                {
+                    smene.Text += r.shift.StartDate.ToString() + " do " + r.shift.EndDate.ToString() + " ordinacija " + r.room.RoomCode;
+                }
             }
 
            double validDrugs= app.NotificationController.NotifyDoctorOfDrugsForValidation();
