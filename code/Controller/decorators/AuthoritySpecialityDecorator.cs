@@ -18,7 +18,6 @@ namespace bolnica.Controller.decorators
             AuthorizedUsers = new Dictionary<string, List<string>>();
             AuthorizedUsers["Get"] = new List<String>() { "Patient", "Doctor", "Director" };
             AuthorizedUsers["GetAll"] = new List<String>() { "Patient", "Doctor", "Director" };
-
         }
 
         public Speciality Get(long id)

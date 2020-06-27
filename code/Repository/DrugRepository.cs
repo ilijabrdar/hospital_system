@@ -35,7 +35,6 @@ namespace Repository
                     alternativeDrug.Name = temp.Name;
                     alternativeDrug.Amount = temp.Amount;
                     alternativeDrug.Approved = temp.Approved;
-                    //other attributes are not important
                 }
             }
         }
@@ -55,16 +54,6 @@ namespace Repository
             }
         }
 
-        public List<Drug> GetAlternativeDrugs(Drug drug)
-        {
-            List<Drug> alternativeDrugs = new List<Drug>();
-            foreach (Drug drugAlternative in drug.Alternative)
-            {
-                alternativeDrugs.Add(drugAlternative);
-            }
-            return alternativeDrugs;
-        }
-
         public Drug GetEager(long id)
         {
             Drug drug = base.Get(id);
@@ -81,7 +70,6 @@ namespace Repository
                 alternativeDrug.Name = temp.Name;
                 alternativeDrug.Amount = temp.Amount;
                 alternativeDrug.Approved = temp.Approved;
-                //other attributes are not important
             }
 
             return drug;

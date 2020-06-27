@@ -9,21 +9,21 @@ namespace bolnica.Service
 {
     public class AddressService : IAddressService
     {
-        IAddressRepository _repository;
+        IAddressRepository _addressRepository;
 
         public AddressService(IAddressRepository repository)
         {
-            _repository = repository;
+            _addressRepository = repository;
         }
 
         public Address Get(long id)
         {
-            throw new NotImplementedException();
+            return _addressRepository.Get(id);
         }
 
         public IEnumerable<Address> GetAll()
         {
-            return _repository.GetAll();
+            return _addressRepository.GetAll();
         }
     }
 }

@@ -1,5 +1,3 @@
-
-
 using System;
 using Repository;
 
@@ -7,7 +5,7 @@ namespace Model.Users
 {
    public class Address : IIdentifiable<long>
    {
-        public long Id { get; set; }
+        public long Id;
         public String Street { get; set; }
         public int Number { get; set; }
         public String FullAddress { get; set; }
@@ -35,7 +33,7 @@ namespace Model.Users
 
         public String GetFullAddress()
         {
-            return String.Join(", ", Street, Number);
+            return String.Join(" ", Street, Number);
         }
 
         public Town GetTown()

@@ -4,33 +4,28 @@ using Service;
 using System;
 using System.Collections.Generic;
 using bolnica.Model.Dto;
-
+using bolnica.Controller;
 
 namespace Controller
 {
-   public class NotificationController
+   public class NotificationController : INotificationController
    {
-        private readonly NotificationService service;
+        private readonly NotificationService _notificationService;
 
         public NotificationController(NotificationService service)
         {
-            this.service = service;
+            this._notificationService = service;
         }
 
         public int NotifyDoctorOfDrugsForValidation()
         {
-            return service.NotifyDoctorOfDrugsForValidation();
+            return _notificationService.NotifyDoctorOfDrugsForValidation();
         }
 
         public List<NotifyDoctorBusinessDay> NotifyDoctorOfUpcomingBusinessDays(Doctor doctor)
         {
-            return service.NotifyDoctorOfUpcomingBusinessDays(doctor);
+            return _notificationService.NotifyDoctorOfUpcomingBusinessDays(doctor);
         }
-
-        //public PatientNotification NotifyPatientOfExaminationRescheduling()
-        //{
-
-        //}
 
     }
 }

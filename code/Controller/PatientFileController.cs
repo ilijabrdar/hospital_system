@@ -28,12 +28,10 @@ namespace Controller
             return _patientFileService.AddExamination(examination, patientFile);
         }
 
-
         public Hospitalization AddHospitalization(Hospitalization hospitalization, PatientFile patientFile)
         {
             return _patientFileService.AddHospitalization(hospitalization, patientFile);
         }
-
 
         public Operation AddOperation(Operation operations, PatientFile patientFile)
         {
@@ -55,7 +53,6 @@ namespace Controller
            _patientFileService.Edit(entity);
         }
 
-
         public PatientFile Get(long id)
         {
            return _patientFileService.Get(id);
@@ -64,11 +61,6 @@ namespace Controller
         public IEnumerable<PatientFile> GetAll()
         {
             return _patientFileService.GetAll();
-        }
-
-        public PatientFile GetPatientFile(Patient patient)
-        {
-            return _patientFileService.GetPatientFile(patient);
         }
 
         public PatientFile Save(PatientFile entity)

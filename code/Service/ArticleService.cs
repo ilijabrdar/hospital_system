@@ -48,9 +48,6 @@ namespace Service
             return _articleRepository.Save(entity);
         }
 
-        public List<Article> SearchArticle(string criteria)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }

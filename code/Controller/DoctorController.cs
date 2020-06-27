@@ -45,10 +45,6 @@ namespace Controller
             return _doctorservice.GetDoctorsBySpeciality(specialty);
         }
 
-        public DoctorGrade GiveGrade(DoctorGrade doctorGrade)
-        {
-            throw new NotImplementedException();
-        }
 
         public Doctor Save(Doctor entity)
         {

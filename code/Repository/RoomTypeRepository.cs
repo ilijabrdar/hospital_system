@@ -11,7 +11,6 @@ namespace Repository
         public RoomTypeRepository(ICSVStream<RoomType> stream, ISequencer<long> sequencer)
             : base(stream, sequencer)
         {
-
         }
 
         public IEnumerable<RoomType> GetAllEager()

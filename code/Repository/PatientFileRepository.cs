@@ -18,7 +18,6 @@ namespace Repository
         public PatientFileRepository(ICSVStream<PatientFile> stream, ISequencer<long> sequencer)
                : base(stream, sequencer)
         {
-
         }
 
         public IEnumerable<PatientFile> GetAllEager()

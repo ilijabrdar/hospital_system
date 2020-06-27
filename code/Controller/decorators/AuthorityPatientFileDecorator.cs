@@ -28,7 +28,6 @@ namespace bolnica.Controller.decorators
             AuthorizedUsers["Edit"] = new List<String>() { "Doctor" };
             AuthorizedUsers["Get"] = new List<String>() { "Patient", "Doctor" };
             AuthorizedUsers["GetAll"] = new List<String>() { "Patient", "Doctor" };
-            AuthorizedUsers["GetPatientFile"] = new List<String>() { "Patient", "Doctor" };
             AuthorizedUsers["Save"] = new List<String>() { "Doctor" };
         }
         public Allergy AddAllergy(Allergy allergy, PatientFile patientFile)
@@ -96,14 +95,6 @@ namespace bolnica.Controller.decorators
         {
             if (AuthorizedUsers["GetAll"].SingleOrDefault(x => x == Role) != null)
                 return PatientFileController.GetAll();
-            else
-                return null;
-        }
-
-        public PatientFile GetPatientFile(Patient patient)
-        {
-            if (AuthorizedUsers["GetPatientFile"].SingleOrDefault(x => x == Role) != null)
-                return PatientFileController.GetPatientFile(patient);
             else
                 return null;
         }

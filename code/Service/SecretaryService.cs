@@ -6,7 +6,6 @@ using Repository;
 
 namespace Service
 {
-
    public class SecretaryService : ISecretaryService
    {
       private readonly ISecretaryRepository _secretaryRepository;
@@ -18,7 +17,7 @@ namespace Service
         
         public void Delete(Secretary entity)
         {
-            throw new NotImplementedException();
+            _secretaryRepository.Delete(entity);
         }
 
 
@@ -29,12 +28,12 @@ namespace Service
 
         public Secretary Get(long id)
         {
-            throw new NotImplementedException();
+            return _secretaryRepository.Get(id);
         }
 
         public IEnumerable<Secretary> GetAll()
         {
-            throw new NotImplementedException();
+            return _secretaryRepository.GetAll();
         }
 
         public User GetUserByUsername(string username)
@@ -44,7 +43,7 @@ namespace Service
 
         public Secretary Save(Secretary entity)
         {
-            throw new NotImplementedException();
+            return _secretaryRepository.Save(entity);
         }
     }
 }

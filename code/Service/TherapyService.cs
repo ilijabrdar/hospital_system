@@ -15,10 +15,6 @@ namespace Service
             _therapyRepository = repository;
         }
 
-        public Therapy AssignCurrentTherapy(PatientFile patientFile)
-        {
-            throw new NotImplementedException();
-        }
 
         public void Delete(Therapy entity)
         {

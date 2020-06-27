@@ -10,12 +10,7 @@ namespace bolnica.Controller
     public interface IUserController : IController<User, long>
     {
         Feedback SendFeedback(String feedback);
-
-        Boolean IsPasswordValid(String password);
         User IsUsernamedValid(String username);
-
-        Boolean BlockUser(String username);
         User Login(String username, String password);
-        Boolean Logout(User user);
     }
 }

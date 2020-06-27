@@ -29,15 +29,13 @@ namespace Service
             _patientFileService = _servicePatientFile;
         }
 
-
         public Patient Save(Patient entity)
         {
             if (_patientRepository.GetUserByUsername(entity.Username) != null)
             {
                 return null;
             }
-            //TODO: skloniti -1 iz patFile
-            entity.patientFile = _patientFileService.Save(new PatientFile(-1));
+            entity.patientFile = _patientFileService.Save(new PatientFile());
             return _patientRepository.Save(entity);
 
         }

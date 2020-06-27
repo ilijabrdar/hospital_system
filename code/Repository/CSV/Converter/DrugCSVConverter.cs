@@ -9,12 +9,10 @@ namespace bolnica.Repository.CSV.Converter
    public class DrugCSVConverter : ICSVConverter<Drug>
     {
         private readonly string _delimiter;
-        //private readonly string _arraydelimiter;
 
         public DrugCSVConverter(string delimiter)
         {
             _delimiter = delimiter;
-            //_arraydelimiter = arraydel;
         }
         public Drug ConvertCSVFormatToEntity(string entityCSVFormat)
         {
@@ -52,9 +50,6 @@ namespace bolnica.Repository.CSV.Converter
                 ingredients_temp,
                 alternatives_temp);
         }
-
-
-        //id,name,amount,false,[2,4,3,5,1],[5,4,10,44]
         public string ConvertEntityToCSVFormat(Drug entity)
         {
             StringBuilder sb = new StringBuilder();

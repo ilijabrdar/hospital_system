@@ -11,9 +11,6 @@ namespace bolnica.Controller
    public interface IDoctorController : IController<Doctor, long>
     {
          List<Doctor> GetDoctorsBySpeciality(Speciality specialty);
-
-        bool CheckJMBGUnique(String JMBG);
-
-
+         bool CheckJMBGUnique(String JMBG);
     }
 }

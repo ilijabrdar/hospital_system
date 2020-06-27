@@ -8,10 +8,9 @@ namespace Model.Doctor
 {
    public class Referral : IIdentifiable<long>
    {
-
         public long Id;
-        public Period Period;
-        public Model.Users.Doctor Doctor;
+        public Period Period { get; set; }
+        public Model.Users.Doctor Doctor { get; set; }
 
         public Referral() { }
 

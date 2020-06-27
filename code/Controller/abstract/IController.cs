@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  IService.cs
- * Author:  david
- * Purpose: Definition of the Interface Service.IService
- ***********************************************************************/
-
 using bolnica.Controller;
 using Repository;
 using System;

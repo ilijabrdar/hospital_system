@@ -8,8 +8,6 @@ namespace Controller
 {
     public class UserController : IUserController
     {
-
-        //private Service.IService _service;
         private readonly IUserService _userService;
 
         public UserController(IUserService userService)
@@ -17,15 +15,9 @@ namespace Controller
             this._userService = userService;
         }
 
-
         public User Save(User entity)
         {
             return _userService.Save(entity);
-        }
-
-        public bool BlockUser(string username)
-        {
-            throw new NotImplementedException();
         }
 
         public User Login(string username, string password)
@@ -33,13 +25,6 @@ namespace Controller
             User user = _userService.Login(username, password);
             return user;
         }
-
-        public bool Logout(User user)
-        {
-            throw new NotImplementedException();
-        }
-
-
 
         public Feedback SendFeedback(string feedback)
         {
@@ -64,11 +49,6 @@ namespace Controller
         public User Get(long id)
         {
             return _userService.Get(id);
-        }
-
-        public bool IsPasswordValid(string password)
-        {
-            throw new NotImplementedException();
         }
 
         public User IsUsernamedValid(string username)

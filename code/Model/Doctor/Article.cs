@@ -6,13 +6,12 @@ namespace Model.Doctor
    public class Article : IIdentifiable<long>
     {
         public long Id;
-        public DateTime DatePublished;
-        public Model.Users.Doctor Doctor;
+        public DateTime DatePublished { get; set; }
+        public Model.Users.Doctor Doctor { get; set; }
+        public String Topic { get; set; }
+        public String Text { get; set; }
 
-        public String Topic;
-        public String Text;
-
-        public Article(long id, DateTime datePublished, Users.Doctor doctor, string topic, string text) : this(id)
+    public Article(long id, DateTime datePublished, Users.Doctor doctor, string topic, string text) : this(id)
         {
             DatePublished = datePublished;
             Doctor = doctor;

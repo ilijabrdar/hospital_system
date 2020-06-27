@@ -10,25 +10,9 @@ namespace Service
    public class DrugService : IDrugService
    {
         private readonly IDrugRepository _repository;
-        private readonly IIngredientService _ingredientService;
         public DrugService(IDrugRepository repository)
         {
             _repository = repository;
-        }
-
-        public Drug AddAlternativeDrug(Drug originalDrug, Drug alternativeDrug)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Drug ApproveDrug(Drug drug)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Drug RecommendDrugBasedOnDiagnosis(Diagnosis diagnosis)
-        {
-            throw new NotImplementedException();
         }
 
         public void Delete(Drug entity)
@@ -49,11 +33,6 @@ namespace Service
         public IEnumerable<Drug> GetAll()
         {
             return _repository.GetAllEager();
-        }
-
-        public List<Drug> GetAlternativeDrug(Drug drug)
-        {
-            throw new NotImplementedException();
         }
 
         public List<Drug> GetNotApproved()

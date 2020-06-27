@@ -9,7 +9,6 @@ namespace bolnica.Service
 {
     public interface IDiagnosisService : IGetterService<Diagnosis,long>
     {
-        Diagnosis RecommendDiagnosisBasedOnSymptoms(Symptom symptom, Diagnosis diagnosis);
 
     }
 }
