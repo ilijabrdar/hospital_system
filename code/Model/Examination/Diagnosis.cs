@@ -8,9 +8,8 @@ namespace Model.PatientSecretary
 {
    public class Diagnosis : IIdentifiable<long>
    {
-        public long Id;
-        public string Name;
-        public List<Symptom> Symptom;
+        public long Id { get; set; }
+        public string Name { get; set; }
 
         public Diagnosis() { }
         public Diagnosis(long id)
@@ -23,17 +22,9 @@ namespace Model.PatientSecretary
             Name = name;
         }
 
-        public Diagnosis(string name, List<Symptom> symptom)
+        public Diagnosis(string name)
         {
             Name = name;
-            Symptom = symptom;
-        }
-
-        public Diagnosis(long id, string name, List<Symptom> symptom)
-        {
-            Id = id;
-            this.Name = name;
-            this.Symptom = symptom;
         }
 
         public long GetId()

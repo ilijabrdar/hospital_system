@@ -76,7 +76,7 @@ namespace bolnica.Repository.CSV.Converter
             StringBuilder sb = new StringBuilder();;
             sb.Append(entity.GetId());
             sb.Append(_delimiter);
-            if(entity.Allergy == null)
+            if(entity.Allergy.Count ==0)
             {
                 sb.Append("empty");
             }else
@@ -89,7 +89,9 @@ namespace bolnica.Repository.CSV.Converter
                 sb.Remove(sb.Length - 1, 1);
             }
             sb.Append(_delimiter);
-            if(entity.Hospitalization == null)
+
+
+            if(entity.Hospitalization.Count == 0)
             {
                 sb.Append("empty");
             }else
@@ -103,7 +105,9 @@ namespace bolnica.Repository.CSV.Converter
 
             }
             sb.Append(_delimiter);
-            if(entity.Operation == null)
+
+
+            if(entity.Operation.Count == 0)
             {
                 sb.Append("empty");
             }else
@@ -116,7 +120,9 @@ namespace bolnica.Repository.CSV.Converter
                 sb.Remove(sb.Length - 1, 1);
             }
             sb.Append(_delimiter);
-            if(entity.Examination == null)
+
+
+            if(entity.Examination.Count == 0)
             {
                 sb.Append("empty");
             }else

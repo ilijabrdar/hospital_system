@@ -8,6 +8,7 @@ using Model.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 namespace Service
 {
@@ -25,16 +26,14 @@ namespace Service
             _hospitalizationService = hospitalizationService;
             _operationService = operationService;
         }
+        public DoctorReportDTO GenerateAnamnesisPrescriptionReport(Examination examination)
+        {
+            DoctorReportDTO retVal = new DoctorReportDTO(examination.Prescription, examination.Anemnesis, (Patient)examination.User);
+            return retVal;    
+        }
 
-        public DoctorReportDTO GenerateAnamnesisPrescriptionReport(PatientFile patientFile)
-      {
-         // TODO: implement
-         return null;
-      }
-
-        //renovations, equipment inventory, operations, examinations, hospitalizations
         public RoomOccupationReportDTO GenerateRoomOccupationReport(Room room, Period period)  //arguments: Room room, Period period
-      {
+        {
             RoomOccupationReportDTO report = new RoomOccupationReportDTO();
 
             report.room = room;

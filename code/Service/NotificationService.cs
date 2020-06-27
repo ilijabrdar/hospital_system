@@ -11,7 +11,6 @@ namespace Service
     public class NotifyDoctorBusinessDay
     {
         public Period shift;
-        //public DateTime day;
         public Room room;
 
         public NotifyDoctorBusinessDay(Period shift, Room room)
@@ -25,10 +24,6 @@ namespace Service
         
    public class NotificationService
    {
-        //kako doktor radi naredna tri dana
-        //izmena termina
-        //broj lekova za validaciju
-
         public IDrugService drugService;
         public IBusinessDayService businessDayService;
 
@@ -57,58 +52,32 @@ namespace Service
             bool day2 = false;
             bool day3 = false;
 
-
+            ret.Insert(0, null);
+            ret.Insert(1, null);
+            ret.Insert(2, null);
             foreach (BusinessDay businessDay in businessDayService.GetBusinessDaysByDoctor(doctor))
             {
-                //if (checkBelonging(businessDay))
-                // {
-                //     if (DateTime.Compare(businessDay.Shift.EndDate.Date, DateTime.Now.AddDays(1).Date) >= 0 && days_ahead!=4)
-                //     {
-                //         NotifyDoctorBusinessDay notification = new NotifyDoctorBusinessDay(businessDay.Shift, DateTime.Now.AddDays(days_ahead++), businessDay.room);
-                //         ret.Add(notification);
-                //     }
-                //     if (DateTime.Compare(businessDay.Shift.EndDate.Date, DateTime.Now.AddDays(2).Date) >= 0 && days_ahead != 4)
-                //     {
-                //         NotifyDoctorBusinessDay notification = new NotifyDoctorBusinessDay(businessDay.Shift, DateTime.Now.AddDays(days_ahead++), businessDay.room);
-                //         ret.Add(notification);
-                //     }
-                //     if (DateTime.Compare(businessDay.Shift.EndDate.Date, DateTime.Now.AddDays(3).Date) >= 0 && days_ahead != 4)
-                //     {
-                //         NotifyDoctorBusinessDay notification = new NotifyDoctorBusinessDay(businessDay.Shift, DateTime.Now.AddDays(days_ahead++), businessDay.room);
-                //         ret.Add(notification);
-                //     }
-
-                //     if (ret.Count == 4)
-                //         break;
-                // }
-
+                
                 if (businessDay.Shift.StartDate.Date == DateTime.Today.Date.AddDays(1).Date)
                 {
                     NotifyDoctorBusinessDay notification = new NotifyDoctorBusinessDay(businessDay.Shift, businessDay.room);
-                    ret.Insert(0, notification);
+                    ret[0]=notification;
                     day1 = true;
                 }
                 else if (businessDay.Shift.StartDate.Date == DateTime.Today.AddDays(2).Date)
                 {
                     NotifyDoctorBusinessDay notification = new NotifyDoctorBusinessDay(businessDay.Shift, businessDay.room);
-                    ret.Insert(1, notification);
+                    ret[1] = notification;
                     day2 = true;
                 }
                 else if (businessDay.Shift.StartDate.Date == DateTime.Today.AddDays(3).Date)
                 {
                     NotifyDoctorBusinessDay notification = new NotifyDoctorBusinessDay(businessDay.Shift, businessDay.room);
-                    ret.Insert(2, notification);
-                    day3 = true;
+                    ret[2] = notification;
+                    day3 = true;   
                 }
+           
             }
-
-            if (!day1)
-                ret.Insert(0, null);
-            if (!day2)
-                ret.Insert(1, null);
-            if (!day3)
-                ret.Insert(2, null);
-
 
 
             return ret;
