@@ -16,10 +16,7 @@ namespace Service
             _repository = repository;
         }
 
-        public Drug AddAlternativeDrug(Drug originalDrug, Drug alternativeDrug)
-        {
-            throw new NotImplementedException();
-        }
+
 
 
         public Drug RecommendDrugBasedOnDiagnosis(Diagnosis diagnosis)

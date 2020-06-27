@@ -21,5 +21,8 @@ namespace bolnica.Service
 
         Room getExaminationRoom(Examination examination);
 
+        List<Examination> GetUpcomingExaminationsByRoomAndPeriod(Room room, Period period);
+
+        List<Examination> GetPreviousExaminationsByRoomAndPeriod(Room room, Period period);
     }
 }

@@ -72,6 +72,26 @@ namespace Service
             return _upcomingRepository.GetUpcomingExaminationsByUser(user);
         }
 
+        public List<Examination> GetUpcomingExaminationsByRoomAndPeriod(Room room, Period period)
+        {
+            List<Examination> examinations = new List<Examination>();
+            foreach (Examination examination in GetAll())
+                if (DateTime.Compare(examination.Period.StartDate.Date, period.StartDate.Date) >= 0 && DateTime.Compare(examination.Period.EndDate.Date, period.EndDate.Date) <= 0 && getExaminationRoom(examination).Id == room.Id)
+                        examinations.Add(examination);
+
+            return examinations;
+        }
+
+        public List<Examination> GetPreviousExaminationsByRoomAndPeriod(Room room, Period period)
+        {
+            List<Examination> examinations = new List<Examination>();
+            foreach (Examination examination in GetAllPrevious())
+                if (DateTime.Compare(examination.Period.StartDate.Date, period.StartDate.Date) >= 0 && DateTime.Compare(examination.Period.EndDate.Date, period.EndDate.Date) <= 0 && getExaminationRoom(examination).Id == room.Id)
+                    examinations.Add(examination);
+
+            return examinations;
+        }
+
         public Examination Get(long id)
         {
 

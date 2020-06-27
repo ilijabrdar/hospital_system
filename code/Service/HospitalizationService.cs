@@ -1,5 +1,7 @@
 using bolnica.Service;
+using Model.Director;
 using Model.Doctor;
+using Model.PatientSecretary;
 using Model.Users;
 using Repository;
 using System;
@@ -46,5 +48,14 @@ namespace Service
             return _hospitalizationRepository.GetHospitalizationByDoctor(doctor);
         }
 
+        public List<Hospitalization> GetHospitalizationsByRoomAndPeriod(Room room, Period period)
+        {
+            List<Hospitalization> hospitalizations = new List<Hospitalization>();
+            foreach (Hospitalization hospitalization in GetAll())
+                if (DateTime.Compare(hospitalization.Period.StartDate.Date, period.StartDate.Date) >= 0 && DateTime.Compare(hospitalization.Period.EndDate.Date, period.EndDate.Date) <= 0 && hospitalization.Room.Id == room.Id)
+                    hospitalizations.Add(hospitalization);
+
+            return hospitalizations;
+        }
     }
 }
