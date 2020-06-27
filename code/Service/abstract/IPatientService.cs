@@ -9,7 +9,7 @@ using System.Text;
 namespace bolnica.Service
 {
     public interface IPatientService : IService<Patient, long>, IUserGetterService
-{
+    {
         Patient ClaimAccount(Patient patient);
 
         Patient GetPatientByJMBG(String jmbg);

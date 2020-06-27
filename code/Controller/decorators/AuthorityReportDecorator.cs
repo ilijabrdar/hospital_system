@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using bolnica.Model.Dto;
+using Model.Director;
 using Model.Dto;
 using Model.PatientSecretary;
 using Model.Users;
@@ -20,15 +22,14 @@ namespace bolnica.Controller.decorators
             Role = role;
             AuthorizedUsers = new Dictionary<string, List<string>>();
             AuthorizedUsers["GenerateAnamnesisPrescriptionReport"] = new List<String>() { "Doctor"};
-            AuthorizedUsers["GenerateDoctorOccupationReport"] = new List<String>() { "Director" };
-            AuthorizedUsers["GenerateRoomOccupationReport"] = new List<String>() { "Secretary" };
+            AuthorizedUsers["GenerateDoctorOccupationReport"] = new List<String>() { "Secretary" };
+            AuthorizedUsers["GenerateRoomOccupationReport"] = new List<String>() { "Director" };
             AuthorizedUsers["GenerateTherapyTimetableReport"] = new List<String>() { "Patient" };
         }
-
-        public DoctorReportDTO GenerateAnamnesisPrescriptionReport(PatientFile patientFile)
+        public DoctorReportDTO GenerateAnamnesisPrescriptionReport(Examination examination)
         {
             if (AuthorizedUsers["GenerateAnamnesisPrescriptionReport"].SingleOrDefault(x => x == Role) != null)
-                return ReportController.GenerateAnamnesisPrescriptionReport(patientFile);
+                return ReportController.GenerateAnamnesisPrescriptionReport(examination);
             else
                 return null;
         }
@@ -41,10 +42,10 @@ namespace bolnica.Controller.decorators
                 return null;
         }
 
-        public string GenerateRoomOccupationReport()
+        public RoomOccupationReportDTO GenerateRoomOccupationReport(Room room, Period period)
         {
             if (AuthorizedUsers["GenerateRoomOccupationReport"].SingleOrDefault(x => x == Role) != null)
-                return ReportController.GenerateRoomOccupationReport();
+                return ReportController.GenerateRoomOccupationReport( room,  period);
             else
                 return null;
         }

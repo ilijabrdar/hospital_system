@@ -9,20 +9,20 @@ namespace bolnica.Controller
 {
     public class TownController : ITownController
     {
-        ITownService _service;
+        ITownService _townService;
 
         public TownController(ITownService service)
         {
-            _service = service;
+            _townService = service;
         }
         public Town Get(long id)
         {
-            throw new NotImplementedException();
+            return _townService.Get(id);
         }
 
         public IEnumerable<Town> GetAll()
         {
-            return _service.GetAll();
+            return _townService.GetAll();
         }
     }
 }

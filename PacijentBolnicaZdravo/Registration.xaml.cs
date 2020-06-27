@@ -209,7 +209,7 @@ namespace PacijentBolnicaZdravo
             patient.Address.Town.State = state;
 
             var app = Application.Current as App;
-            if (app.UserController.IsUsernamedValid(Username.Text.ToString()) == null)
+            if (app.UserController.IsUsernamedValid(Username.Text.ToString()) == null && app.PatientDecorator.GetPatientByJMBG(Id) == null)
             {
                 var temp = app.UserController.Save(patient);
                 if (temp != null)
@@ -218,6 +218,7 @@ namespace PacijentBolnicaZdravo
                     WindowLogIn lg = new WindowLogIn();
                     lg.Show();
                     this.Close();
+                    return;
                 }
                 USERNAME = "";
                 Username.GetBindingExpression(System.Windows.Controls.TextBox.TextProperty).UpdateSource();
@@ -229,8 +230,15 @@ namespace PacijentBolnicaZdravo
                 return;
               
             }
+            USERNAME = "";
+            Username.GetBindingExpression(System.Windows.Controls.TextBox.TextProperty).UpdateSource();
+            string Message = "Username already exists!";
+            string Caption = "Information";
+            MessageBoxButton Buttons = MessageBoxButton.OK;
+            MessageBoxResult Result;
+            Result = MessageBox.Show(Message, Caption, Buttons);
+            return;
 
-          
         }
 
         private void UpdatePw(object sender, RoutedEventArgs e)

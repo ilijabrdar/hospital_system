@@ -1,5 +1,3 @@
-
-
 using System;
 using System.Collections.Generic;
 
@@ -7,7 +5,7 @@ namespace Model.Users
 {
    public class Town : Repository.IIdentifiable<long>
    {
-        public long Id { get; set; }
+        public long Id;
         public String Name { get; set; }
         public String PostalNumber { get; set; }
         public State State { get; set; }
@@ -34,7 +32,6 @@ namespace Model.Users
             State = new State(stateID);
         }
 
-        /// <pdGenerated>default getter</pdGenerated>
         public List<Address> GetAddress()
         {
             if (address == null)
@@ -42,7 +39,6 @@ namespace Model.Users
             return address;
         }
       
-        /// <pdGenerated>default setter</pdGenerated>
         public void SetAddress(List<Address> newAddress)
         {
             RemoveAllAddress();
@@ -50,7 +46,6 @@ namespace Model.Users
             AddAddress(oAddress);
         }
       
-        /// <pdGenerated>default Add</pdGenerated>
         public void AddAddress(Address newAddress)
         {
             if (newAddress == null)
@@ -64,7 +59,6 @@ namespace Model.Users
             }
         }
       
-        /// <pdGenerated>default Remove</pdGenerated>
         public void RemoveAddress(Address oldAddress)
         {
             if (oldAddress == null)
@@ -77,7 +71,6 @@ namespace Model.Users
             }
         }
       
-        /// <pdGenerated>default removeAll</pdGenerated>
         public void RemoveAllAddress()
         {
             if (address != null)
@@ -92,14 +85,12 @@ namespace Model.Users
             }
         }
       
-        /// <pdGenerated>default parent getter</pdGenerated>
         public State GetState()
         {
             return State;
         }
       
-        /// <pdGenerated>default parent setter</pdGenerated>
-        /// <param>newState</param>
+
         public void SetState(State newState)
         {
             if (State != newState)

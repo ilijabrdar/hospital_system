@@ -26,6 +26,8 @@ namespace Service
 
         public IDoctorService doctorService;
 
+        public IExaminationService examinationService { get; set; }
+
         public BusinessDayService(IBusinessDayRepository businessDayRepository, IDoctorService doctorService)
         {
             _businessDayRepository = businessDayRepository;
@@ -38,14 +40,9 @@ namespace Service
             _businessDayRepository.Delete(entity);
         }
 
-        public bool DeletePreviousBusinessDay()
-        {
-            throw new NotImplementedException();
-        }
-
         public void Edit(BusinessDay entity)
         {
-            _businessDayRepository.Edit(entity);
+                _businessDayRepository.Edit(entity);
         }
 
         public BusinessDay GetExactDay(Doctor doctor, DateTime date)
@@ -157,7 +154,7 @@ namespace Service
 
         private bool validateDates(BusinessDay entity)
         {
-            foreach (BusinessDay businessDay in GetBusinessDaysByDoctor(entity.doctor)) //15/07 - 25/-7
+            foreach (BusinessDay businessDay in GetBusinessDaysByDoctor(entity.doctor)) 
             {
                 if (DateTime.Compare(businessDay.Shift.StartDate, entity.Shift.StartDate) <= 0 && DateTime.Compare(businessDay.Shift.EndDate, entity.Shift.EndDate) >= 0)  // 16/07 - 21/07
                     return false;
@@ -169,16 +166,13 @@ namespace Service
                     return false;
             }
 
-            if (DateTime.Compare(entity.Shift.StartDate, entity.Shift.EndDate) >= 0)  //   18/04 - 11/04 XXX
+            if (DateTime.Compare(entity.Shift.StartDate, entity.Shift.EndDate) >= 0)  
                 return false;
 
             return true;
         }
 
-        public bool SetRoomForBusinessDay(BusinessDay businessDay, Room room)
-        {
-            throw new NotImplementedException();
-        }
+
 
         public void DeleteBusinessDayByRoom(Room room)
         {
@@ -210,8 +204,51 @@ namespace Service
         }
 
         [Obsolete]
+        public Boolean ChangeDoctorShift(BusinessDay newShift)
+        {
+            TimeSpan shiftDuration = new TimeSpan();
+            shiftDuration = newShift.Shift.EndDate - newShift.Shift.StartDate;  
+
+            double periodTotalMinutes = 0;
+            foreach (Period period in newShift.ScheduledPeriods)
+            {
+                periodTotalMinutes += durationOfExamination;
+            }
+
+            if (shiftDuration.TotalMinutes < periodTotalMinutes)
+            {
+                return false;
+            }
+
+            BusinessDay temp = new BusinessDay(newShift.Id, newShift.Shift,newShift.doctor, newShift.room,new List<Period>());
+
+            foreach (Period period in newShift.ScheduledPeriods)
+            {
+                if (!periodCorrespondsToNewShift(newShift.Shift, period))
+                {
+                    return false;
+                }
+                
+            }
+
+
+            //return found;
+            return true;
+        }
+
+        private bool periodCorrespondsToNewShift(Period shift, Period period)
+        {
+            if (DateTime.Compare(shift.StartDate, period.StartDate)<= 0 && DateTime.Compare(shift.EndDate, period.EndDate) >= 0)
+                return true;
+
+            return false;
+
+                  
+        }
+
+        [Obsolete]
         public Boolean isExaminationPossible(Examination examination)
-        { 
+        {
             _searchPeriods = new NoPrioritySearch();
             List<ExaminationDTO> examinations = Search(new BusinessDayDTO(examination.Doctor, examination.Period));
             foreach (ExaminationDTO exam in examinations)
@@ -221,6 +258,6 @@ namespace Service
             }
             return false;
         }
-     
+
     }
 }

@@ -427,6 +427,8 @@ namespace PacijentBolnicaZdravo
             DateBirthTextBlock.Text = _patient.DateOfBirth.Date.ToString();
             Email2.Text = _patient.Email;
             PhoneNumber2.Text = _patient.Phone;
+            ProfileImage2.Source = new BitmapImage(_patient.Image);
+            ProfileImage.Source = new BitmapImage(_patient.Image);
             
 
             Ime = _patient.FirstName;
@@ -535,6 +537,7 @@ namespace PacijentBolnicaZdravo
 
         private void ChoosePhoto(object sender, RoutedEventArgs e)
         {
+            var app = Application.Current as App;
             OpenFileDialog op = new OpenFileDialog();
             op.Title = "Select a picture";
             op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
@@ -545,6 +548,8 @@ namespace PacijentBolnicaZdravo
               String fileName = op.FileName;
                 ProfileImage.Source = new BitmapImage(new Uri(fileName));
                 ProfileImage2.Source = new BitmapImage(new Uri(fileName));
+                _patient.Image = new Uri(fileName);
+                app.UserController.Edit(_patient);
                 SuccessUpdatePhoto.Foreground = Brushes.Green;
 
                 SuccessUpdatePhoto.Text = "You have successfully changed photo!";

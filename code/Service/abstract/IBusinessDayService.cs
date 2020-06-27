@@ -13,11 +13,6 @@ namespace bolnica.Service
 {
     public interface IBusinessDayService : IService<BusinessDay, long>
     {
-
-        Boolean DeletePreviousBusinessDay();
-
-        Boolean SetRoomForBusinessDay(BusinessDay businessDay, Room room);
-
         List<ExaminationDTO> Search(BusinessDayDTO businessDayDTO);
 
         void MarkAsOccupied(List<Period> period, BusinessDay businessDay);
@@ -29,6 +24,9 @@ namespace bolnica.Service
         void DeleteBusinessDayByRoom(Room room);
 
         void FreePeriod(BusinessDay businessDay, List<DateTime> period);
+
+        Boolean ChangeDoctorShift(BusinessDay newShift);
+
 
         Boolean isExaminationPossible(Examination examination);
     }

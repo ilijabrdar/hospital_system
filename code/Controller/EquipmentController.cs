@@ -10,45 +10,51 @@ namespace Controller
 {
    public class EquipmentController : IEquipmentController
    {
-        private readonly IEquipmentService _service;
+        private readonly IEquipmentService _equipmentService;
 
         public EquipmentController(IEquipmentService service)
         {
-            _service = service;
+            _equipmentService = service;
         }
+
         public Equipment Save(Equipment entity)
         {
-            return _service.Save(entity);
+            return _equipmentService.Save(entity);
         }
 
         public void Delete(Equipment entity)
         {
-            _service.Delete(entity);
+            _equipmentService.Delete(entity);
         }
 
         public void Edit(Equipment entity)
         {
-            _service.Edit(entity);
+            _equipmentService.Edit(entity);
         }
-
 
         public Equipment Get(long id)
         {
-            return _service.Get(id);
+            return _equipmentService.Get(id);
         }
 
         public IEnumerable<Equipment> GetAll()
         {
-            return _service.GetAll();
+            return _equipmentService.GetAll();
         }
 
-        public IEnumerable<Equipment> getConsumableEquipment() => _service.GetConsumableEquipment();
+        public IEnumerable<Equipment> getConsumableEquipment()
+        {
+            return _equipmentService.GetConsumableEquipment();
+        }
 
-        public IEnumerable<Equipment> getInconsumableEquipment() => _service.GetInconsumableEquipment();
+        public IEnumerable<Equipment> getInconsumableEquipment()
+        {
+            return _equipmentService.GetInconsumableEquipment();
+        }
 
         public bool CheckEquipmentNameUnique(String name)
         {
-            return _service.CheckEquipmentNameUnique(name);
+            return _equipmentService.CheckEquipmentNameUnique(name);
         }
     }
 }

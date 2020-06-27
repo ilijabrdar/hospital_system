@@ -11,15 +11,15 @@ namespace Repository
 {
    public class PatientRepository : CSVRepository<Patient,long> ,IPatientRepository, IEagerRepository<Patient,long>
    {
-        private readonly IPatientFileRepository patientFleRepository;
-        private readonly IEagerRepository<Address, long> _addressRepository;
-        private readonly IEagerRepository<Town, long> _townRepository;
-        private readonly IEagerRepository<State, long> _stateRepository;
-        public PatientRepository(ICSVStream<Patient> stream, ISequencer<long> sequencer, IPatientFileRepository patientFileRepository, IEagerRepository<Address, long> addressRepository,
-            IEagerRepository<Town, long> townRepository, IEagerRepository<State, long> stateRepository)
+        private readonly IPatientFileRepository _patientFleRepository;
+        private readonly IAddressRepository _addressRepository;
+        private readonly ITownRepository _townRepository;
+        private readonly IStateRepository _stateRepository;
+        public PatientRepository(ICSVStream<Patient> stream, ISequencer<long> sequencer, IPatientFileRepository patientFileRepository, IAddressRepository addressRepository,
+            ITownRepository townRepository, IStateRepository stateRepository)
             : base(stream, sequencer)
         {
-            patientFleRepository = patientFileRepository;
+            _patientFleRepository = patientFileRepository;
             _addressRepository = addressRepository;
             _townRepository = townRepository;
             _stateRepository = stateRepository;
@@ -39,7 +39,7 @@ namespace Repository
         public Patient GetEager(long id)
         {
             Patient patient = Get(id);
-            PatientFile patientfile = patientFleRepository.GetEager(patient.patientFile.GetId());
+            PatientFile patientfile = _patientFleRepository.GetEager(patient.patientFile.GetId());
             patient.patientFile = patientfile;
             patient.Address = _addressRepository.GetEager(patient.Address.GetId());
             patient.Address.Town = _townRepository.GetEager(patient.Address.Town.GetId());

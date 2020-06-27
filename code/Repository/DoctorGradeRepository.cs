@@ -14,11 +14,5 @@ namespace Repository
         {
 
         }
-
-        public List<string> GetQuestions()
-        {
-            String[] questions = File.ReadAllLines("../../ResourceFiles/questionsForDoctorGrade.csv");
-            return questions.ToList();
-        }
     }
 }

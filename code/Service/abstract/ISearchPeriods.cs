@@ -10,10 +10,10 @@ using System.Text;
 
 namespace bolnica.Service
 {
-   public interface ISearchPeriods
-{
+    public interface ISearchPeriods
+    {
         List<ExaminationDTO> Search(BusinessDayDTO businessDayDTO, List<BusinessDay> businessDayCollection);
         List<ExaminationDTO> CreateExaminationDTO(BusinessDay businessDay);
         List<BusinessDay> DaysForExactPeriod(Period period, List<BusinessDay> businessDaysCollection);
-}
+    }
 }

@@ -82,16 +82,16 @@ namespace PacijentBolnicaZdravo
             var roomRepo = new RoomRepository(new CSVStream<Room>(_room_File, new RoomCSVConverter(",")), new LongSequencer(), roomTypeRepo, equipmentRepo);
             var businessDayRepo = new BusinessDayRepository(new CSVStream<BusinessDay>(_businessDay_File, new BusinessDayCSVConverter(",")), new LongSequencer(), roomRepo);
             var doctorRepository = new DoctorRepository(new CSVStream<Doctor>(_doctor_File, new DoctorCSVConverter(",")), new LongSequencer(), businessDayRepo, specialityRepo, doctorGradeRepo,addressRepo,townRepo,stateRepo);
-            businessDayRepo.doctorRepo = doctorRepository;
+            businessDayRepo._doctorRepository = doctorRepository;
             var articleRepo = new ArticleRepository(new CSVStream<Article>(_article_File, new ArticleCSVConverter("|")), new LongSequencer(), doctorRepository);
             var symptomRepository = new SymptomRepository(new CSVStream<Symptom>(_symptom_File, new SymptomCSVConverter(",")), new LongSequencer());
-            var diagnosisRepository = new DiagnosisRepository(new CSVStream<Diagnosis>(_diagnosis_File, new DiagnosisCSVConverter(",", ":")), new LongSequencer(), symptomRepository);
+            var diagnosisRepository = new DiagnosisRepository(new CSVStream<Diagnosis>(_diagnosis_File, new DiagnosisCSVConverter(",")), new LongSequencer(), symptomRepository);
             var ingredientRepository = new IngredientRepository(new CSVStream<Ingredient>(_ingredients_File, new IngredientsCSVConverter(",")), new LongSequencer());
             var drugRepository = new DrugRepository(new CSVStream<Drug>(_drug_File, new DrugCSVConverter(",")), new LongSequencer(), ingredientRepository);
             var prescriptionRepository = new PrescriptionRepository(new CSVStream<Prescription>(_prescription_File, new PrescriptionCSVConverter(",", ":")), new LongSequencer(), drugRepository);
             var therapyRepository = new TherapyRepository(new CSVStream<Therapy>(_therapy_File, new TherapyCSVConverter("|", ":")), new LongSequencer(), drugRepository);
             var referralRepository = new ReferralRepository(new CSVStream<Referral>(_referral_File, new ReferralCSVConverter(",")), new LongSequencer(), doctorRepository);
-            var hospitalizationRepository = new HospitalizationRepository(new CSVStream<Hospitalization>(_hospitalization_File, new HospitalizationCSVConverter(",")), new LongSequencer(), roomRepo,patientRepo);
+            var hospitalizationRepository = new HospitalizationRepository(new CSVStream<Hospitalization>(_hospitalization_File, new HospitalizationCSVConverter(",")), new LongSequencer(), roomRepo,patientRepo, doctorRepository);
             var operationRepository = new OperationRepository(new CSVStream<Operation>(_operation_File, new OperationCSVConverter(",")), new LongSequencer(), roomRepo, doctorRepository, patientRepo);
             var examinationUpcomingRepository = new ExaminationUpcomingRepository(new CSVStream<Examination>(_examinationUpcoming_File, new UpcomingExaminationCSVConverter(",")), new LongSequencer(), doctorRepository, patientRepo);
             var examinationPreviousRepository = new ExaminationPreviousRepository(new CSVStream<Examination>(_examinationPrevius_File, new PreviousExaminationCSVConverter("|")), new LongSequencer(), doctorRepository, patientRepo, diagnosisRepository, prescriptionRepository, therapyRepository, referralRepository);
@@ -132,7 +132,7 @@ namespace PacijentBolnicaZdravo
             var townService = new TownService(townRepo);
             var stateService = new StateService(stateRepo);
             doctorService._doctorGradeService = doctorGradeService;
-            var reportService = new ReportService(examinationService, operationService);
+            var reportService = new ReportService(examinationService,renovationService,hospitalizationService, operationService);
             var notificationService = new PatientNotificationService(notificationRepo);
 
             

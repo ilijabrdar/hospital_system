@@ -9,7 +9,6 @@ namespace bolnica.Controller
 {
    public interface IDirectorController : IController<Director, long>
     {
-        Doctor RegisterDoctor(Doctor doctor);
 
     }
 }

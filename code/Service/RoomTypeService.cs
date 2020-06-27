@@ -1,5 +1,3 @@
-
-
 using bolnica.Service;
 using Model.Director;
 using Repository;
@@ -12,8 +10,6 @@ namespace Service
    public class RoomTypeService : IRoomTypeService
    {
         private readonly IRoomTypeRepository _repository;
-
-        //private Repository.IRoomTypeRepository _roomTypeRepository;
         public IRoomService roomService;
         
         public RoomTypeService(IRoomTypeRepository repository, IRoomService roomService)
@@ -36,7 +32,6 @@ namespace Service
             roomService.DeleteRoomsByRoomType(entity);
             _repository.Delete(entity);
         }
-
 
         public void Edit(RoomType entity)
         {

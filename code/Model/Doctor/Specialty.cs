@@ -7,8 +7,8 @@ namespace Model.Doctor
 {
    public class Speciality : IIdentifiable<long>
     {
-        public String Name { get; set; } 
-        public long Id { get; set; }
+        public String Name { get; set; }
+        public long Id;
 
         public Speciality() { }
         public Speciality(string name)

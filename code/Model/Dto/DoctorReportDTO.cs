@@ -1,14 +1,20 @@
-
-
+using Model.PatientSecretary;
+using Model.Users;
 using System;
 
 namespace Model.Dto
 {
    public class DoctorReportDTO
    {
-      private Model.PatientSecretary.Prescription Prescription;
-      private Model.PatientSecretary.Anemnesis Anemnesis;
-      private Model.Users.Patient Patient;
-   
-   }
+        public Prescription Prescription { get; set; }
+        public Anemnesis Anemnesis { get; set; }
+        public Patient Patient { get; set; }
+
+        public DoctorReportDTO(Prescription prescription, Anemnesis anemnesis, Patient patient)
+        {
+            Prescription = prescription;
+            Anemnesis = anemnesis;
+            Patient = patient;
+        }
+    }
 }

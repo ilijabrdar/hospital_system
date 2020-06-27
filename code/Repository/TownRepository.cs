@@ -9,9 +9,9 @@ namespace bolnica.Repository
 {
     public class TownRepository : CSVGetterRepository<Town, long>, ITownRepository
     {
-        private readonly IEagerRepository<Address, long> _addressRepository;
+        private readonly IAddressRepository _addressRepository;
 
-        public TownRepository(ICSVStream<Town> stream, ISequencer<long> sequencer, IEagerRepository<Address, long> addressRepository) : base(stream, sequencer)
+        public TownRepository(ICSVStream<Town> stream, ISequencer<long> sequencer, IAddressRepository addressRepository) : base(stream, sequencer)
         {
             _addressRepository = addressRepository;
         }

@@ -20,16 +20,11 @@ namespace Controller
         public BusinessDayController(IBusinessDayService _service)
         {
             _businessDayService = _service;
-        }
-        
+        }     
+
         public void Delete(BusinessDay entity)
         {
             _businessDayService.Delete(entity);
-        }
-
-        public bool DeletePreviousBusinessDay()
-        {
-            throw new NotImplementedException();
         }
 
         public void Edit(BusinessDay entity)
@@ -37,14 +32,9 @@ namespace Controller
             _businessDayService.Edit(entity);
         }
 
-  /*      public List<Period> GenerateAvailablePeriods(BusinessDay bussinesDay)
-        {
-            return _businessDayService.GenerateAvailablePeriods(bussinesDay);
-        }*/
-
         public BusinessDay Get(long id)
         {
-            throw new NotImplementedException();
+            return _businessDayService.Get(id);  
         }
 
         public IEnumerable<BusinessDay> GetAll()
@@ -54,12 +44,7 @@ namespace Controller
 
         public List<BusinessDay> GetBusinessDaysByDoctor(Doctor doctor)
         {
-            throw new NotImplementedException();
-        }
-
-        public BusinessDay getDoctorWorkingHoursForSpecificDate(Doctor doctor, DateTime date)
-        {
-            throw new NotImplementedException();
+            return _businessDayService.GetBusinessDaysByDoctor(doctor);
         }
 
         public void MarkAsOccupied(List<Period> period, BusinessDay businessDay)
@@ -67,11 +52,6 @@ namespace Controller
             _businessDayService.MarkAsOccupied(period, businessDay);
         }
 
-        /*      public List<Examination> PeriodRecommendationByDate(DateTime date)
-              {
-                  throw new NotImplementedException();
-              }
-      */
         public BusinessDay Save(BusinessDay entity)
         {
             return _businessDayService.Save(entity);
@@ -80,11 +60,6 @@ namespace Controller
         public List<ExaminationDTO> Search(BusinessDayDTO businessDayDTO)
         {
             return _businessDayService.Search(businessDayDTO);
-        }
-
-        public bool SetRoomForBusinessDay(BusinessDay businessDay, Room room)
-        {
-            throw new NotImplementedException();
         }
 
         public void FreePeriod(BusinessDay businessDay, List<DateTime> period)
@@ -100,6 +75,11 @@ namespace Controller
         public Boolean isExaminationPossible(Examination examination)
         {
             return _businessDayService.isExaminationPossible(examination);
+        }
+
+        public bool ChangeDoctorShift(BusinessDay  newShift)
+        {
+            return _businessDayService.ChangeDoctorShift(newShift);
         }
     }
 }

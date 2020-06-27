@@ -1,4 +1,5 @@
-﻿using Model.Dto;
+﻿using Model.Director;
+using Model.Dto;
 using Model.PatientSecretary;
 using Model.Users;
 using Service;
@@ -11,11 +12,11 @@ namespace bolnica.Service
 {
     public interface IExaminationService : IService<Examination,long>
     {
-        Examination StartUpcomingExamination(Examination examination);
         Examination SaveFinishedExamination(Examination examination);
         List<Examination> GetUpcomingExaminationsByUser(User user);
         List<Examination> GetFinishedxaminationsByUser(User user);
         List<Examination> GetExaminationsByFilter(ExaminationDTO examinationDTO, Boolean upcomingOnly);
         IEnumerable<Examination> GetAllPrevious();
+        Room getExaminationRoom(Examination examination);
     }
 }

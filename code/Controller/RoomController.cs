@@ -15,12 +15,10 @@ namespace Controller
         {
             _service = service;
         }
-
         public Room Save(Room entity)
         {
             return _service.Save(entity);
         }
-
 
         public IEnumerable<Room> GetAll()
         {
@@ -36,17 +34,6 @@ namespace Controller
         {
             _service.Delete(entity);
         }
-
-        public IEnumerable<Room> GetVacantRooms()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool AddEquipment(Equipment equipment, Room room)
-        {
-            throw new NotImplementedException();
-        }
-
 
         public Room Get(long id)
         {

@@ -22,7 +22,6 @@ namespace bolnica.Controller.decorators
             AuthorizedUsers["Get"] = new List<String>() { "Director", "Doctor", "Secretary", "Patient" };
             AuthorizedUsers["GetAll"] = new List<String>() { "Director", "Doctor", "Secretary", "Patient" };
             AuthorizedUsers["Save"] = new List<String>() { "Doctor" };
-            AuthorizedUsers["SearchArticle"] = new List<String>() { "Director", "Doctor", "Secretary", "Patient" };
         }
 
         public void Delete(Article entity)
@@ -57,14 +56,6 @@ namespace bolnica.Controller.decorators
         {
             if (AuthorizedUsers["Save"].SingleOrDefault(x => x == Role) != null)
                 return ArticleController.Save(entity);
-            else
-                return null;
-        }
-
-        public List<Article> SearchArticle(string criteria)
-        {
-            if (AuthorizedUsers["SearchArticle"].SingleOrDefault(x => x == Role) != null)
-                return ArticleController.SearchArticle(criteria);
             else
                 return null;
         }

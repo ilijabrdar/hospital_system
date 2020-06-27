@@ -10,21 +10,17 @@ namespace Repository
 {
    public class SecretaryRepository : CSVRepository<Secretary, long>, ISecretaryRepository, IEagerRepository<Secretary, long>
    {
-        private readonly IEagerRepository<Address, long> _addressRepository;
-        private readonly IEagerRepository<Town, long> _townRepository;
-        private readonly IEagerRepository<State, long> _stateRepository;
+        private readonly IAddressRepository _addressRepository;
+        private readonly ITownRepository _townRepository;
+        private readonly IStateRepository _stateRepository;
 
-        public SecretaryRepository(ICSVStream<Secretary> stream, ISequencer<long> sequencer, IEagerRepository<Address, long> addressRepository,
-            IEagerRepository<Town, long> townRepository, IEagerRepository<State, long> stateRepository) : base(stream, sequencer)
+        public SecretaryRepository(ICSVStream<Secretary> stream, ISequencer<long> sequencer, IAddressRepository addressRepository,
+            ITownRepository townRepository, IStateRepository stateRepository) : base(stream, sequencer)
         {
             _addressRepository = addressRepository;
             _townRepository = townRepository;
             _stateRepository = stateRepository;
 
-        }
-
-        public SecretaryRepository(CSVStream<Secretary> cSVStream, LongSequencer longSequencer) : base(cSVStream, longSequencer)
-        {
         }
 
         public IEnumerable<Secretary> GetAllEager()

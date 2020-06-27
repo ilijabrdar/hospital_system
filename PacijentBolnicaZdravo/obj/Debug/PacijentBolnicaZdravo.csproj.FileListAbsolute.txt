@@ -54,8 +54,6 @@ C:\Users\jovan\Desktop\hospital_system\PacijentBolnicaZdravo\bin\Debug\MaterialD
 C:\Users\jovan\Desktop\hospital_system\PacijentBolnicaZdravo\bin\Debug\System.Resources.Extensions.dll
 C:\Users\jovan\Desktop\hospital_system\PacijentBolnicaZdravo\bin\Debug\System.Windows.Interactivity.dll
 C:\Users\jovan\Desktop\hospital_system\PacijentBolnicaZdravo\bin\Debug\System.Memory.dll
-C:\Users\jovan\Desktop\hospital_system\PacijentBolnicaZdravo\bin\Debug\System.Numerics.Vectors.dll
-C:\Users\jovan\Desktop\hospital_system\PacijentBolnicaZdravo\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
 C:\Users\jovan\Desktop\hospital_system\PacijentBolnicaZdravo\bin\Debug\System.Buffers.dll
 C:\Users\jovan\Desktop\hospital_system\PacijentBolnicaZdravo\bin\Debug\ControlzEx.pdb
 C:\Users\jovan\Desktop\hospital_system\PacijentBolnicaZdravo\bin\Debug\MahApps.Metro.pdb
@@ -91,3 +89,10 @@ C:\Users\jovan\Desktop\hospital_system\PacijentBolnicaZdravo\bin\Debug\bolnica.p
 C:\Users\jovan\Desktop\hospital_system\PacijentBolnicaZdravo\bin\Debug\Caliburn.Micro.dll
 C:\Users\jovan\Desktop\hospital_system\PacijentBolnicaZdravo\bin\Debug\Caliburn.Micro.xml
 C:\Users\jovan\Desktop\hospital_system\PacijentBolnicaZdravo\obj\Debug\PacijentBolnicaZdravo.DeleteExamination.resources
+C:\Users\jovan\Desktop\hospital_system\PacijentBolnicaZdravo\obj\Debug\PacijentBolnicaZdravo.exe.config
+C:\Users\jovan\Desktop\hospital_system\PacijentBolnicaZdravo\bin\Debug\System.Text.Json.dll
+C:\Users\jovan\Desktop\hospital_system\PacijentBolnicaZdravo\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\jovan\Desktop\hospital_system\PacijentBolnicaZdravo\bin\Debug\bolnica.dll.config
+C:\Users\jovan\Desktop\hospital_system\PacijentBolnicaZdravo\bin\Debug\System.Text.Json.xml
+C:\Users\jovan\Desktop\hospital_system\PacijentBolnicaZdravo\bin\Debug\itextsharp.dll
+C:\Users\jovan\Desktop\hospital_system\PacijentBolnicaZdravo\bin\Debug\itextsharp.xml
