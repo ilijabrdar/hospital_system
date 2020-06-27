@@ -200,6 +200,8 @@ namespace upravnikKT2
             Uri temp = director.Image;
 
             UserImage.Source = new BitmapImage(director.Image);
+
+            _roomController.CheckHospitalizationDurationInRoom();
         }
 
         private void setDirectorField()
