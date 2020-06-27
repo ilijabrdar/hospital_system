@@ -51,11 +51,6 @@ namespace Service
             
         }
 
-        public List<string> GetQuestions()
-        {
-            return _doctorGradeRepository.GetQuestions();
-        }
-
         public DoctorGrade Save(DoctorGrade entity)
         {
             return _doctorGradeRepository.Save(entity);

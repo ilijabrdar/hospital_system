@@ -1,5 +1,3 @@
-
-
 using bolnica.Controller;
 using bolnica.Service;
 using Model.Doctor;

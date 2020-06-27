@@ -40,15 +40,6 @@ namespace Service
                 return _doctorService.Save(docktor);
             }
         }
-        public bool BlockUser(string username)
-        {
-            throw new NotImplementedException();
-        }
-
-        public object Delete()
-        {
-            throw new NotImplementedException();
-        }
 
         public void Edit(User entity)
         {
@@ -59,6 +50,14 @@ namespace Service
             else if(entity.GetType() == typeof(Patient))
             {
                 _patientService.Edit((Patient)entity);
+            }
+            else if(entity.GetType() == typeof(Secretary))
+            {
+                _secretaryService.Edit((Secretary)entity);
+            }
+            else if(entity.GetType() == typeof(Director))
+            {
+                _directorService.Edit((Director)entity);
             }
         }
 
@@ -72,7 +71,6 @@ namespace Service
 
         public User IsUsernameValid(string username)
         {
-            
             User user = null;
 
             if ((user = _patientService.GetUserByUsername(username)) != null)
@@ -96,39 +94,26 @@ namespace Service
                 return null;
         }
 
-        public bool Logout(User user)
-        {
-            throw new NotImplementedException();
-        }
-
-
-        public Feedback SendFeedback(string feedback)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Delete(User entity)
         {
-            throw new NotImplementedException();
+            if (entity.GetType() == typeof(Doctor))
+                _doctorService.Delete((Doctor)entity);
+            if (entity.GetType() == typeof(Director))
+                _directorService.Delete((Director)entity);
+            if (entity.GetType() == typeof(Secretary))
+                _secretaryService.Delete((Secretary)entity);
+            if (entity.GetType() == typeof(Patient))
+                _patientService.Delete((Patient)entity);          
         }
 
         public IEnumerable<User> GetAll()
         {
-            throw new NotImplementedException();
+            return null;
         }
 
         public User Get(long id)
         {
-            User user = null;
-            if ((user = _doctorService.Get(id)) != null)
-                return user;
-
-            return user;
-        }
-
-        public bool IsPasswordValid(string password)
-        {
-            throw new NotImplementedException();
+            return null;
         }
     }
 }

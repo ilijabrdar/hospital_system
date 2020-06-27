@@ -8,7 +8,7 @@ namespace Model.PatientSecretary
 {
    public class Diagnosis : IIdentifiable<long>
    {
-        public long Id { get; set; }
+        public long Id;
         public string Name { get; set; }
 
         public Diagnosis() { }

@@ -10,15 +10,12 @@ namespace Repository
 {
     public class DiagnosisRepository : CSVGetterRepository<Diagnosis, long>, IDiagnosisRepository
     {
-        private readonly ISymptomRepository _symptomRepo;
+        private readonly ISymptomRepository _symptomRepository;
 
-        public DiagnosisRepository(ICSVStream<Diagnosis> stream, ISequencer<long> sequencer, ISymptomRepository _symptomRepository)
+        public DiagnosisRepository(ICSVStream<Diagnosis> stream, ISequencer<long> sequencer, ISymptomRepository symptomRepository)
           : base(stream, sequencer)
         {
-            _symptomRepo = _symptomRepository;
+            this._symptomRepository = symptomRepository;
         }
-
-    
-        
     }
 }

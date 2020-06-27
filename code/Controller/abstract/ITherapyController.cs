@@ -9,6 +9,5 @@ namespace bolnica.Controller
 {
    public interface ITherapyController : IController<Therapy,long>
     {
-        Therapy AssignCurrentTherapy(PatientFile patientFile);
     }
 }

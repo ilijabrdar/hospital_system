@@ -30,6 +30,9 @@ namespace Model.PatientSecretary
             Examination = examinations;
         }
 
+        public PatientFile()
+        {
+        }
 
         public long GetId()
         {

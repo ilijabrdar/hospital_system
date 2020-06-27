@@ -1,5 +1,3 @@
-
-
 using bolnica.Controller;
 using bolnica.Service;
 using Model.PatientSecretary;
@@ -15,21 +13,6 @@ namespace Controller
         public DrugController(IDrugService service)
         {
             _service = service;
-        }
-
-        public Drug AddAlternativeDrug(Drug originalDrug, Drug alternativeDrug)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Drug ApproveDrug(Drug drug)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Drug RecommendDrugBasedOnDiagnosis(Diagnosis diagnosis)
-        {
-            throw new NotImplementedException();
         }
 
         public void Delete(Drug entity)
@@ -50,11 +33,6 @@ namespace Controller
         public IEnumerable<Drug> GetAll()
         {
             return _service.GetAll();
-        }
-
-        public List<Drug> GetAlternativeDrugs(Drug drug)
-        {
-            throw new NotImplementedException();
         }
 
         public List<Drug> GetNotApprovedDrugs()

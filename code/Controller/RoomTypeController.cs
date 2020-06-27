@@ -9,7 +9,7 @@ namespace Controller
 {
    public class RoomTypeController : IRoomTypeController
    {
-      private readonly IRoomTypeService _service;
+        private readonly IRoomTypeService _service;
 
         public RoomTypeController(IRoomTypeService service)
         {

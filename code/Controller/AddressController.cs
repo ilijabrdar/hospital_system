@@ -7,23 +7,23 @@ using Model.Users;
 
 namespace bolnica.Controller
 {
-   public class AddressController : IAddressController
+    public class AddressController : IAddressController
     {
-        IAddressService _service;
+        IAddressService _adressService;
 
         public AddressController(IAddressService service)
         {
-            _service = service;
+            _adressService = service;
         }
 
         public Address Get(long id)
         {
-            throw new NotImplementedException();
+            return _adressService.Get(id);
         }
 
         public IEnumerable<Address> GetAll()
         {
-            return _service.GetAll();
+            return _adressService.GetAll();
         }
     }
 }

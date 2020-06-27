@@ -6,9 +6,9 @@ namespace Model.Dto
 {
    public class DoctorReportDTO
    {
-      public Prescription Prescription;
-      public Anemnesis Anemnesis;
-      public Patient Patient;
+        public Prescription Prescription { get; set; }
+        public Anemnesis Anemnesis { get; set; }
+        public Patient Patient { get; set; }
 
         public DoctorReportDTO(Prescription prescription, Anemnesis anemnesis, Patient patient)
         {

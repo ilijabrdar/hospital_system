@@ -11,7 +11,6 @@ namespace bolnica.Controller
 {
     public interface IExaminationController : IController<Examination, long>
     {
-        Examination StartUpcomingExamination(Examination examination);
         Examination SaveFinishedExamination(Examination examination);
         List<Examination> GetUpcomingExaminationsByUser(User user);
         List<Examination> GetFinishedxaminationsByUser(User user);
