@@ -41,6 +41,7 @@ namespace HCIproject
             setHospitalizations();
             setOperation();
             setPatientInfo();
+            setAllergy();
         }
 
 
@@ -53,6 +54,15 @@ namespace HCIproject
 
             int godine = DateTime.Now.Year - patient.DateOfBirth.Year;
             godinePacijenta.Content = godine.ToString();
+
+          
+        }
+
+        private void setAllergy()
+        {
+            var app = Application.Current as App;
+            alergijePacijenta.Content = "";
+            Patient patient = app.PatientDecorator.Get(id);
 
             foreach (Allergy allergy in patient.patientFile.Allergy)
             {
@@ -76,7 +86,7 @@ namespace HCIproject
                 b.BorderThickness = new Thickness(2);
                 b.CornerRadius = new CornerRadius(3);
                 b.BorderBrush = Brushes.LightBlue;
-                b.Margin = new Thickness(10, 10, 10, 10);
+                b.Margin = new Thickness(5,5,5,5);
 
                 StackPanel stackPanelExamination = new StackPanel();
                 TextBlock doctor = new TextBlock();
@@ -90,72 +100,75 @@ namespace HCIproject
                 Button myButton = new Button();
 
                 myButton.Content = "Izvestaj";
-                myButton.Width = 100;
-                myButton.Height = 30;
+                myButton.Width = 80;
+                myButton.Height = 20;
                 myButton.Background = new SolidColorBrush(Color.FromRgb(162, 217, 206));
                 myButton.Tag = examination;
+                myButton.FontSize = 9;
+                myButton.HorizontalAlignment = HorizontalAlignment.Right;
                 myButton.Click += new RoutedEventHandler(izvestajPdf);
                 stackPanelExamination.Children.Add(myButton);
 
-                doctor.FontSize = 15;
+                doctor.FontSize = 12;
                 doctor.Inlines.Add(new Run("Doktor:  ") { FontWeight = FontWeights.SemiBold });
                 doctor.Inlines.Add(examination.Doctor.FullName);
-                doctor.Margin = new Thickness(10, 10, 10, 10);
+                doctor.Margin = new Thickness(5, 5, 5, 5);
                 stackPanelExamination.Children.Add(doctor);
                 //
                 period.Inlines.Add(new Run("Datum:  ") { FontWeight = FontWeights.SemiBold });
-                period.FontSize = 15;
+                period.FontSize = 12;
                 period.Inlines.Add(examination.Period.StartDate.ToString());
-                period.Margin = new Thickness(10, 10, 10, 10);
+                period.Margin = new Thickness(5, 5, 5, 5);
                 stackPanelExamination.Children.Add(period);
 
-                Simptomi.FontSize = 15;
-                Simptomi.Inlines.Add(new Run("Simptomi:  ") { FontWeight = FontWeights.SemiBold });
-                Simptomi.TextWrapping = TextWrapping.Wrap;
-                Simptomi.Margin = new Thickness(10, 10, 10, 10);
-                //foreach (var s in examination.Diagnosis.Symptom)
-                //{
-                //    Simptomi.Inlines.Add(s.Name);
-                //}
-                stackPanelExamination.Children.Add(Simptomi);
-
-                Anamnesis.FontSize = 15;
+                Anamnesis.FontSize = 12;
                 Anamnesis.Inlines.Add(new Run("Anamneza:  ") { FontWeight = FontWeights.SemiBold });
                 Anamnesis.TextWrapping = TextWrapping.Wrap;
-                Anamnesis.Margin = new Thickness(10, 10, 10, 10);
+                Anamnesis.Margin = new Thickness(5, 5, 5, 5);
+                if (examination.Anemnesis !=null)        
                 Anamnesis.Inlines.Add(examination.Anemnesis.Text);
+
                 stackPanelExamination.Children.Add(Anamnesis);
 
                 //
-                Diagnosis.FontSize = 15;
+                Diagnosis.FontSize = 12;
                 Diagnosis.TextWrapping = TextWrapping.Wrap;
                 Diagnosis.Inlines.Add(new Run("Diagnoza:  ") { FontWeight = FontWeights.SemiBold });
-                Diagnosis.Margin = new Thickness(10, 10, 10, 10);
+                Diagnosis.Margin = new Thickness(5, 5, 5, 5);
                 Diagnosis.Inlines.Add(examination.Diagnosis.Name);
                 stackPanelExamination.Children.Add(Diagnosis);
 
                 //
 
-                prescription.FontSize = 15;
+                prescription.FontSize = 12;
                 prescription.TextWrapping = TextWrapping.Wrap;
-                prescription.Margin = new Thickness(10, 10, 10, 10);
+                prescription.Margin = new Thickness(5, 5, 5, 5);
                 prescription.Inlines.Add(new Run("Recept: ") { FontWeight = FontWeights.SemiBold });
-                foreach (Drug dr in examination.Prescription.Drug)
-                {
-                        prescription.Inlines.Add(dr.Name);
-                }
-                stackPanelExamination.Children.Add(prescription);
+                if (examination.Prescription != null) { 
+                    foreach (Drug dr in examination.Prescription.Drug)
+                    {
+                            prescription.Inlines.Add(dr.Name);
 
-                therapy.FontSize = 15;
+                    }
+                    stackPanelExamination.Children.Add(prescription);
+
+                }
+                therapy.FontSize = 12;
                 therapy.TextWrapping = TextWrapping.Wrap;
-                therapy.Margin = new Thickness(10, 10, 10, 10);
+                therapy.Margin = new Thickness(5, 5, 5, 5);
                 therapy.Inlines.Add(new Run("Terapija:  ") { FontWeight = FontWeights.SemiBold });
-                therapy.Inlines.Add(examination.Therapy.Note);
-                stackPanelExamination.Children.Add(therapy);
+                if (examination.Therapy != null)
+                {
+                    therapy.Inlines.Add(examination.Therapy.Note);
+                    stackPanelExamination.Children.Add(therapy);
+
+                }
+
+
                 if (examination.Refferal != null)
                 {
-                    refferal.FontSize = 15;
-                    refferal.Margin = new Thickness(10, 10, 10, 10);
+                    refferal.FontSize = 12;
+                    refferal.Margin = new Thickness(5, 5, 5, 5);
                     refferal.Inlines.Add(new Run("Uput:  ") { FontWeight = FontWeights.SemiBold });
                     refferal.Inlines.Add("pacijent se upućuje na dateljniji pregled kod lekara " + examination.Refferal.Doctor.FullName + " datuma " + examination.Refferal.Period.StartDate.ToString());
                     stackPanelExamination.Children.Add(refferal);
@@ -182,29 +195,28 @@ namespace HCIproject
                 b.BorderThickness = new Thickness(2);
                 b.CornerRadius = new CornerRadius(3);
                 b.BorderBrush = Brushes.GreenYellow;
-                b.Margin = new Thickness(10, 10, 10, 10);
+                b.Margin = new Thickness(5, 5, 5, 5);
 
                 StackPanel stackPanelExamination = new StackPanel();
                 TextBlock period = new TextBlock();
                 TextBlock room = new TextBlock();
                 TextBlock hospitalizacija = new TextBlock();
 
-                hospitalizacija.FontSize = 15;
+                hospitalizacija.FontSize = 12;
                 hospitalizacija.Inlines.Add(new Run("HOSPITALIZACIJA") { FontWeight = FontWeights.Bold });
-                hospitalizacija.Margin = new Thickness(10, 10, 10, 10);
+                hospitalizacija.Margin = new Thickness(5, 5, 5, 5);
                 stackPanelExamination.Children.Add(hospitalizacija);
 
                 period.Inlines.Add(new Run("Datum:  ") { FontWeight = FontWeights.SemiBold });
-                period.FontSize = 15;
+                period.FontSize = 12;
                 period.Inlines.Add(hospitalization.Period.StartDate.ToString());
-                period.Margin = new Thickness(10, 10, 10, 10);
+                period.Margin = new Thickness(5, 5, 5, 5);
                 stackPanelExamination.Children.Add(period);
 
-                //
                 room.Inlines.Add(new Run("Prostorija: ") { FontWeight = FontWeights.SemiBold });
-                room.FontSize = 15;
+                room.FontSize = 12;
                 room.Inlines.Add(hospitalization.Room.RoomCode);
-                room.Margin = new Thickness(10);
+                room.Margin = new Thickness(5);
                 stackPanelExamination.Children.Add(room);
 
                 b.Child = stackPanelExamination;
@@ -230,7 +242,7 @@ namespace HCIproject
                 b.BorderThickness = new Thickness(2);
                 b.CornerRadius = new CornerRadius(3);
                 b.BorderBrush = Brushes.Pink;
-                b.Margin = new Thickness(10, 10, 10, 10);
+                b.Margin = new Thickness(5, 5, 5, 5);
 
                 StackPanel stackPanelExamination = new StackPanel();
                 TextBlock operacija = new TextBlock();
@@ -239,38 +251,35 @@ namespace HCIproject
                 TextBlock room = new TextBlock();
                 TextBlock description = new TextBlock();
 
-                operacija.FontSize = 15;
+                operacija.FontSize = 12;
                 operacija.Inlines.Add(new Run("OPERACIJA") { FontWeight = FontWeights.Bold });
-                operacija.Margin = new Thickness(10, 10, 10, 10);
+                operacija.Margin = new Thickness(5, 5, 5, 5);
                 stackPanelExamination.Children.Add(operacija);
 
-                doctor.FontSize = 15;
+                doctor.FontSize = 12;
                 doctor.Inlines.Add(new Run("Doktor:  ") { FontWeight = FontWeights.SemiBold });
                 doctor.Inlines.Add(operation.Doctor.FullName);
-                doctor.Margin = new Thickness(10, 10, 10, 10);
+                doctor.Margin = new Thickness(5, 5, 5, 5);
                 stackPanelExamination.Children.Add(doctor);
                 //
                 period.Inlines.Add(new Run("Datum:  ") { FontWeight = FontWeights.SemiBold });
-                period.FontSize = 15;
+                period.FontSize = 12;
                 period.Inlines.Add(operation.Period.StartDate.ToString());
-                period.Margin = new Thickness(10, 10, 10, 10);
+                period.Margin = new Thickness(5, 5, 5, 5);
                 stackPanelExamination.Children.Add(period);
 
-                //
+
                 room.Inlines.Add(new Run("Prostorija: ") { FontWeight = FontWeights.SemiBold });
-                room.FontSize = 15;
+                room.FontSize = 12;
                 room.Inlines.Add(operation.Room.RoomCode);
-                room.Margin = new Thickness(10);
+                room.Margin = new Thickness(5);
                 stackPanelExamination.Children.Add(room);
 
-                //
                 description.Inlines.Add(new Run("Opis: ") { FontWeight = FontWeights.SemiBold });
-                description.FontSize = 15;
+                description.FontSize = 12;
                 description.Inlines.Add(operation.Description);
                 description.Margin = new Thickness(10);
                 stackPanelExamination.Children.Add(description);
-
-
 
                 b.Child = stackPanelExamination;
 
@@ -293,17 +302,7 @@ namespace HCIproject
         }
 
 
-       
 
-        private void searchMyExam(String input)
-        {
-          
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            searchMyExam(" ");
-        }
 
         private void izvestajPdf(object sender, RoutedEventArgs e)
         {
@@ -447,8 +446,8 @@ namespace HCIproject
 
             AllergyWin allergyWin = new AllergyWin((Doctor)user, patient);
 
-            allergyWin.Show();
-
+            allergyWin.ShowDialog();
+            setAllergy();
         }
     }
 }

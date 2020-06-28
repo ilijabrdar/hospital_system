@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HCIproject"
         mc:Ignorable="d"
-        Title="AllergyWin" Height="350" Width="700"
+        Title="AllergyWin" Height="250" Width="700"
     WindowStartupLocation="CenterScreen">
-    <StackPanel Background="#D0ECE7" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" >
-        <Grid  VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">
+    <StackPanel Background="#D0ECE7" Orientation="Vertical">
+        <Grid  VerticalAlignment="Center" HorizontalAlignment="Center"  Margin="50">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -27,7 +27,7 @@
             <Label Content="Izaberite alergiju koju zelite da obrisete" Grid.Row="1" Grid.Column="0"></Label>
 
             <TextBox x:Name="alergijaDodaj" Grid.Row="0" Grid.Column="1"></TextBox>
-            <ComboBox x:Name="alergijaBrisi" Grid.Row="1" Grid.Column="1"></ComboBox>
+            <ComboBox x:Name="alergijaBrisi" DisplayMemberPath="Name"  Grid.Row="1" Grid.Column="1"></ComboBox>
         </Grid>
         <Button Content="Potvrdi izmene" Width="130" Click="Button_Click"></Button>
     </StackPanel>

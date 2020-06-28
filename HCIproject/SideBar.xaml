@@ -20,7 +20,7 @@
                 <StackPanel x:Name="pocetnaGrid" Background="#D5F5E3"  Orientation="Vertical" HorizontalAlignment="Stretch">
                     <StackPanel Background="#D5F5E3"  Orientation="Horizontal">
                         <StackPanel Orientation="Vertical">
-                            <Image x:Name="pic" HorizontalAlignment="Left" Margin="30,30,80,10" Height="114"  VerticalAlignment="Top" Width="130" Source="user.png"/>
+                            <Image x:Name="pic" HorizontalAlignment="Left" Margin="30,30,80,10" Height="114"  VerticalAlignment="Top" Width="130"/>
                             <Button Content="Promeni sliku" Width="90" Margin="-60,0,0,0" FontSize="9" Foreground="#2C3E50"  BorderBrush="#FF1FEECD" Height="22" Click="changePhoto" >
                                 <Button.Background>
                                     <SolidColorBrush Color="{DynamicResource Color1}"/>
@@ -78,13 +78,13 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Label Content="Za današnji datum preostalo termina:"  Grid.Column="0" Grid.Row="0" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top"  />
-                        <Label x:Name="brojPregleda" Grid.Column="1" Grid.Row="0" FontSize="14" FontWeight="Bold"/>
+                        <TextBox x:Name="brojPregleda" Grid.Column="1" Grid.Row="0"  BorderBrush="#D5F5E3"  FontSize="14" FontWeight="SemiBold" IsReadOnly="True" Focusable="False"/>
 
-                        <Label Content="Radno vreme:"  Grid.Column="0" Grid.Row="1" FontSize="12" HorizontalAlignment="Left"   VerticalAlignment="Top" />
-                        <TextBox x:Name="smene"  AcceptsReturn="True" Grid.Column="1"  Grid.Row="1" FontSize="13" FontWeight="Bold"/> 
+                        <Label Content="Radno vreme naredna tri dana:"  Grid.Column="0" Grid.Row="1" FontSize="12" HorizontalAlignment="Left"   VerticalAlignment="Top" />
+                        <TextBox x:Name="smene" BorderBrush="#D5F5E3" AcceptsReturn="True" Grid.Column="1"  Grid.Row="1" FontSize="13" FontWeight="SemiBold" IsReadOnly="True" Focusable="False" /> 
                         
                         <Label Content="Broj lekova za validiranje"  Grid.Column="0" Grid.Row="2" FontSize="12" HorizontalAlignment="Left"   VerticalAlignment="Top" />
-                        <TextBox x:Name="lekoviValidacija"  AcceptsReturn="True" Grid.Column="1"  Grid.Row="2" FontSize="13" FontWeight="Bold"/>
+                        <TextBox x:Name="lekoviValidacija"  AcceptsReturn="True"   BorderBrush="#D5F5E3"  Grid.Column="1"  Grid.Row="2" FontSize="13" FontWeight="SemiBold" IsReadOnly="True" Focusable="False" />
                     </Grid>
                     <Button Content="Odjava" Background="#A2D9CE" Foreground="#2C3E50" FontSize="14" HorizontalAlignment="Right" Margin="10"  Width="102" Click="Button_Click" BorderBrush="#FF1FEECD"  />
 

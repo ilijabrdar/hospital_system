@@ -1,4 +1,5 @@
-﻿using Model.PatientSecretary;
+﻿using Model.Doctor;
+using Model.PatientSecretary;
 using Model.Users;
 using System;
 using System.Collections.Generic;
@@ -123,8 +124,45 @@ namespace HCIproject
                 Patient patient = new Patient();
                 patient = app.PatientDecorator.Get(patientId);
                 User userPatient = patient as User;
-                
-                Examination saveExamination = new Examination(userPatient, user, examination.Period, diagnosis, new Anemnesis(anamnezaTxt.Text), PrescriptionWin.terapija, RefferalWin.referral, PrescriptionWin.prescription);
+
+                Anemnesis ane;
+                if (anamnezaTxt.Text != " ") {
+                    ane = new Anemnesis(anamnezaTxt.Text);
+                }
+                else
+                {
+                    ane = null; 
+                }
+
+                Therapy terapija;
+                if (PrescriptionWin.terapija != null)
+                {
+                    terapija = PrescriptionWin.terapija;
+                }
+                else
+                {
+                    terapija = null; 
+                }
+
+                Referral referral;
+                if (RefferalWin.referral != null)
+                {
+                    referral = RefferalWin.referral;
+                }
+                else
+                {
+                    referral = null;
+                }
+                Prescription prescription;
+                if (PrescriptionWin.prescription != null)
+                {
+                    prescription = PrescriptionWin.prescription;
+                }
+                else
+                {
+                    prescription = null;
+                }
+                Examination saveExamination = new Examination(userPatient, user, examination.Period, diagnosis, ane,terapija,referral, prescription);
                 app.ExaminationDecorator.SaveFinishedExamination(saveExamination);
 
                 app.ExaminationDecorator.Delete(examination);
@@ -132,6 +170,10 @@ namespace HCIproject
                 List<DateTime> pom = new List<DateTime>();
                 pom.Add(examination.Period.StartDate);
                 app.BusinessDayDecorator.FreePeriod(selectedDay, pom);
+
+                app.PatientFileDecorator.AddExamination(saveExamination, patient.patientFile);
+                
+                
 
                 string messageBoxText = "Pregled uspesno zavrsen";
                 string caption = "Pregled gotov";

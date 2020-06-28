@@ -107,8 +107,10 @@ namespace HCIproject
                 Patient patient = app.PatientDecorator.Get(patientId);
                 if (StartDate.SelectedDate == null || EndDate.SelectedDate == null) return;
                 Period period = new Period(StartDate.SelectedDate, EndDate.SelectedDate);
+                Hospitalization hospitalization = new Hospitalization(patient, user, period, room);
+            //    app.HospitalizationDecorator.Save(hospitalization);
 
-                app.HospitalizationDecorator.Save(new Hospitalization(patient, user, period, room));
+                app.PatientFileDecorator.AddHospitalization(hospitalization, patient.patientFile);
                 string messageBoxText = "Uspesno ste izvrsili hospitalizaciju pacijenta!";
                 string caption = "Hospitalizacija";
                 MessageBoxButton button = MessageBoxButton.OK;

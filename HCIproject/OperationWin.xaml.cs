@@ -27,8 +27,6 @@ namespace HCIproject
         private long id;
         private String dijagnoza;
         public List<ExaminationDTO> specialistExaminations { get; set; }
-
-
         public List<ExaminationDTO> operationList { get; set; }
         public OperationWin() { }
         public OperationWin(Doctor user, long _patientId, String _dijagnoza)
@@ -66,6 +64,8 @@ namespace HCIproject
         { //potvrdi
             if (specialistGrid.SelectedItem != null || vreme.Text!="" || naziv.Text!="")
             {
+                var app = Application.Current as App;
+
                 ExaminationDTO examDTO = (ExaminationDTO)specialistGrid.SelectedItem;
                 string messageBoxText = "Uspesno ste zakazali operaciju za dan" + examDTO.Period.StartDate;
                 string caption = "Operacija";
@@ -167,6 +167,7 @@ namespace HCIproject
 
             Operation operation = new Operation(patient, user, "Operacija kolena", period, operationList[0].Room);
             app.OperationDecorator.Save(operation);
+            app.PatientFileDecorator.AddOperation(operation, patient.patientFile);
 
             BusinessDay day = app.BusinessDayDecorator.GetExactDay(user, period.StartDate);
             List<Period> pom = new List<Period>();

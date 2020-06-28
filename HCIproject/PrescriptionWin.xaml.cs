@@ -22,8 +22,8 @@ namespace HCIproject
         public long patientId;
         public String dijagnoza;
 
-        public static Prescription prescription=new Prescription();
-        public static Therapy terapija = new Therapy();
+        public static Prescription prescription;
+        public static Therapy terapija;
 
         public List<Drug> lekoviListBox = new List<Drug>();
 
@@ -35,8 +35,8 @@ namespace HCIproject
             this.patientId = _patientId;
             this.dijagnoza = _dijagnoza;
             InitializeComponent();
-            prescription = null;
-            terapija = null;
+            prescription = new Prescription();
+            terapija = new Therapy();
 
 
             setPatientInfo();

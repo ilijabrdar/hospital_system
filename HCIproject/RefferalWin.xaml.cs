@@ -31,7 +31,7 @@ namespace HCIproject
         public List<ExaminationDTO> specialistExaminations { get; set; }
         public List<Doctor> listOfDoctors { get; set; }
 
-        public static Referral referral = new Referral();
+        public static Referral referral;
 
 
         public RefferalWin(Doctor user, long _patientId, string _dijagnoza)
@@ -41,6 +41,7 @@ namespace HCIproject
             this.dijagnoza = _dijagnoza;
 
             InitializeComponent();
+            referral = new Referral();
             setOdeljenjeCMB();
             setPatientInfo();
             dijagnozaTxt.Text = dijagnoza;

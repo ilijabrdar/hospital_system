@@ -135,7 +135,7 @@ namespace HCIproject
             DoctorGradeRepository doctorGradeRepository = new DoctorGradeRepository(new CSVStream<DoctorGrade>(DOCTOR_GRADE_FILE, new DoctorGradeCSVConverter(CSV_DELIMITER2, CSV_DICTIONARY_DELIMITER, CSV_ARRAY_DELIMITER)), new LongSequencer());
             SpecialityRepository specialityRepository = new SpecialityRepository(new CSVStream<Speciality>(SPECIALITY_FILE, new SpecialityCSVConverter(CSV_DELIMITER)), new LongSequencer());
             SymptomRepository symptomRepository = new SymptomRepository(new CSVStream<Symptom>(SYMPTOM_FILE, new SymptomCSVConverter(CSV_DELIMITER)), new LongSequencer());
-            DiagnosisRepository diagnosisRepository = new DiagnosisRepository(new CSVStream<Diagnosis>(DIAGNOSIS_FILE, new DiagnosisCSVConverter(CSV_DELIMITER, CSV_ARRAY_DELIMITER)), new LongSequencer(), symptomRepository);
+            DiagnosisRepository diagnosisRepository = new DiagnosisRepository(new CSVStream<Diagnosis>(DIAGNOSIS_FILE, new DiagnosisCSVConverter(CSV_DELIMITER)), new LongSequencer(), symptomRepository);
             IngredientRepository ingredientRepository = new IngredientRepository(new CSVStream<Ingredient>(INGREDIENT_FILE, new IngredientsCSVConverter(CSV_DELIMITER)), new LongSequencer());
             DrugRepository drugRepository = new DrugRepository(new CSVStream<Drug>(DRUG_FILE, new DrugCSVConverter(CSV_DELIMITER)), new LongSequencer(), ingredientRepository);
             PrescriptionRepository prescriptionRepository = new PrescriptionRepository(new CSVStream<Prescription>(PRESCRIPTION_FILE, new PrescriptionCSVConverter(CSV_DELIMITER, CSV_ARRAY_DELIMITER)), new LongSequencer(), drugRepository);
@@ -155,7 +155,7 @@ namespace HCIproject
 
 
 
-            businessDayRepository.doctorRepo = doctorRepository;
+            businessDayRepository._doctorRepository = doctorRepository;
 
             ReferralRepository referralRepository = new ReferralRepository(new CSVStream<Referral>(REFERRAL_FILE, new ReferralCSVConverter(CSV_DELIMITER)), new LongSequencer(), doctorRepository);
             PatientFileRepository patientFileRepository = new PatientFileRepository(new CSVStream<PatientFile>(PATIENTFILE_FILE, new PatientFileCSVConverter(CSV_DELIMITER, CSV_DELIMITER2)), new LongSequencer());
@@ -185,7 +185,7 @@ namespace HCIproject
             ExaminationService examinationService = new ExaminationService(examinationUpcomingRepository, examinationPreviousRepository);
             DrugService drugService = new DrugService(drugRepository);
             IngredientService ingredientService = new IngredientService(ingredientRepository);
-            PatientFileService patientFileService = new PatientFileService(patientFileRepository);
+            PatientFileService patientFileService = new PatientFileService(patientFileRepository,hospitalizationService,operationService);
             PatientService patientService = new PatientService(patientRepository, patientFileService, doctorGradeService);
             BusinessDayService = new BusinessDayService(businessDayRepository, doctorService);
             RenovationService renovationService = new RenovationService(renovationRepository);

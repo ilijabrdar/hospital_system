@@ -18,7 +18,7 @@
                     <Label x:Name="godinePacijenta" Margin="10,10,80,10" FontSize="14" FontWeight="SemiBold"/>
                     <Label Content="Alergija:" Margin="10" FontSize="13"/>
                     <Label x:Name="alergijePacijenta" Margin="10" FontSize="14" FontWeight="SemiBold"/>
-                    <Button Content="Azuriraj alergije" FontSize="10" Background="#FFA2D9CE" Click="Button_Click_2" Height="27" Width="103" ></Button>
+                    <Button Content="Azuriraj" FontSize="8" Background="#FFA2D9CE" Click="Button_Click_2" Height="23" Width="60" ></Button>
                 </WrapPanel>
             </StackPanel>
         </Border>

@@ -1,7 +1,9 @@
-0,polen,1,1,1|2|3|4
-1,prasina,1,1,5|6|7|8
+0,polen,1|8,1,1|2|3|4|34|35
+1,empty,1|11,1,5|6|7|8|33|37
 2,prasina,1,1,5|6|7|8
-3,empty,empty,empty,empty
+3,empty,9|10,empty,31
 4,empty,empty,empty,empty
 5,empty,empty,empty,empty
 6,empty,empty,empty,empty
+7,empty,empty,empty,empty
+8,empty,empty,empty,empty

@@ -16,9 +16,6 @@ using System.Windows.Shapes;
 
 namespace HCIproject
 {
-    /// <summary>
-    /// Interaction logic for AllergyWin.xaml
-    /// </summary>
     public partial class AllergyWin : Window
     {
         private Doctor doctor;
@@ -34,9 +31,9 @@ namespace HCIproject
         {
             foreach (Allergy allergy in patient.patientFile.Allergy)
             {
-                alergijaBrisi.Items.Add(allergy.Name);
+                alergijaBrisi.Items.Add(allergy);
             }
-        }
+        }   
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -44,19 +41,14 @@ namespace HCIproject
 
             if (alergijaBrisi.SelectedItem != null)
             {
-                Allergy allergy = new Allergy(alergijaBrisi.SelectedItem.ToString());
-                foreach(Allergy al in patient.patientFile.Allergy.ToList())
-                {
-                    if(al.Name== allergy.Name)
-                    {
-                        patient.patientFile.Allergy.Remove(al);
-                    }
-                }
+                //patient.patientFile.Allergy.Remove((Allergy)alergijaBrisi.SelectedItem);
+                app.PatientFileDecorator.DeleteAllergy((Allergy)alergijaBrisi.SelectedItem, patient.patientFile);
             }
-            if (alergijaDodaj.Text != " ")
+            if (alergijaDodaj.Text != "")
             {
-                
-                patient.patientFile.Allergy.Add(new Allergy(alergijaDodaj.Text));
+                app.PatientFileDecorator.AddAllergy(new Allergy(alergijaDodaj.Text), patient.patientFile);
+
+                // patient.patientFile.Allergy.Add(new Allergy(alergijaDodaj.Text));
             }
 
             app.PatientFileDecorator.Edit(patient.patientFile);

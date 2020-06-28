@@ -33,7 +33,6 @@ namespace HCIproject
         private int num1 = 0;
         public string fileName { get; set; }
         private Speciality spec=new Speciality();
-
         public List<State> States { get; set; }
         public List<Town> Towns { get; set; }
         public List<Address> Addresses { get; set; }
@@ -95,7 +94,7 @@ namespace HCIproject
             this.Visibility = Visibility.Hidden;
             mainWin.Show();
         }
-//Lekovi
+
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {//dodaj alternativni
             DrugAlternative drugAltWind = new DrugAlternative((Doctor)user);
@@ -122,9 +121,15 @@ namespace HCIproject
         {
             var app = Application.Current as App;
 
-            brojPregleda.Content = app.ExaminationDecorator.GetUpcomingExaminationsByUser(user).Count;
+            brojPregleda.Text = app.ExaminationDecorator.GetUpcomingExaminationsByUser(user).Count.ToString();
             List<NotifyDoctorBusinessDay> ret = app.NotificationController.NotifyDoctorOfUpcomingBusinessDays(user);
-
+            DateTime day = DateTime.Now;
+            DateTime day1 = day.AddDays(1);
+            DateTime day2 = day.AddDays(2);
+            DateTime day3 = day.AddDays(3);
+            bool flag1 = false;
+            bool flag2 = false;
+            bool flag3 = false;
             foreach(var r in ret)
             {
                 if (r == null)
@@ -133,7 +138,22 @@ namespace HCIproject
                 }
                 else
                 {
-                    smene.Text += r.shift.StartDate.ToString() + " do " + r.shift.EndDate.ToString() + " ordinacija " + r.room.RoomCode;
+                    if (day1.Date == r.shift.StartDate.Date)
+                    {
+                        smene.Text += r.shift.StartDate.ToString() + " - " + r.shift.EndDate.TimeOfDay.ToString() + " ordinacija " + r.room.RoomCode + "\n";
+                        flag1 = true;
+                    }
+                    if (day2.Date == r.shift.StartDate.Date)
+                    {
+                        smene.Text += r.shift.StartDate.ToString() + " - " + r.shift.EndDate.TimeOfDay.ToString() + " ordinacija " + r.room.RoomCode + "\n";
+                        flag2 = true;
+                    }
+                    if (day3.Date == r.shift.StartDate.Date)
+                    {
+                        smene.Text += r.shift.StartDate.ToString() + " - " + r.shift.EndDate.TimeOfDay.ToString() + " ordinacija " + r.room.RoomCode + "\n";
+                        flag3 = true;
+                    }                
+
                 }
             }
 
@@ -791,8 +811,8 @@ namespace HCIproject
               "Portable Network Graphic (*.png)|*.png";
             if (op.ShowDialog() == true)
             {
-                fileName = op.FileName;
                 pic.Source = new BitmapImage(new Uri(fileName));
+                fileName = op.FileName;
             }
         }
 
@@ -811,7 +831,7 @@ namespace HCIproject
                 b.BorderThickness = new Thickness(2);
                 b.CornerRadius = new CornerRadius(3);
                 b.BorderBrush = Brushes.GreenYellow;
-                b.Margin = new Thickness(10, 10, 10, 10);
+                b.Margin = new Thickness(5,5,5,5);
 
                 StackPanel stackPanelExamination = new StackPanel();
                 TextBlock period = new TextBlock();
@@ -819,28 +839,28 @@ namespace HCIproject
                 TextBlock patient = new TextBlock();
                 TextBlock hospitalizacija = new TextBlock();
 
-                hospitalizacija.FontSize = 15;
+                hospitalizacija.FontSize = 12;
                 hospitalizacija.Inlines.Add(new Run("HOSPITALIZACIJA") { FontWeight = FontWeights.Bold });
-                hospitalizacija.Margin = new Thickness(10, 10, 10, 10);
+                hospitalizacija.Margin = new Thickness(5, 5, 5, 5);
                 stackPanelExamination.Children.Add(hospitalizacija);
 
                 period.Inlines.Add(new Run("Datum:  ") { FontWeight = FontWeights.SemiBold });
-                period.FontSize = 15;
+                period.FontSize = 12;
                 period.Inlines.Add(hospitalization.Period.StartDate.ToString());
-                period.Margin = new Thickness(10, 10, 10, 10);
+                period.Margin = new Thickness(5, 5, 5, 5);
                 stackPanelExamination.Children.Add(period);
 
                 patient.Inlines.Add(new Run("Pacijent:  ") { FontWeight = FontWeights.SemiBold });
-                patient.FontSize = 15;
+                patient.FontSize = 12;
                 patient.Inlines.Add(hospitalization.Patient.FullName);
-                patient.Margin = new Thickness(10, 10, 10, 10);
+                patient.Margin = new Thickness(5, 5, 5, 5);
                 stackPanelExamination.Children.Add(patient);
 
                 //
                 room.Inlines.Add(new Run("Prostorija: ") { FontWeight = FontWeights.SemiBold });
-                room.FontSize = 15;
+                room.FontSize = 12;
                 room.Inlines.Add(hospitalization.Room.RoomCode);
-                room.Margin = new Thickness(10);
+                room.Margin = new Thickness(5);
                 stackPanelExamination.Children.Add(room);
 
                 b.Child = stackPanelExamination;
@@ -862,7 +882,7 @@ namespace HCIproject
                 b.BorderThickness = new Thickness(2);
                 b.CornerRadius = new CornerRadius(3);
                 b.BorderBrush = Brushes.Pink;
-                b.Margin = new Thickness(10, 10, 10, 10);
+                b.Margin = new Thickness(5, 5, 5, 5);
 
                 StackPanel stackPanelExamination = new StackPanel();
                 TextBlock operacija = new TextBlock();
@@ -871,38 +891,34 @@ namespace HCIproject
                 TextBlock room = new TextBlock();
                 TextBlock description = new TextBlock();
 
-                operacija.FontSize = 15;
+                operacija.FontSize = 12;
                 operacija.Inlines.Add(new Run("OPERACIJA") { FontWeight = FontWeights.Bold });
-                operacija.Margin = new Thickness(10, 10, 10, 10);
+                operacija.Margin = new Thickness(5, 5, 5, 5);
                 stackPanelExamination.Children.Add(operacija);
 
-                patient.FontSize = 15;
+                patient.FontSize = 12;
                 patient.Inlines.Add(new Run("Pacijent:  ") { FontWeight = FontWeights.SemiBold });
                 patient.Inlines.Add(operation.Patient.FullName);
-                patient.Margin = new Thickness(10, 10, 10, 10);
+                patient.Margin = new Thickness(5, 5, 5, 5);
                 stackPanelExamination.Children.Add(patient);
-                //
+                
                 period.Inlines.Add(new Run("Datum:  ") { FontWeight = FontWeights.SemiBold });
-                period.FontSize = 15;
+                period.FontSize = 12;
                 period.Inlines.Add(operation.Period.StartDate.ToString());
-                period.Margin = new Thickness(10, 10, 10, 10);
+                period.Margin = new Thickness(5, 5, 5, 5);
                 stackPanelExamination.Children.Add(period);
 
-                //
                 room.Inlines.Add(new Run("Prostorija: ") { FontWeight = FontWeights.SemiBold });
-                room.FontSize = 15;
+                room.FontSize = 12;
                 room.Inlines.Add(operation.Room.RoomCode);
-                room.Margin = new Thickness(10);
+                room.Margin = new Thickness(5);
                 stackPanelExamination.Children.Add(room);
 
-                //
                 description.Inlines.Add(new Run("Opis: ") { FontWeight = FontWeights.SemiBold });
-                description.FontSize = 15;
+                description.FontSize = 12;
                 description.Inlines.Add(operation.Description);
-                description.Margin = new Thickness(10);
+                description.Margin = new Thickness(5);
                 stackPanelExamination.Children.Add(description);
-
-
 
                 b.Child = stackPanelExamination;
 
