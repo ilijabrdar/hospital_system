@@ -199,7 +199,7 @@ namespace upravnikKT2
 
             setDirectorField();
 
-            Uri temp = director.Image;
+           // Uri temp = new Uri(@"C:\Users\david\Desktop\user.jpg");
 
             UserImage.Source = new BitmapImage(director.Image);
 
@@ -1682,6 +1682,10 @@ namespace upravnikKT2
             {
                 fileName = op.FileName;
                 UserImage.Source = new BitmapImage(new Uri(fileName));
+                director.Image = new Uri(fileName);
+                _directorController.Edit(director);
+
+
             }
         }
 

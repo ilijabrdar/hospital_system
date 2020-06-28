@@ -210,6 +210,7 @@ namespace upravnikKT2
 
                     // String name, String surname, String jmbg, String email, String phone, DateTime birth, Address adress, String username, String password, Uri img, Speciality speciality, List<Article> articles, List<BusinessDay> businessDay, DoctorGrade doctGrade
                     var doctor = new Doctor(Ime, Prezime, JMBG, EMAIL, Phone, (DateTime)datum, address, JMBG, JMBG, null, (Speciality)comboSpeciality.SelectedItem, null, null,null);
+                    doctor.Image = new Uri("C:/Users/Tamara Kovacevic/Desktop/hospital_system/code/Resources/Images/Anonimus.Jpeg");
                     _doctorController.Save(doctor);
                 }
                 else

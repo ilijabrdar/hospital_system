@@ -79,7 +79,7 @@
                                     
                                     <Label DockPanel.Dock="Left" Width="200">Ukupan broj pacijenata</Label>
                                     <Separator Margin="86,0,0,0"></Separator>
-                                    <Label DockPanel.Dock="Left" Width="38" HorizontalContentAlignment="Center" Content="31"  IsHitTestVisible="False" FontWeight="Bold"/>
+                                    <Label DockPanel.Dock="Left" Width="38" HorizontalContentAlignment="Center" Content="9"  IsHitTestVisible="False" FontWeight="Bold"/>
 
                                     <Separator DockPanel.Dock="Top" Visibility="Hidden" Background="White" Foreground="White"  Margin="0" FontWeight="Bold"/>
                                 </DockPanel>
@@ -91,7 +91,7 @@
                                 <StackPanel Orientation="Horizontal" Margin="20,10,10,10">
                                     <Label Width="200">Broj objavljenih članaka</Label>
                                     <Separator Margin="86,0,0,0"></Separator>
-                                    <Label Width="38" HorizontalContentAlignment="Center" FontWeight="Bold">81</Label>
+                                    <Label Width="38" HorizontalContentAlignment="Center" FontWeight="Bold">6</Label>
                                 </StackPanel>
                                 
                             </StackPanel>
