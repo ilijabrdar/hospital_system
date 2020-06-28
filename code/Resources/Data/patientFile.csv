@@ -1,7 +1,10 @@
-0,polen,1,1,1|2|3|4
-1,prasina,1,1,5|6|7|8
-2,prasina,1,1,5|6|7|8
-3,empty,empty,empty,empty
-4,empty,empty,empty,empty
-5,empty,empty,empty,empty
-6,empty,empty,empty,empty
+0,Polen,0,empty,1|3|4|7
+1,empty,1|12,0|8|10|12|14,5|6
+2,Prasina,2,1,8|12
+3,Penicilin,3,empty,14|20
+4,Panklav,4,2,2
+5,Sunce,5,3,9
+6,Gluten,6,empty,10|11
+7,Laktoza,7,4,13|16
+8,Jagode,8,empty,15|17|19
+9,Grinje,9,5,12|18

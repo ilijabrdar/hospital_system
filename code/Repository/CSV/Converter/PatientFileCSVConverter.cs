@@ -76,63 +76,84 @@ namespace bolnica.Repository.CSV.Converter
             StringBuilder sb = new StringBuilder();;
             sb.Append(entity.GetId());
             sb.Append(_delimiter);
-            if(entity.Allergy.Count ==0)
+            if(entity.Allergy == null)
             {
                 sb.Append("empty");
             }else
             {
-                foreach(Allergy allergy in entity.Allergy)
+                if (entity.Allergy.Count == 0)                
+                    sb.Append("empty");              
+                else
                 {
-                    sb.Append(allergy.Name);
-                    sb.Append(_arrayDelimiter);
+                    foreach (Allergy allergy in entity.Allergy)
+                    {
+                        sb.Append(allergy.Name);
+                        sb.Append(_arrayDelimiter);
+                    }
+                    sb.Remove(sb.Length - 1, 1);
                 }
-                sb.Remove(sb.Length - 1, 1);
             }
             sb.Append(_delimiter);
 
 
-            if(entity.Hospitalization.Count == 0)
+            if(entity.Hospitalization == null)
             {
                 sb.Append("empty");
             }else
             {
-                foreach (Hospitalization hospitalization in entity.Hospitalization)
+                if (entity.Hospitalization.Count == 0)
+                    sb.Append("empty");
+                else
                 {
-                    sb.Append(hospitalization.GetId());
-                    sb.Append(_arrayDelimiter);
+                    foreach (Hospitalization hospitalization in entity.Hospitalization)
+                    {
+                        sb.Append(hospitalization.GetId());
+                        sb.Append(_arrayDelimiter);
+                    }
+                    sb.Remove(sb.Length - 1, 1);
                 }
-                sb.Remove(sb.Length - 1, 1);
-
             }
             sb.Append(_delimiter);
 
 
-            if(entity.Operation.Count == 0)
+            if (entity.Operation == null)
             {
                 sb.Append("empty");
-            }else
+            }
+            else
             {
-                foreach(Operation operation in entity.Operation)
+                if (entity.Operation.Count == 0)
+                    sb.Append("empty");
+                else
                 {
-                    sb.Append(operation.GetId());
-                    sb.Append(_arrayDelimiter);
+                    foreach (Operation operation in entity.Operation)
+                    {
+                        sb.Append(operation.GetId());
+                        sb.Append(_arrayDelimiter);
+                    }
+                    sb.Remove(sb.Length - 1, 1);
                 }
-                sb.Remove(sb.Length - 1, 1);
+            
             }
             sb.Append(_delimiter);
 
 
-            if(entity.Examination.Count == 0)
+            if(entity.Examination == null)
             {
                 sb.Append("empty");
             }else
             {
-                foreach (Examination examination in entity.Examination)
+                if (entity.Examination.Count == 0)
+                    sb.Append("empty");
+                else
                 {
-                    sb.Append(examination.GetId());
-                    sb.Append(_arrayDelimiter);
+                    foreach (Examination examination in entity.Examination)
+                    {
+                        sb.Append(examination.GetId());
+                        sb.Append(_arrayDelimiter);
+                    }
+                    sb.Remove(sb.Length - 1, 1);
                 }
-                sb.Remove(sb.Length - 1, 1);
             }
             return sb.ToString();
         }
