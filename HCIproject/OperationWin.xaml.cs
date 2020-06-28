@@ -157,7 +157,7 @@ namespace HCIproject
             if (naziv.Text != "")
                 nazivOp = naziv.Text;
             Operation operation = new Operation(patient, user, nazivOp, period, operationList[0].Room);
-            app.PatientFileDecorator.AddOperation(operation, patient.patientFile);
+                app.PatientFileDecorator.AddOperation(operation, patient.patientFile);
 
             BusinessDay day = app.BusinessDayDecorator.GetExactDay(user, period.StartDate);
             List<Period> pom = new List<Period>();
