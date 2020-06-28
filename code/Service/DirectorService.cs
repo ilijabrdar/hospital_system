@@ -28,7 +28,7 @@ namespace Service
 
         public Director Get(long id)
         {
-            return _directorRepository.GetEager(id);
+            return _directorRepository.Get(id);
         }
 
         public IEnumerable<Director> GetAll()

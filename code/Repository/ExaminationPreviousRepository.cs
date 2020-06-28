@@ -43,9 +43,12 @@ namespace Repository
             exam.Doctor = doctorRepository.GetEager(exam.Doctor.GetId());
             exam.User = patientRepository.Get(exam.User.GetId());
             exam.Diagnosis = diagnosisRepository.Get(exam.Diagnosis.GetId());
-            exam.Therapy = therapyRepository.GetEager(exam.Therapy.GetId());
-            exam.Refferal = referralRepository.GetEager(exam.Refferal.GetId());
-            exam.Prescription = prescriptionRepository.GetEager(exam.Prescription.GetId());     
+            if (exam.Therapy != null)
+                exam.Therapy = therapyRepository.GetEager(exam.Therapy.GetId());
+            if(exam.Refferal!=null)
+                exam.Refferal = referralRepository.GetEager(exam.Refferal.GetId());
+            if(exam.Prescription!=null)
+                exam.Prescription = prescriptionRepository.GetEager(exam.Prescription.GetId());     
             return exam;
         }
 

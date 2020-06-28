@@ -208,10 +208,20 @@ namespace Service
 
             if (shiftDuration.TotalMinutes < periodTotalMinutes)
                 return false;
+<<<<<<< HEAD
             
+=======
+            }
+
+            BusinessDay temp = new BusinessDay(newShift.Id, newShift.Shift,newShift.doctor, newShift.room,new List<Period>());
+>>>>>>> doctormaster
 
             foreach (Period period in newShift.ScheduledPeriods)
                 if (!periodCorrespondsToNewShift(newShift.Shift, period))
+<<<<<<< HEAD
+=======
+                {
+>>>>>>> doctormaster
                     return false;
                 
             return true;

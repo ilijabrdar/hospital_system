@@ -1,5 +1,3 @@
-
-
 using Model.Doctor;
 using Model.Users;
 using Repository;

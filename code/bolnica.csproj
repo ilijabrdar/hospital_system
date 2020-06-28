@@ -684,6 +684,10 @@
     <Content Include="Resources\Data\SecretaryFile.txt" />
     <Content Include="Resources\Data\StateFile.txt" />
     <Content Include="Resources\Data\TownFile.txt" />
+<<<<<<< HEAD
+=======
+    <Content Include="Resources\Images\Anonimus.Jpeg" />
+>>>>>>> doctormaster
     <Content Include="Resources\LoggedIn\config.txt" />
   </ItemGroup>
   <ItemGroup>
