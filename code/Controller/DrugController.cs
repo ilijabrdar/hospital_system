@@ -33,7 +33,7 @@ namespace Controller
 
         public IEnumerable<Drug> GetAll()
         {
-            return _drugService.GetAll();r
+            return _drugService.GetAll();
         }
 
         public List<Drug> GetNotApprovedDrugs()
