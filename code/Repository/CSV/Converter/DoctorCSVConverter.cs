@@ -26,7 +26,7 @@ namespace bolnica.Repository.CSV.Converter
             List<BusinessDay> businessDays = new List<BusinessDay>();
             if (!tokens[14].Equals("empty"))
             {
-                string[] daysIds = tokens[13].Split("|".ToCharArray());
+                string[] daysIds = tokens[14].Split("|".ToCharArray());
                 for (int i = 0; i < daysIds.Length; i++)
                     businessDays.Add(new BusinessDay(long.Parse(daysIds[i])));
             }

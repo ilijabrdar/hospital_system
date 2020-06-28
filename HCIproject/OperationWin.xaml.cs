@@ -113,21 +113,7 @@ namespace HCIproject
             try
             {
                 vremeTrajanje = double.Parse(vreme.Text);
-            }
-            catch
-            {
-                string messageBoxText = "Trajanje operacije mora biti ceo broj u minutima.";
-                string caption = "Vreme";
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Information;
-                MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
-            }
-
-             double vremeTrajanje1=0;
-            try
-            {
-                vremeTrajanje = double.Parse(vreme.Text);
-                operationList = app.BusinessDayService.OperationSearch(businessDayDTO, vremeTrajanje1);
+                operationList = app.BusinessDayService.OperationSearch(businessDayDTO, vremeTrajanje);
 
             }
             catch
@@ -138,6 +124,8 @@ namespace HCIproject
                 MessageBoxImage icon = MessageBoxImage.Information;
                 MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
             }
+
+             
 
             if (operationList == null)  
                 return;
@@ -169,7 +157,6 @@ namespace HCIproject
             if (naziv.Text != "")
                 nazivOp = naziv.Text;
             Operation operation = new Operation(patient, user, nazivOp, period, operationList[0].Room);
-            app.OperationDecorator.Save(operation);
             app.PatientFileDecorator.AddOperation(operation, patient.patientFile);
 
             BusinessDay day = app.BusinessDayDecorator.GetExactDay(user, period.StartDate);
