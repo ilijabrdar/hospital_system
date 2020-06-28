@@ -309,7 +309,7 @@ namespace upravnikKT2
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            string text = System.IO.File.ReadAllText(@"C:\Users\david\Desktop\cc\hospital_system\upravnikKT2\upravnikKT2\Resources\Data\config.txt");
+            string text = System.IO.File.ReadAllText(@"../../../../code/Resources/LoggedIn/config.txt");
 
             if (text.Equals("false"))
                 StartupUri = new Uri("MainWindow.xaml", UriKind.Relative);

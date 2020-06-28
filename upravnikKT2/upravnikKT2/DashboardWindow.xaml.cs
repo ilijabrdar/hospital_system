@@ -12,6 +12,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.IO.Packaging;
 using System.Linq;
 using System.Net;
@@ -391,8 +392,8 @@ namespace upravnikKT2
 
         private void Button_Click_Logout(object sender, RoutedEventArgs e)
         {
+            File.WriteAllText(@"../../../../code/Resources/LoggedIn/config.txt", "false");
 
-            
             MainWindow window = new MainWindow();
             window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             window.Show();
