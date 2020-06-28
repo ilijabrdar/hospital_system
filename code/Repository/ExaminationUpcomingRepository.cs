@@ -54,7 +54,7 @@ namespace bolnica.Repository
                 }
                 return findExamination;
 
-            }catch(Exception e)
+            }catch
             {
                 Patient patient = (Patient)user;
                 List<Examination> examinations = GetAllEager().ToList();

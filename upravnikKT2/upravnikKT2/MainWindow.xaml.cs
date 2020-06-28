@@ -74,7 +74,7 @@ namespace upravnikKT2
                 this.Close();
 
             }
-            catch (Exception ee)
+            catch
             {
                 labelError.Content = "Neispravno korisnicko ime/lozinka!";
                 labelError.Visibility = Visibility.Visible;

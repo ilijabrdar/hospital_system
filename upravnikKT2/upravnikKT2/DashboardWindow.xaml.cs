@@ -1,4 +1,5 @@
 ﻿using bolnica.Controller;
+using bolnica.Model.Dto;
 using Controller;
 using Microsoft.Win32;
 using Model.Director;
