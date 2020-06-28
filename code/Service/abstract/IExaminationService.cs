@@ -18,5 +18,9 @@ namespace bolnica.Service
         List<Examination> GetExaminationsByFilter(ExaminationDTO examinationDTO, Boolean upcomingOnly);
         IEnumerable<Examination> GetAllPrevious();
         Room getExaminationRoom(Examination examination);
+
+        List<Examination> GetUpcomingExaminationsByRoomAndPeriod(Room room, Period period);
+
+        List<Examination> GetPreviousExaminationsByRoomAndPeriod(Room room, Period period);
     }
 }
