@@ -208,7 +208,6 @@ namespace Service
 
             if (shiftDuration.TotalMinutes < periodTotalMinutes)
                 return false;
-            
 
             foreach (Period period in newShift.ScheduledPeriods)
                 if (!periodCorrespondsToNewShift(newShift.Shift, period))

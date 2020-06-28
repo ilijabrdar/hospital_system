@@ -17,6 +17,7 @@ namespace Controller
         }
 
         public void Delete(Director entity) 
+
         {
             _directorService.Delete(entity);
         }
@@ -28,10 +29,12 @@ namespace Controller
 
         public Director Get(long id)
         {
+
             return _directorService.Get(id);
         }
 
         public IEnumerable<Director> GetAll()  
+
         {
             return _directorService.GetAll();
         }
@@ -39,6 +42,7 @@ namespace Controller
         public Director Save(Director entity)  
         {
             return _directorService.Save(entity);
+
         }
     }
 }

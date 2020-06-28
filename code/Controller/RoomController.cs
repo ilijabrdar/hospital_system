@@ -33,6 +33,7 @@ namespace Controller
         public void Delete(Room entity)
         {
             _roomService.Delete(entity);
+
         }
 
         public Room Get(long id)

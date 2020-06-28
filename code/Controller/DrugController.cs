@@ -13,6 +13,7 @@ namespace Controller
         public DrugController(IDrugService service)
         {
             _drugService = service;
+
         }
 
         public void Delete(Drug entity)
