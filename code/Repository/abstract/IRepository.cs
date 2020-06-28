@@ -10,9 +10,9 @@ namespace Repository
    public interface IRepository<E, ID> : IGetterRepository<E,ID>
        where E : IIdentifiable<ID>
        where ID : IComparable
-   {    //TODO: the rest of the methods?
+   {    
       
-      E Save(E entity);  //Danijelov create
+      E Save(E entity);  
       void Edit(E entity);
       void Delete(E entity);
         

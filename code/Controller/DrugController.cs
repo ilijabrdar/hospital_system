@@ -8,46 +8,46 @@ namespace Controller
 {
     public class DrugController : IDrugController
     {
-        private readonly IDrugService _service;
+        private readonly IDrugService _drugService;
 
         public DrugController(IDrugService service)
         {
-            _service = service;
+            _drugService = service;
         }
 
         public void Delete(Drug entity)
         {
-            _service.Delete(entity);
+            _drugService.Delete(entity);
         }
 
         public void Edit(Drug entity)
         {
-            _service.Edit(entity);
+            _drugService.Edit(entity);
         }
 
         public Drug Get(long id)
         {
-            return _service.Get(id);
+            return _drugService.Get(id);
         }
 
         public IEnumerable<Drug> GetAll()
         {
-            return _service.GetAll();
+            return _drugService.GetAll();
         }
 
         public List<Drug> GetNotApprovedDrugs()
         {
-            return _service.GetNotApproved();
+            return _drugService.GetNotApproved();
         }
 
         public Drug Save(Drug entity)
         {
-            return _service.Save(entity);
+            return _drugService.Save(entity);
         }
 
         public bool CheckDrugNameUnique(String name)
         {
-            return _service.CheckDrugNameUnique(name);
+            return _drugService.CheckDrugNameUnique(name);
         }
     }
 }

@@ -9,36 +9,36 @@ namespace Controller
 {
     public class DirectorContoller : IDirectorController
     {
-        private readonly IDirectorService directorService;
+        private readonly IDirectorService _directorService;
 
         public DirectorContoller(IDirectorService directorService)
         {
-            this.directorService = directorService;
+            this._directorService = directorService;
         }
 
-        public void Delete(Director entity)  //TODO: sta cemo sa ovim
+        public void Delete(Director entity) 
         {
-            throw new NotImplementedException();
+            _directorService.Delete(entity);
         }
 
         public void Edit(Director entity)
         {
-            directorService.Edit(entity);
+            _directorService.Edit(entity);
         }
 
         public Director Get(long id)
         {
-            return directorService.Get(id);
+            return _directorService.Get(id);
         }
 
-        public IEnumerable<Director> GetAll()  //sta cemo sa ovim
+        public IEnumerable<Director> GetAll()  
         {
-            throw new NotImplementedException();
+            return _directorService.GetAll();
         }
 
-        public Director Save(Director entity)  //TODO: sta cemo sa ovim
+        public Director Save(Director entity)  
         {
-            throw new NotImplementedException();
+            return _directorService.Save(entity);
         }
     }
 }

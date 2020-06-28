@@ -314,6 +314,7 @@
     <Compile Include="Model\Dto\ExaminationDTO.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Model\Dto\NotifyDoctorBusinessDay.cs" />
     <Compile Include="Model\Dto\RoomOccupationReportDTO.cs" />
     <Compile Include="Model\Dto\PatientNotification.cs" />
     <Compile Include="Model\Dto\SecretaryReportDTO.cs">
@@ -364,9 +365,6 @@
     <Compile Include="Model\Users\Doctor.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Users\Feedback.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Model\Users\Patient.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -387,7 +385,6 @@
     </Compile>
     <Compile Include="Repository\abstract\IAddressRepository.cs" />
     <Compile Include="Repository\abstract\IEagerRepository.cs" />
-    <Compile Include="Repository\abstract\IEditRepository.cs" />
     <Compile Include="Repository\abstract\IGetterRepository.cs" />
     <Compile Include="Repository\abstract\IPatientNotificationRepository.cs" />
     <Compile Include="Repository\abstract\IStateRepository.cs" />
@@ -573,6 +570,7 @@
     <Compile Include="Service\abstract\IGetterService.cs" />
     <Compile Include="Service\abstract\IHospitalizationService.cs" />
     <Compile Include="Service\abstract\IIngredientService.cs" />
+    <Compile Include="Service\abstract\INotificationService.cs" />
     <Compile Include="Service\abstract\IOperationService.cs" />
     <Compile Include="Service\abstract\IPatientFileService.cs" />
     <Compile Include="Service\abstract\IPatientNotificationService.cs" />

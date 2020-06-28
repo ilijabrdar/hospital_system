@@ -7,12 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace bolnica.Controller
+namespace bolnica.Service
 {
-    public interface INotificationController
+    public interface INotificationService
     {
         int NotifyDoctorOfDrugsForValidation();
         List<NotifyDoctorBusinessDay> NotifyDoctorOfUpcomingBusinessDays(Doctor doctor);
-
     }
 }
