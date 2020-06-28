@@ -82,8 +82,10 @@ namespace Service
         {
             List<Examination> examinations = new List<Examination>();
             foreach (Examination examination in GetAllPrevious())
-                if (DateTime.Compare(examination.Period.StartDate.Date, period.StartDate.Date) >= 0 && DateTime.Compare(examination.Period.EndDate.Date, period.EndDate.Date) <= 0 && getExaminationRoom(examination).Id == room.Id)
-                    examinations.Add(examination);
+                if (DateTime.Compare(examination.Period.StartDate.Date, period.StartDate.Date) >= 0)
+                    if (getExaminationRoom(examination)!= null)
+                        if (getExaminationRoom(examination).Id == room.Id)
+                            examinations.Add(examination);
 
             return examinations;
         }

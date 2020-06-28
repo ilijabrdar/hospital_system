@@ -231,11 +231,6 @@ namespace upravnikKT2
                 examination_paragraph.Add(new Chunk("\n"));
                 examination_paragraph.Add("Period : " + examination.Period.StartDate);
                 examination_paragraph.Add(new Chunk("\n"));
-                //examination_paragraph.Add("Anamneza : " + examination.Anemnesis.Text);  //ovo je upcoming examinations pa nema dijagnozu i te stvari, pokusaj kroz previous da ides
-                
-                //examination_paragraph.Add(new Chunk("\n"));
-                //examination_paragraph.Add("Terapija : " + examination.Therapy.Note);
-                //examination_paragraph.Add(new Chunk("\n"));
                 examination_paragraph.Add(new Chunk("\n"));
 
 
@@ -268,10 +263,10 @@ namespace upravnikKT2
                 examination_previous_paragraph.Add(new Chunk("\n"));
                 examination_previous_paragraph.Add("Period : " + examination.Period.StartDate);
                 examination_previous_paragraph.Add(new Chunk("\n"));
-                examination_paragraph.Add("Anamneza : " + examination.Anemnesis.Text);  //ovo je upcoming examinations pa nema dijagnozu i te stvari, pokusaj kroz previous da ides
-                examination_paragraph.Add(new Chunk("\n"));
-                examination_paragraph.Add("Terapija : " + examination.Therapy.Note);
-                examination_paragraph.Add(new Chunk("\n"));
+                examination_previous_paragraph.Add("Anamneza : " + examination.Anemnesis.Text);  //ovo je upcoming examinations pa nema dijagnozu i te stvari, pokusaj kroz previous da ides
+                examination_previous_paragraph.Add(new Chunk("\n"));
+                examination_previous_paragraph.Add("Terapija : " + examination.Therapy.Note);
+                examination_previous_paragraph.Add(new Chunk("\n"));
                 examination_previous_paragraph.Add(new Chunk("\n"));
 
 
