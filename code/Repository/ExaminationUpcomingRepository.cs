@@ -70,9 +70,5 @@ namespace bolnica.Repository
             }
         }
 
-        public Examination StartUpcomingExamination(Examination examination) //TODO ?
-        {
-            throw new NotImplementedException();
-        }
     }
 }

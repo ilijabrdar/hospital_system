@@ -40,7 +40,6 @@ namespace Service
             _businessDayRepository.Delete(entity);
         }
 
-
         public void Edit(BusinessDay entity)
         {
                 _businessDayRepository.Edit(entity);

@@ -9,21 +9,21 @@ namespace bolnica.Service
 {
     public class StateService : IStateService
     {
-        IStateRepository _repository;
+        IStateRepository _stateRepository;
 
         public StateService(IStateRepository repository)
         {
-            _repository = repository;
+            _stateRepository = repository;
         }
 
         public State Get(long id)
         {
-            throw new NotImplementedException();
+            return _stateRepository.Get(id);
         }
 
         public IEnumerable<State> GetAll()
         {
-            return _repository.GetAllEager();
+            return _stateRepository.GetAllEager();
         }
     }
 }

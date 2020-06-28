@@ -7,7 +7,9 @@ using Model.PatientSecretary;
 using Model.Users;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
+using System.Threading;
 
 namespace Service
 {
@@ -18,6 +20,9 @@ namespace Service
         public IHospitalizationService _hospitalizationService { get; set; }
         public IOperationService _operationService { get; set; }
 
+        [Obsolete]
+        public static double ExaminationDuration = Double.Parse(ConfigurationSettings.AppSettings["examinationDuration"]);
+
         public ReportService(IExaminationService examinationService, IRenovationService renovationService, IHospitalizationService hospitalizationService, IOperationService operationService)
         {
             _examinationService = examinationService;
@@ -25,12 +30,11 @@ namespace Service
             _hospitalizationService = hospitalizationService;
             _operationService = operationService;
         }
-
-        public DoctorReportDTO GenerateAnamnesisPrescriptionReport(PatientFile patientFile)
-      {
-         // TODO: implement
-         return null;
-      }
+        public DoctorReportDTO GenerateAnamnesisPrescriptionReport(Examination examination)
+        {
+            DoctorReportDTO retVal = new DoctorReportDTO(examination.Prescription, examination.Anemnesis, (Patient)examination.User);
+            return retVal;    
+        }
 
         public RoomOccupationReportDTO GenerateRoomOccupationReport(Room room, Period period)
       {
@@ -46,8 +50,9 @@ namespace Service
 
             return report;
       }
-      
-      public SecretaryReportDTO GenerateDoctorOccupationReport(Doctor doctor, Period period)
+
+        [Obsolete]
+        public SecretaryReportDTO GenerateDoctorOccupationReport(Doctor doctor, Period period)
       {
             List<Examination> upcomingExaminations = _examinationService.GetAll().ToList();
             List<Examination> previousExaminations = _examinationService.GetAllPrevious().ToList();
@@ -56,7 +61,7 @@ namespace Service
 
             foreach (Examination examination in previousExaminations)
             {
-                if (examination.Doctor.Id == doctor.Id && examination.Period.StartDate >= period.StartDate && examination.Period.EndDate <= period.EndDate)
+                if (examination.Doctor.Id == doctor.Id && examination.Period.StartDate >= period.StartDate && examination.Period.StartDate.AddMinutes(ExaminationDuration) <= period.EndDate)
                 {
                     retVal.Examinations.Add(examination);
                 }
@@ -64,7 +69,7 @@ namespace Service
 
             foreach (Examination examination in upcomingExaminations)
             {
-                if(examination.Doctor.Id == doctor.Id && examination.Period.StartDate >= period.StartDate && examination.Period.EndDate <= period.EndDate)
+                if(examination.Doctor.Id == doctor.Id && examination.Period.StartDate >= period.StartDate && examination.Period.StartDate.AddMinutes(ExaminationDuration) <= period.EndDate)
                 {
                     retVal.Examinations.Add(examination);        
                 }

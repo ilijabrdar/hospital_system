@@ -8,10 +8,9 @@ namespace Model.PatientSecretary
    public class Drug : IIdentifiable<long>
     {
       public String Name { get; set; }
-      public long Id { get; set; }
+        public long Id;
       public int Amount { get; set; }
-      public Boolean Approved { get; set; }
-      
+      public Boolean Approved { get; set; }     
       public List<Ingredient> Ingredients { get; set; }
       public List<Drug> Alternative { get; set; }
 

@@ -9,10 +9,7 @@ namespace bolnica.Controller
 {
     public interface IDrugController : IController<Drug,long>
     {
-        Drug RecommendDrugBasedOnDiagnosis(Diagnosis diagnosis);
-
         Boolean CheckDrugNameUnique(String name);
-
 
         List<Drug> GetNotApprovedDrugs();
     }

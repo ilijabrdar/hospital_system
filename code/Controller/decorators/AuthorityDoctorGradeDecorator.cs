@@ -23,7 +23,6 @@ namespace bolnica.Controller.decorators
             AuthorizedUsers["GetAll"] = new List<String>() { "Patient" };
             AuthorizedUsers["Save"] = new List<String>() { "Patient" };
             AuthorizedUsers["GetAverageGrade"] = new List<String>() { "Patient" };
-            AuthorizedUsers["GetQuestions"] = new List<String>() { "Patient" };
         }
 
         public void Delete(DoctorGrade entity)
@@ -61,8 +60,6 @@ namespace bolnica.Controller.decorators
             else
                 return 0;
         }
-
-
 
         public DoctorGrade Save(DoctorGrade entity)
         {

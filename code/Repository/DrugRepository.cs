@@ -35,7 +35,6 @@ namespace Repository
                     alternativeDrug.Name = temp.Name;
                     alternativeDrug.Amount = temp.Amount;
                     alternativeDrug.Approved = temp.Approved;
-                    //other attributes are not important
                 }
             }
         }
@@ -55,8 +54,6 @@ namespace Repository
             }
         }
 
-
-
         public Drug GetEager(long id)
         {
             Drug drug = base.Get(id);
@@ -73,7 +70,6 @@ namespace Repository
                 alternativeDrug.Name = temp.Name;
                 alternativeDrug.Amount = temp.Amount;
                 alternativeDrug.Approved = temp.Approved;
-                //other attributes are not important
             }
 
             return drug;

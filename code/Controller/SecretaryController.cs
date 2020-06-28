@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  SecretaryService.cs
- * Author:  Asus
- * Purpose: Definition of the Class Service.SecretaryService
- ***********************************************************************/
-
 using System;
 using System.Collections.Generic;
 using bolnica.Controller;
@@ -12,38 +6,38 @@ using Model.Users;
 
 namespace Controller
 {
-    public class SecretaryController : ISecretaryController //TODO: sta cemo sa metodama
+    public class SecretaryController : ISecretaryController 
     {
-        private ISecretaryService _service;
+        private ISecretaryService _secretaryService;
 
         public SecretaryController(ISecretaryService service)
         {
-            _service = service;
+            _secretaryService = service;
         }
 
         public void Delete(Secretary entity)
         {
-            throw new NotImplementedException();
+            _secretaryService.Delete(entity);
         }
 
         public void Edit(Secretary entity)
         {
-            _service.Edit(entity);
+            _secretaryService.Edit(entity);
         }
 
         public Secretary Get(long id)
         {
-            throw new NotImplementedException();
+            return _secretaryService.Get(id);
         }
 
         public IEnumerable<Secretary> GetAll()
         {
-            throw new NotImplementedException();
+            return _secretaryService.GetAll();
         }
 
         public Secretary Save(Secretary entity)
         {
-            throw new NotImplementedException();
+            return _secretaryService.Save(entity);
         }
     }
 }

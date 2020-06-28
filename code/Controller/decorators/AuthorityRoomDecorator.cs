@@ -24,13 +24,11 @@ namespace bolnica.Controller.decorators
             AuthorizedUsers["Edit"] = new List<string>() { "Director" };
             AuthorizedUsers["GetRoomsContainingEquipment"] = new List<string>() { "Director" };
             AuthorizedUsers["GetRoomsForHospitalization"] = new List<string>() { "Doctor" };
-            AuthorizedUsers["GetVacantRooms"] = new List<string>() { "Doctor" };
             AuthorizedUsers["Save"] = new List<string>() { "Director" };
             AuthorizedUsers["Get"] = new List<string>() { "Director", "Doctor", "Secretary" };
             AuthorizedUsers["GetAll"] = new List<string>() { "Director", "Doctor", "Secretary" };
 
         }
-
 
         public void CheckHospitalizationDurationInRoom()
         {
@@ -84,7 +82,6 @@ namespace bolnica.Controller.decorators
                 return RoomController.GetRoomsForHospitalization();
             return null;
         }
-
 
         public Room Save(Room entity)
         {

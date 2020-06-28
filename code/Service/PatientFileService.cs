@@ -38,9 +38,6 @@ namespace Service
 
         public Examination AddExamination(Examination examination, PatientFile patientFile)
         { 
-            //@Tamara :D Obrati paznju ovde moras prvo da napravis examination pa tek onda ga saljes ovde dok za hosp i za
-            //oper samo prosledis, ali ako hoces moze i ovde sa servisom da ne moras da se njakas msm isto je 
-            // mozda da ostanemo konzistentni
             patientFile.Examination.Add(examination);
             Edit(patientFile);
             return examination;
@@ -98,12 +95,6 @@ namespace Service
         public IEnumerable<PatientFile> GetAll()
         {
             return _patientFileRepo.GetAllEager();
-        }
-
-        public PatientFile GetPatientFile(Patient patient)
-        {
-            //TODO : mozda treba?
-           return null;
         }
 
         public PatientFile Save(PatientFile entity)

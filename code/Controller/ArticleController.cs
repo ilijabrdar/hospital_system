@@ -39,11 +39,6 @@ namespace Controller
         {
             return _articleService.GetAll();
         }
-       //TODO: Tamara pretraga clanaka
-        public List<Article> SearchArticle(string criteria)
-        {
-            throw new NotImplementedException();
-        }
 
     }
 }

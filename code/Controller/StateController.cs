@@ -9,21 +9,21 @@ namespace bolnica.Controller
 {
     public class StateController : IStateController
     {
-        IStateService _service;
+        IStateService _stateService;
 
         public StateController(IStateService service)
         {
-            _service = service;
+            _stateService = service;
         }
 
         public State Get(long id)
         {
-            throw new NotImplementedException();
+            return _stateService.Get(id);
         }
 
         public IEnumerable<State> GetAll()
         {
-            return _service.GetAll();
+            return _stateService.GetAll();
         }
     }
 }

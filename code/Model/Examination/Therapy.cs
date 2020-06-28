@@ -7,9 +7,9 @@ namespace Model.PatientSecretary
    public class Therapy : IIdentifiable<long>
    {
         public long Id;
-        public String Note;
-        public Period Period;
-        public List<Drug> Drug;
+        public String Note { get; set; }
+        public Period Period { get; set; }
+        public List<Drug> Drug { get; set; }
 
         public Therapy() { }
 

@@ -10,10 +10,11 @@ using System.Text;
 
 namespace bolnica.Service
 {
-   public class DatePrioritySearch : ISearchPeriods
+    public class DatePrioritySearch : ISearchPeriods
     {
         public DatePrioritySearch() { }
 
+        [Obsolete]
         public List<ExaminationDTO> Search(BusinessDayDTO businessDayDTO, List<BusinessDay> businessDayCollection)
         {
             List<BusinessDay> IterationDays = DaysForExactPeriod(businessDayDTO.Period, businessDayDTO.Doctor.BusinessDay);
@@ -22,15 +23,14 @@ namespace bolnica.Service
                 foreach (BusinessDay day in IterationDays)
                 {
                     List<ExaminationDTO> examinationDTOCollection = CreateExaminationDTO(day);
-                    if (examinationDTOCollection != null)
-                    {
+                    if (examinationDTOCollection != null)             
                         return examinationDTOCollection;
-                    }
                 }
             }
             return AlternativeForDoctor(businessDayDTO, businessDayCollection.Except(IterationDays));
         }
 
+        [Obsolete]
         private List<ExaminationDTO> AlternativeForDoctor(BusinessDayDTO businessDayDTO, IEnumerable<BusinessDay> businessDayCollection)
         {
             foreach(BusinessDay day in businessDayCollection.ToList())
@@ -39,15 +39,13 @@ namespace bolnica.Service
 
                     List<ExaminationDTO> examinationDTOCollection = CreateExaminationDTO(day);
                     if (examinationDTOCollection != null)
-                    {
                         return examinationDTOCollection;
-
-                    }
                 }
             }
             return null;
         }
 
+        [Obsolete]
         public List<ExaminationDTO> CreateExaminationDTO(BusinessDay businessDay)
         {
             List<ExaminationDTO> retVal = new List<ExaminationDTO>();
@@ -76,17 +74,12 @@ namespace bolnica.Service
         public List<BusinessDay> DaysForExactPeriod(Period period, List<BusinessDay> businessDaysCollection)
         {
             List<BusinessDay> businessDays = new List<BusinessDay>();
-            if (businessDaysCollection != null)
-            {
-                foreach (BusinessDay day in businessDaysCollection)
-                {
-                    if (day.Shift.StartDate.Date >= period.StartDate.Date && day.Shift.EndDate.Date <= period.EndDate.Date)
-                    {
-                        businessDays.Add(day);
-                    }
-                }
-            }
 
+            if (businessDaysCollection != null)           
+                foreach (BusinessDay day in businessDaysCollection)               
+                    if (day.Shift.StartDate.Date >= period.StartDate.Date && day.Shift.EndDate.Date <= period.EndDate.Date)                  
+                        businessDays.Add(day);
+                   
             return businessDays;
         }
 

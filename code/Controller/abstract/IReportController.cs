@@ -12,7 +12,7 @@ namespace bolnica.Controller
 {
     public interface IReportController
     {
-        DoctorReportDTO GenerateAnamnesisPrescriptionReport(PatientFile patientFile);
+        DoctorReportDTO GenerateAnamnesisPrescriptionReport(Examination examination);
 
         RoomOccupationReportDTO GenerateRoomOccupationReport(Room room, Period period);
 

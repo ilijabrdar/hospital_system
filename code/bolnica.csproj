@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
   <PropertyGroup>
     <ProjectType>Local</ProjectType>
     <ProductVersion>7.10.3077</ProductVersion>
@@ -23,6 +23,8 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>0.0</OldToolsVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>bin\Debug\</OutputPath>
@@ -42,6 +44,7 @@
     <DebugType>full</DebugType>
     <ErrorReport>prompt</ErrorReport>
     <UseVSHostingProcess>true</UseVSHostingProcess>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -60,12 +63,19 @@
     <WarningLevel>4</WarningLevel>
     <DebugType>none</DebugType>
     <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.1.1.1\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationFramework" />
     <Reference Include="System">
       <Name>System</Name>
       <HintPath>%25windowsDirectory%25\\Microsoft.NET\\Framework\\v1.0.3705\\System.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\HCIproject\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.Data">
       <Name>System.Data</Name>
@@ -74,6 +84,28 @@
     <Reference Include="System.Drawing">
       <Name>System.Drawing</Name>
       <HintPath>%25windowsDirectory%25\\Microsoft.NET\\Framework\\v1.0.3705\\System.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\HCIproject\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\HCIproject\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\HCIproject\packages\System.Runtime.CompilerServices.Unsafe.4.7.1\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\HCIproject\packages\System.Text.Encodings.Web.4.7.1\lib\net461\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Text.Json.4.7.2\lib\net461\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\HCIproject\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\HCIproject\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
     <Reference Include="System.Web">
       <Name>System.Web</Name>
@@ -96,6 +128,14 @@
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ComputationalGraph\MultiplyNode.cs" />
+    <Compile Include="ComputationalGraph\NeuralLayer.cs" />
+    <Compile Include="ComputationalGraph\NeuralNetwork.cs" />
+    <Compile Include="ComputationalGraph\NeuronNode.cs" />
+    <Compile Include="ComputationalGraph\Program.cs" />
+    <Compile Include="ComputationalGraph\RandomGaussian.cs" />
+    <Compile Include="ComputationalGraph\SigmoidNode.cs" />
+    <Compile Include="ComputationalGraph\SumNode.cs" />
     <Compile Include="Controller\abstract\IAddressController.cs" />
     <Compile Include="Controller\abstract\IBusinessDayController.cs" />
     <Compile Include="Controller\abstract\IDiagnosisController.cs" />
@@ -103,6 +143,7 @@
     <Compile Include="Controller\abstract\IDoctorController.cs" />
     <Compile Include="Controller\abstract\IDrugController.cs" />
     <Compile Include="Controller\abstract\IGetterController.cs" />
+    <Compile Include="Controller\abstract\INotificationController.cs" />
     <Compile Include="Controller\abstract\IPatientController.cs" />
     <Compile Include="Controller\abstract\IDoctorGradeController.cs" />
     <Compile Include="Controller\abstract\IEquipmentController.cs" />
@@ -273,6 +314,7 @@
     <Compile Include="Model\Dto\ExaminationDTO.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Model\Dto\NotifyDoctorBusinessDay.cs" />
     <Compile Include="Model\Dto\RoomOccupationReportDTO.cs" />
     <Compile Include="Model\Dto\PatientNotification.cs" />
     <Compile Include="Model\Dto\SecretaryReportDTO.cs">
@@ -323,9 +365,6 @@
     <Compile Include="Model\Users\Doctor.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Users\Feedback.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Model\Users\Patient.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -346,7 +385,6 @@
     </Compile>
     <Compile Include="Repository\abstract\IAddressRepository.cs" />
     <Compile Include="Repository\abstract\IEagerRepository.cs" />
-    <Compile Include="Repository\abstract\IEditRepository.cs" />
     <Compile Include="Repository\abstract\IGetterRepository.cs" />
     <Compile Include="Repository\abstract\IPatientNotificationRepository.cs" />
     <Compile Include="Repository\abstract\IStateRepository.cs" />
@@ -532,6 +570,7 @@
     <Compile Include="Service\abstract\IGetterService.cs" />
     <Compile Include="Service\abstract\IHospitalizationService.cs" />
     <Compile Include="Service\abstract\IIngredientService.cs" />
+    <Compile Include="Service\abstract\INotificationService.cs" />
     <Compile Include="Service\abstract\IOperationService.cs" />
     <Compile Include="Service\abstract\IPatientFileService.cs" />
     <Compile Include="Service\abstract\IPatientNotificationService.cs" />
@@ -639,15 +678,18 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\AIDataSet\NeuralNetwork.txt" />
     <Content Include="Resources\Data\AddressFile.txt" />
     <Content Include="Resources\Data\config.txt" />
     <Content Include="Resources\Data\SecretaryFile.txt" />
     <Content Include="Resources\Data\StateFile.txt" />
     <Content Include="Resources\Data\TownFile.txt" />
-    <Content Include="Resources\Images\kim.jpg" />
     <Content Include="Resources\LoggedIn\config.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Resources\AIDataSet\sims_dataset.csv" />
     <None Include="Resources\Data\articles.csv" />
     <None Include="Resources\Data\businessdays.csv" />
     <None Include="Resources\Data\diagnosisFile.csv" />
@@ -672,6 +714,10 @@
     <None Include="Resources\Data\symptomFile.csv" />
     <None Include="Resources\Data\therapyFile.csv" />
     <None Include="Resources\Data\upcomingExamination.csv" />
+    <None Include="Resources\Reports\Report.pdf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\Images\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

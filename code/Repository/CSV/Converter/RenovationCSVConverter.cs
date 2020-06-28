@@ -8,7 +8,7 @@ using System.Text;
 namespace bolnica.Repository.CSV.Converter
 {
     public class RenovationCSVConverter : ICSVConverter<Renovation>
-    { //TODO: what if description contains CSV delimiter
+    { 
         private readonly string _delimiter;
 
         public RenovationCSVConverter(string delimiter)
@@ -16,7 +16,6 @@ namespace bolnica.Repository.CSV.Converter
             _delimiter = delimiter;
         }
 
-        //id, status, (beginDate, endDate), description, roomID
         public Renovation ConvertCSVFormatToEntity(string entityCSVFormat)
         {
             string[] tokens = entityCSVFormat.Split(_delimiter.ToCharArray());

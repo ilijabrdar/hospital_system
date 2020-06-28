@@ -19,7 +19,7 @@ namespace bolnica.Service
         }
         public void Delete(PatientNotification entity)
         {
-            throw new NotImplementedException();
+            _patientNotificationRepository.Delete(entity);
         }
 
         public void Edit(PatientNotification entity)

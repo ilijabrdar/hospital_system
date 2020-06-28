@@ -11,8 +11,8 @@ namespace bolnica.Repository.CSV.Converter
    public class PatientFileCSVConverter : ICSVConverter<PatientFile>
     {
 
-        private readonly string _delimiter = ",";
-        private readonly string _arrayDelimiter = "|";
+        private readonly string _delimiter;
+        private readonly string _arrayDelimiter;
 
         public PatientFileCSVConverter(string delimiter, string arrayDelimiter)
         {
@@ -89,6 +89,8 @@ namespace bolnica.Repository.CSV.Converter
                 sb.Remove(sb.Length - 1, 1);
             }
             sb.Append(_delimiter);
+
+
             if(entity.Hospitalization == null)
             {
                 sb.Append("empty");
@@ -103,6 +105,8 @@ namespace bolnica.Repository.CSV.Converter
 
             }
             sb.Append(_delimiter);
+
+
             if(entity.Operation == null)
             {
                 sb.Append("empty");
@@ -116,6 +120,8 @@ namespace bolnica.Repository.CSV.Converter
                 sb.Remove(sb.Length - 1, 1);
             }
             sb.Append(_delimiter);
+
+
             if(entity.Examination == null)
             {
                 sb.Append("empty");

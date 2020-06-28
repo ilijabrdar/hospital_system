@@ -16,6 +16,7 @@ namespace bolnica.Service
     {
         public DoctorPrioritySearch() { }
 
+        [Obsolete]
         public List<ExaminationDTO> Search(BusinessDayDTO businessDayDTO, List<BusinessDay> businessDayCollection)
         {
             List<BusinessDay> IterationDays = DaysForExactPeriod(businessDayDTO.Period, businessDayDTO.Doctor.BusinessDay);
@@ -24,16 +25,15 @@ namespace bolnica.Service
                 foreach (BusinessDay day in IterationDays)
                 {
                     List<ExaminationDTO> examinationDTOCollection = CreateExaminationDTO(day);
-                    if (examinationDTOCollection != null)
-                    {
+                    if (examinationDTOCollection != null)                   
                         return examinationDTOCollection;
-                    }
                 }
             }
 
             return AlternativeForPeriod(businessDayDTO.Period.EndDate, businessDayDTO.Doctor.BusinessDay.Except(IterationDays));
         }
 
+        [Obsolete]
         private List<ExaminationDTO> AlternativeForPeriod(DateTime endOfPeriod, IEnumerable<BusinessDay> businessDayCollection)
         {
             if (businessDayCollection != null)
@@ -44,10 +44,8 @@ namespace bolnica.Service
                     if (timeSpan.Days >= 1 && timeSpan.Days <= 3)
                     {
                         List<ExaminationDTO> examinationDTOCollection = CreateExaminationDTO(day);
-                        if (examinationDTOCollection != null)
-                        {
-                            return examinationDTOCollection;
-                        }
+                        if (examinationDTOCollection != null)                     
+                            return examinationDTOCollection;                     
                     }
                 }
             }
@@ -55,7 +53,7 @@ namespace bolnica.Service
         }
 
 
-
+        [Obsolete]
         public List<ExaminationDTO> CreateExaminationDTO(BusinessDay businessDay)
         {
             List<ExaminationDTO> retVal = new List<ExaminationDTO>();
@@ -84,16 +82,11 @@ namespace bolnica.Service
         public List<BusinessDay> DaysForExactPeriod(Period period, List<BusinessDay> businessDaysCollection)
         {
             List<BusinessDay> businessDays = new List<BusinessDay>();
+
             if (businessDaysCollection != null)
-            {
-                foreach (BusinessDay day in businessDaysCollection)
-                {
+                foreach (BusinessDay day in businessDaysCollection)                
                     if (day.Shift.StartDate.Date >= period.StartDate.Date && day.Shift.EndDate.Date <= period.EndDate.Date)
-                    {
                         businessDays.Add(day);
-                    }
-                }
-            }
 
             return businessDays;
         }

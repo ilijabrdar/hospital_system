@@ -8,6 +8,6 @@ using System.Text;
 namespace bolnica.Service
 {
     public interface IIngredientService : IService<Ingredient,long>
-{
-}
+    {
+    }
 }

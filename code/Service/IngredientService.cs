@@ -9,37 +9,37 @@ namespace Service
 {
     public class IngredientService : IIngredientService
     {
-        private readonly IIngredientRepository _repository;
+        private readonly IIngredientRepository _ingrerdientRepository;
 
         public IngredientService(IIngredientRepository repository)
         {
-            _repository = repository;
+            _ingrerdientRepository = repository;
         }
 
         public void Delete(Ingredient entity)
         {
-            _repository.Delete(entity);
+            _ingrerdientRepository.Delete(entity);
         }
 
 
         public void Edit(Ingredient entity)
         {
-            _repository.Edit(entity);
+            _ingrerdientRepository.Edit(entity);
         }
 
         public Ingredient Get(long id)
         {
-            return _repository.Get(id);
+            return _ingrerdientRepository.Get(id);
         }
 
         public Ingredient Save(Ingredient entity)
         {
-            return _repository.Save(entity);
+            return _ingrerdientRepository.Save(entity);
         }
 
         public IEnumerable<Ingredient> GetAll()
         {
-            return _repository.GetAll();
+            return _ingrerdientRepository.GetAll();
         }
     }
 }

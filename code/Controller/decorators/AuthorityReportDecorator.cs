@@ -22,15 +22,14 @@ namespace bolnica.Controller.decorators
             Role = role;
             AuthorizedUsers = new Dictionary<string, List<string>>();
             AuthorizedUsers["GenerateAnamnesisPrescriptionReport"] = new List<String>() { "Doctor"};
-            AuthorizedUsers["GenerateDoctorOccupationReport"] = new List<String>() { "Director" };
+            AuthorizedUsers["GenerateDoctorOccupationReport"] = new List<String>() { "Secretary" };
             AuthorizedUsers["GenerateRoomOccupationReport"] = new List<String>() { "Director" };
             AuthorizedUsers["GenerateTherapyTimetableReport"] = new List<String>() { "Patient" };
         }
-
-        public DoctorReportDTO GenerateAnamnesisPrescriptionReport(PatientFile patientFile)
+        public DoctorReportDTO GenerateAnamnesisPrescriptionReport(Examination examination)
         {
             if (AuthorizedUsers["GenerateAnamnesisPrescriptionReport"].SingleOrDefault(x => x == Role) != null)
-                return ReportController.GenerateAnamnesisPrescriptionReport(patientFile);
+                return ReportController.GenerateAnamnesisPrescriptionReport(examination);
             else
                 return null;
         }

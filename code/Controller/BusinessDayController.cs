@@ -20,25 +20,21 @@ namespace Controller
         public BusinessDayController(IBusinessDayService _service)
         {
             _businessDayService = _service;
-        }
-        
+        }     
+
         public void Delete(BusinessDay entity)
         {
             _businessDayService.Delete(entity);
         }
-
-
 
         public void Edit(BusinessDay entity)
         {
             _businessDayService.Edit(entity);
         }
 
-
-
         public BusinessDay Get(long id)
         {
-            return _businessDayService.Get(id);  //TODO: kako nemam get
+            return _businessDayService.Get(id);  
         }
 
         public IEnumerable<BusinessDay> GetAll()
@@ -51,13 +47,10 @@ namespace Controller
             return _businessDayService.GetBusinessDaysByDoctor(doctor);
         }
 
-
-
         public void MarkAsOccupied(List<Period> period, BusinessDay businessDay)
         {
             _businessDayService.MarkAsOccupied(period, businessDay);
         }
-
 
         public BusinessDay Save(BusinessDay entity)
         {
