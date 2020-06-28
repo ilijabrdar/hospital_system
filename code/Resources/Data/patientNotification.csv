@@ -1,10 +1,10 @@
-1,6,False,Pregled zakazan za 11/10/2020 09:40:00 je izmenjen!
-2,0,False,Pregled zakazan za 10/10/2020 04:40:00 je otkazan!
-3,6,False,Pregled zakazan za 27/06/2020 06:20:00 je otkazan!
+1,6,True,Pregled zakazan za 11/10/2020 09:40:00 je izmenjen!
+2,0,True,Pregled zakazan za 10/10/2020 04:40:00 je otkazan!
+3,6,True,Pregled zakazan za 27/06/2020 06:20:00 je otkazan!
 4,2,False,Pregled zakazan za 05/10/2020 00:40:00 je izmenjen!
 5,2,False,Pregled zakazan za 05/10/2020 00:40:00 je izmenjen!
 6,7,False,Pregled zakazan za 04/10/2020 09:00:00 je otkazan!
 7,5,False,Pregled zakazan za 27/06/2020 06:40:00 je otkazan!
 8,4,False,Pregled zakazan za 10/10/2020 06:40:00 je otkazan!
 9,4,False,Pregled zakazan za 29/06/2020 06:40:00 je otkazan!
-10,1,False,Pregled zakazan za 10/10/2020 10:40:00 je otkazan!
+10,1,True,Pregled zakazan za 10/10/2020 10:40:00 je otkazan!
