@@ -68,6 +68,8 @@ namespace PacijentBolnicaZdravo
 
         public AuthorityDoctorGradeDecorator DoctorGradeDecorator { get; set; }
 
+        public AuthoritySecretaryDecorator SecretaryDecorator { get; set; }
+
         App()
         {
             var addressRepo = new AddressRepository(new CSVStream<Address>(_address_File, new AddressCSVConverter(",")), new LongSequencer());
@@ -148,6 +150,7 @@ namespace PacijentBolnicaZdravo
            var reportController = new ReportController(reportService);
             PatientNotificationController = new PatientNotificationController(notificationService);
             var doctorGradeController = new DoctorGradeController(doctorGradeService);
+            var secretaryController = new SecretaryController(secretaryService);
 
             ArticleDecorator = new AuthorityArticleDecorator(articleController, "Patient");
             DoctorDecorator = new AuthorityDoctorDecorator(doctorController, "Patient");
@@ -156,6 +159,7 @@ namespace PacijentBolnicaZdravo
             PatientDecorator = new AuthorityPatientDecorator(patientController, "Patient");
             ReportDecorator = new AuthorityReportDecorator(reportController, "Patient");
             DoctorGradeDecorator = new AuthorityDoctorGradeDecorator(doctorGradeController, "Patient");
+            SecretaryDecorator = new AuthoritySecretaryDecorator(secretaryController, "Patient");
 
            
         }

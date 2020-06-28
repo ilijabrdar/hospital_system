@@ -33,7 +33,7 @@ namespace Service
 
         public IEnumerable<Director> GetAll()
         {
-            return _directorRepository.GetAll();
+            return _directorRepository.GetAllEager();
         }
 
         public User GetUserByUsername(string username)

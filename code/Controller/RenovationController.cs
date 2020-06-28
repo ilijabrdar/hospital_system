@@ -8,34 +8,34 @@ namespace Controller
 {
    public class RenovationController : IRenovationController
    {
-        private readonly IRenovationService _service;
+        private readonly IRenovationService _renovationService;
 
         public RenovationController(IRenovationService service)
         {
-            _service = service;
+            _renovationService = service;
         }
         public void Delete(Renovation entity)
         {
-            _service.Delete(entity);
+            _renovationService.Delete(entity);
         }
 
         public void Edit(Renovation entity)
         {
-            _service.Edit(entity);
+            _renovationService.Edit(entity);
         }
 
         public Renovation Get(long id)
         {
-            return _service.Get(id);
+            return _renovationService.Get(id);
         }
         public IEnumerable<Renovation> GetAll()
         {
-            return _service.GetAll();
+            return _renovationService.GetAll();
         }
 
         public Renovation Save(Renovation entity)
         {
-            return _service.Save(entity);
+            return _renovationService.Save(entity);
         }
     }
 }

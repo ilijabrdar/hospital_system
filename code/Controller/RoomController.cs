@@ -9,55 +9,56 @@ namespace Controller
 {
     public class RoomController : IRoomController
     {
-        private readonly IRoomService _service;
+        private readonly IRoomService _roomService;
 
         public RoomController(IRoomService service)
         {
-            _service = service;
+            _roomService = service;
         }
         public Room Save(Room entity)
         {
-            return _service.Save(entity);
+            return _roomService.Save(entity);
         }
 
         public IEnumerable<Room> GetAll()
         {
-            return _service.GetAll();
+            return _roomService.GetAll();
         }
 
         public void Edit(Room entity)
         {
-            _service.Edit(entity);
+            _roomService.Edit(entity);
         }
 
         public void Delete(Room entity)
         {
-            _service.Delete(entity);
+            _roomService.Delete(entity);
+
         }
 
         public Room Get(long id)
         {
-            return _service.Get(id);
+            return _roomService.Get(id);
         }
 
         public IEnumerable<Room> GetRoomsContainingEquipment(Equipment equipment)
         {
-            return _service.GetRoomsCointainingEquipment(equipment);
+            return _roomService.GetRoomsCointainingEquipment(equipment);
         }
 
         public bool CheckRoomCodeUnique(String name)
         {
-            return _service.CheckRoomCodeUnique(name);
+            return _roomService.CheckRoomCodeUnique(name);
         }
 
         public List<Room> GetRoomsForHospitalization()
         {
-            return _service.GetRoomsForHospitalization();
+            return _roomService.GetRoomsForHospitalization();
         }
 
         public void CheckHospitalizationDurationInRoom()
         {
-            _service.CheckHospitalizationDurationInRoom();
+            _roomService.CheckHospitalizationDurationInRoom();
         }
 
     }

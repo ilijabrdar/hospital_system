@@ -207,6 +207,7 @@ namespace PacijentBolnicaZdravo
             patient.Address = selectedAddress;
             patient.Address.Town = town;
             patient.Address.Town.State = state;
+            patient.Image = new Uri("C:\\Users\\jovan\\Desktop\\hospital_system\\code\\Resources\\Images\\Anonimus.Jpeg");
 
             var app = Application.Current as App;
             if (app.UserController.IsUsernamedValid(Username.Text.ToString()) == null && app.PatientDecorator.GetPatientByJMBG(Id) == null)

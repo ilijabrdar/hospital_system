@@ -9,7 +9,7 @@ namespace bolnica.Controller
 {
     public interface IUserController : IController<User, long>
     {
-        Feedback SendFeedback(String feedback);
+        void SendFeedback(String feedback);
         User IsUsernamedValid(String username);
         User Login(String username, String password);
     }

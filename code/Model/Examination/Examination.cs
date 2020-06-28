@@ -19,6 +19,14 @@ namespace Model.PatientSecretary
         public Therapy Therapy { get; set; }
         public Referral Refferal { get; set; }
 
+        public Examination(long id, User user, Users.Doctor doctor, Period period, Diagnosis diagnosis) : this(id)
+        {
+            User = user;
+            Doctor = doctor;
+            Period = period;
+            Diagnosis = diagnosis;
+        }
+
         public Examination(long id,  Users.Doctor doctor, Period period)
         {
             Id = id;

@@ -159,7 +159,13 @@
                             <ToolTip x:Name="ToolTipCancel"  Content = "{x:Static p:Resources.ToolTipCancel}" BorderThickness="2" BorderBrush="Gray"/>
                         </Button.ToolTip>
                     </Button>
+                    <StackPanel Margin="10" Orientation="Vertical" Name="Secretary">
+                        <TextBlock FontSize="14">If you have any doubts, contract the secretary:</TextBlock>
+                        
+                    </StackPanel>
                 </StackPanel>
+
+           
             </TabItem>
             <TabItem Header="{x:Static p:Resources.TabFile}" Name="TabFile">
                 <TabControl BorderBrush="LightBlue" BorderThickness="1" x:Name="TabControl2" TabStripPlacement="Top" Margin="0.3">

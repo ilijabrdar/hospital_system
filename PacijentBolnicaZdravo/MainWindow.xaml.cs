@@ -181,8 +181,23 @@ namespace PacijentBolnicaZdravo
             setOperation();
             setHospitalizations();
             setArticle(ListOfArticles);
+            setSecretary();
         }
 
+        private void setSecretary()
+        {
+            var app = Application.Current as App;
+            Secretary secretary = app.SecretaryDecorator.GetAll().ToList()[0];
+            TextBlock secret = new TextBlock();
+            secret.FontSize = 14;
+            secret.Inlines.Add(new Run("Secretary: ") { FontWeight = FontWeights.Bold });
+            secret.Inlines.Add(secretary.FullName + "\n");
+            secret.Inlines.Add("Phone number: " + secretary.Phone + "\n");
+            secret.Inlines.Add("Email: " + secretary.Email + "\n");
+            secret.Margin = new Thickness(10, 10, 10, 10);
+
+            Secretary.Children.Add(secret);
+        }
 
         private void setExaminations()
         {
@@ -296,7 +311,7 @@ namespace PacijentBolnicaZdravo
                 //
                 period.Inlines.Add(new Run("Datum:  ") { FontWeight = FontWeights.Bold });
                 period.FontSize = 15;
-                period.Inlines.Add(hospitalization.Period.StartDate.ToString());
+                period.Inlines.Add(hospitalization.Period.StartDate.ToString() + "->" + hospitalization.Period.EndDate.ToString());
                 period.Margin = new Thickness(10, 10, 10, 10);
                 stackPanelExamination.Children.Add(period);
 
