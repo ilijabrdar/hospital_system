@@ -202,7 +202,8 @@ namespace HCIproject
             }
             else
             {
-                dijagnoza = diagnosisCombo.SelectedItem.ToString();
+                Diagnosis diagnosis = (Diagnosis)diagnosisCombo.SelectedItem;
+                dijagnoza = diagnosis.Name;
                 PrescriptionWin presWin = new PrescriptionWin((Doctor)user, patientId,dijagnoza);
                 //this.Visibility = Visibility.Hidden;
                 presWin.ShowDialog();
@@ -222,7 +223,8 @@ namespace HCIproject
             }
             else
             {
-                dijagnoza = diagnosisCombo.SelectedItem.ToString();
+                Diagnosis diagnosis = (Diagnosis)diagnosisCombo.SelectedItem;
+                dijagnoza = diagnosis.Name;
                 RefferalWin refWin = new RefferalWin((Doctor)user, patientId, dijagnoza);
 
                 refWin.ShowDialog();
@@ -242,7 +244,8 @@ namespace HCIproject
             }
             else
             {
-                dijagnoza = diagnosisCombo.SelectedItem.ToString();
+                Diagnosis diagnosis = (Diagnosis)diagnosisCombo.SelectedItem;
+                dijagnoza = diagnosis.Name;
                 HospitalizationWin hosWin = new HospitalizationWin((Doctor)user, patientId, dijagnoza);
                 // this.Visibility = Visibility.Hidden;
                 hosWin.ShowDialog();
@@ -270,7 +273,8 @@ namespace HCIproject
             }
             else
             {
-                dijagnoza = diagnosisCombo.SelectedItem.ToString();
+                Diagnosis diagnosis = (Diagnosis)diagnosisCombo.SelectedItem;
+                dijagnoza = diagnosis.Name;
                 OperationWin opeWin = new OperationWin((Doctor)user, patientId, dijagnoza);
                 opeWin.ShowDialog();
 

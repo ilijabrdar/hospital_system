@@ -127,34 +127,17 @@ namespace HCIproject
             DateTime day1 = day.AddDays(1);
             DateTime day2 = day.AddDays(2);
             DateTime day3 = day.AddDays(3);
-            bool flag1 = false;
-            bool flag2 = false;
-            bool flag3 = false;
-            foreach(var r in ret)
+
+            smene.Text += day1.Date.Day+"."+day1.Date.Month+"."+day1.Date.Year+ "." + "\t\n";
+            smene.Text += day2.Date.Day + "." + day2.Date.Month + "." + day2.Date.Year + "." + "\t\n";
+            smene.Text += day3.Date.Day + "." + day3.Date.Month + "." + day3.Date.Year + "." + "\t\n";
+
+            foreach (var r in ret)
             {
                 if (r == null)
-                {
-                    smene.Text += "Slobodan" + "\n";
-                }
+                    smene2.Text += "Slobodan" + "\n";
                 else
-                {
-                    if (day1.Date == r.shift.StartDate.Date)
-                    {
-                        smene.Text += r.shift.StartDate.ToString() + " - " + r.shift.EndDate.TimeOfDay.ToString() + " ordinacija " + r.room.RoomCode + "\n";
-                        flag1 = true;
-                    }
-                    if (day2.Date == r.shift.StartDate.Date)
-                    {
-                        smene.Text += r.shift.StartDate.ToString() + " - " + r.shift.EndDate.TimeOfDay.ToString() + " ordinacija " + r.room.RoomCode + "\n";
-                        flag2 = true;
-                    }
-                    if (day3.Date == r.shift.StartDate.Date)
-                    {
-                        smene.Text += r.shift.StartDate.ToString() + " - " + r.shift.EndDate.TimeOfDay.ToString() + " ordinacija " + r.room.RoomCode + "\n";
-                        flag3 = true;
-                    }                
-
-                }
+                  smene2.Text += r.shift.StartDate.TimeOfDay.ToString() + " - " + r.shift.EndDate.TimeOfDay.ToString() + " ordinacija " + r.room.RoomCode + "\n";
             }
 
            double validDrugs= app.NotificationController.NotifyDoctorOfDrugsForValidation();
@@ -174,6 +157,7 @@ namespace HCIproject
             TelSet.Text = user.Phone;
             String doctorAddress = user.Address.Street + " " + user.Address.Number + "," + " " + user.Address.Town.Name + " " + user.Address.Town.PostalNumber + "," + " " + user.Address.Town.State.Name;
             AdresaSet.Text = doctorAddress;
+            pic.Source = new BitmapImage(user.Image);
 
             TestSpec = user.Specialty.Name;
             TestImePrezime= user.FirstName + " " + user.LastName;
@@ -804,15 +788,20 @@ namespace HCIproject
 
         private void changePhoto(object sender, RoutedEventArgs e)
         {//promeni sliku
+            var app = Application.Current as App;
+
             OpenFileDialog op = new OpenFileDialog();
             op.Title = "Select a picture";
             op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
               "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
               "Portable Network Graphic (*.png)|*.png";
+
             if (op.ShowDialog() == true)
             {
+                String fileName = op.FileName;
                 pic.Source = new BitmapImage(new Uri(fileName));
-                fileName = op.FileName;
+                user.Image = new Uri(fileName);
+                app.UserController.Edit(user);
             }
         }
 

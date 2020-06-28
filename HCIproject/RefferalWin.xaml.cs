@@ -74,7 +74,7 @@ namespace HCIproject
             foreach(var speciality in app.SpecialityDecorator.GetAll())
             {
                 if(speciality.Name!="Opsta praksa")
-                    odeljenjeCMB.Items.Add(speciality.Name);
+                    odeljenjeCMB.Items.Add(speciality);
             }
 
 

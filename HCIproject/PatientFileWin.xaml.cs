@@ -298,7 +298,7 @@ namespace HCIproject
         }
         private void patientFileScrool_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            patientFileScrool.Height = this.ActualHeight - 200;
+            patientFileScrool.Height = this.ActualHeight - 150;
         }
 
 

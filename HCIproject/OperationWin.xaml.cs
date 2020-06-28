@@ -165,7 +165,10 @@ namespace HCIproject
             Period period = new Period(operationList[0].Period.StartDate, operationList.LastOrDefault().Period.EndDate);
             Patient patient = app.PatientDecorator.Get(id);
 
-            Operation operation = new Operation(patient, user, "Operacija kolena", period, operationList[0].Room);
+            String nazivOp="";
+            if (naziv.Text != "")
+                nazivOp = naziv.Text;
+            Operation operation = new Operation(patient, user, nazivOp, period, operationList[0].Room);
             app.OperationDecorator.Save(operation);
             app.PatientFileDecorator.AddOperation(operation, patient.patientFile);
 

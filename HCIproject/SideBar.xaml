@@ -75,13 +75,15 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Label Content="Za današnji datum preostalo termina:"  Grid.Column="0" Grid.Row="0" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top"  />
-                        <TextBox x:Name="brojPregleda" Grid.Column="1" Grid.Row="0"  BorderBrush="#D5F5E3"  FontSize="14" FontWeight="SemiBold" IsReadOnly="True" Focusable="False"/>
+                        <TextBox x:Name="brojPregleda" Grid.Column="1" Grid.Row="0"  BorderBrush="#D5F5E3"  FontSize="12" FontWeight="SemiBold" IsReadOnly="True" Focusable="False"/>
 
                         <Label Content="Radno vreme naredna tri dana:"  Grid.Column="0" Grid.Row="1" FontSize="12" HorizontalAlignment="Left"   VerticalAlignment="Top" />
                         <TextBox x:Name="smene" BorderBrush="#D5F5E3" AcceptsReturn="True" Grid.Column="1"  Grid.Row="1" FontSize="13" FontWeight="SemiBold" IsReadOnly="True" Focusable="False" /> 
+                        <TextBox x:Name="smene2" BorderBrush="#D5F5E3" AcceptsReturn="True" Grid.Column="2"  Grid.Row="1" FontSize="13" FontWeight="SemiBold" IsReadOnly="True" Focusable="False" /> 
                         
                         <Label Content="Broj lekova za validiranje"  Grid.Column="0" Grid.Row="2" FontSize="12" HorizontalAlignment="Left"   VerticalAlignment="Top" />
                         <TextBox x:Name="lekoviValidacija"  AcceptsReturn="True"   BorderBrush="#D5F5E3"  Grid.Column="1"  Grid.Row="2" FontSize="13" FontWeight="SemiBold" IsReadOnly="True" Focusable="False" />

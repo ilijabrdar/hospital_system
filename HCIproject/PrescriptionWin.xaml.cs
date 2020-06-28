@@ -40,7 +40,7 @@ namespace HCIproject
 
 
             setPatientInfo();
-            dijagnozaTxt.Text = dijagnoza;
+            dijagnozaTxt.Text = _dijagnoza;
             setDrugCombo();
         }
 
@@ -65,7 +65,7 @@ namespace HCIproject
             var app = Application.Current as App;
             foreach(var lek in app.DrugDecorator.GetAll())
             {
-                lekovi.Items.Add(lek.Name);
+                lekovi.Items.Add(lek);
             }
         }
 
@@ -81,15 +81,11 @@ namespace HCIproject
                     period = new Period(StartDate.SelectedDate, EndDate.SelectedDate);
                 }
 
-                foreach(String drug in lekovi.SelectedItems)
+                foreach(Drug drug in lekovi.SelectedItems)
                 {
-                    foreach (Drug lek in app.DrugDecorator.GetAll())
-                    {
-                        if (drug == lek.Name)
-                        {
-                            lekoviListBox.Add(lek);
-                        }
-                    }
+
+                            lekoviListBox.Add(drug);
+
                 }
 
                 terapija = new Therapy(terapija2.Text, period, lekoviListBox);

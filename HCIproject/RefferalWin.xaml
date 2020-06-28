@@ -37,13 +37,13 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Label Content="Dijagnoza" Grid.Row="0" Grid.Column="0" FontSize="16" Margin="5"/>
-                    <TextBlock x:Name="dijagnozaTxt" Grid.Row="0" Grid.Column="1" FontSize="16" Margin="5"/>
+                    <TextBlock x:Name="dijagnozaTxt"  Grid.Row="0" Grid.Column="1" FontSize="16" Margin="5"/>
 
                     <Label Content="Napomena" Grid.Row="1" Grid.Column="0" FontSize="16" Margin="5"/>
                     <TextBox Grid.Row="1" Grid.Column="1" Margin="5.4,5.4,4.6,4.2" AcceptsReturn="True" FontSize="16" CaretBrush="#FF1FEECD"/>
 
                     <Label Content="Odeljenje" Grid.Row="2" Grid.Column="0" FontSize="16" Margin="5"  />
-                    <ComboBox x:Name="odeljenjeCMB"  IsEditable="True" IsReadOnly="True" Grid.Row="2"  Grid.Column="1" Grid.ColumnSpan="2"  DropDownClosed="odeljenjeCMB_DropDownClosed"/> 
+                    <ComboBox x:Name="odeljenjeCMB" DisplayMemberPath="Name"  IsEditable="True" IsReadOnly="True" Grid.Row="2"  Grid.Column="1" Grid.ColumnSpan="2"  DropDownClosed="odeljenjeCMB_DropDownClosed"/> 
 
                     <Label Content="Lekar specijalista" Grid.Row="3" Grid.Column="0" FontSize="16" Margin="5"  />
                     <ComboBox x:Name="lekarCMB" IsEditable="True" IsReadOnly="True" Grid.Row="3"  Grid.Column="1" Grid.ColumnSpan="2"  ItemsSource ="{Binding Path=listOfDoctors}" Grid.RowSpan="2"/>
