@@ -73,9 +73,10 @@ namespace Service
         {
             User user = null;
 
-            if ((user = _patientService.GetUserByUsername(username)) != null)
+            
+            if ((user = _secretaryService.GetUserByUsername(username)) != null)
                 return user;
-            else if ((user = _secretaryService.GetUserByUsername(username)) != null)
+            else if ((user = _patientService.GetUserByUsername(username)) != null)
                 return user;
             else if ((user = _directorService.GetUserByUsername(username)) != null)
                 return user;

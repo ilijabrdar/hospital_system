@@ -741,6 +741,7 @@ namespace UserInterface
                 GuestPatient.Address.Town.State = States[0];
                 GuestPatient.Username = GuestPatient.Jmbg;
                 GuestPatient.Password = GuestPatient.Jmbg;
+                GuestPatient.Image = new Uri("C:\\Users\\Asus\\Desktop\\SIMS\\hospital_system\\code\\Resources\\Images\\Anonimus.Jpeg");
                 GuestPatient = app.PatientController.Save(GuestPatient);
             }
                 

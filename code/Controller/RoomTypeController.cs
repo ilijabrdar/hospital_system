@@ -9,41 +9,41 @@ namespace Controller
 {
    public class RoomTypeController : IRoomTypeController
    {
-        private readonly IRoomTypeService _service;
+        private readonly IRoomTypeService _roomTypeService;
 
         public RoomTypeController(IRoomTypeService service)
         {
-            _service = service;
+            _roomTypeService = service;
         }
 
         public bool CheckRoomTypeUnique(string type)
         {
-            return _service.CheckRoomTypeUnique(type);
+            return _roomTypeService.CheckRoomTypeUnique(type);
         }
 
         public void Delete(RoomType entity)
         {
-            _service.Delete(entity);
+            _roomTypeService.Delete(entity);
         }
 
         public void Edit(RoomType entity)
         {
-            _service.Edit(entity);
+            _roomTypeService.Edit(entity);
         }
 
         public RoomType Get(long id)
         {
-            return _service.Get(id);
+            return _roomTypeService.Get(id);
         }
 
         public IEnumerable<RoomType> GetAll()
         {
-            return _service.GetAll();
+            return _roomTypeService.GetAll();
         }
 
         public RoomType Save(RoomType entity)
         {
-            return _service.Save(entity);
+            return _roomTypeService.Save(entity);
         }
 
     }

@@ -11,6 +11,7 @@ namespace Repository
    public class BusinessDayRepository : CSVRepository<BusinessDay,long>, IBusinessDayRepository
    {
         public IDoctorRepository _doctorRepository;
+
         private readonly IRoomRepository _roomRepository;
         public BusinessDayRepository(ICSVStream<BusinessDay> stream, ISequencer<long> sequencer, IRoomRepository room)
            : base(stream, sequencer)
