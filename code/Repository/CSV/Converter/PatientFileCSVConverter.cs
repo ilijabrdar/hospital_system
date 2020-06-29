@@ -116,7 +116,7 @@ namespace bolnica.Repository.CSV.Converter
             sb.Append(_delimiter);
 
 
-            if (entity.Operation == null)
+            if(entity.Operation == null)
             {
                 sb.Append("empty");
             }

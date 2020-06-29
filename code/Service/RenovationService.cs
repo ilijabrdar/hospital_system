@@ -2,6 +2,7 @@
 
 using bolnica.Service;
 using Model.Director;
+using Model.PatientSecretary;
 using Repository;
 using System;
 using System.Collections.Generic;
@@ -25,10 +26,9 @@ namespace Service
         public void DeleteRenovationByRoom(Room room)
         {
             foreach (Renovation renovation in GetAll())
-            {
                 if (renovation.Room.Id == room.Id)
                     Delete(renovation);
-            }
+            
         }
 
         public void Edit(Renovation entity)
@@ -46,6 +46,15 @@ namespace Service
             return _repository.GetAllEager();
         }
 
+        public IEnumerable<Renovation> GetRenovationsByRoomAndPeriod(Room room, Period period)
+        {
+            List<Renovation> ret = new List<Renovation>();
+            foreach (Renovation renovation in GetAll())
+                if (renovation.Room.RoomCode.Equals(room.RoomCode) && DateTime.Compare(renovation.Period.StartDate.Date, period.StartDate.Date) >= 0 && DateTime.Compare(renovation.Period.EndDate.Date, period.EndDate.Date) <= 0)
+                    ret.Add(renovation);
+            return ret;
+        }
+
         public Renovation Save(Renovation entity)
         {
             if (validateDates(entity))
@@ -53,6 +62,8 @@ namespace Service
             else
                 return null;
         }
+
+        
 
         private bool validateDates(Renovation entity)
         {

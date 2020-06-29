@@ -28,12 +28,12 @@ namespace Service
 
         public Director Get(long id)
         {
-            return _directorRepository.Get(id);
+            return _directorRepository.GetEager(id);
         }
 
         public IEnumerable<Director> GetAll()
         {
-            return _directorRepository.GetAll();
+            return _directorRepository.GetAllEager();
         }
 
         public User GetUserByUsername(string username)

@@ -1,3 +1,4 @@
+using bolnica.Model.Dto;
 using bolnica.Service;
 using Model.Director;
 using Model.PatientSecretary;
@@ -8,19 +9,7 @@ using System.Windows.Documents;
 
 namespace Service
 {
-    public class NotifyDoctorBusinessDay
-    {
-        public Period shift;
-        public Room room;
-
-        public NotifyDoctorBusinessDay(Period shift, Room room)
-        {
-            this.shift = shift;
-            this.room = room;
-        }
-    }
-   
-   public class NotificationService
+   public class NotificationService : INotificationService
    {
         public IDrugService drugService;
         public IBusinessDayService businessDayService;
@@ -45,10 +34,6 @@ namespace Service
         {
             List<NotifyDoctorBusinessDay> ret = new List<NotifyDoctorBusinessDay>();
 
-            bool day1 = false;
-            bool day2 = false;
-            bool day3 = false;
-
             ret.Insert(0, null);
             ret.Insert(1, null);
             ret.Insert(2, null);
@@ -59,19 +44,16 @@ namespace Service
                 {
                     NotifyDoctorBusinessDay notification = new NotifyDoctorBusinessDay(businessDay.Shift, businessDay.room);
                     ret[0]=notification;
-                    day1 = true;
                 }
                 else if (businessDay.Shift.StartDate.Date == DateTime.Today.AddDays(2).Date)
                 {
                     NotifyDoctorBusinessDay notification = new NotifyDoctorBusinessDay(businessDay.Shift, businessDay.room);
                     ret[1] = notification;
-                    day2 = true;
                 }
                 else if (businessDay.Shift.StartDate.Date == DateTime.Today.AddDays(3).Date)
                 {
                     NotifyDoctorBusinessDay notification = new NotifyDoctorBusinessDay(businessDay.Shift, businessDay.room);
                     ret[2] = notification;
-                    day3 = true;   
                 }  
             }
             return ret;

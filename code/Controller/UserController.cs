@@ -26,7 +26,7 @@ namespace Controller
             return user;
         }
 
-        public Feedback SendFeedback(string feedback)
+        public void SendFeedback(string feedback)
         {
             throw new NotImplementedException();
         }

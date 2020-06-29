@@ -20,7 +20,7 @@ namespace bolnica.Controller.decorators
             AuthorizedUsers["Delete"] = new List<string>() { "Secretary" };
             AuthorizedUsers["Edit"] = new List<string>() { "Secretary" };
             AuthorizedUsers["Get"] = new List<string>() { "Secretary" };
-            AuthorizedUsers["GetAll"] = new List<string>() { "Secretary" };
+            AuthorizedUsers["GetAll"] = new List<string>() { "Secretary", "Patient" };
             AuthorizedUsers["Save"] = new List<string>() { "Secretary" };
         }
 

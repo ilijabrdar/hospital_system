@@ -154,20 +154,9 @@ namespace Service
 
         private bool validateDates(BusinessDay entity)
         {
-            foreach (BusinessDay businessDay in GetBusinessDaysByDoctor(entity.doctor)) 
-            {
-                if (DateTime.Compare(businessDay.Shift.StartDate, entity.Shift.StartDate) <= 0 && DateTime.Compare(businessDay.Shift.EndDate, entity.Shift.EndDate) >= 0)  // 16/07 - 21/07
+            foreach (BusinessDay businessDay in GetBusinessDaysByDoctor(entity.doctor)) //15/07 - 25/-7
+                if (businessDay.Shift.StartDate.Date == entity.Shift.StartDate.Date)
                     return false;
-                else if ((DateTime.Compare(businessDay.Shift.StartDate, entity.Shift.StartDate) <= 0 && DateTime.Compare(businessDay.Shift.EndDate, entity.Shift.StartDate) >= 0) && DateTime.Compare(businessDay.Shift.EndDate, entity.Shift.EndDate) <= 0)  // 13/07 - 17/07
-                    return false;
-                else if (DateTime.Compare(businessDay.Shift.StartDate, entity.Shift.StartDate) >= 0 && DateTime.Compare(businessDay.Shift.StartDate, entity.Shift.EndDate) <= 0 && DateTime.Compare(businessDay.Shift.EndDate, entity.Shift.EndDate) >= 0)  // 17/07 -27/07
-                    return false;
-                else if (DateTime.Compare(entity.Shift.StartDate,businessDay.Shift.StartDate) <= 0 && DateTime.Compare( entity.Shift.EndDate, businessDay.Shift.EndDate) >= 0)  //10/07 - 30/07
-                    return false;
-            }
-
-            if (DateTime.Compare(entity.Shift.StartDate, entity.Shift.EndDate) >= 0)  
-                return false;
 
             return true;
         }
@@ -210,29 +199,20 @@ namespace Service
             shiftDuration = newShift.Shift.EndDate - newShift.Shift.StartDate;  
 
             double periodTotalMinutes = 0;
+            if (newShift.ScheduledPeriods == null)
+                return true;
+
             foreach (Period period in newShift.ScheduledPeriods)
-            {
                 periodTotalMinutes += durationOfExamination;
-            }
+            
 
             if (shiftDuration.TotalMinutes < periodTotalMinutes)
-            {
                 return false;
-            }
-
-            BusinessDay temp = new BusinessDay(newShift.Id, newShift.Shift,newShift.doctor, newShift.room,new List<Period>());
 
             foreach (Period period in newShift.ScheduledPeriods)
-            {
                 if (!periodCorrespondsToNewShift(newShift.Shift, period))
-                {
                     return false;
-                }
                 
-            }
-
-
-            //return found;
             return true;
         }
 
@@ -242,8 +222,6 @@ namespace Service
                 return true;
 
             return false;
-
-                  
         }
 
         [Obsolete]
