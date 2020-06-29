@@ -1,4 +1,5 @@
-﻿using Controller;
+﻿using bolnica.Model.Dto;
+using Controller;
 using Microsoft.Win32;
 using MindFusion.Charting.Wpf;
 using Model.Director;

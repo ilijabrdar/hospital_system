@@ -163,7 +163,7 @@ namespace HCIproject
                     prescription = null;
                 }
                 Examination saveExamination = new Examination(userPatient, user, examination.Period, diagnosis, ane,terapija,referral, prescription);
-            //    app.ExaminationDecorator.SaveFinishedExamination(saveExamination);
+                app.ExaminationDecorator.SaveFinishedExamination(saveExamination);
 
                 app.ExaminationDecorator.Delete(examination);
                 BusinessDay selectedDay = app.BusinessDayDecorator.GetExactDay(saveExamination.Doctor, saveExamination.Period.StartDate);
