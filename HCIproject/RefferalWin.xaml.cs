@@ -71,7 +71,7 @@ namespace HCIproject
         private void setOdeljenjeCMB()
         {
             var app = Application.Current as App;
-            foreach(var speciality in app.SpecialityDecorator.GetAll())
+            foreach(Speciality speciality in app.SpecialityDecorator.GetAll())
             {
                 if(speciality.Name!="Opsta praksa")
                     odeljenjeCMB.Items.Add(speciality);
@@ -174,7 +174,8 @@ namespace HCIproject
             Speciality speciality = new Speciality();
             foreach (Speciality spec in app.SpecialityDecorator.GetAll())
             {
-                if (spec.Name == odeljenjeCMB.SelectedItem.ToString())
+                Speciality s =(Speciality) odeljenjeCMB.SelectedItem;
+                if (spec.Name == s.Name)
                 {
                     speciality = new Speciality(spec.Id, spec.Name);
                 }
