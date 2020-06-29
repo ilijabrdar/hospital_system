@@ -567,6 +567,7 @@ namespace HCIproject
             // this.Visibility = Visibility.Hidden;
             drugValWind.ShowDialog();
             setDrug();
+            setNotifications();
         }
 
         public void setViewUpcExam() {
@@ -751,6 +752,7 @@ namespace HCIproject
                 ExaminationWin examWinn = new ExaminationWin((Doctor)user, (long)PatientId,Exam);
                 this.Visibility = Visibility.Hidden;
                 examWinn.ShowDialog();
+ //               setNotifications();
             }
         }
 
